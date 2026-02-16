@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+
+    <title>OSCPV Insurance Calculator (Ukraine) — CalcCore</title>
+    <meta name="description"
+        content="OSCPV (mandatory car liability) calculator: estimated insurance price range, compare two scenarios, choose an insurer baseline, share link and copy results, plus FAQ." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/oscpv-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/oscpv-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/oscpv-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/oscpv.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/oscpv.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/oscpv-calculator#app",
+    "name":"OSCPV Insurance Calculator",
+    "description":"OSCPV (mandatory third-party liability) calculator: estimate price range and compare scenarios.",
+    "url":"https://calccore.net/en/auto/oscpv-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="oscpv-page">
+    <div id="header"></div>
+
+    <main class="page">
+        <div class="oscpv-wrap">
+
+            <!-- TITLE BAR -->
+            <section class="oscpv-titlebar">
+                <h1 class="oscpv-h1">OSCPV Insurance Calculator (Car Liability)</h1>
+                <p class="oscpv-p">
+                    Shows an <b>estimated OSCPV price range</b> (min–avg–max) and lets you <b>compare two scenarios</b>.
+                    You can also choose an <b>insurer baseline</b> and see how the estimate changes.
+                </p>
+            </section>
+
+            <!-- CALCULATOR SHELL -->
+            <section class="oscpv-shell">
+                <div class="oscpv-grid">
+
+                    <!-- LEFT -->
+                    <div class="oscpv-box">
+                        <h2>🚗 Inputs</h2>
+
+                        <!-- INSURER SELECT -->
+                        <div class="field">
+                            <label for="insurer">Insurer (baseline)</label>
+                            <select id="insurer">
+                                <option value="market" selected>Market average</option>
+                                <option value="tas">TAS</option>
+                                <option value="arx">ARX</option>
+                                <option value="pzu">PZU</option>
+                                <option value="uniqa">UNIQA</option>
+                                <option value="ingo">INGO</option>
+                            </select>
+                            <div class="hint">The baseline is set automatically, but you can adjust it manually.</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="basePrice">Base price (UAH)</label>
+                            <input id="basePrice" type="number" min="0" step="50" value="1300" />
+                            <div class="hint">
+                                This is the “starting point” for the estimate. Then coefficients apply (region, vehicle
+                                type, usage, etc.).
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <h2>⚖️ Compare scenarios</h2>
+
+                        <div class="compare-grid">
+                            <!-- Scenario A -->
+                            <div class="box">
+                                <div class="box-title">Car 1</div>
+
+                                <div class="field">
+                                    <label for="regionA">Region</label>
+                                    <select id="regionA">
+                                        <option value="kyiv">Kyiv</option>
+                                        <option value="oblast">Regional center</option>
+                                        <option value="city" selected>Other city</option>
+                                        <option value="rural">Town / rural area</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label for="vehicleA">Vehicle type</label>
+                                    <select id="vehicleA">
+                                        <option value="car" selected>Passenger car</option>
+                                        <option value="moto">Motorcycle</option>
+                                        <option value="truck">Truck</option>
+                                        <option value="bus">Bus</option>
+                                    </select>
+                                </div>
+
+                                <div class="field" id="engineRowA">
+                                    <label for="engineA">Engine (for passenger car)</label>
+                                    <select id="engineA">
+                                        <option value="lt16">up to 1.6</option>
+                                        <option value="16_20" selected>1.6–2.0</option>
+                                        <option value="20_30">2.0–3.0</option>
+                                        <option value="gt30">3.0+</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label for="useA">Usage</label>
+                                    <select id="useA">
+                                        <option value="private" selected>Private</option>
+                                        <option value="delivery">Delivery / courier</option>
+                                        <option value="taxi">Taxi</option>
+                                    </select>
+                                </div>
+
+                                <div class="field two">
+                                    <div>
+                                        <label for="ageA">Driver age</label>
+                                        <select id="ageA">
+                                            <option value="u25">under 25</option>
+                                            <option value="25_60" selected>25–60</option>
+                                            <option value="60p">60+</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="expA">Experience</label>
+                                        <select id="expA">
+                                            <option value="lt2">under 2 years</option>
+                                            <option value="2_10" selected>2–10</option>
+                                            <option value="gt10">10+</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="field two">
+                                    <div>
+                                        <label for="periodA">Period</label>
+                                        <select id="periodA">
+                                            <option value="6">6 months</option>
+                                            <option value="12" selected>12 months</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="franchiseA">Deductible</label>
+                                        <select id="franchiseA">
+                                            <option value="0" selected>0 UAH</option>
+                                            <option value="500">500 UAH</option>
+                                            <option value="1000">1000 UAH</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label for="benefitA">Benefit / discount</label>
+                                    <select id="benefitA">
+                                        <option value="none" selected>None</option>
+                                        <option value="50">50% benefit</option>
+                                    </select>
+                                </div>
+
+                                <div class="coef-row">
+                                    <label class="coef-label">
+                                        <input type="checkbox" id="showCoef" checked />
+                                        Show coefficient
+                                    </label>
+                                    <div class="coef-val">k: <b id="coefA">—</b></div>
+                                </div>
+                            </div>
+
+                            <!-- Scenario B -->
+                            <div class="box">
+                                <div class="box-title">Car 2</div>
+
+                                <div class="field">
+                                    <label for="regionB">Region</label>
+                                    <select id="regionB">
+                                        <option value="kyiv" selected>Kyiv</option>
+                                        <option value="oblast">Regional center</option>
+                                        <option value="city">Other city</option>
+                                        <option value="rural">Town / rural area</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label for="vehicleB">Vehicle type</label>
+                                    <select id="vehicleB">
+                                        <option value="car" selected>Passenger car</option>
+                                        <option value="moto">Motorcycle</option>
+                                        <option value="truck">Truck</option>
+                                        <option value="bus">Bus</option>
+                                    </select>
+                                </div>
+
+                                <div class="field" id="engineRowB">
+                                    <label for="engineB">Engine (for passenger car)</label>
+                                    <select id="engineB">
+                                        <option value="lt16">up to 1.6</option>
+                                        <option value="16_20">1.6–2.0</option>
+                                        <option value="20_30" selected>2.0–3.0</option>
+                                        <option value="gt30">3.0+</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label for="useB">Usage</label>
+                                    <select id="useB">
+                                        <option value="private">Private</option>
+                                        <option value="delivery">Delivery / courier</option>
+                                        <option value="taxi" selected>Taxi</option>
+                                    </select>
+                                </div>
+
+                                <div class="field two">
+                                    <div>
+                                        <label for="ageB">Driver age</label>
+                                        <select id="ageB">
+                                            <option value="u25" selected>under 25</option>
+                                            <option value="25_60">25–60</option>
+                                            <option value="60p">60+</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="expB">Experience</label>
+                                        <select id="expB">
+                                            <option value="lt2" selected>under 2 years</option>
+                                            <option value="2_10">2–10</option>
+                                            <option value="gt10">10+</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="field two">
+                                    <div>
+                                        <label for="periodB">Period</label>
+                                        <select id="periodB">
+                                            <option value="6">6 months</option>
+                                            <option value="12" selected>12 months</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="franchiseB">Deductible</label>
+                                        <select id="franchiseB">
+                                            <option value="0" selected>0 UAH</option>
+                                            <option value="500">500 UAH</option>
+                                            <option value="1000">1000 UAH</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label for="benefitB">Benefit / discount</label>
+                                    <select id="benefitB">
+                                        <option value="none" selected>None</option>
+                                        <option value="50">50% benefit</option>
+                                    </select>
+                                </div>
+
+                                <div class="coef-row">
+                                    <div class="coef-val">k: <b id="coefB">—</b></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="oscpv-actions">
+                            <button class="btn oscpv-btn" id="btnShare" type="button">Copy link</button>
+                            <button class="btn oscpv-btn-ghost" id="btnCopy" type="button">Copy results</button>
+                        </div>
+
+                        <div class="note">
+                            <b>Note:</b> this calculator provides an approximate model-based OSCPV cost estimate using
+                            typical market parameters.
+                            The final policy price is determined by the insurer individually during purchase.
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="oscpv-box">
+                        <h2>📌 Result</h2>
+
+                        <div class="kpi-grid">
+                            <div class="kpi">
+                                <div class="kpi-label">Car 1 — min</div>
+                                <div class="kpi-value"><span id="minA">—</span> <span class="kpi-unit">UAH</span></div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-label">Car 1 — average</div>
+                                <div class="kpi-value"><span id="avgA">—</span> <span class="kpi-unit">UAH</span></div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-label">Car 1 — max</div>
+                                <div class="kpi-value"><span id="maxA">—</span> <span class="kpi-unit">UAH</span></div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-label">Car 2 — min</div>
+                                <div class="kpi-value"><span id="minB">—</span> <span class="kpi-unit">UAH</span></div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-label">Car 2 — average</div>
+                                <div class="kpi-value"><span id="avgB">—</span> <span class="kpi-unit">UAH</span></div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-label">Car 2 — max</div>
+                                <div class="kpi-value"><span id="maxB">—</span> <span class="kpi-unit">UAH</span></div>
+                            </div>
+                        </div>
+
+                        <div class="verdict" id="verdictBox">
+                            <div class="verdict-icon" id="verdictIcon">ℹ️</div>
+                            <div class="verdict-text" id="verdictText">
+                                Change inputs and instantly see how region / taxi / experience affects the price.
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="tiles-head">
+                            <div>
+                                <div class="oscpv-mini-title">Quick tiles (passenger car 1.6)</div>
+                                <div class="muted small">Private, 25–60, experience 2–10, 12 months, deductible 0</div>
+                            </div>
+                            <button class="btn oscpv-btn-ghost" id="btnSetDefault" type="button">Set defaults</button>
+                        </div>
+
+                        <div class="tile-grid" id="tilesRegion"></div>
+
+                        <div class="divider"></div>
+
+                        <div class="tiles-head">
+                            <div>
+                                <div class="oscpv-mini-title">By insurer (Car 1)</div>
+                                <div class="muted small">Approximate: same scenario A, different baseline price</div>
+                            </div>
+                        </div>
+
+                        <div class="tile-grid" id="tilesInsurer"></div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEO TEXT + FAQ -->
+            <section class="oscpv-content">
+                <h2 class="oscpv-content-title">What affects OSCPV price?</h2>
+
+                <div class="oscpv-content-text">
+                    <p>
+                        OSCPV (mandatory car liability) cost usually depends on the <b>region</b>, <b>vehicle type</b>,
+                        <b>engine size</b> (for passenger cars), <b>usage</b> (private/commercial/taxi), and policy
+                        terms:
+                        <b>period</b>, <b>deductible</b> and <b>benefits</b>.
+                    </p>
+                    <p>
+                        In this calculator you can choose an <b>insurer</b> to set the baseline price, then risk
+                        coefficients apply.
+                        Results are shown as a <b>range</b> because real offers may differ due to discounts, promotions
+                        and insurer pricing policies.
+                    </p>
+                    <ul>
+                        <li><b>Kyiv</b> and large cities are often more expensive due to higher accident risk.</li>
+                        <li><b>Taxi</b> use is usually more expensive because the car spends more time on the road.</li>
+                        <li><b>Less experience</b> or a <b>younger driver</b> often increases the price.</li>
+                        <li><b>Deductible</b> may slightly reduce the premium.</li>
+                    </ul>
+                    <p>
+                        This is an <b>approximate</b> estimate. For an exact price, compare real offers from
+                        insurers/aggregators.
+                    </p>
+
+                    <h2 class="oscpv-content-title">About this calculator</h2>
+                    <p>
+                        This calculator is an informational model created to compare how region, vehicle type, usage
+                        (private/taxi),
+                        driver experience and other factors may influence OSCPV cost.
+                        Since OSCPV pricing has moved to a more flexible market approach, insurers set prices
+                        individually using internal tariffs,
+                        discounts, promotions and customer history.
+                        Therefore, the result is not an official insurer quote and may differ from the final policy
+                        price.
+                    </p>
+
+                    <h2 class="oscpv-content-title">Additional note</h2>
+                    <p>
+                        Insurer names are used only to illustrate the comparison model. The website is not an insurer
+                        and does not represent any insurance company.
+                    </p>
+                </div>
+
+                <h2 class="oscpv-content-title" style="margin-top:22px;">FAQ</h2>
+
+                <div class="oscpv-faq-item">
+                    <h3>Why does OSCPV price differ between insurers?</h3>
+                    <p>Insurers use different baseline prices, discounts, promotions and internal risk models.</p>
+                </div>
+
+                <div class="oscpv-faq-item">
+                    <h3>Why is “taxi” almost always more expensive?</h3>
+                    <p>Commercial usage increases accident risk, so insurers usually apply higher rates.</p>
+                </div>
+
+                <div class="oscpv-faq-item">
+                    <h3>Why does the calculator show a range (min–max)?</h3>
+                    <p>Because real pricing depends on the specific insurer, discounts and policy details. A range
+                        provides a quick estimate.</p>
+                </div>
+
+                <div class="oscpv-faq-item">
+                    <h3>Can I save money on OSCPV?</h3>
+                    <p>Yes: compare insurers, check promotions, consider a deductible and use benefits (if eligible).
+                    </p>
+                </div>
+
+                <div class="oscpv-faq-item">
+                    <h3>Does this calculator provide an exact price?</h3>
+                    <p>No. It’s an estimate. For an exact price you need a quote from a specific insurer/aggregator.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

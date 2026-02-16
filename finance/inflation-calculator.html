@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор інфляції онлайн — купівельна спроможність, графік, таблиця | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор інфляції CalcCore: сума, річна інфляція, період і поповнення. Результат: реальна вартість у сьогоднішніх грошах, потрібна номінальна сума, втрата купівельної спроможності, графік і таблиця по роках." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/inflation-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/inflation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/inflation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/inflation-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/inflation-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке інфляція простими словами?",
+        "acceptedAnswer":{"@type":"Answer","text":"Інфляція — це зростання цін з часом, через що гроші поступово втрачають купівельну спроможність."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому реальна сума менша за номінальну?",
+        "acceptedAnswer":{"@type":"Answer","text":"Реальна сума враховує вплив інфляції. Вона показує, скільки ваші гроші будуть варті у сьогоднішніх цінах."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як калькулятор рахує вплив інфляції?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор використовує заданий річний відсоток інфляції та період у роках, щоб розрахувати зниження купівельної спроможності з часом."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи враховує калькулятор додаткові внески?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, якщо задані регулярні внески, калькулятор також показує, як інфляція впливає на них протягом обраного періоду."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи гарантує калькулятор точний рівень інфляції?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні. Це модель на основі введеного середнього показника. Реальна інфляція може відрізнятися."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/inflation-calculator#app",
+    "name":"Калькулятор інфляції",
+    "description":"Онлайн калькулятор інфляції: розрахунок реальної та номінальної вартості грошей з урахуванням річного рівня інфляції, графік та таблиця по роках.",
+    "url":"https://calccore.net/finance/inflation-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cinflation">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cinflation" id="cinflation">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор інфляції</h1>
+                    <p class="mcalc__p">
+                        Оціни, як інфляція впливає на купівельну спроможність грошей.
+                        Показує “реальну” вартість у сьогоднішніх грошах, потрібну номінальну суму, графік і таблицю по
+                        роках.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="amount">Сума зараз</label>
+                                <input class="mcalc__input" id="amount" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 100 000" />
+                                <div class="mcalc__hint">Базова валюта: ₴ (UAH).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="inflationRate">Інфляція на рік, %</label>
+                                <input class="mcalc__input" id="inflationRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 10" />
+                                <div class="mcalc__hint">Середній річний темп інфляції.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="years">Період (роки)</label>
+                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
+                                    placeholder="наприклад: 5" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="monthlyTopUp">Щомісячне поповнення (опц.)</label>
+                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 2 000" />
+                                <div class="mcalc__hint">Додається на початку кожного місяця (щоб бачити реальну
+                                    купівельну спроможність накопичень).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Для підписів років у таблиці/графіку.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи суму, інфляцію та період.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік: номінал vs “реально”</div>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік впливу інфляції"></canvas>
+                            <div class="m-hintSmall">
+                                “Реально” — це купівельна спроможність у сьогоднішніх грошах (скориговано на інфляцію).
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця по роках <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                            
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Таблиця інфляції по роках">
+                                    <thead>
+                                        <tr>
+                                            <th>Рік</th>
+                                            <th>Дата</th>
+                                            <th>Номінал (₴)</th>
+                                            <th>“Реально” (₴)</th>
+                                            <th>Інфляційний множник</th>
+                                            <th>Втрата, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <div class="m-divider"></div>
+        
+        <section class="m-seo">
+            <h2>Як працює калькулятор інфляції?</h2>
+            <p>
+                Калькулятор інфляції CalcCore показує, як змінюється <b>купівельна спроможність грошей</b> з часом.
+                Інфляція зменшує реальну вартість грошей: через декілька років на ту саму суму можна буде купити менше товарів і
+                послуг.
+            </p>
+            <p>
+                Ви вводите <b>поточну суму</b>, <b>річний рівень інфляції</b> та <b>період у роках</b>.
+                Калькулятор розраховує:
+                <b>реальну вартість</b> грошей у сьогоднішніх цінах,
+                <b>номінальну суму</b> через обраний період,
+                а також показує, на скільки відсотків знизиться купівельна спроможність.
+            </p>
+        
+            <h2>Номінальна vs реальна вартість</h2>
+            <p>
+                <b>Номінальна сума</b> — це просто число грошей у майбутньому без урахування інфляції.
+                <b>Реальна сума</b> — це вартість тих самих грошей у сьогоднішніх цінах.
+                Калькулятор показує різницю між цими двома значеннями.
+            </p>
+        
+            <h2>Що показує графік і таблиця по роках?</h2>
+            <p>
+                Графік відображає, як з часом розходяться лінії <b>номінальної</b> та <b>реальної</b> вартості.
+                Таблиця по роках показує значення наприкінці кожного року:
+                скільки грошей буде номінально, яка їхня реальна вартість і який накопичений вплив інфляції.
+            </p>
+        
+            <h2>Навіщо це знати?</h2>
+            <p>
+                Розуміння інфляції допомагає:
+                планувати заощадження,
+                оцінювати довгострокові фінансові цілі,
+                приймати інвестиційні рішення та
+                розуміти, чому зберігати гроші без доходності означає втрачати купівельну спроможність.
+            </p>
+        </section>
+        
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="m-faq-item">
+                <h3>Що таке інфляція простими словами?</h3>
+                <p>
+                    Інфляція — це зростання цін з часом. Вона означає, що гроші поступово знецінюються.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чому реальна сума менша за номінальну?</h3>
+                <p>
+                    Тому що враховується вплив інфляції, яка зменшує купівельну спроможність грошей.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи враховує калькулятор щомісячні поповнення?</h3>
+                <p>
+                    Так, якщо вони задані, калькулятор додає їх і також показує, як інфляція впливає на ці кошти з часом.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи можна використовувати це для інвестиційного планування?</h3>
+                <p>
+                    Так. Калькулятор допомагає зрозуміти, яку дохідність потрібно отримувати, щоб хоча б перекривати інфляцію.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи гарантує розрахунок точний рівень інфляції?</h3>
+                <p>
+                    Ні. Це модель на основі заданого середнього показника. Реальна інфляція може змінюватися.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор пального (1–2 авто) — CalcCore</title>
+    <meta name="description"
+        content="Онлайн калькулятор витрат пального: розрахунок вартості поїздки та витрат для одного або двох авто." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/auto/fuel-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/fuel-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/fuel-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fuel.css" />
+
+    <!-- i18n BEFORE calculator -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/fuel.js?v=20260209" defer></script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/fuel-calculator#app",
+    "name":"Калькулятор пального",
+    "description":"Онлайн калькулятор витрат пального: розрахунок вартості поїздки та витрат для одного або двох авто.",
+    "url":"https://calccore.net/auto/fuel-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="fuel-page">
+    <!-- ✅ Хедер підтягується сюди -->
+    <div id="header"></div>
+
+    <main class="fuel-main">
+        <section class="fuel-shell">
+            <div class="fuel-wrap">
+            <div class="fuel-titlebar">
+                <h1 class="fuel-h1">Калькулятор витрати палива</h1>
+                <p class="fuel-p">Рахує витрати пального та вартість поїздки. Порівняння 1–2 авто та річні витрати.</p>
+            </div>
+
+
+            <!-- TOP BAR: 1/2 авто + Авто-розрахунок -->
+            <div class="fuel-topbar">
+                <div class="mode-switch">
+                    <button id="mode1" class="pill active" type="button">1 авто</button>
+                    <button id="mode2" class="pill" type="button">2 авто</button>
+                </div>
+
+                <label class="auto-toggle" title="Якщо вимкнути — розрахунок тільки по кнопці">
+                    <input type="checkbox" id="auto_calc_toggle" checked />
+                    <span class="auto-ui"></span>
+                    <span class="auto-text">Авто-розрахунок</span>
+                </label>
+            </div>
+
+            <!-- GLOBAL INPUTS -->
+            <div class="global-card">
+                <div class="global-grid">
+                    <div class="field">
+                        <label for="global_distance">Відстань маршруту (км)</label>
+                        <input id="global_distance" type="number" inputmode="decimal" placeholder="Напр: 450" />
+                    </div>
+
+                    <div class="field">
+                        <label for="global_year_km">Пробіг на рік (км)</label>
+                        <input id="global_year_km" type="number" inputmode="decimal" placeholder="Напр: 15000" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARS -->
+            <div class="cars-grid">
+                <!-- CAR 1 -->
+                <section id="car1_wrapper" class="car-card">
+                    <div class="car-head">
+                        <h2>Авто 1</h2>
+                    </div>
+
+                    <div class="field">
+                        <label for="car1_type">Тип авто</label>
+                        <select id="car1_type">
+                            <option value="ice">Бензин / Дизель</option>
+                            <option value="hybrid">Гібрид</option>
+                            <option value="ev">Електро</option>
+                        </select>
+                    </div>
+
+                    <!-- ICE -->
+                    <div id="car1_blockICE" class="dyn-block">
+                        <div class="field">
+                            <label for="car1_consumption">Середня витрата (л / 100 км)</label>
+                            <input id="car1_consumption" type="number" inputmode="decimal" placeholder="Напр: 7.5" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car1_fuelPrice">Ціна пального (грн / л)</label>
+                            <input id="car1_fuelPrice" type="number" inputmode="decimal" placeholder="Напр: 55" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car1_tank">Обʼєм бака (л) <span class="hint">(необовʼязково)</span></label>
+                            <input id="car1_tank" type="number" inputmode="decimal" placeholder="Напр: 60" />
+                        </div>
+                    </div>
+
+                    <!-- EV -->
+                    <div id="car1_blockEV" class="dyn-block is-hidden">
+                        <div class="field">
+                            <label for="car1_kwhPer100">Споживання (кВт·год / 100 км)</label>
+                            <input id="car1_kwhPer100" type="number" inputmode="decimal" placeholder="Напр: 18" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car1_kwhPrice">Ціна електроенергії (грн / кВт·год)</label>
+                            <input id="car1_kwhPrice" type="number" inputmode="decimal" placeholder="Напр: 6" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car1_chargeLoss">Втрати при зарядці (%) <span
+                                    class="hint">(необовʼязково)</span></label>
+                            <input id="car1_chargeLoss" type="number" inputmode="decimal" placeholder="Напр: 10" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car1_battery">Ємність батареї (кВт·год) <span
+                                    class="hint">(необовʼязково)</span></label>
+                            <input id="car1_battery" type="number" inputmode="decimal" placeholder="Напр: 60" />
+                        </div>
+                    </div>
+
+                    <!-- HYBRID EXTRA -->
+                    <div id="car1_blockHybridExtra" class="dyn-block is-hidden">
+                        <div class="field">
+                            <label for="car1_evShare">Частка електропробігу (%)</label>
+                            <input id="car1_evShare" type="number" inputmode="decimal" placeholder="Напр: 40" />
+                            <span class="hint">0–100. Наприклад 40% — 40% шляху на електро, решта на пальному.</span>
+                        </div>
+                    </div>
+
+                    <div id="car1_result" class="result"></div>
+                </section>
+
+                <!-- CAR 2 -->
+                <section id="car2_wrapper" class="car-card" style="display:none;">
+                    <div class="car-head">
+                        <h2>Авто 2</h2>
+                    </div>
+
+                    <div class="field">
+                        <label for="car2_type">Тип авто</label>
+                        <select id="car2_type">
+                            <option value="ice">Бензин / Дизель</option>
+                            <option value="hybrid">Гібрид</option>
+                            <option value="ev">Електро</option>
+                        </select>
+                    </div>
+
+                    <!-- ICE -->
+                    <div id="car2_blockICE" class="dyn-block">
+                        <div class="field">
+                            <label for="car2_consumption">Середня витрата (л / 100 км)</label>
+                            <input id="car2_consumption" type="number" inputmode="decimal" placeholder="Напр: 8.5" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car2_fuelPrice">Ціна пального (грн / л)</label>
+                            <input id="car2_fuelPrice" type="number" inputmode="decimal" placeholder="Напр: 55" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car2_tank">Обʼєм бака (л) <span class="hint">(необовʼязково)</span></label>
+                            <input id="car2_tank" type="number" inputmode="decimal" placeholder="Напр: 60" />
+                        </div>
+                    </div>
+
+                    <!-- EV -->
+                    <div id="car2_blockEV" class="dyn-block is-hidden">
+                        <div class="field">
+                            <label for="car2_kwhPer100">Споживання (кВт·год / 100 км)</label>
+                            <input id="car2_kwhPer100" type="number" inputmode="decimal" placeholder="Напр: 18" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car2_kwhPrice">Ціна електроенергії (грн / кВт·год)</label>
+                            <input id="car2_kwhPrice" type="number" inputmode="decimal" placeholder="Напр: 6" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car2_chargeLoss">Втрати при зарядці (%) <span
+                                    class="hint">(необовʼязково)</span></label>
+                            <input id="car2_chargeLoss" type="number" inputmode="decimal" placeholder="Напр: 10" />
+                        </div>
+
+                        <div class="field">
+                            <label for="car2_battery">Ємність батареї (кВт·год) <span
+                                    class="hint">(необовʼязково)</span></label>
+                            <input id="car2_battery" type="number" inputmode="decimal" placeholder="Напр: 60" />
+                        </div>
+                    </div>
+
+                    <!-- HYBRID EXTRA -->
+                    <div id="car2_blockHybridExtra" class="dyn-block is-hidden">
+                        <div class="field">
+                            <label for="car2_evShare">Частка електропробігу (%)</label>
+                            <input id="car2_evShare" type="number" inputmode="decimal" placeholder="Напр: 30" />
+                            <span class="hint">0–100</span>
+                        </div>
+                    </div>
+
+                    <div id="car2_result" class="result"></div>
+                </section>
+            </div>
+
+            <!-- COMPARE -->
+            <div id="compare_result" class="compare"></div>
+
+            <!-- ACTIONS -->
+            <div class="fuel-actions">
+                <button id="calculate" class="pill primary" type="button">Розрахувати</button>
+                <button id="clear" class="pill" type="button">Очистити</button>
+                <button id="copy_result" class="pill" type="button">Скопіювати результат</button>
+                <button id="share_link" class="pill" type="button">Поділитись</button>
+            </div>
+
+            <div id="share_status" class="share-status"></div>
+        </section>
+    </main>
+
+    <section class="fuel-seo">
+        <h2>Калькулятор витрат пального та електроенергії для авто</h2>
+        <p>
+            Наш онлайн <strong>калькулятор витрат пального</strong> дозволяє швидко та точно
+            розрахувати вартість поїздки для бензинових, дизельних, гібридних та електричних автомобілів.
+            Ви можете дізнатися, скільки коштує 1 км, 100 км або повний маршрут з урахуванням
+            ціни пального, витрати, електроенергії та втрат при зарядці.
+        </p>
+        <p>
+            За допомогою цього калькулятора ви легко порівняєте два автомобілі між собою:
+            наприклад, дизель проти гібриду, або електромобіль проти бензинового авто.
+            Інструмент покаже, яке авто дешевше у використанні та скільки грошей ви заощадите за рік.
+        </p>
+        <p>
+            Калькулятор підходить для планування поїздок, розрахунку витрат на дорогу,
+            вибору автомобіля перед покупкою та аналізу річних витрат на пальне або електроенергію.
+            Ви можете змінювати відстань маршруту, річний пробіг, витрату пального або
+            споживання електроенергії та миттєво бачити результат.
+        </p>
+        <p>
+            Якщо ви плануєте купівлю авто з Німеччини або Європи, цей калькулятор допоможе
+            зрозуміти реальну вартість експлуатації різних моделей і типів двигунів.
+            Особливо корисний він для порівняння електромобілів, гібридів та класичних ДВЗ.
+        </p>
+        <p>
+            Використовуйте наш безкоштовний калькулятор витрат авто, щоб оптимізувати свій бюджет,
+            зменшити витрати на паливо та вибрати найвигідніший транспорт для щоденних поїздок
+            або дальніх подорожей.
+        </p>
+    </section>
+
+    <section class="fuel-faq">
+        <h2>Часті питання про витрати автомобіля</h2>
+
+        <div class="faq-item">
+            <h3>Скільки коштує 100 км на бензині?</h3>
+            <p>Вартість 100 км залежить від витрати пального та ціни за літр. Наприклад, якщо авто споживає 8 л / 100
+                км, а бензин коштує 55 грн, то 100 км коштуватимуть 440 грн.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Скільки коштує 1 км на електромобілі?</h3>
+            <p>Якщо електромобіль споживає 18 кВт·год на 100 км, а ціна електроенергії 6 грн за кВт·год, то 1 км коштує
+                приблизно 1,08 грн.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Що дешевше — електромобіль чи бензин?</h3>
+            <p>У більшості випадків електромобіль дешевший у використанні, особливо при щоденних поїздках і нічній
+                зарядці. Наш калькулятор дозволяє точно порівняти EV, гібрид і ДВЗ.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Як порахувати витрати на поїздку?</h3>
+            <p>Введіть відстань маршруту, витрату пального або електроенергії та ціну. Калькулятор автоматично покаже
+                загальну вартість, ціну за 1 км та 100 км.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Чи можна порівняти два автомобілі?</h3>
+            <p>Так. У режимі «2 авто» ви можете порівняти будь-які два авто — наприклад, дизель проти гібрида або
+                електро проти бензину — та побачити, яке дешевше в експлуатації.</p>
+        </div>
+    </section>
+
+    <!-- ✅ Футер підтягується сюди -->
+    <div id="footer"></div>
+
+    <!-- ✅ Підключення layout (має бути ПІСЛЯ header/footer контейнерів) -->
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

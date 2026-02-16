@@ -1,0 +1,451 @@
+/* =========================
+   OSCPV — SmartCalc style
+   (копія підхід як braking-distance)
+   All styles are isolated by .oscpv-page
+========================= */
+
+.oscpv-page {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+    background: #f4f6fb;
+}
+
+.oscpv-page * {
+    box-sizing: border-box;
+}
+
+/* page width */
+.oscpv-page .oscpv-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 12px 28px;
+}
+
+/* ===== TITLE BAR (як у braking-distance) ===== */
+.oscpv-page .oscpv-titlebar {
+    background: linear-gradient(180deg, #283b69, #1f2f55);
+    color: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    margin: 12px auto 16px;
+    box-shadow: 0 10px 25px rgba(16, 24, 40, .08);
+}
+
+.oscpv-page .oscpv-h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.oscpv-page .oscpv-p {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: .95;
+}
+
+/* ===== SHELL ===== */
+.oscpv-page .oscpv-shell {
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(20, 30, 60, .06);
+}
+
+/* ===== GRID ===== */
+.oscpv-page .oscpv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .oscpv-page .oscpv-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== BOX ===== */
+.oscpv-page .oscpv-box {
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 14px;
+    background: #fbfcff;
+}
+
+.oscpv-page .oscpv-box h2 {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1f2f55;
+    margin: 0 0 10px;
+}
+
+/* ===== FIELDS ===== */
+.oscpv-page .field {
+    margin-bottom: 12px;
+}
+
+.oscpv-page .field label {
+    font-weight: 900;
+    font-size: 13px;
+    margin-bottom: 6px;
+    display: block;
+    color: #2b3a55;
+}
+
+.oscpv-page input[type="number"],
+.oscpv-page select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    font-size: 13px;
+    outline: none;
+}
+
+.oscpv-page input[type="number"]:focus,
+.oscpv-page select:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+}
+
+.oscpv-page .hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.oscpv-page .divider {
+    height: 1px;
+    background: #e6e8ee;
+    margin: 12px 0;
+}
+
+.oscpv-page .two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .oscpv-page .two {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== COMPARE GRID ===== */
+.oscpv-page .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 680px) {
+    .oscpv-page .compare-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.oscpv-page .box {
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.oscpv-page .box-title {
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+    margin-bottom: 10px;
+}
+
+/* coef row */
+.oscpv-page .coef-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(40, 59, 105, .18);
+}
+
+.oscpv-page .coef-label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 700;
+}
+
+.oscpv-page .coef-val {
+    font-size: 13px;
+    color: #374151;
+}
+
+/* ===== ACTIONS ===== */
+.oscpv-page .oscpv-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+.oscpv-page .btn {
+    height: 44px;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    padding: 0 14px;
+    border: 1px solid transparent;
+}
+
+.oscpv-page .oscpv-btn {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+    color: #1f2f55;
+    flex: 1 1 220px;
+}
+
+.oscpv-page .oscpv-btn:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+.oscpv-page .oscpv-btn-ghost {
+    background: #fff;
+    border: 1px solid #d4d7de;
+    color: #1f2f55;
+    flex: 1 1 220px;
+}
+
+.oscpv-page .oscpv-btn-ghost:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+}
+
+@media (max-width: 520px) {
+    .oscpv-page .oscpv-actions .btn {
+        flex: 1 1 100%;
+    }
+}
+
+.oscpv-page .note {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #374151;
+    border: 1px solid #e6e8ee;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 14px;
+}
+
+/* ===== KPI ===== */
+/* 3 в ряд (A рядок, B рядок) */
+.oscpv-page .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .oscpv-page .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.oscpv-page .kpi {
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 10px 24px rgba(16, 24, 40, .06);
+}
+
+.oscpv-page .kpi-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.oscpv-page .kpi-value {
+    font-size: 20px;
+    font-weight: 900;
+    color: #111827;
+}
+
+.oscpv-page .kpi-unit {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 700;
+}
+
+/* verdict */
+.oscpv-page .verdict {
+    margin-top: 14px;
+    background: #f7f8fc;
+    border: 1px dashed #cfd6ea;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.oscpv-page .verdict-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    background: rgba(40, 59, 105, .12);
+}
+
+.oscpv-page .verdict-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #374151;
+}
+
+/* tiles */
+.oscpv-page .tiles-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 10px 0 10px;
+}
+
+.oscpv-page .oscpv-mini-title {
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.oscpv-page .tile-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .oscpv-page .tile-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .oscpv-page .tile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.oscpv-page .tile {
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 10px 24px rgba(16, 24, 40, .06);
+}
+
+.oscpv-page .t-title {
+    font-weight: 900;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.oscpv-page .t-val {
+    margin-top: 6px;
+    font-size: 18px;
+    font-weight: 900;
+    color: #111827;
+}
+
+.oscpv-page .t-sub {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* helpers */
+.oscpv-page .muted {
+    color: #6b7280;
+}
+
+.oscpv-page .small {
+    font-size: 12px;
+}
+
+/* ===== SEO blocks (bottom) ===== */
+.oscpv-page .oscpv-content {
+    max-width: 860px;
+    margin: 22px auto 0;
+    padding: 0 16px;
+    text-align: left;
+}
+
+.oscpv-page .oscpv-content-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #283b69;
+    margin: 0 0 14px;
+}
+
+.oscpv-page .oscpv-content-text p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #223;
+    margin: 0 0 14px;
+}
+
+.oscpv-page .oscpv-content-text ul {
+    padding-left: 18px;
+    margin: 10px 0 16px;
+}
+
+.oscpv-page .oscpv-content-text li {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+/* FAQ always open */
+.oscpv-page .oscpv-faq-item {
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.oscpv-page .oscpv-faq-item h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.oscpv-page .oscpv-faq-item p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #374151;
+}
+/* ===== KPI highlight (win/lose) ===== */
+.oscpv-page .kpi.kpi-win {
+    border-color: rgba(31, 143, 82, .35);
+    background: rgba(31, 143, 82, .06);
+}
+
+.oscpv-page .kpi.kpi-lose {
+    border-color: rgba(197, 58, 58, .35);
+    background: rgba(197, 58, 58, .06);
+}

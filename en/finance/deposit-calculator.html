@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Deposit Calculator — income, taxes, schedule | CalcCore</title>
+    <meta name="description"
+        content="CalcCore deposit calculator: amount, annual rate, term, monthly top-ups, capitalization, taxes, totals, and monthly schedule. Export CSV and copy." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/en/finance/deposit-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/deposit-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/deposit-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/deposit-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/deposit-calculator.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/deposit-calculator#app",
+    "name":"Deposit Calculator",
+    "description":"Online deposit calculator: amount, rate, term, top-ups, capitalization, taxes, and a monthly schedule.",
+    "url":"https://calccore.net/en/finance/deposit-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page cdeposit">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cdeposit" id="cdeposit">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Deposit Calculator</h1>
+                    <p class="mcalc__p">
+                        Estimate your deposit income: interest, capitalization, monthly top-ups, taxes, and a detailed
+                        schedule.
+                        Supports monthly and daily (365) accrual.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="NBU exchange rate (USD/EUR)">
+                            NBU rate: loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter details</h2>
+                            <span class="mcalc__badge">Finance</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="principal">Deposit amount</label>
+                                <input class="mcalc__input" id="principal" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 100 000" />
+                                <div class="mcalc__hint">Base currency: ₴ (UAH). Schedule conversion uses NBU rates.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualRate">Annual rate</label>
+                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 16" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termMonths">Term</label>
+                                <input class="mcalc__input" id="termMonths" type="number" min="1" step="1"
+                                    placeholder="e.g.: 12" />
+                                <div class="mcalc__hint">In months.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="interestPeriod">Interest accrual</label>
+                                <select class="mcalc__select" id="interestPeriod">
+                                    <option value="monthly" selected>Monthly</option>
+                                    <option value="daily">Daily (assume 365)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="capitalization">Capitalization</label>
+                                <select class="mcalc__select" id="capitalization">
+                                    <option value="on" selected>Yes (add interest to principal)</option>
+                                    <option value="off">No (interest separately)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyTopUp">Monthly top-up (optional)</label>
+                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2 000" />
+                                <div class="mcalc__hint">Added at the start of each month starting from month 2.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxMode">Taxes</label>
+                                <select class="mcalc__select" id="taxMode">
+                                    <option value="standard" selected>Standard (18% PIT + 1.5% levy)</option>
+                                    <option value="none">Ignore</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxRate">Tax rate, % (if “Custom”)</label>
+                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 19.5" />
+                                <div class="mcalc__hint">Default is 19.5%.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Used for schedule dates.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter amount, rate, and term.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Schedule (monthly) <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
+                                    CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Deposit schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Top-up (₴)</th>
+                                            <th>Interest (₴)</th>
+                                            <th>Tax (₴)</th>
+                                            <th>Net (₴)</th>
+                                            <th>Balance (₴)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>How does the deposit calculator work?</h2>
+            <p>
+                The CalcCore deposit calculator helps you estimate how much you can earn from a deposit over a chosen
+                period.
+                It calculates <b>gross interest</b>, <b>taxes</b>, <b>net income</b>, and shows the <b>final balance</b>
+                together with a <b>monthly schedule</b>.
+            </p>
+            <p>
+                Enter the <b>deposit amount</b>, <b>annual rate</b>, and <b>term</b> in months. Optionally, enable
+                <b>capitalization</b>, set a <b>monthly top-up</b>, and choose interest accrual:
+                <b>monthly</b> or <b>daily (365)</b>.
+            </p>
+
+            <h2>Capitalization and top-ups</h2>
+            <ul>
+                <li><b>Capitalization</b> increases the interest base: interest is added to the principal, so future
+                    interest is calculated on a larger amount.</li>
+                <li><b>Top-ups</b> increase the deposit over time — which can boost total interest (especially with
+                    capitalization).</li>
+            </ul>
+
+            <h2>Taxes: standard or custom</h2>
+            <p>
+                By default, the calculator uses a <b>19.5%</b> tax rate (18% PIT + 1.5% levy).
+                You can also <b>ignore taxes</b> or set a <b>custom rate</b>.
+            </p>
+
+            <h2>Schedule currency and NBU rates</h2>
+            <p>
+                Calculations are performed in UAH (₴), but the schedule can be displayed in <b>USD</b> or <b>EUR</b>.
+                Conversion uses <b>NBU</b> exchange rates shown in the top badge.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Frequently asked questions</h2>
+
+            <div class="m-faq-item">
+                <h3>What’s the difference between “monthly” and “daily (365)”?</h3>
+                <p>
+                    Monthly means interest is calculated once per month based on the current balance.
+                    Daily (365) applies interest proportionally to the number of days in each month (a simplified model
+                    using 365 days/year).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How does capitalization work here?</h3>
+                <p>
+                    When capitalization is enabled, <b>net interest</b> (after tax) is added to the balance at the end
+                    of each period,
+                    so future interest is calculated on a larger principal.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>When are monthly top-ups applied?</h3>
+                <p>
+                    Top-ups are added <b>at the start of each month starting from month 2</b>, matching a typical
+                    recurring contribution scenario.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why can results differ from a bank’s calculation?</h3>
+                <p>
+                    Banks may use different day-count conventions (360/365), rounding rules, exact accrual/payout dates,
+                    and product-specific conditions.
+                    This calculator provides a mathematically consistent estimate based on your inputs.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

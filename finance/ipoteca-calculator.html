@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Іпотечний калькулятор онлайн — платіж, переплата, графік | CalcCore</title>
+    <meta name="description"
+        content="Іпотечний калькулятор CalcCore: перший внесок (₴ або %), сума кредиту, щомісячний платіж (ануїтет або диференційований), переплата, загалом до сплати та графік платежів. Експорт CSV і копіювання." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/ipoteca-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/ipoteca-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/ipoteca-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ipoteca-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ipoteca-calculator.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/ipoteca-calculator#app",
+    "name":"Іпотечний калькулятор",
+    "description":"Онлайн іпотечний калькулятор: перший внесок (₴ або %), ануїтет або диференційований платіж, переплата, загальна сума та графік платежів.",
+    "url":"https://calccore.net/finance/ipoteca-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cmortgage">
+    <!-- Header через layout.js -->
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cmortgage" id="cmortgage">
+            <div class="mcalc__wrap">
+
+                <!-- Titlebar -->
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Іпотечний калькулятор</h1>
+                    <p class="mcalc__p">
+                        Порахуйте платіж по іпотеці: перший внесок (₴ або %), щомісячний платіж, переплата та детальний
+                        графік.
+                        Підтримує ануїтет і диференційований платіж.
+                    </p>
+                </div>
+
+                <!-- Grid -->
+                <div class="mcalc__grid">
+
+                    <!-- Topline -->
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT card -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="propertyPrice">Вартість нерухомості</label>
+                                <input class="mcalc__input" id="propertyPrice" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 2 000 000" />
+                                <div class="mcalc__hint">Ціна об’єкта (квартира/будинок). Валюта розрахунку: ₴.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label">Перший внесок</label>
+                                <div class="m-switch" role="group" aria-label="Тип першого внеску">
+                                    <button id="dpModeUAH" class="m-switch__btn is-active" type="button">₴</button>
+                                    <button id="dpModePCT" class="m-switch__btn" type="button">%</button>
+                                </div>
+                                <div class="mcalc__hint">Обери режим: сума або відсоток від вартості.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="downPayment">Внесок (сума або %)</label>
+                                <input class="mcalc__input" id="downPayment" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 400 000" />
+                                <div class="mcalc__hint" id="dpHint">Наприклад: 400 000 ₴</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="loanAmount">Сума кредиту (авто)</label>
+                                <input class="mcalc__input" id="loanAmount" type="text" inputmode="decimal"
+                                    placeholder="автоматично" readonly />
+                                <div class="mcalc__hint">Автоматично: вартість − перший внесок.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualRate">Ставка річних</label>
+                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 18" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termYears">Термін</label>
+                                <input class="mcalc__input" id="termYears" type="number" min="1" step="1"
+                                    placeholder="наприклад: 20" />
+                                <div class="mcalc__hint">У роках (буде перераховано в місяці).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="paymentType">Тип платежу</label>
+                                <select class="mcalc__select" id="paymentType">
+                                    <option value="annuity" selected>Ануїтет (рівні платежі)</option>
+                                    <option value="diff">Диференційований (тіло рівномірно)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Використовується для дат у графіку.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="oneTimeFee">Разова комісія (опц.)</label>
+                                <input class="mcalc__input" id="oneTimeFee" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 5 000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyCosts">Щомісячні витрати (опц.)</label>
+                                <input class="mcalc__input" id="monthlyCosts" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 800" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT card -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи вартість, внесок, ставку та термін.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <!-- Schedule -->
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Графік платежів <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV"
+                                    type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Графік платежів">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Дата</th>
+                                            <th id="thPayment">Платіж (₴)</th>
+                                            <th id="thInterest">Відсотки (₴)</th>
+                                            <th id="thPrincipal">Тіло (₴)</th>
+                                            <th id="thFees">Витрати (₴)</th>
+                                            <th id="thBalance">Залишок (₴)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Як працює іпотечний калькулятор?</h2>
+            <p>
+                Іпотечний калькулятор CalcCore допомагає швидко оцінити умови кредиту на житло: скільки становитиме
+                щомісячний платіж, яка буде переплата за відсотками, скільки грошей піде загалом та як виглядатиме
+                графік платежів.
+            </p>
+            <p>
+                Ви вводите <b>вартість нерухомості</b>, обираєте <b>перший внесок</b> (сума або %), задаєте <b>річну
+                    ставку</b> і
+                <b>термін</b> у роках. Калькулятор автоматично визначає <b>суму кредиту</b> як «ціна − внесок» і будує
+                графік на весь період.
+            </p>
+
+            <h2>Ануїтет чи диференційований платіж — що краще?</h2>
+            <ul>
+                <li><b>Ануїтет</b> — платіж майже однаковий щомісяця. Зручно для планування бюджету.</li>
+                <li><b>Диференційований</b> — тіло кредиту гаситься рівними частинами, а відсотки зменшуються разом із
+                    боргом. Перші платежі більші, але переплата часто нижча.</li>
+            </ul>
+
+            <h2>Чому важливий перший внесок?</h2>
+            <p>
+                Чим більший перший внесок — тим менша сума кредиту, нижчий платіж і переплата. Калькулятор дозволяє
+                рахувати внесок як
+                <b>сумою в ₴</b> або як <b>відсотком (%)</b> від вартості.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як правильно ввести перший внесок?</h3>
+                <p>Обери режим <b>₴</b> або <b>%</b>. Поле “Внесок” підлаштується під обраний режим і автоматично
+                    перерахує суму кредиту.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що входить у “Загалом (Платежі + витрати)”?</h3>
+                <p>Це всі платежі по тілу та відсотках + разова комісія (якщо задана) + щомісячні витрати (якщо задані).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому суми можуть відрізнятися від банку?</h3>
+                <p>Банки можуть використовувати іншу методику округлення, дні в місяці, внутрішні комісії та точні дати
+                    списання. Калькулятор дає математично коректну оцінку за введеними даними.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна завантажити графік платежів?</h3>
+                <p>Так, натисни <b>“Завантажити CSV”</b>. Файл відкривається в Excel або Google Sheets.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer через layout.js -->
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

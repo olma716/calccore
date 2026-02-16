@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Депозитний калькулятор онлайн — дохід, податки, графік | CalcCore</title>
+    <meta name="description"
+        content="Депозитний калькулятор CalcCore: сума, ставка, строк, поповнення, капіталізація, податки, підсумок та графік по місяцях. Експорт CSV і копіювання." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/deposit-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/deposit-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/deposit-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/deposit-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/deposit-calculator.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/deposit-calculator#app",
+    "name":"Депозитний калькулятор",
+    "description":"Онлайн депозитний калькулятор: сума, ставка, строк, поповнення, капіталізація, податки та помісячний графік.",
+    "url":"https://calccore.net/finance/deposit-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cdeposit">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cdeposit" id="cdeposit">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Депозитний калькулятор</h1>
+                    <p class="mcalc__p">
+                        Порахуйте дохід по депозиту: відсотки, капіталізація, поповнення, податки та детальний графік.
+                        Підтримує щомісячне та щоденне (365) нарахування.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="principal">Сума депозиту</label>
+                                <input class="mcalc__input" id="principal" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 100 000" />
+                                <div class="mcalc__hint">Валюта розрахунку: ₴. Конвертація в графіку — за курсом НБУ.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualRate">Ставка річних</label>
+                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 16" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termMonths">Термін</label>
+                                <input class="mcalc__input" id="termMonths" type="number" min="1" step="1"
+                                    placeholder="наприклад: 12" />
+                                <div class="mcalc__hint">У місяцях.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="interestPeriod">Нарахування відсотків</label>
+                                <select class="mcalc__select" id="interestPeriod">
+                                    <option value="monthly" selected>Щомісячно</option>
+                                    <option value="daily">Щоденно (умовно 365)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="capitalization">Капіталізація</label>
+                                <select class="mcalc__select" id="capitalization">
+                                    <option value="on" selected>Так (відсотки додаються до тіла)</option>
+                                    <option value="off">Ні (відсотки окремо)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyTopUp">Щомісячне поповнення (опц.)</label>
+                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 2 000" />
+                                <div class="mcalc__hint">Додається на початку кожного місяця, починаючи з 2-го.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxMode">Податки</label>
+                                <select class="mcalc__select" id="taxMode">
+                                    <option value="standard" selected>Стандарт (ПДФО 18% + ВЗ 1.5%)</option>
+                                    <option value="none">Не враховувати</option>
+                                    <option value="custom">Вручну</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxRate">Ставка податку, % (якщо “Вручну”)</label>
+                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 19.5" />
+                                <div class="mcalc__hint">За замовчуванням 19.5%.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Використовується для дат у графіку.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи суму, ставку та термін.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Графік (помесячно) <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV"
+                                    type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Графік депозиту">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Дата</th>
+                                            <th>Поповнення (₴)</th>
+                                            <th>Відсотки (₴)</th>
+                                            <th>Податок (₴)</th>
+                                            <th>Нетто (₴)</th>
+                                            <th>Баланс (₴)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Як працює депозитний калькулятор?</h2>
+            <p>
+                Депозитний калькулятор CalcCore допомагає швидко оцінити, скільки ви заробите на депозиті за заданий
+                період.
+                Він рахує <b>відсотки (брутто)</b>, <b>податки</b>, <b>дохід (нетто)</b>, а також показує
+                <b>підсумковий баланс</b> і <b>помісячний графік</b>.
+            </p>
+            <p>
+                Ви вводите <b>суму депозиту</b>, <b>річну ставку</b> і <b>термін</b> у місяцях. Додатково можна
+                увімкнути
+                <b>капіталізацію</b>, задати <b>щомісячне поповнення</b> і вибрати режим нарахування відсотків:
+                <b>щомісячно</b> або <b>щоденно (365)</b>.
+            </p>
+
+            <h2>Капіталізація і поповнення — як впливають?</h2>
+            <ul>
+                <li><b>Капіталізація</b> збільшує базу нарахування: відсотки додаються до тіла, і наступні відсотки
+                    рахуються з більшої суми.</li>
+                <li><b>Поповнення</b> збільшує вклад щомісяця — це теж підвищує майбутні нарахування (особливо з
+                    капіталізацією).</li>
+            </ul>
+
+            <h2>Податки: стандарт чи вручну?</h2>
+            <p>
+                За замовчуванням калькулятор використовує стандартну ставку <b>19.5%</b> (ПДФО 18% + ВЗ 1.5%).
+                За потреби податки можна <b>вимкнути</b> або задати <b>вручну</b>.
+            </p>
+
+            <h2>Валюта графіка і курс НБУ</h2>
+            <p>
+                Розрахунок ведеться в гривні (₴), але в графіку можна перемкнути відображення на <b>USD</b> або
+                <b>EUR</b>.
+                Конвертація робиться за курсом <b>НБУ</b>, який показується у верхньому бейджі.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чим відрізняється “щомісячно” від “щоденно (365)”?</h3>
+                <p>
+                    Щомісячно — відсотки рахуються раз на місяць від поточного балансу. Щоденно (365) — відсотки
+                    нараховуються
+                    пропорційно кількості днів у місяці (спрощена модель на базі 365 днів у році).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як працює капіталізація в калькуляторі?</h3>
+                <p>
+                    Якщо капіталізація увімкнена, <b>нетто-відсотки</b> (після податку) додаються до балансу наприкінці
+                    кожного періоду,
+                    тому наступні відсотки рахуються з більшої суми.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Коли враховується щомісячне поповнення?</h3>
+                <p>
+                    Поповнення додається <b>на початку кожного місяця, починаючи з 2-го</b>. Це відповідає типовому
+                    сценарію регулярних внесків.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому результат може відрізнятися від банку?</h3>
+                <p>
+                    Банки можуть використовувати іншу базу днів (360/365), інші правила округлення, конкретні дати
+                    нарахування/виплат,
+                    а також додаткові умови продукту. Калькулятор дає математично коректну оцінку за введеними даними.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

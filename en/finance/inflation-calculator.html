@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Inflation Calculator — purchasing power, chart, yearly table | CalcCore</title>
+    <meta name="description"
+        content="CalcCore inflation calculator: amount, annual inflation rate, period, optional monthly additions. Results: real value in today's money, required nominal amount, purchasing power loss, chart and yearly table. Copy and CSV export." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/inflation-calculator" />
+
+    <!-- hreflang (ABSOLUTE + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/inflation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/inflation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/inflation-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/inflation-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is inflation in simple terms?",
+        "acceptedAnswer":{"@type":"Answer","text":"Inflation is the rise in prices over time, which reduces the purchasing power of money."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is real value lower than nominal value?",
+        "acceptedAnswer":{"@type":"Answer","text":"Real value accounts for inflation and shows what the money is worth in today’s prices."}
+      },
+      {
+        "@type":"Question",
+        "name":"How does the calculator estimate inflation impact?",
+        "acceptedAnswer":{"@type":"Answer","text":"It uses the entered annual inflation rate and time period to project how purchasing power declines over time."}
+      },
+      {
+        "@type":"Question",
+        "name":"Are additional contributions included?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. If regular contributions are added, the calculator also shows how inflation affects those amounts."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is the inflation rate guaranteed?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. It is an assumed average rate for modeling. Actual inflation may differ."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/inflation-calculator#app",
+    "name":"Inflation Calculator",
+    "description":"Online inflation calculator: estimates real vs nominal money value over time using annual inflation rate, with chart and yearly table.",
+    "url":"https://calccore.net/en/finance/inflation-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cinflation">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cinflation" id="cinflation">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Inflation Calculator</h1>
+                    <p class="mcalc__p">
+                        See how inflation affects purchasing power over time.
+                        Get real value in today’s money, required nominal amount, a chart, and a yearly table.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
+                            NBU rates loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter details</h2>
+                            <span class="mcalc__badge">Finance</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="amount">Amount today</label>
+                                <input class="mcalc__input" id="amount" type="text" inputmode="decimal"
+                                    placeholder="e.g., 100 000" />
+                                <div class="mcalc__hint">Base currency: ₴ (UAH).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="inflationRate">Annual inflation, %</label>
+                                <input class="mcalc__input" id="inflationRate" type="text" inputmode="decimal"
+                                    placeholder="e.g., 10" />
+                                <div class="mcalc__hint">Average annual inflation rate.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="years">Period (years)</label>
+                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
+                                    placeholder="e.g., 5" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="monthlyTopUp">Monthly additions (optional)</label>
+                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
+                                    placeholder="e.g., 2 000" />
+                                <div class="mcalc__hint">Added at the beginning of each month.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Used for year labels in the chart/table.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter amount, inflation, and period.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Chart: nominal vs real</div>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280" aria-label="Inflation chart"></canvas>
+                            <div class="m-hintSmall">
+                                “Real” = purchasing power in today’s money (inflation-adjusted).
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Yearly table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <div class="m-tools">
+                                    <label class="m-curr">
+                                        Currency:
+                                        <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                            <option value="UAH" selected>UAH ₴</option>
+                                            <option value="USD">USD $</option>
+                                            <option value="EUR">EUR €</option>
+                                        </select>
+                                    </label>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
+                                    CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Inflation yearly table">
+                                    <thead>
+                                        <tr>
+                                            <th>Year</th>
+                                            <th>Date</th>
+                                            <th>Nominal (₴)</th>
+                                            <th>Real (₴)</th>
+                                            <th>Inflation factor</th>
+                                            <th>Loss, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <div class="m-divider"></div>
+        
+        <section class="m-seo">
+            <h2>How does the inflation calculator work?</h2>
+            <p>
+                The CalcCore inflation calculator shows how <b>purchasing power</b> changes over time.
+                Inflation reduces the real value of money — in the future, the same amount will buy fewer goods and services.
+            </p>
+            <p>
+                You enter the <b>amount today</b>, <b>annual inflation rate</b>, and <b>period in years</b>.
+                The calculator estimates the <b>real value</b> in today’s money,
+                the <b>future nominal value</b>, and the percentage loss of purchasing power.
+            </p>
+        
+            <h2>Nominal vs real value</h2>
+            <p>
+                <b>Nominal value</b> is the future amount of money without considering inflation.
+                <b>Real value</b> adjusts for inflation and shows what that money is worth in today’s terms.
+            </p>
+        
+            <h2>What do the chart and yearly table show?</h2>
+            <p>
+                The chart illustrates how nominal and real values diverge over time.
+                The yearly table shows end-of-year values, real purchasing power, and the cumulative inflation impact.
+            </p>
+        
+            <h2>Why is this important?</h2>
+            <p>
+                Understanding inflation helps with savings planning, long-term financial goals,
+                and investment decisions. Money that does not grow at least as fast as inflation
+                loses value over time.
+            </p>
+        </section>
+        
+        <section class="m-faq">
+            <h2>FAQ</h2>
+        
+            <div class="m-faq-item">
+                <h3>What is inflation in simple terms?</h3>
+                <p>
+                    Inflation is the rise in prices over time, which reduces the value of money.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why is real value lower than nominal?</h3>
+                <p>
+                    Because inflation reduces purchasing power over time.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Are monthly additions included?</h3>
+                <p>
+                    Yes. If monthly additions are entered, they are included and adjusted for inflation.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Can this help with investment planning?</h3>
+                <p>
+                    Yes. It shows the return you need just to keep up with inflation.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Is the inflation rate guaranteed?</h3>
+                <p>
+                    No. It is an assumed average rate used for modeling. Actual inflation can vary.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

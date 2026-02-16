@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Construction Cost Calculator — вартість будівництва, графік, таблиця | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор вартості будівництва: площа, ціна за м², етапи, резерв, ПДВ/податки. Результат: загальна сума, вартість за м², графік накопичення та таблиця по етапах." />
+
+    <link rel="canonical" href="https://calccore.net/construction/cost-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/construction-cost-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/construction-cost-calculator.js?v=20260210" defer></script>
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://calccore.net/#org",
+        "name": "CalcCore",
+        "url": "https://calccore.net/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://calccore.net/img/logo.png"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://calccore.net/#website",
+        "url": "https://calccore.net/",
+        "name": "CalcCore",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "inLanguage": "uk"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://calccore.net/construction/cost-calculator#webpage",
+        "url": "https://calccore.net/construction/cost-calculator",
+        "name": "Калькулятор вартості будівництва",
+        "description": "Калькулятор вартості будівництва: площа, ціна за м², етапи, резерв, ПДВ/податки. Результат: загальна сума, вартість за м², графік накопичення та таблиця по етапах.",
+        "isPartOf": {
+          "@id": "https://calccore.net/#website"
+        },
+        "inLanguage": "uk",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "breadcrumb": {
+          "@id": "https://calccore.net/construction/cost-calculator#breadcrumb"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://calccore.net/construction/cost-calculator#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "CalcCore",
+            "item": "https://calccore.net/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Будівництво",
+            "item": "https://calccore.net/construction/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Калькулятор вартості будівництва",
+            "item": "https://calccore.net/construction/cost-calculator"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://calccore.net/construction/cost-calculator#app",
+        "name": "Калькулятор вартості будівництва",
+        "description": "Оцінка загальної вартості будівництва: площа, базова ціна за м², етапи, резерв і податки. Показує підсумок, ціну за м², графік і таблицю по етапах.",
+        "url": "https://calccore.net/construction/cost-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "inLanguage": "uk",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "UAH"
+        }
+      }
+    ]
+    </script>
+
+</head>
+
+<body class="credit-page cconstruction">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cconstruction" id="cconstruction">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор вартості будівництва</h1>
+                    <p class="mcalc__p">
+                        Оціни загальну вартість будівництва будинку/об’єкта: площа, базова ціна за м², етапи, резерв і
+                        податки.
+                        Показує загальну суму, ціну за м², графік та таблицю по етапах.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Будівництво</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="area">Площа, м²</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 120" />
+                                <div class="mcalc__hint">Загальна площа об’єкта.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="baseCost">Базова ціна, ₴/м²</label>
+                                <input class="mcalc__input" id="baseCost" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 25 000" />
+                                <div class="mcalc__hint">Орієнтовна середня ціна “під ключ” або “коробка” — залежно від
+                                    сценарію.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="scenario">Сценарій</label>
+                                <select class="mcalc__select" id="scenario">
+                                    <option value="shell" selected>Коробка (фундамент+стіни+дах)</option>
+                                    <option value="turnkey">Під ключ</option>
+                                    <option value="custom">Налаштування по етапах</option>
+                                </select>
+                                <div class="mcalc__hint">В “Налаштування по етапах” можна вручну змінювати відсотки.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="contingency">Резерв (непередбачене), %</label>
+                                <input class="mcalc__input" id="contingency" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 10" />
+                                <div class="mcalc__hint">Рекомендовано 8–15% залежно від проєкту.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxVat">ПДВ/податки, % (опц.)</label>
+                                <input class="mcalc__input" id="taxVat" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 0" />
+                                <div class="mcalc__hint">Якщо потрібно додати податки до кошторису.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="extras">Додаткові витрати, ₴ (опц.)</label>
+                                <input class="mcalc__input" id="extras" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 150 000" />
+                                <div class="mcalc__hint">Проєкт, геодезія, дозвільні, підключення, благоустрій тощо.
+                                </div>
+                            </div>
+
+                            <!-- Stage weights (editable when scenario=custom) -->
+                            <div class="m-stagebox m-full">
+                                <div class="m-stagebox__title">Етапи (частка від базової суми), %</div>
+
+                                <div class="m-stagegrid">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wFoundation">Фундамент</label>
+                                        <input class="mcalc__input" id="wFoundation" type="text" inputmode="decimal"
+                                            placeholder="20" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wWalls">Стіни/коробка</label>
+                                        <input class="mcalc__input" id="wWalls" type="text" inputmode="decimal"
+                                            placeholder="35" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wRoof">Дах</label>
+                                        <input class="mcalc__input" id="wRoof" type="text" inputmode="decimal"
+                                            placeholder="15" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wWindows">Вікна/фасад</label>
+                                        <input class="mcalc__input" id="wWindows" type="text" inputmode="decimal"
+                                            placeholder="10" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wEngineering">Інженерія</label>
+                                        <input class="mcalc__input" id="wEngineering" type="text" inputmode="decimal"
+                                            placeholder="10" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wInterior">Оздоблення</label>
+                                        <input class="mcalc__input" id="wInterior" type="text" inputmode="decimal"
+                                            placeholder="10" />
+                                    </div>
+                                </div>
+
+                                <div class="mcalc__hint">
+                                    Сума відсотків має бути 100%. Для “Коробка/Під ключ” підставляються дефолти.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи площу та ціну за м².
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік: накопичення витрат по етапах</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік вартості будівництва"></canvas>
+                            <div class="m-hintSmall">
+                                Лінія показує накопичення вартості (UAH / USD / EUR) від етапу до етапу.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця по етапах <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV"
+                                    type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Таблиця вартості по етапах">
+                                    <thead>
+                                        <tr>
+                                            <th>Етап</th>
+                                            <th>Частка, %</th>
+                                            <th>Сума</th>
+                                            <th>Накопичено</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    <div class="m-navlinks">
+                        <a href="/construction/concrete-calculator.html">Розрахуй кількість бетону</a>
+                        <a href="/construction/brick-calculator.html">Розрахуй кількість цегли</a>
+                        <a href="/construction/plaster-calculator.html">Розрахуй штукатурку</a>
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <section class="m-seo">
+            <h2>Як працює калькулятор вартості будівництва</h2>
+            <p>
+                Калькулятор вартості будівництва допомагає оцінити <b>загальний бюджет будівельного проєкту</b> на основі площі,
+                базової ціни за квадратний метр, розподілу по етапах, резерву на непередбачені витрати та додаткових витрат.
+                Ви отримуєте структурований розрахунок, який показує, куди саме йдуть кошти.
+            </p>
+        
+            <h2>Пояснення блоків введення</h2>
+            <p>
+                <b>Площа (м²)</b> — загальна площа будівлі. Це головний параметр, що визначає масштаб бюджету.
+            </p>
+            <p>
+                <b>Базова ціна за м²</b> — орієнтовна середня вартість будівництва одного квадратного метра.
+                Вона може відповідати рівню “коробка” або “під ключ” залежно від обраного сценарію.
+            </p>
+            <p>
+                <b>Сценарій</b> — вибір стандартного розподілу витрат по етапах (Коробка або Під ключ) або можливість
+                задати власні відсотки у режимі “Кастом”.
+            </p>
+            <p>
+                <b>Резерв (%)</b> — запас коштів на непередбачені витрати: коливання цін, зміни в проєкті, особливості ґрунту,
+                додаткові роботи.
+            </p>
+            <p>
+                <b>ПДВ / податки (%)</b> — опціонально додаються до бюджету, якщо потрібно врахувати податкове навантаження.
+            </p>
+            <p>
+                <b>Додаткові витрати</b> — фіксовані суми на проєктування, дозволи, підключення до мереж, благоустрій,
+                зовнішні роботи тощо.
+            </p>
+        
+            <h2>Розподіл по етапах</h2>
+            <p>
+                Калькулятор ділить базовий бюджет на етапи: фундамент, стіни, дах, інженерні системи,
+                фасад, внутрішні роботи. Це дозволяє побачити, як накопичуються витрати в процесі будівництва.
+            </p>
+        
+            <h2>Що показує результат</h2>
+            <p>Після розрахунку ви отримуєте:</p>
+            <ul>
+                <li><b>Загальну вартість проєкту</b> з урахуванням резерву, податків і додаткових витрат.</li>
+                <li><b>Фактичну ціну за м²</b> на основі фінальної суми.</li>
+                <li><b>Таблицю по етапах</b> з часткою витрат і накопиченою сумою.</li>
+                <li><b>Графік накопичення витрат</b> по ходу будівельних етапів.</li>
+            </ul>
+        
+            <h2>Навіщо це потрібно</h2>
+            <p>
+                Розуміння структури будівельних витрат допомагає планувати бюджет, оцінювати фінансові ризики,
+                вести переговори з підрядниками та уникати неприємних сюрпризів під час реалізації проєкту.
+            </p>
+        </section>
+        
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="m-faq-item">
+                <h3>Чи підходить цей калькулятор для професійного кошторису?</h3>
+                <p>
+                    Це попередній орієнтовний розрахунок. Для точного кошторису потрібні робочі креслення,
+                    інженерні розрахунки та комерційні пропозиції підрядників.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Який резерв вважається нормальним?</h3>
+                <p>
+                    Зазвичай закладають 8–15% залежно від складності об’єкта, регіону та нестабільності цін на матеріали.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи можна змінити розподіл по етапах?</h3>
+                <p>
+                    Так. У режимі “Кастом” можна вручну задати відсотки для кожного етапу будівництва.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи враховується вартість земельної ділянки?</h3>
+                <p>
+                    Ні. Калькулятор рахує лише будівельні витрати, без купівлі землі.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чому змінюється фактична ціна за м²?</h3>
+                <p>
+                    Тому що вона враховує резерв, податки та додаткові витрати, а не лише базову ставку за м².
+                </p>
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

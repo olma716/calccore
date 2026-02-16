@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Tire & Wheel Size Calculator — CalcCore</title>
+    <meta name="description"
+        content="Tire & wheel size calculator: compare sizes like 205/55 R16 vs 225/45 R17. See diameter, circumference, ground clearance change, and speedometer error." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/wheels-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/wheels-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/wheels-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/wheels.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/wheels.js?v=20260209" defer></script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/wheels-calculator#app",
+    "name":"Tire & Wheel Size Calculator",
+    "description":"Compare tire and wheel sizes: diameter, circumference, ground clearance change and speedometer error.",
+    "url":"https://calccore.net/en/auto/wheels-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="whl-page">
+    <div id="header"></div>
+
+    <main class="container">
+
+        <!-- Titlebar -->
+        <div class="whl-titlebar">
+            <h1 class="whl-h1">Tire & Wheel Size Calculator</h1>
+            <p class="whl-p">
+                Compare tire sizes like <b>205/55 R16</b> and <b>225/45 R17</b>:
+                wheel diameter, circumference, ground clearance change, and <b>speedometer error</b>.
+            </p>
+        </div>
+
+        <section class="whl-shell">
+            <div class="whl-topbar">
+                <div class="mode-switch" aria-label="Mode">
+                    <button id="mode1" class="pill active" type="button">1 size</button>
+                    <button id="mode2" class="pill" type="button">Compare 2</button>
+                </div>
+
+                <label class="auto-toggle" title="If disabled — calculate only by button">
+                    <input type="checkbox" id="auto_calc_toggle" checked />
+                    <span class="auto-ui"></span>
+                    <span class="auto-text">Auto-calculate</span>
+                </label>
+            </div>
+
+            <div class="whl-grid">
+                <!-- SIZE 1 -->
+                <div class="whl-box" id="size1_box">
+                    <h2>🛞 Size 1</h2>
+
+                    <div class="whl-row3">
+                        <div class="field">
+                            <label for="w1">Width (mm)</label>
+                            <input id="w1" inputmode="decimal" placeholder="205" />
+                        </div>
+                        <div class="field">
+                            <label for="a1">Aspect ratio (%)</label>
+                            <input id="a1" inputmode="decimal" placeholder="55" />
+                        </div>
+                        <div class="field">
+                            <label for="r1">Rim (R)</label>
+                            <input id="r1" inputmode="decimal" placeholder="16" />
+                        </div>
+                    </div>
+
+                    <div class="whl-mini">
+                        Format: <b>205/55 R16</b> → width 205, aspect 55, rim 16.
+                    </div>
+
+                    <div class="whl-kpi" id="kpi1"></div>
+                </div>
+
+                <!-- SIZE 2 -->
+                <div class="whl-box" id="size2_box" style="display:none;">
+                    <h2>🛞 Size 2</h2>
+
+                    <div class="whl-row3">
+                        <div class="field">
+                            <label for="w2">Width (mm)</label>
+                            <input id="w2" inputmode="decimal" placeholder="225" />
+                        </div>
+                        <div class="field">
+                            <label for="a2">Aspect ratio (%)</label>
+                            <input id="a2" inputmode="decimal" placeholder="45" />
+                        </div>
+                        <div class="field">
+                            <label for="r2">Rim (R)</label>
+                            <input id="r2" inputmode="decimal" placeholder="17" />
+                        </div>
+                    </div>
+
+                    <div class="whl-mini">
+                        We compare it to Size 1 and show the difference.
+                    </div>
+
+                    <div class="whl-kpi" id="kpi2"></div>
+                </div>
+            </div>
+
+            <div class="whl-actions">
+                <button class="btn whl-btn" id="calcBtn" type="button">Calculate</button>
+                <button class="btn whl-btn whl-btn-ghost" id="resetBtn" type="button">Reset</button>
+                <button class="btn whl-btn whl-btn-ghost" id="copyBtn" type="button">Copy result</button>
+                <button class="btn whl-btn whl-btn-ghost" id="shareBtn" type="button">Share</button>
+            </div>
+
+            <div class="whl-result" id="result">
+                Enter values and click “Calculate”.
+            </div>
+
+            <div class="whl-compare" id="compare"></div>
+            <div class="whl-status" id="status"></div>
+        </section>
+
+        <hr class="divider">
+
+        <section class="cc-seo">
+            <h2>How does the tire & wheel size calculator work?</h2>
+            <p>
+                The calculator estimates the <b>overall wheel diameter</b> using:
+                rim diameter + 2×tire sidewall height.
+                Based on that, it calculates circumference, ground clearance change, and speedometer error.
+            </p>
+            <p>
+                This helps you understand whether an <b>alternative size</b> is reasonable
+                and how it may affect handling, ride height, and speed readings.
+            </p>
+
+            <h2>What does the result show?</h2>
+            <p>
+                You’ll see diameter difference in percent, ground clearance change in millimeters,
+                and the <b>real speed</b> when your speedometer shows 100 km/h.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>What diameter difference is acceptable?</h3>
+                <p>
+                    A common recommendation is to stay within <b>±2%</b>
+                    to avoid issues with ABS/ESP and ground clearance.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does the speedometer reading change?</h3>
+                <p>
+                    The speedometer depends on wheel circumference.
+                    If the circumference is larger, your real speed will be higher than the indicated speed.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+
+</body>
+
+</html>

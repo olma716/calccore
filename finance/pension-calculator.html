@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Пенсійний калькулятор онлайн — накопичення, внески, дохідність, графік | CalcCore</title>
+    <meta name="description"
+        content="Пенсійний калькулятор CalcCore: вік, вік виходу на пенсію, накопичення зараз, щомісячні внески, очікувана дохідність. Результат: сума на пенсію, внесли vs заробили, графік росту. Конвертація USD/EUR за курсом НБУ." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/pension-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/pension-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/pension-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pension-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pension-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як пенсійний калькулятор рахує накопичення?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор моделює зростання накопичень за принципом складних відсотків: нарахування відбувається на поточний баланс, який включає стартові заощадження, внески та отриманий дохід."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що означає “очікувана дохідність”?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це прогнозна середня річна ставка зростання (у %), яку калькулятор використовує для моделі. Реальна дохідність може відрізнятися."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як впливають щомісячні внески?",
+        "acceptedAnswer":{"@type":"Answer","text":"Регулярні внески збільшують суму інвестованого капіталу, а отже й базу для нарахування відсотків. Це суттєво підвищує підсумковий результат на довгому горизонті."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи враховує калькулятор інфляцію, податки та комісії?",
+        "acceptedAnswer":{"@type":"Answer","text":"Базовий розрахунок показує номінальне зростання за заданою ставкою. Податки, комісії та інфляція можуть вплинути на реальний результат і за потреби мають враховуватися окремо."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому вигідно почати накопичувати раніше?",
+        "acceptedAnswer":{"@type":"Answer","text":"Чим більше часу до пенсії, тим сильніше працює ефект складних відсотків. Ранні внески мають більше років для зростання, тому навіть менші суми можуть дати значний результат."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/pension-calculator#app",
+    "name":"Пенсійний калькулятор",
+    "description":"Онлайн пенсійний калькулятор: поточний вік, вік виходу на пенсію, накопичення зараз, щомісячні внески та очікувана дохідність. Показує прогноз накопичень, графік і таблицю по роках.",
+    "url":"https://calccore.net/finance/pension-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cpension">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cpension" id="cpension">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Пенсійний калькулятор</h1>
+                    <p class="mcalc__p">
+                        Оціни, скільки можна накопичити до пенсії: поточні накопичення, регулярні внески й очікувана
+                        дохідність.
+                        Показує підсумок, внесли vs заробили та графік росту.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="ageNow">Вік</label>
+                                <input class="mcalc__input" id="ageNow" type="number" min="0" max="120" step="1"
+                                    placeholder="наприклад: 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="ageRetire">Вік виходу на пенсію</label>
+                                <input class="mcalc__input" id="ageRetire" type="number" min="0" max="120" step="1"
+                                    placeholder="наприклад: 60" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="savingsNow">Накопичення зараз</label>
+                                <input class="mcalc__input" id="savingsNow" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 200 000" />
+                                <div class="mcalc__hint">Базова валюта: ₴. Графік можна перемкнути на USD/EUR (курс
+                                    НБУ).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyContrib">Щомісячні внески</label>
+                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 3 000" />
+                                <div class="mcalc__hint">Додаються на початку кожного місяця.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualReturn">Очікувана дохідність, %</label>
+                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 10" />
+                                <div class="mcalc__hint">Середня річна дохідність (модель зі щомісячним нарахуванням).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Використовується для підписів років у графіку.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи вік, вік виходу на пенсію, суму та дохідність.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік росту накопичень</div>
+
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік пенсійних накопичень"></canvas>
+                            <div class="m-hintSmall">
+                                Лінія показує баланс наприкінці кожного року до пенсії.
+                            </div>
+                        </div>
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця по роках <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+                        
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                        
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Завантажити CSV</button>
+                            </div>
+                        
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Таблиця пенсійних накопичень по роках">
+                                    <thead>
+                                        <tr>
+                                            <th>Рік</th>
+                                            <th>Вік</th>
+                                            <th>Дата</th>
+                                            <th>Внесли (₴)</th>
+                                            <th>Заробили (₴)</th>
+                                            <th>Баланс (₴)</th>
+                                            <th>Заробили, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <section class="m-seo">
+            <h2>Як працює пенсійний калькулятор?</h2>
+            <p>
+                Пенсійний калькулятор CalcCore допомагає оцінити, скільки коштів можна накопичити до моменту виходу на пенсію.
+                Він моделює довгострокове зростання за принципом <b>складних відсотків</b>, де дохід нараховується
+                на всю суму — початкові накопичення, щомісячні внески та вже зароблені відсотки.
+            </p>
+            <p>
+                Ви вводите <b>поточний вік</b>, <b>вік виходу на пенсію</b>, <b>накопичення зараз</b>,
+                <b>щомісячні внески</b> та <b>очікувану дохідність</b>.
+                Калькулятор розраховує, як зростатиме капітал з року в рік і яку суму ви можете мати на момент пенсії.
+            </p>
+        
+            <h2>Складні відсотки і довгий горизонт</h2>
+            <p>
+                Основний фактор зростання — час. Чим раніше почати відкладати, тим більшу роль відіграють
+                складні відсотки: відсотки починають приносити відсотки.
+                Навіть невеликі регулярні внески можуть суттєво збільшити підсумкову суму через десятки років.
+            </p>
+        
+            <h2>Що показує графік і таблиця?</h2>
+            <p>
+                Графік показує зростання пенсійних заощаджень до обраного віку.
+                Таблиця по роках відображає баланс наприкінці кожного року, суму внесків і суму заробленого доходу.
+                Це допомагає зрозуміти, як змінюється структура накопичень з часом.
+            </p>
+        
+            <h2>Навіщо використовувати пенсійний калькулятор?</h2>
+            <p>
+                Такий розрахунок корисний для фінансового планування:
+                ви бачите, чи достатні поточні внески, щоб досягти бажаної суми,
+                і як зміна ставки доходності або розміру внесків вплине на майбутній результат.
+            </p>
+        </section>
+        
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="m-faq-item">
+                <h3>Чи гарантує калькулятор точну суму пенсії?</h3>
+                <p>
+                    Ні. Калькулятор дає математичну модель на основі заданої ставки доходності.
+                    У реальному житті доходність може змінюватися, а також можуть бути податки та комісії.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Що означає “очікувана дохідність”?</h3>
+                <p>
+                    Це середній річний відсоток зростання ваших інвестицій. Це прогнозне значення,
+                    яке використовується для моделювання довгострокового результату.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Як впливають щомісячні внески?</h3>
+                <p>
+                    Регулярні внески значно прискорюють зростання капіталу, бо збільшують базу,
+                    на яку нараховуються складні відсотки.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чому важливо починати раніше?</h3>
+                <p>
+                    Час підсилює ефект компаундингу. Навіть невеликі суми, вкладені рано,
+                    можуть перевищити великі внески, зроблені пізніше.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи враховує калькулятор інфляцію?</h3>
+                <p>
+                    Базовий розрахунок показує номінальну суму. Для оцінки реальної купівельної спроможності
+                    варто додатково враховувати інфляцію окремо.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

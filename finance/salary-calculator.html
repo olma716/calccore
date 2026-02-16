@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Зарплатний калькулятор онлайн — зарплата “на руки”, податки, ЄСВ | CalcCore</title>
+    <meta name="description"
+        content="Зарплатний калькулятор CalcCore: брутто/нетто, ПДФО, військовий збір, ЄСВ (опц.), бонуси, утримання, помісячний графік. Експорт CSV і копіювання." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/finance/salary-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/salary-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/salary-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/salary-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/salary-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чим відрізняється зарплата “брутто” і “нетто”?",
+        "acceptedAnswer":{"@type":"Answer","text":"Брутто — це зарплата до податків. Нетто — сума, яку ви отримуєте “на руки” після всіх утримань."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому “на руки” виходить менше, ніж у договорі або вакансії?",
+        "acceptedAnswer":{"@type":"Answer","text":"Тому що із зарплати утримуються податки та збори. Калькулятор показує суму відрахувань і чисту виплату."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна змінити ставку податків у калькуляторі?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так. Якщо доступний режим ручного введення, ви можете задати власну ставку та побачити, як вона впливає на зарплату “на руки”."}
+      },
+      {
+        "@type":"Question",
+        "name":"Для чого потрібен зарплатний калькулятор при порівнянні оферів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Щоб порівнювати пропозиції коректно: одні компанії вказують суму до податків, інші — “на руки”. Калькулятор приводить все до одного формату."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/salary-calculator#app",
+    "name":"Зарплатний калькулятор",
+    "description":"Онлайн калькулятор зарплати після податків. Розрахунок чистої зарплати (нетто), податків та різниці між брутто і нетто.",
+    "url":"https://calccore.net/finance/salary-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page csalary">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc csalary" id="csalary">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Зарплатний калькулятор (на руки)</h1>
+                    <p class="mcalc__p">
+                        Порахуй “на руки” із зарплати: ПДФО, військовий збір, опційно ЄСВ (як витрати роботодавця),
+                        бонуси, утримання та помісячний графік. Підтримує розрахунок від брутто або від нетто.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="mode">Режим</label>
+                                <select class="mcalc__select" id="mode">
+                                    <option value="gross2net" selected>Від брутто → на руки</option>
+                                    <option value="net2gross">Від “на руки” → брутто</option>
+                                </select>
+                                <div class="mcalc__hint">Обери, що ти вводиш: зарплату до податків або “на руки”.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="salaryAmount">Сума</label>
+                                <input class="mcalc__input" id="salaryAmount" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 50 000" />
+                                <div class="mcalc__hint">Валюта розрахунку: ₴. Конвертація в графіку — за курсом НБУ.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="period">Період</label>
+                                <select class="mcalc__select" id="period">
+                                    <option value="monthly" selected>На місяць</option>
+                                    <option value="yearly">На рік</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="bonus">Бонус / премія (опц.)</label>
+                                <input class="mcalc__input" id="bonus" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 5 000" />
+                                <div class="mcalc__hint">Додається до бази оподаткування.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="deductions">Інші утримання (опц.)</label>
+                                <input class="mcalc__input" id="deductions" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 1 200" />
+                                <div class="mcalc__hint">Віднімається після податків (типово: аліменти/штрафи/комісії).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxMode">Податки (ПДФО+ВЗ)</label>
+                                <select class="mcalc__select" id="taxMode">
+                                    <option value="standard" selected>Стандарт (18% + 1.5% = 19.5%)</option>
+                                    <option value="none">Не враховувати</option>
+                                    <option value="custom">Вручну</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxRate">Ставка податків, % (якщо “Вручну”)</label>
+                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 19.5" />
+                                <div class="mcalc__hint">За замовчуванням 19.5%.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="showEsv">
+                                    <span style="display:inline-flex;gap:10px;align-items:center;">
+                                        <input id="showEsv" type="checkbox" checked />
+                                        Показувати ЄСВ (витрати роботодавця)
+                                    </span>
+                                </label>
+                                <div class="mcalc__hint">ЄСВ зазвичай не зменшує “на руки”, але впливає на повну
+                                    вартість працівника.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="esvRate">ЄСВ, % (якщо показувати)</label>
+                                <input class="mcalc__input" id="esvRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 22" />
+                                <div class="mcalc__hint">За замовчуванням 22%.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="months">Горизонт графіка</label>
+                                <input class="mcalc__input" id="months" type="number" min="1" step="1"
+                                    placeholder="наприклад: 12" />
+                                <div class="mcalc__hint">У місяцях (для таблиці).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Використовується для дат у графіку.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи суму для розрахунку.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця (помісячно) <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV"
+                                    type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Графік зарплати">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Дата</th>
+                                            <th>Брутто (₴)</th>
+                                            <th>Податки (₴)</th>
+                                            <th>Утримання (₴)</th>
+                                            <th>На руки (₴)</th>
+                                            <th>ЄСВ (₴)</th>
+                                            <th>Вартість роботодавця (₴)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Як працює зарплатний калькулятор “на руки”?</h2>
+            <p>
+                Зарплатний калькулятор CalcCore допомагає швидко порахувати, скільки ви отримаєте
+                <b>зарплати “на руки” (нетто)</b> після відрахування податків із
+                <b>зарплати до оподаткування (брутто)</b>.
+            </p>
+            <p>
+                Це корисно, коли ви порівнюєте офери, ведете переговори про зарплату або плануєте бюджет.
+                Достатньо ввести суму зарплати, а калькулятор покаже
+                <b>чисту суму</b>, <b>суму податків</b> і <b>різницю між брутто та нетто</b>.
+            </p>
+        
+            <h2>Які податки враховує калькулятор?</h2>
+            <p>
+                Залежно від налаштувань, калькулятор може враховувати стандартні ставки податків
+                або дозволяє вказати їх вручну. У результаті ви бачите не лише чисту суму,
+                а й скільки саме було утримано податками.
+            </p>
+        
+            <h2>Чому важливо рахувати зарплату після податків?</h2>
+            <p>
+                У вакансіях часто вказують зарплату <b>до податків</b>, але для реального життя важливий
+                <b>фактичний дохід</b>. Розрахунок “на руки” допомагає правильно планувати витрати,
+                оцінювати вигідність пропозицій та розуміти реальну різницю між різними оферами.
+            </p>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="m-faq-item">
+                <h3>Чим відрізняється зарплата “брутто” і “нетто”?</h3>
+                <p>
+                    <b>Брутто</b> — це зарплата до податків. <b>Нетто</b> — сума, яку ви отримуєте “на руки”
+                    після всіх утримань.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чому “на руки” виходить менше, ніж у договорі або вакансії?</h3>
+                <p>
+                    Тому що із зарплати утримуються податки та збори. Калькулятор показує,
+                    яку частину забирають відрахування і яка сума залишається.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи можна змінити ставку податків?</h3>
+                <p>
+                    Так. Якщо у калькуляторі доступний режим “вручну”, ви можете задати іншу ставку
+                    та побачити, як вона впливає на чисту зарплату.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Для чого потрібен зарплатний калькулятор при порівнянні оферів?</h3>
+                <p>
+                    Щоб порівнювати пропозиції коректно: одна компанія може вказувати суму “до податків”,
+                    інша — “на руки”. Калькулятор приводить все до однакового формату.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

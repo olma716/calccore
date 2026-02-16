@@ -1,0 +1,571 @@
+/* =========================
+   Customs Calculator (scoped)
+   все тільки всередині .ccalc
+========================= */
+
+.ccalc,
+.ccalc * {
+    box-sizing: border-box;
+}
+
+.ccalc {
+    --cc-card: #fff;
+    --cc-text: #222;
+    --cc-muted: #6b7280;
+    --cc-brand: #283b69;
+    --cc-brand2: #1f2f55;
+    --cc-border: #e6e8ef;
+    --cc-shadow: 0 10px 25px rgba(16, 24, 40, .08);
+    --cc-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cc-text);
+}
+
+.ccalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+.ccalc__titlebar {
+    background: linear-gradient(180deg, var(--cc-brand), var(--cc-brand2));
+    color: #fff;
+    border-radius: var(--cc-radius);
+    padding: 16px 16px;
+    box-shadow: var(--cc-shadow);
+    margin-bottom: 14px;
+}
+
+.ccalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.ccalc__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+.ccalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+    gap: 14px;
+    align-items: start;
+}
+
+@media (max-width: 980px) {
+    .ccalc__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ccalc__card {
+    background: var(--cc-card);
+    border: 1px solid var(--cc-border);
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow);
+    padding: 14px;
+    min-width: 0;
+}
+
+.ccalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.ccalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--cc-brand2);
+}
+
+.ccalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.ccalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .ccalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ccalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.ccalc__label {
+    font-size: 12px;
+    color: var(--cc-muted);
+}
+
+.ccalc__input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--cc-border);
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: var(--cc-text);
+}
+
+.ccalc__input:focus {
+    border-color: rgba(40, 59, 105, .45);
+    box-shadow: 0 0 0 4px rgba(40, 59, 105, .10);
+}
+
+.ccalc__hint {
+    font-size: 12px;
+    color: var(--cc-muted);
+    margin-top: 2px;
+}
+
+.ccalc__toggle {
+    display: flex;
+    gap: 8px;
+    background: #f0f2f8;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 6px;
+    width: 100%;
+}
+
+.ccalc__toggleBtn {
+    flex: 1;
+    height: 36px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 13px;
+    background: transparent;
+    color: var(--cc-brand2);
+}
+
+.ccalc__toggleBtn.is-active {
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(16, 24, 40, .10);
+}
+
+.ccalc__mini {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border: 1px dashed var(--cc-border);
+    border-radius: 14px;
+    background: #fbfcff;
+}
+
+.ccalc__checkbox {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+}
+
+.ccalc__miniTitle {
+    font-weight: 800;
+    color: var(--cc-brand2);
+    font-size: 13px;
+}
+
+.ccalc__bigNumber {
+    background: linear-gradient(180deg, rgba(40, 59, 105, .08), rgba(40, 59, 105, .03));
+    border: 1px solid rgba(40, 59, 105, .16);
+    border-radius: var(--cc-radius);
+    padding: 12px;
+}
+
+.ccalc__bigLabel {
+    color: var(--cc-muted);
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.ccalc__bigValue {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cc-brand2);
+}
+
+/* ✅ table wrap: щоб 4 колонки не ламались */
+.ccalc__tableWrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ccalc__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    border: 1px solid var(--cc-border);
+    margin-top: 10px;
+    overflow: hidden;
+    min-width: 640px;
+}
+
+.ccalc__table th,
+.ccalc__table td {
+    padding: 10px 10px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--cc-border);
+    text-align: left;
+}
+
+.ccalc__table th {
+    background: #f7f8fc;
+    color: var(--cc-muted);
+    font-weight: 800;
+}
+
+.ccalc__table tr:last-child td {
+    border-bottom: none;
+}
+
+.ccalc__right {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.ccalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ccalc__btn {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--cc-border);
+    background: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    color: var(--cc-brand2);
+    min-width: 160px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.ccalc__btn--primary {
+    border-color: rgba(40, 59, 105, .35);
+    background: rgba(40, 59, 105, .08);
+}
+
+/* ✅ м'яко-зелена кнопка */
+.ccalc__btn--success {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.35);
+    color: #166534;
+}
+
+.ccalc__btn--success:hover {
+    background: rgba(34, 197, 94, 0.18);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.ccalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cc-muted);
+    min-height: 16px;
+}
+
+.ccalc__mt10 {
+    margin-top: 10px;
+}
+
+.ccalc__mb10 {
+    margin-bottom: 10px;
+}
+
+/* Сірі підказки (placeholder) */
+.ccalc__input::placeholder {
+    color: #9aa3b2;
+    opacity: 1;
+}
+
+.ccalc__input {
+    color: #1f2937;
+}
+
+.ccalc__input:focus {
+    color: #111827;
+}
+
+.ccalc .ccalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+/* SEO / FAQ / divider */
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+}
+
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+}
+
+/* ===== Actions: 3 buttons in one row (desktop) ===== */
+@media (min-width: 681px) {
+    .ccalc__actions {
+        flex-wrap: nowrap;
+    }
+
+    .ccalc__actions .ccalc__btn {
+        min-width: 0;
+        flex: 1 1 0;
+        padding: 0 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+}
+
+/* Зелена — ще компактніша */
+.ccalc__btn--success {
+    font-size: 12px;
+    padding: 0 10px;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+/* =========================
+   OSCPV look-alike overrides
+   (fonts + inputs + buttons)
+========================= */
+
+/* labels як в ОСЦПВ */
+.ccalc__label {
+    font-weight: 900;
+    font-size: 13px;
+    color: #2b3a55;
+}
+
+/* inputs/select як в ОСЦПВ */
+.ccalc__input,
+.ccalc select.ccalc__input,
+.ccalc__input[type="number"],
+.ccalc__input[type="text"],
+.ccalc__input[type="date"] {
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    font-size: 13px;
+    outline: none;
+}
+
+/* focus як в ОСЦПВ */
+.ccalc__input:focus,
+.ccalc select.ccalc__input:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+}
+
+/* hint/muted як в ОСЦПВ */
+.ccalc__hint,
+.ccalc__p,
+.ccalc__toast,
+.ccalc__bigLabel {
+    color: #6b7280;
+}
+
+/* Buttons як в ОСЦПВ */
+.ccalc__btn {
+    height: 44px;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    padding: 0 14px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    color: #1f2f55;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* "primary" як oscpv-btn */
+.ccalc__btn--primary {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+    color: #1f2f55;
+}
+
+.ccalc__btn--primary:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+/* ghost hover як oscpv-btn-ghost */
+.ccalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+}
+
+/* success — м’яко-зелена в тій же системі */
+.ccalc__btn--success {
+    background: rgba(34, 197, 94, .10);
+    border: 1px solid rgba(34, 197, 94, .35);
+    color: #166534;
+    box-shadow: none;
+}
+
+.ccalc__btn--success:hover {
+    background: rgba(34, 197, 94, .16);
+    border-color: rgba(34, 197, 94, .50);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, .10);
+}
+
+/* toggle ближче до ОСЦПВ */
+.ccalc__toggle {
+    border-radius: 14px;
+    background: #f6f7fb;
+    border: 1px solid #e6e8ee;
+}
+
+.ccalc__toggleBtn {
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+}
+
+.ccalc__toggleBtn.is-active {
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    box-shadow: 0 10px 24px rgba(16, 24, 40, .06);
+}
+
+/* таблиця заголовок як в ОСЦПВ */
+.ccalc__table th {
+    background: #f7f8fc;
+    color: #6b7280;
+    font-weight: 900;
+}
+/* рядок під синім блоком */
+.ccalc__ratesRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+/* сам бейдж */
+.ccalc__rates {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f2f55;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid #d8deea;
+
+    white-space: nowrap;
+}
+
+/* мобілка */
+@media (max-width: 680px) {
+    .ccalc__ratesRow {
+        justify-content: flex-start;
+    }
+}
+/* ===== Мобілка: мито + ПДВ в один ряд ===== */
+@media (max-width: 680px) {
+
+    /* контейнер де лежать ці поля */
+    .ccalc__rows.ccalc__mt10 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+}
+/* ===== Мобілка: кнопки в один ряд ===== */
+@media (max-width: 680px) {
+
+    .ccalc__actions {
+        display: flex;
+        flex-wrap: nowrap;
+        /* ❗ не переносити */
+        gap: 8px;
+    }
+
+    .ccalc__actions .ccalc__btn {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 0 8px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+}

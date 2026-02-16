@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор шин і дисків — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор шин і дисків: порівняй розміри 205/55 R16 та 225/45 R17. Діаметр колеса, окружність, кліренс і похибка спідометра. Режим 1 розмір або порівняння 2." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/auto/wheels-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/wheels-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/wheels-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/wheels.css" />
+
+    <!-- i18n ENGINE -->
+    <script src="/js/i18n.js" defer></script>
+
+    <!-- Calculator logic (defer + cache busting) -->
+    <script src="/js/wheels.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/wheels-calculator#app",
+    "name":"Калькулятор шин і дисків",
+    "description":"Порівняння розмірів шин і дисків: діаметр колеса, кліренс та похибка спідометра.",
+    "url":"https://calccore.net/auto/wheels-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+
+<body class="whl-page">
+    <!-- ✅ HEADER (підтягується з /partials/header.html) -->
+    <div id="header"></div>
+
+    <main class="container">
+    <!-- ===== Titlebar (як у TCO) ===== -->
+    <div class="whl-titlebar">
+        <h1 class="whl-h1">Калькулятор шин і дисків</h1>
+        <p class="whl-p">
+            Порівняй розміри шин і дисків типу
+            <b>205/55 R16</b> та <b>225/45 R17</b>:
+            діаметр колеса, окружність, зміну кліренсу
+            та <b>похибку спідометра</b>.
+        </p>
+    </div>
+
+        <section class="whl-shell">
+            <div class="whl-topbar">
+                <div class="mode-switch" aria-label="Режим">
+                    <button id="mode1" class="pill active" type="button">1 розмір</button>
+                    <button id="mode2" class="pill" type="button">Порівняти 2</button>
+                </div>
+
+                <label class="auto-toggle" title="Якщо вимкнути — розрахунок тільки по кнопці">
+                    <input type="checkbox" id="auto_calc_toggle" checked />
+                    <span class="auto-ui"></span>
+                    <span class="auto-text">Авто-розрахунок</span>
+                </label>
+            </div>
+
+            <div class="whl-grid">
+                <!-- SIZE 1 -->
+                <div class="whl-box" id="size1_box">
+                    <h2>🛞 Розмір 1</h2>
+
+                    <div class="whl-row3">
+                        <div class="field">
+                            <label for="w1">Ширина (мм)</label>
+                            <input id="w1" inputmode="decimal" placeholder="205" />
+                        </div>
+                        <div class="field">
+                            <label for="a1">Профіль (%)</label>
+                            <input id="a1" inputmode="decimal" placeholder="55" />
+                        </div>
+                        <div class="field">
+                            <label for="r1">Диск (R)</label>
+                            <input id="r1" inputmode="decimal" placeholder="16" />
+                        </div>
+                    </div>
+
+                    <div class="whl-mini">
+                        Формат: <b>205/55 R16</b> → ширина 205, профіль 55, диск 16.
+                    </div>
+
+                    <div class="whl-kpi" id="kpi1"></div>
+                </div>
+
+                <!-- SIZE 2 -->
+                <div class="whl-box" id="size2_box" style="display:none;">
+                    <h2>🛞 Розмір 2</h2>
+
+                    <div class="whl-row3">
+                        <div class="field">
+                            <label for="w2">Ширина (мм)</label>
+                            <input id="w2" inputmode="decimal" placeholder="225" />
+                        </div>
+                        <div class="field">
+                            <label for="a2">Профіль (%)</label>
+                            <input id="a2" inputmode="decimal" placeholder="45" />
+                        </div>
+                        <div class="field">
+                            <label for="r2">Диск (R)</label>
+                            <input id="r2" inputmode="decimal" placeholder="17" />
+                        </div>
+                    </div>
+
+                    <div class="whl-mini">
+                        Порівнюємо з розміром 1 і показуємо різницю.
+                    </div>
+
+                    <div class="whl-kpi" id="kpi2"></div>
+                </div>
+            </div>
+
+            <div class="whl-actions">
+                <button class="btn whl-btn" id="calcBtn" type="button">Розрахувати</button>
+                <button class="btn whl-btn whl-btn-ghost" id="resetBtn" type="button">Скинути</button>
+                <button class="btn whl-btn whl-btn-ghost" id="copyBtn" type="button">Скопіювати результат</button>
+                <button class="btn whl-btn whl-btn-ghost" id="shareBtn" type="button">Поділитись</button>
+            </div>
+
+            <div class="whl-result" id="result">
+                Введи дані та натисни «Розрахувати».
+            </div>
+
+            <div class="whl-compare" id="compare"></div>
+            <div class="whl-status" id="status"></div>
+        </section>
+
+        <hr class="divider">
+
+        <section class="cc-seo">
+            <h2>Як працює калькулятор шин і дисків?</h2>
+            <p>
+                Калькулятор розраховує <b>повний діаметр колеса</b> за формулою:
+                діаметр диска + 2×висота профілю шини.
+                На основі цього визначається окружність,
+                зміна кліренсу та похибка спідометра.
+            </p>
+            <p>
+                Це допомагає зрозуміти, чи <b>підходить альтернативний розмір</b>,
+                і як він вплине на керованість, висоту авто та покази швидкості.
+            </p>
+        
+            <h2>Що показує результат?</h2>
+            <p>
+                Результат показує різницю діаметра у відсотках,
+                зміну кліренсу в міліметрах та
+                <b>реальну швидкість авто</b> при 100 км/год на спідометрі.
+            </p>
+        </section>
+        
+        <section class="cc-faq">
+            <h2>Часті питання</h2>
+        
+            <div class="cc-faq-item">
+                <h3>Яка допустима різниця діаметра?</h3>
+                <p>
+                    Зазвичай рекомендують не перевищувати <b>±2%</b>,
+                    щоб уникнути проблем з ABS, ESP і кліренсом.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Чому змінюється показ спідометра?</h3>
+                <p>
+                    Спідометр прив’язаний до окружності колеса.
+                    Якщо вона більша — реальна швидкість буде вищою, ніж показує прилад.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ✅ FOOTER (підтягується з /partials/footer.html) -->
+    <div id="footer"></div>
+
+    <!-- ✅ layout має бути після #header/#footer -->
+    <script src="/js/layout.js"></script>
+
+   
+</body>
+
+</html>

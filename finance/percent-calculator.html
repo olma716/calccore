@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор відсотків онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор відсотків CalcCore: знайди X% від числа, який відсоток одне число від іншого, збільш або зменш на %, різниця у відсотках." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/percent-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/percent-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/percent-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/percent.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/percent.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/percent-calculator#app",
+    "name":"Калькулятор відсотків",
+    "description":"Онлайн калькулятор відсотків: X% від числа, який відсоток одне число від іншого, збільшення або зменшення на %, різниця у відсотках.",
+    "url":"https://calccore.net/finance/percent-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="percent-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc pcalc" id="pcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор відсотків</h1>
+                    <p class="ccalc__p">
+                        4 найпопулярніші формули: <b>X% від числа</b>, <b>який % одне число від іншого</b>,
+                        <b>збільшити/зменшити на %</b>, <b>різниця у %</b>.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                     <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Фінанси</span>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="pcalc-tabs" role="tablist" aria-label="Режими калькулятора">
+                            <button class="pcalc-tab is-active" type="button" data-tab="t1" role="tab"
+                                aria-selected="true">
+                                X% від числа
+                            </button>
+                            <button class="pcalc-tab" type="button" data-tab="t2" role="tab" aria-selected="false">
+                                Який %?
+                            </button>
+                            <button class="pcalc-tab" type="button" data-tab="t3" role="tab" aria-selected="false">
+                                ± на %
+                            </button>
+                            <button class="pcalc-tab" type="button" data-tab="t4" role="tab" aria-selected="false">
+                                Різниця %
+                            </button>
+                        </div>
+
+                        <!-- Panel 1 -->
+                        <div class="pcalc-panel is-active" id="t1" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t1_percent">Відсоток (%)</label>
+                                    <input class="ccalc__input" id="t1_percent" placeholder="наприклад: 15"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t1_number">Число</label>
+                                    <input class="ccalc__input" id="t1_number" placeholder="наприклад: 2000"
+                                        inputmode="decimal" />
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT1">Розрахувати</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 2 -->
+                        <div class="pcalc-panel" id="t2" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t2_part">Частина</label>
+                                    <input class="ccalc__input" id="t2_part" placeholder="наприклад: 50"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t2_total">Від цілого</label>
+                                    <input class="ccalc__input" id="t2_total" placeholder="наприклад: 200"
+                                        inputmode="decimal" />
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT2">Розрахувати</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 3 -->
+                        <div class="pcalc-panel" id="t3" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t3_number">Число</label>
+                                    <input class="ccalc__input" id="t3_number" placeholder="наприклад: 1000"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t3_percent">Змінити на (%)</label>
+                                    <input class="ccalc__input" id="t3_percent" placeholder="наприклад: 12"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field pcalc-full">
+                                    <label class="ccalc__label">Операція</label>
+                                    <div class="pcalc-radio">
+                                        <label><input type="radio" name="t3_op" value="plus" checked />
+                                            Збільшити</label>
+                                        <label><input type="radio" name="t3_op" value="minus" /> Зменшити</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT3">Розрахувати</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 4 -->
+                        <div class="pcalc-panel" id="t4" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t4_old">Було (старе число)</label>
+                                    <input class="ccalc__input" id="t4_old" placeholder="наприклад: 80"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t4_new">Стало (нове число)</label>
+                                    <input class="ccalc__input" id="t4_new" placeholder="наприклад: 100"
+                                        inputmode="decimal" />
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT4">Розрахувати</button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__toast" id="pToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="pResult">
+                            Вибери режим і натисни «Розрахувати».
+                        </div>
+
+                        <div class="pcalc-details" id="pDetails" aria-live="polite"></div>
+                        <div class="ccalc__actions ccalc__mt10 pcalc-result-actions">
+                            <button class="ccalc__btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що таке калькулятор відсотків і для чого він потрібен?</h2>
+            <p>
+                Калькулятор відсотків — це зручний інструмент для швидкого обчислення частки числа, зміни значення на
+                певний
+                відсоток
+                та визначення співвідношення між двома числами у відсотках. Він використовується у фінансах, покупках,
+                знижках,
+                кредитах, податках, інвестиціях і повсякденних розрахунках.
+            </p>
+            <p>
+                З його допомогою можна дізнатися, скільки становить X% від числа, на скільки зміниться значення при
+                збільшенні
+                або
+                зменшенні на відсоток, а також який відсоток одне число складає від іншого. Це дозволяє швидко приймати
+                фінансові
+                рішення без складних формул.
+            </p>
+
+            <h2>Які розрахунки можна виконати?</h2>
+            <p>
+                Онлайн калькулятор відсотків дозволяє:
+            </p>
+            <ul>
+                <li>Знайти відсоток від числа</li>
+                <li>Обчислити, на скільки відсотків одне число більше або менше іншого</li>
+                <li>Збільшити значення на заданий відсоток</li>
+                <li>Зменшити значення на відсоток</li>
+                <li>Порахувати знижку або націнку</li>
+            </ul>
+            <p>
+                Це універсальний фінансовий інструмент, який стане в нагоді як для особистих витрат, так і для
+                бізнес-розрахунків.
+            </p>
+        </section>
+
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти відсоток від числа?</h3>
+                <p>
+                    Щоб знайти X% від числа, потрібно помножити число на відсоток і поділити на 100.
+                    Наприклад, 20% від 500 = 500 × 20 / 100 = 100.
+                    Калькулятор виконує це автоматично.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати, на скільки відсотків одне число більше іншого?</h3>
+                <p>
+                    Потрібно знайти різницю між числами, поділити її на початкове значення та помножити на 100.
+                    Це часто використовується для порівняння цін, доходів або змін показників.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як працює збільшення числа на відсоток?</h3>
+                <p>
+                    Число збільшується на його частку. Наприклад, якщо додати 15% до 200, результат буде
+                    200 + (200 × 15 / 100) = 230.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати знижку у відсотках?</h3>
+                <p>
+                    Знижка визначається як відсоток від початкової ціни. Наприклад, знижка 25% на товар за 800 грн
+                    означає,
+                    що економія становить 200 грн, а нова ціна — 600 грн.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна використовувати калькулятор для фінансових розрахунків?</h3>
+                <p>
+                    Так, інструмент підходить для базових фінансових обчислень: кредитні переплати, інфляція, знижки,
+                    інвестиційні прирости та інші відсоткові розрахунки.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

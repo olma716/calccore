@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Plastering Calculator — bags or cement+sand | CalcCore</title>
+    <meta name="description"
+        content="CalcCore Plastering Calculator: estimate plaster materials. Modes: dry mix in bags or cement+sand. Water, chart, materials table, copy and CSV (Excel)." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/en/construction/plaster-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/plaster-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/plaster-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/plaster-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/plaster-calculator.js?v=20260212" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Which mode should I choose: bags or cement+sand?",
+        "acceptedAnswer":{"@type":"Answer","text":"If you buy a ready dry plaster mix in bags, choose “Bags”. If you mix plaster yourself (cement + sand), choose “Cement + sand”."}
+      },
+      {
+        "@type":"Question",
+        "name":"What units should I use?",
+        "acceptedAnswer":{"@type":"Answer","text":"Length/height in meters (m), area in m², layer thickness in mm. For bags mode, use consumption in kg/m² per 10 mm as shown on the bag."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is it only an estimate?",
+        "acceptedAnswer":{"@type":"Answer","text":"Real consumption depends on substrate flatness, losses, tools and application technique. Add 5–15% extra as a safety margin."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/plaster-calculator#app",
+    "name":"Plastering Calculator",
+    "description":"Plastering calculator: bags or cement+sand, water, chart and materials table, copy and CSV.",
+    "url":"https://calccore.net/en/construction/plaster-calculator",
+    "applicationCategory":"ConstructionApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page cplaster">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cplaster" id="cplaster">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1" data-i18n="plaster.h1">Plastering Calculator</h1>
+                    <p class="mcalc__p" data-i18n="plaster.subtitle">
+                        Estimate materials for plastering: <b>dry mix (bags)</b> or <b>cement + sand</b>.
+                        Includes chart, materials table, copy and CSV (Excel).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span data-i18n="plaster.auto">Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="plaster.input_title">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mode" data-i18n="plaster.mode_label">Mode</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="wall" selected data-i18n="plaster.mode_wall">Wall (L×H)</option>
+                                    <option value="area" data-i18n="plaster.mode_area">Area (m²)</option>
+                                </select>
+                                <div class="mcalc__hint" data-i18n="plaster.mode_hint">
+                                    Wall: enter length and height. Area: enter only m².
+                                </div>
+                            </div>
+
+                            <!-- Mix type -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mixType" data-i18n="plaster.mix_type_label">Plaster
+                                    type</label>
+                                <select id="mixType" class="mcalc__select">
+                                    <option value="bags" selected data-i18n="plaster.mix_bags">Dry mix (bags)</option>
+                                    <option value="cs" data-i18n="plaster.mix_cs">Cement + sand (DIY)</option>
+                                </select>
+                                <div class="mcalc__hint" data-i18n="plaster.mix_type_hint">
+                                    Choose what you want to estimate: bags or cement-sand mix.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field" id="lengthWrap">
+                                <label class="mcalc__label" for="length" data-i18n="plaster.length_label">Length
+                                    (m)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 6" />
+                            </div>
+
+                            <div class="mcalc__field" id="heightWrap">
+                                <label class="mcalc__label" for="height" data-i18n="plaster.height_label">Height
+                                    (m)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2.7" />
+                            </div>
+
+                            <div class="mcalc__field" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area" data-i18n="plaster.area_label">Area (m²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 16.2" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="openingsArea"
+                                    data-i18n="plaster.openings_label">Openings area (m²) (opt.)</label>
+                                <input class="mcalc__input" id="openingsArea" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 1.8" />
+                                <div class="mcalc__hint" data-i18n="plaster.openings_hint">
+                                    Total windows/doors area. Subtracted from plaster area.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="thicknessMm" data-i18n="plaster.thickness_label">Layer
+                                    thickness (mm)</label>
+                                <input class="mcalc__input" id="thicknessMm" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 15" />
+                                <div class="mcalc__hint" data-i18n="plaster.thickness_hint">
+                                    Average thickness. Add extra for uneven walls.
+                                </div>
+                            </div>
+
+                            <!-- BAGS FIELDS -->
+                            <div id="bagsFields" class="m-full">
+                                <div class="mcalc__rows">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="consumptionKg10mm"
+                                            data-i18n="plaster.cons_label">
+                                            Consumption (kg/m² per 10 mm)
+                                        </label>
+                                        <input class="mcalc__input" id="consumptionKg10mm" type="text"
+                                            inputmode="decimal" placeholder="e.g.: 9.0" />
+                                        <div class="mcalc__hint" data-i18n="plaster.cons_hint">
+                                            Use the value from the bag. Typical 8–10 kg/m² per 10 mm.
+                                        </div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="bagKg" data-i18n="plaster.bagkg_label">Bag
+                                            weight (kg)</label>
+                                        <input class="mcalc__input" id="bagKg" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 25" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="waterLPerKg"
+                                            data-i18n="plaster.water_lkg_label">Water (L per 1 kg) (opt.)</label>
+                                        <input class="mcalc__input" id="waterLPerKg" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 0.22" />
+                                        <div class="mcalc__hint" data-i18n="plaster.water_lkg_hint">
+                                            Leave empty if unknown — water won’t be calculated.
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="mcalc__hint" style="margin-top:8px;" data-i18n="plaster.bags_formula_hint">
+                                    Formula: kg = area × consumption × (thickness/10) × (1 + waste%).
+                                </div>
+                            </div>
+
+                            <!-- CEMENT+SAND FIELDS -->
+                            <div id="csFields" class="m-full" style="display:none;">
+
+                                <div class="mcalc__field m-full">
+                                    <label class="mcalc__label" data-i18n="plaster.ratio_title">Ratio (by
+                                        volume)</label>
+
+                                    <div class="m-3col">
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" data-i18n="plaster.ratio_c">Cement (C)</label>
+                                            <input class="mcalc__input" id="ratioC" type="text" inputmode="decimal"
+                                                placeholder="e.g.: 1" />
+                                        </div>
+
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" data-i18n="plaster.ratio_s">Sand (S)</label>
+                                            <input class="mcalc__input" id="ratioS" type="text" inputmode="decimal"
+                                                placeholder="e.g.: 3" />
+                                        </div>
+
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" data-i18n="plaster.ratio_wc">Water/cement
+                                                (W/C)</label>
+                                            <input class="mcalc__input" id="wcRatio" type="text" inputmode="decimal"
+                                                placeholder="e.g.: 0.5" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mcalc__hint" data-i18n="plaster.ratio_hint">
+                                        • 1:3 means 1 part cement + 3 parts sand (by volume).<br>
+                                        • W/C = 0.5 means ~0.5 L water per 1 kg cement.<br>
+                                        • Typical: 1:3 or 1:4 • W/C ~ 0.45–0.6
+                                    </div>
+                                </div>
+
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="cementDensity"
+                                            data-i18n="plaster.cement_density">Cement density (kg/m³)</label>
+                                        <input class="mcalc__input" id="cementDensity" type="text" inputmode="decimal"
+                                            placeholder="1440" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="sandDensity"
+                                            data-i18n="plaster.sand_density">Sand density (kg/m³)</label>
+                                        <input class="mcalc__input" id="sandDensity" type="text" inputmode="decimal"
+                                            placeholder="1600" />
+                                    </div>
+                                </div>
+
+                                <!-- ✅ Weight + Waste in one row -->
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="cementBagKg"
+                                            data-i18n="plaster.cement_bagkg">Cement bag weight (kg)</label>
+                                        <input class="mcalc__input" id="cementBagKg" type="text" inputmode="decimal"
+                                            placeholder="25" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePct" data-i18n="plaster.waste_label">Waste
+                                            / extra, %</label>
+                                        <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                            placeholder="8" />
+                                        <div class="mcalc__hint" data-i18n="plaster.waste_hint">Typical 5–15% depending
+                                            on losses and surface.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Waste for bags mode (shown outside too; JS uses same ID) -->
+                            <div class="mcalc__field" id="wasteOutsideWrap">
+                                <label class="mcalc__label" for="wastePct" data-i18n="plaster.waste_label">Waste /
+                                    extra, %</label>
+                                <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                    placeholder="8" />
+                                <div class="mcalc__hint" data-i18n="plaster.waste_hint">Typical 5–15% depending on
+                                    losses and surface.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button"
+                                        data-i18n="plaster.btn_calc">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button"
+                                        data-i18n="plaster.btn_reset">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button"
+                                        data-i18n="plaster.btn_copy">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="plaster.result_title">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult" data-i18n="plaster.result_enter">
+                            Enter inputs to calculate.
+                        </div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title" data-i18n="plaster.chart_title">Chart</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Plaster materials chart"></canvas>
+                            <div class="m-hintSmall" data-i18n="plaster.chart_hint">
+                                Visualization of key values (depends on selected mode).
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="plaster.table_title">Materials table</span>
+                                    <span class="muted" data-i18n="plaster.table_open">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button"
+                                    data-i18n="plaster.btn_copy_table">Copy table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button"
+                                    data-i18n="plaster.btn_csv">📄 Download (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Plaster materials table">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n="plaster.th_item">Item</th>
+                                            <th data-i18n="plaster.th_qty">Qty</th>
+                                            <th data-i18n="plaster.th_unit">Unit</th>
+                                            <th data-i18n="plaster.th_note">Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="plaster.cost_title">Material cost</span>
+                                    <span class="muted" data-i18n="plaster.cost_opt">(optional)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="pricePerBag" data-i18n="plaster.price_per_bag">
+                                            Mix: price per bag
+                                        </label>
+                                        <input id="pricePerBag" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 180" />
+                                        <div class="mcalc__hint" data-i18n="plaster.price_per_bag_hint">
+                                            In cement+sand mode, this means “cement price per bag”.
+                                        </div>
+                                    </div>
+
+                                    <div class="mcalc__field" id="priceSandWrap">
+                                        <label class="mcalc__label" for="priceSandPerM3" data-i18n="plaster.price_sand">
+                                            Sand: price per 1 m³
+                                        </label>
+                                        <input id="priceSandPerM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 850" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceWaterPerL"
+                                            data-i18n="plaster.price_water">Water: price per 1 L (opt.)</label>
+                                        <input id="priceWaterPerL" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery" data-i18n="plaster.delivery">Delivery
+                                            (fixed)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost"
+                                            data-i18n="plaster.waste_cost">Waste/extra, % (for cost)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                        <div class="mcalc__hint" data-i18n="plaster.waste_cost_hint">Separate from
+                                            material quantity waste.</div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button" data-i18n="plaster.btn_save_prices">Save prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button" data-i18n="plaster.btn_reset_prices">Reset prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost" type="button"
+                                                data-i18n="plaster.btn_copy_cost">Copy cost</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal" data-i18n="plaster.cost_enter">
+                                            Enter prices to see the total cost.
+                                        </div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/concrete-calculator.html">
+                                Calculate concrete volume
+                            </a>
+                        
+                            <a class="mcalc__btn" href="/en/construction/brick-calculator.html">
+                                Calculate bricks quantity
+                            </a>
+                        
+                           
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="m-divider"></div>
+        
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>How the plastering calculator works</h2>
+            <p>
+                This calculator helps you estimate <b>how much material</b> you need for plastering walls:
+                either <b>ready dry mix in bags</b> or a <b>DIY cement + sand mortar</b>.
+                It’s designed for quick planning and budgeting.
+            </p>
+        
+            <h2>Who it’s for</h2>
+            <ul>
+                <li><b>Contractors and foremen</b> — fast quantity and cost estimates.</li>
+                <li><b>Homeowners</b> — to know how many bags to buy.</li>
+                <li><b>Early budgeting</b> — before doing perfect measurements.</li>
+                <li><b>Before purchase</b> — to add a reasonable waste margin.</li>
+            </ul>
+        
+            <h2>Two calculation modes</h2>
+            <p><b>1) Dry mix (bags)</b></p>
+            <p>
+                Enter area, layer thickness and bag consumption (kg/m² per 10 mm). The calculator estimates:
+                <b>total kg</b>, <b>number of bags</b>, and optionally <b>water</b> for mixing.
+            </p>
+        
+            <p><b>2) Cement + sand (DIY)</b></p>
+            <p>
+                Enter area, thickness, <b>C:S</b> ratio (by volume), densities and <b>W/C</b>.
+                The calculator estimates: <b>cement (kg and bags)</b>, <b>sand (m³)</b> and <b>water (L)</b>.
+            </p>
+        
+            <h2>What is included in the estimate</h2>
+            <ul>
+                <li><b>Openings area</b> (windows/doors) is subtracted from total area.</li>
+                <li><b>Layer thickness</b> is converted from mm to volume.</li>
+                <li><b>Waste margin</b> is added to results (recommended 5–15%).</li>
+                <li><b>Optional cost</b> — enter prices to get a rough budget.</li>
+            </ul>
+        
+            <p class="m-hintSmall">
+                This is an estimate. Real consumption depends on wall flatness, tools, application technique and losses.
+                For uneven walls and beginners, use a higher margin (about <b>10–15%</b>).
+            </p>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>FAQ</h2>
+        
+            <div class="m-faq-item">
+                <h3>Which mode should I choose: bags or cement+sand?</h3>
+                <p>
+                    If you buy a ready dry plaster mix — choose <b>“Dry mix (bags)”</b>.
+                    If you mix mortar yourself — choose <b>“Cement + sand (DIY)”</b>.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Where do I find the consumption value (kg/m² per 10 mm)?</h3>
+                <p>
+                    It’s written on the bag or in the product datasheet. Values vary between gypsum and cement mixes.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why does the real usage differ from the calculator?</h3>
+                <p>
+                    Surface unevenness, layer thickness variations, mixing losses and application technique can change real
+                    usage.
+                    Add a <b>5–15%</b> margin to stay safe.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Does it include windows and doors?</h3>
+                <p>
+                    Yes. Enter total <b>openings area (m²)</b> and it will be subtracted automatically.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>What is W/C and what value should I use?</h3>
+                <p>
+                    <b>W/C</b> is water-to-cement ratio. For example, 0.5 ≈ 0.5 L of water per 1 kg of cement.
+                    Typical range: <b>0.45–0.6</b>, but adjust based on workability and conditions.
+                </p>
+            </div>
+        </section>
+
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+
+    <!-- Optional: hide duplicate waste field depending on mode (JS can do too) -->
+    <script>
+        // If you don't want waste duplicated in EN HTML:
+        // Leave both; JS will read by ID anyway. If duplicates exist, keep only ONE wastePct input in real file.
+    </script>
+</body>
+
+</html>

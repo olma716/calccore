@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Concrete Calculator Online — Volume & Materials | CalcCore</title>
+    <meta name="description"
+        content="CalcCore Concrete Calculator: calculate concrete volume and required materials (cement, sand, gravel, water) by shape, dimensions and mix ratio. Chart, materials table, copy and download (Excel)." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/en/construction/concrete-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/concrete-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/concrete-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/concrete-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/concrete-calculator.js?v=20260211" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What units should I use for dimensions?",
+        "acceptedAnswer":{"@type":"Answer","text":"Enter all dimensions in meters (m). The calculator will return concrete volume in cubic meters (m³)."}
+      },
+      {
+        "@type":"Question",
+        "name":"What does L×W×H or L×W×T mean?",
+        "acceptedAnswer":{"@type":"Answer","text":"L = length, W = width, H = height, T = thickness. For slabs you typically use L×W×T; for beams you often use L×W×H."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is W/C and do I need to enter liters of water?",
+        "acceptedAnswer":{"@type":"Answer","text":"W/C is the water-to-cement ratio (a coefficient), not liters. The calculator automatically estimates the water amount from cement mass and the selected W/C ratio."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is dry volume higher than wet volume?",
+        "acceptedAnswer":{"@type":"Answer","text":"Dry volume accounts for voids and losses during mixing. That’s why a dry-volume factor is used (often around 1.54)."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/concrete-calculator#app",
+    "name":"Concrete Calculator",
+    "description":"Online concrete calculator: concrete volume and required materials (cement, sand, gravel, water), chart and materials table, copy and download table.",
+    "url":"https://calccore.net/en/construction/concrete-calculator",
+    "applicationCategory":"ConstructionApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page cconcrete">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cconcrete" id="cconcrete">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Concrete Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate concrete volume and required materials: cement, sand, gravel and water.
+                        Includes a chart, a materials table, copy tools and Excel download.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="shape">Shape</label>
+                                <select id="shape" class="mcalc__select">
+                                    <option value="slab" selected>Slab (L×W×T)</option>
+                                    <option value="footing">Footing/Foundation pad (L×W×T)</option>
+                                    <option value="beam">Beam (L×W×H)</option>
+                                    <option value="wall">Wall (L×H×T)</option>
+                                    <option value="columnRect">Column — rectangular (L×W×H)</option>
+                                    <option value="columnRound">Column — round (D×H)</option>
+                                </select>
+                                <div class="mcalc__hint">Enter all dimensions in meters (m).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="length">Length (m)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 6" />
+                            </div>
+
+                            <div class="mcalc__field" id="widthWrap">
+                                <label class="mcalc__label" for="width">Width (m)</label>
+                                <input class="mcalc__input" id="width" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 4" />
+                            </div>
+
+                            <div class="mcalc__field" id="heightWrap">
+                                <label class="mcalc__label" for="height">Height / thickness (m)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0.12" />
+                            </div>
+
+                            <div class="mcalc__field" id="diameterWrap" style="display:none;">
+                                <label class="mcalc__label" for="diameter">Diameter (m)</label>
+                                <input class="mcalc__input" id="diameter" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0.3" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="grade">Mix ratio (cement:sand:gravel)</label>
+                                <select id="grade" class="mcalc__select">
+                                    <option value="1:5:10">M5 (1:5:10)</option>
+                                    <option value="1:4:8">M7.5 (1:4:8)</option>
+                                    <option value="1:3:6">M10 (1:3:6)</option>
+                                    <option value="1:2:4" selected>M15 (1:2:4)</option>
+                                    <option value="1:1.5:3">M20 (1:1.5:3)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dryFactor">Dry volume factor</label>
+                                <input class="mcalc__input" id="dryFactor" type="text" inputmode="decimal"
+                                    placeholder="1.54" />
+                                <div class="mcalc__hint">Common range: 1.52–1.57 (losses + voids).</div>
+                            </div>
+
+                            <!-- W/C preset UX -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wcrPreset">Workability</label>
+                                <select id="wcrPreset" class="mcalc__select">
+                                    <option value="0.40">Stiff (strong) — W/C 0.40</option>
+                                    <option value="0.50" selected>Standard — W/C 0.50</option>
+                                    <option value="0.60">Plastic (easy to place) — W/C 0.60</option>
+                                    <option value="custom">Enter manually</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field" id="wcrCustomWrap" style="display:none;">
+                                <label class="mcalc__label" for="wcr">W/C (water/cement)</label>
+                                <input class="mcalc__input" id="wcr" type="text" inputmode="decimal"
+                                    placeholder="0.5" />
+                                <div class="mcalc__hint">
+                                    This is NOT liters. 0.5 means 0.5 L of water per 1 kg of cement. The calculator
+                                    estimates water
+                                    automatically.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="bagSize">Cement bag (kg)</label>
+                                <input class="mcalc__input" id="bagSize" type="text" inputmode="decimal"
+                                    placeholder="50" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter dimensions to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Chart: material volumes (m³)</div>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Concrete materials chart"></canvas>
+                            <div class="m-hintSmall">
+                                Visualization of cement / sand / gravel volumes based on the selected mix ratio and dry
+                                volume factor.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Materials table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Download table (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Concrete materials table">
+                                    <thead>
+                                        <tr>
+                                            <th>Material</th>
+                                            <th>Volume (m³)</th>
+                                            <th>Weight (kg)</th>
+                                            <th>Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST (after materials table) -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Material cost <span class="muted">(optional)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceCementBag">Cement: price per bag</label>
+                                        <input id="priceCementBag" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 210" />
+                                        <div class="mcalc__hint">Bag size = the “Cement bag (kg)” input.</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceSandM3">Sand: price per m³</label>
+                                        <input id="priceSandM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 900" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceGravelM3">Gravel: price per m³</label>
+                                        <input id="priceGravelM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 1200" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceWaterM3">Water: price per m³
+                                            (optional)</label>
+                                        <input id="priceWaterM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                        <div class="mcalc__hint">1 m³ = 1000 L.</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Delivery (fixed)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePct">Extra / waste, %</label>
+                                        <input id="wastePct" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button">Save prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button">Reset prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost"
+                                                type="button">Copy cost</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Enter prices to see the total cost.
+                                        </div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/brick-calculator.html">
+                                Calculate bricks quantity
+                            </a>
+                        
+                            <a class="mcalc__btn" href="/en/construction/plaster-calculator.html">
+                                Calculate plaster amount
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>How to use the concrete calculator</h2>
+            <p>
+                This calculator helps you quickly estimate <b>concrete volume (m³)</b> and required materials for
+                mixing:
+                <b>cement, sand, gravel and water</b>. It’s useful for planning purchases, budgeting, and checking
+                quantities
+                for different structural elements (slabs, walls, columns, etc.).
+            </p>
+
+            <h2>Step-by-step</h2>
+            <p><b>1) Choose a “Shape”</b> — the calculator applies the correct volume formula.</p>
+            <p><b>2) Enter dimensions in meters</b> — length, width, height/thickness, or diameter for round columns.
+            </p>
+            <p><b>3) Pick a mix ratio</b> (cement:sand:gravel) — this splits the dry volume across materials.</p>
+            <p><b>4) Check the “Dry volume factor”</b> (often ~1.54) — accounts for voids and mixing losses.</p>
+            <p><b>5) Set workability</b> — this is W/C (water/cement). Water (liters) is computed automatically.</p>
+            <p><b>6) Click “Calculate”</b> — you’ll get volume, KPI results, chart and a materials table.</p>
+
+            <h2>What does L×W×H / T mean?</h2>
+            <p>These letters are shorthand used in the shape labels:</p>
+            <ul>
+                <li><b>L</b> — length (m): the longest horizontal dimension.</li>
+                <li><b>W</b> — width (m): the other horizontal dimension.</li>
+                <li><b>H</b> — height (m): vertical dimension (beams, walls, columns).</li>
+                <li><b>T</b> — thickness (m): for “flat” elements (slabs, pads).</li>
+                <li><b>D</b> — diameter (m): for round columns only.</li>
+            </ul>
+            <p>
+                For example, <b>L×W×T</b> = length × width × thickness,
+                and <b>L×W×H</b> = length × width × height.
+            </p>
+
+            <h2>What does “Shape” mean in this calculator?</h2>
+            <p><b>Slab (L×W×T)</b> — floors, pavements, roof slabs, foundation slabs.</p>
+            <p><b>Footing/Foundation pad (L×W×T)</b> — base under walls/columns to spread load.</p>
+            <p><b>Beam (L×W×H)</b> — horizontal load-bearing element between supports.</p>
+            <p><b>Wall (L×H×T)</b> — vertical structures (basements, retaining walls).</p>
+            <p><b>Column — rectangular (L×W×H)</b> — vertical member with rectangular cross-section.</p>
+            <p><b>Column — round (D×H)</b> — cylindrical column (volume = π × r² × height).</p>
+
+            <h2>How the calculator estimates materials</h2>
+            <p>
+                First, it calculates the <b>wet volume</b> from your dimensions. Then it multiplies by the
+                <b>dry volume factor</b> to estimate dry ingredients. Next, the dry volume is split into cement, sand
+                and gravel
+                according to the selected mix ratio.
+            </p>
+            <p>
+                Water is derived from <b>W/C</b> (water/cement):
+                water (kg) ≈ cement (kg) × W/C, and 1 kg of water ≈ 1 liter.
+            </p>
+
+            <h2>Material cost block</h2>
+            <p>
+                If you want a budget estimate, open <b>“Material cost”</b> under the materials table and enter your
+                prices
+                (cement per bag, sand/gravel per m³). The calculator will show total cost and cost per 1 m³ of concrete.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Frequently asked questions</h2>
+
+            <div class="m-faq-item">
+                <h3>What units should I use?</h3>
+                <p>Use meters (m) for all dimensions. The result will be in cubic meters (m³).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Do I need to enter liters of water?</h3>
+                <p>
+                    No. You set the <b>W/C ratio</b>, and the calculator estimates water in liters based on cement
+                    quantity.
+                    For convenience, use the workability presets (stiff/standard/plastic).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why is dry volume higher than wet volume?</h3>
+                <p>
+                    Dry aggregates have voids and some volume is lost during mixing and compaction, so a dry factor is
+                    applied
+                    (often ~1.54).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How accurate is this calculation?</h3>
+                <p>
+                    It’s an estimate. Actual usage depends on moisture in sand, aggregate grading, compaction, site
+                    losses, and
+                    the specific mixing method.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I calculate multiple elements?</h3>
+                <p>
+                    Yes. Calculate each element separately and sum the results, or export the table to Excel and combine
+                    there.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

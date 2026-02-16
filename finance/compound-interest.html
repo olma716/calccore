@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор складних відсотків — поповнення, частота, графік | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор складних відсотків CalcCore: початкова сума, щомісячні поповнення, річна ставка, роки, частота нарахування. Підсумок, внесли vs заробили %, графік та таблиця по роках. CSV і копіювання." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/compound-interest" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/compound-interest" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/compound-interest" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/compound-interest.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/compound-interest.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке складні відсотки?",
+        "acceptedAnswer":{"@type":"Answer","text":"Складні відсотки означають, що дохід нараховується не лише на початкову суму, а й на раніше отримані відсотки. Відсотки починають приносити відсотки."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чим частіше нарахування — тим більше заробіток?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так. Щомісячне нарахування дає більший результат, ніж щорічне, бо відсотки додаються до суми частіше і швидше починають працювати."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як впливають щомісячні поповнення?",
+        "acceptedAnswer":{"@type":"Answer","text":"Регулярні внески збільшують капітал і базу для нарахування складних відсотків, що суттєво підвищує підсумкову суму."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи гарантує калькулятор точний результат?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні. Це математична модель на основі введеної ставки. Реальна доходність інвестицій може змінюватися."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/compound-interest#app",
+    "name":"Калькулятор складних відсотків",
+    "description":"Онлайн калькулятор складних відсотків із щомісячними внесками, різною частотою нарахування та графіком росту капіталу.",
+    "url":"https://calccore.net/finance/compound-interest",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page ccomp">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc ccomp" id="ccomp">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Складні відсотки (Compound Interest)</h1>
+                    <p class="mcalc__p">
+                        Порахуй зростання капіталу з поповненнями: підсумкова сума, внесли vs заробили (%),
+                        графік і таблиця по роках. Частота нарахування: щомісяця / щокварталу / щороку.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="principal">Початкова сума</label>
+                                <input class="mcalc__input" id="principal" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 100 000" />
+                                <div class="mcalc__hint">Валюта розрахунку: ₴. Конвертація — за курсом НБУ (USD/EUR) у
+                                    графіку/таблиці.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyTopUp">Щомісячне поповнення</label>
+                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 2 000" />
+                                <div class="mcalc__hint">Додається на початку кожного місяця (включно з 1-м).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualRate">Річна ставка, %</label>
+                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 12" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="years">Період (роки)</label>
+                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
+                                    placeholder="наприклад: 10" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="frequency">Частота нарахування</label>
+                                <select class="mcalc__select" id="frequency">
+                                    <option value="monthly" selected>Щомісяця</option>
+                                    <option value="quarterly">Щокварталу</option>
+                                    <option value="yearly">Щороку</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Для підписів по роках у таблиці.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи початкову суму, ставку та період.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік зростання капіталу</div>
+
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік зростання капіталу"></canvas>
+                            <div class="m-hintSmall">
+                                Лінія показує баланс наприкінці кожного року.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця по роках <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV"
+                                    type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable"
+                                    aria-label="Таблиця складних відсотків по роках">
+                                    <thead>
+                                        <tr>
+                                            <th>Рік</th>
+                                            <th>Дата</th>
+                                            <th>Внесли (₴)</th>
+                                            <th>Заробили (₴)</th>
+                                            <th>Баланс (₴)</th>
+                                            <th>Заробили, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Як працює калькулятор складних відсотків?</h2>
+            <p>
+                Калькулятор складних відсотків CalcCore показує, як зростають ваші гроші з часом завдяки ефекту
+                <b>компаундингу</b> — коли відсотки нараховуються не лише на початкову суму, а й на вже зароблені відсотки.
+                Це одна з ключових ідей довгострокових інвестицій та накопичень.
+            </p>
+            <p>
+                Ви вводите <b>початкову суму</b>, <b>щомісячні поповнення</b>, <b>річну ставку</b> і <b>період</b>.
+                Далі обираєте <b>частоту нарахування</b> (щомісяця / щокварталу / щороку).
+                Калькулятор рахує підсумковий баланс і показує, яку частину ви внесли самі, а яку заробили завдяки відсоткам.
+            </p>
+        
+            <h2>Частота нарахування: щомісяця, щокварталу чи щороку</h2>
+            <p>
+                Частота нарахування впливає на результат: чим частіше відбувається капіталізація, тим швидше росте баланс,
+                бо відсотки “працюють” раніше і довше. Наприклад, при однаковій ставці
+                <b>щомісячне нарахування</b> зазвичай дає більший підсумок, ніж <b>щорічне</b>.
+            </p>
+        
+            <h2>Внесли vs заробили: що означають ці показники?</h2>
+            <p>
+                Калькулятор окремо показує:
+                <b>скільки ви внесли</b> (початкова сума + всі поповнення) та
+                <b>скільки заробили</b> (різниця між підсумковою сумою та внесками).
+                Так ви бачите реальний внесок “відсотків” у кінцевий результат.
+            </p>
+        
+            <h2>Графік і таблиця по роках</h2>
+            <p>
+                Для наочності калькулятор будує <b>графік зростання капіталу</b> і формує <b>таблицю по роках</b>,
+                де видно баланс на кінець кожного року, суму внесків і суму зароблених відсотків.
+                Це зручно для планування цілей: накопичення, “фінансової подушки” або великих покупок.
+            </p>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="m-faq-item">
+                <h3>Що таке складні відсотки простими словами?</h3>
+                <p>
+                    Це коли відсотки нараховуються на весь баланс, включно з уже заробленими відсотками.
+                    Тобто ваші відсотки також починають приносити відсотки.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Як частота нарахування впливає на результат?</h3>
+                <p>
+                    Чим частіше нараховуються відсотки (щомісяця/щокварталу/щороку), тим швидше росте баланс,
+                    бо капіталізація відбувається частіше.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Як враховуються щомісячні поповнення?</h3>
+                <p>
+                    Поповнення додаються регулярно та збільшують базу для нарахування відсотків.
+                    Чим раніше і стабільніше ви поповнюєте рахунок, тим більший ефект компаундингу.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи гарантує калькулятор точний результат як у банку/брокера?</h3>
+                <p>
+                    Калькулятор дає математичну оцінку за заданими параметрами. У реальних продуктах можуть бути комісії,
+                    податки, нерівномірні ставки або конкретні дати операцій — це може змінити фінальний результат.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чим відрізняються “внесли” і “заробили”?</h3>
+                <p>
+                    “Внесли” — це ваші гроші (початкова сума + поповнення). “Заробили” — це приріст завдяки відсоткам:
+                    підсумкова сума мінус внески.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

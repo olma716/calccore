@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Total Cost of a Car from Europe Calculator — CalcCore</title>
+    <meta name="description"
+        content="Total cost of a car from Europe calculator: car price, delivery, customs clearance (duty, excise, VAT), certification, registration, first service. Turnkey estimate." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/import-cost-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/import-cost-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/import-cost-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/import-cost.css" />
+
+    <!-- i18n BEFORE calculator -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/import-cost.js?v=20260209" defer></script>
+
+    <!-- SEO Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/import-cost-calculator#app",
+    "name":"Total Cost of a Car from Europe Calculator",
+    "description":"Turnkey estimate for importing a car from Europe: price, delivery, customs clearance, certification and registration.",
+    "url":"https://calccore.net/en/auto/import-cost-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="imp-page">
+    <div id="header"></div>
+
+    <main class="container">
+
+        <!-- 🔵 SEO TITLE BAR -->
+        <section class="imp-titlebar">
+            <h1 class="imp-h1">Total cost of a car from Europe</h1>
+            <p class="imp-p">
+                Calculate the <b>real “turnkey” price</b>: car price, delivery,
+                customs clearance (duty, excise, VAT), certification, registration and first service.
+                Exchange rates — based on NBU data.
+            </p>
+        </section>
+
+        <!-- ✅ Rates badge UNDER titlebar (right) -->
+        <div class="imp-ratesRow">
+            <div class="imp-rates" id="ratesBadge">NBU rates: —</div>
+        </div>
+
+        <!-- 🧮 CALCULATOR -->
+        <section class="imp-shell">
+
+            <!-- TOP -->
+            <div class="imp-topbar">
+
+                <!-- (technical rates block; keep for JS but hidden by CSS) -->
+                <div class="imp-ratebox">
+                    <div class="imp-rate-title">EUR → UAH rate (NBU)</div>
+                    <div class="imp-rate-row">
+                        <input id="eurRate" inputmode="decimal" />
+                        <button class="btn imp-btn-ghost" id="rateBtn">Refresh</button>
+                    </div>
+                    <div class="imp-rate-hint" id="rateMeta">Rates not loaded</div>
+                </div>
+
+                <label class="auto-toggle">
+                    <input type="checkbox" id="auto_calc_toggle" checked />
+                    <span class="auto-text">Auto-calculate</span>
+                </label>
+            </div>
+
+            <div class="imp-grid">
+                <!-- LEFT -->
+                <div class="imp-box">
+                    <h2>🚗 Car details & delivery</h2>
+
+                    <div class="imp-row2">
+                        <div class="field">
+                            <label>Car price</label>
+                            <div style="display:flex; gap:10px;">
+                                <input id="carPriceVal" inputmode="decimal" placeholder="12000" />
+                                <select id="carPriceCur">
+                                    <option value="EUR">€ EUR</option>
+                                    <option value="USD">$ USD</option>
+                                    <option value="UAH">₴ UAH</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Year</label>
+                            <input id="yearMade" inputmode="numeric" placeholder="2018" />
+                        </div>
+                    </div>
+
+                    <div class="imp-row2">
+                        <div class="field">
+                            <label>Type</label>
+                            <select id="fuelType">
+                                <option value="petrol">Petrol</option>
+                                <option value="diesel">Diesel</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="ev">Electric (EV)</option>
+                            </select>
+                        </div>
+
+                        <!-- ICE volume -->
+                        <div class="field" id="engineWrap">
+                            <label>Engine size (cm³)</label>
+                            <input id="engineCm3" inputmode="numeric" placeholder="2000" />
+                        </div>
+
+                        <!-- ✅ EV battery -->
+                        <div class="field" id="batteryWrap" style="display:none;">
+                            <label>Battery capacity (kWh)</label>
+                            <input id="batteryKwh" inputmode="decimal" placeholder="60" />
+                        </div>
+                    </div>
+
+                    <div class="imp-row2">
+                        <div class="field">
+                            <label>Delivery</label>
+                            <input id="deliveryVal" inputmode="decimal" placeholder="0" />
+                        </div>
+                        <div class="field">
+                            <label>Delivery currency</label>
+                            <select id="deliveryCur">
+                                <option value="EUR">EUR</option>
+                                <option value="UAH">UAH</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="imp-box">
+                    <h2>🧾 Customs & additional costs</h2>
+                    <div class="imp-kpi" id="customsKpi"></div>
+
+                    <div class="imp-row2">
+                        <div class="field">
+                            <label>Certification (UAH)</label>
+                            <input id="certUah" inputmode="numeric" placeholder="5000" />
+                        </div>
+                        <div class="field">
+                            <label>Registration (UAH)</label>
+                            <input id="regUah" inputmode="numeric" placeholder="150" />
+                        </div>
+                    </div>
+
+                    <div class="imp-row2">
+                        <div class="field">
+                            <label>First service (UAH)</label>
+                            <input id="serviceUah" inputmode="numeric" placeholder="0" />
+                        </div>
+                        <div class="field">
+                            <label>Agent fee (UAH)</label>
+                            <input id="agentUah" inputmode="numeric" placeholder="0" />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Contingency (%)</label>
+                        <input id="extraPct" inputmode="decimal" placeholder="0" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="imp-actions">
+                <button class="btn imp-btn" id="calcBtn">Calculate</button>
+                <button class="btn imp-btn-ghost" id="resetBtn">Reset</button>
+                <button class="btn imp-btn-ghost" id="shareBtn">Share</button>
+
+                <!-- ✅ green button -->
+                <a class="btn imp-btn-success" href="/auto/oscpv-calculator.html">
+                    Calculate MTPL
+                </a>
+            </div>
+
+            <!-- RESULTS -->
+            <div class="imp-results">
+                <div class="imp-total-card">
+                    <div class="imp-total-label">Total “turnkey” cost</div>
+                    <div class="imp-total-value" id="totalMain">—</div>
+                    <div class="imp-total-sub" id="totalSub">—</div>
+                </div>
+
+                <div class="imp-kpi-grid" id="kpiGrid"></div>
+                <div class="imp-explain" id="humanExplain"></div>
+            </div>
+
+            <div class="imp-status" id="status"></div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 🔽 SEO TEXT -->
+        <section class="imp-content">
+            <h2 class="imp-content-title">
+                Total cost of a car from Europe
+            </h2>
+
+            <div class="imp-content-text">
+                <p>
+                    This calculator helps you quickly estimate the <strong>total “turnkey” cost</strong>
+                    of importing a car from Europe to Ukraine. You immediately see the realistic amount,
+                    including customs payments and all additional expenses.
+                </p>
+
+                <p>
+                    You can enter the <strong>car price in euros, dollars or hryvnias</strong>.
+                    The calculator converts the amount using current NBU rates
+                    and uses it to estimate duty, excise and VAT.
+                </p>
+
+                <p><strong>The calculator includes:</strong></p>
+                <ul>
+                    <li>car price (any currency)</li>
+                    <li>delivery to Ukraine</li>
+                    <li>duty, excise and VAT</li>
+                    <li>certification and registration</li>
+                    <li>first service, agent fee and contingency</li>
+                </ul>
+
+                <p>
+                    The result is an <strong>estimate</strong> suitable for budgeting,
+                    comparing cars and planning before purchase.
+                </p>
+            </div>
+        </section>
+
+        <!-- ❓ FAQ -->
+        <section class="imp-content">
+            <h2 class="imp-content-title">
+                FAQ
+            </h2>
+
+            <div class="imp-content-text">
+
+                <div class="faq-item">
+                    <h3>Can I enter the car price in UAH or USD?</h3>
+                    <p>
+                        Yes. You can enter the car price in <strong>UAH, USD or EUR</strong>.
+                        The calculator converts the amount using NBU rates.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How accurate is the customs estimate?</h3>
+                    <p>
+                        This is an estimate. Real totals may vary depending on
+                        customs valuation, documents, exemptions and vehicle category.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Is delivery included?</h3>
+                    <p>
+                        Yes. Delivery is added to the customs value
+                        and affects duty and VAT.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Does it work for electric cars?</h3>
+                    <p>
+                        Yes. For EVs the calculator uses a simplified model,
+                        where duty and/or excise may be reduced or zero depending on the rules.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What is this calculator best for?</h3>
+                    <p>
+                        Budget planning, comparing different cars,
+                        and understanding the real import cost before buying.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+
+</body>
+
+</html>

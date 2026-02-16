@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Construction Cost Calculator — total build cost, chart, table | CalcCore</title>
+    <meta name="description"
+        content="Construction Cost Calculator by CalcCore: area, cost per m², stages, contingency, taxes, and extras. Output: total cost, cost per m², cumulative chart and stage breakdown table." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/en/construction/cost-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/cost-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/cost-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/construction-cost-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/construction-cost-calculator.js?v=20260210" defer></script>
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://calccore.net/#org",
+        "name": "CalcCore",
+        "url": "https://calccore.net/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://calccore.net/img/logo.png"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://calccore.net/#website",
+        "url": "https://calccore.net/",
+        "name": "CalcCore",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://calccore.net/en/construction/cost-calculator#webpage",
+        "url": "https://calccore.net/en/construction/cost-calculator",
+        "name": "Construction Cost Calculator",
+        "description": "Construction Cost Calculator by CalcCore: area, cost per m², stages, contingency, taxes, and extras. Output: total cost, cost per m², cumulative chart and stage breakdown table.",
+        "isPartOf": {
+          "@id": "https://calccore.net/#website"
+        },
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "breadcrumb": {
+          "@id": "https://calccore.net/en/construction/cost-calculator#breadcrumb"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://calccore.net/en/construction/cost-calculator#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "CalcCore",
+            "item": "https://calccore.net/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Construction",
+            "item": "https://calccore.net/en/construction/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Construction Cost Calculator",
+            "item": "https://calccore.net/en/construction/cost-calculator"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://calccore.net/en/construction/cost-calculator#app",
+        "name": "Construction Cost Calculator",
+        "description": "Estimate total construction cost for a house or project: area, base cost per m², stages, contingency and taxes. Shows total cost, effective cost per m², a chart and a stage-by-stage table.",
+        "url": "https://calccore.net/en/construction/cost-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "UAH"
+        }
+      }
+    ]
+    </script>
+</head>
+
+<body class="credit-page cconstruction">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cconstruction" id="cconstruction">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Construction Cost Calculator</h1>
+                    <p class="mcalc__p">
+                        Estimate total construction cost for a house or project: area, base cost per m², stages,
+                        contingency and
+                        taxes.
+                        Shows total cost, effective cost per m², a chart and a stage-by-stage table.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="NBU rates (USD/EUR)">
+                            NBU rates: loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter details</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="area">Area, m²</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g., 120" />
+                                <div class="mcalc__hint">Total gross area of the project.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="baseCost">Base cost, ₴/m²</label>
+                                <input class="mcalc__input" id="baseCost" type="text" inputmode="decimal"
+                                    placeholder="e.g., 25 000" />
+                                <div class="mcalc__hint">An average estimate per m² (shell or turnkey, depending on the
+                                    scenario).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="scenario">Scenario</label>
+                                <select class="mcalc__select" id="scenario">
+                                    <option value="shell" selected>Shell (foundation + walls + roof)</option>
+                                    <option value="turnkey">Turnkey</option>
+                                    <option value="custom">Custom stage weights</option>
+                                </select>
+                                <div class="mcalc__hint">In “Custom”, you can edit stage percentages manually.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="contingency">Contingency, %</label>
+                                <input class="mcalc__input" id="contingency" type="text" inputmode="decimal"
+                                    placeholder="e.g., 10" />
+                                <div class="mcalc__hint">Common range: 8–15% depending on the project.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxVat">VAT / taxes, % (optional)</label>
+                                <input class="mcalc__input" id="taxVat" type="text" inputmode="decimal"
+                                    placeholder="e.g., 0" />
+                                <div class="mcalc__hint">Use if you want to add taxes on top of the estimate.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="extras">Extras, ₴ (optional)</label>
+                                <input class="mcalc__input" id="extras" type="text" inputmode="decimal"
+                                    placeholder="e.g., 150 000" />
+                                <div class="mcalc__hint">Design, permits, utilities, landscaping, connections, etc.
+                                </div>
+                            </div>
+
+                            <!-- Stage weights -->
+                            <div class="m-stagebox m-full">
+                                <div class="m-stagebox__title">Stages (share of base cost), %</div>
+
+                                <div class="m-stagegrid">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wFoundation">Foundation</label>
+                                        <input class="mcalc__input" id="wFoundation" type="text" inputmode="decimal"
+                                            placeholder="20" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wWalls">Walls / structure</label>
+                                        <input class="mcalc__input" id="wWalls" type="text" inputmode="decimal"
+                                            placeholder="35" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wRoof">Roof</label>
+                                        <input class="mcalc__input" id="wRoof" type="text" inputmode="decimal"
+                                            placeholder="15" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wWindows">Windows / facade</label>
+                                        <input class="mcalc__input" id="wWindows" type="text" inputmode="decimal"
+                                            placeholder="10" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wEngineering">Engineering</label>
+                                        <input class="mcalc__input" id="wEngineering" type="text" inputmode="decimal"
+                                            placeholder="10" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wInterior">Interior finishes</label>
+                                        <input class="mcalc__input" id="wInterior" type="text" inputmode="decimal"
+                                            placeholder="10" />
+                                    </div>
+                                </div>
+
+                                <div class="mcalc__hint">
+                                    Percentages should add up to 100%. For “Shell/Turnkey”, presets are used.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter area and cost per m².
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Chart: cumulative cost by stage</div>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Construction cost chart"></canvas>
+                            <div class="m-hintSmall">
+                                The line shows cumulative cost (UAH / USD / EUR) from stage to stage.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Stage breakdown <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
+                                    CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Stage cost table">
+                                    <thead>
+                                        <tr>
+                                            <th>Stage</th>
+                                            <th>Share, %</th>
+                                            <th>Amount</th>
+                                            <th>Cumulative</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/concrete-calculator.html">
+                                Calculate concrete volume
+                            </a>
+                        
+                            <a class="mcalc__btn" href="/en/construction/brick-calculator.html">
+                                Calculate bricks quantity
+                            </a>
+                        
+                            <a class="mcalc__btn" href="/en/construction/plaster-calculator.html">
+                                Calculate plaster amount
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <section class="m-seo">
+            <h2>How the Construction Cost Calculator Works</h2>
+            <p>
+                The Construction Cost Calculator helps estimate the <b>total budget of a building project</b> based on
+                area, base cost per square meter, construction stages, contingency and additional expenses.
+                It provides a structured breakdown so you can understand where the money goes.
+            </p>
+        
+            <h2>Input Blocks Explained</h2>
+            <p>
+                <b>Area (m²)</b> — the total size of the building. This is the core factor affecting overall cost.
+            </p>
+            <p>
+                <b>Base cost per m²</b> — an average construction cost benchmark. Depending on your scenario, this can represent
+                a structural shell or a turnkey finish level.
+            </p>
+            <p>
+                <b>Scenario</b> — selects predefined stage distributions (Shell or Turnkey) or allows you to define your own
+                percentages in Custom mode.
+            </p>
+            <p>
+                <b>Contingency (%)</b> — a reserve for unforeseen costs such as material price changes, design adjustments, or
+                unexpected site conditions.
+            </p>
+            <p>
+                <b>VAT / Taxes (%)</b> — optional addition if taxes must be included in the estimate.
+            </p>
+            <p>
+                <b>Extras</b> — any fixed additional expenses like design work, permits, utilities connection, landscaping, or
+                external works.
+            </p>
+        
+            <h2>Stage Distribution</h2>
+            <p>
+                The calculator divides the base construction budget into stages such as foundation, structure, roof,
+                engineering systems, and interior works. This shows how costs accumulate during the project timeline.
+            </p>
+        
+            <h2>What the Results Show</h2>
+            <p>
+                The calculator provides:
+            </p>
+            <ul>
+                <li><b>Total project cost</b> including contingency, taxes, and extras.</li>
+                <li><b>Effective cost per m²</b> based on the final total.</li>
+                <li><b>Stage breakdown table</b> showing cost share and cumulative totals.</li>
+                <li><b>Cumulative chart</b> visualizing how the budget grows across construction stages.</li>
+            </ul>
+        
+            <h2>Why This Matters</h2>
+            <p>
+                Understanding construction costs helps with financial planning, loan calculations, contractor negotiations,
+                and risk management. A structured estimate reduces surprises and supports better project decisions.
+            </p>
+        </section>
+        
+        <section class="m-faq">
+            <h2>Frequently Asked Questions</h2>
+        
+            <div class="m-faq-item">
+                <h3>Is this calculator suitable for professional cost estimation?</h3>
+                <p>
+                    It provides a structured preliminary estimate. For detailed professional budgeting, engineering studies
+                    and contractor quotes are still required.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>What is a typical contingency percentage?</h3>
+                <p>
+                    Most projects use 8–15% depending on complexity, location, and market volatility.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Can I adjust stage percentages?</h3>
+                <p>
+                    Yes. Select “Custom” scenario to manually define the cost distribution between construction stages.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Does the calculator include land cost?</h3>
+                <p>
+                    No. Land purchase is not included. Only construction-related costs are calculated.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why does cost per m² change after calculation?</h3>
+                <p>
+                    The effective cost per m² includes contingency, taxes, and additional expenses, not just the base rate.
+                </p>
+            </div>
+        </section>
+
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

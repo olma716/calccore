@@ -1,0 +1,627 @@
+/* =========================
+   Deposit Calculator (scoped)
+   only inside .cdeposit
+========================= */
+
+.cdeposit,
+.cdeposit * {
+    box-sizing: border-box;
+}
+
+.cdeposit {
+    --m-card: #fff;
+    --m-text: #222;
+    --m-muted: #6b7280;
+    --m-brand: #283b69;
+    --m-brand2: #1f2f55;
+    --m-border: #e6e8ef;
+    --m-shadow: 0 10px 25px rgba(16, 24, 40, .08);
+    --m-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--m-text);
+}
+
+/* Wrap */
+.cdeposit .mcalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+/* Titlebar */
+.cdeposit .mcalc__titlebar {
+    background: linear-gradient(180deg, var(--m-brand), var(--m-brand2));
+    color: #fff;
+    border-radius: var(--m-radius);
+    padding: 16px;
+    box-shadow: var(--m-shadow);
+    margin-bottom: 14px;
+}
+
+.cdeposit .mcalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.cdeposit .mcalc__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+/* Grid */
+.cdeposit .mcalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "top top"
+        "left right";
+    gap: 14px;
+    align-items: start;
+}
+
+.cdeposit .mcalc__grid>.m-topline {
+    grid-area: top;
+    margin: 0;
+    padding: 0 2px 6px;
+}
+
+.cdeposit .mcalc__grid>.mcalc__card:first-of-type {
+    grid-area: left;
+}
+
+.cdeposit .mcalc__grid>.mcalc__card:last-of-type {
+    grid-area: right;
+    margin-top: 0;
+}
+
+@media (max-width:980px) {
+    .cdeposit .mcalc__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "top"
+            "left"
+            "right";
+    }
+}
+
+/* Card */
+.cdeposit .mcalc__card {
+    background: var(--m-card);
+    border: 1px solid var(--m-border);
+    border-radius: var(--m-radius);
+    box-shadow: var(--m-shadow);
+    padding: 14px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Section title */
+.cdeposit .mcalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--m-border);
+}
+
+.cdeposit .mcalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--m-brand2);
+}
+
+.cdeposit .mcalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Topline */
+.cdeposit .m-topline {
+    margin: 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cdeposit .m-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.cdeposit .m-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+/* NBU badge */
+.cdeposit .m-nbu {
+    font-size: 12px;
+    font-weight: 900;
+    color: #1f2f55;
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .18);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Fields grid */
+.cdeposit .mcalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width:680px) {
+    .cdeposit .mcalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cdeposit .mcalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.cdeposit .m-full {
+    grid-column: 1 / -1;
+}
+
+.cdeposit .mcalc__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.cdeposit .mcalc__input,
+.cdeposit .mcalc__select {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.cdeposit .mcalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.cdeposit .mcalc__input:focus,
+.cdeposit .mcalc__select:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    color: #111827;
+}
+
+.cdeposit .mcalc__hint {
+    font-size: 12px;
+    color: var(--m-muted);
+}
+
+/* Actions */
+.cdeposit .mcalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cdeposit .mcalc__btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.cdeposit .mcalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+    transform: translateY(-1px);
+}
+
+.cdeposit .mcalc__btn--primary {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+}
+
+.cdeposit .mcalc__btn--primary:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+.cdeposit .mcalc__btn--small {
+    height: 36px;
+    min-width: unset;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.cdeposit .mcalc__select--mini {
+    height: 36px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 13px;
+}
+
+.cdeposit .m-mt10 {
+    margin-top: 10px;
+}
+
+/* Result */
+.cdeposit .mcalc__bigNumber {
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    border: 1px solid #bfe3cd;
+    border-radius: var(--m-radius);
+    padding: 12px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, .10);
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+/* Details */
+.cdeposit .m-details {
+    margin-top: 12px;
+    border: 1px solid var(--m-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.cdeposit .m-details:empty {
+    display: none;
+}
+
+.cdeposit .m-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width:680px) {
+    .cdeposit .m-kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cdeposit .m-kpi {
+    border: 1px solid rgba(40, 59, 105, .10);
+    border-radius: 14px;
+    padding: 12px;
+    background: rgba(40, 59, 105, .04);
+}
+
+.cdeposit .m-kpi__k {
+    font-size: 12px;
+    font-weight: 900;
+    color: rgba(75, 85, 99, .95);
+    margin-bottom: 6px;
+}
+
+.cdeposit .m-kpi__v {
+    font-size: 18px;
+    font-weight: 900;
+    color: #1f2f55;
+    font-variant-numeric: tabular-nums;
+}
+
+.cdeposit .m-kpi__s {
+    margin-top: 6px;
+    font-size: 12px;
+    color: rgba(75, 85, 99, .92);
+}
+
+/* Summary block */
+.cdeposit .m-summary {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(40, 59, 105, .12);
+    background: rgba(40, 59, 105, .06);
+    color: #0b1b3f;
+}
+
+.cdeposit .m-summary b {
+    font-weight: 900;
+}
+
+.cdeposit .m-hintSmall {
+    margin-top: 6px;
+    font-size: 11px;
+    color: rgba(75, 85, 99, .88);
+    line-height: 1.45;
+}
+
+/* Toast */
+.cdeposit .mcalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--m-muted);
+    min-height: 16px;
+}
+
+/* Schedule (button look) */
+.cdeposit .m-schedule {
+    margin-top: 12px;
+    border: 1px solid var(--m-border);
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* closed */
+.cdeposit .m-schedule summary.m-sum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    font-weight: 900;
+    cursor: pointer;
+    list-style: none;
+    transition: all .18s ease;
+
+    background: linear-gradient(180deg, #fff5f5, #faeaea);
+    border-bottom: 1px solid rgba(231, 188, 188, .85);
+    color: #6b3a3a;
+
+    margin: 10px 12px 12px;
+    border: 1px solid rgba(231, 188, 188, .85);
+    border-radius: 14px;
+}
+
+.cdeposit .m-schedule summary::-webkit-details-marker {
+    display: none;
+}
+
+.cdeposit .m-schedule summary.m-sum:hover {
+    background: linear-gradient(180deg, #fbecec, #f6e0e0);
+    box-shadow: 0 6px 16px rgba(120, 60, 60, .10);
+    transform: translateY(-1px);
+}
+
+/* open */
+.cdeposit details[open]>summary.m-sum {
+    background: linear-gradient(180deg, #e9f7ef, #dff4e8);
+    border: 1px solid #bfe3cd;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, .14);
+}
+
+.cdeposit .m-sum-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cdeposit .muted {
+    font-weight: 900;
+    color: rgba(75, 85, 99, .85);
+    font-size: 12px;
+}
+
+/* table icon */
+.cdeposit .m-ico {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background:
+        linear-gradient(currentColor, currentColor) 4px 6px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 4px 10px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 4px 14px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 6px 4px/1px 12px no-repeat;
+    opacity: .85;
+}
+
+/* chevron */
+.cdeposit .m-chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform .2s ease;
+    flex: 0 0 auto;
+}
+
+.cdeposit details[open]>summary .m-chevron {
+    transform: rotate(-135deg);
+}
+
+/* schedule tools */
+.cdeposit .m-tools {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 10px;
+    flex-wrap: wrap;
+}
+
+.cdeposit .m-curr {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+}
+
+/* table */
+.cdeposit .m-tablewrap {
+    overflow: auto;
+    padding: 0 12px 12px;
+}
+
+.cdeposit .m-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+.cdeposit .m-table th,
+.cdeposit .m-table td {
+    text-align: left;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgba(40, 59, 105, .10);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.cdeposit .m-table th {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, .95);
+    color: var(--m-brand2);
+    font-weight: 900;
+}
+
+.cdeposit .m-table td {
+    color: rgba(31, 47, 85, .95);
+}
+/* Force NBU badge to look like mortgage one */
+.cdeposit .m-topline #nbuBadge.m-nbu,
+.cdeposit .m-topline .m-nbu#nbuBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 12px;
+    font-weight: 900;
+    color: #1f2f55;
+
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .18);
+    padding: 6px 10px;
+    border-radius: 999px;
+
+    white-space: nowrap;
+}
+/* Make currency select same height as small buttons */
+.cdeposit .m-tools select.mcalc__select--mini,
+.cdeposit .m-tools .mcalc__select.mcalc__select--mini {
+    height: 36px !important;
+    line-height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 10px !important;
+
+    font-size: 13px;
+    font-weight: 900;
+}
+/* Divider + SEO/FAQ (same as mortgage) */
+.cdeposit .m-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, .35);
+}
+
+.cdeposit .m-seo,
+.cdeposit .m-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cdeposit .m-seo h2,
+.cdeposit .m-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cdeposit .m-seo p,
+.cdeposit .m-seo li {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+.cdeposit .m-seo ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+.cdeposit .m-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+    border: 1px solid rgba(40, 59, 105, .10);
+}
+
+.cdeposit .m-faq-item h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: #283b69;
+    font-weight: 900;
+}
+
+.cdeposit .m-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width:520px) {
+
+    .cdeposit .m-seo h2,
+    .cdeposit .m-faq h2 {
+        font-size: 18px;
+    }
+
+    .cdeposit .m-seo p,
+    .cdeposit .m-seo li {
+        font-size: 14px;
+    }
+
+    .cdeposit .m-faq-item {
+        padding: 14px;
+    }
+}

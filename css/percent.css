@@ -1,0 +1,519 @@
+/* =========================
+   Percent Calculator (scoped)
+   only inside .pcalc / .ccalc
+========================= */
+
+.pcalc,
+.pcalc * {
+    box-sizing: border-box;
+}
+
+.pcalc {
+    --cc-card: #fff;
+    --cc-text: #222;
+    --cc-muted: #6b7280;
+    --cc-brand: #283b69;
+    --cc-brand2: #1f2f55;
+    --cc-border: #e6e8ef;
+    --cc-shadow: 0 10px 25px rgba(16, 24, 40, 0.08);
+    --cc-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cc-text);
+}
+
+/* Wrap */
+.pcalc .ccalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+/* Titlebar */
+.pcalc .ccalc__titlebar {
+    background: linear-gradient(180deg, var(--cc-brand), var(--cc-brand2));
+    color: #fff;
+    border-radius: var(--cc-radius);
+    padding: 16px;
+    box-shadow: var(--cc-shadow);
+    margin-bottom: 14px;
+}
+
+.pcalc .ccalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.pcalc .ccalc__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+/* ===== Layout fix: Введи дані зліва, Результат справа ===== */
+
+/* grid layout */
+.pcalc .ccalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+/* Topline (checkbox) - зліва зверху */
+.pcalc .ccalc__grid>.evc-topline {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    /* прибираємо зайві відступи */
+    padding: 0 2px 6px;
+}
+
+/* Card "Введи дані" - зліва під чекбоксом */
+.pcalc .ccalc__grid>.ccalc__card:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/* Card "Результат" - справа, по висоті займає 2 рядки */
+.pcalc .ccalc__grid>.ccalc__card:last-of-type {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+/* Трошки “симетрії” по висоті і відчуття балансу */
+.pcalc .ccalc__grid>.ccalc__card {
+    display: flex;
+    flex-direction: column;
+}
+
+.pcalc #pResult {
+    min-height: 74px;
+    /* щоб блок результату не був “плоский” */
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile: все в одну колонку */
+@media (max-width: 980px) {
+    .pcalc .ccalc__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pcalc .ccalc__grid>.evc-topline,
+    .pcalc .ccalc__grid>.ccalc__card:first-of-type,
+    .pcalc .ccalc__grid>.ccalc__card:last-of-type {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
+/* Card */
+.pcalc .ccalc__card {
+    background: var(--cc-card);
+    border: 1px solid var(--cc-border);
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow);
+    padding: 14px;
+    min-width: 0;
+}
+
+/* Section title */
+.pcalc .ccalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.pcalc .ccalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--cc-brand2);
+}
+
+.pcalc .ccalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Tabs */
+.pcalc-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 720px) {
+    .pcalc-tabs {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.pcalc-tab {
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--cc-border);
+    background: #fff;
+    font-weight: 900;
+    font-size: 12px;
+    color: var(--cc-brand2);
+    cursor: pointer;
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.pcalc-tab:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(31, 47, 85, .10);
+    border-color: rgba(40, 59, 105, .25);
+}
+
+.pcalc-tab.is-active {
+    background: rgba(40, 59, 105, .08);
+    border-color: rgba(40, 59, 105, .35);
+}
+
+/* Panels */
+.pcalc-panel {
+    display: none;
+}
+
+.pcalc-panel.is-active {
+    display: block;
+}
+
+/* Fields */
+.pcalc .ccalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .pcalc .ccalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pcalc .ccalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.pcalc-full {
+    grid-column: 1 / -1;
+}
+
+.pcalc .ccalc__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.pcalc .ccalc__input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.pcalc .ccalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.pcalc .ccalc__input:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    color: #111827;
+}
+
+/* Radio */
+.pcalc-radio {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.pcalc-radio label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 900;
+    color: #1f2f55;
+    font-size: 13px;
+    user-select: none;
+}
+
+.pcalc-radio input {
+    accent-color: #283b69;
+}
+
+/* Actions */
+.pcalc .ccalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pcalc .ccalc__btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.pcalc .ccalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+    transform: translateY(-1px);
+}
+
+.pcalc .ccalc__btn--primary {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+}
+
+.pcalc .ccalc__btn--primary:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+/* Utilities */
+.pcalc .ccalc__mt10 {
+    margin-top: 10px;
+}
+
+/* Result box */
+.pcalc .ccalc__bigNumber {
+    background: linear-gradient(180deg, rgba(40, 59, 105, .08), rgba(40, 59, 105, .03));
+    border: 1px solid rgba(40, 59, 105, .16);
+    border-radius: var(--cc-radius);
+    padding: 12px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #111827;
+}
+
+.pcalc-details {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.pcalc-details:empty {
+    display: none;
+}
+
+/* Toast */
+.pcalc .ccalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cc-muted);
+    min-height: 16px;
+}
+/* =========================
+   SEO + FAQ (як у TCO)
+   для percent calculator
+   ========================= */
+
+/* Divider */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+}
+
+/* SEO/Faq wrappers */
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+/* Titles */
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+/* SEO text */
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+/* SEO list */
+.cc-seo ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+.cc-seo li {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #222;
+}
+
+/* FAQ item card */
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(40, 59, 105, 0.10);
+}
+
+/* FAQ question */
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+    font-weight: 900;
+}
+
+/* FAQ answer */
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* Mobile tweaks */
+@media (max-width: 520px) {
+
+    .cc-seo h2,
+    .cc-faq h2 {
+        font-size: 18px;
+    }
+
+    .cc-seo p,
+    .cc-seo li {
+        font-size: 14px;
+    }
+
+    .cc-faq-item {
+        padding: 14px;
+    }
+}
+/* ===== Auto-calc checkbox (як на скріні) ===== */
+.evc-topline {
+    margin: 10px 0 10px;
+}
+
+.evc-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.evc-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+    /* твій brand */
+}
+/* Вирівнюємо "Результат" по горизонталі з блоком "Введи дані" */
+
+.pcalc .ccalc__grid>.ccalc__card:last-of-type {
+    margin-top: 46px;
+    /* висота чекбокса + відступ */
+}
+/* ===== Формули: активна зелена, неактивні червоні ===== */
+
+/* Усі кнопки формул за замовчуванням — спокійний червоний */
+.pcalc-tab {
+    background: #fbf1f1;
+    border: 1px solid #e7caca;
+    color: #7a3b3b;
+    transition: all .18s ease;
+}
+
+/* Hover по неактивних */
+.pcalc-tab:hover {
+    background: #f6e4e4;
+    border-color: #ddb5b5;
+    box-shadow: 0 6px 14px rgba(160, 80, 80, 0.08);
+}
+
+/* 🔥 АКТИВНА формула — зелена */
+.pcalc-tab.is-active {
+    background: #e6f5ec;
+    border-color: #b7dec9;
+    color: #1f513a;
+    box-shadow: 0 4px 12px rgba(46, 125, 90, 0.15);
+    transform: translateY(-1px);
+}
+/* ===== Зелений блок результату ===== */
+
+.pcalc .ccalc__bigNumber {
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    border: 1px solid #bfe3cd;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, 0.10);
+}
+
+/* Коли результат з'являється — легкий "живий" ефект */
+.pcalc .ccalc__bigNumber:not(:empty) {
+    animation: resultGlow .35s ease;
+}
+
+@keyframes resultGlow {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

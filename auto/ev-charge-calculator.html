@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор вартості зарядки електромобіля — CalcCore</title>
+    <meta name="description"
+        content="Порахуй, скільки коштує зарядити електромобіль від розетки або зарядної станції: від поточних % до потрібних % з урахуванням втрат і тарифу." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/auto/ev-charge-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/ev-charge-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/ev-charge-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ev-charge.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ev-charge.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/ev-charge-calculator#app",
+    "name":"Калькулятор вартості зарядки EV",
+    "description":"Розрахунок вартості зарядки електромобіля від розетки або на станції з урахуванням втрат.",
+    "url":"https://calccore.net/auto/ev-charge-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="evc-page">
+    <div id="header"></div>
+
+    <main class="container">
+
+        <!-- ===== Titlebar як у TCO ===== -->
+        <div class="evc-titlebar">
+            <h1 class="evc-h1">Калькулятор вартості зарядки електромобіля</h1>
+            <p class="evc-p">
+                Порахуй <b>скільки коштує зарядити електромобіль</b> від розетки або зарядної станції:
+                від <b>поточних %</b> до <b>потрібних %</b> з урахуванням <b>втрат</b> та тарифу.
+            </p>
+        </div>
+
+        <!-- ===== Calculator shell ===== -->
+        <section class="evc-shell">
+
+            <div class="evc-topbar">
+                <div class="mode-switch" aria-label="Джерело зарядки">
+                    <button id="srcHome" class="pill active" type="button">Від розетки</button>
+                    <button id="srcStation" class="pill" type="button">Від зарядної станції</button>
+                </div>
+
+                <label class="auto-toggle">
+                    <input type="checkbox" id="auto_calc_toggle" checked>
+                    <span>Авто-розрахунок</span>
+                </label>
+            </div>
+
+            <!-- ===== INPUT GRID ===== -->
+            <div class="evc-grid">
+
+                <!-- Battery -->
+                <div class="evc-box">
+                    <h2>⚡ Дані батареї</h2>
+
+                    <label for="battery_kwh">Ємність батареї (кВт⋅год)</label>
+                    <input id="battery_kwh" inputmode="decimal" placeholder="Наприклад: 62">
+
+                    <div class="evc-row">
+                        <div>
+                            <label for="soc_now">Зараз (%)</label>
+                            <input id="soc_now" inputmode="decimal" placeholder="20">
+                        </div>
+                        <div>
+                            <label for="soc_target">Хочу (%)</label>
+                            <input id="soc_target" inputmode="decimal" placeholder="80">
+                        </div>
+                    </div>
+
+                    <label for="loss_pct">Втрати при зарядці (%) <span class="evc-hint">(необовʼязково)</span></label>
+                    <input id="loss_pct" inputmode="decimal" placeholder="10">
+
+                    <label for="power_kw">Потужність зарядки (кВт)</label>
+                    <select id="power_kw">
+                        <option value="2.3">Розетка 2.3 кВт</option>
+                        <option value="7.4">Wallbox 7.4 кВт</option>
+                        <option value="11">AC станція 11 кВт</option>
+                        <option value="22">AC станція 22 кВт</option>
+                        <option value="50">DC 50 кВт</option>
+                        <option value="100">DC 100 кВт</option>
+                    </select>
+                </div>
+
+                <!-- Tariffs -->
+                <div class="evc-box">
+                    <h2>💸 Тарифи</h2>
+
+                    <div class="evc-tariffs">
+                        <div class="evc-tariff-card">
+                            <div class="evc-tariff-title">Від розетки</div>
+                            <label for="price_home">Ціна (грн / кВт⋅год)</label>
+                            <input id="price_home" inputmode="decimal" placeholder="6">
+                        </div>
+
+                        <div class="evc-tariff-card">
+                            <div class="evc-tariff-title">Зарядна станція</div>
+
+                            <label for="station_tariff_mode">Тариф</label>
+                            <select id="station_tariff_mode">
+                                <option value="kwh">грн / кВт⋅год</option>
+                                <option value="min">грн / хв</option>
+                            </select>
+
+                            <label id="station_price_label" for="price_station">Ціна</label>
+                            <input id="price_station" inputmode="decimal" placeholder="14">
+
+                            <div class="evc-mini" id="station_hint"></div>
+                        </div>
+                    </div>
+
+                    <!-- ACTIONS -->
+                    <div class="evc-actions">
+                        <button class="btn evc-btn" id="calcBtn" type="button">Розрахувати</button>
+                        <button class="btn evc-btn evc-btn-ghost" id="resetBtn" type="button">Скинути</button>
+                        <button class="btn evc-btn evc-btn-ghost" id="shareBtn" type="button">Поділитись</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== RESULT BLOCK (як у TCO) ===== -->
+        <div class="evc-result-wrap">
+        
+            <div class="evc-result-head">
+                <h2 class="evc-result-title">Результат</h2>
+                <span class="evc-result-badge">EV</span>
+            </div>
+        
+            <div class="evc-result" id="result">
+                Введи дані та натисни «Розрахувати».
+            </div>
+        
+            <div class="evc-compare" id="compare"></div>
+        </div>
+
+        </section>
+
+        <hr class="divider">
+
+        <!-- ===== SEO TEXT ===== -->
+        <!-- ===== SEO TEXT (як у TCO) ===== -->
+        <section class="cc-seo">
+            <h2>Як працює калькулятор вартості зарядки EV?</h2>
+            <p>
+                Калькулятор рахує, <b>скільки енергії потрібно додати</b> у батарею від поточного рівня заряду до бажаного.
+                Для цього він бере <b>ємність батареї (кВт⋅год)</b> і різницю між “Зараз (%)” та “Хочу (%)”.
+            </p>
+            <p>
+                Далі враховуються <b>втрати при зарядці</b> (якщо ти їх вказав): це означає, що “з мережі” потрібно взяти більше
+                кВт⋅год, ніж фактично “піде у батарею”.
+                Саме кВт⋅год <b>з мережі</b> множаться на тариф — і так отримуємо <b>вартість зарядки</b>.
+            </p>
+        
+            <h2>Що саме показує результат?</h2>
+            <p>
+                У результаті ти бачиш:
+                <b>енергію “у батарею”</b>, <b>енергію “з мережі (з втратами)”</b>, <b>орієнтовний час зарядки</b>
+                (енергія з мережі / потужність), а також <b>вартість зарядки</b> для обраного джерела — розетки або станції.
+            </p>
+            <p>
+                Якщо заповнені обидва тарифи (для розетки і станції), калькулятор також показує <b>порівняння</b> —
+                де дешевше і на скільки.
+            </p>
+        </section>
+        
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="cc-faq-item">
+                <h3>Чому кВт⋅год “з мережі” більше, ніж “у батарею”?</h3>
+                <p>
+                    Через втрати при зарядці: нагрів, перетворення струму, роботу електроніки та балансування батареї.
+                    Зазвичай це 5–15% (залежно від авто, температури та типу зарядки).
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Що означає “орієнтовний час зарядки”?</h3>
+                <p>
+                    Це оцінка за формулою: <b>кВт⋅год з мережі / потужність (кВт)</b>.
+                    У реальності час може відрізнятися через обмеження авто/станції та падіння потужності ближче до 80–100%.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Як порахувати станцію з тарифом “грн/хв”?</h3>
+                <p>
+                    У режимі “грн/хв” калькулятор спочатку оцінює час зарядки, а потім множить
+                    <b>хвилини × тариф</b>.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Чи змінює потужність кількість кВт⋅год?</h3>
+                <p>
+                    Ні. Потужність впливає лише на <b>час</b>. Кількість енергії визначається ємністю батареї та різницею %
+                    (і втратами).
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+   
+</body>
+
+</html>

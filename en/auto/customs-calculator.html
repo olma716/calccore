@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Car Customs Clearance Calculator — CalcCore</title>
+    <meta name="description"
+        content="Car customs clearance calculator: duty, excise and VAT for cars imported to Ukraine from Europe or the USA. Calculate customs value and total taxes in UAH." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/customs-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/customs-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/customs-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/customs.css" />
+
+    <!-- i18n BEFORE calculator -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/customs.js?v=20260213" defer></script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/customs-calculator#app",
+    "name":"Car Customs Clearance Calculator",
+    "description":"Duty, excise and VAT estimate for importing a car to Ukraine from Europe or the USA.",
+    "url":"https://calccore.net/en/auto/customs-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="customs-page">
+    <!-- ✅ HEADER -->
+    <div id="header"></div>
+
+    <main class="container">
+        <!-- START: Calculator -->
+        <section class="ccalc" id="ccalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Car Customs Clearance Calculator (UA) (2026)</h1>
+                    <p class="ccalc__p">
+                        Calculates: duty + excise + VAT. For EV: duty is 0% by default (editable), excise is 1€ × kWh.
+                    </p>
+                </div>
+
+                <div class="ccalc__ratesRow">
+                    <div class="ccalc__rates" data-cc="ratesBadge">
+                        NBU rates: —
+                    </div>
+                </div>
+
+                <div class="ccalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Input data</h2>
+                            <span class="ccalc__badge" data-cc="modeBadge">ICE</span>
+                        </div>
+
+                        <div class="ccalc__field ccalc__mb10">
+                            <label class="ccalc__label">Vehicle type</label>
+                            <div class="ccalc__toggle" role="tablist" aria-label="Vehicle type">
+                                <button type="button" class="ccalc__toggleBtn is-active" data-cc-action="setMode"
+                                    data-mode="ICE">ICE</button>
+                                <button type="button" class="ccalc__toggleBtn" data-cc-action="setMode"
+                                    data-mode="EV">Electric</button>
+                            </div>
+                            <div class="ccalc__hint">Age (MVP): current year − year of manufacture.</div>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Price currency</label>
+                                <select class="ccalc__input" data-cc="currency">
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="USD">USD ($)</option>
+                                    <option value="UAH">UAH (₴)</option>
+                                </select>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Year of manufacture</label>
+                                <input class="ccalc__input" data-cc="year" type="number" min="1950" max="2100"
+                                    placeholder="e.g. 2018">
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Car price (excluding delivery)</label>
+                                <input class="ccalc__input" data-cc="price" type="number" min="0" step="0.01"
+                                    placeholder="e.g. 8000">
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Delivery/insurance to border (optional)</label>
+                                <input class="ccalc__input" data-cc="shipping" type="number" min="0" step="0.01"
+                                    placeholder="e.g. 1000">
+                            </div>
+                        </div>
+
+                        <!-- ICE only -->
+                        <div class="ccalc__block ccalc__mt10" data-cc="iceBlock">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label">Fuel type</label>
+                                    <select class="ccalc__input" data-cc="fuelType">
+                                        <option value="gasoline">Petrol</option>
+                                        <option value="diesel">Diesel</option>
+                                    </select>
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label">Engine size (cm³)</label>
+                                    <input class="ccalc__input" data-cc="engineCC" type="number" min="0" step="1"
+                                        placeholder="e.g. 2000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EV only -->
+                        <div class="ccalc__block ccalc__mt10" data-cc="evBlock" style="display:none">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label">Battery capacity (kWh)</label>
+                                    <input class="ccalc__input" data-cc="batteryKwh" type="number" min="0" step="0.1"
+                                        placeholder="e.g. 60">
+                                </div>
+                            </div>
+                            <div class="ccalc__hint">EV excise: 1€ × battery kWh.</div>
+                        </div>
+
+                        <div class="ccalc__rows ccalc__mt10">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Duty rate (%)</label>
+                                <input class="ccalc__input" data-cc="dutyRate" type="number" min="0" max="100"
+                                    step="0.1" value="10" placeholder="e.g. 10">
+                                <div class="ccalc__hint">Default is 10% (editable).</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">VAT (%)</label>
+                                <input class="ccalc__input" data-cc="vatRate" type="number" min="0" max="100" step="0.1"
+                                    value="20" placeholder="e.g. 20">
+                                <div class="ccalc__hint">Default is 20% (editable).</div>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button" data-cc-action="copyLink">Share
+                                link</button>
+                            <button class="ccalc__btn" type="button" data-cc-action="reset">Reset</button>
+
+                            <a class="ccalc__btn ccalc__btn--success" href="/en/auto/import-cost-calculator.html">
+                                Calculate total<br>car cost from Europe
+                            </a>
+                        </div>
+
+                        <div class="ccalc__toast" data-cc="toast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge" data-cc="ageBadge">Age: —</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber">
+                            <div class="ccalc__bigLabel">Total customs payments (duty + excise + VAT)</div>
+                            <div class="ccalc__bigValue" data-cc="totalCustoms">—</div>
+                            <div class="ccalc__hint" data-cc="subHint"></div>
+                        </div>
+
+                        <div class="ccalc__tableWrap">
+                            <table class="ccalc__table" aria-label="Breakdown">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th class="ccalc__right">UAH</th>
+                                        <th class="ccalc__right">EUR</th>
+                                        <th class="ccalc__right">USD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Customs value (price + delivery)</td>
+                                        <td class="ccalc__right" data-cc="customsValue">—</td>
+                                        <td class="ccalc__right" data-cc="customsValueEur">—</td>
+                                        <td class="ccalc__right" data-cc="customsValueUsd">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Duty</td>
+                                        <td class="ccalc__right" data-cc="duty">—</td>
+                                        <td class="ccalc__right" data-cc="dutyEur">—</td>
+                                        <td class="ccalc__right" data-cc="dutyUsd">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Excise</td>
+                                        <td class="ccalc__right" data-cc="excise">—</td>
+                                        <td class="ccalc__right" data-cc="exciseEur">—</td>
+                                        <td class="ccalc__right" data-cc="exciseUsd">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VAT</td>
+                                        <td class="ccalc__right" data-cc="vat">—</td>
+                                        <td class="ccalc__right" data-cc="vatEur">—</td>
+                                        <td class="ccalc__right" data-cc="vatUsd">—</td>
+                                    </tr>
+
+                                    <tr data-cc="pensionRow" style="display:none">
+                                        <td>Pension fund fee</td>
+                                        <td class="ccalc__right" data-cc="pension">—</td>
+                                        <td class="ccalc__right" data-cc="pensionEur">—</td>
+                                        <td class="ccalc__right" data-cc="pensionEur">—</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Total</th>
+                                        <th class="ccalc__right" data-cc="grandTotal">—</th>
+                                        <th class="ccalc__right" data-cc="grandTotalEur">—</th>
+                                        <th class="ccalc__right" data-cc="grandTotalUsd">—</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="ccalc__hint ccalc__mt10"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Calculator -->
+
+        <div class="cc-divider"></div>
+
+        <!-- SEO -->
+        <section class="cc-seo">
+            <h2>How the car customs calculator works</h2>
+            <p>
+                This customs calculator helps you quickly estimate import payments when bringing a car to Ukraine from
+                Europe or the USA: duty, excise and VAT.
+            </p>
+            <p>
+                Enter the car price, delivery, year of manufacture and engine parameters — the calculator automatically
+                determines the customs value and totals in UAH.
+            </p>
+            <p>
+                For electric vehicles, duty is often 0%, while excise is calculated from battery capacity (kWh).
+            </p>
+
+            <h2>VAT when importing a car to Ukraine: what to know</h2>
+            <p>
+                VAT on car import is not charged only on the “car price”. The VAT base usually includes the customs
+                value
+                (price + delivery/insurance to border) plus duty and excise.
+            </p>
+            <p>
+                In this calculator VAT is calculated as:
+                <strong>(customs value + duty + excise) × VAT rate</strong>.
+            </p>
+
+            <h2>Excise in Ukraine: what it depends on</h2>
+            <p>
+                Excise is a separate payment. For ICE vehicles (simplified model) it depends on fuel type, engine size
+                and vehicle age.
+            </p>
+            <p>
+                For electric vehicles excise is: <strong>1€ × kWh</strong>.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ about car customs clearance</h2>
+
+            <div class="cc-faq-item">
+                <h3>What is included in customs clearance cost?</h3>
+                <p>Duty, excise and VAT. The calculator shows a breakdown for each payment.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is delivery included?</h3>
+                <p>Yes. Delivery/insurance is added to the car price and forms the customs value.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How is excise calculated?</h3>
+                <p>For ICE — depends on fuel type, engine size and age. For EV — 1€ × kWh.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How accurate is this calculator?</h3>
+                <p>This is an MVP version for quick estimation. For broker-level accuracy, more parameters are needed.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ✅ FOOTER -->
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

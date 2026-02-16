@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Brick Calculator Online — Bricks & Mortar | CalcCore</title>
+    <meta name="description"
+        content="CalcCore Brick Calculator: estimate bricks quantity and mortar volume by wall size/area, thickness, brick size and joint. Chart, materials table, copy and CSV (Excel)." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/brick-calculator" />
+
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/brick-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/brick-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/brick-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/brick-calculator.js?v=20260212" defer></script>
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://calccore.net/#org",
+        "name": "CalcCore",
+        "url": "https://calccore.net/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://calccore.net/img/logo.png"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://calccore.net/#website",
+        "url": "https://calccore.net/",
+        "name": "CalcCore",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://calccore.net/en/construction/brick-calculator#webpage",
+        "url": "https://calccore.net/en/construction/brick-calculator",
+        "name": "Brick Calculator Online",
+        "description": "Estimate bricks quantity and mortar volume by wall size, area, thickness, brick size and joint. Includes chart, materials table and CSV export.",
+        "isPartOf": {
+          "@id": "https://calccore.net/#website"
+        },
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "breadcrumb": {
+          "@id": "https://calccore.net/en/construction/brick-calculator#breadcrumb"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://calccore.net/en/construction/brick-calculator#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "CalcCore",
+            "item": "https://calccore.net/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Construction",
+            "item": "https://calccore.net/en/construction/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Brick Calculator",
+            "item": "https://calccore.net/en/construction/brick-calculator"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://calccore.net/en/construction/brick-calculator#app",
+        "name": "Brick Calculator Online",
+        "description": "Calculate bricks quantity and mortar volume. Includes materials table, chart and CSV export.",
+        "url": "https://calccore.net/en/construction/brick-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://calccore.net/#org"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "UAH"
+        }
+      }
+    ]
+    </script>
+
+</head>
+
+<body class="credit-page cbrick">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cbrick" id="cbrick">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1" data-i18n="brick.title">Brick Calculator</h1>
+                    <p class="mcalc__p" data-i18n="brick.subtitle">
+                        Calculate bricks quantity and mortar volume. Includes a chart, materials table, copy tools and
+                        CSV (Excel).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span data-i18n="common.autoCalc">Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="common.inputs">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mode" data-i18n="brick.modeLabel">Mode</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="wall" selected data-i18n="brick.modeWall">Wall (L×H)</option>
+                                    <option value="area" data-i18n="brick.modeArea">Area (m²)</option>
+                                </select>
+                                <div class="mcalc__hint" data-i18n="brick.modeHint">
+                                    Wall: enter length and height. Area: enter only m².
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field" id="lengthWrap">
+                                <label class="mcalc__label" for="length" data-i18n="brick.length">Length (m)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 6" />
+                            </div>
+
+                            <div class="mcalc__field" id="heightWrap">
+                                <label class="mcalc__label" for="height" data-i18n="brick.height">Height (m)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2.7" />
+                            </div>
+
+                            <div class="mcalc__field" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area" data-i18n="brick.area">Area (m²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 16.2" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="openingsArea" data-i18n="brick.openings">Openings area
+                                    (m²) (opt.)</label>
+                                <input class="mcalc__input" id="openingsArea" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 1.8" />
+                                <div class="mcalc__hint" data-i18n="brick.openingsHint">
+                                    Total windows/doors area. Subtracted from the wall area.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="thicknessPreset"
+                                    data-i18n="brick.thicknessPresetLabel">Wall thickness</label>
+                                <select id="thicknessPreset" class="mcalc__select">
+                                    <option value="0.12" data-i18n="brick.thicknessHalf">½ brick — 0.12 m</option>
+                                    <option value="0.25" selected data-i18n="brick.thicknessOne">1 brick — 0.25 m
+                                    </option>
+                                    <option value="0.38" data-i18n="brick.thicknessOneHalf">1½ bricks — 0.38 m</option>
+                                    <option value="0.51" data-i18n="brick.thicknessTwo">2 bricks — 0.51 m</option>
+                                    <option value="custom" data-i18n="common.enterManually">Enter manually</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field" id="thicknessCustomWrap" style="display:none;">
+                                <label class="mcalc__label" for="thickness" data-i18n="brick.thickness">Thickness
+                                    (m)</label>
+                                <input class="mcalc__input" id="thickness" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0.30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="brickPreset" data-i18n="brick.brickPresetLabel">Brick
+                                    size (mm)</label>
+                                <select id="brickPreset" class="mcalc__select">
+                                    <option value="250x120x65" selected data-i18n="brick.brickSingle">Single 250×120×65
+                                    </option>
+                                    <option value="250x120x88" data-i18n="brick.brickThick">Thick 250×120×88</option>
+                                    <option value="250x120x138" data-i18n="brick.brickDouble">Double 250×120×138
+                                    </option>
+                                    <option value="custom" data-i18n="common.enterManually">Enter manually</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field" id="brickCustomWrap" style="display:none;">
+                                <label class="mcalc__label" data-i18n="brick.brickCustomLabel">Brick size (mm)</label>
+                                <div class="m-3col">
+                                    <input class="mcalc__input" id="brickL" type="text" inputmode="decimal"
+                                        placeholder="L 250" />
+                                    <input class="mcalc__input" id="brickW" type="text" inputmode="decimal"
+                                        placeholder="W 120" />
+                                    <input class="mcalc__input" id="brickH" type="text" inputmode="decimal"
+                                        placeholder="H 65" />
+                                </div>
+                                <div class="mcalc__hint" data-i18n="brick.brickCustomHint">L×W×H in mm. Converted to
+                                    meters for calculation.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="joint" data-i18n="brick.joint">Joint (mm)</label>
+                                <input class="mcalc__input" id="joint" type="text" inputmode="decimal"
+                                    placeholder="10" />
+                                <div class="mcalc__hint" data-i18n="brick.jointHint">
+                                    Typical 10 mm. Affects bricks count and mortar volume.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastePct" data-i18n="brick.waste">Extra / waste,
+                                    %</label>
+                                <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                    placeholder="5" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button"
+                                        data-i18n="common.calc">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button"
+                                        data-i18n="common.reset">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button"
+                                        data-i18n="common.copyResult">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="common.result">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult" data-i18n="common.enterData">Enter inputs to
+                            calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title" data-i18n="brick.chartTitle">Chart: volumes (m³)</div>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Brick materials chart"></canvas>
+                            <div class="m-hintSmall" data-i18n="brick.chartHint">
+                                Visualization of wall volume and estimated mortar volume.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="common.materialsTable">Materials table</span> <span class="muted"
+                                        data-i18n="common.open">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button"
+                                    data-i18n="common.copyTable">Copy table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button"
+                                    data-i18n="common.downloadExcel">📄 Download (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Brick materials table">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n="brick.table.item">Item</th>
+                                            <th data-i18n="brick.table.qty">Qty</th>
+                                            <th data-i18n="brick.table.unit">Unit</th>
+                                            <th data-i18n="brick.table.note">Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="common.cost">Material cost</span> <span class="muted"
+                                        data-i18n="common.optional">(optional)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceBrick"
+                                            data-i18n="brick.cost.priceBrick">Brick: price per piece</label>
+                                        <input id="priceBrick" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 12" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceMortarM3"
+                                            data-i18n="brick.cost.priceMortar">Mortar: price per m³</label>
+                                        <input id="priceMortarM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 2200" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery" data-i18n="common.delivery">Delivery
+                                            (fixed)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost"
+                                            data-i18n="brick.cost.wasteCost">Extra / waste, % (for cost)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                        <div class="mcalc__hint" data-i18n="brick.cost.wasteCostHint">Separate from
+                                            quantity calculations.</div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button" data-i18n="common.savePrices">Save prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button" data-i18n="common.resetPrices">Reset prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost" type="button"
+                                                data-i18n="common.copyCost">Copy cost</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal" data-i18n="common.enterPrices">
+                                            Enter prices to see the total cost.</div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/concrete-calculator.html">
+                                Calculate concrete volume
+                            </a>
+                        
+                            <a class="mcalc__btn" href="/en/construction/plaster-calculator.html">
+                                Calculate plaster amount
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <div class="m-divider"></div>
+        
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>How to use the brick calculator</h2>
+            <p>
+                This calculator helps you estimate <b>how many bricks (pcs)</b> and <b>how much mortar (m³)</b>
+                are needed to build a wall. It’s useful for workers, foremen, and DIY builders.
+            </p>
+        
+            <h2>Step by step</h2>
+            <p><b>1) Choose a mode</b> — <b>Wall (L×H)</b> or <b>Area (m²)</b>.</p>
+            <p><b>2) Enter openings area</b> (windows/doors) if needed — it will be subtracted.</p>
+            <p><b>3) Select wall thickness</b> — ½, 1, 1½ or 2 bricks (or enter manually).</p>
+            <p><b>4) Choose brick size</b> — a preset or custom dimensions (mm).</p>
+            <p><b>5) Set joint thickness</b> — usually <b>10 mm</b>.</p>
+            <p><b>6) Click “Calculate”</b> — you’ll get bricks, mortar, a table, and a chart.</p>
+        
+            <h2>What the abbreviations mean</h2>
+            <ul>
+                <li><b>m²</b> — area in square meters.</li>
+                <li><b>m³</b> — volume in cubic meters.</li>
+                <li><b>mm</b> — millimeters (brick and joint sizes).</li>
+                <li><b>pcs</b> — number of bricks.</li>
+                <li><b>L×H</b> — wall length × wall height.</li>
+                <li><b>Joint</b> — mortar layer thickness between bricks.</li>
+            </ul>
+        
+            <h2>How the calculator works</h2>
+            <p>
+                First, it calculates the <b>net masonry area</b> (wall area minus openings), then
+                the <b>wall volume</b> = area × thickness.
+                Next, it estimates brick count using a “module” (brick + joint) and mortar volume:
+            </p>
+            <p>
+                <b>mortar ≈ wall volume − solid brick volume</b>
+            </p>
+            <p class="m-hintSmall">
+                This is an estimate for planning. For real projects, add <b>5–10% extra</b>.
+            </p>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Frequently asked questions</h2>
+        
+            <div class="m-faq-item">
+                <h3>How accurate is this calculation?</h3>
+                <p>
+                    It’s a practical estimate. Real usage depends on workmanship, cutting waste, wall irregularities, and joint
+                    thickness.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why should I add extra bricks?</h3>
+                <p>
+                    Some bricks break or are cut. Builders usually add <b>+5–10%</b>.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Does it account for windows and doors?</h3>
+                <p>
+                    Yes. Enter the total <b>openings area (m²)</b> — it will be subtracted automatically.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why is mortar volume so large?</h3>
+                <p>
+                    Mortar fills all joints between bricks. Thicker joints mean more mortar.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Can I use custom brick sizes?</h3>
+                <p>
+                    Yes. Select “Enter manually” and input your brick dimensions in <b>mm</b>.
+                </p>
+            </div>
+        </section>
+
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

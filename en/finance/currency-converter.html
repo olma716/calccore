@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>NBU Currency Converter — official exchange rates | CalcCore</title>
+    <meta name="description"
+        content="CalcCore currency converter using the National Bank of Ukraine (NBU) official rates: USD, EUR, PLN and more. Auto-calculate, official rate date, quick copy." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/currency-converter" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/currency-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/currency-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/currency.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/currency.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/currency-converter#app",
+    "name":"NBU Currency Converter",
+    "description":"Online currency converter based on the National Bank of Ukraine (NBU) official exchange rates. Supports USD, EUR, PLN and more, shows the rate date, auto-calculation.",
+    "url":"https://calccore.net/en/finance/currency-converter",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="currency-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc cconv" id="cconv">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">NBU Currency Converter</h1>
+                    <p class="ccalc__p">
+                        Official exchange rates of the National Bank of Ukraine. Choose currencies, enter an amount —
+                        get conversion instantly.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT top line -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="cconv-date" id="rateDate" title="NBU official rate date"></span>
+                    </div>
+
+                    <!-- LEFT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter details</h2>
+                            <span class="ccalc__badge">Finance</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field cconv-full">
+                                <label class="ccalc__label" for="amount">Amount</label>
+                                <input class="ccalc__input" id="amount" placeholder="e.g. 1000" inputmode="decimal" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="fromCur">From</label>
+                                <select class="ccalc__select" id="fromCur"></select>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="toCur">To</label>
+                                <select class="ccalc__select" id="toCur"></select>
+                            </div>
+
+                            <div class="ccalc__field cconv-full cconv-actions-row">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnSwap">
+                                    ⇄ Swap currencies
+                                </button>
+                            
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">
+                                    Calculate
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__toast" id="cToast"></div>
+                    </div>
+
+                    <!-- RIGHT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="cResult">
+                            Enter an amount and choose currencies.
+                        </div>
+
+                        <div class="cconv-details" id="cDetails" aria-live="polite"></div>
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn" type="button" id="btnReset">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How does the NBU currency converter work?</h2>
+            <p>
+                The converter uses the official National Bank of Ukraine (NBU) exchange rate to convert an amount from
+                one currency to another.
+                It’s useful for budgeting, travel planning, and accounting calculations.
+            </p>
+            <p>
+                NBU rates are published according to the bank’s schedule. The calculator also shows the <b>rate date</b>
+                so you know which day the conversion is based on.
+            </p>
+
+            <h2>What can you calculate?</h2>
+            <ul>
+                <li>UAH ↔ USD/EUR/PLN conversions and many other currencies</li>
+                <li>Convert an amount between any available currencies</li>
+                <li>Quick copy of the final result</li>
+            </ul>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>Where does the exchange rate come from?</h3>
+                <p>The rate is loaded from the official NBU API (statistical service) which provides a list of
+                    currencies and their rates to UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why can the rate date be “tomorrow”?</h3>
+                <p>NBU publishes rates on a schedule: before ~15:30 it may be the current business day rate, after
+                    ~15:30 it’s often the next business day rate.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if NBU is temporarily unavailable?</h3>
+                <p>The calculator may use the latest saved rates from your browser (localStorage), if available.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

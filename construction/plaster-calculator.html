@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор штукатурки онлайн — мішки або цемент+пісок | CalcCore</title>
+    <meta name="description"
+        content="CalcCore Plastering Calculator: розрахунок штукатурної суміші. Режими: готова суха суміш (мішки) або цемент+пісок. Об’єм/кг, вода, графік, таблиця матеріалів, копіювання та CSV (Excel)." />
+
+    <link rel="canonical" href="https://calccore.net/construction/plastering-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/plastering-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/plastering-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/plaster-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/plaster-calculator.js?v=20260212" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що вибрати: мішки чи цемент+пісок?",
+        "acceptedAnswer":{"@type":"Answer","text":"Якщо купуєш готову суху штукатурну суміш — обирай «мішки». Якщо готуєш розчин сам (цемент + пісок) — обирай відповідний режим."}
+      },
+      {
+        "@type":"Question",
+        "name":"В яких одиницях вводити дані?",
+        "acceptedAnswer":{"@type":"Answer","text":"Довжину/висоту вводь у метрах (м), площу — у м², товщину шару — у мм, витрату — у кг/м² на 10 мм (як на мішку)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому це лише оцінка?",
+        "acceptedAnswer":{"@type":"Answer","text":"Фактична витрата залежить від рівності основи, втрат, інструменту та техніки нанесення. Рекомендується закладати запас 5–15%."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/construction/plastering-calculator#app",
+    "name":"Plastering Calculator",
+    "description":"Калькулятор штукатурки: мішки або цемент+пісок, вода, графік і таблиця матеріалів, копіювання та CSV.",
+    "url":"https://calccore.net/construction/plastering-calculator",
+    "applicationCategory":"ConstructionApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page cplaster">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cplaster" id="cplaster">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор штукатурки</h1>
+                    <p class="mcalc__p">
+                        Розрахунок штукатурної суміші: <b>готова суха суміш (мішки)</b> або <b>цемент + пісок</b>.
+                        Є графік, таблиця матеріалів, копіювання та CSV (Excel).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mode">Режим</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="wall" selected>Стіна (Д×В)</option>
+                                    <option value="area">Площа (м²)</option>
+                                </select>
+                                <div class="mcalc__hint">Стіна: вводиш довжину та висоту. Площа: вводиш лише м².</div>
+                            </div>
+
+                            <!-- ✅ Mix type switch -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mixType">Тип штукатурки</label>
+                                <select id="mixType" class="mcalc__select">
+                                    <option value="bags" selected>Готова суха суміш (мішки)</option>
+                                    <option value="cs">Цемент + пісок (саморобний)</option>
+                                </select>
+                                <div class="mcalc__hint">Обери, що саме рахуємо: мішки суміші або цементно-піщаний
+                                    розчин.</div>
+                            </div>
+
+                            <div class="mcalc__field" id="lengthWrap">
+                                <label class="mcalc__label" for="length">Довжина (м)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="напр.: 6" />
+                            </div>
+
+                            <div class="mcalc__field" id="heightWrap">
+                                <label class="mcalc__label" for="height">Висота (м)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="напр.: 2.7" />
+                            </div>
+
+                            <div class="mcalc__field" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area">Площа (м²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="напр.: 16.2" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="openingsArea">Площа отворів (м²) (опц.)</label>
+                                <input class="mcalc__input" id="openingsArea" type="text" inputmode="decimal"
+                                    placeholder="напр.: 1.8" />
+                                <div class="mcalc__hint">Сумарно для вікон/дверей. Віднімається від площі штукатурення.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="thicknessMm">Товщина шару (мм)</label>
+                                <input class="mcalc__input" id="thicknessMm" type="text" inputmode="decimal"
+                                    placeholder="напр.: 15" />
+                                <div class="mcalc__hint">Середня товщина. Для нерівних стін краще брати запас.</div>
+                            </div>
+
+                            <!-- ✅ BAGS FIELDS -->
+                            <div id="bagsFields" class="m-full">
+                                <div class="mcalc__rows">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="consumptionKg10mm">Витрата (кг/м² на 10
+                                            мм)</label>
+                                        <input class="mcalc__input" id="consumptionKg10mm" type="text"
+                                            inputmode="decimal" placeholder="напр.: 9.0" />
+                                        <div class="mcalc__hint">Бери з мішка. Типово 8–10 кг/м² на 10 мм (залежить від
+                                            суміші).</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="bagKg">Вага мішка (кг)</label>
+                                        <input class="mcalc__input" id="bagKg" type="text" inputmode="decimal"
+                                            placeholder="напр.: 25" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="waterLPerKg">Вода (л на 1 кг) (опц.)</label>
+                                        <input class="mcalc__input" id="waterLPerKg" type="text" inputmode="decimal"
+                                            placeholder="напр.: 0.22" />
+                                        <div class="mcalc__hint">Якщо не знаєш — залиш порожнім, вода не рахуватиметься.
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="mcalc__hint" style="margin-top:8px;">
+                                    Формула: кг = площа × витрата × (товщина/10) × (1 + запас%).
+                                </div>
+                            </div>
+
+                            <!-- ✅ CEMENT+SAND FIELDS -->
+                            <div id="csFields" class="m-full" style="display:none;">
+
+                                <div class="mcalc__field m-full">
+                                    <label class="mcalc__label">Пропорція (за об’ємом)</label>
+
+                                    <div class="m-3col">
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label">Цемент (C)</label>
+                                            <input class="mcalc__input" id="ratioC" type="text" inputmode="decimal"
+                                                placeholder="напр.: 1" />
+                                        </div>
+
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label">Пісок (S)</label>
+                                            <input class="mcalc__input" id="ratioS" type="text" inputmode="decimal"
+                                                placeholder="напр.: 3" />
+                                        </div>
+
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label">Вода/цемент (W/C)</label>
+                                            <input class="mcalc__input" id="wcRatio" type="text" inputmode="decimal"
+                                                placeholder="напр.: 0.5" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mcalc__hint">
+                                        🔹 1:3 означає — 1 частина цементу + 3 частини піску (по об’єму).<br>
+                                        🔹 W/C = 0.5 означає — ~0.5 л води на 1 кг цементу.<br>
+                                        🔹 Типово: 1:3 або 1:4 • W/C ~ 0.45–0.6
+                                    </div>
+                                </div>
+
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="cementDensity">Густина цементу (кг/м³)</label>
+                                        <input class="mcalc__input" id="cementDensity" type="text" inputmode="decimal"
+                                            placeholder="1440" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="sandDensity">Густина піску (кг/м³)</label>
+                                        <input class="mcalc__input" id="sandDensity" type="text" inputmode="decimal"
+                                            placeholder="1600" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="cementBagKg">Вага мішка цементу (кг)</label>
+                                        <input class="mcalc__input" id="cementBagKg" type="text" inputmode="decimal"
+                                            placeholder="25" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePct">Запас / втрати, %</label>
+                                        <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal" placeholder="8" />
+                                        <div class="mcalc__hint">Зазвичай 5–15% залежно від основи та втрат.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Plaster materials chart"></canvas>
+                            <div class="m-hintSmall">Візуалізація основних показників (залежно від режиму).</div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця матеріалів <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Завантажити (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Plaster materials table">
+                                    <thead>
+                                        <tr>
+                                            <th>Позиція</th>
+                                            <th>К-сть</th>
+                                            <th>Одиниця</th>
+                                            <th>Примітка</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Вартість матеріалів <span class="muted">(опційно)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="pricePerBag">Суміш: ціна за 1 мішок</label>
+                                        <input id="pricePerBag" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="напр.: 180" />
+                                        <div class="mcalc__hint">У режимі «цемент+пісок» це поле означає «цемент за
+                                            мішок».</div>
+                                    </div>
+
+                                    <!-- ✅ show only for cement+sand -->
+                                    <div class="mcalc__field" id="priceSandWrap">
+                                        <label class="mcalc__label" for="priceSandPerM3">Пісок: ціна за 1 м³</label>
+                                        <input id="priceSandPerM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="напр.: 850" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceWaterPerL">Вода: ціна за 1 л
+                                            (опц.)</label>
+                                        <input id="priceWaterPerL" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Доставка (фікс.)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost">Запас/втрати, % (для
+                                            вартості)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                        <div class="mcalc__hint">Окремо, щоб не чіпати розрахунок кількості.</div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button">Зберегти ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button">Скинути ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost"
+                                                type="button">Копіювати вартість</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Введи ціни, щоб побачити загальну
+                                            вартість.</div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+                        <div class="m-navlinks">
+                            <a href="/construction/concrete-calculator.html">Розрахуй кількість бетону</a>
+                            <a href="/construction/brick-calculator.html">Розрахуй кількість цегли</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Як працює калькулятор штукатурки</h2>
+            <p>
+                Цей калькулятор допомагає швидко оцінити, <b>скільки потрібно матеріалу</b> для штукатурення стін:
+                або <b>готової сухої суміші в мішках</b>, або <b>саморобного цементно-піщаного розчину</b>.
+                Результат підходить для планування закупівель і бюджету.
+            </p>
+        
+            <h2>Кому і коли корисно</h2>
+            <ul>
+                <li><b>Майстрам та прорабам</b> — для швидкої оцінки матеріалів і вартості.</li>
+                <li><b>Власникам квартир/будинків</b> — щоб зрозуміти скільки мішків купувати.</li>
+                <li><b>На етапі підготовки кошторису</b> — коли треба приблизні обсяги до замірів “в нуль”.</li>
+                <li><b>Перед закупівлею</b> — щоб закласти адекватний запас і не “застрягнути” без матеріалу.</li>
+            </ul>
+        
+            <h2>Два режими розрахунку</h2>
+            <p><b>1) Готова суха суміш (мішки)</b></p>
+            <p>
+                Ти задаєш площу, товщину шару та витрату з мішка (кг/м² на 10 мм). Калькулятор порахує:
+                <b>скільки кг суміші</b> потрібно, <b>скільки це мішків</b>, і (опційно) <b>скільки води</b> треба для
+                замішування.
+            </p>
+        
+            <p><b>2) Цемент + пісок (саморобний розчин)</b></p>
+            <p>
+                Ти задаєш площу, товщину шару, пропорцію <b>C:S</b> (за об’ємом), густини та <b>W/C</b>.
+                Калькулятор оцінює: <b>цемент (кг та мішки)</b>, <b>пісок (м³)</b> і <b>воду (л)</b>.
+            </p>
+        
+            <h2>Що враховує калькулятор</h2>
+            <ul>
+                <li><b>Площа отворів</b> (вікна/двері) — віднімається від загальної площі.</li>
+                <li><b>Товщина шару</b> — у мм, переводиться в об’єм.</li>
+                <li><b>Запас/втрати</b> — додається до результату (рекомендується 5–15%).</li>
+                <li><b>Опційний кошторис</b> — якщо ввести ціни, покаже приблизну вартість.</li>
+            </ul>
+        
+            <p class="m-hintSmall">
+                Результат є оціночним. Реальна витрата залежить від рівності стін, інструменту, техніки нанесення та втрат на
+                об’єкті.
+                Для кривих стін і новачків запас краще брати ближче до <b>10–15%</b>.
+            </p>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="m-faq-item">
+                <h3>Що краще обрати: “мішки” чи “цемент+пісок”?</h3>
+                <p>
+                    Якщо ти купуєш готову суху штукатурну суміш — обирай <b>“Готова суха суміш (мішки)”</b>.
+                    Якщо готуєш розчин сам — обирай <b>“Цемент + пісок”</b>.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Де взяти витрату (кг/м² на 10 мм)?</h3>
+                <p>
+                    Витрата вказана на мішку виробника або в технічному паспорті суміші.
+                    Для різних сумішей (гіпсова/цементна) вона відрізняється.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чому калькулятор показує більше/менше, ніж вийшло на об’єкті?</h3>
+                <p>
+                    На реальну витрату впливають нерівності основи, товщина шару “по місцю”, втрати при замісі,
+                    підсипання/пересихання, а також рівність маяків. Тому завжди додавай <b>запас 5–15%</b>.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Чи враховуються вікна та двері?</h3>
+                <p>
+                    Так. Вкажи сумарну <b>площу отворів (м²)</b> — вона автоматично відніметься від площі штукатурення.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Що означає W/C і яке значення ставити?</h3>
+                <p>
+                    <b>W/C</b> — співвідношення вода/цемент. Наприклад, 0.5 ≈ 0.5 л води на 1 кг цементу.
+                    Типовий діапазон для цементних розчинів: <b>0.45–0.6</b>, але краще орієнтуватися на пластичність і умови.
+                </p>
+            </div>
+        </section>
+
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

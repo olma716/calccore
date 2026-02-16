@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Fuel Cost Calculator (1–2 Cars) — CalcCore</title>
+    <meta name="description"
+        content="Fuel cost calculator for 1–2 cars: trip cost, cost per km and per 100 km, plus yearly fuel/electricity expenses. Compare ICE, hybrid and EV." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/fuel-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/fuel-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/fuel-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fuel.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/fuel.js?v=20260209" defer></script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/fuel-calculator#app",
+    "name":"Fuel Cost Calculator",
+    "description":"Online fuel and energy cost calculator: trip cost and expenses for one or two cars (ICE, hybrid, EV).",
+    "url":"https://calccore.net/en/auto/fuel-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="fuel-page">
+    <div id="header"></div>
+
+    <main class="fuel-main">
+        <section class="fuel-shell">
+            <div class="fuel-wrap">
+
+                <div class="fuel-titlebar">
+                    <h1 class="fuel-h1">Fuel Cost Calculator</h1>
+                    <p class="fuel-p">Estimate fuel/energy usage and trip cost. Compare 1–2 cars and yearly expenses.
+                    </p>
+                </div>
+
+                <!-- TOP BAR: 1/2 cars + Auto-calc -->
+                <div class="fuel-topbar">
+                    <div class="mode-switch">
+                        <button id="mode1" class="pill active" type="button">1 car</button>
+                        <button id="mode2" class="pill" type="button">2 cars</button>
+                    </div>
+
+                    <label class="auto-toggle" title="If disabled — calculation runs only when you press the button">
+                        <input type="checkbox" id="auto_calc_toggle" checked />
+                        <span class="auto-ui"></span>
+                        <span class="auto-text">Auto-calculate</span>
+                    </label>
+                </div>
+
+                <!-- GLOBAL INPUTS -->
+                <div class="global-card">
+                    <div class="global-grid">
+                        <div class="field">
+                            <label for="global_distance">Trip distance (km)</label>
+                            <input id="global_distance" type="number" inputmode="decimal" placeholder="e.g. 450" />
+                        </div>
+
+                        <div class="field">
+                            <label for="global_year_km">Annual mileage (km)</label>
+                            <input id="global_year_km" type="number" inputmode="decimal" placeholder="e.g. 15000" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARS -->
+                <div class="cars-grid">
+                    <!-- CAR 1 -->
+                    <section id="car1_wrapper" class="car-card">
+                        <div class="car-head">
+                            <h2>Car 1</h2>
+                        </div>
+
+                        <div class="field">
+                            <label for="car1_type">Powertrain</label>
+                            <select id="car1_type">
+                                <option value="ice">Gasoline / Diesel</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="ev">Electric (EV)</option>
+                            </select>
+                        </div>
+
+                        <!-- ICE -->
+                        <div id="car1_blockICE" class="dyn-block">
+                            <div class="field">
+                                <label for="car1_consumption">Average consumption (L / 100 km)</label>
+                                <input id="car1_consumption" type="number" inputmode="decimal" placeholder="e.g. 7.5" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car1_fuelPrice">Fuel price (UAH / L)</label>
+                                <input id="car1_fuelPrice" type="number" inputmode="decimal" placeholder="e.g. 55" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car1_tank">Fuel tank capacity (L) <span
+                                        class="hint">(optional)</span></label>
+                                <input id="car1_tank" type="number" inputmode="decimal" placeholder="e.g. 60" />
+                            </div>
+                        </div>
+
+                        <!-- EV -->
+                        <div id="car1_blockEV" class="dyn-block is-hidden">
+                            <div class="field">
+                                <label for="car1_kwhPer100">Consumption (kWh / 100 km)</label>
+                                <input id="car1_kwhPer100" type="number" inputmode="decimal" placeholder="e.g. 18" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car1_kwhPrice">Electricity price (UAH / kWh)</label>
+                                <input id="car1_kwhPrice" type="number" inputmode="decimal" placeholder="e.g. 6" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car1_chargeLoss">Charging losses (%) <span
+                                        class="hint">(optional)</span></label>
+                                <input id="car1_chargeLoss" type="number" inputmode="decimal" placeholder="e.g. 10" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car1_battery">Battery capacity (kWh) <span
+                                        class="hint">(optional)</span></label>
+                                <input id="car1_battery" type="number" inputmode="decimal" placeholder="e.g. 60" />
+                            </div>
+                        </div>
+
+                        <!-- HYBRID EXTRA -->
+                        <div id="car1_blockHybridExtra" class="dyn-block is-hidden">
+                            <div class="field">
+                                <label for="car1_evShare">Electric driving share (%)</label>
+                                <input id="car1_evShare" type="number" inputmode="decimal" placeholder="e.g. 40" />
+                                <span class="hint">0–100. Example: 40% means 40% of the distance on electricity, the
+                                    rest on fuel.</span>
+                            </div>
+                        </div>
+
+                        <div id="car1_result" class="result"></div>
+                    </section>
+
+                    <!-- CAR 2 -->
+                    <section id="car2_wrapper" class="car-card" style="display:none;">
+                        <div class="car-head">
+                            <h2>Car 2</h2>
+                        </div>
+
+                        <div class="field">
+                            <label for="car2_type">Powertrain</label>
+                            <select id="car2_type">
+                                <option value="ice">Gasoline / Diesel</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="ev">Electric (EV)</option>
+                            </select>
+                        </div>
+
+                        <!-- ICE -->
+                        <div id="car2_blockICE" class="dyn-block">
+                            <div class="field">
+                                <label for="car2_consumption">Average consumption (L / 100 km)</label>
+                                <input id="car2_consumption" type="number" inputmode="decimal" placeholder="e.g. 8.5" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car2_fuelPrice">Fuel price (UAH / L)</label>
+                                <input id="car2_fuelPrice" type="number" inputmode="decimal" placeholder="e.g. 55" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car2_tank">Fuel tank capacity (L) <span
+                                        class="hint">(optional)</span></label>
+                                <input id="car2_tank" type="number" inputmode="decimal" placeholder="e.g. 60" />
+                            </div>
+                        </div>
+
+                        <!-- EV -->
+                        <div id="car2_blockEV" class="dyn-block is-hidden">
+                            <div class="field">
+                                <label for="car2_kwhPer100">Consumption (kWh / 100 km)</label>
+                                <input id="car2_kwhPer100" type="number" inputmode="decimal" placeholder="e.g. 18" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car2_kwhPrice">Electricity price (UAH / kWh)</label>
+                                <input id="car2_kwhPrice" type="number" inputmode="decimal" placeholder="e.g. 6" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car2_chargeLoss">Charging losses (%) <span
+                                        class="hint">(optional)</span></label>
+                                <input id="car2_chargeLoss" type="number" inputmode="decimal" placeholder="e.g. 10" />
+                            </div>
+
+                            <div class="field">
+                                <label for="car2_battery">Battery capacity (kWh) <span
+                                        class="hint">(optional)</span></label>
+                                <input id="car2_battery" type="number" inputmode="decimal" placeholder="e.g. 60" />
+                            </div>
+                        </div>
+
+                        <!-- HYBRID EXTRA -->
+                        <div id="car2_blockHybridExtra" class="dyn-block is-hidden">
+                            <div class="field">
+                                <label for="car2_evShare">Electric driving share (%)</label>
+                                <input id="car2_evShare" type="number" inputmode="decimal" placeholder="e.g. 30" />
+                                <span class="hint">0–100</span>
+                            </div>
+                        </div>
+
+                        <div id="car2_result" class="result"></div>
+                    </section>
+                </div>
+
+                <!-- COMPARE -->
+                <div id="compare_result" class="compare"></div>
+
+                <!-- ACTIONS -->
+                <div class="fuel-actions">
+                    <button id="calculate" class="pill primary" type="button">Calculate</button>
+                    <button id="clear" class="pill" type="button">Clear</button>
+                    <button id="copy_result" class="pill" type="button">Copy results</button>
+                    <button id="share_link" class="pill" type="button">Share</button>
+                </div>
+
+                <div id="share_status" class="share-status"></div>
+
+            </div>
+        </section>
+    </main>
+
+    <section class="fuel-seo">
+        <h2>Fuel and electricity cost calculator for cars</h2>
+        <p>
+            Our online <strong>fuel cost calculator</strong> helps you estimate trip cost for gasoline, diesel, hybrid
+            and electric cars.
+            You can see the cost per 1 km, per 100 km, or for the entire route based on fuel price, consumption,
+            electricity price and charging losses.
+        </p>
+        <p>
+            With this tool you can easily compare two cars — for example diesel vs hybrid, or EV vs gasoline.
+            It shows which car is cheaper to run and how much money you can save per year.
+        </p>
+        <p>
+            Use it for trip planning, budget estimation, choosing a car before purchase, and analyzing yearly fuel or
+            electricity expenses.
+            Change route distance, annual mileage, fuel consumption or electricity usage and get results instantly.
+        </p>
+        <p>
+            If you’re considering buying a car from Germany or Europe, this calculator helps you understand real running
+            costs across powertrains,
+            especially when comparing EVs, hybrids and classic ICE vehicles.
+        </p>
+        <p>
+            Use this free calculator to optimize your budget, reduce running costs and choose the most cost-effective
+            vehicle for daily commuting or long trips.
+        </p>
+    </section>
+
+    <section class="fuel-faq">
+        <h2>FAQ about car running costs</h2>
+
+        <div class="faq-item">
+            <h3>How much does 100 km cost on gasoline?</h3>
+            <p>It depends on fuel consumption and price per liter. For example, 8 L/100 km at 55 UAH/L costs 440 UAH per
+                100 km.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How much does 1 km cost in an electric car?</h3>
+            <p>If an EV uses 18 kWh per 100 km and electricity costs 6 UAH per kWh, then 1 km costs about 1.08 UAH
+                (before losses).</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What’s cheaper — an EV or a gasoline car?</h3>
+            <p>In most cases an EV is cheaper to run, especially with frequent driving and home charging. This
+                calculator helps compare EV, hybrid and ICE precisely.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I calculate trip expenses?</h3>
+            <p>Enter trip distance, fuel or electricity consumption and price. The calculator shows total cost, cost per
+                1 km and per 100 km.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I compare two cars?</h3>
+            <p>Yes. Switch to “2 cars” mode and compare any two cars — diesel vs hybrid or EV vs gasoline — to see which
+                is cheaper to operate.</p>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>ROI Investment Calculator — return, net profit, growth chart | CalcCore</title>
+    <meta name="description"
+        content="CalcCore ROI calculator: investment amount, expected annual return, years, monthly contributions. Results: ROI%, net profit, final amount, growth chart. Explanations and FAQ." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/roi-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/roi-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/roi-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/roi-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/roi-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is ROI and how do you calculate it?",
+        "acceptedAnswer":{"@type":"Answer","text":"ROI (Return on Investment) measures investment profitability as a percentage. A common formula is (net profit / investment amount) × 100%."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is the difference between ROI and profit?",
+        "acceptedAnswer":{"@type":"Answer","text":"Profit is the money you gain. ROI expresses that gain as a percentage of the amount invested, which makes comparisons easier."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do additional contributions affect the result?",
+        "acceptedAnswer":{"@type":"Answer","text":"Additional contributions increase total invested capital and the growth base, so final value and profit may be higher. ROI depends on the relationship between total growth and total contributions."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why can results differ from real investing outcomes?",
+        "acceptedAnswer":{"@type":"Answer","text":"The calculator uses a simplified model with an assumed average return. Real investments may include fees, taxes, variable returns, and risk."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/roi-calculator#app",
+    "name":"Investment ROI Calculator",
+    "description":"Online ROI calculator: investment amount, expected return, time period, and additional contributions. Shows ROI %, net profit, and a growth chart.",
+    "url":"https://calccore.net/en/finance/roi-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page croi">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc croi" id="croi">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Investment ROI Calculator</h1>
+                    <p class="mcalc__p">
+                        Estimate your potential investment outcome: ROI %, net profit, final amount,
+                        and a growth chart with optional monthly contributions.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
+                            NBU rate: loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter details</h2>
+                            <span class="mcalc__badge">Finance</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="investment">Investment amount</label>
+                                <input class="mcalc__input" id="investment" type="text" inputmode="decimal"
+                                    placeholder="e.g., 100 000" />
+                                <div class="mcalc__hint">Base currency: ₴. You can switch the chart to USD/EUR using NBU
+                                    rates.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualReturn">Expected return, %</label>
+                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
+                                    placeholder="e.g., 12" />
+                                <div class="mcalc__hint">Average annual return (smoothed monthly growth model).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="years">Period (years)</label>
+                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
+                                    placeholder="e.g., 10" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyContrib">Additional contributions
+                                    (monthly)</label>
+                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
+                                    placeholder="e.g., 2 000" />
+                                <div class="mcalc__hint">Added at the beginning of each month (DCA-style).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Used for year labels in the chart.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter investment amount, return, and period.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Growth chart</div>
+
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Investment growth chart"></canvas>
+                            <div class="m-hintSmall">
+                                The line shows the end-of-year balance (monthly growth model).
+                            </div>
+                        </div>
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Yearly table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+                        
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                        
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download CSV</button>
+                            </div>
+                        
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="ROI yearly table">
+                                    <thead>
+                                        <tr>
+                                            <th>Year</th>
+                                            <th>Date</th>
+                                            <th>Contributed (₴)</th>
+                                            <th>Profit (₴)</th>
+                                            <th>Balance (₴)</th>
+                                            <th>ROI, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>What is ROI and how does this calculator work?</h2>
+            <p>
+                <b>ROI (Return on Investment)</b> shows how much profit you earn relative to the total amount you
+                invested.
+                It’s a quick way to compare scenarios: higher ROI means a larger return per invested unit.
+            </p>
+            <p>
+                This calculator estimates investment growth using a <b>smoothed monthly return model</b> (compound
+                growth),
+                with optional <b>monthly contributions</b> (DCA). Each month your balance increases by a fraction of the
+                annual
+                expected return, and contributions expand the base that compounds going forward.
+            </p>
+
+            <h2>What results do you get?</h2>
+            <ul>
+                <li><b>Final amount</b> — the estimated end balance after the selected period.</li>
+                <li><b>Net profit</b> — final amount minus total contributed (initial + contributions).</li>
+                <li><b>ROI %</b> — profit as a percentage of total contributed: <b>(profit / contributed) × 100%</b>.
+                </li>
+                <li><b>Growth chart</b> — yearly snapshots of the balance to visualize time + contributions impact.</li>
+            </ul>
+
+            <h2>Important limitations</h2>
+            <p>
+                Real investments do not grow smoothly: returns fluctuate, and fees/taxes may apply. This calculator is
+                an
+                educational planning estimate, not a guaranteed outcome.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Is ROI the same as annual return?</h3>
+                <p>
+                    No. Annual return is an assumed average yearly rate, while ROI is the total return across the whole
+                    period
+                    relative to the invested amount.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How are monthly contributions applied?</h3>
+                <p>
+                    Contributions are added at the beginning of each month. Then the updated balance grows according to
+                    the
+                    monthly portion of the expected annual return.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why does the chart show yearly values?</h3>
+                <p>
+                    Yearly snapshots are easier to read for long horizons. Internally, the model compounds monthly, but
+                    the chart
+                    displays end-of-year points for clarity.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Does this include fees and taxes?</h3>
+                <p>
+                    No. This is a basic ROI estimate. Fees and taxes can materially reduce net returns, especially over
+                    long
+                    periods.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why might results differ from a broker or bank?</h3>
+                <p>
+                    Differences may come from real-world volatility, exact contribution dates, rounding, fees, taxes,
+                    and the
+                    specific product rules.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

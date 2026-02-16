@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Salary Calculator (Net Pay) — taxes, employer cost, monthly schedule | CalcCore</title>
+    <meta name="description"
+        content="CalcCore salary calculator: gross↔net, taxes, optional SSC (employer cost), bonuses, deductions, monthly schedule. Copy & export CSV." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/salary-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/salary-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/salary-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/salary-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/salary-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is the difference between gross and net salary?",
+        "acceptedAnswer":{"@type":"Answer","text":"Gross salary is income before taxes. Net salary (take-home pay) is what you receive after all deductions."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is take-home pay lower than gross salary?",
+        "acceptedAnswer":{"@type":"Answer","text":"Because taxes and contributions are deducted from the gross amount. The calculator shows the deducted amount and your final net pay."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I change the tax rate?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. If a custom mode is available, you can enter a different tax rate and see how it affects take-home pay."}
+      },
+      {
+        "@type":"Question",
+        "name":"How does this help when comparing job offers?",
+        "acceptedAnswer":{"@type":"Answer","text":"Some companies present salaries as gross, others as net. This calculator converts everything to a consistent take-home number for a fair comparison."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/salary-calculator#app",
+    "name":"Take-Home Salary Calculator",
+    "description":"Online salary calculator to estimate net take-home pay after taxes. Shows gross salary, total taxes, and net income.",
+    "url":"https://calccore.net/en/finance/salary-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page csalary">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc csalary" id="csalary">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Salary Calculator (Net Pay)</h1>
+                    <p class="mcalc__p">
+                        Calculate take-home pay: income tax, military levy, optional SSC (employer cost),
+                        bonuses, deductions, and a detailed monthly schedule. Supports gross→net and net→gross.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
+                            NBU rate: loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter details</h2>
+                            <span class="mcalc__badge">Finance</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="mode">Mode</label>
+                                <select class="mcalc__select" id="mode">
+                                    <option value="gross2net" selected>Gross → Net (take-home)</option>
+                                    <option value="net2gross">Net (take-home) → Gross</option>
+                                </select>
+                                <div class="mcalc__hint">Choose what you input: gross salary or take-home pay.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="salaryAmount">Amount</label>
+                                <input class="mcalc__input" id="salaryAmount" type="text" inputmode="decimal"
+                                    placeholder="e.g., 50 000" />
+                                <div class="mcalc__hint">Base currency: ₴. Schedule conversion uses NBU rates.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="period">Period</label>
+                                <select class="mcalc__select" id="period">
+                                    <option value="monthly" selected>Per month</option>
+                                    <option value="yearly">Per year</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="bonus">Bonus / extra (optional)</label>
+                                <input class="mcalc__input" id="bonus" type="text" inputmode="decimal"
+                                    placeholder="e.g., 5 000" />
+                                <div class="mcalc__hint">Added to the taxable base.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="deductions">Other deductions (optional)</label>
+                                <input class="mcalc__input" id="deductions" type="text" inputmode="decimal"
+                                    placeholder="e.g., 1 200" />
+                                <div class="mcalc__hint">Subtracted after taxes (e.g., penalties/fees).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxMode">Taxes</label>
+                                <select class="mcalc__select" id="taxMode">
+                                    <option value="standard" selected>Standard (18% + 1.5% = 19.5%)</option>
+                                    <option value="none">Ignore</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="taxRate">Tax rate, % (if “Custom”)</label>
+                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
+                                    placeholder="e.g., 19.5" />
+                                <div class="mcalc__hint">Default: 19.5%.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="showEsv">
+                                    <span style="display:inline-flex;gap:10px;align-items:center;">
+                                        <input id="showEsv" type="checkbox" checked />
+                                        Show SSC (employer cost)
+                                    </span>
+                                </label>
+                                <div class="mcalc__hint">SSC typically does not reduce take-home pay. We show it as
+                                    employer cost.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="esvRate">SSC, % (if enabled)</label>
+                                <input class="mcalc__input" id="esvRate" type="text" inputmode="decimal"
+                                    placeholder="e.g., 22" />
+                                <div class="mcalc__hint">Default: 22%.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="months">Schedule horizon</label>
+                                <input class="mcalc__input" id="months" type="number" min="1" step="1"
+                                    placeholder="e.g., 12" />
+                                <div class="mcalc__hint">In months (for the table).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Used for dates in the schedule.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter an amount to calculate.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Table </Table> (monthly) <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
+                                    CSV</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Salary schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Gross (₴)</th>
+                                            <th>Taxes (₴)</th>
+                                            <th>Deductions (₴)</th>
+                                            <th>Take-home (₴)</th>
+                                            <th>SSC (₴)</th>
+                                            <th>Employer cost (₴)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+        
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>How does the take-home salary calculator work?</h2>
+            <p>
+                The CalcCore salary calculator helps you estimate your <b>net (take-home) pay</b>
+                from your <b>gross salary</b>. Enter the salary amount and the calculator shows
+                how much you receive after taxes and deductions.
+            </p>
+            <p>
+                This is useful when comparing job offers, negotiating compensation, or planning a budget.
+                You can quickly see <b>net pay</b>, <b>total tax</b>, and the difference between
+                gross and net salary.
+            </p>
+        
+            <h2>What taxes are included?</h2>
+            <p>
+                Depending on your settings, the calculator can use standard tax rates or allow you to
+                enter a custom rate. This way you can see not only the take-home amount, but also how
+                much is deducted.
+            </p>
+        
+            <h2>Why calculate net salary?</h2>
+            <p>
+                Many job listings show salary <b>before tax</b>, but real financial planning requires
+                knowing your <b>actual income</b>. A net salary estimate helps you compare offers fairly
+                and understand the real difference between compensation packages.
+            </p>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>FAQ</h2>
+        
+            <div class="m-faq-item">
+                <h3>What is the difference between gross and net salary?</h3>
+                <p>
+                    <b>Gross salary</b> is income before taxes. <b>Net salary</b> (take-home pay) is what you
+                    receive after all deductions.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why is take-home pay lower than gross salary?</h3>
+                <p>
+                    Because taxes and contributions are deducted from the gross amount. The calculator shows
+                    the deducted amount and the final net pay.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Can I change the tax rate?</h3>
+                <p>
+                    Yes. If a custom mode is available, you can enter a different tax rate to see how it affects
+                    net salary.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>How does this help when comparing job offers?</h3>
+                <p>
+                    Some companies present salaries as gross, others as net. This calculator converts everything
+                    to a consistent take-home number for a fair comparison.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Mortgage Calculator — payment, interest, schedule | CalcCore</title>
+    <meta name="description"
+        content="CalcCore mortgage calculator: down payment (₴ or %), loan amount, monthly payment (annuity or decreasing), total interest, full cost and payment schedule. CSV export and copy." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/ipoteca-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/ipoteca-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/ipoteca-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ipoteca-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ipoteca-calculator.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/ipoteca-calculator#app",
+    "name":"Mortgage Calculator",
+    "description":"Online mortgage calculator with down payment, annuity or decreasing payment type, interest, total cost and schedule.",
+    "url":"https://calccore.net/en/finance/ipoteca-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cmortgage">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cmortgage" id="cmortgage">
+            <div class="mcalc__wrap">
+
+                <!-- Titlebar -->
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Mortgage Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate mortgage payment: down payment (amount or %), monthly payment, total interest, and a
+                        detailed schedule.
+                        Supports annuity and decreasing payment types.
+                    </p>
+                </div>
+
+                <!-- Grid -->
+                <div class="mcalc__grid">
+
+                    <!-- Topline -->
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto calculation</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
+                            NBU rates loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT card -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter data</h2>
+                            <span class="mcalc__badge">Finance</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="propertyPrice">Property price</label>
+                                <input class="mcalc__input" id="propertyPrice" type="text" inputmode="decimal"
+                                    placeholder="example: 2 000 000" />
+                                <div class="mcalc__hint">Object price (apartment/house). Base currency: ₴ (UAH).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label">Down payment mode</label>
+                                <div class="m-switch" role="group" aria-label="Down payment mode">
+                                    <button id="dpModeUAH" class="m-switch__btn is-active" type="button">₴</button>
+                                    <button id="dpModePCT" class="m-switch__btn" type="button">%</button>
+                                </div>
+                                <div class="mcalc__hint">Choose amount or percent of the property price.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="downPayment">Down payment (amount or %)</label>
+                                <input class="mcalc__input" id="downPayment" type="text" inputmode="decimal"
+                                    placeholder="example: 400 000" />
+                                <div class="mcalc__hint" id="dpHint">Example: 400 000 ₴</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="loanAmount">Loan amount (auto)</label>
+                                <input class="mcalc__input" id="loanAmount" type="text" inputmode="decimal"
+                                    placeholder="auto" readonly />
+                                <div class="mcalc__hint">Auto: property price − down payment.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualRate">Annual rate</label>
+                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
+                                    placeholder="example: 18" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termYears">Term</label>
+                                <input class="mcalc__input" id="termYears" type="number" min="1" step="1"
+                                    placeholder="example: 20" />
+                                <div class="mcalc__hint">In years (will be converted to months).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="paymentType">Payment type</label>
+                                <select class="mcalc__select" id="paymentType">
+                                    <option value="annuity" selected>Annuity (equal payments)</option>
+                                    <option value="diff">Decreasing (principal evenly)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Used for dates in the schedule.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="oneTimeFee">One-time fee (optional)</label>
+                                <input class="mcalc__input" id="oneTimeFee" type="text" inputmode="decimal"
+                                    placeholder="example: 5 000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyCosts">Monthly costs (optional)</label>
+                                <input class="mcalc__input" id="monthlyCosts" type="text" inputmode="decimal"
+                                    placeholder="example: 800" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT card -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter property price, down payment, annual rate and term.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <!-- Schedule -->
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Payment schedule <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">
+                                    Copy table
+                                </button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">
+                                    Download CSV
+                                </button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Payment schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th id="thPayment">Payment (₴)</th>
+                                            <th id="thInterest">Interest (₴)</th>
+                                            <th id="thPrincipal">Principal (₴)</th>
+                                            <th id="thFees">Costs (₴)</th>
+                                            <th id="thBalance">Balance (₴)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>How does the mortgage calculator work?</h2>
+            <p>
+                CalcCore mortgage calculator helps you estimate your loan: monthly payment, total interest, total cost,
+                and how the payment schedule looks over time.
+            </p>
+            <p>
+                Enter the <b>property price</b>, choose a <b>down payment</b> (amount or %), set the <b>annual rate</b>
+                and the <b>term</b> in years. The calculator determines the <b>loan amount</b> as “price − down payment”
+                and builds the schedule for the full term.
+            </p>
+
+            <h2>Annuity vs decreasing payments — which is better?</h2>
+            <ul>
+                <li><b>Annuity</b> — the monthly payment is almost the same each month. Easier for budgeting.</li>
+                <li><b>Decreasing</b> — principal is repaid evenly and interest decreases with the balance. First months
+                    are higher, but total interest is often lower.</li>
+            </ul>
+
+            <h2>Why does down payment matter?</h2>
+            <p>
+                The bigger the down payment, the smaller the loan amount, the lower the payment and the total interest.
+                You can calculate down payment as a <b>fixed amount</b> or as a <b>percentage (%)</b> of the price.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How to enter down payment correctly?</h3>
+                <p>
+                    Choose mode <b>₴</b> or <b>%</b>. The “Down payment” field adapts to the mode and automatically
+                    recalculates the loan amount.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is included in “Total (payments + costs)”?</h3>
+                <p>
+                    All principal + interest payments, plus one-time fee (if set) and monthly costs (if set).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why can it differ from a bank calculation?</h3>
+                <p>
+                    Banks may use different rounding rules, day-count conventions, internal fees and exact debit dates.
+                    This calculator provides a mathematically correct estimate based on your inputs.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I download the payment schedule?</h3>
+                <p>
+                    Yes — click <b>“Download CSV”</b>. The file opens in Excel or Google Sheets.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+
+</body>
+
+</html>

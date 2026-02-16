@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Кредитний калькулятор онлайн — платіж, переплата, графік | CalcCore</title>
+    <meta name="description"
+        content="Кредитний калькулятор CalcCore: щомісячний платіж (ануїтет або диференційований), переплата, загальна сума, комісії та графік платежів. Авто-розрахунок, копіювання та CSV." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/credit-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/credit-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/credit-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#283b69" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/credit-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/credit-calculator.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/credit-calculator#app",
+    "name":"Кредитний калькулятор",
+    "description":"Онлайн кредитний калькулятор: ануїтет або диференційований платіж, комісії, переплата, загальна сума та графік платежів.",
+    "url":"https://calccore.net/finance/credit-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+
+<body class="credit-page ccredit">
+    <!-- Header через layout.js -->
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc ccredit" id="ccredit">
+            <div class="ccalc__wrap">
+
+                <!-- Titlebar (як у currency) -->
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Кредитний калькулятор</h1>
+                    <p class="ccalc__p">
+                        Порахуйте щомісячний платіж, переплату та графік платежів. Підтримує ануїтет і диференційований
+                        платіж,
+                        а також комісії й додаткові витрати.
+                    </p>
+                </div>
+
+                <!-- Grid -->
+                <div class="ccalc__grid">
+
+                    <!-- Topline -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="cconv-date" id="nbuBadge" title="Офіційний курс НБУ">
+                            Курс НБУ: завантаження...
+                        </span>
+                    </div>
+
+                    <!-- LEFT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field cconv-full">
+                                <label class="ccalc__label" for="loanAmount">Сума кредиту</label>
+                                <input class="ccalc__input" id="loanAmount" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 200 000" />
+                                <div class="ccalc__hint">Введи суму без комісій (за потреби додай їх нижче).</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="annualRate">Ставка річних</label>
+                                <input class="ccalc__input" id="annualRate" type="text" inputmode="decimal" placeholder="наприклад: 36" />
+                                <div class="ccalc__hint">Річна відсоткова ставка в <b>%</b> (наприклад, 36 означає 36% на рік).</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="termMonths">Термін</label>
+                                <input class="ccalc__input" id="termMonths" type="number" min="1" step="1" placeholder="наприклад: 24" />
+                                <div class="ccalc__hint">Термін кредиту в <b>місяцях</b>.</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="paymentType">Тип платежу</label>
+                                <select class="ccalc__select" id="paymentType">
+                                    <option value="annuity" selected>Ануїтет (рівні платежі)</option>
+                                    <option value="diff">Диференційований (тіло рівномірно)</option>
+                                </select>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="startDate">Дата старту</label>
+                                <input class="ccalc__input" id="startDate" type="date" />
+                                <div class="ccalc__hint">Використовується для побудови дат у графіку.</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="oneTimeFee">Разова комісія</label>
+                                <input class="ccalc__input" id="oneTimeFee" type="text" inputmode="decimal" placeholder="наприклад: 2 000" />
+                                <div class="ccalc__hint">Одноразовий платіж у <b>грн</b>, який сплачується при оформленні кредиту.</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="monthlyFee">Щомісячна комісія</label>
+                                <input class="ccalc__input" id="monthlyFee" type="text" inputmode="decimal" placeholder="наприклад: 150" />
+                                <div class="ccalc__hint">Додатковий платіж у <b>грн щомісяця</b> (не є відсотками).</div>
+                            </div>
+
+                            <div class="ccalc__field cconv-full">
+                                <label class="ccalc__label" for="insurance">Страхування / додаткові витрати
+                                    (щомісяця)</label>
+                                <input class="ccalc__input" id="insurance" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 0" />
+                                <div class="ccalc__hint">Опціонально — впливає на “платіж з витратами”.</div>
+                            </div>
+
+                            <div class="ccalc__field cconv-full">
+                                <div class="ccalc__actions ccalc__mt10">
+                                    <button class="ccalc__btn ccalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="ccalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="ccalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+
+                                <!-- Toast як у currency -->
+                                <div class="ccalc__toast" id="cToast"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <!-- Main result like currency -->
+                        <div class="ccalc__bigNumber" id="cResult">
+                            Введи суму, ставку та термін.
+                        </div>
+
+                        <!-- Detailed result blocks rendered by JS -->
+                        <div class="cconv-details" id="cDetails" aria-live="polite"></div>
+
+                        <!-- Schedule -->
+                        <details class="ccredit-schedule" id="scheduleWrap">
+                            <summary class="ccredit-summary">
+                                <span class="ccredit-sum-left">
+                                    <span class="ccredit-ico" aria-hidden="true"></span>
+                                    Графік платежів <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="ccredit-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="schedule-tools">
+                                <div class="ccredit-curpick">
+                                    <label class="ccredit-curpick__label" for="scheduleCurrency">Валюта:</label>
+                                    <select class="ccalc__select ccredit-curpick__select" id="scheduleCurrency">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </div>
+                            
+                                <button class="ccalc__btn ccalc__btn--small" id="btnCopySchedule" type="button">Копіювати таблицю</button>
+                                <button class="ccalc__btn ccalc__btn--small" id="btnDownloadCSV" type="button">Завантажити CSV</button>
+                            </div>
+
+                            <div class="table-wrap">
+                                <table class="table" id="scheduleTable" aria-label="Графік платежів">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Дата</th>
+                                            <th>Платіж</th>
+                                            <th>Відсотки</th>
+                                            <th>Тіло</th>
+                                            <th>Комісії</th>
+                                            <th>Залишок</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <!-- SEO block (styled like currency) -->
+        <section class="cc-seo">
+            <h2>Як працює кредитний калькулятор?</h2>
+            <p>
+                Цей кредитний калькулятор рахує основні показники позики: щомісячний платіж, суму відсотків (переплату),
+                загальну суму до сплати та формує графік платежів по місяцях. Підходить для споживчих кредитів,
+                розстрочок,
+                авто-кредитів та інших продуктів, де платежі здійснюються регулярно.
+            </p>
+            <p>
+                Ти вводиш суму кредиту, річну ставку та термін у місяцях. Далі обираєш тип платежу: <b>ануїтет</b> або
+                <b>диференційований</b>. Якщо є додаткові витрати — разова комісія, щомісячна комісія чи страхування —
+                калькулятор додасть їх до розрахунків, щоб ти бачив(ла) реальну картину витрат.
+            </p>
+
+            <h2>Ануїтет чи диференційований платіж — у чому різниця?</h2>
+            <ul>
+                <li><b>Ануїтет</b> — платіж щомісяця майже однаковий. На початку більше відсотків, з часом більша частка
+                    йде в тіло кредиту.</li>
+                <li><b>Диференційований</b> — тіло кредиту гаситься рівними частинами, а відсотки зменшуються разом із
+                    залишком боргу. Платежі з часом стають меншими.</li>
+            </ul>
+
+            <h2>Що саме рахує калькулятор?</h2>
+            <ul>
+                <li><b>Щомісячний платіж</b> (за обраним типом)</li>
+                <li><b>Платіж “з витратами”</b> — коли додані комісії/страхування</li>
+                <li><b>Переплату</b> — суму відсотків за весь період</li>
+                <li><b>Загальну суму</b> — скільки буде сплачено разом</li>
+                <li><b>Графік платежів</b> — розподіл на відсотки/тіло/комісії по місяцях</li>
+            </ul>
+
+            <h2>Чому результат може відрізнятися від банку?</h2>
+            <p>
+                Банки можуть по-різному рахувати дні в місяці, робити округлення, застосовувати комісії за своїми
+                правилами
+                або змінювати дату списання. Калькулятор дає <b>точну математичну оцінку</b> за введеними параметрами,
+                але
+                реальні умови завжди перевіряй у договорі.
+            </p>
+        </section>
+
+        <!-- FAQ block (styled like currency) -->
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Що вводити в “Сума кредиту” — з комісіями чи без?</h3>
+                <p>
+                    Рекомендуємо вводити <b>чисту суму кредиту</b> (тіло). Комісії та страхування краще додавати окремо
+                    у відповідні поля,
+                    тоді калькулятор покаже і “базовий” платіж, і платіж з додатковими витратами.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому при диференційованому платежі “щомісячний платіж” не один і той самий?</h3>
+                <p>
+                    Бо відсотки нараховуються на <b>залишок боргу</b>. Тіло гаситься рівними частинами, залишок
+                    зменшується —
+                    і відсоткова частина теж зменшується. Тому перші платежі вищі, а потім стають нижчими.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке “платіж з витратами”?</h3>
+                <p>
+                    Це орієнтовний платіж, який включає <b>щомісячні комісії</b> та <b>страхування</b> (якщо ти їх
+                    вказав(ла)).
+                    Разова комісія враховується в загальних витратах, але не додається до кожного місяця.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна завантажити графік платежів?</h3>
+                <p>
+                    Так. У блоці “Графік платежів” є кнопка <b>“Завантажити CSV”</b>. Файл можна відкрити в Excel/Google
+                    Sheets
+                    і зручно аналізувати або надсилати.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Цей калькулятор рахує ефективну ставку (APR)?</h3>
+                <p>
+                    Він показує вплив комісій та витрат через “платіж з витратами”, переплату та загальну суму. Для
+                    повного APR
+                    інколи потрібні додаткові умови (точні дати, методика банку, денна/місячна база). Але для оцінки
+                    кредиту
+                    в більшості випадків цього достатньо.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer через layout.js -->
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>TCO Calculator — EV vs ICE — CalcCore</title>
+    <meta name="description"
+        content="TCO calculator: total cost of ownership for EV vs ICE (purchase price + energy + service) over 3–10 years." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/tco-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/tco-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/tco-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/tco.css" />
+
+    <!-- i18n ENGINE -->
+    <script src="/js/i18n.js" defer></script>
+
+    <!-- TCO calculator logic (cache busting) -->
+    <script src="/js/tco.js?v=20260209" defer></script>
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/tco-calculator#app",
+    "name":"TCO Calculator (EV vs ICE)",
+    "description":"Compare total cost of ownership for EV and ICE vehicles over 3–10 years.",
+    "url":"https://calccore.net/en/auto/tco-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="tco-page">
+    <div id="header"></div>
+
+    <main class="container">
+
+        <section class="ccalc tcoCalc" id="tcoCalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">TCO Calculator (EV vs ICE)</h1>
+                    <p class="ccalc__p">
+                        Total cost of ownership: purchase price + energy (fuel/electricity) + service over the selected
+                        period.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Inputs</h2>
+
+                            <div class="evc-topline">
+                                <label class="evc-autocalc">
+                                    <input type="checkbox" id="evAutoCalc" checked>
+                                    <span>Auto-calculate</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__rows ccalc__mb10">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="currencySelect">Currency</label>
+                                <select class="ccalc__input" id="currencySelect">
+                                    <option value="UAH">₴ UAH</option>
+                                    <option value="USD">$ USD</option>
+                                    <option value="EUR">€ EUR</option>
+                                </select>
+                                <div class="ccalc__hint tco-currency-hint" id="tcoCurrencyHint"></div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="mileage">Annual mileage (km)</label>
+                                <input class="ccalc__input" id="mileage" placeholder="e.g. 15000" inputmode="numeric">
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="years">Ownership period (years)</label>
+                                <input class="ccalc__input" id="years" placeholder="e.g. 5" inputmode="numeric">
+                            </div>
+                        </div>
+
+                        <div class="tcoCompare">
+                            <!-- ICE -->
+                            <div class="tcoMiniCard">
+                                <div class="tcoMiniHead">
+                                    <div class="tcoMiniTitle">🚗 ICE</div>
+                                    <div class="tcoMiniBadge">ICE</div>
+                                </div>
+
+                                <div class="tcoMiniFields">
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="ice_price">Car price (<span
+                                                class="curSym">₴</span>)</label>
+                                        <input class="ccalc__input" id="ice_price" placeholder="e.g. 800000"
+                                            inputmode="decimal">
+                                    </div>
+
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="ice_consumption">Fuel consumption (L / 100
+                                            km)</label>
+                                        <input class="ccalc__input" id="ice_consumption" placeholder="e.g. 7"
+                                            inputmode="decimal">
+                                    </div>
+
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="fuel_price">Fuel price (<span
+                                                class="curSym">₴</span> / L)</label>
+                                        <input class="ccalc__input" id="fuel_price" placeholder="e.g. 60"
+                                            inputmode="decimal">
+                                    </div>
+
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="ice_service">Annual service (<span
+                                                class="curSym">₴</span>)</label>
+                                        <input class="ccalc__input" id="ice_service" placeholder="e.g. 20000"
+                                            inputmode="decimal">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- EV -->
+                            <div class="tcoMiniCard">
+                                <div class="tcoMiniHead">
+                                    <div class="tcoMiniTitle">⚡ EV</div>
+                                    <div class="tcoMiniBadge">EV</div>
+                                </div>
+
+                                <div class="tcoMiniFields">
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="ev_price">Car price (<span
+                                                class="curSym">₴</span>)</label>
+                                        <input class="ccalc__input" id="ev_price" placeholder="e.g. 1100000"
+                                            inputmode="decimal">
+                                    </div>
+
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="ev_consumption">Consumption (kWh / 100
+                                            km)</label>
+                                        <input class="ccalc__input" id="ev_consumption" placeholder="e.g. 18"
+                                            inputmode="decimal">
+                                    </div>
+
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="electric_price">Electricity price (<span
+                                                class="curSym">₴</span> / kWh)</label>
+                                        <input class="ccalc__input" id="electric_price" placeholder="e.g. 6"
+                                            inputmode="decimal">
+                                    </div>
+
+                                    <div class="ccalc__field">
+                                        <label class="ccalc__label" for="ev_service">Annual service (<span
+                                                class="curSym">₴</span>)</label>
+                                        <input class="ccalc__input" id="ev_service" placeholder="e.g. 8000"
+                                            inputmode="decimal">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACTIONS -->
+                        <div class="ccalc__actions ccalc__mt10 tco-actions-row">
+                            <div class="tco-actions-left">
+                                <button class="ccalc__btn ccalc__btn--primary" id="tcoCalcBtn" type="button">
+                                    Calculate
+                                </button>
+                                <button class="ccalc__btn" id="tcoResetBtn" type="button">
+                                    Reset
+                                </button>
+                                <button class="ccalc__btn" id="tcoShareBtn" type="button">
+                                    Share
+                                </button>
+                            </div>
+
+                            <div class="tco-actions-right">
+                                <a href="/en/auto/fuel-calculator.html" class="ccalc__btn tco-btn-green" role="button">
+                                    ⛽ Fuel cost
+                                </a>
+
+                                <a href="/en/auto/ev-charge-calculator.html" class="ccalc__btn tco-btn-green"
+                                    role="button">
+                                    ⚡ EV charging
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__toast" id="tcoToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">TCO</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="result">
+                            Enter values and click “Calculate”.
+                        </div>
+
+                        <div class="tcoYearlyWrap" id="tcoYearly"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What is TCO and why it matters?</h2>
+            <p>
+                TCO (Total Cost of Ownership) is the <b>full cost of owning a car</b> over a selected period:
+                purchase price + energy (fuel or electricity) + planned service.
+                This gives a more realistic picture than comparing fuel/electricity costs only.
+            </p>
+            <p>
+                For example, an EV can be much cheaper to run day-to-day but have a higher upfront price.
+                TCO shows when (mileage, energy prices, service) an EV becomes cheaper than an ICE — or vice versa.
+            </p>
+
+            <h2>How to read the result</h2>
+            <p>
+                The calculator compares total costs for both scenarios and helps estimate the “cost per 1 km”.
+                It’s useful when you want to compare different cars under the same annual mileage assumptions.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>Why can an EV be more expensive even if electricity is cheaper?</h3>
+                <p>
+                    Most often because of a higher purchase price. With low mileage, energy savings may not have time
+                    to offset the upfront difference.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What costs are included and what’s not?</h3>
+                <p>
+                    Included: purchase price + energy + annual service. Not included: insurance, taxes, depreciation,
+                    tires, repairs beyond routine service, home charging hardware, etc.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter decimals with comma?</h3>
+                <p>
+                    Yes. You can type <b>1,6</b> or <b>1.6</b> — the calculator should handle both.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does “cost per 1 km” mean?</h3>
+                <p>
+                    It’s total costs over the period divided by total mileage. This makes it easier to compare scenarios
+                    and vehicles.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    
+    <script src="/js/layout.js"></script>
+
+</body>
+
+</html>

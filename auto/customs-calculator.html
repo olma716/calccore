@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор розмитнення авто — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор розмитнення авто: мито, акциз і ПДВ для авто з Європи або США. Розрахунок митної вартості та суми платежів у гривнях." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/auto/customs-calculator" />
+
+    <!-- hreflang (якщо є EN сторінка) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/customs-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/customs-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/customs.css" />
+
+    <!-- i18n BEFORE calculator -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/customs.js?v=20260213" defer></script>
+
+   
+    
+    <!-- Structured data -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/customs-calculator#app",
+    "name":"Калькулятор розмитнення авто",
+    "description":"Розрахунок мита, акцизу та ПДВ для авто з Європи або США.",
+    "url":"https://calccore.net/auto/customs-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="customs-page">
+    <!-- ✅ HEADER (підтягується з /partials/header.html) -->
+    <div id="header"></div>
+
+    <main class="container">
+        <!-- START: Calculator -->
+        <section class="ccalc" id="ccalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор розмитнення авто (UA) (2026)</h1>
+                    <p class="ccalc__p">
+                        Рахує: мито + акциз + ПДВ. Для електро: мито 0% за замовчуванням (можна змінити), акциз 1€ ×
+                        кВт·год.
+                    </p>
+                </div>
+                <div class="ccalc__ratesRow">
+                    <div class="ccalc__rates" data-cc="ratesBadge">
+                        Курс НБУ: —
+                    </div>
+                </div>
+                
+                <div class="ccalc__grid">
+
+
+                    <!-- LEFT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Дані для розрахунку</h2>
+                            <span class="ccalc__badge" data-cc="modeBadge">ДВЗ</span>
+                        </div>
+
+                        <div class="ccalc__field ccalc__mb10">
+                            <label class="ccalc__label">Тип авто</label>
+                            <div class="ccalc__toggle" role="tablist" aria-label="Тип авто">
+                                <button type="button" class="ccalc__toggleBtn is-active" data-cc-action="setMode"
+                                    data-mode="ICE">ДВЗ</button>
+                                <button type="button" class="ccalc__toggleBtn" data-cc-action="setMode"
+                                    data-mode="EV">Електро</button>
+                            </div>
+                            <div class="ccalc__hint">Для “повних років” у MVP: поточний рік − рік випуску.</div>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Валюта ціни</label>
+                                <select class="ccalc__input" data-cc="currency">
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="USD">USD ($)</option>
+                                    <option value="UAH">UAH (₴)</option>
+                                </select>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Рік випуску</label>
+                                <input class="ccalc__input" data-cc="year" type="number" min="1950" max="2100"
+                                    placeholder="Напр: 2018">
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Ціна авто (без доставки)</label>
+                                <input class="ccalc__input" data-cc="price" type="number" min="0" step="0.01"
+                                    placeholder="Напр: 8000">
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Доставка/страховка до кордону (опц.)</label>
+                                <input class="ccalc__input" data-cc="shipping" type="number" min="0" step="0.01"
+                                    placeholder="Напр: 1000">
+                            </div>
+                        </div>
+
+                        <!-- ICE only -->
+                        <div class="ccalc__block ccalc__mt10" data-cc="iceBlock">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label">Тип пального</label>
+                                    <select class="ccalc__input" data-cc="fuelType">
+                                        <option value="gasoline">Бензин</option>
+                                        <option value="diesel">Дизель</option>
+                                    </select>
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label">Обʼєм двигуна (см³)</label>
+                                    <input class="ccalc__input" data-cc="engineCC" type="number" min="0" step="1"
+                                        placeholder="Напр: 2000">
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- EV only -->
+                        <div class="ccalc__block ccalc__mt10" data-cc="evBlock" style="display:none">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label">Ємність батареї (кВт·год)</label>
+                                    <input class="ccalc__input" data-cc="batteryKwh" type="number" min="0" step="0.1"
+                                        placeholder="Напр: 60">
+                                </div>
+                            </div>
+                            <div class="ccalc__hint">Акциз електро: 1€ × кВт·год батареї.</div>
+                        </div>
+
+                        <div class="ccalc__rows ccalc__mt10">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Ставка мита (%)</label>
+                                <input class="ccalc__input" data-cc="dutyRate" type="number" min="0" max="100"
+                                    step="0.1" value="10" placeholder="Напр: 10">
+                                <div class="ccalc__hint"> стандартно 10% (можна змінити).</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">ПДВ (%)</label>
+                                <input class="ccalc__input" data-cc="vatRate" type="number" min="0" max="100" step="0.1"
+                                    value="20" placeholder="Напр: 20">
+                                <div class="ccalc__hint"> стандартно 20% (можна змінити).</div>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                data-cc-action="copyLink">Поділитись посиланням</button>
+                            <button class="ccalc__btn" type="button" data-cc-action="reset">Скинути</button>
+
+                            <a class="ccalc__btn ccalc__btn--success" href="/auto/import-cost-calculator.html">
+                                Порахуй повну<br>вартість авто з Європи
+                            </a>
+                        </div>
+
+                        <div class="ccalc__toast" data-cc="toast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge" data-cc="ageBadge">Вік: —</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber">
+                            <div class="ccalc__bigLabel">Разом митні платежі (мито + акциз + ПДВ)</div>
+                            <div class="ccalc__bigValue" data-cc="totalCustoms">—</div>
+                            <div class="ccalc__hint" data-cc="subHint"></div>
+                        </div>
+
+                        <div class="ccalc__tableWrap">
+                            <table class="ccalc__table" aria-label="Розбивка">
+                                <thead>
+                                    <tr>
+                                        <th>Стаття</th>
+                                        <th class="ccalc__right">UAH</th>
+                                        <th class="ccalc__right">EUR</th>
+                                        <th class="ccalc__right">USD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Митна вартість (ціна + доставка)</td>
+                                        <td class="ccalc__right" data-cc="customsValue">—</td>
+                                        <td class="ccalc__right" data-cc="customsValueEur">—</td>
+                                        <td class="ccalc__right" data-cc="customsValueUsd">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Мито</td>
+                                        <td class="ccalc__right" data-cc="duty">—</td>
+                                        <td class="ccalc__right" data-cc="dutyEur">—</td>
+                                        <td class="ccalc__right" data-cc="dutyUsd">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Акциз</td>
+                                        <td class="ccalc__right" data-cc="excise">—</td>
+                                        <td class="ccalc__right" data-cc="exciseEur">—</td>
+                                        <td class="ccalc__right" data-cc="exciseUsd">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ПДВ</td>
+                                        <td class="ccalc__right" data-cc="vat">—</td>
+                                        <td class="ccalc__right" data-cc="vatEur">—</td>
+                                        <td class="ccalc__right" data-cc="vatUsd">—</td>
+                                    </tr>
+
+                                    <tr data-cc="pensionRow" style="display:none">
+                                        <td>Пенсійний збір</td>
+                                        <td class="ccalc__right" data-cc="pension">—</td>
+                                        <td class="ccalc__right" data-cc="pensionEur">—</td>
+                                        <td class="ccalc__right" data-cc="pensionUsd">—</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Разом</th>
+                                        <th class="ccalc__right" data-cc="grandTotal">—</th>
+                                        <th class="ccalc__right" data-cc="grandTotalEur">—</th>
+                                        <th class="ccalc__right" data-cc="grandTotalUsd">—</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="ccalc__hint ccalc__mt10">
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Calculator -->
+
+        <div class="cc-divider"></div>
+
+        <!-- SEO -->
+        <section class="cc-seo">
+            <h2>Як працює калькулятор розмитнення авто</h2>
+            <p>
+                Калькулятор розмитнення авто дозволяє швидко розрахувати митні платежі при ввезенні авто в Україну з
+                Європи або США:
+                мито, акциз та ПДВ.
+            </p>
+            <p>
+                Ви вводите ціну авто, доставку, рік випуску, параметри двигуна — система автоматично визначає митну
+                вартість та підсумок у гривнях.
+            </p>
+            <p>
+                Для електромобілів мито зазвичай 0%, а акциз рахується від ємності батареї (кВт·год).
+            </p>
+
+            <h2>ПДВ при імпорті авто в Україні: що важливо знати</h2>
+            <p>
+                ПДВ при розмитненні авто в Україні нараховується не лише на “ціну авто”. База для ПДВ зазвичай включає
+                митну вартість (ціна авто + доставка/страховка до кордону), а також суму мита і акцизу.
+            </p>
+            <p>
+                У цьому калькуляторі ПДВ рахується за формулою:
+                <strong>(митна вартість + мито + акциз) × ставка ПДВ</strong>.
+            </p>
+
+            <h2>Акциз в Україні: від чого залежить</h2>
+            <p>
+                Акциз — це окремий платіж. Для авто з ДВЗ у спрощеній моделі він залежить від типу пального, об’єму
+                двигуна та віку авто.
+            </p>
+            <p>
+                Для електромобілів акциз: <strong>1€ × кВт·год</strong>.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті питання про розмитнення авто</h2>
+
+            <div class="cc-faq-item">
+                <h3>Що входить у вартість розмитнення авто?</h3>
+                <p>Мито, акциз та ПДВ. Калькулятор показує розбивку по кожному платежу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховується доставка авто?</h3>
+                <p>Так. Доставка/страховка додаються до ціни авто і формують митну вартість.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як розраховується акциз?</h3>
+                <p>Для ДВЗ — від пального, об’єму двигуна та віку авто. Для електро — 1€ × кВт·год.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи точний цей калькулятор?</h3>
+                <p>Це MVP-версія для швидкої оцінки. Для 100% “під брокера” потрібні додаткові параметри.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ✅ FOOTER (підтягується з /partials/footer.html) -->
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+
+</body>
+
+</html>

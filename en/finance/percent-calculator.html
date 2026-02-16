@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Percentage Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore percentage calculator: find X% of a number, what percent one number is of another, increase/decrease by %, and percentage difference." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/percent-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/percent-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/percent-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/percent.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/percent.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/percent-calculator#app",
+    "name":"Percentage Calculator",
+    "description":"Percentage calculations: X% of a number, what percent one number is of another, increase/decrease by %, and percentage difference.",
+    "url":"https://calccore.net/en/finance/percent-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="percent-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc pcalc" id="pcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Percentage Calculator</h1>
+                    <p class="ccalc__p">
+                        4 common formulas: <b>X% of a number</b>, <b>what %?</b>, <b>increase/decrease by %</b>, <b>%
+                            difference</b>.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto calculation</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter values</h2>
+                            <span class="ccalc__badge">Finance</span>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="pcalc-tabs" role="tablist" aria-label="Calculator modes">
+                            <button class="pcalc-tab is-active" type="button" data-tab="t1" role="tab"
+                                aria-selected="true">
+                                X% of a number
+                            </button>
+                            <button class="pcalc-tab" type="button" data-tab="t2" role="tab" aria-selected="false">
+                                What %?
+                            </button>
+                            <button class="pcalc-tab" type="button" data-tab="t3" role="tab" aria-selected="false">
+                                ± by %
+                            </button>
+                            <button class="pcalc-tab" type="button" data-tab="t4" role="tab" aria-selected="false">
+                                % difference
+                            </button>
+                        </div>
+
+                        <!-- Panel 1 -->
+                        <div class="pcalc-panel is-active" id="t1" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t1_percent">Percent (%)</label>
+                                    <input class="ccalc__input" id="t1_percent" placeholder="e.g. 15"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t1_number">Number</label>
+                                    <input class="ccalc__input" id="t1_number" placeholder="e.g. 2000"
+                                        inputmode="decimal" />
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT1">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 2 -->
+                        <div class="pcalc-panel" id="t2" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t2_part">Part</label>
+                                    <input class="ccalc__input" id="t2_part" placeholder="e.g. 50"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t2_total">Of total</label>
+                                    <input class="ccalc__input" id="t2_total" placeholder="e.g. 200"
+                                        inputmode="decimal" />
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT2">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 3 -->
+                        <div class="pcalc-panel" id="t3" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t3_number">Number</label>
+                                    <input class="ccalc__input" id="t3_number" placeholder="e.g. 1000"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t3_percent">Change by (%)</label>
+                                    <input class="ccalc__input" id="t3_percent" placeholder="e.g. 12"
+                                        inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field pcalc-full">
+                                    <label class="ccalc__label">Operation</label>
+                                    <div class="pcalc-radio">
+                                        <label><input type="radio" name="t3_op" value="plus" checked /> Increase</label>
+                                        <label><input type="radio" name="t3_op" value="minus" /> Decrease</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT3">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 4 -->
+                        <div class="pcalc-panel" id="t4" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t4_old">Old value</label>
+                                    <input class="ccalc__input" id="t4_old" placeholder="e.g. 80" inputmode="decimal" />
+                                </div>
+
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t4_new">New value</label>
+                                    <input class="ccalc__input" id="t4_new" placeholder="e.g. 100"
+                                        inputmode="decimal" />
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT4">Calculate</button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__toast" id="pToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="pResult">
+                            Choose a mode and click “Calculate”.
+                        </div>
+
+                        <div class="pcalc-details" id="pDetails" aria-live="polite"></div>
+                        <div class="ccalc__actions ccalc__mt10 pcalc-result-actions">
+                            <button class="ccalc__btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What is a percentage calculator and why use it?</h2>
+            <p>
+                A percentage calculator is a quick tool to compute parts of a number, apply percentage change,
+                and compare two values in percent. It’s useful for discounts, finance, taxes, business metrics,
+                and everyday calculations.
+            </p>
+            <p>
+                With this calculator you can find X% of a number, determine what percent one value is of another,
+                increase or decrease a value by a percent, and calculate percentage difference.
+            </p>
+
+            <h2>What can you calculate?</h2>
+            <ul>
+                <li>X% of a number</li>
+                <li>What percent one number is of another</li>
+                <li>Increase a value by a percent</li>
+                <li>Decrease a value by a percent</li>
+                <li>Discounts and markups</li>
+            </ul>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate X% of a number?</h3>
+                <p>
+                    Multiply the number by the percent and divide by 100.
+                    Example: 20% of 500 = 500 × 20 / 100 = 100.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How to find how many percent one number is of another?</h3>
+                <p>
+                    Divide the part by the total and multiply by 100. This is commonly used to compare prices,
+                    growth, and ratios.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does increase by percent work?</h3>
+                <p>
+                    Add the percentage of the number to itself.
+                    Example: add 15% to 200 → 200 + (200 × 15 / 100) = 230.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How to calculate a discount in percent?</h3>
+                <p>
+                    A discount is a percent of the original price.
+                    Example: 25% off 800 means you save 200 and pay 600.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I use it for finance calculations?</h3>
+                <p>
+                    Yes — it’s great for basic finance tasks: discounts, commissions, percentage changes, and quick
+                    estimates.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

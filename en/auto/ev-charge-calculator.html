@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>EV Charging Cost Calculator — CalcCore</title>
+    <meta name="description"
+        content="Calculate how much it costs to charge an electric car at home or at a charging station: from current % to target % including charging losses and tariffs." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/auto/ev-charge-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/ev-charge-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/ev-charge-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ev-charge.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ev-charge.js?v=20260209" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/ev-charge-calculator#app",
+    "name":"EV Charging Cost Calculator",
+    "description":"Calculate the cost of charging an electric vehicle at home or at a charging station, including charging losses.",
+    "url":"https://calccore.net/en/auto/ev-charge-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="evc-page">
+    <div id="header"></div>
+
+    <main class="container">
+
+        <div class="evc-titlebar">
+            <h1 class="evc-h1">EV Charging Cost Calculator</h1>
+            <p class="evc-p">
+                Calculate <b>how much it costs to charge an EV</b> at home or at a charging station:
+                from <b>current %</b> to <b>target %</b> including <b>charging losses</b> and the tariff.
+            </p>
+        </div>
+
+        <section class="evc-shell">
+
+            <div class="evc-topbar">
+                <div class="mode-switch" aria-label="Charging source">
+                    <button id="srcHome" class="pill active" type="button">Home outlet</button>
+                    <button id="srcStation" class="pill" type="button">Charging station</button>
+                </div>
+
+                <label class="auto-toggle">
+                    <input type="checkbox" id="auto_calc_toggle" checked>
+                    <span>Auto-calculate</span>
+                </label>
+            </div>
+
+            <div class="evc-grid">
+
+                <!-- Battery -->
+                <div class="evc-box">
+                    <h2>⚡ Battery details</h2>
+
+                    <label for="battery_kwh">Battery capacity (kWh)</label>
+                    <input id="battery_kwh" inputmode="decimal" placeholder="Example: 62">
+
+                    <div class="evc-row">
+                        <div>
+                            <label for="soc_now">Now (%)</label>
+                            <input id="soc_now" inputmode="decimal" placeholder="20">
+                        </div>
+                        <div>
+                            <label for="soc_target">Target (%)</label>
+                            <input id="soc_target" inputmode="decimal" placeholder="80">
+                        </div>
+                    </div>
+
+                    <label for="loss_pct">Charging losses (%) <span class="evc-hint">(optional)</span></label>
+                    <input id="loss_pct" inputmode="decimal" placeholder="10">
+
+                    <label for="power_kw">Charging power (kW)</label>
+                    <select id="power_kw">
+                        <option value="2.3">Outlet 2.3 kW</option>
+                        <option value="7.4">Wallbox 7.4 kW</option>
+                        <option value="11">AC station 11 kW</option>
+                        <option value="22">AC station 22 kW</option>
+                        <option value="50">DC 50 kW</option>
+                        <option value="100">DC 100 kW</option>
+                    </select>
+                </div>
+
+                <!-- Tariffs -->
+                <div class="evc-box">
+                    <h2>💸 Tariffs</h2>
+
+                    <div class="evc-tariffs">
+                        <div class="evc-tariff-card">
+                            <div class="evc-tariff-title">Home</div>
+                            <label for="price_home">Price (UAH / kWh)</label>
+                            <input id="price_home" inputmode="decimal" placeholder="6">
+                        </div>
+
+                        <div class="evc-tariff-card">
+                            <div class="evc-tariff-title">Charging station</div>
+
+                            <label for="station_tariff_mode">Tariff type</label>
+                            <select id="station_tariff_mode">
+                                <option value="kwh">UAH / kWh</option>
+                                <option value="min">UAH / min</option>
+                            </select>
+
+                            <label id="station_price_label" for="price_station">Price</label>
+                            <input id="price_station" inputmode="decimal" placeholder="14">
+
+                            <div class="evc-mini" id="station_hint"></div>
+                        </div>
+                    </div>
+
+                    <div class="evc-actions">
+                        <button class="btn evc-btn" id="calcBtn" type="button">Calculate</button>
+                        <button class="btn evc-btn evc-btn-ghost" id="resetBtn" type="button">Reset</button>
+                        <button class="btn evc-btn evc-btn-ghost" id="shareBtn" type="button">Share</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="evc-result-wrap">
+                <div class="evc-result-head">
+                    <h2 class="evc-result-title">Result</h2>
+                    <span class="evc-result-badge">EV</span>
+                </div>
+
+                <div class="evc-result" id="result">
+                    Enter values and click “Calculate”.
+                </div>
+
+                <div class="evc-compare" id="compare"></div>
+            </div>
+
+        </section>
+
+        <hr class="divider">
+
+        <section class="cc-seo">
+            <h2>How does the EV charging cost calculator work?</h2>
+            <p>
+                The calculator estimates <b>how much energy you need to add</b> to the battery from the current charge
+                level to the target.
+                It uses the <b>battery capacity (kWh)</b> and the difference between “Now (%)” and “Target (%)”.
+            </p>
+            <p>
+                Then it applies <b>charging losses</b> (if provided). Losses mean you need to draw more energy from the
+                grid than what ends up in the battery.
+                The kWh <b>from the grid</b> are multiplied by the tariff to get the <b>charging cost</b>.
+            </p>
+
+            <h2>What does the result show?</h2>
+            <p>
+                You’ll see: <b>energy into the battery</b>, <b>energy from the grid (including losses)</b>, <b>estimated
+                    charging time</b>
+                (grid energy / power), and the <b>cost</b> for the selected source — home or station.
+            </p>
+            <p>
+                If both tariffs are filled (home and station), the calculator also shows a <b>comparison</b> — which
+                option is cheaper and by how much.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>Why is “energy from the grid” higher than “energy into the battery”?</h3>
+                <p>
+                    Because of charging losses: heat, power conversion, electronics, and battery balancing.
+                    Typical losses are 5–15% depending on the car, temperature and charging type.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does “estimated charging time” mean?</h3>
+                <p>
+                    It’s calculated as: <b>kWh from the grid / power (kW)</b>.
+                    Real time may differ due to car/station limits and reduced power near 80–100% SoC.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does the “UAH/min” station tariff work?</h3>
+                <p>
+                    In “UAH/min” mode the calculator first estimates charging time and then calculates:
+                    <b>minutes × tariff</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does charging power change the kWh needed?</h3>
+                <p>
+                    No. Power affects only <b>time</b>. Energy depends on battery capacity and the % difference (and
+                    losses).
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор бетону онлайн — об’єм і матеріали | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор бетону CalcCore: розрахунок об’єму бетону та кількості матеріалів (цемент, пісок, щебінь, вода) за формою, розмірами й пропорціями. Графік, таблиця, копіювання та завантаження таблиці (Excel)." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/construction/concrete-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/concrete-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/concrete-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/concrete-calculator.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/concrete-calculator.js?v=20260211" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"У яких одиницях вводити розміри?",
+        "acceptedAnswer":{"@type":"Answer","text":"Вводьте всі розміри у метрах (м). Тоді об’єм бетону буде у кубічних метрах (м³)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що означає Д×Ш×В або Д×Ш×Т?",
+        "acceptedAnswer":{"@type":"Answer","text":"Д — довжина, Ш — ширина, В — висота, Т — товщина. Для плити зазвичай використовують Д×Ш×Т, для балки — Д×Ш×В."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке В/Ц і чи потрібно вводити літри води?",
+        "acceptedAnswer":{"@type":"Answer","text":"В/Ц — це співвідношення вода/цемент (коефіцієнт), а не літри. Калькулятор сам розраховує кількість води за цементом і обраним В/Ц."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому сухий об’єм більший за мокрий?",
+        "acceptedAnswer":{"@type":"Answer","text":"Сухий об’єм враховує пустоти та втрати при змішуванні. Тому застосовують коефіцієнт сухого об’єму (часто близько 1.54)."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/construction/concrete-calculator#app",
+    "name":"Калькулятор бетону",
+    "description":"Онлайн калькулятор бетону: об’єм бетону та кількість матеріалів (цемент, пісок, щебінь, вода), графік та таблиця, копіювання й завантаження таблиці.",
+    "url":"https://calccore.net/construction/concrete-calculator",
+    "applicationCategory":"ConstructionApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+
+    <!-- OPTIONAL: if you need to enforce no-hover-jump specifically for this calculator
+  <style>
+    .cconcrete .mcalc__btn:hover { transform: none !important; }
+  </style>
+  -->
+</head>
+
+<body class="credit-page cconcrete">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cconcrete" id="cconcrete">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор бетону</h1>
+                    <p class="mcalc__p">
+                        Розрахуй об’єм бетону та кількість матеріалів: цемент, пісок, щебінь і вода.
+                        Є графік, таблиця, копіювання та завантаження таблиці (Excel).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Будівництво</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="shape">Форма</label>
+                                <select id="shape" class="mcalc__select">
+                                    <option value="slab" selected>Плита (Д×Ш×Т)</option>
+                                    <option value="footing">Подушка/фундамент (Д×Ш×Т)</option>
+                                    <option value="beam">Балка (Д×Ш×В)</option>
+                                    <option value="wall">Стіна (Д×В×Т)</option>
+                                    <option value="columnRect">Колона — прямокутна (Д×Ш×В)</option>
+                                    <option value="columnRound">Колона — кругла (D×В)</option>
+                                </select>
+                                <div class="mcalc__hint">Всі розміри вводяться в метрах (м).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="length">Довжина (м)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 6" />
+                            </div>
+
+                            <div class="mcalc__field" id="widthWrap">
+                                <label class="mcalc__label" for="width">Ширина (м)</label>
+                                <input class="mcalc__input" id="width" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 4" />
+                            </div>
+
+                            <div class="mcalc__field" id="heightWrap">
+                                <label class="mcalc__label" for="height">Висота / товщина (м)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 0.12" />
+                            </div>
+
+                            <div class="mcalc__field" id="diameterWrap" style="display:none;">
+                                <label class="mcalc__label" for="diameter">Діаметр (м)</label>
+                                <input class="mcalc__input" id="diameter" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 0.3" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="grade">Суміш (цемент:пісок:щебінь)</label>
+                                <select id="grade" class="mcalc__select">
+                                    <option value="1:5:10">M5 (1:5:10)</option>
+                                    <option value="1:4:8">M7.5 (1:4:8)</option>
+                                    <option value="1:3:6">M10 (1:3:6)</option>
+                                    <option value="1:2:4" selected>M15 (1:2:4)</option>
+                                    <option value="1:1.5:3">M20 (1:1.5:3)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dryFactor">Коефіцієнт сухого об’єму</label>
+                                <input class="mcalc__input" id="dryFactor" type="text" inputmode="decimal"
+                                    placeholder="1.54" />
+                                <div class="mcalc__hint">Зазвичай 1.52–1.57 (втрати + пустоти).</div>
+                            </div>
+
+                            <!-- W/C preset UX -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wcrPreset">Пластичність бетону</label>
+                                <select id="wcrPreset" class="mcalc__select">
+                                    <option value="0.40">Густий (міцний бетон) — В/Ц 0.40</option>
+                                    <option value="0.50" selected>Стандартний — В/Ц 0.50</option>
+                                    <option value="0.60">Пластичний (легко укладати) — В/Ц 0.60</option>
+                                    <option value="custom">Ввести вручну</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field" id="wcrCustomWrap" style="display:none;">
+                                <label class="mcalc__label" for="wcr">В/Ц (вода/цемент)</label>
+                                <input class="mcalc__input" id="wcr" type="text" inputmode="decimal"
+                                    placeholder="0.5" />
+                                <div class="mcalc__hint">
+                                    Це НЕ літри. 0.5 означає 0.5 л води на 1 кг цементу. Кількість води калькулятор
+                                    порахує автоматично.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="bagSize">Мішок цементу (кг)</label>
+                                <input class="mcalc__input" id="bagSize" type="text" inputmode="decimal"
+                                    placeholder="50" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи розміри для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік: об’єм матеріалів (м³)</div>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік матеріалів бетону"></canvas>
+                            <div class="m-hintSmall">
+                                Візуалізація об’ємів цементу / піску / щебеню відповідно до суміші та сухого об’єму.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця матеріалів <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Завантажити таблицю (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Таблиця матеріалів бетону">
+                                    <thead>
+                                        <tr>
+                                            <th>Матеріал</th>
+                                            <th>Об’єм (м³)</th>
+                                            <th>Вага (кг)</th>
+                                            <th>Примітка</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Вартість матеріалів <span class="muted">(опціонально)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+                        
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceCementBag">Цемент: ціна за мішок</label>
+                                        <input id="priceCementBag" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="наприклад: 210" />
+                                        <div class="mcalc__hint">Мішок = як у полі “Мішок цементу (кг)”.</div>
+                                    </div>
+                        
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceSandM3">Пісок: ціна за м³</label>
+                                        <input id="priceSandM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="наприклад: 900" />
+                                    </div>
+                        
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceGravelM3">Щебінь: ціна за м³</label>
+                                        <input id="priceGravelM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="наприклад: 1200" />
+                                    </div>
+                        
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceWaterM3">Вода: ціна за м³ (опц.)</label>
+                                        <input id="priceWaterM3" class="mcalc__input" type="text" inputmode="decimal" placeholder="0" />
+                                        <div class="mcalc__hint">1 м³ = 1000 л.</div>
+                                    </div>
+                        
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Доставка (фіксовано)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal" placeholder="0" />
+                                    </div>
+                        
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePct">Запас/втрати, %</label>
+                                        <input id="wastePct" class="mcalc__input" type="text" inputmode="decimal" placeholder="5" />
+                                    </div>
+                        
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices" type="button">Зберегти ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices" type="button">Скинути ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost" type="button">Копіювати
+                                                вартість</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+                        
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Введи ціни, щоб побачити вартість.</div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                        <div class="m-navlinks">
+                            <a href="/construction/brick-calculator.html">Розрахуй кількість цегли</a>
+                            <a href="/construction/plaster-calculator.html">Розрахуй штукатурку</a>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Як користуватися калькулятором бетону</h2>
+            <p>
+                Цей калькулятор допомагає швидко оцінити <b>об’єм бетону (м³)</b> та кількість матеріалів для
+                замішування:
+                <b>цемент, пісок, щебінь і вода</b>. Він зручний для планування закупівель, попереднього бюджету та
+                перевірки
+                витрат матеріалів під різні типи елементів (плита, стіна, колона тощо).
+            </p>
+
+            <h2>Покрокова інструкція</h2>
+            <p><b>1) Обери “Форму”</b> — калькулятор застосує потрібну формулу об’єму.</p>
+            <p><b>2) Введи розміри в метрах</b> — довжина, ширина, висота/товщина або діаметр для круглої колони.</p>
+            <p><b>3) Обери суміш</b> (цемент:пісок:щебінь) — це розподіляє сухий об’єм між матеріалами.</p>
+            <p><b>4) Перевір “Коефіцієнт сухого об’єму”</b> (часто ~1.54) — він враховує пустоти та втрати при
+                змішуванні.</p>
+            <p><b>5) Вкажи пластичність</b> — це В/Ц (вода/цемент). Калькулятор сам порахує воду в літрах.</p>
+            <p><b>6) Натисни “Розрахувати”</b> — отримаєш об’єм бетону, KPI-результати, графік і таблицю матеріалів.</p>
+
+            <h2>Що означає Д×Ш×В / Т?</h2>
+            <p>
+                У підписах форм використовуються скорочення:
+            </p>
+            <ul>
+                <li><b>Д</b> — довжина (м): найбільший горизонтальний розмір.</li>
+                <li><b>Ш</b> — ширина (м): поперечний горизонтальний розмір.</li>
+                <li><b>В</b> — висота (м): вертикальний розмір (балки, стіни, колони).</li>
+                <li><b>Т</b> — товщина (м): коли елемент “плоский” (плита, подушка).</li>
+                <li><b>D</b> — діаметр (м): тільки для круглих колон.</li>
+            </ul>
+            <p>
+                Наприклад, <b>Д×Ш×Т</b> — це довжина × ширина × товщина,
+                а <b>Д×Ш×В</b> — довжина × ширина × висота.
+            </p>
+
+            <h2>Що означає “Форма” у калькуляторі</h2>
+            <p><b>Плита (Д×Ш×Т)</b> — горизонтальний елемент: підлоги, перекриття, доріжки, плити фундаменту.</p>
+            <p><b>Подушка/фундамент (Д×Ш×Т)</b> — основа під стіни/колони, ширша для розподілу навантаження на ґрунт.
+            </p>
+            <p><b>Балка (Д×Ш×В)</b> — горизонтальний несучий елемент між опорами.</p>
+            <p><b>Стіна (Д×В×Т)</b> — вертикальна конструкція (підвали, підпірні стіни).</p>
+            <p><b>Колона — прямокутна (Д×Ш×В)</b> — вертикальний елемент прямокутного перерізу.</p>
+            <p><b>Колона — кругла (D×В)</b> — циліндрична колона (об’єм = π × r² × висота).</p>
+
+            <h2>Як калькулятор рахує матеріали</h2>
+            <p>
+                Спочатку визначається <b>мокрий об’єм</b> за вашими розмірами. Потім він множиться на
+                <b>коефіцієнт сухого об’єму</b>, щоб оцінити реальну потребу сухих компонентів.
+                Далі сухий об’єм ділиться на цемент, пісок і щебінь за пропорцією суміші.
+            </p>
+            <p>
+                Вода визначається через <b>В/Ц</b> (вода/цемент):
+                вода (кг) ≈ цемент (кг) × В/Ц, а 1 кг води ≈ 1 літр.
+            </p>
+
+            <h2>Блок “Вартість матеріалів”</h2>
+            <p>
+                Якщо потрібно оцінити бюджет, відкрий блок <b>“Вартість матеріалів”</b> під калькулятором та введи ціни.
+                Найзрозуміліше для практики: цемент — ціна за мішок, пісок/щебінь — ціна за м³.
+                Калькулятор покаже загальну вартість і ціну за 1 м³ бетону.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>У яких одиницях вводити розміри?</h3>
+                <p>Вводьте розміри в метрах (м). Тоді результат буде у кубічних метрах (м³).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи потрібно вводити літри води?</h3>
+                <p>
+                    Ні. Ви задаєте <b>В/Ц</b> (коефіцієнт), а калькулятор сам порахує воду в літрах за кількістю
+                    цементу.
+                    Для простоти використовуйте “Пластичність бетону” (густий/стандартний/пластичний).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому сухий об’єм більший за мокрий?</h3>
+                <p>
+                    Сухі матеріали мають пустоти і частина об’єму “зникає” при змішуванні/ущільненні.
+                    Тому застосовують коефіцієнт (часто близько 1.54).
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Наскільки точний розрахунок?</h3>
+                <p>
+                    Це оцінка. Реальні витрати залежать від вологості піску, фракції щебеню, ущільнення, втрат на місці
+                    та конкретної технології замішування.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна порахувати кілька елементів?</h3>
+                <p>
+                    Так. Порахуйте кожен елемент окремо і підсумуйте. Або відкрийте таблицю й експортуйте її в Excel.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

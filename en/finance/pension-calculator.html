@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Retirement Calculator — savings, contributions, return, growth chart | CalcCore</title>
+    <meta name="description"
+        content="CalcCore retirement calculator: current age, retirement age, current savings, monthly contributions, expected annual return. Results: retirement amount, contributed vs earned, growth chart. USD/EUR conversion using NBU rates." />
+
+    <!-- Canonical (EN clean URL) -->
+    <link rel="canonical" href="https://calccore.net/en/finance/pension-calculator" />
+
+    <!-- hreflang (ABSOLUTE + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/pension-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/pension-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pension-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pension-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How does the retirement calculator estimate savings?",
+        "acceptedAnswer":{"@type":"Answer","text":"It uses a compound growth model: returns are applied to the current balance, which includes your starting savings, ongoing contributions, and accumulated returns."}
+      },
+      {
+        "@type":"Question",
+        "name":"What does “expected return” mean?",
+        "acceptedAnswer":{"@type":"Answer","text":"It is an assumed average annual growth rate used for projection. Actual investment performance may differ."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do monthly contributions affect the outcome?",
+        "acceptedAnswer":{"@type":"Answer","text":"Regular contributions increase invested capital and the compounding base, which can significantly raise the final amount over long periods."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does the calculator include inflation, taxes, or fees?",
+        "acceptedAnswer":{"@type":"Answer","text":"The base projection shows nominal growth based on the entered return rate. Inflation, taxes, and fees can affect real results and may need to be considered separately."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is starting early important?",
+        "acceptedAnswer":{"@type":"Answer","text":"More time allows compounding to work longer. Early contributions have more years to grow, so even smaller amounts can become substantial."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/pension-calculator#app",
+    "name":"Retirement Calculator",
+    "description":"Online retirement calculator: current age, retirement age, current savings, monthly contributions, and expected return. Shows projected savings, a growth chart, and a yearly table.",
+    "url":"https://calccore.net/en/finance/pension-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page cpension">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cpension" id="cpension">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Retirement Calculator</h1>
+                    <p class="mcalc__p">
+                        Estimate how much you can build by retirement: current savings, monthly contributions,
+                        and expected return. Shows final amount, contributed vs earned, and a growth chart.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
+                            NBU rate: loading…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter details</h2>
+                            <span class="mcalc__badge">Finance</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="ageNow">Current age</label>
+                                <input class="mcalc__input" id="ageNow" type="number" min="0" max="120" step="1"
+                                    placeholder="e.g., 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="ageRetire">Retirement age</label>
+                                <input class="mcalc__input" id="ageRetire" type="number" min="0" max="120" step="1"
+                                    placeholder="e.g., 60" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="savingsNow">Current savings</label>
+                                <input class="mcalc__input" id="savingsNow" type="text" inputmode="decimal"
+                                    placeholder="e.g., 200 000" />
+                                <div class="mcalc__hint">Base currency: ₴. You can switch the chart to USD/EUR using NBU
+                                    rates.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyContrib">Monthly contributions</label>
+                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
+                                    placeholder="e.g., 3 000" />
+                                <div class="mcalc__hint">Added at the beginning of each month.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualReturn">Expected return, %</label>
+                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
+                                    placeholder="e.g., 10" />
+                                <div class="mcalc__hint">Average annual return (smoothed monthly compounding model).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Used for year labels in the chart.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Enter ages, amount, and expected return.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Retirement savings growth</div>
+
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Retirement savings chart"></canvas>
+                            <div class="m-hintSmall">
+                                The line shows the end-of-year balance up to retirement.
+                            </div>
+                        </div>
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Yearly table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+                        
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Currency:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                        
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download CSV</button>
+                            </div>
+                        
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Retirement yearly table">
+                                    <thead>
+                                        <tr>
+                                            <th>Year</th>
+                                            <th>Age</th>
+                                            <th>Date</th>
+                                            <th>Contributed (₴)</th>
+                                            <th>Earned (₴)</th>
+                                            <th>Balance (₴)</th>
+                                            <th>Earned, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    <div class="m-divider"></div>
+    
+    <section class="m-seo">
+        <h2>How does the retirement calculator work?</h2>
+        <p>
+            The CalcCore retirement calculator estimates how much you could accumulate by retirement age.
+            It uses a <b>compound growth model</b>, where returns are applied to your current savings,
+            monthly contributions, and previously earned returns.
+        </p>
+        <p>
+            You enter your <b>current age</b>, <b>retirement age</b>, <b>current savings</b>,
+            <b>monthly contributions</b>, and <b>expected return</b>.
+            The calculator projects how your balance may grow year by year until retirement.
+        </p>
+    
+        <h2>Compound interest and long-term growth</h2>
+        <p>
+            Time is the key factor. The earlier you start saving, the stronger the effect of compounding:
+            returns generate additional returns over time.
+            Even small regular contributions can grow significantly over decades.
+        </p>
+    
+        <h2>What do the chart and yearly table show?</h2>
+        <p>
+            The chart displays retirement savings growth over time.
+            The yearly table shows the end-of-year balance, total contributions, and total earnings,
+            helping you understand how savings evolve.
+        </p>
+    
+        <h2>Why use a retirement calculator?</h2>
+        <p>
+            It helps with financial planning: you can see whether your current savings strategy
+            is enough to reach your goal and how changes in contributions or return rate affect the future result.
+        </p>
+    </section>
+    
+    <section class="m-faq">
+        <h2>FAQ</h2>
+    
+        <div class="m-faq-item">
+            <h3>Does the calculator guarantee my retirement amount?</h3>
+            <p>
+                No. It provides a projection based on an assumed return rate.
+                Real investment performance may vary, and fees or taxes can apply.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>What does “expected return” mean?</h3>
+            <p>
+                It is the average annual growth rate used to model long-term performance.
+                It represents an estimate, not a guaranteed rate.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>How do monthly contributions affect results?</h3>
+            <p>
+                Regular contributions increase the principal over time,
+                which increases the base for compound growth.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>Why is starting early important?</h3>
+            <p>
+                More time means compounding has longer to work.
+                Early investments can outperform larger contributions made later.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>Does this include inflation?</h3>
+            <p>
+                The base calculation shows nominal values.
+                To estimate real purchasing power, inflation should be considered separately.
+            </p>
+        </div>
+    </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

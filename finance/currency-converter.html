@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Конвертор валют НБУ онлайн — офіційний курс | CalcCore</title>
+    <meta name="description"
+        content="Конвертор валют CalcCore за офіційним курсом НБУ: USD, EUR, PLN та інші валюти. Авто-розрахунок, дата курсу, швидке копіювання результату." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/currency-converter" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/currency-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/currency-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/currency.css" />
+
+    <!-- JS -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/currency.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/currency-converter#app",
+    "name":"Конвертор валют НБУ",
+    "description":"Онлайн конвертор валют за офіційним курсом НБУ. Підтримує USD, EUR, PLN та інші валюти, показує дату курсу та виконує авто-розрахунок.",
+    "url":"https://calccore.net/finance/currency-converter",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+
+<body class="currency-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc cconv" id="cconv">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Конвертор валют НБУ</h1>
+                    <p class="ccalc__p">
+                        Офіційні курси Національного банку України. Обери валюту, введи суму — і отримай конвертацію.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT top line -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="cconv-date" id="rateDate" title="Дата офіційного курсу НБУ"></span>
+                    </div>
+
+                    <!-- LEFT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field cconv-full">
+                                <label class="ccalc__label" for="amount">Сума</label>
+                                <input class="ccalc__input" id="amount" placeholder="наприклад: 1000"
+                                    inputmode="decimal" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="fromCur">З валюти</label>
+                                <select class="ccalc__select" id="fromCur"></select>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="toCur">У валюту</label>
+                                <select class="ccalc__select" id="toCur"></select>
+                            </div>
+
+                            <div class="ccalc__field cconv-full cconv-actions-row">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnSwap">
+                                    ⇄ Поміняти місцями
+                                </button>
+                            
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">
+                                    Розрахувати
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__toast" id="cToast"></div>
+                    </div>
+
+                    <!-- RIGHT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="cResult">
+                            Введи суму та обери валюти.
+                        </div>
+
+                        <div class="cconv-details" id="cDetails" aria-live="polite"></div>
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn" type="button" id="btnReset">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Як працює конвертор валют НБУ?</h2>
+            <p>
+                Конвертор валют НБУ використовує офіційний курс Національного банку України для перерахунку суми з
+                однієї
+                валюти в іншу. Це зручно для фінансових розрахунків, планування покупок, поїздок та бухгалтерії.
+            </p>
+            <p>
+                Курс НБУ оновлюється за правилами публікації на сайті НБУ. У калькуляторі також відображається дата
+                курсу,
+                щоб ти розумів(ла), на який день він актуальний.
+            </p>
+
+            <h2>Що можна порахувати?</h2>
+            <ul>
+                <li>Конвертацію UAH ↔ USD/EUR/PLN та інших валют</li>
+                <li>Перерахунок суми в будь-яку доступну валюту зі списку</li>
+                <li>Швидке копіювання готового результату</li>
+            </ul>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Звідки береться курс?</h3>
+                <p>Курс завантажується з офіційного API НБУ (статистичний сервіс), який повертає список валют і їх курс
+                    до гривні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому дата курсу може бути “завтра”?</h3>
+                <p>НБУ публікує курс за регламентом: до 15:30 може бути курс на поточний робочий день, після 15:30 — на
+                    наступний робочий день.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що робити, якщо НБУ тимчасово не відкривається?</h3>
+                <p>Калькулятор спробує використати останні збережені курси з браузера (localStorage), якщо вони є.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+    
+</body>
+
+</html>

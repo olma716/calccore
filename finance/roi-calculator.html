@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор ROI інвестицій онлайн — дохідність, прибуток, графік | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор інвестицій ROI від CalcCore: сума інвестиції, очікувана дохідність, період, додаткові щомісячні внески. Результати: ROI%, чистий прибуток, підсумкова сума та графік росту. Пояснення і FAQ." />
+
+    <!-- Canonical (CLEAN URL) -->
+    <link rel="canonical" href="https://calccore.net/finance/roi-calculator" />
+
+    <!-- hreflang (FULL + CLEAN URLs) -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/roi-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/roi-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/roi-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/roi-calculator.js?v=20260209" defer></script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке ROI і як його рахувати?",
+        "acceptedAnswer":{"@type":"Answer","text":"ROI (Return on Investment) — це показник прибутковості інвестиції у відсотках. Зазвичай його рахують як (чистий прибуток / сума інвестиції) × 100%."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чим відрізняється ROI від прибутку?",
+        "acceptedAnswer":{"@type":"Answer","text":"Прибуток — це сума грошей, яку ви заробили. ROI показує прибутковість у відсотках від вкладеної суми, що зручно для порівняння різних інвестицій."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як впливають додаткові внески на результат?",
+        "acceptedAnswer":{"@type":"Answer","text":"Додаткові внески збільшують загальну суму вкладень і базу для зростання, тому підсумкова сума та прибуток можуть бути вищими. ROI при цьому залежить від співвідношення приросту до загальних внесків."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому результат може відрізнятися від реальних інвестицій?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор використовує спрощену модель із середньою очікуваною дохідністю. У реальності можуть бути комісії, податки, нерівномірна доходність та ризики, які змінюють результат."}
+      }
+    ]
+  }
+  </script>
+
+    <!-- WebApp Schema -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/finance/roi-calculator#app",
+    "name":"Калькулятор інвестицій (ROI)",
+    "description":"Онлайн калькулятор ROI: сума інвестиції, очікувана дохідність, період і додаткові внески. Показує ROI %, чистий прибуток та графік зростання.",
+    "url":"https://calccore.net/finance/roi-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page croi">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc croi" id="croi">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор інвестицій (ROI)</h1>
+                    <p class="mcalc__p">
+                        Оціни потенційний результат інвестиції: ROI %, чистий прибуток, підсумкова сума
+                        та графік росту з урахуванням додаткових внесків.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+
+                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
+                            Курс НБУ: завантаження…
+                        </span>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="investment">Сума інвестиції</label>
+                                <input class="mcalc__input" id="investment" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 100 000" />
+                                <div class="mcalc__hint">Базова валюта: ₴. У графіку можна перемкнути на USD/EUR за
+                                    курсом НБУ.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="annualReturn">Очікувана дохідність, %</label>
+                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 12" />
+                                <div class="mcalc__hint">Річна середня дохідність (модель з рівномірним нарахуванням).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="years">Період (роки)</label>
+                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
+                                    placeholder="наприклад: 10" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="monthlyContrib">Додаткові внески (щомісяця)</label>
+                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
+                                    placeholder="наприклад: 2 000" />
+                                <div class="mcalc__hint">Додаються на початку кожного місяця (DCA-сценарій).</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Дата старту</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                                <div class="mcalc__hint">Для підписів по роках у графіку.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">
+                            Введи суму інвестиції, дохідність та період.
+                        </div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік росту</div>
+
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік росту інвестиції"></canvas>
+                            <div class="m-hintSmall">
+                                Лінія показує баланс наприкінці кожного року (модель з щомісячним нарахуванням).
+                            </div>
+                        </div>
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця по роках <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+                        
+                            <div class="m-tools">
+                                <label class="m-curr">
+                                    Валюта:
+                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </label>
+                        
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Завантажити CSV</button>
+                            </div>
+                        
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Таблиця ROI по роках">
+                                    <thead>
+                                        <tr>
+                                            <th>Рік</th>
+                                            <th>Дата</th>
+                                            <th>Внесли (₴)</th>
+                                            <th>Профіт (₴)</th>
+                                            <th>Баланс (₴)</th>
+                                            <th>ROI, %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <!-- SEO -->
+        <section class="m-seo">
+            <h2>Що таке ROI і як працює калькулятор інвестицій?</h2>
+            <p>
+                <b>ROI (Return on Investment)</b> — це відсоток прибутковості інвестиції відносно вкладених коштів.
+                У спрощеному вигляді ROI показує, наскільки “виросла” ваша інвестиція: чим більший ROI — тим вища
+                віддача.
+            </p>
+            <p>
+                Цей калькулятор оцінює результат за моделлю <b>складного відсотка</b> з <b>щомісячним нарахуванням</b>
+                та
+                опційними <b>додатковими внесками</b> (DCA). Тобто сума зростає щомісяця на основі річної дохідності,
+                а внески збільшують базу, на яку нараховується дохід.
+            </p>
+
+            <h2>Що саме рахується?</h2>
+            <ul>
+                <li><b>Підсумкова сума</b> — скільки буде на рахунку наприкінці періоду.</li>
+                <li><b>Чистий прибуток</b> — різниця між підсумковою сумою та сумою всіх внесків.</li>
+                <li><b>ROI %</b> — прибуток у відсотках до внесених коштів: <b>(прибуток / внесли) × 100%</b>.</li>
+                <li><b>Графік росту</b> — динаміка балансу по роках для швидкої оцінки ефекту часу та внесків.</li>
+            </ul>
+
+            <h2>Про обмеження моделі</h2>
+            <p>
+                Калькулятор показує <b>математичну оцінку</b> за заданою середньою дохідністю. Реальні інвестиції мають
+                коливання, комісії, податки та нерівномірну прибутковість. Тому результат — це орієнтир для планування,
+                а не гарантія.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>ROI — це те саме, що річна дохідність?</h3>
+                <p>
+                    Ні. Річна дохідність — це ставка/очікуваний відсоток на рік, а ROI — підсумкова віддача за весь
+                    період
+                    відносно вкладених коштів.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як враховуються додаткові внески?</h3>
+                <p>
+                    Додаткові внески додаються на початку кожного місяця й далі “працюють” разом із капіталом.
+                    Це підсилює ефект складного відсотка.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому графік показує значення по роках, а не по місяцях?</h3>
+                <p>
+                    Річний графік зручніший для оцінки довгих періодів. Усередині моделі нарахування відбувається
+                    щомісяця,
+                    а для читабельності ми відображаємо “зріз” наприкінці кожного року.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи враховані комісії та податки?</h3>
+                <p>
+                    Ні. Це базовий ROI-розрахунок. Комісії/податки можуть суттєво змінювати результат, особливо на
+                    довгих горизонтах.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Результат може відрізнятися від брокера/банку — чому?</h3>
+                <p>
+                    Різниця можлива через нерівномірну дохідність, фактичні дні/дати внесків, округлення, комісії,
+                    валютні курси та податки.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

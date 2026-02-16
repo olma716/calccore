@@ -1,0 +1,391 @@
+/* =========================
+   Wheels калькулятор (scoped, like TCO)
+========================= */
+
+/* ===== Container ===== */
+.whl-page .container {
+    max-width: 1100px;
+}
+
+/* ===== Titlebar (як у TCO) ===== */
+.whl-titlebar {
+    background: linear-gradient(180deg, #283b69, #1f2f55);
+    color: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 25px rgba(16, 24, 40, 0.08);
+    margin: 10px auto 14px;
+}
+
+.whl-h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.whl-p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0.95;
+}
+
+/* ===== Shell ===== */
+.whl-shell {
+    margin: 0 auto 40px;
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(20, 30, 60, 0.06);
+}
+
+/* ===== Topbar ===== */
+.whl-topbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+/* ===== Mode switch (pill buttons) ===== */
+.whl-topbar .mode-switch {
+    display: inline-flex;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 999px;
+    border: 1px solid #e6e8ee;
+    background: #f6f8ff;
+}
+
+.whl-topbar .pill {
+    border: 1px solid transparent;
+    background: transparent;
+    color: #1f2f55;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.whl-topbar .pill:hover {
+    background: rgba(40, 59, 105, 0.06);
+}
+
+.whl-topbar .pill.active {
+    background: rgba(40, 59, 105, 0.92);
+    border-color: rgba(40, 59, 105, 0.92);
+    color: #fff;
+}
+
+/* ===== Auto toggle ===== */
+.whl-topbar .auto-toggle {
+    font-size: 13px;
+    font-weight: 900;
+    color: #111827;
+}
+
+.whl-topbar .auto-toggle input {
+    accent-color: #283b69;
+}
+
+/* ===== Grid ===== */
+.whl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+@media (max-width: 900px) {
+    .whl-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Boxes ===== */
+.whl-box {
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 14px;
+    background: #fbfcff;
+}
+
+.whl-box h2 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.whl-row3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .whl-row3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.whl-box label {
+    display: block;
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 6px;
+    color: #111827;
+}
+
+.whl-box input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    outline: none;
+}
+
+.whl-box input:focus {
+    border-color: rgba(40, 59, 105, 0.45);
+    box-shadow: 0 0 0 4px rgba(40, 59, 105, 0.1);
+}
+
+.whl-mini {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* ===== KPI ===== */
+.whl-kpi {
+    margin-top: 12px;
+    border-top: 1px dashed #d7dbea;
+    padding-top: 12px;
+}
+
+.whl-kpi .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .whl-kpi .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.whl-kpi .kpi {
+    border: 1px solid rgba(40, 59, 105, 0.16);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+}
+
+.whl-kpi .kpi-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: #6b7280;
+}
+
+.whl-kpi .kpi-value {
+    font-size: 18px;
+    font-weight: 900;
+    color: #111827;
+    margin-top: 4px;
+}
+
+/* ===== Actions (buttons like TCO) ===== */
+.whl-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.whl-btn {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Primary */
+.whl-btn:not(.whl-btn-ghost) {
+    background: rgba(40, 59, 105, 0.08);
+    border: 1px solid rgba(40, 59, 105, 0.35);
+    color: #1f2f55;
+}
+
+.whl-btn:not(.whl-btn-ghost):hover {
+    background: rgba(40, 59, 105, 0.14);
+}
+
+/* Ghost */
+.whl-btn-ghost {
+    background: #fff;
+    border: 1px solid #d4d7de;
+    color: #1f2f55;
+}
+
+.whl-btn-ghost:hover {
+    background: #f7f8fc;
+    border-color: #c7ccd6;
+}
+
+/* ===== Result ===== */
+.whl-result {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(40, 59, 105, .08), rgba(40, 59, 105, .03));
+    border: 1px solid rgba(40, 59, 105, .16);
+    color: #111827;
+}
+
+/* ===== Compare ===== */
+.whl-compare {
+    margin-top: 12px;
+}
+
+.compare-card {
+    border: 1px solid #e6e8ee;
+    border-radius: 16px;
+    padding: 14px;
+    background: #fff;
+}
+
+.compare-title {
+    font-weight: 900;
+    color: #1f2f55;
+    margin-bottom: 10px;
+}
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 900px) {
+    .compare-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.compare-item {
+    border: 1px solid rgba(40, 59, 105, .16);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fbfcff;
+}
+
+.compare-label {
+    font-size: 12px;
+    font-weight: 900;
+    color: #6b7280;
+}
+
+.compare-value {
+    font-size: 16px;
+    font-weight: 900;
+    color: #111827;
+}
+
+/* ===== Verdict ===== */
+.verdict-box {
+    margin-bottom: 12px;
+    padding: 14px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid #e6e8ee;
+}
+
+.verdict-box.ok {
+    border-left: 6px solid #22c55e;
+}
+
+.verdict-box.warn {
+    border-left: 6px solid #f59e0b;
+}
+
+.verdict-box.bad {
+    border-left: 6px solid #ef4444;
+}
+
+.verdict-title {
+    font-weight: 900;
+    margin-bottom: 6px;
+    color: #1f2f55;
+}
+
+.verdict-short {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.verdict-long,
+.verdict-hint,
+.verdict-seo {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+/* ===== Divider ===== */
+.divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 24px auto;
+    border: 0;
+    border-top: 2px dashed rgba(40, 59, 105, .35);
+}
+
+/* ===== SEO + FAQ (як у TCO) ===== */
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #223;
+    margin-bottom: 14px;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 6px;
+    color: #283b69;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}

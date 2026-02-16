@@ -1,0 +1,765 @@
+/* =========================
+   Credit Calculator (scoped)
+   only inside .ccredit / .ccalc
+========================= */
+
+.ccredit,
+.ccredit * {
+    box-sizing: border-box;
+}
+
+.ccredit {
+    --cc-card: #fff;
+    --cc-text: #222;
+    --cc-muted: #6b7280;
+    --cc-brand: #283b69;
+    --cc-brand2: #1f2f55;
+    --cc-border: #e6e8ef;
+    --cc-shadow: 0 10px 25px rgba(16, 24, 40, 0.08);
+    --cc-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cc-text);
+}
+
+/* Wrap */
+.ccredit .ccalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+/* Titlebar */
+.ccredit .ccalc__titlebar {
+    background: linear-gradient(180deg, var(--cc-brand), var(--cc-brand2));
+    color: #fff;
+    border-radius: var(--cc-radius);
+    padding: 16px;
+    box-shadow: var(--cc-shadow);
+    margin-bottom: 14px;
+}
+
+.ccredit .ccalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.ccredit .ccalc__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+/* Grid (same logic as converter FIX) */
+.ccredit .ccalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "top top"
+        "left right";
+    gap: 14px;
+    align-items: start;
+}
+
+.ccredit .ccalc__grid>.evc-topline {
+    grid-area: top;
+    margin: 0;
+    padding: 0 2px 6px;
+}
+
+.ccredit .ccalc__grid>.ccalc__card:first-of-type {
+    grid-area: left;
+}
+
+.ccredit .ccalc__grid>.ccalc__card:last-of-type {
+    grid-area: right;
+    margin-top: 0;
+}
+
+@media (max-width: 980px) {
+    .ccredit .ccalc__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "top"
+            "left"
+            "right";
+    }
+}
+
+/* Card */
+.ccredit .ccalc__card {
+    background: var(--cc-card);
+    border: 1px solid var(--cc-border);
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow);
+    padding: 14px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Section title */
+.ccredit .ccalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.ccredit .ccalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--cc-brand2);
+}
+
+.ccredit .ccalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Topline */
+.ccredit .evc-topline {
+    margin: 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ccredit .evc-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.ccredit .evc-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+.ccredit .cconv-date {
+    font-size: 12px;
+    font-weight: 900;
+    color: #1f2f55;
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .18);
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* Fields grid */
+.ccredit .ccalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .ccredit .ccalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ccredit .ccalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.ccredit .cconv-full {
+    grid-column: 1 / -1;
+}
+
+.ccredit .ccalc__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.ccredit .ccalc__input,
+.ccredit .ccalc__select {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.ccredit .ccalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.ccredit .ccalc__input:focus,
+.ccredit .ccalc__select:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    color: #111827;
+}
+
+.ccredit .ccalc__hint {
+    font-size: 12px;
+    color: var(--cc-muted);
+}
+
+/* Actions */
+.ccredit .ccalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ccredit .ccalc__btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.ccredit .ccalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+    transform: translateY(-1px);
+}
+
+.ccredit .ccalc__btn--primary {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+}
+
+.ccredit .ccalc__btn--primary:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+.ccredit .ccalc__btn--small {
+    height: 36px;
+    min-width: unset;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.ccredit .ccalc__mt10 {
+    margin-top: 10px;
+}
+
+/* Result box: same green "success" feel */
+.ccredit .ccalc__bigNumber {
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    border: 1px solid #bfe3cd;
+    border-radius: var(--cc-radius);
+    padding: 12px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, 0.10);
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+/* Placeholder text inside result */
+.ccredit .placeholder {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1f513a;
+}
+
+/* Toast */
+.ccredit .ccalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cc-muted);
+    min-height: 16px;
+}
+
+/* Schedule */
+.ccredit .ccredit-schedule {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+    /* щоб нічого не вилазило */
+}
+.ccredit .ccredit-schedule summary.ccredit-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 12px 16px;
+    /* трохи більше внутрішній відступ */
+    margin: 0;
+    /* ❗ прибирає виїзд */
+    border-radius: 0;
+    /* ❗ не дублюємо радіус */
+    border: none;
+    /* рамка вже у контейнера */
+
+    font-weight: 900;
+    cursor: pointer;
+    transition: background .18s ease, box-shadow .18s ease;
+
+    /* м’який червоний */
+    background: linear-gradient(180deg, #fdf3f3, #f7e6e6);
+    color: #7a3b3b;
+}
+.ccredit .ccredit-schedule summary {
+    cursor: pointer;
+    padding: 12px 12px;
+    list-style: none;
+    font-weight: 900;
+    color: var(--cc-brand2);
+    background: rgba(40, 59, 105, .06);
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.ccredit .ccredit-schedule summary::-webkit-details-marker {
+    display: none;
+}
+
+.ccredit .muted {
+    font-weight: 900;
+    color: rgba(75, 85, 99, .9);
+    font-size: 12px;
+}
+
+/* Schedule tools + table */
+.ccredit .schedule-tools {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px 0;
+    flex-wrap: wrap;
+}
+
+.ccredit .table-wrap {
+    overflow: auto;
+    padding: 10px 12px 12px;
+}
+
+.ccredit .table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+.ccredit .table th,
+.ccredit .table td {
+    text-align: left;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgba(40, 59, 105, .10);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.ccredit .table th {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, .95);
+    color: var(--cc-brand2);
+    font-weight: 900;
+}
+
+.ccredit .table td {
+    color: rgba(31, 47, 85, .95);
+}
+
+/* Divider + SEO (reuse from converter) */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+}
+
+.cc-seo {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p,
+.cc-seo li {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+.cc-seo ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+@media (max-width: 520px) {
+    .cc-seo h2 {
+        font-size: 18px;
+    }
+
+    .cc-seo p,
+    .cc-seo li {
+        font-size: 14px;
+    }
+}
+/* KPI всередині зеленого блоку */
+.ccredit .ccredit-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ccredit .ccredit-big {
+    font-size: 22px;
+    font-weight: 900;
+    color: #0f5132;
+}
+
+.ccredit .ccredit-sub {
+    font-size: 13px;
+    color: #1f513a;
+}
+
+
+.ccredit .ccredit-sum-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+}
+
+.ccredit .ccredit-schedule summary.ccredit-summary:hover {
+    background: linear-gradient(180deg, #f9eaea, #f2dada);
+    box-shadow: inset 0 0 0 1px rgba(122, 59, 59, 0.08);
+    transform: none;
+    /* ❗ прибрали підскакування */
+}
+
+/* Іконка "таблиця" — чистий CSS */
+.ccredit .ccredit-ico {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1px solid rgba(40, 59, 105, .25);
+    background:
+        linear-gradient(rgba(40, 59, 105, .18), rgba(40, 59, 105, .18)) 4px 6px/10px 1px no-repeat,
+        linear-gradient(rgba(40, 59, 105, .18), rgba(40, 59, 105, .18)) 4px 10px/10px 1px no-repeat,
+        linear-gradient(rgba(40, 59, 105, .18), rgba(40, 59, 105, .18)) 4px 14px/10px 1px no-repeat,
+        linear-gradient(rgba(40, 59, 105, .18), rgba(40, 59, 105, .18)) 6px 4px/1px 12px no-repeat;
+    background-color: rgba(255, 255, 255, .9);
+}
+
+/* Шеврон */
+.ccredit .ccredit-chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid rgba(31, 47, 85, .8);
+    border-bottom: 2px solid rgba(31, 47, 85, .8);
+    transform: rotate(45deg);
+    transition: transform .18s ease;
+    flex: 0 0 auto;
+}
+
+/* При відкритті details — шеврон догори */
+.ccredit details[open]>summary .ccredit-chevron {
+    transform: rotate(-135deg);
+}
+/* SUMMARY = кнопка графіка (ДУЖЕ м'який червоний) */
+.ccredit .ccredit-schedule summary.ccredit-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all .18s ease;
+
+    /* 🧁 М'ЯКИЙ ПАСТЕЛЬНИЙ */
+    background: linear-gradient(180deg, #fef6f6, #fbeeee);
+    border: 1px solid #f1d4d4;
+    color: #8a4b4b;
+}
+
+/* hover */
+.ccredit .ccredit-schedule summary.ccredit-summary:hover {
+    background: linear-gradient(180deg, #fdeeee, #f7dddd);
+    box-shadow: 0 6px 16px rgba(120, 60, 60, .10);
+}
+
+/* 🟢 КОЛИ ВІДКРИТО */
+.ccredit details[open]>summary.ccredit-summary {
+    background: linear-gradient(180deg, #ecf8f1, #def3e6);
+    border: 1px solid #bfe3cd;
+    color: #1f513a;
+    box-shadow: 0 6px 18px rgba(46, 125, 90, 0.12);
+}
+
+/* ліва частина */
+.ccredit .ccredit-sum-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ІКОНКА "ТАБЛИЦЯ" */
+.ccredit .ccredit-ico {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background:
+        linear-gradient(currentColor, currentColor) 4px 6px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 4px 10px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 4px 14px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 6px 4px/1px 12px no-repeat;
+    opacity: .85;
+}
+
+/* ШЕВРОН */
+.ccredit .ccredit-chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform .2s ease;
+}
+
+/* повертається при відкритті */
+.ccredit details[open]>summary .ccredit-chevron {
+    transform: rotate(-135deg);
+}
+/* ===== Detailed result blocks (inside #cDetails) ===== */
+.ccredit .cconv-details {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.ccredit .cconv-details:empty {
+    display: none;
+}
+
+/* KPI grid */
+.ccredit .ccredit-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .ccredit .ccredit-kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ccredit .ccredit-kpi {
+    border: 1px solid rgba(40, 59, 105, .10);
+    border-radius: 14px;
+    padding: 12px;
+    background: rgba(40, 59, 105, .04);
+}
+
+.ccredit .ccredit-kpi__k {
+    font-size: 12px;
+    font-weight: 900;
+    color: rgba(75, 85, 99, .95);
+    margin-bottom: 6px;
+}
+
+.ccredit .ccredit-kpi__v {
+    font-size: 18px;
+    font-weight: 900;
+    color: #1f2f55;
+    font-variant-numeric: tabular-nums;
+}
+
+.ccredit .ccredit-kpi__s {
+    margin-top: 6px;
+    font-size: 12px;
+    color: rgba(75, 85, 99, .92);
+}
+
+/* Summary block */
+.ccredit .ccredit-summary {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(40, 59, 105, .12);
+    background: rgba(40, 59, 105, .06);
+    color: #0b1b3f;
+}
+
+.ccredit .ccredit-summary b {
+    font-weight: 900;
+}
+/* Divider + SEO/FAQ (scoped like currency) */
+.ccredit .cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+}
+
+.ccredit .cc-seo,
+.ccredit .cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.ccredit .cc-seo h2,
+.ccredit .cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.ccredit .cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+.ccredit .cc-seo ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+.ccredit .cc-seo li {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #222;
+}
+
+/* FAQ cards like currency */
+.ccredit .cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(40, 59, 105, 0.10);
+}
+
+.ccredit .cc-faq-item h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: #283b69;
+    font-weight: 900;
+}
+
+.ccredit .cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 520px) {
+
+    .ccredit .cc-seo h2,
+    .ccredit .cc-faq h2 {
+        font-size: 18px;
+    }
+
+    .ccredit .cc-seo p,
+    .ccredit .cc-seo li {
+        font-size: 14px;
+    }
+
+    .ccredit .cc-faq-item {
+        padding: 14px;
+    }
+}
+body.ccredit {
+    outline: 8px solid #ff00ff !important;
+}
+/* Підказка в блоці результатів — тихіша */
+.ccredit .ccredit-summary .muted {
+    font-size: 12px;
+    opacity: 0.65;
+    font-weight: 600;
+}
+
+.ccredit .ccredit-summary div:last-child {
+    font-size: 12px;
+    opacity: 0.75;
+}
+.ccredit .ccredit-curpick {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ccredit .ccredit-curpick__label {
+    font-size: 12px;
+    font-weight: 900;
+    color: rgba(31, 47, 85, .85);
+    white-space: nowrap;
+}
+
+.ccredit .ccredit-curpick__select {
+    height: 36px;
+    /* як small кнопки */
+    border-radius: 10px;
+    font-size: 13px;
+    padding: 0 10px;
+}
+/* NBU rate badge */
+.ccredit .cconv-date {
+    font-size: 12px;
+    font-weight: 900;
+    color: #1f2f55;
+    background: linear-gradient(180deg, #eef3ff, #e2e9ff);
+    border: 1px solid rgba(40, 59, 105, .25);
+    padding: 6px 12px;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(40, 59, 105, .08);
+}

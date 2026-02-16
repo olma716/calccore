@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Loan Calculator — monthly payment, interest, schedule | CalcCore</title>
+    <meta name="description"
+        content="CalcCore loan calculator: monthly payment (annuity or declining), total interest, total cost, fees and repayment schedule. Auto-calculate, copy and CSV export." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/en/finance/credit-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/credit-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/credit-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#283b69" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/credit-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/credit-calculator.js?v=20260209" defer></script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/finance/credit-calculator#app",
+    "name":"Loan Calculator",
+    "description":"Online loan calculator: annuity or declining payment, fees, total interest, total cost and repayment schedule.",
+    "url":"https://calccore.net/en/finance/credit-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+
+<body class="credit-page ccredit">
+    <!-- Header via layout.js -->
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc ccredit" id="ccredit">
+            <div class="ccalc__wrap">
+
+                <!-- Titlebar -->
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Loan Calculator</h1>
+                    <p class="ccalc__p">
+                        Calculate your monthly payment, total interest and repayment schedule.
+                        Supports annuity and declining payments, plus fees and extra monthly costs.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+
+                    <!-- Topline -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calculate</span>
+                        </label>
+
+                        <span class="cconv-date" id="nbuBadge" title="Official NBU rate">
+                            NBU rate: loading...
+                        </span>
+                    </div>
+
+                    <!-- LEFT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter details</h2>
+                            <span class="ccalc__badge">Finance</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field cconv-full">
+                                <label class="ccalc__label" for="loanAmount">Loan amount</label>
+                                <input class="ccalc__input" id="loanAmount" type="text" inputmode="decimal"
+                                    placeholder="e.g. 200,000" />
+                                <div class="ccalc__hint">Enter the principal amount (add fees below if needed).</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="annualRate">Annual interest rate</label>
+                                <input class="ccalc__input" id="annualRate" type="text" inputmode="decimal"
+                                    placeholder="e.g. 36" />
+                                <div class="ccalc__hint">Annual rate in <b>%</b> (e.g. 36 means 36% per year).</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="termMonths">Term</label>
+                                <input class="ccalc__input" id="termMonths" type="number" min="1" step="1"
+                                    placeholder="e.g. 24" />
+                                <div class="ccalc__hint">Loan term in <b>months</b>.</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="paymentType">Payment type</label>
+                                <select class="ccalc__select" id="paymentType">
+                                    <option value="annuity" selected>Annuity (equal payments)</option>
+                                    <option value="diff">Declining (principal is equal)</option>
+                                </select>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="startDate">Start date</label>
+                                <input class="ccalc__input" id="startDate" type="date" />
+                                <div class="ccalc__hint">Used to generate payment dates in the schedule.</div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="oneTimeFee">One-time fee</label>
+                                <input class="ccalc__input" id="oneTimeFee" type="text" inputmode="decimal"
+                                    placeholder="e.g. 2,000" />
+                                <div class="ccalc__hint">A one-time fee in <b>UAH</b> paid when the loan is issued.
+                                </div>
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="monthlyFee">Monthly fee</label>
+                                <input class="ccalc__input" id="monthlyFee" type="text" inputmode="decimal"
+                                    placeholder="e.g. 150" />
+                                <div class="ccalc__hint">Extra charge in <b>UAH per month</b> (not interest).</div>
+                            </div>
+
+                            <div class="ccalc__field cconv-full">
+                                <label class="ccalc__label" for="insurance">Insurance / extra monthly costs</label>
+                                <input class="ccalc__input" id="insurance" type="text" inputmode="decimal"
+                                    placeholder="e.g. 0" />
+                                <div class="ccalc__hint">Optional — affects “payment with extras”.</div>
+                            </div>
+
+                            <div class="ccalc__field cconv-full">
+                                <div class="ccalc__actions ccalc__mt10">
+                                    <button class="ccalc__btn ccalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="ccalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="ccalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+
+                                <div class="ccalc__toast" id="cToast"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT card -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="cResult">
+                            Enter amount, rate and term.
+                        </div>
+
+                        <div class="cconv-details" id="cDetails" aria-live="polite"></div>
+
+                        <!-- Schedule -->
+                        <details class="ccredit-schedule" id="scheduleWrap">
+                            <summary class="ccredit-summary">
+                                <span class="ccredit-sum-left">
+                                    <span class="ccredit-ico" aria-hidden="true"></span>
+                                    Payment schedule <span class="muted">(open)</span>
+                                </span>
+                                <span class="ccredit-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="schedule-tools">
+                                <div class="ccredit-curpick">
+                                    <label class="ccredit-curpick__label" for="scheduleCurrency">Currency:</label>
+                                    <select class="ccalc__select ccredit-curpick__select" id="scheduleCurrency">
+                                        <option value="UAH" selected>UAH ₴</option>
+                                        <option value="USD">USD $</option>
+                                        <option value="EUR">EUR €</option>
+                                    </select>
+                                </div>
+
+                                <button class="ccalc__btn ccalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="ccalc__btn ccalc__btn--small" id="btnDownloadCSV" type="button">Download
+                                    CSV</button>
+                            </div>
+
+                            <div class="table-wrap">
+                                <table class="table" id="scheduleTable" aria-label="Payment schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Payment</th>
+                                            <th>Interest</th>
+                                            <th>Principal</th>
+                                            <th>Fees</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <!-- SEO -->
+        <section class="cc-seo">
+            <h2>How does the loan calculator work?</h2>
+            <p>
+                This calculator estimates the key loan metrics: monthly payment, total interest (overpayment),
+                total amount paid, and it builds a month-by-month repayment schedule.
+                It works for consumer loans, installments, auto loans and other products with regular payments.
+            </p>
+            <p>
+                Enter the loan amount, annual interest rate and the term in months. Then choose the payment type:
+                <b>annuity</b> or <b>declining</b>. If you have extra costs (one-time fee, monthly fee, insurance),
+                the calculator includes them so you can see a more realistic picture.
+            </p>
+
+            <h2>Annuity vs declining — what’s the difference?</h2>
+            <ul>
+                <li><b>Annuity</b> — the payment is almost the same each month. Early payments include more interest,
+                    later payments include more principal.</li>
+                <li><b>Declining</b> — principal is repaid evenly, interest decreases as the balance goes down,
+                    so monthly payments gradually become smaller.</li>
+            </ul>
+
+            <h2>What does it calculate?</h2>
+            <ul>
+                <li><b>Monthly payment</b> (based on the chosen method)</li>
+                <li><b>Payment with extras</b> — includes monthly fees/insurance if provided</li>
+                <li><b>Total interest</b> — interest paid over the whole term</li>
+                <li><b>Total paid</b> — total cost of the loan</li>
+                <li><b>Payment schedule</b> — breakdown of interest/principal/fees by month</li>
+            </ul>
+
+            <h2>Why may it differ from a bank’s numbers?</h2>
+            <p>
+                Banks may use different day-count conventions, rounding rules, fee policies, or payment dates.
+                This calculator provides a <b>mathematical estimate</b> based on your inputs,
+                but always verify the exact terms in your contract.
+            </p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>Should I enter the loan amount with fees or without?</h3>
+                <p>
+                    It’s best to enter the <b>principal only</b>. Add fees and insurance in the fields below —
+                    then you’ll see both the “base” payment and the payment including extras.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why isn’t the monthly payment constant for declining payments?</h3>
+                <p>
+                    Because interest is calculated on the <b>remaining balance</b>. Principal is repaid evenly,
+                    the balance decreases, so the interest part decreases too. That’s why early payments are higher
+                    and later payments are lower.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is “payment with extras”?</h3>
+                <p>
+                    It’s an estimated monthly payment including <b>monthly fees</b> and <b>insurance</b> (if provided).
+                    The one-time fee is included in total cost, but not added to every month.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I download the repayment schedule?</h3>
+                <p>
+                    Yes. Open “Payment schedule” and click <b>Download CSV</b>.
+                    You can open it in Excel/Google Sheets.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does it calculate APR (effective rate)?</h3>
+                <p>
+                    It shows the impact of fees via total cost, total interest and “payment with extras”.
+                    Full APR sometimes requires extra assumptions (exact day-count, bank methodology),
+                    but for planning this is usually sufficient.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

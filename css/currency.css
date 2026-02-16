@@ -1,0 +1,447 @@
+/* =========================
+   Currency Converter (scoped)
+   only inside .cconv / .ccalc
+========================= */
+
+.cconv,
+.cconv * {
+    box-sizing: border-box;
+}
+
+.cconv {
+    --cc-card: #fff;
+    --cc-text: #222;
+    --cc-muted: #6b7280;
+    --cc-brand: #283b69;
+    --cc-brand2: #1f2f55;
+    --cc-border: #e6e8ef;
+    --cc-shadow: 0 10px 25px rgba(16, 24, 40, 0.08);
+    --cc-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cc-text);
+}
+
+/* Wrap */
+.cconv .ccalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+/* Titlebar */
+.cconv .ccalc__titlebar {
+    background: linear-gradient(180deg, var(--cc-brand), var(--cc-brand2));
+    color: #fff;
+    border-radius: var(--cc-radius);
+    padding: 16px;
+    box-shadow: var(--cc-shadow);
+    margin-bottom: 14px;
+}
+
+.cconv .ccalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.cconv .ccalc__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+/* Grid */
+.cconv .ccalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+@media (max-width: 980px) {
+    .cconv .ccalc__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card */
+.cconv .ccalc__card {
+    background: var(--cc-card);
+    border: 1px solid var(--cc-border);
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow);
+    padding: 14px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Section title */
+.cconv .ccalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.cconv .ccalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--cc-brand2);
+}
+
+.cconv .ccalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Topline */
+.evc-topline {
+    margin: 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.evc-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.evc-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+.cconv-date {
+    font-size: 12px;
+    font-weight: 900;
+    color: #1f2f55;
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .18);
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* Layout positions */
+.cconv .ccalc__grid>.evc-topline {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    padding: 0 2px 6px;
+}
+
+.cconv .ccalc__grid>.ccalc__card:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.cconv .ccalc__grid>.ccalc__card:last-of-type {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin-top: 46px;
+    /* вирівняти по "Введи дані" */
+}
+
+@media (max-width: 980px) {
+
+    .cconv .ccalc__grid>.evc-topline,
+    .cconv .ccalc__grid>.ccalc__card:first-of-type,
+    .cconv .ccalc__grid>.ccalc__card:last-of-type {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 0;
+    }
+}
+
+/* Fields */
+.cconv .ccalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .cconv .ccalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cconv .ccalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.cconv-full {
+    grid-column: 1 / -1;
+}
+
+.cconv .ccalc__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.cconv .ccalc__input,
+.cconv .ccalc__select {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.cconv .ccalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.cconv .ccalc__input:focus,
+.cconv .ccalc__select:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    color: #111827;
+}
+
+/* Actions */
+.cconv .ccalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cconv .ccalc__btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.cconv .ccalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+    transform: translateY(-1px);
+}
+
+.cconv .ccalc__btn--primary {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+}
+
+.cconv .ccalc__btn--primary:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+/* Utilities */
+.cconv .ccalc__mt10 {
+    margin-top: 10px;
+}
+
+/* Result box (зелений як "успіх") */
+.cconv .ccalc__bigNumber {
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    border: 1px solid #bfe3cd;
+    border-radius: var(--cc-radius);
+    padding: 12px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, 0.10);
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+/* Details */
+.cconv-details {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.cconv-details:empty {
+    display: none;
+}
+
+/* Toast */
+.cconv .ccalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cc-muted);
+    min-height: 16px;
+}
+
+/* Divider + SEO/FAQ (як у TCO/percent) */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+}
+
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+.cc-seo ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+.cc-seo li {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #222;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(40, 59, 105, 0.10);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+    font-weight: 900;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+
+    .cc-seo h2,
+    .cc-faq h2 {
+        font-size: 18px;
+    }
+
+    .cc-seo p,
+    .cc-seo li {
+        font-size: 14px;
+    }
+
+    .cc-faq-item {
+        padding: 14px;
+    }
+}
+/* ===== FIX: ідеальне вирівнювання "Введи дані" та "Результат" ===== */
+
+/* Робимо зрозумілу сітку: верхній рядок (topline) на 2 колонки,
+   нижче — ліва і права картки в один ряд */
+.cconv .ccalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "top top"
+        "left right";
+    gap: 14px;
+    align-items: start;
+}
+
+/* Верхній рядок: чекбокс + дата */
+.cconv .ccalc__grid>.evc-topline {
+    grid-area: top;
+    margin: 0;
+    padding: 0 2px 6px;
+}
+
+/* Ліва картка "Введи дані" */
+.cconv .ccalc__grid>.ccalc__card:first-of-type {
+    grid-area: left;
+}
+
+/* Права картка "Результат" */
+.cconv .ccalc__grid>.ccalc__card:last-of-type {
+    grid-area: right;
+    margin-top: 0;
+    /* на всяк випадок прибираємо старі підкрутки */
+}
+
+/* Mobile: все в одну колонку */
+@media (max-width: 980px) {
+    .cconv .ccalc__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "top"
+            "left"
+            "right";
+    }
+}
+/* Row for Swap + Calc (override .ccalc__field column layout) */
+.cconv .cconv-actions-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.cconv .cconv-actions-row .ccalc__btn {
+    flex: 1;
+    min-width: 0;
+    /* перебиває min-width:160px */
+    width: auto;
+}
