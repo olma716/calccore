@@ -1,0 +1,811 @@
+/* =========================
+   Excavation Calculator (scoped)
+   only inside .cexcavation
+========================= */
+
+.cexcavation,
+.cexcavation * {
+    box-sizing: border-box;
+}
+
+.cexcavation {
+    --m-card: #fff;
+    --m-text: #222;
+    --m-muted: #6b7280;
+    --m-brand: #283b69;
+    --m-brand2: #1f2f55;
+    --m-border: #e6e8ef;
+    --m-shadow: 0 10px 25px rgba(16, 24, 40, .08);
+    --m-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--m-text);
+}
+
+.cexcavation .mcalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+.cexcavation .mcalc__titlebar {
+    background: linear-gradient(180deg, var(--m-brand), var(--m-brand2));
+    color: #fff;
+    border-radius: var(--m-radius);
+    padding: 16px;
+    box-shadow: var(--m-shadow);
+    margin-bottom: 14px;
+}
+
+.cexcavation .mcalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.cexcavation .mcalc__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+/* GRID */
+.cexcavation .mcalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "top top"
+        "left right";
+    gap: 14px;
+    align-items: start;
+}
+
+.cexcavation .mcalc__grid>.m-topline {
+    grid-area: top;
+    margin: 0;
+    padding: 0 2px 6px;
+}
+
+.cexcavation .mcalc__grid>.mcalc__card:first-of-type {
+    grid-area: left;
+}
+
+.cexcavation .mcalc__grid>.mcalc__card:last-of-type {
+    grid-area: right;
+    margin-top: 0;
+}
+
+@media (max-width:980px) {
+    .cexcavation .mcalc__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: "top" "left" "right";
+    }
+}
+
+/* CARDS / TITLES */
+.cexcavation .mcalc__card {
+    background: var(--m-card);
+    border: 1px solid var(--m-border);
+    border-radius: var(--m-radius);
+    box-shadow: var(--m-shadow);
+    padding: 14px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cexcavation .mcalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--m-border);
+}
+
+.cexcavation .mcalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--m-brand2);
+}
+
+.cexcavation .mcalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* topline */
+.cexcavation .m-topline {
+    margin: 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cexcavation .m-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.cexcavation .m-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+/* FORM */
+.cexcavation .mcalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width:680px) {
+    .cexcavation .mcalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cexcavation .mcalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.cexcavation .m-full {
+    grid-column: 1 / -1;
+}
+
+.cexcavation .mcalc__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.cexcavation .mcalc__input,
+.cexcavation .mcalc__select {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.cexcavation .mcalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.cexcavation .mcalc__input:focus,
+.cexcavation .mcalc__select:focus {
+    border-color: rgba(40, 59, 105, .55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    color: #111827;
+}
+
+.cexcavation .mcalc__hint {
+    font-size: 12px;
+    color: var(--m-muted);
+}
+
+/* Buttons */
+.cexcavation .mcalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cexcavation .mcalc__btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.cexcavation .mcalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 6px 16px rgba(31, 47, 85, .12);
+    transform: none;
+}
+
+.cexcavation .mcalc__btn--primary {
+    background: rgba(40, 59, 105, .08);
+    border: 1px solid rgba(40, 59, 105, .35);
+}
+
+.cexcavation .mcalc__btn--primary:hover {
+    background: rgba(40, 59, 105, .14);
+}
+
+.cexcavation .mcalc__btn--small {
+    height: 36px;
+    min-width: unset;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.cexcavation .m-mt10 {
+    margin-top: 10px;
+}
+
+/* RESULTS / KPI */
+.cexcavation .mcalc__bigNumber {
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    border: 1px solid #bfe3cd;
+    border-radius: var(--m-radius);
+    padding: 12px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, .10);
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+.cexcavation .m-details {
+    margin-top: 12px;
+    border: 1px solid var(--m-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.cexcavation .m-details:empty {
+    display: none;
+}
+
+.cexcavation .m-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width:680px) {
+    .cexcavation .m-kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cexcavation .m-kpi {
+    border: 1px solid rgba(40, 59, 105, .10);
+    border-radius: 14px;
+    padding: 12px;
+    background: rgba(40, 59, 105, .04);
+}
+
+.cexcavation .m-kpi__k {
+    font-size: 12px;
+    font-weight: 900;
+    color: rgba(75, 85, 99, .95);
+    margin-bottom: 6px;
+}
+
+.cexcavation .m-kpi__v {
+    font-size: 18px;
+    font-weight: 900;
+    color: #1f2f55;
+    font-variant-numeric: tabular-nums;
+}
+
+.cexcavation .m-kpi__s {
+    margin-top: 6px;
+    font-size: 12px;
+    color: rgba(75, 85, 99, .92);
+}
+
+.cexcavation .m-summary {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(40, 59, 105, .12);
+    background: rgba(40, 59, 105, .06);
+    color: #0b1b3f;
+}
+
+.cexcavation .m-hintSmall {
+    margin-top: 6px;
+    font-size: 11px;
+    color: rgba(75, 85, 99, .88);
+    line-height: 1.45;
+}
+
+.cexcavation .mcalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--m-muted);
+    min-height: 16px;
+}
+
+/* CHART */
+.cexcavation .m-chart {
+    margin-top: 12px;
+    border: 1px solid var(--m-border);
+    border-radius: 14px;
+    background: #fff;
+    padding: 12px;
+}
+
+.cexcavation .m-chart__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.cexcavation .m-chart__title {
+    font-weight: 900;
+    color: #1f2f55;
+    font-size: 13px;
+}
+
+.cexcavation canvas {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(40, 59, 105, .10);
+    background: rgba(40, 59, 105, .02);
+}
+
+/* DETAILS / TABLE */
+.cexcavation .m-schedule {
+    margin-top: 12px;
+    border: 1px solid var(--m-border);
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.cexcavation .m-schedule summary.m-sum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    font-weight: 900;
+    cursor: pointer;
+    list-style: none;
+    transition: all .18s ease;
+    background: linear-gradient(180deg, #fff5f5, #faeaea);
+    border-bottom: 1px solid rgba(231, 188, 188, .85);
+    color: #6b3a3a;
+    margin: 10px 12px 12px;
+    border: 1px solid rgba(231, 188, 188, .85);
+    border-radius: 14px;
+}
+
+.cexcavation .m-schedule summary::-webkit-details-marker {
+    display: none;
+}
+
+.cexcavation details[open]>summary.m-sum {
+    background: linear-gradient(180deg, #e9f7ef, #dff4e8);
+    border: 1px solid #bfe3cd;
+    color: #1f513a;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, .14);
+}
+
+.cexcavation .m-tools {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.cexcavation .m-tablewrap {
+    overflow: auto;
+    padding: 0 12px 12px;
+}
+
+.cexcavation .m-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+.cexcavation .m-table th,
+.cexcavation .m-table td {
+    text-align: left;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgba(40, 59, 105, .10);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.cexcavation .m-table th {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, .95);
+    color: var(--m-brand2);
+    font-weight: 900;
+}
+
+.cexcavation .m-table td {
+    color: rgba(31, 47, 85, .95);
+}
+
+.cexcavation .m-sum-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cexcavation .muted {
+    font-weight: 900;
+    color: rgba(75, 85, 99, .85);
+    font-size: 12px;
+}
+
+.cexcavation .m-ico {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background:
+        linear-gradient(currentColor, currentColor) 4px 6px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 4px 10px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 4px 14px/10px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) 6px 4px/1px 12px no-repeat;
+    opacity: .85;
+}
+
+.cexcavation .m-chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform .2s ease;
+}
+
+.cexcavation details[open]>summary .m-chevron {
+    transform: rotate(-135deg);
+}
+
+/* COST GRID */
+.cexcavation .m-costgrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+    padding: 0 12px 12px;
+}
+
+@media (max-width:680px) {
+    .cexcavation .m-costgrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Divider + SEO/FAQ */
+.cexcavation .m-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, .35);
+}
+
+.cexcavation .m-seo,
+.cexcavation .m-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cexcavation .m-seo h2,
+.cexcavation .m-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cexcavation .m-seo p,
+.cexcavation .m-seo li {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+.cexcavation .m-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+    border: 1px solid rgba(40, 59, 105, .10);
+}
+
+.cexcavation .m-faq-item h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: #283b69;
+    font-weight: 900;
+}
+
+.cexcavation .m-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width:520px) {
+
+    .cexcavation .m-seo h2,
+    .cexcavation .m-faq h2 {
+        font-size: 18px;
+    }
+
+    .cexcavation .m-seo p,
+    .cexcavation .m-seo li {
+        font-size: 14px;
+    }
+
+    .cexcavation .m-faq-item {
+        padding: 14px;
+    }
+}
+
+/* =========================
+   Highlight "Режим" (mode)
+   soft yellow like Google AI button
+========================= */
+
+.cexcavation #mode {
+    border-color: rgba(251, 191, 36, .25);
+    background: linear-gradient(180deg,
+            rgba(255, 253, 247, 1),
+            rgba(255, 248, 220, .35));
+    box-shadow:
+        0 6px 18px rgba(251, 191, 36, .06);
+}
+
+.cexcavation #mode:hover {
+    border-color: rgba(251, 191, 36, .35);
+    box-shadow:
+        0 8px 22px rgba(251, 191, 36, .10);
+}
+
+.cexcavation #mode:focus {
+    border-color: rgba(251, 191, 36, .45);
+    box-shadow:
+        0 0 0 3px rgba(251, 191, 36, .10),
+        0 10px 24px rgba(251, 191, 36, .12);
+}
+
+.cexcavation label[for="mode"] {
+    color: #8a4b00;
+}
+
+/* ===== Bottom links under RESULT (3 green buttons) ===== */
+.cexcavation .m-navlinks {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.cexcavation .m-navlinks a {
+    flex: 1;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 6px 10px;
+    border-radius: 12px;
+
+    border: 1px solid #9ad8b1;
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    color: #1f513a;
+
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 1.15;
+    text-decoration: none;
+
+    white-space: normal;
+}
+
+.cexcavation .m-navlinks a:hover {
+    border-color: #7ecb9b;
+    box-shadow: 0 8px 18px rgba(46, 125, 90, .12);
+}
+
+@media (max-width:520px) {
+    .cexcavation .m-navlinks {
+        flex-direction: column;
+    }
+}
+/* KPI GRID */
+.m-kpis,
+#mDetails .m-kpis,
+#kpiGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+/* KPI CARD */
+.m-kpi {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.m-kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* LABEL */
+.m-kpi__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+/* VALUE */
+.m-kpi__value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+}
+/* =========================
+   SEO BLOCK (scoped)
+========================= */
+
+.cexcavation .m-seo-block {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 0 40px;
+}
+
+.cexcavation .m-seo {
+    background: var(--m-card);
+    border: 1px solid var(--m-border);
+    border-radius: var(--m-radius);
+    box-shadow: var(--m-shadow);
+    padding: 20px;
+}
+
+/* Заголовки */
+.cexcavation .m-seo h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--m-brand2);
+    margin: 24px 0 12px;
+}
+
+.cexcavation .m-seo h2:first-child {
+    margin-top: 0;
+}
+
+/* Текст */
+.cexcavation .m-seo p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #374151;
+    margin-bottom: 14px;
+}
+
+/* Список */
+.cexcavation .m-seo ul {
+    padding-left: 18px;
+    margin-bottom: 16px;
+}
+
+.cexcavation .m-seo li {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+/* Формули */
+.cexcavation .m-seo__formulas {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cexcavation .m-seo__formula {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(40, 59, 105, .12);
+    background: rgba(40, 59, 105, .04);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #1f2f55;
+}
+
+/* FAQ */
+.cexcavation .m-seo__faq {
+    margin-top: 14px;
+}
+
+.cexcavation .m-seo__faq-item {
+    border: 1px solid var(--m-border);
+    border-radius: 14px;
+    padding: 14px;
+    background: #fff;
+    margin-bottom: 12px;
+    transition: box-shadow .18s ease, transform .18s ease;
+}
+
+.cexcavation .m-seo__faq-item:hover {
+    box-shadow: 0 6px 18px rgba(31, 47, 85, .08);
+    transform: translateY(-2px);
+}
+
+.cexcavation .m-seo__faq-item h3 {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--m-brand2);
+    margin: 0 0 6px;
+}
+
+.cexcavation .m-seo__faq-item p {
+    font-size: 13px;
+    margin: 0;
+    color: #4b5563;
+}
+
+/* Responsive */
+@media (max-width:680px) {
+    .cexcavation .m-seo {
+        padding: 16px;
+    }
+
+    .cexcavation .m-seo h2 {
+        font-size: 16px;
+    }
+
+    .cexcavation .m-seo p,
+    .cexcavation .m-seo li {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>калькулятор об'єму земляних робіт — об’єм грунту | CalcCore</title>
+    <meta name="description"
+        content="CalcCore калькулятор виїмки ґрунту: об’єм траншеї/котловану/площі/вручну, перекоп, розпушення, рейси та тоннаж. Є графік, таблиця, копіювання та CSV (Excel)." />
+
+    <link rel="canonical" href="https://calccore.net/construction/excavation-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/excavation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/excavation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/excavation-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/excavation-calculator.js?v=20260217" defer></script>
+</head>
+
+<body class="credit-page cexcavation">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cexcavation" id="cexcavation">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1" data-i18n="excavation.h1">Калькулятор об'єму земляних робіт</h1>
+                    <p class="mcalc__p" data-i18n="excavation.subtitle">
+                        Розрахунок об’єму грунту: траншея/котлован/площа/вручну, перекоп, розпушення, рейси і тоннаж.
+                        Є графік, таблиця, копіювання та CSV (Excel).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span data-i18n="excavation.auto">Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="excavation.input_title">Введи дані</h2>
+                            <span class="mcalc__badge">Будівництво</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <!-- MODE -->
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="mode" data-i18n="excavation.mode_label">Режим</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="trench" selected data-i18n="excavation.mode_trench">Траншея (Д×Ш×Г)
+                                    </option>
+                                    <option value="pit" data-i18n="excavation.mode_pit">Котлован (Д×Ш×Г)</option>
+                                    <option value="area" data-i18n="excavation.mode_area">Площа × глибина</option>
+                                    <option value="custom" data-i18n="excavation.mode_custom">Об’єм вручну (м³)</option>
+                                </select>
+                                <div class="mcalc__hint" data-i18n="excavation.mode_hint">
+                                    Обери режим — поля нижче зміняться.
+                                </div>
+                            </div>
+
+                            <!-- Dimensions -->
+                            <div class="mcalc__field" id="lengthWrap">
+                                <label class="mcalc__label" for="length" data-i18n="excavation.length_label">Довжина
+                                    (м)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="напр.: 12" />
+                            </div>
+
+                            <div class="mcalc__field" id="widthWrap">
+                                <label class="mcalc__label" for="width" data-i18n="excavation.width_label">Ширина
+                                    (м)</label>
+                                <input class="mcalc__input" id="width" type="text" inputmode="decimal"
+                                    placeholder="напр.: 0.6" />
+                            </div>
+
+                            <div class="mcalc__field" id="depthWrap">
+                                <label class="mcalc__label" for="depth" data-i18n="excavation.depth_label">Глибина
+                                    (м)</label>
+                                <input class="mcalc__input" id="depth" type="text" inputmode="decimal"
+                                    placeholder="напр.: 1.2" />
+                                <div class="mcalc__hint" data-i18n="excavation.depth_hint">Середня глибина.</div>
+                            </div>
+
+                            <!-- Area mode -->
+                            <div class="mcalc__field" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area" data-i18n="excavation.area_label">Площа
+                                    (м²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="напр.: 30" />
+                            </div>
+
+                            <!-- Custom volume -->
+                            <div class="mcalc__field" id="customWrap" style="display:none;">
+                                <label class="mcalc__label" for="customVol" data-i18n="excavation.custom_label">Об’єм
+                                    (м³)</label>
+                                <input class="mcalc__input" id="customVol" type="text" inputmode="decimal"
+                                    placeholder="напр.: 18" />
+                            </div>
+
+                            <!-- EXTRA -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="overdigPct"
+                                    data-i18n="excavation.overdig_label">Перекоп, % (опц.)</label>
+                                <input class="mcalc__input" id="overdigPct" type="text" inputmode="decimal"
+                                    placeholder="5" />
+                                <div class="mcalc__hint" data-i18n="excavation.overdig_hint">Запас на
+                                    нерівності/неточності.</div>
+                            </div>
+
+                        <!-- Soil preset -->
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="soilPreset">Тип ґрунту (задає розпушення і густину)</label>
+                            <select id="soilPreset" class="mcalc__select">
+                                <option value="sand" selected>Пісок</option>
+                                <option value="loam">Суглинок</option>
+                                <option value="clay">Глина</option>
+                                <option value="chernozem">Чорнозем</option>
+                                <option value="gravel">Щебінь / гравій</option>
+                                <option value="custom">Вручну (свій % та густина)</option>
+                            </select>
+                            <div class="mcalc__hint">Автоматично підставляє розпушення (%) та густину (т/м³). Для “вручну” можна редагувати.
+                            </div>
+                        </div>
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="bulkingPct">Розпушення, %</label>
+                            <input class="mcalc__input" id="bulkingPct" type="text" inputmode="decimal" placeholder="25" />
+                        </div>
+                        
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="densityT">Густина (т/м³) (опц.)</label>
+                            <input class="mcalc__input" id="densityT" type="text" inputmode="decimal" placeholder="1.6" />
+                        </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="truckCap" data-i18n="excavation.truck_label">Місткість
+                                    машини (м³) (опц.)</label>
+                                <input class="mcalc__input" id="truckCap" type="text" inputmode="decimal"
+                                    placeholder="10" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button"
+                                        data-i18n="excavation.btn_calc">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button"
+                                        data-i18n="excavation.btn_reset">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button"
+                                        data-i18n="excavation.btn_copy">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="excavation.result_title">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult" data-i18n="excavation.result_enter">
+                            Введи дані для розрахунку.
+                        </div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title" data-i18n="excavation.chart_title">Графік</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="Графік виїмки ґрунту"></canvas>
+                            <div class="m-hintSmall" data-i18n="excavation.chart_hint">
+                                Візуалізація основних значень.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="excavation.table_title">Таблиця</span>
+                                    <span class="muted" data-i18n="excavation.table_open">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button"
+                                    data-i18n="excavation.btn_copy_table">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button"
+                                    data-i18n="excavation.btn_csv">📄 Завантажити (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Таблиця виїмки ґрунту">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n="excavation.th_item">Позиція</th>
+                                            <th data-i18n="excavation.th_qty">К-сть</th>
+                                            <th data-i18n="excavation.th_unit">Одиниця</th>
+                                            <th data-i18n="excavation.th_note">Примітка</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="excavation.cost_title">Вартість</span>
+                                    <span class="muted" data-i18n="excavation.cost_opt">(опційно)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceExcPerM3"
+                                            data-i18n="excavation.price_exc">Земляні роботи: ціна за 1 м³</label>
+                                        <input id="priceExcPerM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="напр.: 180" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceHaulPerM3"
+                                            data-i18n="excavation.price_haul">Вивіз/утилізація: ціна за 1 м³</label>
+                                        <input id="priceHaulPerM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="напр.: 220" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceTrip"
+                                            data-i18n="excavation.price_trip">Машина: ціна за рейс (опц.)</label>
+                                        <input id="priceTrip" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                        <div class="mcalc__hint" data-i18n="excavation.price_trip_hint">Працює, якщо
+                                            задана місткість машини.</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery"
+                                            data-i18n="excavation.delivery">Додатково (фікс.)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost"
+                                            data-i18n="excavation.waste_cost">Запас, % (для вартості)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button" data-i18n="excavation.btn_save_prices">Зберегти
+                                                ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button" data-i18n="excavation.btn_reset_prices">Скинути
+                                                ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost" type="button"
+                                                data-i18n="excavation.btn_copy_cost">Копіювати вартість</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal" data-i18n="excavation.cost_enter">
+                                            Введи ціни, щоб побачити вартість.
+                                        </div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/construction/plaster-calculator.html">Калькулятор
+                                штукатурки</a>
+                            <a class="mcalc__btn" href="/construction/concrete-calculator.html">Калькулятор бетону</a>
+                            <a class="mcalc__btn" href="/construction/brick-calculator.html">Калькулятор цегли</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo-block">
+            <div class="m-seo">
+        
+                <h2 class="m-seo__title">
+                    Що таке калькулятор об’єму земляних робіт?
+                </h2>
+        
+                <p>
+                    Калькулятор об’єму земляних робіт — це онлайн інструмент для точного
+                    розрахунку кількості ґрунту при копанні траншей, котлованів або плануванні
+                    території. Він дозволяє швидко визначити об’єм виїмки, розпушений об’єм,
+                    тоннаж та кількість рейсів самоскида.
+                </p>
+        
+                <h2 class="m-seo__title">
+                    Для чого потрібен цей калькулятор?
+                </h2>
+        
+                <ul class="m-seo__list">
+                    <li>Розрахунок траншей під фундамент</li>
+                    <li>Планування котловану</li>
+                    <li>Визначення кількості ґрунту для вивезення</li>
+                    <li>Розрахунок тоннажу для транспортування</li>
+                    <li>Оцінка вартості земляних робіт</li>
+                </ul>
+        
+                <h2 class="m-seo__title">
+                    Як виконується розрахунок?
+                </h2>
+        
+                <div class="m-seo__formulas">
+                    <div class="m-seo__formula">
+                        <strong>1. Геометричний об’єм:</strong><br>
+                        V = Д × Ш × Г
+                    </div>
+        
+                    <div class="m-seo__formula">
+                        <strong>2. Об’єм з перекопом:</strong><br>
+                        V₁ = V × (1 + % перекопу / 100)
+                    </div>
+        
+                    <div class="m-seo__formula">
+                        <strong>3. Розпушений об’єм:</strong><br>
+                        V₂ = V₁ × (1 + % розпушення / 100)
+                    </div>
+        
+                    <div class="m-seo__formula">
+                        <strong>4. Тоннаж:</strong><br>
+                        T = V₂ × густина (т/м³)
+                    </div>
+        
+                    <div class="m-seo__formula">
+                        <strong>5. Кількість рейсів:</strong><br>
+                        R = V₂ / місткість машини
+                    </div>
+                </div>
+        
+                <h2 class="m-seo__title">Часті запитання</h2>
+        
+                <div class="m-seo__faq">
+        
+                    <div class="m-seo__faq-item">
+                        <h3>Чим відрізняється об’єм у ґрунті від розпушеного?</h3>
+                        <p>
+                            Об’єм у ґрунті — це геометричний розрахунок у природному стані.
+                            Розпушений об’єм більший, тому що після копання ґрунт збільшується.
+                        </p>
+                    </div>
+        
+                    <div class="m-seo__faq-item">
+                        <h3>Який відсоток розпушення використовувати?</h3>
+                        <p>
+                            Пісок ≈ 10–15%, суглинок ≈ 15–25%, глина ≈ 20–30%.
+                            Калькулятор автоматично підставляє середні значення.
+                        </p>
+                    </div>
+        
+                    <div class="m-seo__faq-item">
+                        <h3>Як порахувати кількість машин?</h3>
+                        <p>
+                            Потрібно вказати місткість самоскида в м³.
+                            Калькулятор автоматично округлює результат у більшу сторону.
+                        </p>
+                    </div>
+        
+                    <div class="m-seo__faq-item">
+                        <h3>Чи враховується запас на неточності?</h3>
+                        <p>
+                            Так, для цього використовується поле “Перекоп, %”.
+                            Воно додає резерв на нерівності або похибки вимірювання.
+                        </p>
+                    </div>
+        
+                </div>
+        
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

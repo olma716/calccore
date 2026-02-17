@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Earthworks Volume Calculator — Soil volume | CalcCore</title>
+    <meta name="description"
+        content="CalcCore earthworks volume calculator: trench/pit/area/manual volume, overdig, bulking, truck trips and tonnage. Includes chart, table, copy and CSV (Excel)." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/excavation-calculator" />
+
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/excavation-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/excavation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/excavation-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/excavation-calculator.js?v=20260217" defer></script>
+</head>
+
+<body class="credit-page cexcavation">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cexcavation" id="cexcavation">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1" data-i18n="excavation.h1">Earthworks Volume Calculator</h1>
+                    <p class="mcalc__p" data-i18n="excavation.subtitle">
+                        Calculate soil volume: trench/pit/area/manual input, overdig, bulking, truck trips and tonnage.
+                        Includes chart, table, copy and CSV (Excel).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span data-i18n="excavation.auto">Auto calculation</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="excavation.input_title">Enter data</h2>
+                            <span class="mcalc__badge" data-i18n="excavation.badge_left">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <!-- MODE -->
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="mode" data-i18n="excavation.mode_label">Mode</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="trench" selected data-i18n="excavation.mode_trench">Trench (L×W×D)
+                                    </option>
+                                    <option value="pit" data-i18n="excavation.mode_pit">Pit (L×W×D)</option>
+                                    <option value="area" data-i18n="excavation.mode_area">Area × depth</option>
+                                    <option value="custom" data-i18n="excavation.mode_custom">Manual volume (m³)
+                                    </option>
+                                </select>
+                                <div class="mcalc__hint" data-i18n="excavation.mode_hint">
+                                    Choose a mode — the fields below will adapt.
+                                </div>
+                            </div>
+
+                            <!-- Dimensions -->
+                            <div class="mcalc__field" id="lengthWrap">
+                                <label class="mcalc__label" for="length" data-i18n="excavation.length_label">Length
+                                    (m)</label>
+                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
+                                    placeholder="e.g. 12" />
+                            </div>
+
+                            <div class="mcalc__field" id="widthWrap">
+                                <label class="mcalc__label" for="width" data-i18n="excavation.width_label">Width
+                                    (m)</label>
+                                <input class="mcalc__input" id="width" type="text" inputmode="decimal"
+                                    placeholder="e.g. 0.6" />
+                            </div>
+
+                            <div class="mcalc__field" id="depthWrap">
+                                <label class="mcalc__label" for="depth" data-i18n="excavation.depth_label">Depth
+                                    (m)</label>
+                                <input class="mcalc__input" id="depth" type="text" inputmode="decimal"
+                                    placeholder="e.g. 1.2" />
+                                <div class="mcalc__hint" data-i18n="excavation.depth_hint">Average depth.</div>
+                            </div>
+
+                            <!-- Area mode -->
+                            <div class="mcalc__field" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area" data-i18n="excavation.area_label">Area
+                                    (m²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g. 30" />
+                            </div>
+
+                            <!-- Custom volume -->
+                            <div class="mcalc__field" id="customWrap" style="display:none;">
+                                <label class="mcalc__label" for="customVol" data-i18n="excavation.custom_label">Volume
+                                    (m³)</label>
+                                <input class="mcalc__input" id="customVol" type="text" inputmode="decimal"
+                                    placeholder="e.g. 18" />
+                            </div>
+
+                            <!-- Overdig -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="overdigPct"
+                                    data-i18n="excavation.overdig_label">Overdig, % (opt.)</label>
+                                <input class="mcalc__input" id="overdigPct" type="text" inputmode="decimal"
+                                    placeholder="5" />
+                                <div class="mcalc__hint" data-i18n="excavation.overdig_hint">Extra for unevenness /
+                                    tolerance.</div>
+                            </div>
+
+                            <!-- Soil preset -->
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="soilPreset" data-i18n="excavation.soil_label">Soil
+                                    type</label>
+                                <select id="soilPreset" class="mcalc__select">
+                                    <option value="sand" selected data-i18n="excavation.soil_sand">Sand</option>
+                                    <option value="loam" data-i18n="excavation.soil_loam">Loam</option>
+                                    <option value="clay" data-i18n="excavation.soil_clay">Clay</option>
+                                    <option value="chernozem" data-i18n="excavation.soil_chernozem">Chernozem</option>
+                                    <option value="gravel" data-i18n="excavation.soil_gravel">Gravel / crushed stone
+                                    </option>
+                                    <option value="custom" data-i18n="excavation.soil_custom">Custom (manual)</option>
+                                </select>
+                                <div class="mcalc__hint" data-i18n="excavation.soil_hint">
+                                    Presets set bulking (%) and density (t/m³). “Custom” lets you edit manually.
+                                </div>
+                            </div>
+
+                            <!-- ONLY for custom soil -->
+                            <div class="mcalc__field" id="bulkingWrap">
+                                <label class="mcalc__label" for="bulkingPct"
+                                    data-i18n="excavation.bulking_label">Bulking, %</label>
+                                <input class="mcalc__input" id="bulkingPct" type="text" inputmode="decimal"
+                                    placeholder="25" />
+                            </div>
+
+                            <div class="mcalc__field" id="densityWrap">
+                                <label class="mcalc__label" for="densityT" data-i18n="excavation.density_label">Density
+                                    (t/m³) (opt.)</label>
+                                <input class="mcalc__input" id="densityT" type="text" inputmode="decimal"
+                                    placeholder="1.6" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="truckCap" data-i18n="excavation.truck_label">Truck
+                                    capacity (m³) (opt.)</label>
+                                <input class="mcalc__input" id="truckCap" type="text" inputmode="decimal"
+                                    placeholder="10" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button"
+                                        data-i18n="excavation.btn_calc">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button"
+                                        data-i18n="excavation.btn_reset">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button"
+                                        data-i18n="excavation.btn_copy">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2" data-i18n="excavation.result_title">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult" data-i18n="excavation.result_enter">Enter inputs to
+                            calculate.</div>
+
+                        <!-- KPI blocks are rendered here by JS -->
+                        <div class="m-kpis" id="kpiGrid" style="margin-top:12px;"></div>
+
+                        <div class="m-summary" id="mSummary" style="display:none;"></div>
+                        <div class="m-hintSmall" id="mHint" style="display:none;"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title" data-i18n="excavation.chart_title">Chart</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280" aria-label="Soil chart"></canvas>
+                            <div class="m-hintSmall" data-i18n="excavation.chart_hint">Visualization of key values.
+                            </div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="excavation.table_title">Table</span>
+                                    <span class="muted" data-i18n="excavation.table_open">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button"
+                                    data-i18n="excavation.btn_copy_table">Copy table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button"
+                                    data-i18n="excavation.btn_csv">📄 Download (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Soil table">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n="excavation.th_item">Item</th>
+                                            <th data-i18n="excavation.th_qty">Qty</th>
+                                            <th data-i18n="excavation.th_unit">Unit</th>
+                                            <th data-i18n="excavation.th_note">Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    <span data-i18n="excavation.cost_title">Cost</span>
+                                    <span class="muted" data-i18n="excavation.cost_opt">(optional)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceExcPerM3"
+                                            data-i18n="excavation.price_exc">Excavation: price per 1 m³</label>
+                                        <input id="priceExcPerM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g. 180" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceHaulPerM3"
+                                            data-i18n="excavation.price_haul">Hauling/disposal: price per 1 m³</label>
+                                        <input id="priceHaulPerM3" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g. 220" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceTrip"
+                                            data-i18n="excavation.price_trip">Truck: price per trip (opt.)</label>
+                                        <input id="priceTrip" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                        <div class="mcalc__hint" data-i18n="excavation.price_trip_hint">Works if truck
+                                            capacity is set.</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery" data-i18n="excavation.delivery">Extra
+                                            (fixed)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost"
+                                            data-i18n="excavation.waste_cost">Waste, % (for cost)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button" data-i18n="excavation.btn_save_prices">Save
+                                                prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button" data-i18n="excavation.btn_reset_prices">Reset
+                                                prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost" type="button"
+                                                data-i18n="excavation.btn_copy_cost">Copy cost</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal" data-i18n="excavation.cost_enter">
+                                            Enter prices to see the total cost.</div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- ✅ нижні кнопки (як в укр) -->
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/plaster-calculator.html"
+                                data-i18n="excavation.link_plaster">Plaster calculator</a>
+                            <a class="mcalc__btn" href="/en/construction/concrete-calculator.html"
+                                data-i18n="excavation.link_concrete">Concrete calculator</a>
+                            <a class="mcalc__btn" href="/en/construction/brick-calculator.html"
+                                data-i18n="excavation.link_brick">Brick calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+    <section class="m-seo">
+    
+        <h2>What is the Earthworks Volume Calculator?</h2>
+    
+        <p>
+            The Earthworks Volume Calculator is an online tool designed to calculate
+            the volume of soil for trenches, pits, and site grading works.
+            It helps determine in-ground volume, excavation volume with overdig,
+            loose (bulked) volume, soil tonnage, and required truck trips.
+        </p>
+    
+        <h2>What is it used for?</h2>
+    
+        <p>
+            This calculator is used for construction planning,
+            estimating soil removal, selecting proper machinery,
+            and calculating preliminary earthworks costs.
+        </p>
+    
+        <ul>
+            <li>Foundation trench calculations</li>
+            <li>Building pit excavation</li>
+            <li>Site leveling and grading</li>
+            <li>Soil transportation planning</li>
+            <li>Budget estimation for excavation works</li>
+        </ul>
+    
+        <h2>How does the calculation work?</h2>
+    
+        <p><strong>1. In-ground volume:</strong><br>
+            V = Length × Width × Depth
+        </p>
+    
+        <p><strong>2. Excavation volume (with overdig):</strong><br>
+            V₁ = V × (1 + Overdig % / 100)
+        </p>
+    
+        <p><strong>3. Loose (bulked) volume:</strong><br>
+            V₂ = V₁ × (1 + Bulking % / 100)
+        </p>
+    
+        <p><strong>4. Tonnage:</strong><br>
+            T = V₂ × Density (t/m³)
+        </p>
+    
+        <p><strong>5. Truck trips:</strong><br>
+            R = V₂ / Truck capacity
+        </p>
+    
+    </section>
+    
+    
+    <section class="m-faq">
+    
+        <h2>Frequently Asked Questions</h2>
+    
+        <div class="m-faq-item">
+            <h3>What is the difference between in-ground and loose volume?</h3>
+            <p>
+                In-ground volume is the natural geometric volume before excavation.
+                After digging, soil expands and increases in volume —
+                this is called loose (bulked) volume.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>What bulking percentage should I use?</h3>
+            <p>
+                Sand ≈ 10–15%, loam ≈ 15–25%, clay ≈ 20–30%.
+                The calculator automatically applies average preset values.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>How are truck trips calculated?</h3>
+            <p>
+                The loose soil volume is divided by the truck capacity.
+                The result is always rounded up to the nearest whole trip.
+            </p>
+        </div>
+    
+        <div class="m-faq-item">
+            <h3>Why should I include overdig?</h3>
+            <p>
+                Overdig accounts for uneven surfaces and measurement tolerances,
+                adding a safety margin to the calculated volume.
+            </p>
+        </div>
+    
+    </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

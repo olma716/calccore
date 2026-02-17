@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Flooring Calculator — laminate / vinyl / tile / carpet | CalcCore</title>
+    <meta name="description"
+        content="Flooring Calculator by CalcCore: laminate & vinyl (packs), tile (size + pcs per pack), carpet (roll width → linear meters). Includes chart, materials table, copy and CSV export." />
+
+    <link rel="canonical" href="/en/construction/flooring-calculator.html" />
+    <link rel="alternate" hreflang="en" href="/en/construction/flooring-calculator.html" />
+    <link rel="alternate" hreflang="uk" href="/construction/flooring-calculator.html" />
+    <link rel="alternate" hreflang="x-default" href="/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/flooring-calculator.css" />
+
+    <!-- ДОДАЙ i18n.js також, щоб поведінка була як в інших -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/flooring-calculator.js?v=20260216-simple" defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Flooring Calculator",
+      "applicationCategory": "ConstructionApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "en",
+      "description": "Online flooring calculator for laminate, vinyl, tile and carpet with waste and pack rounding.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much waste should I add for laminate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually 7–10% for straight layout and 12–15% for diagonal installation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should tile be rounded up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, tile is sold in packs, so rounding up is necessary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is carpet calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Area is divided by roll width to get required linear meters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator include cutting waste?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, waste percentage is added before calculating material quantity."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="credit-page cfloor">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cfloor" id="cfloor">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Flooring Calculator</h1>
+                    <p class="mcalc__p">
+                        Estimate flooring materials: <b>laminate / vinyl</b> (packs), <b>tile</b> (size + pcs/pack),
+                        <b>carpet</b> (roll width → linear meters). Includes chart, materials table, copy, CSV and
+                        optional cost.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mode">Area mode</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="room" selected>Room (L × W)</option>
+                                    <option value="area">Area (m²)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="floorType">Floor type</label>
+                                <select id="floorType" class="mcalc__select">
+                                    <option value="laminate" selected>Laminate</option>
+                                    <option value="vinyl">Vinyl (SPC / LVT)</option>
+                                    <option value="tile">Tile</option>
+                                    <option value="carpet">Carpet</option>
+                                </select>
+                                <div class="mcalc__hint">Fields below adapt automatically.</div>
+                            </div>
+
+                            <div class="mcalc__field" id="lenWrap">
+                                <label class="mcalc__label" for="len">Length (m)</label>
+                                <input class="mcalc__input" id="len" type="text" inputmode="decimal"
+                                    placeholder="e.g. 5.2" />
+                            </div>
+
+                            <div class="mcalc__field" id="widWrap">
+                                <label class="mcalc__label" for="wid">Width (m)</label>
+                                <input class="mcalc__input" id="wid" type="text" inputmode="decimal"
+                                    placeholder="e.g. 3.4" />
+                            </div>
+
+                            <div class="mcalc__field m-full" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area">Area (m²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g. 17.68" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="cutouts">Subtract area (m²) (optional)</label>
+                                <input class="mcalc__input" id="cutouts" type="text" inputmode="decimal"
+                                    placeholder="0" />
+                                <div class="mcalc__hint">If not needed — keep 0.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastePct">Waste / cutting (%)</label>
+                                <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                    placeholder="10" />
+                                <div class="mcalc__hint">Usually 7–12% (straight), 12–18% (complex).</div>
+                            </div>
+
+                            <!-- LAMINATE / VINYL -->
+                            <div id="packFields" class="m-full">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="coverPerPack">Coverage per pack (m²)</label>
+                                        <input class="mcalc__input" id="coverPerPack" type="text" inputmode="decimal"
+                                            placeholder="2.22" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="unitsName">Unit name</label>
+                                        <input class="mcalc__input" id="unitsName" type="text" placeholder="packs" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TILE -->
+                            <div id="tileFields" class="m-full" style="display:none;">
+                                <div class="mcalc__field m-full">
+                                    <label class="mcalc__label">Tile size</label>
+                                    <div class="m-3col">
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" for="tileLenMm">Length (mm)</label>
+                                            <input class="mcalc__input" id="tileLenMm" type="text" inputmode="decimal"
+                                                placeholder="600" />
+                                        </div>
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" for="tileWidMm">Width (mm)</label>
+                                            <input class="mcalc__input" id="tileWidMm" type="text" inputmode="decimal"
+                                                placeholder="600" />
+                                        </div>
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" for="tilesPerPack">Pieces per pack</label>
+                                            <input class="mcalc__input" id="tilesPerPack" type="text"
+                                                inputmode="decimal" placeholder="4" />
+                                        </div>
+                                    </div>
+                                    <div class="mcalc__hint">Shows pieces and packs. Buying is usually by packs.</div>
+                                </div>
+
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="unitsNameTile">Unit name</label>
+                                        <input class="mcalc__input" id="unitsNameTile" type="text"
+                                            placeholder="packs" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="rounding">Rounding</label>
+                                        <select id="rounding" class="mcalc__select">
+                                            <option value="packs" selected>Round packs up</option>
+                                            <option value="pieces">Round pieces up</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CARPET -->
+                            <div id="carpetFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="rollWidthM">Roll width (m)</label>
+                                        <input class="mcalc__input" id="rollWidthM" type="text" inputmode="decimal"
+                                            placeholder="4" />
+                                        <div class="mcalc__hint">Linear meters = (area with waste) / roll width.</div>
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="carpetUnitName">Unit name</label>
+                                        <input class="mcalc__input" id="carpetUnitName" type="text" placeholder="lm" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Chart</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280" aria-label="Flooring chart"></canvas>
+                            <div class="m-hintSmall">Visualization of key metrics.</div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Materials table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Download (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Flooring materials table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Qty</th>
+                                            <th>Unit</th>
+                                            <th>Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Material cost <span class="muted">(optional)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="pricePerUnit">Price</label>
+                                        <input id="pricePerUnit" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g. 780" />
+                                        <div class="mcalc__hint">For carpet — price per m². For others — price per pack.
+                                        </div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Delivery (fixed)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost">Waste, % (for cost)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button">Save prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button">Reset prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost"
+                                                type="button">Copy cost</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Enter prices to see the total cost.
+                                        </div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/plaster-calculator.html">
+                                Plastering Calculator
+                            </a>
+                        
+                            <a class="mcalc__btn" href="/en/construction/brick-calculator.html">
+                                Brick Calculator
+                            </a>
+                        
+                        
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How the Flooring Calculator Works</h2>
+        
+            <p>
+                This flooring calculator helps you estimate materials for laminate,
+                vinyl, tile, or carpet. Enter room dimensions or area, add waste
+                percentage, and get the required packs, pieces, or linear meters.
+            </p>
+        
+            <h3>How to Calculate Flooring Properly</h3>
+            <ul>
+                <li>Measure room length and width (or enter total area).</li>
+                <li>Subtract niches or built-in elements if needed.</li>
+                <li>Add 7–12% waste for straight layout or 12–18% for diagonal.</li>
+                <li>For tiles, specify size and pieces per pack.</li>
+                <li>For carpet, enter roll width to get linear meters.</li>
+            </ul>
+        
+            <h3>Who Can Use This Tool</h3>
+            <p>
+                Perfect for homeowners, contractors, designers, and anyone planning
+                flooring renovation who needs accurate material estimation.
+            </p>
+            </section>
+
+            <section class="m-faq">
+        
+            <h3>Frequently Asked Questions</h3>
+        <div class="m-faq-item">
+            <h4>1. How much waste should I add for laminate?</h4>
+            <p>Usually 7–10% for straight layout and 12–15% for diagonal installation.</p>
+        </div>
+        <div class="m-faq-item">
+            <h4>2. Should tile be rounded up?</h4>
+            <p>Yes, tiles are purchased by packs, so rounding up is required.</p>
+        </div>
+        <div class="m-faq-item">
+            <h4>3. How is carpet calculated?</h4>
+            <p>Area is divided by roll width to get required linear meters.</p>
+        </div>
+        <div class="m-faq-item">
+            <h4>4. Does the calculator include cutting waste?</h4>
+            <p>Yes, the selected waste percentage is added before calculation.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

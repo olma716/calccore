@@ -983,12 +983,374 @@ brick: {
               btn_copy_cost: "Копіювати вартість",
               cost_enter: "Введи ціни, щоб побачити загальну вартість.",
             },
+            flooring: {
+    h1: "Калькулятор підлогових матеріалів",
+    subtitle: "Розрахунок матеріалів для підлоги: <b>ламінат / вініл</b> (упаковки), <b>плитка</b> (розмір + шт/упак), <b>килим</b> (ширина рулону → пог. м). Є графік, таблиця матеріалів, копіювання та CSV (Excel).",
 
+    auto: "Авто-розрахунок",
+
+    inputTitle: "Введи дані",
+    modeLabel: "Режим площі",
+    modeRoom: "Кімната (Д×Ш)",
+    modeArea: "Площа (м²)",
+
+    typeLabel: "Тип покриття",
+    typeLaminate: "Ламінат",
+    typeVinyl: "Вініл (SPC / LVT)",
+    typeTile: "Плитка",
+    typeCarpet: "Килим",
+    typeHint: "Поля нижче автоматично змінюються залежно від типу.",
+
+    lenLabel: "Довжина (м)",
+    widLabel: "Ширина (м)",
+    areaLabel: "Площа (м²)",
+
+    cutoutsLabel: "Відняти площу (м²) (опц.)",
+    cutoutsHint: "Якщо не потрібно — залиш 0.",
+
+    wasteLabel: "Запас / підрізка, %",
+    wasteHint: "Зазвичай 7–12% (пряма укладка), 12–18% (складна).",
+
+    coverPerPackLabel: "Покриття 1 упаковки (м²)",
+    unitNameLabel: "Назва одиниці",
+
+    tileSizeTitle: "Розмір плитки",
+    tileLenLabel: "Довжина (мм)",
+    tileWidLabel: "Ширина (мм)",
+    tilesPerPackLabel: "Штук в упаковці",
+    tileHint: "Показує кількість штук та упаковок. Купівля зазвичай по упаковках.",
+    unitNameTileLabel: "Назва одиниці",
+    roundingLabel: "Округлення",
+    roundPacks: "Округляти упаковки вгору",
+    roundPieces: "Округляти штуки вгору",
+
+    rollWidthLabel: "Ширина рулону (м)",
+    rollHint: "Погонні метри = (площа з запасом) / ширина рулону.",
+    carpetUnitLabel: "Назва одиниці",
+
+    btnCalc: "Розрахувати",
+    btnReset: "Скинути",
+    btnCopy: "Копіювати результат",
+
+    resultTitle: "Результат",
+    resultPlaceholder: "Введи дані для розрахунку.",
+
+    chartTitle: "Графік",
+    chartHint: "Візуалізація основних показників.",
+
+    tableTitle: "Таблиця матеріалів",
+    tableOpen: "(відкрити)",
+    btnCopyTable: "Копіювати таблицю",
+    btnCsv: "📄 Завантажити (Excel)",
+    thItem: "Позиція",
+    thQty: "К-сть",
+    thUnit: "Одиниця",
+    thNote: "Примітка",
+
+    costTitle: "Вартість матеріалів",
+    costOpt: "(опційно)",
+    priceLabel: "Ціна",
+    priceHint: "Для килима — ціна за м². Для інших — ціна за упаковку.",
+    deliveryLabel: "Доставка (фікс.)",
+    wasteCostLabel: "Запас, % (для вартості)",
+    btnSavePrices: "Зберегти ціни",
+    btnResetPrices: "Скинути ціни",
+    btnCopyCost: "Копіювати вартість",
+    costPlaceholder: "Введи ціни, щоб побачити загальну вартість.",
+
+    linkPlaster: "Калькулятор штукатурки",
+    linkConcrete: "Калькулятор бетону",
+
+    seoH2: "Як працює калькулятор",
+    seoP: "Обери тип покриття → введи площу та запас → отримай упаковки/штуки або погонні метри для килима.",
+  },
+  excavation: {
+  h1: "Калькулятор об’єму земляних робіт",
+  subtitle: "Розрахунок об’єму ґрунту: траншея/котлован/площа/вручну, перекоп, розпушення, рейси і тоннаж. Є графік, таблиця, копіювання та CSV (Excel).",
+  auto: "Авто-розрахунок",
+
+  input_title: "Введи дані",
+
+  mode_label: "Режим",
+  mode_trench: "Траншея (Д×Ш×Г)",
+  mode_pit: "Котлован (Д×Ш×Г)",
+  mode_area: "Площа × глибина",
+  mode_custom: "Об’єм вручну (м³)",
+  mode_hint: "Обери режим — поля нижче зміняться.",
+
+  length_label: "Довжина (м)",
+  width_label: "Ширина (м)",
+  depth_label: "Глибина (м)",
+  depth_hint: "Середня глибина.",
+  area_label: "Площа (м²)",
+  custom_label: "Об’єм (м³)",
+
+  overdig_label: "Перекоп, % (опц.)",
+  overdig_hint: "Запас на нерівності/неточності.",
+
+  soil_label: "Тип ґрунту (задає розпушення і густину)",
+  soil_hint: "Автоматично підставляє розпушення (%) та густину (т/м³). Для “вручну” можна редагувати.",
+  soil_sand: "Пісок",
+  soil_loam: "Суглинок",
+  soil_clay: "Глина",
+  soil_chernozem: "Чорнозем",
+  soil_gravel: "Щебінь / гравій",
+  soil_custom: "Вручну (свій % та густина)",
+
+  bulking_label: "Розпушення, %",
+  density_label: "Густина (т/м³) (опц.)",
+  truck_label: "Місткість машини (м³) (опц.)",
+
+  btn_calc: "Розрахувати",
+  btn_reset: "Скинути",
+  btn_copy: "Копіювати результат",
+
+  result_title: "Результат",
+  result_enter: "Введи дані для розрахунку.",
+
+  // KPI tiles
+  kpi_in_situ: "Об’єм ґрунту",
+  kpi_excavation: "Об’єм копання (з перекопом)",
+  kpi_loose: "Розпушений об’єм",
+  kpi_tonnage: "Тоннаж",
+  kpi_trips: "Рейси",
+
+  note_soil: "Тип ґрунту: {soil}. Об’єм для розпушення рахую по об’єму копання, а для перевезення — по розпушеному об’єму.",
+  note_trips: "Примітка: якщо густина або місткість не задані — тоннаж/рейси не рахуються.",
+
+  chart_title: "Графік",
+  chart_hint: "Візуалізація основних значень.",
+
+  table_title: "Таблиця",
+  table_open: "(відкрити)",
+  btn_copy_table: "Копіювати таблицю",
+  btn_csv: "📄 Завантажити (Excel)",
+  th_item: "Позиція",
+  th_qty: "К-сть",
+  th_unit: "Одиниця",
+  th_note: "Примітка",
+
+  // toasts
+  toast_enter_values: "Введи дані для розрахунку.",
+  toast_need_calc_first: "Спочатку зроби розрахунок.",
+  toast_reset: "Скинуто ✅",
+  copy_ok: "✅ Результат скопійовано",
+  copy_failed: "Не вдалося скопіювати.",
+  table_copy_ok: "✅ Таблицю скопійовано",
+  table_copy_failed: "Не вдалося скопіювати таблицю.",
+  csv_downloaded: "CSV завантажено ✅",
+
+  // cost
+  cost_title: "Вартість",
+  cost_opt: "(опційно)",
+  price_exc: "Земляні роботи: ціна за 1 м³",
+  price_haul: "Вивіз/утилізація: ціна за 1 м³",
+  price_trip: "Машина: ціна за рейс (опц.)",
+  price_trip_hint: "Працює, якщо задана місткість машини.",
+  delivery: "Додатково (фікс.)",
+  waste_cost: "Запас, % (для вартості)",
+  btn_save_prices: "Зберегти ціни",
+  btn_reset_prices: "Скинути ціни",
+  btn_copy_cost: "Копіювати вартість",
+  cost_enter: "Введи ціни, щоб побачити вартість.",
+
+  // labels for table
+  row_geom: "Геометрія",
+  row_overdig: "Перекоп",
+  row_excavation: "Об’єм копання",
+  row_bulking: "Розпушення",
+  row_loose: "Розпушений об’єм",
+  row_density: "Густина",
+  row_tonnage: "Тоннаж",
+  row_truck: "Місткість машини",
+  row_trips: "Рейси",
+},
 
 
     },
 
     en: {
+      excavation: {
+  h1: "Earthworks Volume Calculator",
+  subtitle: "Estimate soil volume: trench/pit/area/manual input, overdig, bulking factor, truck trips and tonnage. Includes chart, table, copy and CSV (Excel).",
+  auto: "Auto calculation",
+
+  input_title: "Enter data",
+
+  mode_label: "Mode",
+  mode_trench: "Trench (L×W×D)",
+  mode_pit: "Pit (L×W×D)",
+  mode_area: "Area × depth",
+  mode_custom: "Manual volume (m³)",
+  mode_hint: "Choose a mode — fields below will adapt.",
+
+  length_label: "Length (m)",
+  width_label: "Width (m)",
+  depth_label: "Depth (m)",
+  depth_hint: "Average depth.",
+  area_label: "Area (m²)",
+  custom_label: "Volume (m³)",
+
+  overdig_label: "Overdig, % (opt.)",
+  overdig_hint: "Extra allowance for inaccuracies.",
+
+  soil_label: "Soil type (sets bulking & density)",
+  soil_hint: "Automatically fills bulking (%) and density (t/m³). Choose “manual” to edit.",
+  soil_sand: "Sand",
+  soil_loam: "Loam",
+  soil_clay: "Clay",
+  soil_chernozem: "Black soil",
+  soil_gravel: "Gravel / crushed stone",
+  soil_custom: "Manual (custom % & density)",
+
+  bulking_label: "Bulking, %",
+  density_label: "Density (t/m³) (opt.)",
+  truck_label: "Truck capacity (m³) (opt.)",
+
+  btn_calc: "Calculate",
+  btn_reset: "Reset",
+  btn_copy: "Copy result",
+
+  result_title: "Result",
+  result_enter: "Enter inputs to calculate.",
+
+  kpi_in_situ: "In-situ volume",
+  kpi_excavation: "Excavation volume (with overdig)",
+  kpi_loose: "Loose volume",
+  kpi_tonnage: "Tonnage",
+  kpi_trips: "Trips",
+
+  note_soil: "Soil: {soil}. Bulking is applied to excavation volume; hauling uses loose volume.",
+  note_trips: "Note: if density or truck capacity is missing — tonnage/trips are not calculated.",
+
+  chart_title: "Chart",
+  chart_hint: "Visualization of key values.",
+
+  table_title: "Table",
+  table_open: "(open)",
+  btn_copy_table: "Copy table",
+  btn_csv: "📄 Download (Excel)",
+  th_item: "Item",
+  th_qty: "Qty",
+  th_unit: "Unit",
+  th_note: "Note",
+
+  toast_enter_values: "Enter inputs to calculate.",
+  toast_need_calc_first: "Calculate first.",
+  toast_reset: "Reset ✅",
+  copy_ok: "✅ Result copied",
+  copy_failed: "Copy failed.",
+  table_copy_ok: "✅ Table copied",
+  table_copy_failed: "Failed to copy table.",
+  csv_downloaded: "CSV downloaded ✅",
+
+  cost_title: "Cost",
+  cost_opt: "(optional)",
+  price_exc: "Excavation work: price per 1 m³",
+  price_haul: "Hauling/disposal: price per 1 m³",
+  price_trip: "Truck: price per trip (opt.)",
+  price_trip_hint: "Works if truck capacity is set.",
+  delivery: "Extra (fixed)",
+  waste_cost: "Extra, % (for cost)",
+  btn_save_prices: "Save prices",
+  btn_reset_prices: "Reset prices",
+  btn_copy_cost: "Copy cost",
+  cost_enter: "Enter prices to see the total cost.",
+
+  row_geom: "Geometry",
+  row_overdig: "Overdig",
+  row_excavation: "Excavation volume",
+  row_bulking: "Bulking",
+  row_loose: "Loose volume",
+  row_density: "Density",
+  row_tonnage: "Tonnage",
+  row_truck: "Truck capacity",
+  row_trips: "Trips",
+},
+
+
+       flooring: {
+    h1: "Flooring Calculator",
+    subtitle: "Estimate flooring materials: <b>laminate / vinyl</b> (packs), <b>tile</b> (size + pcs/pack), <b>carpet</b> (roll width → linear meters). Includes chart, materials table, copy and CSV (Excel).",
+
+    auto: "Auto-calc",
+
+    inputTitle: "Enter inputs",
+    modeLabel: "Area mode",
+    modeRoom: "Room (L×W)",
+    modeArea: "Area (m²)",
+
+    typeLabel: "Floor type",
+    typeLaminate: "Laminate",
+    typeVinyl: "Vinyl (SPC / LVT)",
+    typeTile: "Tile",
+    typeCarpet: "Carpet",
+    typeHint: "Fields below will adapt automatically.",
+
+    lenLabel: "Length (m)",
+    widLabel: "Width (m)",
+    areaLabel: "Area (m²)",
+
+    cutoutsLabel: "Subtract area (m²) (opt.)",
+    cutoutsHint: "If not needed — keep 0.",
+
+    wasteLabel: "Waste / cutting, %",
+    wasteHint: "Usually 7–12% (straight), 12–18% (complex).",
+
+    coverPerPackLabel: "Coverage per pack (m²)",
+    unitNameLabel: "Unit name",
+
+    tileSizeTitle: "Tile size",
+    tileLenLabel: "Length (mm)",
+    tileWidLabel: "Width (mm)",
+    tilesPerPackLabel: "Pieces per pack",
+    tileHint: "Shows pieces and packs. Buying is usually by packs.",
+    unitNameTileLabel: "Unit name",
+    roundingLabel: "Rounding",
+    roundPacks: "Round packs up",
+    roundPieces: "Round pieces up",
+
+    rollWidthLabel: "Roll width (m)",
+    rollHint: "Linear meters = (area with waste) / roll width.",
+    carpetUnitLabel: "Unit name",
+
+    btnCalc: "Calculate",
+    btnReset: "Reset",
+    btnCopy: "Copy result",
+
+    resultTitle: "Result",
+    resultPlaceholder: "Enter inputs to calculate.",
+
+    chartTitle: "Chart",
+    chartHint: "Visualization of key metrics.",
+
+    tableTitle: "Materials table",
+    tableOpen: "(open)",
+    btnCopyTable: "Copy table",
+    btnCsv: "📄 Download (Excel)",
+    thItem: "Item",
+    thQty: "Qty",
+    thUnit: "Unit",
+    thNote: "Note",
+
+    costTitle: "Material cost",
+    costOpt: "(optional)",
+    priceLabel: "Price",
+    priceHint: "For carpet — price per m². For others — price per pack.",
+    deliveryLabel: "Delivery (fixed)",
+    wasteCostLabel: "Waste, % (for cost)",
+    btnSavePrices: "Save prices",
+    btnResetPrices: "Reset prices",
+    btnCopyCost: "Copy cost",
+    costPlaceholder: "Enter prices to see the total cost.",
+
+    linkPlaster: "Plaster calculator",
+    linkConcrete: "Concrete calculator",
+
+    seoH2: "How it works",
+    seoP: "Choose floor type → enter area and waste → get packs/pieces or linear meters for carpet.",
+  },
+
       plaster :{
   h1: "Plastering Calculator",
   subtitle: "Estimate materials for plastering: <b>dry mix (bags)</b> or <b>cement + sand</b>. Includes chart, materials table, copy and CSV (Excel).",

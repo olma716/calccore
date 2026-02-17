@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор підлогових матеріалів — ламінат/вініл/плитка/килим | CalcCore</title>
+    <meta name="description"
+        content="Простий калькулятор підлогових матеріалів: ламінат/вініл (упаковки), плитка (розмір + шт/упак), килим (ширина рулону → пог. м). Запас, таблиця, графік, копіювання, CSV та кошторис." />
+
+    <!-- canonical/hreflang (локально можна лишати, на проді підставиш домен) -->
+    <link rel="canonical" href="/construction/flooring-calculator.html" />
+    <link rel="alternate" hreflang="uk" href="/construction/flooring-calculator.html" />
+    <link rel="alternate" hreflang="en" href="/en/construction/flooring-calculator.html" />
+    <link rel="alternate" hreflang="x-default" href="/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/flooring-calculator.css" />
+
+    <!-- ВАЖЛИВО: layout.js має підвантажити header/footer і зібрати лінки мов -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/flooring-calculator.js?v=20260216-simple" defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Калькулятор підлогових матеріалів",
+      "applicationCategory": "ConstructionApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "uk",
+      "description": "Онлайн калькулятор для розрахунку ламінату, плитки, вінілу та килима з урахуванням запасу та упаковок.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "UAH"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Який запас закладати на ламінат?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "7–10% для прямої укладки та 12–15% для діагональної."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи потрібно округляти плитку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, плитка купується упаковками, тому кількість округлюється вгору."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати килим?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа ділиться на ширину рулону, що дає довжину в погонних метрах."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховується підрізка?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, запас додається до площі перед розрахунком."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+
+
+
+<body class="credit-page cfloor">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc cfloor" id="cfloor">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор підлогових матеріалів</h1>
+                    <p class="mcalc__p">
+                        Простий розрахунок: <b>ламінат/вініл</b> (упаковки), <b>плитка</b> (розмір + шт/упак),
+                        <b>килим</b> (ширина рулону → пог. м). Є таблиця, графік, копіювання, CSV і кошторис.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="mode">Режим площі</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="room" selected>Кімната (Д×Ш)</option>
+                                    <option value="area">Площа (м²)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="floorType">Тип покриття</label>
+                                <select id="floorType" class="mcalc__select">
+                                    <option value="laminate" selected>Ламінат</option>
+                                    <option value="vinyl">Вініл (SPC / LVT)</option>
+                                    <option value="tile">Плитка</option>
+                                    <option value="carpet">Килимове покриття</option>
+                                </select>
+                                <div class="mcalc__hint">Поля нижче автоматично підлаштуються під вибір.</div>
+                            </div>
+
+                            <div class="mcalc__field" id="lenWrap">
+                                <label class="mcalc__label" for="len">Довжина (м)</label>
+                                <input class="mcalc__input" id="len" type="text" inputmode="decimal"
+                                    placeholder="напр.: 5.2" />
+                            </div>
+
+                            <div class="mcalc__field" id="widWrap">
+                                <label class="mcalc__label" for="wid">Ширина (м)</label>
+                                <input class="mcalc__input" id="wid" type="text" inputmode="decimal"
+                                    placeholder="напр.: 3.4" />
+                            </div>
+
+                            <div class="mcalc__field m-full" id="areaWrap" style="display:none;">
+                                <label class="mcalc__label" for="area">Площа (м²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="напр.: 17.68" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="cutouts">Відняти площу (м²) (опц.)</label>
+                                <input class="mcalc__input" id="cutouts" type="text" inputmode="decimal"
+                                    placeholder="0" />
+                                <div class="mcalc__hint">Якщо не потрібно — залиш 0.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastePct">Запас / підрізка, %</label>
+                                <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                    placeholder="10" />
+                                <div class="mcalc__hint">Зазвичай 7–12% (прямо), 12–18% (складно).</div>
+                            </div>
+
+                            <!-- LAMINATE / VINYL -->
+                            <div id="packFields" class="m-full">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="coverPerPack">Покриття 1 упаковки (м²)</label>
+                                        <input class="mcalc__input" id="coverPerPack" type="text" inputmode="decimal"
+                                            placeholder="напр.: 2.22" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="unitsName">Назва одиниці</label>
+                                        <input class="mcalc__input" id="unitsName" type="text" placeholder="упаковки" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TILE -->
+                            <div id="tileFields" class="m-full" style="display:none;">
+                                <div class="mcalc__field m-full">
+                                    <label class="mcalc__label">Розмір плитки</label>
+                                    <div class="m-3col">
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" for="tileLenMm">Довжина (мм)</label>
+                                            <input class="mcalc__input" id="tileLenMm" type="text" inputmode="decimal"
+                                                placeholder="напр.: 600" />
+                                        </div>
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" for="tileWidMm">Ширина (мм)</label>
+                                            <input class="mcalc__input" id="tileWidMm" type="text" inputmode="decimal"
+                                                placeholder="напр.: 600" />
+                                        </div>
+                                        <div class="mcalc__field">
+                                            <label class="mcalc__label" for="tilesPerPack">Штук в упаковці</label>
+                                            <input class="mcalc__input" id="tilesPerPack" type="text"
+                                                inputmode="decimal" placeholder="напр.: 4" />
+                                        </div>
+                                    </div>
+                                    <div class="mcalc__hint">Рахує штуки та упаковки. Закупівля — упаковками.</div>
+                                </div>
+
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="unitsNameTile">Назва одиниці</label>
+                                        <input class="mcalc__input" id="unitsNameTile" type="text"
+                                            placeholder="упаковки" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="rounding">Округлення</label>
+                                        <select id="rounding" class="mcalc__select">
+                                            <option value="packs" selected>Округляти упаковки вгору</option>
+                                            <option value="pieces">Округляти штуки вгору</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CARPET -->
+                            <div id="carpetFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="rollWidthM">Ширина рулону (м)</label>
+                                        <input class="mcalc__input" id="rollWidthM" type="text" inputmode="decimal"
+                                            placeholder="напр.: 4" />
+                                        <div class="mcalc__hint">Довжина рулону = площа з запасом / ширина рулону.</div>
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="carpetUnitName">Назва одиниці</label>
+                                        <input class="mcalc__input" id="carpetUnitName" type="text"
+                                            placeholder="пог. м" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280" aria-label="Flooring chart"></canvas>
+                            <div class="m-hintSmall">Візуалізація ключових показників.</div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця матеріалів <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Завантажити (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Flooring materials table">
+                                    <thead>
+                                        <tr>
+                                            <th>Позиція</th>
+                                            <th>К-сть</th>
+                                            <th>Одиниця</th>
+                                            <th>Примітка</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Вартість матеріалів <span class="muted">(опційно)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="pricePerUnit">Ціна</label>
+                                        <input id="pricePerUnit" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="напр.: 780" />
+                                        <div class="mcalc__hint">Для килима — ціна за м². Для інших — ціна за упаковку.
+                                        </div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Доставка (фікс.)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost">Запас/втрати, % (для
+                                            вартості)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button">Зберегти ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button">Скинути ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost"
+                                                type="button">Копіювати вартість</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Введи ціни, щоб побачити загальну
+                                            вартість.</div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/construction/plaster-calculator.html">Калькулятор штукатурки</a>
+                            <a href="/construction/brick-calculator.html">Розрахуй кількість цегли</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як працює калькулятор підлогових матеріалів</h2>
+        
+            <p>
+                Калькулятор підлоги допомагає швидко розрахувати кількість матеріалу для ламінату,
+                вінілу, плитки або килима. Ви вводите площу кімнати або її розміри,
+                додаєте відсоток запасу на підрізку — і отримуєте кількість упаковок,
+                штук або погонних метрів.
+            </p>
+        
+            <h3>Як правильно рахувати підлогу</h3>
+            <ul>
+                <li>Виміряйте довжину та ширину кімнати (або введіть готову площу).</li>
+                <li>Відніміть площу виступів або ніш (якщо потрібно).</li>
+                <li>Додайте запас 7–12% для прямої укладки або 12–18% для складної.</li>
+                <li>Для плитки врахуйте розмір та кількість штук в упаковці.</li>
+                <li>Для килима введіть ширину рулону — калькулятор переведе площу в погонні метри.</li>
+            </ul>
+        
+            <h3>Кому підходить цей калькулятор</h3>
+            <p>
+                Інструмент буде корисний власникам квартир, майстрам, дизайнерам,
+                підрядникам та всім, хто планує ремонт і хоче точно оцінити бюджет.
+            </p>
+            </section>
+        <section class="m-faq">
+            
+            <h3>Часті запитання</h3>
+        <div class="m-faq-item">
+            <h4>1. Який запас закладати на ламінат?</h4>
+            <p>Зазвичай 7–10% при прямій укладці та 12–15% при діагональній.</p>
+        </div>
+        <div class="m-faq-item">
+            <h4>2. Чи потрібно округляти плитку?</h4>
+            <p>Так, плитка купується упаковками, тому кількість завжди округлюється вгору.</p>
+        </div>
+        <div class="m-faq-item">
+            <h4>3. Як порахувати килим?</h4>
+            <p>Площа ділиться на ширину рулону — ви отримуєте необхідну довжину в погонних метрах.</p>
+        </div>
+        <div class="m-faq-item">
+            <h4>4. Чи враховує калькулятор підрізку?</h4>
+            <p>Так, відсоток запасу додається до чистої площі перед розрахунком матеріалу.</p>
+            </div>
+            
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
