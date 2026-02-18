@@ -1,6 +1,8 @@
 /* =========================================================
    CREDIT CALCULATOR — CalcCore
-   + NBU rates (UAH / USD / EUR) for schedule conversion
+   + NBU rates (UAH / USD / EUR) for conversion
+   + Base currency selector (UAH/USD/EUR) for ALL inputs/outputs
+   + Auto-format money inputs with spaces: 1 000 000
    + i18n (uk/en) via /js/i18n.js
 ========================================================= */
 
@@ -10,6 +12,10 @@
   // ---- i18n helpers ----
   const t = (key, vars) => (window.t ? window.t(key, vars) : key);
   const locale = () => (window.i18nLocale ? window.i18nLocale() : "uk-UA");
+  const isEn = () =>
+    String(document.documentElement.lang || "")
+      .toLowerCase()
+      .startsWith("en");
 
   // Inputs
   const loanAmount = el("loanAmount");
@@ -42,17 +48,24 @@
   const btnCopySchedule = el("btnCopySchedule");
   const btnDownloadCSV = el("btnDownloadCSV");
 
-  // Currency selector (exists in your HTML)
+  // Currency selector for schedule (exists in your HTML)
   const scheduleCurEl = el("scheduleCurrency");
 
   // ---------------- NBU rates ----------------
-  const NBU_URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+  const NBU_URL =
+    "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
   const CACHE_KEY = "cc_credit_nbu_rates_v2";
-  const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 год
+  const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12h
 
   // Rates are "UAH per 1 unit"
-  let ratesByCode = { UAH: { rate: 1, txt: "Українська гривня", exchangedate: "" } };
+  let ratesByCode = {
+    UAH: { rate: 1, txt: "Українська гривня", exchangedate: "" },
+  };
   let lastRateDate = ""; // dd.mm.yyyy
+
+  // ---------------- base currency (ALL calculator) ----------------
+  let baseCur = "UAH";
+  let baseCurSelect = null;
 
   // ---------------- helpers (ui) ----------------
   function setToast(msg) {
@@ -61,7 +74,6 @@
   }
 
   function setResult(main, extraHtml = "") {
-    // main is plain text in your layout
     if (resultEl) resultEl.textContent = main || "";
     if (detailsEl) detailsEl.innerHTML = extraHtml || "";
   }
@@ -101,7 +113,9 @@
   }
 
   function normalizeRates(apiArr) {
-    const map = { UAH: { rate: 1, txt: "Українська гривня", exchangedate: "" } };
+    const map = {
+      UAH: { rate: 1, txt: "Українська гривня", exchangedate: "" },
+    };
 
     for (const row of apiArr || []) {
       const cc = String(row?.cc || "").toUpperCase();
@@ -111,7 +125,7 @@
       map[cc] = {
         rate,
         txt: row?.txt || cc,
-        exchangedate: row?.exchangedate || ""
+        exchangedate: row?.exchangedate || "",
       };
     }
 
@@ -157,24 +171,37 @@
     }
   }
 
+  function hasRate(code) {
+    const c = String(code || "UAH").toUpperCase();
+    if (c === "UAH") return true;
+    const r = ratesByCode?.[c]?.rate;
+    return Number.isFinite(r) && r > 0;
+  }
+
   // ---------------- helpers (currency) ----------------
   function currencySymbol(code) {
     const c = String(code || "UAH").toUpperCase();
     if (c === "USD") return "$";
     if (c === "EUR") return "€";
-    // ₴ for UAH
     return "₴";
   }
 
-  function uahTo(code, uahAmount) {
+  function toUAH(code, amount) {
     const c = String(code || "UAH").toUpperCase();
+    if (!Number.isFinite(amount)) return amount;
+    if (c === "UAH") return amount;
+    const r = ratesByCode?.[c]?.rate;
+    if (!Number.isFinite(r) || r <= 0) return amount;
+    return amount * r; // amount in CUR -> UAH
+  }
+
+  function fromUAH(code, uahAmount) {
+    const c = String(code || "UAH").toUpperCase();
+    if (!Number.isFinite(uahAmount)) return uahAmount;
     if (c === "UAH") return uahAmount;
-
-    const rateUAHper1 = ratesByCode?.[c]?.rate;
-    if (!Number.isFinite(rateUAHper1) || rateUAHper1 <= 0) return uahAmount;
-
-    // 1 USD = X UAH -> UAH / X = USD
-    return uahAmount / rateUAHper1;
+    const r = ratesByCode?.[c]?.rate;
+    if (!Number.isFinite(r) || r <= 0) return uahAmount;
+    return uahAmount / r; // UAH -> CUR
   }
 
   function formatMoney(n, code = "UAH") {
@@ -202,7 +229,6 @@
     const ths = scheduleTable.querySelectorAll("thead th");
     if (!ths?.length) return;
 
-    // indexes: 0 №,1 Date,2 Payment,3 Interest,4 Principal,5 Fees,6 Balance
     const labels = [
       t("credit.th_no"),
       t("credit.th_date"),
@@ -210,16 +236,16 @@
       t("credit.th_interest"),
       t("credit.th_principal"),
       t("credit.th_fees"),
-      t("credit.th_balance")
+      t("credit.th_balance"),
     ];
 
     ths.forEach((th, idx) => {
-      if (idx <= 1) th.textContent = labels[idx];
-      else th.textContent = `${labels[idx]} (${sym})`;
+      if (idx <= 1) th.textContent = labels[idx] || th.textContent;
+      else th.textContent = `${labels[idx] || th.textContent} (${sym})`;
     });
   }
 
-  // ---------------- credit math ----------------
+  // ---------------- money parsing + autoformat ----------------
   function parseMoney(val) {
     if (val == null) return 0;
     const s = String(val)
@@ -230,10 +256,73 @@
     return Number.isFinite(n) ? n : 0;
   }
 
-  function parsePercent(val) {
-    return parseMoney(val);
+  function formatWithSpacesRaw(input) {
+    // Keep only digits + optional dot; group integer part by spaces.
+    const s0 = String(input ?? "");
+    const s = s0.replace(/[^\d.,]/g, "").replace(/,/g, ".");
+    if (!s) return "";
+
+    const firstDot = s.indexOf(".");
+    let intPart = firstDot >= 0 ? s.slice(0, firstDot) : s;
+    let fracPart = firstDot >= 0 ? s.slice(firstDot + 1) : "";
+
+    // remove extra dots from frac part
+    fracPart = fracPart.replace(/\./g, "");
+
+    // trim leading zeros (but keep single 0 if all zeros)
+    intPart = intPart.replace(/^0+(?=\d)/, "");
+
+    // group by 3
+    const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+    // we allow decimals but keep as typed (no rounding here)
+    return firstDot >= 0 ? `${grouped}.${fracPart}` : grouped;
   }
 
+  function countDigitsLeft(str) {
+    // count digits before caret in string (ignore spaces)
+    return (str.match(/\d/g) || []).length;
+  }
+
+  function caretPosForDigits(str, digitsCount) {
+    if (digitsCount <= 0) return 0;
+    let digits = 0;
+    for (let i = 0; i < str.length; i++) {
+      if (/\d/.test(str[i])) digits++;
+      if (digits >= digitsCount) return i + 1;
+    }
+    return str.length;
+  }
+
+  function attachMoneyFormatter(inputEl) {
+    if (!inputEl) return;
+
+    inputEl.addEventListener("input", () => {
+      const oldVal = inputEl.value;
+      const caret = inputEl.selectionStart ?? oldVal.length;
+
+      // digits before caret (ignore spaces)
+      const left = oldVal.slice(0, caret);
+      const digitsLeft = countDigitsLeft(left);
+
+      const formatted = formatWithSpacesRaw(oldVal);
+
+      inputEl.value = formatted;
+
+      // restore caret by digits count
+      const newPos = caretPosForDigits(formatted, digitsLeft);
+      try {
+        inputEl.setSelectionRange(newPos, newPos);
+      } catch {}
+      scheduleAuto();
+    });
+
+    inputEl.addEventListener("blur", () => {
+      inputEl.value = formatWithSpacesRaw(inputEl.value);
+    });
+  }
+
+  // ---------------- credit math ----------------
   function addMonths(date, m) {
     const d = new Date(date);
     const day = d.getDate();
@@ -260,11 +349,11 @@
       typeLabel,
       avgPayment,
       avgPaymentWithFees,
-      outCur
+      outCur,
     } = data;
 
     const main = t("credit.main_monthly", {
-      amount: formatMoney(monthlyPayment, outCur)
+      amount: formatMoney(monthlyPayment, outCur),
     });
 
     const extra = `
@@ -272,12 +361,17 @@
         <div class="ccredit-kpi">
           <div class="ccredit-kpi__k">${t("credit.kpi_monthly_no_fees")}</div>
           <div class="ccredit-kpi__v">${formatMoney(monthlyPayment, outCur)}</div>
-          <div class="ccredit-kpi__s">${t("credit.kpi_calc_type", { type: typeLabel })}</div>
+          <div class="ccredit-kpi__s">${t("credit.kpi_calc_type", {
+            type: typeLabel,
+          })}</div>
         </div>
 
         <div class="ccredit-kpi">
           <div class="ccredit-kpi__k">${t("credit.kpi_monthly_with_fees")}</div>
-          <div class="ccredit-kpi__v">${formatMoney(monthlyPaymentWithFees, outCur)}</div>
+          <div class="ccredit-kpi__v">${formatMoney(
+            monthlyPaymentWithFees,
+            outCur
+          )}</div>
           <div class="ccredit-kpi__s">${t("credit.kpi_fees_included")}</div>
         </div>
 
@@ -295,12 +389,15 @@
       </div>
 
       <div class="ccredit-summary">
-        <div><b>${t("credit.summary_fees")}:</b> ${formatMoney(totalFees, outCur)}</div>
+        <div><b>${t("credit.summary_fees")}:</b> ${formatMoney(
+          totalFees,
+          outCur
+        )}</div>
         <div class="ccredit-hint" style="margin-top:6px; font-size:12px; opacity:.9;">
           <span class="muted">${t("credit.hint_prefix")}:</span>
           ${t("credit.hint_avg", {
             avg1: formatMoney(avgPayment, outCur),
-            avg2: formatMoney(avgPaymentWithFees, outCur)
+            avg2: formatMoney(avgPaymentWithFees, outCur),
           })}
         </div>
       </div>
@@ -310,23 +407,41 @@
   }
 
   function calc({ silent = false, keepScheduleOpen = false } = {}) {
-    const P0 = parseMoney(loanAmount?.value);
-    const rateYear = parsePercent(annualRate?.value);
+    // read inputs in BASE currency, convert to UAH for math
+    const P0_base = parseMoney(loanAmount?.value);
+    const rateYear = parseMoney(annualRate?.value);
     const n = Number(termMonths?.value || 0);
 
-    const feeOne = parseMoney(oneTimeFee?.value);
-    const feeMonth = parseMoney(monthlyFee?.value);
-    const insMonth = parseMoney(insurance?.value);
+    const feeOne_base = parseMoney(oneTimeFee?.value);
+    const feeMonth_base = parseMoney(monthlyFee?.value);
+    const insMonth_base = parseMoney(insurance?.value);
 
-    const outCur = String(scheduleCurEl?.value || "UAH").toUpperCase();
+    const outCur = String(baseCur || "UAH").toUpperCase();
+    const scheduleCur = String(scheduleCurEl?.value || outCur).toUpperCase();
 
-    if (!(P0 > 0) || !(n > 0)) {
+    if (!(P0_base > 0) || !(n > 0)) {
       if (!silent) setToast(t("credit.err_amount_term"));
       setResult(t("credit.hint_enter_inputs"), "");
       if (scheduleTbody) scheduleTbody.innerHTML = "";
       if (scheduleWrap && !keepScheduleOpen) scheduleWrap.open = false;
       return;
     }
+
+    // if user picked USD/EUR but rates not available -> fallback to UAH
+    if ((outCur === "USD" || outCur === "EUR") && !hasRate(outCur)) {
+      setToast(
+        isEn()
+          ? "NBU rates not loaded yet. Using UAH."
+          : "Курс НБУ ще не завантажено. Використовую UAH."
+      );
+      baseCur = "UAH";
+      if (baseCurSelect) baseCurSelect.value = "UAH";
+    }
+
+    const P0 = toUAH(outCur, P0_base);
+    const feeOne = toUAH(outCur, feeOne_base);
+    const feeMonth = toUAH(outCur, feeMonth_base);
+    const insMonth = toUAH(outCur, insMonth_base);
 
     const rMonth = rateYear > 0 ? rateYear / 100 / 12 : 0;
     const type = paymentType?.value || "annuity";
@@ -370,7 +485,7 @@
           interest,
           principal,
           fees: feesThisMonth,
-          balance
+          balance,
         });
       }
     } else {
@@ -397,7 +512,7 @@
           interest,
           principal,
           fees: feesThisMonth,
-          balance
+          balance,
         });
       }
 
@@ -418,52 +533,50 @@
         ? rows[0].payment
         : 0;
 
-    // UI (convert from UAH -> outCur)
+    // UI (convert to BASE currency)
     const ui = buildResultUI({
-      monthlyPayment: uahTo(outCur, monthlyPayment),
-      monthlyPaymentWithFees: uahTo(outCur, monthlyPaymentWithFees),
-      totalPaid: uahTo(outCur, totalPaid),
-      overpay: uahTo(outCur, overpay),
-      totalFees: uahTo(outCur, totalFees),
+      monthlyPayment: fromUAH(outCur, monthlyPayment),
+      monthlyPaymentWithFees: fromUAH(outCur, monthlyPaymentWithFees),
+      totalPaid: fromUAH(outCur, totalPaid),
+      overpay: fromUAH(outCur, overpay),
+      totalFees: fromUAH(outCur, totalFees),
       typeLabel,
-      avgPayment: uahTo(outCur, avgPayment),
-      avgPaymentWithFees: uahTo(outCur, avgPaymentWithFees),
-      outCur
+      avgPayment: fromUAH(outCur, avgPayment),
+      avgPaymentWithFees: fromUAH(outCur, avgPaymentWithFees),
+      outCur,
     });
 
     setToast("");
     setResult(ui.main, ui.extra);
 
-    // Schedule (convert each cell)
-    updateTableHeadCurrency(outCur);
+    // Schedule (convert each cell to schedule currency)
+    updateTableHeadCurrency(scheduleCur);
 
     if (scheduleTbody) {
       scheduleTbody.innerHTML = rows
         .map((r) => {
-          const pay = uahTo(outCur, r.payment);
-          const intr = uahTo(outCur, r.interest);
-          const prin = uahTo(outCur, r.principal);
-          const fees = uahTo(outCur, r.fees);
-          const bal = uahTo(outCur, r.balance);
+          const pay = fromUAH(scheduleCur, r.payment);
+          const intr = fromUAH(scheduleCur, r.interest);
+          const prin = fromUAH(scheduleCur, r.principal);
+          const fees = fromUAH(scheduleCur, r.fees);
+          const bal = fromUAH(scheduleCur, r.balance);
 
           return `
             <tr>
               <td>${r.i}</td>
               <td>${formatDate(r.date)}</td>
-              <td>${formatMoney(pay, outCur)}</td>
-              <td>${formatMoney(intr, outCur)}</td>
-              <td>${formatMoney(prin, outCur)}</td>
-              <td>${formatMoney(fees, outCur)}</td>
-              <td>${formatMoney(bal, outCur)}</td>
+              <td>${formatMoney(pay, scheduleCur)}</td>
+              <td>${formatMoney(intr, scheduleCur)}</td>
+              <td>${formatMoney(prin, scheduleCur)}</td>
+              <td>${formatMoney(fees, scheduleCur)}</td>
+              <td>${formatMoney(bal, scheduleCur)}</td>
             </tr>
           `;
         })
         .join("");
     }
 
-    if (scheduleWrap) {
-      scheduleWrap.open = !!keepScheduleOpen;
-    }
+    if (scheduleWrap) scheduleWrap.open = !!keepScheduleOpen;
   }
 
   function reset() {
@@ -475,7 +588,6 @@
     if (monthlyFee) monthlyFee.value = "";
     if (insurance) insurance.value = "";
 
-    // start date = today
     if (startDate) {
       const d = new Date();
       const yyyy = d.getFullYear();
@@ -490,8 +602,7 @@
     if (scheduleTbody) scheduleTbody.innerHTML = "";
     if (scheduleWrap) scheduleWrap.open = false;
 
-    // reset table head currency back to UAH
-    updateTableHeadCurrency("UAH");
+    updateTableHeadCurrency(String(scheduleCurEl?.value || "UAH").toUpperCase());
 
     setTimeout(() => setToast(""), 1200);
   }
@@ -565,8 +676,66 @@
     autoTimer = setTimeout(() => calc({ silent: true }), 180);
   }
 
+  // ---------------- remove OLD currency picker in topline (if any) ----------------
+  function removeOldToplineCurrencyPicker() {
+    const topline = document.querySelector(".evc-topline");
+    if (!topline) return;
+
+    // remove old injected wrap if exists
+    const oldWrap = topline.querySelector(".ccredit-curpick");
+    if (oldWrap) oldWrap.remove();
+
+    // also remove select if someone injected it directly
+    const oldSelect = topline.querySelector("#calcCurrency");
+    if (oldSelect) oldSelect.remove();
+  }
+
+  // ---------------- base currency picker (now in LEFT block) ----------------
+  function initBaseCurrencyPicker() {
+    const select = document.getElementById("calcCurrency");
+    if (!select) return;
+
+    // force old sizes (same as previous topline picker)
+    select.classList.add("ccalc__select", "ccredit-curpick__select");
+
+    baseCurSelect = select;
+    select.value = baseCur;
+
+    select.addEventListener("change", () => {
+      const next = String(select.value || "UAH").toUpperCase();
+
+      // if USD/EUR but rates not loaded -> revert to UAH
+      if ((next === "USD" || next === "EUR") && !hasRate(next)) {
+        setToast(
+          isEn()
+            ? "NBU rates are not loaded yet. Please try later."
+            : "Курс НБУ ще не завантажено. Спробуй пізніше."
+        );
+        select.value = "UAH";
+        baseCur = "UAH";
+        setTimeout(() => setToast(""), 1800);
+      } else {
+        baseCur = next;
+      }
+
+      // sync schedule currency to base (nice default)
+      if (scheduleCurEl) {
+        scheduleCurEl.value = baseCur;
+        updateTableHeadCurrency(baseCur);
+      }
+
+      calc({ silent: true, keepScheduleOpen: true });
+    });
+  }
+
   // ---------------- init ----------------
   document.addEventListener("DOMContentLoaded", async () => {
+    // remove old currency picker from topline (if any)
+    removeOldToplineCurrencyPicker();
+
+    // init base currency picker (now inside "Введи дані")
+    initBaseCurrencyPicker();
+
     // default date (if empty)
     if (startDate && !startDate.value) {
       const d = new Date();
@@ -576,6 +745,9 @@
       startDate.value = `${yyyy}-${mm}-${dd}`;
     }
 
+    // attach autoformat for money inputs
+    [loanAmount, oneTimeFee, monthlyFee, insurance].forEach(attachMoneyFormatter);
+
     // load NBU
     const ok = await loadNbuRates();
     if (!ok) {
@@ -583,27 +755,34 @@
       setTimeout(() => setToast(""), 1800);
     }
 
-    // currency change -> recalc (keep schedule open)
+    // schedule currency change -> recalc (keep open)
     scheduleCurEl?.addEventListener("change", () => {
+      const cur = String(scheduleCurEl.value || "UAH").toUpperCase();
+      if ((cur === "USD" || cur === "EUR") && !hasRate(cur)) {
+        setToast(
+          isEn()
+            ? "NBU rates not loaded yet. Using UAH."
+            : "Курс НБУ ще не завантажено. Використовую UAH."
+        );
+        scheduleCurEl.value = "UAH";
+        setTimeout(() => setToast(""), 1800);
+      }
       calc({ silent: true, keepScheduleOpen: true });
     });
 
     // inputs -> auto
-    const inputs = [
-      loanAmount,
-      annualRate,
-      termMonths,
-      paymentType,
-      startDate,
-      oneTimeFee,
-      monthlyFee,
-      insurance
-    ].filter(Boolean);
-
+    const inputs = [annualRate, termMonths, paymentType, startDate].filter(Boolean);
     inputs.forEach((inp) => {
       inp.addEventListener("input", scheduleAuto);
       inp.addEventListener("change", scheduleAuto);
     });
+
+    // these are already hooked by formatter via input -> scheduleAuto, but keep change safety
+    [loanAmount, oneTimeFee, monthlyFee, insurance]
+      .filter(Boolean)
+      .forEach((inp) => {
+        inp.addEventListener("change", scheduleAuto);
+      });
 
     btnCalc?.addEventListener("click", () => calc({ silent: false }));
     btnReset?.addEventListener("click", reset);

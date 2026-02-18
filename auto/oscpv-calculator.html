@@ -54,6 +54,47 @@
     "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
   }
   </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://calccore.net/auto/oscpv-calculator#app",
+      "name": "Калькулятор ОСЦПВ",
+      "description": "Калькулятор ОСЦПВ (автоцивілка): оцінка діапазону вартості та порівняння умов страхування.",
+      "url": "https://calccore.net/auto/oscpv-calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "inLanguage": "uk",
+      "publisher": {
+        "@id": "https://calccore.net/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "UAH"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/auto/oscpv-calculator#webpage",
+      "url": "https://calccore.net/auto/oscpv-calculator",
+      "name": "Калькулятор ОСЦПВ (автоцивілка) — CalcCore",
+      "description": "Калькулятор ОСЦПВ (автоцивілка): орієнтовна вартість страховки, діапазон цін, порівняння 2 сценаріїв, вибір страхової, копіювання результату та посилання.",
+      "inLanguage": "uk",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/auto/oscpv-calculator#app"
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 
 
@@ -106,7 +147,14 @@
 
                         <div class="divider"></div>
 
-                        <h2>⚖️ Порівняння умов</h2>
+                        <div class="oscpv-topbar">
+                            <h2 class="oscpv-h2">⚖️ Порівняння умов</h2>
+                        
+                            <div class="mode-switch" aria-label="Режим">
+                                <button id="mode1" class="pill active" type="button">1 авто</button>
+                                <button id="mode2" class="pill" type="button">Порівняти 2</button>
+                            </div>
+                        </div>
 
                         <div class="compare-grid">
                             <!-- Scenario A -->
@@ -207,8 +255,9 @@
                             </div>
 
                             <!-- Scenario B -->
-                            <div class="box">
+                            <div class="box" id="boxB">
                                 <div class="box-title">Авто 2</div>
+
 
                                 <div class="field">
                                     <label for="regionB">Регіон</label>
@@ -331,20 +380,21 @@
                                 <div class="kpi-value"><span id="maxA">—</span> <span class="kpi-unit">грн</span></div>
                             </div>
 
-                            <div class="kpi">
+                            <div class="kpi kpi-b">
                                 <div class="kpi-label">Авто 2 — від</div>
                                 <div class="kpi-value"><span id="minB">—</span> <span class="kpi-unit">грн</span></div>
                             </div>
-
-                            <div class="kpi">
+                            
+                            <div class="kpi kpi-b">
                                 <div class="kpi-label">Авто 2 — середня</div>
                                 <div class="kpi-value"><span id="avgB">—</span> <span class="kpi-unit">грн</span></div>
                             </div>
-
-                            <div class="kpi">
+                            
+                            <div class="kpi kpi-b">
                                 <div class="kpi-label">Авто 2 — до</div>
                                 <div class="kpi-value"><span id="maxB">—</span> <span class="kpi-unit">грн</span></div>
                             </div>
+
                         </div>
 
                         <div class="verdict" id="verdictBox">

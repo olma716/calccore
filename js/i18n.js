@@ -128,6 +128,7 @@
         reset_done: "Скинуто ✅",
       },
       wheels: {
+        unit_m: "м",
           hint_enter_and_calc: "Введи дані та натисни «Розрахувати».",
 
           err_width_mm: "ширина (мм)",
@@ -397,6 +398,20 @@
         // share
         link_copied: "Посилання скопійовано ✅",
         copy_link_prompt: "Скопіюй посилання:",
+        compare_title: "Порівняння",
+compare_home_time: "Від розетки • Час",
+compare_home_cost: "Від розетки • Вартість",
+compare_station_time: "Від станції • Час",
+compare_station_cost: "Від станції • Вартість",
+
+tariff_label: "Тариф",
+station_formula_kwh: "Станція (грн/кВт⋅год): вартість = кВт⋅год (з мережі) × тариф.",
+station_formula_min: "Станція (грн/хв): вартість = хвилини × тариф.",
+
+// short units (для рядків типу ≈ 183 хв • 7.00 кВт)
+unit_h_short: "год",
+unit_min_short: "хв",
+unit_kw: "кВт",
       },
       
         ipoteca: {
@@ -2078,6 +2093,21 @@ csv_downloaded: "CSV downloaded.",
 
         link_copied: "Link copied ✅",
         copy_link_prompt: "Copy this link:",
+        // compare-ui
+compare_title: "Compare",
+compare_home_time: "Home outlet • Time",
+compare_home_cost: "Home outlet • Cost",
+compare_station_time: "Station • Time",
+compare_station_cost: "Station • Cost",
+
+tariff_label: "Tariff",
+station_formula_kwh: "Station (UAH/kWh): cost = grid kWh × tariff.",
+station_formula_min: "Station (UAH/min): cost = minutes × tariff.",
+
+// short units
+unit_h_short: "h",
+unit_min_short: "min",
+unit_kw: "kW",
       },
       customs: {
           mode_ev: "EV",
@@ -2093,6 +2123,7 @@ csv_downloaded: "CSV downloaded.",
           reset_done: "Reset ✅",
         },
       wheels: {
+        unit_m: "m",
           hint_enter_and_calc: "Enter values and click “Calculate”.",
 
           err_width_mm: "width (mm)",

@@ -391,3 +391,80 @@
     font-weight: 700;
     /* або 500, якщо хочеш трохи щільніше */
 }
+/* Коли в "Тарифи" показана тільки одна карточка — робимо 1 колонку на всю ширину */
+.evc-tariffs.evc-tariffs--single {
+    grid-template-columns: 1fr !important;
+}
+
+/* Невеликий відступ, якщо тип розетки перенесено в тарифи */
+#socket_wrap {
+    margin-top: 10px;
+}
+/* ===== Layout fix: left stack + right align to top ===== */
+
+/* 1) Щоб права колонка вирівнювалась по верху з лівою */
+.evc-grid {
+    align-items: start;
+}
+
+/* 2) Ліва колонка: акуратний вертикальний відступ між "Дані батареї" та "Тарифи" */
+.evc-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* маленький відступ між блоками */
+}
+
+/* 3) Прибираємо зайвий margin-top у "Результат", бо він тепер не під "Тарифами", а справа */
+.evc-right .evc-result-wrap {
+    margin-top: 0;
+}
+
+/* 4) (опційно) На мобілці: щоб коли одна колонка, результат мав відступ зверху */
+@media (max-width: 900px) {
+    .evc-right .evc-result-wrap {
+        margin-top: 12px;
+    }
+}
+/* ===== Soft red highlight for more expensive option ===== */
+.evc-kpi.is-expensive {
+    background: linear-gradient(180deg, #fff5f5, #fff);
+    border: 1px solid #f5c2c7;
+}
+
+.evc-kpi.is-expensive .kpi-value {
+    color: #b42318;
+    /* м’який червоний */
+}
+/* winner/loser tint in compare */
+.evc-kpi.is-win {
+    background: linear-gradient(180deg, #ecfdf5, #fff);
+    border-color: #86efac;
+}
+
+.evc-kpi.is-lose {
+    background: linear-gradient(180deg, #fff5f5, #fff);
+    border-color: #f5c2c7;
+}
+
+.evc-kpi.is-lose .kpi-value {
+    color: #b42318;
+}
+/* Link button same size as buttons */
+.evc-actions a.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* Soft green like "cheaper from outlet" */
+.evc-btn-link-green {
+    background: #ecfdf5;
+    border: 1px solid #86efac;
+    color: #14532d;
+}
+
+.evc-btn-link-green:hover {
+    background: #dcfce7;
+}

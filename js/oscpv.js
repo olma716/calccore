@@ -10,6 +10,12 @@
    - Do NOT auto-sync URL on each change.
    - Read params on load (share links work).
    - Strip params ONCE after applying (canonical URL in address bar).
+
+   UPDATE (MODE SWITCH):
+   - mode1/mode2 переключатель як у EV-charge
+   - у режимі "1 авто" блок Авто 2 прихований + disabled
+   - KPI Авто 2 (".kpi-b") приховані
+   - share link зберігає режим: m=1|2
 ========================================================= */
 
 (() => {
@@ -26,6 +32,9 @@
           }
           return s;
         };
+
+  // ---------- state ----------
+  const state = { two: false }; // default: single (1 авто)
 
   /* ===== UI refs ===== */
   const insurerEl = $("insurer");
@@ -76,6 +85,11 @@
   const btnShare = $("btnShare");
   const btnCopy = $("btnCopy");
   const btnSetDefault = $("btnSetDefault");
+
+  // ---- mode switch UI (optional if not present) ----
+  const mode1Btn = $("mode1");
+  const mode2Btn = $("mode2");
+  const boxB = $("boxB"); // wrapper for scenario B (Auto 2)
 
   /* KPI blocks (for highlight) */
   const kpiA = [minAEl, avgAEl, maxAEl].map((el) => el?.closest(".kpi")).filter(Boolean);
@@ -218,6 +232,14 @@
     });
   }
 
+  function setSingleModeVerdict() {
+    if (!verdictIcon || !verdictText) return;
+    verdictIcon.textContent = "ℹ️";
+    const key = tt("oscpv.verdict_single");
+    verdictText.textContent =
+      key && !key.startsWith("oscpv.") ? key : "Увімкни «Порівняти 2», щоб зіставити умови Авто 1 та Авто 2.";
+  }
+
   /* ===== Tiles ===== */
   function renderRegionTiles(base) {
     if (!tilesRegion) return;
@@ -304,11 +326,30 @@
 
   function readBase() {
     const v = Number(basePriceEl?.value);
-    return clamp(
-      Number.isFinite(v) ? v : insurerRates[currentInsurerKey()] ?? insurerRates.market,
-      0,
-      50000
-    );
+    return clamp(Number.isFinite(v) ? v : insurerRates[currentInsurerKey()] ?? insurerRates.market, 0, 50000);
+  }
+
+  /* ===== MODE SWITCH ===== */
+  function setMode(two) {
+    state.two = !!two;
+
+    if (mode1Btn) mode1Btn.classList.toggle("active", !state.two);
+    if (mode2Btn) mode2Btn.classList.toggle("active", state.two);
+
+    // hide/disable scenario B
+    if (boxB) boxB.classList.toggle("is-hidden", !state.two);
+    if (boxB) {
+      boxB.querySelectorAll("input, select").forEach((n) => {
+        n.disabled = !state.two;
+      });
+    }
+
+    // hide KPI blocks for B (expect HTML uses .kpi-b on Auto2 KPIs)
+    document.querySelectorAll(".oscpv-page .kpi-b").forEach((k) => {
+      k.classList.toggle("is-hidden", !state.two);
+    });
+
+    update();
   }
 
   /* ===== URL params ===== */
@@ -317,6 +358,7 @@
     const get = (k, d) => p.get(k) ?? d;
 
     return {
+      mode: get("m", "1"), // "1" or "2"
       insurer: get("ins", "market"),
       base: Number(get("base", String(insurerRates.market))),
       a: {
@@ -349,32 +391,33 @@
     if (insurerEl) insurerEl.value = p.insurer;
     if (basePriceEl && Number.isFinite(p.base)) basePriceEl.value = String(clamp(p.base, 0, 50000));
 
-    regionAEl.value = p.a.region;
-    vehicleAEl.value = p.a.vehicle;
-    engineAEl.value = p.a.engine;
-    useAEl.value = p.a.use;
-    ageAEl.value = p.a.age;
-    expAEl.value = p.a.exp;
-    periodAEl.value = p.a.period;
-    franchiseAEl.value = p.a.franchise;
-    benefitAEl.value = p.a.benefit;
+    if (regionAEl) regionAEl.value = p.a.region;
+    if (vehicleAEl) vehicleAEl.value = p.a.vehicle;
+    if (engineAEl) engineAEl.value = p.a.engine;
+    if (useAEl) useAEl.value = p.a.use;
+    if (ageAEl) ageAEl.value = p.a.age;
+    if (expAEl) expAEl.value = p.a.exp;
+    if (periodAEl) periodAEl.value = p.a.period;
+    if (franchiseAEl) franchiseAEl.value = p.a.franchise;
+    if (benefitAEl) benefitAEl.value = p.a.benefit;
 
-    regionBEl.value = p.b.region;
-    vehicleBEl.value = p.b.vehicle;
-    engineBEl.value = p.b.engine;
-    useBEl.value = p.b.use;
-    ageBEl.value = p.b.age;
-    expBEl.value = p.b.exp;
-    periodBEl.value = p.b.period;
-    franchiseBEl.value = p.b.franchise;
-    benefitBEl.value = p.b.benefit;
+    if (regionBEl) regionBEl.value = p.b.region;
+    if (vehicleBEl) vehicleBEl.value = p.b.vehicle;
+    if (engineBEl) engineBEl.value = p.b.engine;
+    if (useBEl) useBEl.value = p.b.use;
+    if (ageBEl) ageBEl.value = p.b.age;
+    if (expBEl) expBEl.value = p.b.exp;
+    if (periodBEl) periodBEl.value = p.b.period;
+    if (franchiseBEl) franchiseBEl.value = p.b.franchise;
+    if (benefitBEl) benefitBEl.value = p.b.benefit;
 
-    showCoefEl.checked = !!p.show;
+    if (showCoefEl) showCoefEl.checked = !!p.show;
   }
 
   // SEO: clean URL once if opened with share params
   function hasInternalParams() {
     const keys = [
+      "m",
       "ins",
       "base",
       "k",
@@ -413,12 +456,13 @@
     const b = scenarioFromUI("B");
 
     const p = new URLSearchParams();
+    p.set("m", state.two ? "2" : "1");
     p.set("ins", currentInsurerKey());
     p.set("base", String(Math.round(base)));
 
     Object.entries(a).forEach(([k, v]) => p.set(`a_${k}`, v));
     Object.entries(b).forEach(([k, v]) => p.set(`b_${k}`, v));
-    p.set("k", showCoefEl.checked ? "1" : "0");
+    p.set("k", showCoefEl?.checked ? "1" : "0");
 
     const url = new URL(location.href);
     url.search = p.toString();
@@ -464,6 +508,10 @@
       tt("oscpv.copy_title"),
       `${tt("oscpv.copy_insurer")}: ${insName}`,
       `${tt("oscpv.copy_base")}: ${fmt(base)} ${tt("oscpv.uah")}`,
+      `${tt("oscpv.copy_mode") && !tt("oscpv.copy_mode").startsWith("oscpv.")
+        ? tt("oscpv.copy_mode")
+        : "Режим"
+      }: ${state.two ? "Порівняти 2" : "1 авто"}`,
       ``,
       `${tt("oscpv.copy_car1")}: k≈${rA.k.toFixed(2)} | ${tt("oscpv.copy_range", {
         min: fmt(rA.min),
@@ -485,25 +533,25 @@
     if (insurerEl) insurerEl.value = "market";
     setBaseFromInsurer();
 
-    regionAEl.value = "city";
-    vehicleAEl.value = "car";
-    engineAEl.value = "lt16";
-    useAEl.value = "private";
-    ageAEl.value = "25_60";
-    expAEl.value = "2_10";
-    periodAEl.value = "12";
-    franchiseAEl.value = "0";
-    benefitAEl.value = "none";
+    if (regionAEl) regionAEl.value = "city";
+    if (vehicleAEl) vehicleAEl.value = "car";
+    if (engineAEl) engineAEl.value = "lt16";
+    if (useAEl) useAEl.value = "private";
+    if (ageAEl) ageAEl.value = "25_60";
+    if (expAEl) expAEl.value = "2_10";
+    if (periodAEl) periodAEl.value = "12";
+    if (franchiseAEl) franchiseAEl.value = "0";
+    if (benefitAEl) benefitAEl.value = "none";
 
-    regionBEl.value = "kyiv";
-    vehicleBEl.value = "car";
-    engineBEl.value = "20_30";
-    useBEl.value = "taxi";
-    ageBEl.value = "u25";
-    expBEl.value = "lt2";
-    periodBEl.value = "12";
-    franchiseBEl.value = "0";
-    benefitBEl.value = "none";
+    if (regionBEl) regionBEl.value = "kyiv";
+    if (vehicleBEl) vehicleBEl.value = "car";
+    if (engineBEl) engineBEl.value = "20_30";
+    if (useBEl) useBEl.value = "taxi";
+    if (ageBEl) ageBEl.value = "u25";
+    if (expBEl) expBEl.value = "lt2";
+    if (periodBEl) periodBEl.value = "12";
+    if (franchiseBEl) franchiseBEl.value = "0";
+    if (benefitBEl) benefitBEl.value = "none";
   }
 
   function update() {
@@ -511,28 +559,41 @@
 
     const base = readBase();
     const sA = scenarioFromUI("A");
-    const sB = scenarioFromUI("B");
 
     const rA = computeScenario(base, sA);
-    const rB = computeScenario(base, sB);
 
     const show = !!showCoefEl?.checked;
     if (coefAEl) coefAEl.textContent = show ? rA.k.toFixed(2) : tt("oscpv.dash");
-    if (coefBEl) coefBEl.textContent = show ? rB.k.toFixed(2) : tt("oscpv.dash");
-
     if (minAEl) minAEl.textContent = fmt(rA.min);
     if (avgAEl) avgAEl.textContent = fmt(rA.avg);
     if (maxAEl) maxAEl.textContent = fmt(rA.max);
 
+    renderRegionTiles(base);
+    renderInsurerTiles(sA);
+
+    // ---- SINGLE MODE: do not compute/compare B ----
+    if (!state.two) {
+      if (coefBEl) coefBEl.textContent = tt("oscpv.dash");
+      if (minBEl) minBEl.textContent = tt("oscpv.dash");
+      if (avgBEl) avgBEl.textContent = tt("oscpv.dash");
+      if (maxBEl) maxBEl.textContent = tt("oscpv.dash");
+
+      [...kpiA, ...kpiB].forEach((el) => el.classList.remove("kpi-win", "kpi-lose"));
+      setSingleModeVerdict();
+      return;
+    }
+
+    // ---- COMPARE MODE ----
+    const sB = scenarioFromUI("B");
+    const rB = computeScenario(base, sB);
+
+    if (coefBEl) coefBEl.textContent = show ? rB.k.toFixed(2) : tt("oscpv.dash");
     if (minBEl) minBEl.textContent = fmt(rB.min);
     if (avgBEl) avgBEl.textContent = fmt(rB.avg);
     if (maxBEl) maxBEl.textContent = fmt(rB.max);
 
     highlightWinner(rA.avg, rB.avg);
     setVerdict(rA.avg, rB.avg);
-
-    renderRegionTiles(base);
-    renderInsurerTiles(sA);
 
     // IMPORTANT: no URL syncing here (SEO-safe)
   }
@@ -546,10 +607,17 @@
     const p = getParamsFromUrl();
     applyParams(p);
 
+    // Mode from URL
+    setMode(p.mode === "2");
+
     // Clean address bar once (keep canonical), but only if opened with share params
     if (hasInternalParams()) stripSearchParamsOnce();
 
     if (!basePriceEl?.value || !Number.isFinite(Number(basePriceEl.value))) setBaseFromInsurer();
+
+    // mode buttons (optional)
+    mode1Btn?.addEventListener("click", () => setMode(false));
+    mode2Btn?.addEventListener("click", () => setMode(true));
 
     if (insurerEl) {
       insurerEl.addEventListener("change", () => {
@@ -570,6 +638,7 @@
       periodAEl,
       franchiseAEl,
       benefitAEl,
+
       regionBEl,
       vehicleBEl,
       engineBEl,
@@ -579,6 +648,7 @@
       periodBEl,
       franchiseBEl,
       benefitBEl,
+
       showCoefEl,
     ].forEach((n) => bindUpdate(n, "change"));
 

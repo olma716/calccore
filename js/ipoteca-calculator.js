@@ -1,12 +1,10 @@
 /* =========================================================
-   ipoteca-calculator.js — CalcCore (i18n-ready)
-   - Down payment mode: UAH / %
-   - Loan = Price - DownPayment
-   - Payment types: annuity / differentiated
-   - Optional: one-time fee + monthly costs
-   - Schedule currency: UAH / USD / EUR (NBU)
-   - UI: big result + KPI blocks + toast + CSV/copy
-   - i18n: uses window.t(key, vars) from /js/i18n.js
+   ipoteca-calculator.js — CalcCore (i18n-ready) UPDATED
+   ✅ Currency selector near property price (UAH / USD / EUR)
+   ✅ All calculations in selected currency
+   ✅ Money inputs auto-format with spaces: 1 000 000
+   ✅ Hints under oneTimeFee & monthlyCosts (small text like Term)
+   ✅ Schedule currency follows selected currency (and can switch if NBU loaded)
 ========================================================= */
 
 (() => {
@@ -19,9 +17,7 @@
       : (k, vars) => {
           let s = String(k || "");
           if (vars && typeof vars === "object") {
-            for (const [kk, vv] of Object.entries(vars)) {
-              s = s.replaceAll(`{${kk}}`, String(vv));
-            }
+            for (const [kk, vv] of Object.entries(vars)) s = s.replaceAll(`{${kk}}`, String(vv));
           }
           return s;
         };
@@ -76,7 +72,7 @@
   const btnCopySchedule = el("btnCopySchedule");
   const btnDownloadCSV = el("btnDownloadCSV");
 
-  // table thead labels (optional ids)
+  // table thead labels
   const thPayment = el("thPayment");
   const thInterest = el("thInterest");
   const thPrincipal = el("thPrincipal");
@@ -85,6 +81,8 @@
 
   // ---------- state ----------
   let dpMode = "UAH"; // or "PCT"
+
+  // Rates are in UAH per 1 unit
   let rates = {
     loaded: false,
     date: "",
@@ -92,8 +90,11 @@
     EUR: null, // UAH per 1 EUR
   };
 
-  // cache schedule values in UAH so we can re-render in selected currency
-  let scheduleRowsUAH = [];
+  // Base currency for the whole calculator
+  let baseCurrency = "UAH"; // UAH | USD | EUR
+
+  // Cache schedule values in BASE currency
+  let scheduleRowsBASE = [];
 
   // ---------- helpers ----------
   function setToast(msg) {
@@ -106,6 +107,7 @@
     if (detailsEl) detailsEl.innerHTML = extraHtml || "";
   }
 
+  // parse money from input like "1 000 000.50"
   function parseMoney(val) {
     if (val == null) return 0;
     const s = String(val)
@@ -121,9 +123,15 @@
     return n.toLocaleString(LOCALE, { maximumFractionDigits: maxFrac });
   }
 
-  function formatMoneyUAH(n) {
+  function currencySymbol(code) {
+    if (code === "USD") return "$";
+    if (code === "EUR") return "€";
+    return "₴";
+  }
+
+  function formatMoney(n, code = baseCurrency) {
     if (!Number.isFinite(n)) return "—";
-    return `${formatNumber(n, 2)} ₴`;
+    return `${formatNumber(n, 2)} ${currencySymbol(code)}`;
   }
 
   function formatDate(d) {
@@ -150,26 +158,26 @@
     return P * k;
   }
 
-  function currencySymbol(code) {
-    if (code === "USD") return "$";
-    if (code === "EUR") return "€";
-    return "₴";
+  // ---------- currency conversion (for schedule view ONLY) ----------
+  // all calculations are in baseCurrency, but schedule dropdown can show other currency if rates loaded
+  function rateUAH(code) {
+    if (code === "UAH") return 1;
+    if (!rates.loaded) return null;
+    const v = rates[code];
+    return Number.isFinite(v) && v > 0 ? v : null;
   }
 
-  function convertFromUAH(amountUAH, code) {
-    if (!Number.isFinite(amountUAH)) return amountUAH;
-    if (code === "UAH") return amountUAH;
+  function convert(amount, fromCode, toCode) {
+    if (!Number.isFinite(amount)) return amount;
+    if (fromCode === toCode) return amount;
 
-    if (!rates.loaded) return amountUAH; // fallback
-    const r = rates[code];
-    if (!Number.isFinite(r) || r <= 0) return amountUAH;
-    return amountUAH / r;
-  }
+    const rFrom = rateUAH(fromCode);
+    const rTo = rateUAH(toCode);
+    if (!rFrom || !rTo) return amount; // fallback if no rates
 
-  function formatMoneyByCurrency(amountUAH, code) {
-    const v = convertFromUAH(amountUAH, code);
-    if (!Number.isFinite(v)) return "—";
-    return `${formatNumber(v, 2)} ${currencySymbol(code)}`;
+    // amount(from) -> UAH -> to
+    const uah = amount * rFrom;
+    return uah / rTo;
   }
 
   function setTheadCurrency(code) {
@@ -179,6 +187,105 @@
     if (thPrincipal) thPrincipal.textContent = tt("ipoteca.th_principal", { sym: s });
     if (thFees) thFees.textContent = tt("ipoteca.th_costs", { sym: s });
     if (thBalance) thBalance.textContent = tt("ipoteca.th_balance", { sym: s });
+  }
+
+  // ---------- money input formatter (spaces) ----------
+  function formatWithSpaces(raw) {
+    const s0 = String(raw ?? "");
+    const clean = s0.replace(/\s+/g, "").replace(/,/g, ".").replace(/[^\d.]/g, "");
+    if (!clean) return "";
+
+    const parts = clean.split(".");
+    const intPart = parts[0] || "";
+    const decPart = parts.slice(1).join("").slice(0, 2); // max 2 digits
+
+    const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return decPart.length ? `${grouped}.${decPart}` : grouped;
+  }
+
+  function bindMoneyFormat(inputEl) {
+    if (!inputEl) return;
+    inputEl.addEventListener("input", () => {
+      const before = inputEl.value;
+      const after = formatWithSpaces(before);
+
+      if (after === before) return;
+      inputEl.value = after;
+
+      // simple caret behavior (end)
+      try {
+        inputEl.setSelectionRange(after.length, after.length);
+      } catch {}
+    });
+
+    // normalize on blur too
+    inputEl.addEventListener("blur", () => {
+      inputEl.value = formatWithSpaces(inputEl.value);
+    });
+  }
+
+  // ---------- Inject currency selector near property price ----------
+  function ensureCurrencySelector() {
+    // If user already added select in HTML:
+    let curSel = el("propertyCurrency");
+
+    if (!propertyPrice) return null;
+
+    // Create wrapper with input + select side-by-side
+    const field = propertyPrice.closest(".mcalc__field");
+    if (!field) return curSel;
+
+    // If select doesn't exist, create it
+    if (!curSel) {
+      curSel = document.createElement("select");
+      curSel.id = "propertyCurrency";
+      curSel.className = "mcalc__select mcalc__select--mini";
+      curSel.innerHTML = `
+        <option value="UAH">UAH ₴</option>
+        <option value="USD">USD $</option>
+        <option value="EUR">EUR €</option>
+      `;
+    }
+
+    // Create row container if not present
+    let row = field.querySelector(".m-row-money");
+    if (!row) {
+      row = document.createElement("div");
+      row.className = "m-row-money";
+      row.style.display = "flex";
+      row.style.gap = "10px";
+      row.style.alignItems = "center";
+
+      // Move input into row
+      propertyPrice.insertAdjacentElement("beforebegin", row);
+      row.appendChild(propertyPrice);
+      propertyPrice.style.flex = "1 1 auto";
+    }
+
+    // Add select into row
+    if (!row.contains(curSel)) {
+      row.appendChild(curSel);
+      curSel.style.flex = "0 0 120px";
+      curSel.style.height = "44px";
+    }
+
+    return curSel;
+  }
+
+  // ---------- Add hints under fee/cost fields ----------
+  function ensureHintAfterInput(inputEl, text) {
+    if (!inputEl) return;
+    const field = inputEl.closest(".mcalc__field");
+    if (!field) return;
+
+    // if already has hint after this input, do nothing
+    const next = inputEl.nextElementSibling;
+    if (next && next.classList.contains("mcalc__hint")) return;
+
+    const hint = document.createElement("div");
+    hint.className = "mcalc__hint";
+    hint.textContent = text;
+    inputEl.insertAdjacentElement("afterend", hint);
   }
 
   // ---------- NBU rates (USD/EUR) ----------
@@ -213,7 +320,9 @@
         }
       }
 
+      // enable cross-currency schedule if loaded
       if (scheduleCurrency) {
+        syncScheduleCurrencyOptions();
         setTheadCurrency(scheduleCurrency.value);
         renderScheduleFromCache();
       }
@@ -222,6 +331,11 @@
       if (nbuBadge) {
         nbuBadge.textContent = tt("ipoteca.nbu_unavailable");
         nbuBadge.title = tt("ipoteca.nbu_title");
+      }
+      if (scheduleCurrency) {
+        syncScheduleCurrencyOptions();
+        setTheadCurrency(scheduleCurrency.value);
+        renderScheduleFromCache();
       }
     }
   }
@@ -232,7 +346,12 @@
     dpModeUAH?.classList.toggle("is-active", dpMode === "UAH");
     dpModePCT?.classList.toggle("is-active", dpMode === "PCT");
 
-    if (dpHint) dpHint.textContent = dpMode === "UAH" ? tt("ipoteca.dp_hint_uah") : tt("ipoteca.dp_hint_pct");
+    if (dpHint) {
+      dpHint.textContent =
+        dpMode === "UAH"
+          ? tt("ipoteca.dp_hint_uah")
+          : tt("ipoteca.dp_hint_pct");
+    }
 
     syncLoanFromInputs({ keepUserField: true });
     scheduleAuto();
@@ -250,32 +369,64 @@
     if (dpMode === "PCT") {
       const pct = Math.max(0, Math.min(100, dp));
       if (!keepUserField && downPayment) downPayment.value = String(pct);
-      const dpUAH = price * (pct / 100);
-      if (loanAmount) loanAmount.value = formatNumber(Math.max(0, price - dpUAH), 2);
+      const dpVAL = price * (pct / 100);
+      const loan = Math.max(0, price - dpVAL);
+      if (loanAmount) loanAmount.value = formatWithSpaces(formatNumber(loan, 2));
     } else {
       dp = Math.max(0, dp);
-      const dpUAH = Math.min(dp, price);
-      if (!keepUserField && downPayment) downPayment.value = String(dpUAH);
-      if (loanAmount) loanAmount.value = formatNumber(Math.max(0, price - dpUAH), 2);
+      const dpVAL = Math.min(dp, price);
+      if (!keepUserField && downPayment) downPayment.value = formatWithSpaces(dpVAL);
+      const loan = Math.max(0, price - dpVAL);
+      if (loanAmount) loanAmount.value = formatWithSpaces(formatNumber(loan, 2));
     }
   }
 
-  function getLoanPrincipalUAH() {
+  function getLoanPrincipal() {
     const price = parseMoney(propertyPrice?.value);
     const dpRaw = parseMoney(downPayment?.value);
     if (!(price > 0)) return 0;
 
-    let dpUAH = 0;
+    let dpVAL = 0;
     if (dpMode === "PCT") {
       const pct = Math.max(0, Math.min(100, dpRaw));
-      dpUAH = price * (pct / 100);
+      dpVAL = price * (pct / 100);
     } else {
-      dpUAH = Math.min(Math.max(0, dpRaw), price);
+      dpVAL = Math.min(Math.max(0, dpRaw), price);
     }
-    return Math.max(0, price - dpUAH);
+    return Math.max(0, price - dpVAL);
   }
 
-  // ---------- UI builder ----------
+  // ---------- Schedule render ----------
+  function renderScheduleFromCache() {
+    if (!scheduleTbody) return;
+
+    const viewCode = scheduleCurrency?.value || baseCurrency;
+    setTheadCurrency(viewCode);
+
+    scheduleTbody.innerHTML = scheduleRowsBASE
+      .map((r) => {
+        const pay = convert(r.payment, baseCurrency, viewCode);
+        const intr = convert(r.interest, baseCurrency, viewCode);
+        const princ = convert(r.principal, baseCurrency, viewCode);
+        const costs = convert(r.costs, baseCurrency, viewCode);
+        const bal = convert(r.balance, baseCurrency, viewCode);
+
+        return `
+          <tr>
+            <td>${r.i}</td>
+            <td>${r.dateText}</td>
+            <td>${formatMoney(pay, viewCode)}</td>
+            <td>${formatMoney(intr, viewCode)}</td>
+            <td>${formatMoney(princ, viewCode)}</td>
+            <td>${formatMoney(costs, viewCode)}</td>
+            <td>${formatMoney(bal, viewCode)}</td>
+          </tr>
+        `;
+      })
+      .join("");
+  }
+
+  // ---------- Result UI ----------
   function buildResultUI(data) {
     const {
       monthlyPayment,
@@ -288,74 +439,52 @@
       avgPaymentWithCosts,
     } = data;
 
-    const main = tt("ipoteca.per_month", { value: formatMoneyUAH(monthlyPayment) });
+    const main = tt("ipoteca.per_month", { value: formatMoney(monthlyPayment, baseCurrency) });
 
     const extra = `
       <div class="m-kpis">
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("ipoteca.kpi_payment_no_fees")}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(monthlyPayment)}</div>
+          <div class="m-kpi__v">${formatMoney(monthlyPayment, baseCurrency)}</div>
           <div class="m-kpi__s">${tt("ipoteca.kpi_calc_type", { type: typeLabel })}</div>
         </div>
 
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("ipoteca.kpi_payment_with_costs")}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(monthlyPaymentWithCosts)}</div>
+          <div class="m-kpi__v">${formatMoney(monthlyPaymentWithCosts, baseCurrency)}</div>
           <div class="m-kpi__s">${tt("ipoteca.kpi_with_costs_note")}</div>
         </div>
 
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("ipoteca.kpi_overpay_interest")}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(overpay)}</div>
+          <div class="m-kpi__v">${formatMoney(overpay, baseCurrency)}</div>
           <div class="m-kpi__s">${tt("ipoteca.kpi_interest_note")}</div>
         </div>
 
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("ipoteca.kpi_total_paid")}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(totalPaid)}</div>
+          <div class="m-kpi__v">${formatMoney(totalPaid, baseCurrency)}</div>
           <div class="m-kpi__s">${tt("ipoteca.kpi_total_note")}</div>
         </div>
       </div>
 
       <div class="m-summary">
-        <div>${tt("ipoteca.summary_costs", { value: formatMoneyUAH(totalCosts) })}</div>
+        <div>${tt("ipoteca.summary_costs", { value: formatMoney(totalCosts, baseCurrency) })}</div>
         <div class="m-hintSmall">
           ${tt("ipoteca.hint_avg", {
-            avg: formatMoneyUAH(avgPayment),
-            avg2: formatMoneyUAH(avgPaymentWithCosts),
+            avg: formatMoney(avgPayment, baseCurrency),
+            avg2: formatMoney(avgPaymentWithCosts, baseCurrency),
           })}
         </div>
       </div>
     `;
+
     return { main, extra };
-  }
-
-  // ---------- schedule render ----------
-  function renderScheduleFromCache() {
-    if (!scheduleTbody) return;
-    const code = scheduleCurrency?.value || "UAH";
-    setTheadCurrency(code);
-
-    scheduleTbody.innerHTML = scheduleRowsUAH
-      .map(
-        (r) => `
-      <tr>
-        <td>${r.i}</td>
-        <td>${r.dateText}</td>
-        <td>${formatMoneyByCurrency(r.paymentUAH, code)}</td>
-        <td>${formatMoneyByCurrency(r.interestUAH, code)}</td>
-        <td>${formatMoneyByCurrency(r.principalUAH, code)}</td>
-        <td>${formatMoneyByCurrency(r.costsUAH, code)}</td>
-        <td>${formatMoneyByCurrency(r.balanceUAH, code)}</td>
-      </tr>
-    `
-      )
-      .join("");
   }
 
   // ---------- calc ----------
   function calc({ silent = false } = {}) {
-    const P0 = getLoanPrincipalUAH();
+    const P0 = getLoanPrincipal();
     const rateYear = parseMoney(annualRate?.value);
     const years = Number(termYears?.value || 0);
     const n = Math.round(years * 12);
@@ -366,7 +495,7 @@
     if (!(P0 > 0) || !(n > 0)) {
       if (!silent) setToast(tt("ipoteca.toast_enter_values"));
       setResult(tt("ipoteca.result_enter_values"), "");
-      scheduleRowsUAH = [];
+      scheduleRowsBASE = [];
       if (scheduleTbody) scheduleTbody.innerHTML = "";
       if (scheduleWrap) scheduleWrap.open = false;
       return;
@@ -382,7 +511,7 @@
     let totalPrincipal = 0;
     let totalCosts = feeOne;
 
-    scheduleRowsUAH = [];
+    scheduleRowsBASE = [];
     let monthlyPayment = 0;
 
     if (type === "annuity") {
@@ -401,18 +530,18 @@
 
         totalInterest += interest;
         totalPrincipal += principal;
-
         totalCosts += costsMonth;
 
         const date = addMonths(start, i);
-        scheduleRowsUAH.push({
+
+        scheduleRowsBASE.push({
           i,
           dateText: formatDate(date),
-          paymentUAH: monthlyPayment + costsMonth,
-          interestUAH: interest,
-          principalUAH: principal,
-          costsUAH: costsMonth,
-          balanceUAH: balance,
+          payment: monthlyPayment + costsMonth,
+          interest,
+          principal,
+          costs: costsMonth,
+          balance,
         });
       }
     } else {
@@ -428,22 +557,22 @@
 
         totalInterest += interest;
         totalPrincipal += principal;
-
         totalCosts += costsMonth;
 
         const date = addMonths(start, i);
-        scheduleRowsUAH.push({
+
+        scheduleRowsBASE.push({
           i,
           dateText: formatDate(date),
-          paymentUAH: basePayment + costsMonth,
-          interestUAH: interest,
-          principalUAH: principal,
-          costsUAH: costsMonth,
-          balanceUAH: balance,
+          payment: basePayment + costsMonth,
+          interest,
+          principal,
+          costs: costsMonth,
+          balance,
         });
       }
 
-      monthlyPayment = scheduleRowsUAH.length ? scheduleRowsUAH[0].paymentUAH - scheduleRowsUAH[0].costsUAH : 0;
+      monthlyPayment = scheduleRowsBASE.length ? scheduleRowsBASE[0].payment - scheduleRowsBASE[0].costs : 0;
     }
 
     const totalPaid = totalPrincipal + totalInterest + totalCosts;
@@ -455,8 +584,8 @@
     const monthlyPaymentWithCosts =
       type === "annuity"
         ? monthlyPayment + costsMonth
-        : scheduleRowsUAH.length
-        ? scheduleRowsUAH[0].paymentUAH
+        : scheduleRowsBASE.length
+        ? scheduleRowsBASE[0].payment
         : 0;
 
     const ui = buildResultUI({
@@ -499,7 +628,7 @@
     setDpMode("UAH");
     setToast(tt("ipoteca.toast_reset"));
     setResult(tt("ipoteca.result_enter_values"), "");
-    scheduleRowsUAH = [];
+    scheduleRowsBASE = [];
     if (scheduleTbody) scheduleTbody.innerHTML = "";
     if (scheduleWrap) scheduleWrap.open = false;
     setTimeout(() => setToast(""), 1200);
@@ -575,6 +704,40 @@
     scheduleAuto();
   }
 
+  // ---------- schedule currency behavior ----------
+  function syncScheduleCurrencyOptions() {
+    if (!scheduleCurrency) return;
+
+    // Always keep UAH/USD/EUR options present, but:
+    // - If rates not loaded, lock schedule currency to baseCurrency
+    if (!rates.loaded) {
+      scheduleCurrency.value = baseCurrency;
+      // prevent user switching away (soft lock)
+      Array.from(scheduleCurrency.options).forEach((opt) => {
+        opt.disabled = opt.value !== baseCurrency;
+      });
+    } else {
+      Array.from(scheduleCurrency.options).forEach((opt) => (opt.disabled = false));
+      if (!scheduleCurrency.value) scheduleCurrency.value = baseCurrency;
+    }
+  }
+
+  // ---------- base currency selector ----------
+  function setBaseCurrency(code) {
+    baseCurrency = code === "USD" || code === "EUR" ? code : "UAH";
+
+    // Keep schedule currency aligned by default
+    if (scheduleCurrency) {
+      scheduleCurrency.value = baseCurrency;
+      syncScheduleCurrencyOptions();
+      setTheadCurrency(scheduleCurrency.value);
+    }
+
+    // Update loan preview + recalculation
+    syncLoanFromInputs({ keepUserField: true });
+    scheduleAuto();
+  }
+
   // ---------- events ----------
   propertyPrice?.addEventListener("input", onInputsChanged);
   downPayment?.addEventListener("input", onInputsChanged);
@@ -596,9 +759,9 @@
   btnDownloadCSV?.addEventListener("click", downloadCSV);
 
   scheduleCurrency?.addEventListener("change", () => {
-    if ((scheduleCurrency.value === "USD" || scheduleCurrency.value === "EUR") && !rates.loaded) {
+    if (!rates.loaded && scheduleCurrency.value !== baseCurrency) {
       setToast(tt("ipoteca.toast_nbu_not_loaded_fallback"));
-      scheduleCurrency.value = "UAH";
+      scheduleCurrency.value = baseCurrency;
       setTimeout(() => setToast(""), 2000);
     }
     setTheadCurrency(scheduleCurrency.value);
@@ -611,7 +774,37 @@
   });
 
   // ---------- init ----------
-  setTheadCurrency("UAH");
-  loadNbuRates(); // async
+  // Create currency selector near property price
+  const curSel = ensureCurrencySelector();
+  if (curSel) {
+    // default: UAH
+    curSel.value = "UAH";
+    curSel.addEventListener("change", () => setBaseCurrency(curSel.value));
+  }
+
+  // Add small hints under optional fees
+  ensureHintAfterInput(
+    oneTimeFee,
+    tt("ipoteca.one_time_fee_hint") ||
+      "Опційно: разова комісія банку/нотаріуса/оцінки. Додається до загальної суми витрат."
+  );
+  ensureHintAfterInput(
+    monthlyCosts,
+    tt("ipoteca.monthly_costs_hint") ||
+      "Опційно: щомісячні витрати (страхування/обслуговування). Додаються до кожного платежу."
+  );
+
+  // Money formatting (spaces)
+  bindMoneyFormat(propertyPrice);
+  bindMoneyFormat(downPayment);
+  bindMoneyFormat(oneTimeFee);
+  bindMoneyFormat(monthlyCosts);
+
+  // Loan amount is readonly but keep it pretty too (no listener needed)
+  // schedule currency inits
+  setTheadCurrency(baseCurrency);
+  syncScheduleCurrencyOptions();
+
+  loadNbuRates(); // async (only for schedule-view conversions)
   reset();
 })();

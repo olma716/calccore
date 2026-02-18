@@ -1,11 +1,9 @@
 /* =========================================================
-   pension-calculator.js — CalcCore (i18n-ready)
-   - Inputs: age now, retire age, current savings, monthly contrib, expected annual return %
-   - Model: monthly contributions at start of month + monthly compounding
-   - Results: final amount at retirement, contributed vs earned, KPI + chart (end-of-year)
-   - Table: yearly rows (Year, Age, Date, Contributed, Earned, Balance, Earned%)
-   - NBU: currency switch UAH/USD/EUR for chart + table
-   - UI: toast + copy result + copy table + CSV
+   pension-calculator.js — CalcCore (i18n-ready) — UPDATED
+   - NEW: base currency selector near "Savings now" (#baseCurrency)
+   - ALL calculations are done in selected base currency (UAH/USD/EUR)
+   - Chart + table can be switched to UAH/USD/EUR via NBU rates (UAH per 1 USD/EUR)
+   - NEW: auto-format big numbers with spaces in money inputs
 ========================================================= */
 
 (() => {
@@ -43,6 +41,9 @@
   const annualReturn = el("annualReturn");
   const startDate = el("startDate");
 
+  // NEW: Base currency (UAH/USD/EUR)
+  const baseCurrency = el("baseCurrency");
+
   // Controls
   const autoCalc = el("autoCalc");
   const btnCalc = el("btnCalc");
@@ -56,6 +57,7 @@
 
   // NBU
   const nbuBadge = el("nbuBadge");
+  // rates: UAH per 1 USD/EUR
   let rates = { loaded: false, date: "", USD: null, EUR: null };
 
   // Chart
@@ -71,9 +73,10 @@
   const btnCopySchedule = el("btnCopySchedule");
   const btnDownloadCSV = el("btnDownloadCSV");
 
-  // State caches in UAH
-  let chartPointsUAH = []; // [{label, yUAH}]
-  let yearRowsUAH = []; // [{year, age, dateText, contributedUAH, earnedUAH, balanceUAH, earnedPct}]
+  // State caches in BASE currency (last calculation)
+  let lastBaseCode = "UAH";
+  let chartPointsBASE = []; // [{label, yBase}]
+  let yearRowsBASE = []; // [{year, age, dateText, contributedBase, earnedBase, balanceBase, earnedPct}]
 
   // ---------- helpers ----------
   function setToast(msg) {
@@ -98,9 +101,15 @@
     return n.toLocaleString(LOCALE, { maximumFractionDigits: maxFrac });
   }
 
-  function formatMoneyUAH(n) {
-    if (!Number.isFinite(n)) return "—";
-    return `${formatNumber(n, 2)} ₴`;
+  function currencySymbol(code) {
+    if (code === "USD") return "$";
+    if (code === "EUR") return "€";
+    return "₴";
+  }
+
+  function formatMoney(amount, code) {
+    if (!Number.isFinite(amount)) return "—";
+    return `${formatNumber(amount, 2)} ${currencySymbol(code)}`;
   }
 
   function formatDate(d) {
@@ -117,25 +126,79 @@
     return d;
   }
 
-  function currencySymbol(code) {
-    if (code === "USD") return "$";
-    if (code === "EUR") return "€";
-    return "₴";
+  function needsRates(from, to) {
+    return from !== to && (from !== "UAH" || to !== "UAH");
   }
 
-  function convertFromUAH(amountUAH, code) {
+  // ---- Currency conversions through UAH pivot ----
+  function toUAH(amount, fromCode) {
+    if (!Number.isFinite(amount)) return amount;
+    if (fromCode === "UAH") return amount;
+    if (!rates.loaded) return amount;
+    const r = rates[fromCode];
+    if (!Number.isFinite(r) || r <= 0) return amount;
+    return amount * r;
+  }
+
+  function fromUAH(amountUAH, toCode) {
     if (!Number.isFinite(amountUAH)) return amountUAH;
-    if (code === "UAH") return amountUAH;
+    if (toCode === "UAH") return amountUAH;
     if (!rates.loaded) return amountUAH;
-    const r = rates[code];
+    const r = rates[toCode];
     if (!Number.isFinite(r) || r <= 0) return amountUAH;
     return amountUAH / r;
   }
 
-  function formatMoneyByCurrency(amountUAH, code) {
-    const v = convertFromUAH(amountUAH, code);
-    if (!Number.isFinite(v)) return "—";
-    return `${formatNumber(v, 2)} ${currencySymbol(code)}`;
+  function convert(amount, fromCode, toCode) {
+    if (!Number.isFinite(amount)) return amount;
+    if (fromCode === toCode) return amount;
+    if (!needsRates(fromCode, toCode)) return amount;
+    if (!rates.loaded) return amount;
+    const uah = toUAH(amount, fromCode);
+    return fromUAH(uah, toCode);
+  }
+
+  // ---------- Money input formatting (spaces) ----------
+  // formats like: 100 000 / 1 000 000. Keeps decimals if typed.
+  function formatMoneyInput(inputEl) {
+    if (!inputEl) return;
+
+    const old = String(inputEl.value ?? "");
+    const selStart = inputEl.selectionStart ?? old.length;
+
+    // distance from end (simple caret preservation)
+    const fromEnd = old.length - selStart;
+
+    // keep only digits and one dot
+    let raw = old.replace(/,/g, ".").replace(/[^\d.]/g, "");
+    const firstDot = raw.indexOf(".");
+    if (firstDot !== -1) {
+      raw = raw.slice(0, firstDot + 1) + raw.slice(firstDot + 1).replace(/\./g, "");
+    }
+
+    const parts = raw.split(".");
+    let intPart = parts[0] || "";
+    let decPart = parts[1] || "";
+
+    // avoid leading zeros like 000123 -> 123 (but keep single 0)
+    intPart = intPart.replace(/^0+(?=\d)/, "");
+
+    // group by 3 with spaces
+    const spaced = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+    // limit decimals to 2 (optional, can remove if you want unlimited)
+    if (decPart.length > 2) decPart = decPart.slice(0, 2);
+
+    const next = decPart.length ? `${spaced}.${decPart}` : spaced;
+
+    // set if changed
+    if (next !== old) {
+      inputEl.value = next;
+      const newPos = Math.max(0, inputEl.value.length - fromEnd);
+      try {
+        inputEl.setSelectionRange(newPos, newPos);
+      } catch {}
+    }
   }
 
   // ---------- NBU rates ----------
@@ -179,38 +242,38 @@
   }
 
   // ---------- UI builder ----------
-  function buildResultUI({ finalAmount, contributed, earned, yearsToGo, monthsToGo, earnedPct }) {
-    const main = `${tt("pension.main") || "Накопичення на пенсію"}: ${formatMoneyUAH(finalAmount)}`;
+  function buildResultUI({ finalAmount, contributed, earned, yearsToGo, monthsToGo, earnedPct, baseCode }) {
+    const main = `${tt("pension.main") || "Накопичення на пенсію"}: ${formatMoney(finalAmount, baseCode)}`;
 
     const extra = `
       <div class="m-kpis">
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("pension.kpi_final") || "Підсумкова сума"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(finalAmount)}</div>
+          <div class="m-kpi__v">${formatMoney(finalAmount, baseCode)}</div>
           <div class="m-kpi__s">${tt("pension.kpi_horizon") || "Горизонт"}: ${yearsToGo} ${tt("pension.y") || "р."} (${monthsToGo} ${tt("pension.m") || "міс."})</div>
         </div>
 
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("pension.kpi_contrib") || "Внесли"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(contributed)}</div>
+          <div class="m-kpi__v">${formatMoney(contributed, baseCode)}</div>
           <div class="m-kpi__s">${tt("pension.kpi_contrib_hint") || "Накопичення зараз + внески"}</div>
         </div>
 
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("pension.kpi_profit") || "Заробили"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(earned)}</div>
+          <div class="m-kpi__v">${formatMoney(earned, baseCode)}</div>
           <div class="m-kpi__s">${tt("pension.kpi_profit_pct") || "У % до внесків"}: ${formatNumber(earnedPct, 2)}%</div>
         </div>
 
         <div class="m-kpi">
           <div class="m-kpi__k">${tt("pension.kpi_monthly") || "Щомісячний внесок"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(parseMoney(monthlyContrib?.value))}</div>
+          <div class="m-kpi__v">${formatMoney(parseMoney(monthlyContrib?.value), baseCode)}</div>
           <div class="m-kpi__s">${tt("pension.kpi_monthly_hint") || "Регулярні внески до пенсії"}</div>
         </div>
       </div>
 
       <div class="m-summary">
-        <div><b>${tt("pension.summary") || "Внесли та заробили"}</b>: ${formatMoneyUAH(contributed)} / ${formatMoneyUAH(earned)}</div>
+        <div><b>${tt("pension.summary") || "Внесли та заробили"}</b>: ${formatMoney(contributed, baseCode)} / ${formatMoney(earned, baseCode)}</div>
         <div class="m-hintSmall">${tt("pension.summary_hint") || "Графік та таблиця показують баланс наприкінці кожного року. Валюту можна перемкнути на USD/EUR за курсом НБУ."}</div>
       </div>
     `;
@@ -220,22 +283,28 @@
   // ---------- Table render ----------
   function renderTableFromCache() {
     if (!scheduleTbody) return;
-    const code = scheduleCurrency?.value || "UAH";
 
-    scheduleTbody.innerHTML = yearRowsUAH
-      .map(
-        (r) => `
-        <tr>
-          <td>${r.year}</td>
-          <td>${r.age}</td>
-          <td>${r.dateText}</td>
-          <td>${formatMoneyByCurrency(r.contributedUAH, code)}</td>
-          <td>${formatMoneyByCurrency(r.earnedUAH, code)}</td>
-          <td>${formatMoneyByCurrency(r.balanceUAH, code)}</td>
-          <td>${formatNumber(r.earnedPct, 2)}%</td>
-        </tr>
-      `
-      )
+    const toCode = scheduleCurrency?.value || lastBaseCode;
+    const fromCode = lastBaseCode;
+
+    scheduleTbody.innerHTML = yearRowsBASE
+      .map((r) => {
+        const contributed = convert(r.contributedBase, fromCode, toCode);
+        const earned = convert(r.earnedBase, fromCode, toCode);
+        const balance = convert(r.balanceBase, fromCode, toCode);
+
+        return `
+          <tr>
+            <td>${r.year}</td>
+            <td>${r.age}</td>
+            <td>${r.dateText}</td>
+            <td>${formatMoney(contributed, toCode)}</td>
+            <td>${formatMoney(earned, toCode)}</td>
+            <td>${formatMoney(balance, toCode)}</td>
+            <td>${formatNumber(r.earnedPct, 2)}%</td>
+          </tr>
+        `;
+      })
       .join("");
   }
 
@@ -243,8 +312,13 @@
   function drawChart() {
     if (!ctx || !canvas) return;
 
-    const code = chartCurrency?.value || "UAH";
-    const points = chartPointsUAH.map((p) => ({ label: p.label, y: convertFromUAH(p.yUAH, code) }));
+    const toCode = chartCurrency?.value || lastBaseCode;
+    const fromCode = lastBaseCode;
+
+    const points = chartPointsBASE.map((p) => ({
+      label: p.label,
+      y: convert(p.yBase, fromCode, toCode),
+    }));
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -284,7 +358,7 @@
       const v = yMax * (1 - g / gridN);
       ctx.fillStyle = "rgba(31,47,85,.85)";
       ctx.font = "11px Arial";
-      ctx.fillText(`${formatNumber(v, 0)} ${currencySymbol(code)}`, 6, y + 4);
+      ctx.fillText(`${formatNumber(v, 0)} ${currencySymbol(toCode)}`, 6, y + 4);
     }
 
     // line
@@ -330,6 +404,10 @@
   function calc({ silent = false } = {}) {
     const a0 = Number(ageNow?.value || 0);
     const aR = Number(ageRetire?.value || 0);
+
+    const baseCode = baseCurrency?.value || "UAH";
+    lastBaseCode = baseCode;
+
     const P0 = parseMoney(savingsNow?.value);
     const mCont = Math.max(0, parseMoney(monthlyContrib?.value));
     const rPct = parseMoney(annualReturn?.value);
@@ -339,8 +417,8 @@
     if (!(a0 > 0) || !(aR > 0) || !(aR > a0)) {
       if (!silent) setToast(tt("pension.toast_bad_ages") || "Перевір вік і вік виходу на пенсію.");
       setResult(tt("pension.result_enter_values") || "Введи вік, вік виходу на пенсію, суму та дохідність.", "");
-      chartPointsUAH = [];
-      yearRowsUAH = [];
+      chartPointsBASE = [];
+      yearRowsBASE = [];
       if (scheduleTbody) scheduleTbody.innerHTML = "";
       if (scheduleWrap) scheduleWrap.open = false;
       renderAllFromCache();
@@ -354,8 +432,8 @@
     if (!(P0 >= 0) || monthsToGo <= 0) {
       if (!silent) setToast(tt("pension.toast_enter_values") || "Введи значення для розрахунку.");
       setResult(tt("pension.result_enter_values") || "Введи вік, вік виходу на пенсію, суму та дохідність.", "");
-      chartPointsUAH = [];
-      yearRowsUAH = [];
+      chartPointsBASE = [];
+      yearRowsBASE = [];
       if (scheduleTbody) scheduleTbody.innerHTML = "";
       if (scheduleWrap) scheduleWrap.open = false;
       renderAllFromCache();
@@ -367,8 +445,8 @@
     let balance = P0;
     let contributed = P0;
 
-    chartPointsUAH = [];
-    yearRowsUAH = [];
+    chartPointsBASE = [];
+    yearRowsBASE = [];
 
     for (let m = 1; m <= monthsToGo; m++) {
       // contribution at start of month
@@ -387,15 +465,15 @@
         const earned = balance - contributed;
         const earnedPct = contributed > 0 ? (earned / contributed) * 100 : 0;
 
-        chartPointsUAH.push({ label: `${y}`, yUAH: balance });
+        chartPointsBASE.push({ label: `${y}`, yBase: balance });
 
-        yearRowsUAH.push({
+        yearRowsBASE.push({
           year: y,
           age,
           dateText: formatDate(addYears(start, y)),
-          contributedUAH: contributed,
-          earnedUAH: earned,
-          balanceUAH: balance,
+          contributedBase: contributed,
+          earnedBase: earned,
+          balanceBase: balance,
           earnedPct,
         });
       }
@@ -405,7 +483,15 @@
     const earned = finalAmount - contributed;
     const earnedPct = contributed > 0 ? (earned / contributed) * 100 : 0;
 
-    const ui = buildResultUI({ finalAmount, contributed, earned, yearsToGo, monthsToGo, earnedPct });
+    const ui = buildResultUI({
+      finalAmount,
+      contributed,
+      earned,
+      yearsToGo,
+      monthsToGo,
+      earnedPct,
+      baseCode,
+    });
 
     setToast("");
     setResult(ui.main, ui.extra);
@@ -421,6 +507,10 @@
     if (savingsNow) savingsNow.value = "";
     if (monthlyContrib) monthlyContrib.value = "";
     if (annualReturn) annualReturn.value = "";
+
+    if (baseCurrency) baseCurrency.value = "UAH";
+    lastBaseCode = "UAH";
+
     if (chartCurrency) chartCurrency.value = "UAH";
     if (scheduleCurrency) scheduleCurrency.value = "UAH";
 
@@ -435,8 +525,8 @@
     setToast(tt("pension.toast_reset") || "Скинуто.");
     setResult(tt("pension.result_enter_values") || "Введи вік, вік виходу на пенсію, суму та дохідність.", "");
 
-    chartPointsUAH = [];
-    yearRowsUAH = [];
+    chartPointsBASE = [];
+    yearRowsBASE = [];
     if (scheduleTbody) scheduleTbody.innerHTML = "";
     if (scheduleWrap) scheduleWrap.open = false;
 
@@ -510,13 +600,47 @@
     autoTimer = setTimeout(() => calc({ silent: true }), 180);
   }
 
+  function safeSetCurrencySelect(selectEl, targetCode) {
+    if (!selectEl) return;
+    selectEl.value = targetCode;
+  }
+
+  function handleDisplayCurrencyChange(selectEl) {
+    const baseCode = baseCurrency?.value || lastBaseCode || "UAH";
+    const chosen = selectEl?.value || baseCode;
+
+    // If conversion needed but NBU not loaded -> fallback to base currency (not UAH!)
+    if (needsRates(baseCode, chosen) && !rates.loaded) {
+      setToast(tt("pension.toast_nbu_not_loaded_fallback") || "Курс НБУ не завантажився — показую базову валюту.");
+      safeSetCurrencySelect(selectEl, baseCode);
+      setTimeout(() => setToast(""), 2000);
+    }
+  }
+
   // ---------- events ----------
+  // money formatting + auto calc
+  savingsNow?.addEventListener("input", () => {
+    formatMoneyInput(savingsNow);
+    scheduleAuto();
+  });
+
+  monthlyContrib?.addEventListener("input", () => {
+    formatMoneyInput(monthlyContrib);
+    scheduleAuto();
+  });
+
   ageNow?.addEventListener("input", scheduleAuto);
   ageRetire?.addEventListener("input", scheduleAuto);
-  savingsNow?.addEventListener("input", scheduleAuto);
-  monthlyContrib?.addEventListener("input", scheduleAuto);
   annualReturn?.addEventListener("input", scheduleAuto);
   startDate?.addEventListener("change", scheduleAuto);
+
+  // base currency change syncs chart/table currency + recalculates
+  baseCurrency?.addEventListener("change", () => {
+    const baseCode = baseCurrency.value || "UAH";
+    safeSetCurrencySelect(chartCurrency, baseCode);
+    safeSetCurrencySelect(scheduleCurrency, baseCode);
+    calc({ silent: true });
+  });
 
   btnCalc?.addEventListener("click", () => calc({ silent: false }));
   btnReset?.addEventListener("click", reset);
@@ -526,20 +650,12 @@
   btnDownloadCSV?.addEventListener("click", downloadCSV);
 
   scheduleCurrency?.addEventListener("change", () => {
-    if ((scheduleCurrency.value === "USD" || scheduleCurrency.value === "EUR") && !rates.loaded) {
-      setToast(tt("pension.toast_nbu_not_loaded_fallback") || "Курс НБУ не завантажився — показую UAH.");
-      scheduleCurrency.value = "UAH";
-      setTimeout(() => setToast(""), 2000);
-    }
+    handleDisplayCurrencyChange(scheduleCurrency);
     renderTableFromCache();
   });
 
   chartCurrency?.addEventListener("change", () => {
-    if ((chartCurrency.value === "USD" || chartCurrency.value === "EUR") && !rates.loaded) {
-      setToast(tt("pension.toast_nbu_not_loaded_fallback") || "Курс НБУ не завантажився — показую UAH.");
-      chartCurrency.value = "UAH";
-      setTimeout(() => setToast(""), 2000);
-    }
+    handleDisplayCurrencyChange(chartCurrency);
     drawChart();
   });
 

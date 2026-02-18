@@ -1,13 +1,9 @@
 /* =========================================================
-   deposit-calculator.js — CalcCore (i18n-ready)
-   - Principal, annual rate, term months
-   - Interest accrual: monthly / daily(365)
-   - Capitalization: on/off
-   - Monthly top-up optional (added at start of each month starting from 2nd)
-   - Taxes: standard (19.5%), none, custom
-   - Schedule currency: UAH / USD / EUR (NBU)
-   - UI: big result + KPI blocks + toast + CSV/copy
-   - i18n: uses window.t(key, vars) from /js/i18n.js (fallback supported)
+   deposit-calculator.js — CalcCore (BASE CURRENCY: UAH/EUR/USD)
+   - Base currency selector (UAH/EUR/USD) affects ALL inputs/outputs
+   - NBU rates for USD/EUR (UAH per 1 unit)
+   - Money inputs auto-format with spaces: 1 000 000
+   - Schedule currency: UAH/EUR/USD
 ========================================================= */
 
 (() => {
@@ -38,6 +34,10 @@
             : "uk-UA";
 
   const LOCALE = getLocale();
+  const isEn = () =>
+    String(document.documentElement.lang || "")
+      .toLowerCase()
+      .startsWith("en");
 
   // ---------- Inputs ----------
   const principal = el("principal");
@@ -49,6 +49,9 @@
   const taxMode = el("taxMode"); // standard / none / custom
   const taxRate = el("taxRate");
   const startDate = el("startDate");
+
+  // Base currency select (NEW in HTML)
+  const calcCurrency = el("calcCurrency");
 
   // Controls
   const autoCalc = el("autoCalc");
@@ -73,14 +76,19 @@
   const btnDownloadCSV = el("btnDownloadCSV");
 
   // ---------- state ----------
-  let rates = {
-    loaded: false,
-    date: "",
-    USD: null, // UAH per 1 USD
-    EUR: null, // UAH per 1 EUR
+  // Rates: UAH per 1 unit (USD/EUR) — from NBU
+  const ratesByCode = {
+    UAH: { rate: 1 },
+    USD: { rate: null },
+    EUR: { rate: null },
   };
+  let ratesLoaded = false;
+  let ratesDate = "";
 
-  // cache schedule values in UAH so we can re-render in selected currency
+  // Base currency for ALL inputs/outputs
+  let baseCur = "UAH";
+
+  // Cache schedule values in UAH (so we can render any currency)
   let scheduleRowsUAH = [];
 
   // ---------- helpers ----------
@@ -109,11 +117,6 @@
     return n.toLocaleString(LOCALE, { maximumFractionDigits: maxFrac });
   }
 
-  function formatMoneyUAH(n) {
-    if (!Number.isFinite(n)) return "—";
-    return `${formatNumber(n, 2)} ₴`;
-  }
-
   function formatDate(d) {
     try {
       return d.toLocaleDateString(LOCALE);
@@ -136,18 +139,36 @@
     return "₴";
   }
 
-  function convertFromUAH(amountUAH, code) {
-    if (!Number.isFinite(amountUAH)) return amountUAH;
-    if (code === "UAH") return amountUAH;
+  function hasRate(code) {
+    const c = String(code || "UAH").toUpperCase();
+    if (c === "UAH") return true;
+    const r = ratesByCode?.[c]?.rate;
+    return Number.isFinite(r) && r > 0;
+  }
 
-    if (!rates.loaded) return amountUAH;
-    const r = rates[code];
+  // CUR -> UAH
+  function toUAH(code, amount) {
+    const c = String(code || "UAH").toUpperCase();
+    if (!Number.isFinite(amount)) return amount;
+    if (c === "UAH") return amount;
+    const r = ratesByCode?.[c]?.rate;
+    if (!Number.isFinite(r) || r <= 0) return amount;
+    return amount * r;
+  }
+
+  // UAH -> CUR
+  function fromUAH(code, amountUAH) {
+    const c = String(code || "UAH").toUpperCase();
+    if (!Number.isFinite(amountUAH)) return amountUAH;
+    if (c === "UAH") return amountUAH;
+    const r = ratesByCode?.[c]?.rate;
     if (!Number.isFinite(r) || r <= 0) return amountUAH;
     return amountUAH / r;
   }
 
-  function formatMoneyByCurrency(amountUAH, code) {
-    const v = convertFromUAH(amountUAH, code);
+  // Format a UAH amount into chosen currency
+  function formatMoney(amountUAH, code) {
+    const v = fromUAH(code, amountUAH);
     if (!Number.isFinite(v)) return "—";
     return `${formatNumber(v, 2)} ${currencySymbol(code)}`;
   }
@@ -178,31 +199,97 @@
     }
   }
 
+  // ---------- input auto-format with spaces ----------
+  function formatWithSpacesRaw(input) {
+    const s0 = String(input ?? "");
+    const s = s0.replace(/[^\d.,]/g, "").replace(/,/g, ".");
+    if (!s) return "";
+
+    const firstDot = s.indexOf(".");
+    let intPart = firstDot >= 0 ? s.slice(0, firstDot) : s;
+    let fracPart = firstDot >= 0 ? s.slice(firstDot + 1) : "";
+
+    fracPart = fracPart.replace(/\./g, "");
+    intPart = intPart.replace(/^0+(?=\d)/, "");
+
+    const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return firstDot >= 0 ? `${grouped}.${fracPart}` : grouped;
+  }
+
+  function countDigitsLeft(str) {
+    return (str.match(/\d/g) || []).length;
+  }
+
+  function caretPosForDigits(str, digitsCount) {
+    if (digitsCount <= 0) return 0;
+    let digits = 0;
+    for (let i = 0; i < str.length; i++) {
+      if (/\d/.test(str[i])) digits++;
+      if (digits >= digitsCount) return i + 1;
+    }
+    return str.length;
+  }
+
+  function attachMoneyFormatter(inputEl) {
+    if (!inputEl) return;
+
+    inputEl.addEventListener("input", () => {
+      const oldVal = inputEl.value;
+      const caret = inputEl.selectionStart ?? oldVal.length;
+
+      const left = oldVal.slice(0, caret);
+      const digitsLeft = countDigitsLeft(left);
+
+      const formatted = formatWithSpacesRaw(oldVal);
+      inputEl.value = formatted;
+
+      const newPos = caretPosForDigits(formatted, digitsLeft);
+      try {
+        inputEl.setSelectionRange(newPos, newPos);
+      } catch {}
+
+      scheduleAuto();
+    });
+
+    inputEl.addEventListener("blur", () => {
+      inputEl.value = formatWithSpacesRaw(inputEl.value);
+    });
+  }
+
   // ---------- NBU rates (USD/EUR) ----------
   async function loadNbuRates() {
     try {
-      const res = await fetch("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", {
-        cache: "no-store",
-      });
+      const res = await fetch(
+        "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json",
+        { cache: "no-store" }
+      );
       if (!res.ok) throw new Error("NBU fetch failed");
       const data = await res.json();
 
       const usd = data.find((x) => String(x.cc || "").toUpperCase() === "USD");
       const eur = data.find((x) => String(x.cc || "").toUpperCase() === "EUR");
 
-      rates.USD = Number.isFinite(Number(usd?.rate)) ? Number(usd.rate) : null;
-      rates.EUR = Number.isFinite(Number(eur?.rate)) ? Number(eur.rate) : null;
-      rates.date = usd?.exchangedate || eur?.exchangedate || "";
-      rates.loaded = Number.isFinite(rates.USD) && Number.isFinite(rates.EUR);
+      ratesByCode.USD.rate = Number.isFinite(Number(usd?.rate)) ? Number(usd.rate) : null;
+      ratesByCode.EUR.rate = Number.isFinite(Number(eur?.rate)) ? Number(eur.rate) : null;
+
+      ratesDate = usd?.exchangedate || eur?.exchangedate || "";
+      ratesLoaded = Number.isFinite(ratesByCode.USD.rate) && Number.isFinite(ratesByCode.EUR.rate);
 
       if (nbuBadge) {
-        if (rates.loaded) {
-          const datePart = rates.date ? ` • ${rates.date}` : "";
-          nbuBadge.textContent = tt("deposit.nbu_badge", {
-            usd: formatNumber(rates.USD, 4),
-            eur: formatNumber(rates.EUR, 4),
-            datePart,
-          }) || `Курс НБУ: USD ${formatNumber(rates.USD, 4)} / EUR ${formatNumber(rates.EUR, 4)}${datePart}`;
+        if (ratesLoaded) {
+          const datePart = ratesDate ? ` • ${ratesDate}` : "";
+          const s =
+            tt("deposit.nbu_badge", {
+              usd: formatNumber(ratesByCode.USD.rate, 4),
+              eur: formatNumber(ratesByCode.EUR.rate, 4),
+              datePart,
+            }) ||
+            `Курс НБУ: USD ${formatNumber(ratesByCode.USD.rate, 4)} / EUR ${formatNumber(
+              ratesByCode.EUR.rate,
+              4
+            )}${datePart}`;
+
+          nbuBadge.textContent = s;
           nbuBadge.title = tt("deposit.nbu_title") || "Курс НБУ (USD/EUR)";
         } else {
           nbuBadge.textContent = tt("deposit.nbu_unavailable") || "Курс НБУ: недоступно";
@@ -210,9 +297,16 @@
         }
       }
 
+      // If baseCur requires rate but not available -> fallback to UAH
+      if ((baseCur === "USD" || baseCur === "EUR") && !hasRate(baseCur)) {
+        baseCur = "UAH";
+        if (calcCurrency) calcCurrency.value = "UAH";
+        if (scheduleCurrency) scheduleCurrency.value = "UAH";
+      }
+
       renderScheduleFromCache();
     } catch {
-      rates.loaded = false;
+      ratesLoaded = false;
       if (nbuBadge) {
         nbuBadge.textContent = tt("deposit.nbu_unavailable") || "Курс НБУ: недоступно";
         nbuBadge.title = tt("deposit.nbu_title") || "Курс НБУ (USD/EUR)";
@@ -220,52 +314,56 @@
     }
   }
 
-  // ---------- UI builder ----------
+  // ---------- UI builder (outputs in baseCur) ----------
   function buildResultUI(data) {
     const {
-      grossInterest,
-      taxAmount,
-      netInterest,
-      finalBalance,
-      totalTopUps,
+      grossInterestUAH,
+      taxAmountUAH,
+      netInterestUAH,
+      finalBalanceUAH,
+      totalTopUpsUAH,
       effTaxRatePct,
       capOn,
       periodLabel,
     } = data;
 
-    const main = `${tt("deposit.per_income_net") || "Дохід (нетто)"}: ${formatMoneyUAH(netInterest)}`;
+    const main =
+      `${tt("deposit.per_income_net") || (isEn() ? "Income (net)" : "Дохід (нетто)")}` +
+      `: ${formatMoney(netInterestUAH, baseCur)}`;
 
     const extra = `
       <div class="m-kpis">
         <div class="m-kpi">
-          <div class="m-kpi__k">${tt("deposit.kpi_interest_gross") || "Відсотки (брутто)"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(grossInterest)}</div>
-          <div class="m-kpi__s">${tt("deposit.kpi_period") || "Періодичність"}: ${periodLabel}</div>
+          <div class="m-kpi__k">${tt("deposit.kpi_interest_gross") || (isEn() ? "Interest (gross)" : "Відсотки (брутто)")}</div>
+          <div class="m-kpi__v">${formatMoney(grossInterestUAH, baseCur)}</div>
+          <div class="m-kpi__s">${tt("deposit.kpi_period") || (isEn() ? "Period" : "Періодичність")}: ${periodLabel}</div>
         </div>
 
         <div class="m-kpi">
-          <div class="m-kpi__k">${tt("deposit.kpi_tax") || "Податки"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(taxAmount)}</div>
-          <div class="m-kpi__s">${tt("deposit.kpi_tax_rate") || "Ставка"}: ${formatNumber(effTaxRatePct, 2)}%</div>
+          <div class="m-kpi__k">${tt("deposit.kpi_tax") || (isEn() ? "Taxes" : "Податки")}</div>
+          <div class="m-kpi__v">${formatMoney(taxAmountUAH, baseCur)}</div>
+          <div class="m-kpi__s">${tt("deposit.kpi_tax_rate") || (isEn() ? "Rate" : "Ставка")}: ${formatNumber(effTaxRatePct, 2)}%</div>
         </div>
 
         <div class="m-kpi">
-          <div class="m-kpi__k">${tt("deposit.kpi_interest_net") || "Відсотки (нетто)"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(netInterest)}</div>
-          <div class="m-kpi__s">${tt("deposit.kpi_after_tax") || "Після податків"}</div>
+          <div class="m-kpi__k">${tt("deposit.kpi_interest_net") || (isEn() ? "Interest (net)" : "Відсотки (нетто)")}</div>
+          <div class="m-kpi__v">${formatMoney(netInterestUAH, baseCur)}</div>
+          <div class="m-kpi__s">${tt("deposit.kpi_after_tax") || (isEn() ? "After tax" : "Після податків")}</div>
         </div>
 
         <div class="m-kpi">
-          <div class="m-kpi__k">${tt("deposit.kpi_final_balance") || "Підсумковий баланс"}</div>
-          <div class="m-kpi__v">${formatMoneyUAH(finalBalance)}</div>
-          <div class="m-kpi__s">${capOn ? (tt("deposit.cap_on") || "З капіталізацією") : (tt("deposit.cap_off") || "Без капіталізації")}</div>
+          <div class="m-kpi__k">${tt("deposit.kpi_final_balance") || (isEn() ? "Final balance" : "Підсумковий баланс")}</div>
+          <div class="m-kpi__v">${formatMoney(finalBalanceUAH, baseCur)}</div>
+          <div class="m-kpi__s">${capOn ? (tt("deposit.cap_on") || (isEn() ? "With capitalization" : "З капіталізацією")) : (tt("deposit.cap_off") || (isEn() ? "Without capitalization" : "Без капіталізації"))}</div>
         </div>
       </div>
 
       <div class="m-summary">
-        <div><b>${tt("deposit.summary_topups") || "Поповнення"}</b>: ${formatMoneyUAH(totalTopUps)}</div>
+        <div><b>${tt("deposit.summary_topups") || (isEn() ? "Top-ups" : "Поповнення")}</b>: ${formatMoney(totalTopUpsUAH, baseCur)}</div>
         <div class="m-hintSmall">
-          ${tt("deposit.summary_hint") || "У графіку: баланс відображається в ₴ та може бути конвертований у USD/EUR за курсом НБУ."}
+          ${tt("deposit.summary_hint") || (isEn()
+            ? "You can change the schedule currency (NBU rates)."
+            : "У графіку можна перемикати валюту — конвертація за курсом НБУ.")}
         </div>
       </div>
     `;
@@ -275,7 +373,7 @@
   // ---------- schedule render ----------
   function renderScheduleFromCache() {
     if (!scheduleTbody) return;
-    const code = scheduleCurrency?.value || "UAH";
+    const code = String(scheduleCurrency?.value || baseCur || "UAH").toUpperCase();
 
     scheduleTbody.innerHTML = scheduleRowsUAH
       .map(
@@ -283,40 +381,53 @@
         <tr>
           <td>${r.i}</td>
           <td>${r.dateText}</td>
-          <td>${formatMoneyByCurrency(r.topUpUAH, code)}</td>
-          <td>${formatMoneyByCurrency(r.interestUAH, code)}</td>
-          <td>${formatMoneyByCurrency(r.taxUAH, code)}</td>
-          <td>${formatMoneyByCurrency(r.netUAH, code)}</td>
-          <td>${formatMoneyByCurrency(r.balanceUAH, code)}</td>
+          <td>${formatMoney(r.topUpUAH, code)}</td>
+          <td>${formatMoney(r.interestUAH, code)}</td>
+          <td>${formatMoney(r.taxUAH, code)}</td>
+          <td>${formatMoney(r.netUAH, code)}</td>
+          <td>${formatMoney(r.balanceUAH, code)}</td>
         </tr>
       `
       )
       .join("");
   }
 
-  // ---------- calc ----------
+  // ---------- calc (inputs in baseCur, internal math in UAH, outputs in baseCur) ----------
   function calc({ silent = false } = {}) {
-    const P0 = parseMoney(principal?.value);
+    // read inputs in baseCur, convert to UAH for math
+    const P0_base = parseMoney(principal?.value);
     const rYear = parseMoney(annualRate?.value);
     const n = Number(termMonths?.value || 0);
-    const topUp = parseMoney(monthlyTopUp?.value);
+    const topUp_base = parseMoney(monthlyTopUp?.value);
+
     const capOn = (capitalization?.value || "on") === "on";
     const period = interestPeriod?.value || "monthly";
     const taxR = getEffectiveTaxRate();
     const start = startDate?.value ? new Date(startDate.value) : new Date();
 
-    if (!(P0 > 0) || !(n > 0)) {
-      if (!silent) setToast(tt("deposit.toast_enter_values") || "Введи суму та термін.");
-      setResult(tt("deposit.result_enter_values") || "Введи суму, ставку та термін.", "");
+    if (!(P0_base > 0) || !(n > 0)) {
+      if (!silent) setToast(tt("deposit.toast_enter_values") || (isEn() ? "Enter amount and term." : "Введи суму та термін."));
+      setResult(tt("deposit.result_enter_values") || (isEn() ? "Enter amount, rate and term." : "Введи суму, ставку та термін."), "");
       scheduleRowsUAH = [];
       if (scheduleTbody) scheduleTbody.innerHTML = "";
       if (scheduleWrap) scheduleWrap.open = false;
       return;
     }
 
-    // monthly nominal rate:
+    // if baseCur needs NBU and not loaded -> fallback to UAH
+    if ((baseCur === "USD" || baseCur === "EUR") && !hasRate(baseCur)) {
+      setToast(isEn() ? "NBU rates not loaded yet. Using UAH." : "Курс НБУ ще не завантажено. Використовую UAH.");
+      baseCur = "UAH";
+      if (calcCurrency) calcCurrency.value = "UAH";
+      if (scheduleCurrency) scheduleCurrency.value = "UAH";
+      setTimeout(() => setToast(""), 1800);
+    }
+
+    const P0 = toUAH(baseCur, P0_base);
+    const topUp = toUAH(baseCur, topUp_base);
+
+    // nominal rates
     const rMonth = rYear > 0 ? (rYear / 100) / 12 : 0;
-    // daily nominal rate (simple 365):
     const rDay = rYear > 0 ? (rYear / 100) / 365 : 0;
 
     let balance = P0;
@@ -353,7 +464,7 @@
       taxTotal += tax;
       netInterestTotal += net;
 
-      // capitalization: add net (simple model)
+      // capitalization: add net
       if (capOn) balance += net;
 
       const date = addMonths(start, i);
@@ -368,15 +479,20 @@
       });
     }
 
-    const finalBalance = capOn ? balance : P0 + totalTopUps; // without cap, principal doesn't grow by interest
-    const periodLabel = period === "daily" ? (tt("deposit.period_daily") || "щоденно (365)") : (tt("deposit.period_monthly") || "щомісячно");
+    // without cap: principal doesn't grow by interest
+    const finalBalance = capOn ? balance : (P0 + totalTopUps);
+
+    const periodLabel =
+      period === "daily"
+        ? (tt("deposit.period_daily") || (isEn() ? "daily (365)" : "щоденно (365)"))
+        : (tt("deposit.period_monthly") || (isEn() ? "monthly" : "щомісячно"));
 
     const ui = buildResultUI({
-      grossInterest: grossInterestTotal,
-      taxAmount: taxTotal,
-      netInterest: netInterestTotal,
-      finalBalance,
-      totalTopUps,
+      grossInterestUAH: grossInterestTotal,
+      taxAmountUAH: taxTotal,
+      netInterestUAH: netInterestTotal,
+      finalBalanceUAH: finalBalance,
+      totalTopUpsUAH: totalTopUps,
       effTaxRatePct: taxR * 100,
       capOn,
       periodLabel,
@@ -385,6 +501,8 @@
     setToast("");
     setResult(ui.main, ui.extra);
 
+    // Nice default: schedule currency follows base currency
+    if (scheduleCurrency) scheduleCurrency.value = scheduleCurrency.value || baseCur;
     renderScheduleFromCache();
     if (scheduleWrap) scheduleWrap.open = false;
   }
@@ -400,7 +518,8 @@
     if (taxMode) taxMode.value = "standard";
     if (taxRate) taxRate.value = "19.5";
 
-    if (scheduleCurrency) scheduleCurrency.value = "UAH";
+    baseCur = String(calcCurrency?.value || "UAH").toUpperCase();
+    if (scheduleCurrency) scheduleCurrency.value = baseCur;
 
     if (startDate) {
       const d = new Date();
@@ -412,8 +531,8 @@
 
     updateTaxFieldState();
 
-    setToast(tt("deposit.toast_reset") || "Скинуто.");
-    setResult(tt("deposit.result_enter_values") || "Введи суму, ставку та термін.", "");
+    setToast(tt("deposit.toast_reset") || (isEn() ? "Reset." : "Скинуто."));
+    setResult(tt("deposit.result_enter_values") || (isEn() ? "Enter amount, rate and term." : "Введи суму, ставку та термін."), "");
     scheduleRowsUAH = [];
     if (scheduleTbody) scheduleTbody.innerHTML = "";
     if (scheduleWrap) scheduleWrap.open = false;
@@ -423,16 +542,16 @@
   // ---------- copy / CSV ----------
   async function copyResult() {
     const txt = (resultEl?.textContent || "").trim();
-    if (!txt || txt.includes(tt("deposit.result_enter_values") || "Введи")) {
-      setToast(tt("deposit.toast_need_calc_first") || "Спочатку зроби розрахунок.");
+    if (!txt) {
+      setToast(tt("deposit.toast_need_calc_first") || (isEn() ? "Calculate first." : "Спочатку зроби розрахунок."));
       return;
     }
     try {
       await navigator.clipboard.writeText(txt);
-      setToast(tt("deposit.copied_result") || "Скопійовано результат.");
+      setToast(tt("deposit.copied_result") || (isEn() ? "Result copied." : "Скопійовано результат."));
       setTimeout(() => setToast(""), 1500);
     } catch {
-      setToast(tt("deposit.copy_failed") || "Не вдалося скопіювати.");
+      setToast(tt("deposit.copy_failed") || (isEn() ? "Copy failed." : "Не вдалося скопіювати."));
     }
   }
 
@@ -447,10 +566,10 @@
     const text = lines.join("\n");
     try {
       await navigator.clipboard.writeText(text.trim());
-      setToast(tt("deposit.copied_table") || "Скопійовано таблицю.");
+      setToast(tt("deposit.copied_table") || (isEn() ? "Table copied." : "Скопійовано таблицю."));
       setTimeout(() => setToast(""), 1500);
     } catch {
-      setToast(tt("deposit.copy_table_failed") || "Не вдалося скопіювати таблицю.");
+      setToast(tt("deposit.copy_table_failed") || (isEn() ? "Copy failed." : "Не вдалося скопіювати таблицю."));
     }
   }
 
@@ -473,7 +592,7 @@
     a.remove();
 
     URL.revokeObjectURL(url);
-    setToast(tt("deposit.csv_downloaded") || "CSV завантажено.");
+    setToast(tt("deposit.csv_downloaded") || (isEn() ? "CSV downloaded." : "CSV завантажено."));
     setTimeout(() => setToast(""), 1500);
   }
 
@@ -486,20 +605,40 @@
   }
 
   // ---------- events ----------
-  principal?.addEventListener("input", scheduleAuto);
+  // money formatters (spaces)
+  [principal, monthlyTopUp].forEach(attachMoneyFormatter);
+
   annualRate?.addEventListener("input", scheduleAuto);
   termMonths?.addEventListener("input", scheduleAuto);
   interestPeriod?.addEventListener("change", scheduleAuto);
   capitalization?.addEventListener("change", scheduleAuto);
-  monthlyTopUp?.addEventListener("input", scheduleAuto);
 
   taxMode?.addEventListener("change", () => {
     updateTaxFieldState();
     scheduleAuto();
   });
-
   taxRate?.addEventListener("input", scheduleAuto);
   startDate?.addEventListener("change", scheduleAuto);
+
+  // base currency change (UAH/EUR/USD)
+  calcCurrency?.addEventListener("change", () => {
+    const next = String(calcCurrency.value || "UAH").toUpperCase();
+    baseCur = next;
+
+    // sync schedule currency to base by default
+    if (scheduleCurrency) scheduleCurrency.value = baseCur;
+
+    // if rate not loaded yet for USD/EUR -> fallback UAH
+    if ((baseCur === "USD" || baseCur === "EUR") && !hasRate(baseCur)) {
+      setToast(isEn() ? "NBU rates not loaded yet. Using UAH." : "Курс НБУ ще не завантажено. Використовую UAH.");
+      baseCur = "UAH";
+      calcCurrency.value = "UAH";
+      if (scheduleCurrency) scheduleCurrency.value = "UAH";
+      setTimeout(() => setToast(""), 1800);
+    }
+
+    calc({ silent: true });
+  });
 
   btnCalc?.addEventListener("click", () => calc({ silent: false }));
   btnReset?.addEventListener("click", reset);
@@ -508,10 +647,12 @@
   btnCopySchedule?.addEventListener("click", copySchedule);
   btnDownloadCSV?.addEventListener("click", downloadCSV);
 
+  // schedule currency change
   scheduleCurrency?.addEventListener("change", () => {
-    if ((scheduleCurrency.value === "USD" || scheduleCurrency.value === "EUR") && !rates.loaded) {
-      setToast(tt("deposit.toast_nbu_not_loaded_fallback") || "Курс НБУ не завантажився — показую UAH.");
-      scheduleCurrency.value = "UAH";
+    const cur = String(scheduleCurrency.value || "UAH").toUpperCase();
+    if ((cur === "USD" || cur === "EUR") && !hasRate(cur)) {
+      setToast(isEn() ? "NBU rates not loaded yet. Using base currency." : "Курс НБУ ще не завантажено. Показую базову валюту.");
+      scheduleCurrency.value = baseCur || "UAH";
       setTimeout(() => setToast(""), 2000);
     }
     renderScheduleFromCache();
@@ -523,6 +664,21 @@
   });
 
   // ---------- init ----------
+  updateTaxFieldState();
+
+  // default date
+  if (startDate && !startDate.value) {
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    startDate.value = `${yyyy}-${mm}-${dd}`;
+  }
+
+  // default base currency
+  baseCur = String(calcCurrency?.value || "UAH").toUpperCase();
+  if (scheduleCurrency) scheduleCurrency.value = baseCur;
+
   reset();
   loadNbuRates(); // async
 })();

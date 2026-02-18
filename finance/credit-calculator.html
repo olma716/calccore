@@ -105,11 +105,21 @@
                         </div>
 
                         <div class="ccalc__rows">
-                            <div class="ccalc__field cconv-full">
+                            <!-- Ряд 1: сума + валюта -->
+                            <div class="ccalc__field">
                                 <label class="ccalc__label" for="loanAmount">Сума кредиту</label>
-                                <input class="ccalc__input" id="loanAmount" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 200 000" />
+                                <input class="ccalc__input" id="loanAmount" type="text" inputmode="decimal" placeholder="наприклад: 200 000" />
                                 <div class="ccalc__hint">Введи суму без комісій (за потреби додай їх нижче).</div>
+                            </div>
+                            
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="calcCurrency">Валюта</label>
+                                <select class="ccalc__select" id="calcCurrency">
+                                    <option value="UAH" selected>UAH ₴</option>
+                                    <option value="USD">USD $</option>
+                                    <option value="EUR">EUR €</option>
+                                </select>
+                                <div class="ccalc__hint">Валюта для всіх введених даних і результатів.</div>
                             </div>
 
                             <div class="ccalc__field">
@@ -162,8 +172,6 @@
                                 <div class="ccalc__actions ccalc__mt10">
                                     <button class="ccalc__btn ccalc__btn--primary" id="btnCalc"
                                         type="button">Розрахувати</button>
-                                    <button class="ccalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="ccalc__btn" id="btnCopy" type="button">Копіювати результат</button>
                                 </div>
 
                                 <!-- Toast як у currency -->
@@ -228,6 +236,11 @@
                                 </table>
                             </div>
                         </details>
+                        <div class="ccalc__actions ccalc__mt10">
+                            
+                            <button class="ccalc__btn" id="btnReset" type="button">Скинути</button>
+                            <button class="ccalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        </div>
                     </div>
 
                 </div>
