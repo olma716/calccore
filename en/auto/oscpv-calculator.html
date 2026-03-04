@@ -59,37 +59,94 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SoftwareApplication",
-      "@id": "https://calccore.net/en/auto/oscpv-calculator#app",
-      "name": "OSCPV (MTPL) Insurance Calculator",
-      "description": "OSCPV (MTPL) calculator: estimate price range and compare insurance conditions.",
-      "url": "https://calccore.net/en/auto/oscpv-calculator",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any",
-      "isAccessibleForFree": true,
-      "inLanguage": "en",
-      "publisher": {
-        "@id": "https://calccore.net/#org"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "UAH"
+      "@type": "Organization",
+      "@id": "https://calccore.net/#org",
+      "name": "CalcCore",
+      "url": "https://calccore.net/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://calccore.net/assets/logo.png"
       }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://calccore.net/#website",
+      "url": "https://calccore.net/",
+      "name": "CalcCore",
+      "publisher": { "@id": "https://calccore.net/#org" },
+      "inLanguage": "en"
     },
     {
       "@type": "WebPage",
       "@id": "https://calccore.net/en/auto/oscpv-calculator#webpage",
       "url": "https://calccore.net/en/auto/oscpv-calculator",
       "name": "OSCPV (MTPL) Insurance Calculator — CalcCore",
-      "description": "OSCPV (MTPL) calculator: estimated insurance cost range (min–avg–max), compare 2 scenarios, choose an insurer base, copy result and share link.",
+      "description": "OSCPV (Ukraine MTPL) calculator: estimated insurance price range, comparison of 2 scenarios, and insurer base selection.",
+      "isPartOf": { "@id": "https://calccore.net/#website" },
+      "about": { "@id": "https://calccore.net/en/auto/oscpv-calculator#app" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://calccore.net/en/auto/oscpv-calculator#app",
+      "name": "OSCPV (MTPL) Calculator",
+      "description": "Estimates an OSCPV/MTPL insurance price range and lets you compare different risk conditions.",
+      "url": "https://calccore.net/en/auto/oscpv-calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
       "inLanguage": "en",
-      "isPartOf": {
-        "@id": "https://calccore.net/#website"
-      },
-      "about": {
-        "@id": "https://calccore.net/en/auto/oscpv-calculator#app"
-      }
+      "publisher": { "@id": "https://calccore.net/#org" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/auto/oscpv-calculator#faq",
+      "url": "https://calccore.net/en/auto/oscpv-calculator",
+      "isPartOf": { "@id": "https://calccore.net/#website" },
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is OSCPV/MTPL insurance price different across insurers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Insurers use different base rates, discounts, promotions, and internal risk models, so the final price can vary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is “taxi” use usually more expensive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Commercial use (taxi/delivery) increases mileage and accident exposure, so insurers often apply a higher rate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the calculator show a price range?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Real offers depend on a specific insurer, discounts, and contract details. A range provides a quick estimation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I save money on OSCPV/MTPL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Compare insurers, check promotions, consider a deductible (franchise), and use benefits/discounts if eligible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this calculator provide an exact price?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It’s an approximate model. For an exact quote you need a specific insurer or aggregator offer."
+          }
+        }
+      ]
     }
   ]
 }

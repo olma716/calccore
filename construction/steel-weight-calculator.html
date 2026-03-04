@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор ваги металу — Steel Weight Calculator | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор ваги металевих елементів: пруток, труба, профільна труба, смуга, квадрат, лист. Графік, таблиця, копіювання, CSV (Excel) та опційний кошторис." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/construction/steel-weight-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/steel-weight-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/steel-weight-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS (локально через ../) -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/steel-weight-calculator.css" />
+
+    <!-- JS (локально через ../) -->
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/steel-weight-calculator.js?v=20260219" defer></script>
+    <!-- FAQ Schema (UK) -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@graph":[
+        {
+          "@type":"Organization",
+          "@id":"https://calccore.net/#org",
+          "name":"CalcCore",
+          "url":"https://calccore.net/",
+          "logo":{"@type":"ImageObject","url":"https://calccore.net/img/logo.png"}
+        },
+        {
+          "@type":"WebSite",
+          "@id":"https://calccore.net/#website",
+          "url":"https://calccore.net/",
+          "name":"CalcCore",
+          "publisher":{"@id":"https://calccore.net/#org"},
+          "inLanguage":"uk"
+        },
+        {
+          "@type":"WebPage",
+          "@id":"https://calccore.net/construction/steel-weight-calculator#webpage",
+          "url":"https://calccore.net/construction/steel-weight-calculator",
+          "name":"Калькулятор ваги металу — Steel Weight Calculator | CalcCore",
+          "description":"Калькулятор ваги металевих елементів: пруток, труба, профільна труба, смуга, квадрат, лист. Графік, таблиця, копіювання, CSV (Excel) та опційний кошторис.",
+          "isPartOf":{"@id":"https://calccore.net/#website"},
+          "publisher":{"@id":"https://calccore.net/#org"},
+          "inLanguage":"uk",
+          "breadcrumb":{"@id":"https://calccore.net/construction/steel-weight-calculator#breadcrumb"},
+          "about":{"@id":"https://calccore.net/construction/steel-weight-calculator#app"}
+        },
+        {
+          "@type":"BreadcrumbList",
+          "@id":"https://calccore.net/construction/steel-weight-calculator#breadcrumb",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"CalcCore","item":"https://calccore.net/"},
+            {"@type":"ListItem","position":2,"name":"Будівництво","item":"https://calccore.net/construction/"},
+            {"@type":"ListItem","position":3,"name":"Калькулятор ваги металу","item":"https://calccore.net/construction/steel-weight-calculator"}
+          ]
+        },
+        {
+          "@type":"SoftwareApplication",
+          "@id":"https://calccore.net/construction/steel-weight-calculator#app",
+          "name":"Калькулятор ваги металу",
+          "description":"Онлайн калькулятор ваги металопрокату: пруток, труба, профільна труба, смуга, квадрат, лист і кутник. Рахує об’єм, вагу, запас/втрати, показує графік, таблицю та дає CSV.",
+          "url":"https://calccore.net/construction/steel-weight-calculator",
+          "applicationCategory":"UtilitiesApplication",
+          "operatingSystem":"Any",
+          "isAccessibleForFree":true,
+          "inLanguage":"uk",
+          "publisher":{"@id":"https://calccore.net/#org"},
+          "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+        },
+        {
+          "@type":"FAQPage",
+          "@id":"https://calccore.net/construction/steel-weight-calculator#faq",
+          "url":"https://calccore.net/construction/steel-weight-calculator",
+          "inLanguage":"uk",
+          "mainEntity":[
+            {
+              "@type":"Question",
+              "name":"Як розрахувати вагу металу?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Вага металу розраховується за формулою: маса = об’єм × густина. У калькуляторі достатньо вибрати тип елемента, ввести розміри та довжину (де потрібно) — система порахує об’єм і вагу автоматично."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Яку густину ставити для сталі?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Типово для сталі використовують 7850 кг/м³. Якщо рахуєш інший метал — просто заміни густину у полі «Густина»."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Чому для кутника формула приблизна?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"У спрощеному розрахунку для кутника не враховуються внутрішні та зовнішні радіуси, а також особливості сортаменту. Тому результат є оцінкою, а не довідниковою масою."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Чи можна розрахувати швелер і двотавр?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Так. Доступні 2 режими: за масою 1 м (кг/м) або приблизно за геометрією (h×b×s×t). Режим «кг/м» точніший, бо відповідає сортаменту."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Чи враховується запас/втрати?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Так. Можна задати відсоток запасу (наприклад 5–10%), і калькулятор додасть його до об’єму та ваги для врахування порізки й втрат."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="credit-page csteel">
+    <div id="header"></div>
+    <main class="container">
+        <section class="mcalc csteel" id="csteel">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор ваги металу</h1>
+                    <p class="mcalc__p">
+                        Розрахунок <b>ваги металевих елементів</b> за геометрією: прутки, труби, профілі, смуги, лист.
+                        Є графік, таблиця, копіювання та CSV (Excel). Опційно — кошторис.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="shape">Тип елемента</label>
+                            
+                                <div class="m-shapes" id="shapeTabs" aria-label="Тип елемента">
+                                    <button type="button" class="m-shape is-active" data-shape="round">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Пруток</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="pipe">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Труба</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="rectPipe">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Профіль</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="flat">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Смуга</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="square">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Квадрат</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="plate">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Лист</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="angle">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Кутник</span>
+                                    </button>
+                                </div>
+                            
+                                <select id="shape" class="mcalc__select">
+                                    <option value="round" selected>Круглий пруток (Ø)</option>
+                                    <option value="pipe">Труба кругла (Øзовн + товщина)</option>
+                                    <option value="rectPipe">Профільна труба (A×B + товщина)</option>
+                                    <option value="square">Квадрат (a×a)</option>
+                                    <option value="flat">Смуга (ширина × товщина)</option>
+                                    <option value="plateSheet">Лист/плита (Ш×В×т)</option>
+                                    <option value="plateStrip">Стрічка/полоса з листа (Ш×т×Д)</option>
+                                    <option value="angle">Кутник (A×B×т) (без радіусів)</option>
+                                </select>
+                            
+                                <div class="mcalc__hint">
+                                    Поле підсвічене, бо від нього залежить набір параметрів і формула.
+                                </div>
+                            </div>
+
+                            <!-- Common -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="lengthM"> Довжина - L(м)</label>
+                                <input class="mcalc__input" id="lengthM" type="text" inputmode="decimal"
+                                    placeholder="напр.: 6" />
+                                <div class="mcalc__hint" id="lengthHint">Для листа «Ш×В×т» довжина не потрібна.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="qty">Кількість (шт)</label>
+                                <input class="mcalc__input" id="qty" type="text" inputmode="decimal"
+                                    placeholder="напр.: 10" />
+                                <div class="mcalc__hint">Якщо не потрібно — залиш 1 або порожнім.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="density">Густина (кг/м³)</label>
+                                <input class="mcalc__input" id="density" type="text" inputmode="decimal"
+                                    placeholder="7850" />
+                                <div class="mcalc__hint">Типово для сталі: 7850 кг/м³ (можна змінити під інший метал).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastePct">Запас / втрати, %</label>
+                                <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                    placeholder="8" />
+                                <div class="mcalc__hint">Зазвичай 0–10% залежно від порізки та втрат.</div>
+                            </div>
+
+                            <!-- Geometry: Round -->
+                            <div id="roundFields" class="m-full">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="diameterMm">Діаметр Ø (мм)</label>
+                                        <input class="mcalc__input" id="diameterMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 12" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Pipe -->
+                            <div id="pipeFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="odMm">Діаметр Ø зовнішній (мм)</label>
+                                        <input class="mcalc__input" id="odMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 48.3" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="thicknessMm">Товщина стінки t (мм)</label>
+                                        <input class="mcalc__input" id="thicknessMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 3.2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Rect pipe -->
+                            <div id="rectPipeFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="aMm">Сторона A (мм)</label>
+                                        <input class="mcalc__input" id="aMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 40" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="bMm">Сторона B (мм)</label>
+                                        <input class="mcalc__input" id="bMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 20" />
+                                    </div>
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="thicknessMm2">Товщина стінки t (мм)</label>
+                                        <input class="mcalc__input" id="thicknessMm2" type="text" inputmode="decimal"
+                                            placeholder="напр.: 2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Square -->
+                            <div id="squareFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="sideMm">Сторона a (мм)</label>
+                                        <input class="mcalc__input" id="sideMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 12" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Flat -->
+                            <div id="flatFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="flatWidthMm">Ширина (мм)</label>
+                                        <input class="mcalc__input" id="flatWidthMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 40" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="flatThicknessMm">Товщина (мм)</label>
+                                        <input class="mcalc__input" id="flatThicknessMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 4" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Plate sheet -->
+                            <div id="plateSheetFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="plateWidthMm">Ширина (мм)</label>
+                                        <input class="mcalc__input" id="plateWidthMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 1250" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="plateHeightMm">Друга сторона (довжина) (мм)</label>
+                                        <input class="mcalc__input" id="plateHeightMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 2500" />
+                                    </div>
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="plateThicknessMm">Товщина (мм)</label>
+                                        <input class="mcalc__input" id="plateThicknessMm" type="text"
+                                            inputmode="decimal" placeholder="напр.: 4" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Plate strip -->
+                            <div id="plateStripFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="stripWidthMm">Ширина (мм)</label>
+                                        <input class="mcalc__input" id="stripWidthMm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 100" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="stripThicknessMm">Товщина (мм)</label>
+                                        <input class="mcalc__input" id="stripThicknessMm" type="text"
+                                            inputmode="decimal" placeholder="напр.: 4" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Angle -->
+                            <div id="angleFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="angleAmm">Полиця A (мм)</label>
+                                        <input class="mcalc__input" id="angleAmm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 50" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="angleBmm">Полиця B (мм)</label>
+                                        <input class="mcalc__input" id="angleBmm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 50" />
+                                    </div>
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="angleTmm">Товщина t (мм)</label>
+                                        <input class="mcalc__input" id="angleTmm" type="text" inputmode="decimal"
+                                            placeholder="напр.: 5" />
+                                    </div>
+                                    <div class="mcalc__hint m-full">Спрощена формула без урахування внутрішніх/зовнішніх
+                                        радіусів.</div>
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+                        <div class="m-viz" id="shapeViz" aria-label="Візуалізація елемента"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280" aria-label="Steel weight chart"></canvas>
+                            <div class="m-hintSmall">Візуалізація ключових значень (об’єм/вага).</div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Завантажити (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Steel materials table">
+                                    <thead>
+                                        <tr>
+                                            <th>Позиція</th>
+                                            <th>К-сть</th>
+                                            <th>Одиниця</th>
+                                            <th>Примітка</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Вартість <span class="muted">(опційно)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceMode">Ціна</label>
+                                        <select id="priceMode" class="mcalc__select">
+                                            <option value="kg" selected>за 1 кг</option>
+                                            <option value="ton">за 1 т</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="pricePerUnit">Вартість за обрану
+                                            одиницю</label>
+                                        <input id="pricePerUnit" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="напр.: 55" />
+                                        <div class="mcalc__hint">Валюта довільна (₴/€/$) — ми просто множимо.</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Доставка (фікс.)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost">Запас/втрати, % (для
+                                            вартості)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                        <div class="mcalc__hint">Окремо, щоб не чіпати розрахунок ваги.</div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button">Зберегти ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button">Скинути ціни</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost"
+                                                type="button">Копіювати вартість</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Введи ціни, щоб побачити загальну
+                                            вартість.</div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/construction/plastering-calculator">Калькулятор штукатурки</a>
+                            <a class="mcalc__btn" href="/construction/flooring-calculator">Калькулятор підлоги</a>
+                            <a class="mcalc__btn" href="/construction/brick-calculator">Калькулятор цегли</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Калькулятор ваги металу онлайн</h2>
+            <p>
+                Калькулятор ваги металу допомагає швидко оцінити масу металопрокату без довідників і ручних формул.
+                Принцип розрахунку простий: спочатку визначається <b>об’єм</b> деталі за її геометрією, після чого
+                об’єм множиться на <b>густину</b> матеріалу. Для більшості сталей у побутових та будівельних задачах
+                використовують значення 7850 кг/м³, але калькулятор дозволяє змінити густину під інший метал (наприклад,
+                алюміній, мідь або нержавіючу сталь). Для профілів, де є довжина, об’єм рахується як
+                <b>площа поперечного перерізу × довжина</b>. Площа перерізу залежить від типу елемента: для прутка —
+                це коло, для труби — різниця двох кіл (зовнішнього та внутрішнього), для профільної труби — різниця
+                площ прямокутників, для смуги — добуток ширини на товщину, для квадрата — квадрат сторони. Для листа
+                об’єм визначається як <b>ширина × висота × товщина</b>, і довжина в метрах не потрібна. Після розрахунку
+                маси калькулятор може додати <b>запас/втрати</b> у відсотках — це зручно, коли планується порізка,
+                відходи або похибки. Важливо пам’ятати, що результат є розрахунковою оцінкою: реальна вага може трохи
+                відрізнятися через допуски сортаменту, радіуси заокруглень, фактичну товщину стінки, покриття та інші
+                виробничі особливості. Для швелера та двотавра часто зручніше використовувати режим <b>кг/м</b>
+                (масу одного погонного метра за сортаментом) — це зазвичай точніше, ніж спрощена геометрія.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+            <div class="m-faq-item">
+                <h3>Як калькулятор ваги металу рахує масу?</h3>
+                <p>Алгоритм складається з двох кроків: 1) обчислення об’єму за розмірами (площа перерізу × довжина або
+                Ш×В×t для листа), 2) множення об’єму на густину матеріалу. Додатково можна застосувати відсоток запасу.</p>
+            </div>
+            <div class="m-faq-item">
+                <h3>Яку густину ставити для сталі?</h3>
+                <p>Типове значення для сталі — <b>7850 кг/м³</b>. Якщо ви працюєте з іншим металом або сплавом, задайте
+                його густину вручну, щоб отримати коректний результат.</p>
+            </div>
+            <div class="m-faq-item">
+                <h3>Чому розрахункова вага може відрізнятися від фактичної?</h3>
+                <p>Різниця можлива через допуски товщини, відхилення геометрії, радіуси заокруглення, покриття,
+                виробничі особливості профілю, а також через втрати під час різання та монтажу.</p>
+            </div>
+            <div class="m-faq-item">
+                <h3>Як правильно рахувати круглу трубу?</h3>
+                <p>Вкажіть зовнішній діаметр <b>D</b> і товщину стінки <b>t</b>. Внутрішній діаметр дорівнює <b>D − 2t</b>.
+                Площа перерізу труби — це різниця площ зовнішнього та внутрішнього кіл, після чого множимо на довжину.</p>
+            </div>
+            <div class="m-faq-item">
+                <h3>Як рахувати лист або смугу з листа?</h3>
+                <p>Для листа вводять ширину, висоту та товщину — довжина в метрах не потрібна. Для смуги з листа (стрічки)
+                потрібні ширина, товщина і довжина в метрах (погонні метри), бо маса залежить від загальної довжини.</p>
+            </div>
+            <div class="m-faq-item">
+                <h3>Швелер і двотавр: який режим обрати — кг/м чи геометрія?</h3>
+                <p>Якщо маєте дані асортаменту — обирайте режим <b>кг/м</b>: це точніше і швидше. Геометричний режим підходить
+                для приблизної оцінки, коли немає точного значення маси 1 м або потрібно прикинути нестандартний профіль.</p>
+            </div>
+        </section>
+
+    </main>
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

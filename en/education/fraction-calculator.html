@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Fraction Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Fraction Calculator: add/subtract/multiply/divide fractions, simplify fractions, convert mixed and improper fractions." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/fraction-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/fraction-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/fraction-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fraction.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/fraction.js?v=20260304" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/education/fraction-calculator#app",
+    "name":"Fraction Calculator",
+    "description":"Add/subtract/multiply/divide fractions, simplify fractions, convert between mixed and improper fractions.",
+    "url":"https://calccore.net/en/education/fraction-calculator",
+    "applicationCategory":"EducationalApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What types of fractions does this calculator support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator supports common fractions (a/b), mixed numbers (w a/b), and improper fractions. You can also perform operations with multiple fractions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you add or subtract fractions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To add or subtract a/b and c/d, use a common denominator: (a/b) ± (c/d) = (ad ± bc) / bd, then simplify the result if possible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you multiply or divide fractions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Multiplication: (a/b) × (c/d) = (ac)/(bd). Division: (a/b) ÷ (c/d) = (a/b) × (d/c) = (ad)/(bc). Then simplify the result."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you simplify a fraction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To simplify a fraction a/b, divide both the numerator and denominator by their greatest common divisor (GCD). Example: 6/12 = 1/2."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you convert a mixed number to an improper fraction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Convert w a/b to an improper fraction using (w × b + a) / b. Example: 2 1/3 = (2×3+1)/3 = 7/3."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you convert an improper fraction to a mixed number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Convert a/b to a mixed number by dividing: w = floor(a/b), remainder r = a mod b, so a/b = w r/b. Example: 11/4 = 2 3/4."
+      }
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="fraction-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc fcalc" id="fcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Fraction Calculator</h1>
+                    <p class="ccalc__p">
+                        4 modes: <b>fraction operations</b>, <b>simplify</b>, <b>mixed → improper</b>,
+                        <b>improper → mixed</b>.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter values</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="fcalc-tabs" role="tablist" aria-label="Calculator modes">
+                            <button class="fcalc-tab is-active" type="button" data-tab="t1" role="tab"
+                                aria-selected="true">Operations</button>
+
+                            <button class="fcalc-tab" type="button" data-tab="t2" role="tab"
+                                aria-selected="false">Simplify</button>
+
+                            <button class="fcalc-tab" type="button" data-tab="t3" role="tab" aria-selected="false">Mixed
+                                → Improper</button>
+
+                            <button class="fcalc-tab" type="button" data-tab="t4" role="tab"
+                                aria-selected="false">Improper → Mixed</button>
+                        </div>
+
+                        <!-- Panel 1: operations (dynamic fractions) -->
+                        <div class="fcalc-panel is-active" id="t1" role="tabpanel">
+
+                            <div class="fcalc-toprow">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t1_count">How many fractions?</label>
+                                    <select class="ccalc__input" id="t1_count">
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
+                                <div class="ccalc__actions">
+                                    <button class="ccalc__btn" type="button" id="t1_add">+ Add fraction</button>
+                                    <button class="ccalc__btn" type="button" id="t1_remove">− Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="fcalc-chain" id="t1_chain" aria-label="Fraction chain"></div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                    id="btnT1">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 2: simplify -->
+                        <div class="fcalc-panel" id="t2" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field fcalc-full">
+                                    <label class="ccalc__label">Fraction to simplify</label>
+
+                                    <div class="fcalc-fr" id="t2_block">
+                                        <input class="fcalc-whole" inputmode="numeric" placeholder="0"
+                                            aria-label="Whole">
+                                        <div class="fcalc-frac">
+                                            <input class="fcalc-num" inputmode="numeric" placeholder="3"
+                                                aria-label="Numerator">
+                                            <div class="fcalc-bar"></div>
+                                            <input class="fcalc-den" inputmode="numeric" placeholder="12"
+                                                aria-label="Denominator">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                    id="btnT2">Simplify</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 3: mixed -> improper -->
+                        <div class="fcalc-panel" id="t3" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field fcalc-full">
+                                    <label class="ccalc__label">Mixed number</label>
+
+                                    <div class="fcalc-fr" id="t3_block">
+                                        <input class="fcalc-whole" inputmode="numeric" placeholder="2"
+                                            aria-label="Whole">
+                                        <div class="fcalc-frac">
+                                            <input class="fcalc-num" inputmode="numeric" placeholder="1"
+                                                aria-label="Numerator">
+                                            <div class="fcalc-bar"></div>
+                                            <input class="fcalc-den" inputmode="numeric" placeholder="3"
+                                                aria-label="Denominator">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT3">Convert</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 4: improper -> mixed -->
+                        <div class="fcalc-panel" id="t4" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field fcalc-full">
+                                    <label class="ccalc__label">Improper fraction</label>
+
+                                    <div class="fcalc-fr" id="t4_block">
+                                        <input class="fcalc-whole" inputmode="numeric" placeholder="0"
+                                            aria-label="Whole">
+                                        <div class="fcalc-frac">
+                                            <input class="fcalc-num" inputmode="numeric" placeholder="11"
+                                                aria-label="Numerator">
+                                            <div class="fcalc-bar"></div>
+                                            <input class="fcalc-den" inputmode="numeric" placeholder="4"
+                                                aria-label="Denominator">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT4">Convert</button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__toast" id="fToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="fResult">
+                            Choose a mode and click “Calculate”.
+                        </div>
+
+                        <div class="fcalc-details" id="fDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 fcalc-result-actions">
+                            <button class="ccalc__btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+        
+            <h2>Fraction Calculator — How It Works</h2>
+            <p>
+                The CalcCore fraction calculator helps you perform <b>fraction arithmetic</b>,
+                <b>simplify fractions</b>, and convert between <b>mixed numbers</b> and
+                <b>improper fractions</b>. It supports both standard fractions (<b>a/b</b>)
+                and mixed numbers (<b>w a/b</b>).
+            </p>
+        
+            <h2>Mode 1 — Fraction Operations</h2>
+            <p>
+                This mode allows you to add, subtract, multiply, and divide fractions.
+                The calculator automatically finds a common denominator when necessary
+                and simplifies the final result.
+            </p>
+        
+            <ul>
+                <li>
+                    <b>Addition</b><br>
+                    a/b + c/d = (a × d + c × b) / (b × d)
+                </li>
+        
+                <li>
+                    <b>Subtraction</b><br>
+                    a/b − c/d = (a × d − c × b) / (b × d)
+                </li>
+        
+                <li>
+                    <b>Multiplication</b><br>
+                    a/b × c/d = (a × c) / (b × d)
+                </li>
+        
+                <li>
+                    <b>Division</b><br>
+                    a/b ÷ c/d = a/b × d/c = (a × d) / (b × c)
+                </li>
+            </ul>
+        
+            <p>
+                After calculation, the result is automatically simplified and displayed
+                both as a <b>fraction</b> and a <b>mixed number</b> if applicable.
+            </p>
+        
+            <h2>Mode 2 — Simplify a Fraction</h2>
+            <p>
+                Simplifying a fraction means dividing both the numerator and denominator
+                by their <b>GCD (greatest common divisor)</b>.
+            </p>
+        
+            <ul>
+                <li><b>GCD formula:</b> GCD = gcd(a, b)</li>
+                <li><b>Simplification:</b> a/b → (a ÷ GCD) / (b ÷ GCD)</li>
+            </ul>
+        
+            <p>
+                Example: 24/36 → GCD(24,36) = 12 → 24/36 = 2/3.
+            </p>
+        
+            <h2>Mode 3 — Mixed Number to Improper Fraction</h2>
+            <p>
+                A mixed number has the format <b>w a/b</b>, where <b>w</b> is the whole part
+                and <b>a/b</b> is the fractional part.
+            </p>
+        
+            <p>
+                To convert a mixed number into an improper fraction:
+            </p>
+        
+            <ul>
+                <li><b>Formula:</b> w a/b = (w × b + a) / b</li>
+            </ul>
+        
+            <p>
+                Example: 2 1/3 = (2 × 3 + 1) / 3 = 7/3.
+            </p>
+        
+            <h2>Mode 4 — Improper Fraction to Mixed Number</h2>
+            <p>
+                An improper fraction is a fraction where the numerator is greater than
+                or equal to the denominator (<b>a ≥ b</b>).
+            </p>
+        
+            <p>
+                To convert it into a mixed number, perform division with remainder:
+            </p>
+        
+            <ul>
+                <li><b>Whole number:</b> w = ⌊a / b⌋</li>
+                <li><b>Remainder:</b> r = a mod b</li>
+                <li><b>Result:</b> a/b = w r/b</li>
+            </ul>
+        
+            <p>
+                Example: 29/4 → w = 7, r = 1 → 29/4 = 7 1/4.
+            </p>
+        
+            <h2>Tips for Accurate Fraction Calculations</h2>
+            <ul>
+                <li>The denominator cannot be zero.</li>
+                <li>Simplifying fractions makes results easier to read.</li>
+                <li>When dividing fractions, multiply by the reciprocal.</li>
+                <li>Improper fractions can always be written as mixed numbers.</li>
+            </ul>
+        
+        </section>
+        
+        
+        
+        <section class="cc-faq">
+        
+            <h2>Frequently Asked Questions</h2>
+        
+            <div class="cc-faq-item">
+                <h3>What is a proper and improper fraction?</h3>
+                <p>
+                    A <b>proper fraction</b> has a numerator smaller than the denominator (a &lt; b),
+                    for example 3/5.
+                    An <b>improper fraction</b> has a numerator greater than or equal to the denominator,
+                    for example 9/4.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>How do you simplify a fraction?</h3>
+                <p>
+                    Find the greatest common divisor (GCD) of the numerator and denominator,
+                    then divide both numbers by it.
+                    Example: 18/24 → GCD = 6 → 3/4.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>How do you add fractions with different denominators?</h3>
+                <p>
+                    Use the formula:
+                    a/b + c/d = (a × d + c × b) / (b × d).
+                    This converts both fractions to a common denominator.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>How do you divide fractions?</h3>
+                <p>
+                    Division becomes multiplication by the reciprocal:
+                    a/b ÷ c/d = a/b × d/c.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>How do you convert a mixed number into an improper fraction?</h3>
+                <p>
+                    Multiply the whole number by the denominator and add the numerator.
+                    Formula: w a/b = (w × b + a) / b.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>How do you convert an improper fraction to a mixed number?</h3>
+                <p>
+                    Divide the numerator by the denominator.
+                    The quotient becomes the whole number and the remainder becomes the new numerator.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Why does the calculator show both fraction and mixed number?</h3>
+                <p>
+                    Fractions are useful for precise calculations, while mixed numbers are
+                    easier to read and understand.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>What happens if the denominator is zero?</h3>
+                <p>
+                    A fraction with denominator 0 is undefined in mathematics, so the calculator
+                    requires a non-zero denominator.
+                </p>
+            </div>
+        
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

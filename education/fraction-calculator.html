@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор дробів онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор дробів CalcCore: додавання/віднімання/множення/ділення дробів, спрощення дробів, перетворення мішаних та неправильних дробів." />
+
+    <link rel="canonical" href="https://calccore.net/education/fraction-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/fraction-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/fraction-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fraction.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/fraction.js?v=20260304" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/education/fraction-calculator#app",
+    "name":"Калькулятор дробів",
+    "description":"Додавання/віднімання/множення/ділення дробів, спрощення дробів, конвертація мішаних і неправильних дробів.",
+    "url":"https://calccore.net/education/fraction-calculator",
+    "applicationCategory":"EducationApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Які дроби підтримує калькулятор дробів?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Калькулятор підтримує звичайні дроби (a/b), мішані дроби (w a/b) та неправильні дроби. Також можна виконувати арифметичні операції з кількома дробами."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Як додати та відняти дроби?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Щоб додати або відняти дроби a/b і c/d, їх приводять до спільного знаменника: (a/b) ± (c/d) = (ad ± bc) / bd. Потім результат можна скоротити."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Як множити та ділити дроби?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Множення: (a/b) × (c/d) = (ac)/(bd). Ділення: (a/b) ÷ (c/d) = (a/b) × (d/c) = (ad)/(bc). Після цього результат зазвичай скорочують."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Як спростити (скоротити) дріб?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Щоб спростити дріб a/b, потрібно поділити чисельник і знаменник на НСД — найбільший спільний дільник чисел a і b. Наприклад, 6/12 = 1/2."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Як перетворити мішаний дріб у неправильний?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Мішаний дріб w a/b перетворюється у неправильний так: (w × b + a) / b. Наприклад, 2 1/3 = (2×3+1)/3 = 7/3."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Як перетворити неправильний дріб у мішаний?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Неправильний дріб a/b перетворюється у мішаний: w = ⌊a/b⌋, остача r = a mod b, тобто a/b = w r/b. Наприклад, 11/4 = 2 3/4."
+      }
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="fraction-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc fcalc" id="fcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор дробів</h1>
+                    <p class="ccalc__p">
+                        4 режими: <b>операції з дробами</b>, <b>спрощення</b>, <b>мішаний → неправильний</b>,
+                        <b>неправильний → мішаний</b>.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Фінанси</span>
+                        </div>
+
+                        <div class="fcalc-tabs" role="tablist" aria-label="Режими калькулятора">
+                            <button class="fcalc-tab is-active" type="button" data-tab="t1" role="tab"
+                                aria-selected="true">Операції</button>
+                            
+                            <button class="fcalc-tab" type="button" data-tab="t2" role="tab"
+                                aria-selected="false">Спрощення</button>
+                            <button class="fcalc-tab" type="button" data-tab="t3" role="tab"
+                                aria-selected="false">Мішаний → Непр.</button>
+                            <button class="fcalc-tab" type="button" data-tab="t4" role="tab" aria-selected="false">Непр.
+                                → Мішаний</button>
+                        </div>
+
+                        <!-- Panel 1: operations -->
+                        <!-- Panel 1: operations (dynamic fractions) -->
+                        <div class="fcalc-panel is-active" id="t1" role="tabpanel">
+                        
+                            <div class="fcalc-toprow">
+                                <div class="ccalc__field">
+                                    <label class="ccalc__label" for="t1_count">Скільки дробів?</label>
+                                    <select class="ccalc__input" id="t1_count">
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                        
+                                <div class="ccalc__actions">
+                                    <button class="ccalc__btn" type="button" id="t1_add">+ Додати дріб</button>
+                                    <button class="ccalc__btn" type="button" id="t1_remove">− Прибрати</button>
+                                </div>
+                            </div>
+                        
+                            <div class="fcalc-chain" id="t1_chain" aria-label="Ланцюжок дробів"></div>
+                        
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT1">Розрахувати</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 2: simplify -->
+                        <div class="fcalc-panel" id="t2" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field fcalc-full">
+                                    <label class="ccalc__label">Дріб для спрощення</label>
+                        
+                                    <div class="fcalc-fr" id="t2_block">
+                                        <input class="fcalc-whole" inputmode="numeric" placeholder="0" aria-label="Ціле">
+                                        <div class="fcalc-frac">
+                                            <input class="fcalc-num" inputmode="numeric" placeholder="3" aria-label="Чисельник">
+                                            <div class="fcalc-bar"></div>
+                                            <input class="fcalc-den" inputmode="numeric" placeholder="12" aria-label="Знаменник">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT2">Спрощити</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 3: mixed -> improper -->
+                        <div class="fcalc-panel" id="t3" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field fcalc-full">
+                                    <label class="ccalc__label">Мішаний дріб</label>
+                        
+                                    <div class="fcalc-fr" id="t3_block">
+                                        <input class="fcalc-whole" inputmode="numeric" placeholder="2" aria-label="Ціле">
+                                        <div class="fcalc-frac">
+                                            <input class="fcalc-num" inputmode="numeric" placeholder="1" aria-label="Чисельник">
+                                            <div class="fcalc-bar"></div>
+                                            <input class="fcalc-den" inputmode="numeric" placeholder="3" aria-label="Знаменник">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT3">Перетворити</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel 4: improper -> mixed -->
+                        <div class="fcalc-panel" id="t4" role="tabpanel">
+                            <div class="ccalc__rows">
+                                <div class="ccalc__field fcalc-full">
+                                    <label class="ccalc__label">Неправильний дріб</label>
+                        
+                                    <div class="fcalc-fr" id="t4_block">
+                                        <input class="fcalc-whole" inputmode="numeric" placeholder="0" aria-label="Ціле">
+                                        <div class="fcalc-frac">
+                                            <input class="fcalc-num" inputmode="numeric" placeholder="11" aria-label="Чисельник">
+                                            <div class="fcalc-bar"></div>
+                                            <input class="fcalc-den" inputmode="numeric" placeholder="4" aria-label="Знаменник">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="ccalc__actions ccalc__mt10">
+                                <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnT4">Перетворити</button>
+                            </div>
+                        </div>
+                        
+
+                        <div class="ccalc__toast" id="fToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="fResult">
+                            Вибери режим і натисни «Розрахувати».
+                        </div>
+
+                        <div class="fcalc-details" id="fDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 fcalc-result-actions">
+                            <button class="ccalc__btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор дробів CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор дробів допомагає виконувати <b>арифметичні операції з дробами</b>, <b>спрощувати</b> їх,
+                а також <b>перетворювати мішані та неправильні дроби</b>. Підтримуються як звичайні дроби виду <b>a/b</b>,
+                так і мішані числа виду <b>w a/b</b>.
+            </p>
+        
+            <h2>Режим 1 — Операції з дробами</h2>
+            <p>
+                У цьому режимі можна додавати, віднімати, множити та ділити дроби. Калькулятор приводить дроби до спільного
+                знаменника (за потреби), виконує дію і показує результат у вигляді звичайного дробу та мішаного числа.
+            </p>
+            <ul>
+                <li>
+                    <b>Додавання:</b>
+                    <span> a/b + c/d = (a·d + c·b) / (b·d) </span>
+                </li>
+                <li>
+                    <b>Віднімання:</b>
+                    <span> a/b − c/d = (a·d − c·b) / (b·d) </span>
+                </li>
+                <li>
+                    <b>Множення:</b>
+                    <span> a/b · c/d = (a·c) / (b·d) </span>
+                </li>
+                <li>
+                    <b>Ділення:</b>
+                    <span> a/b ÷ c/d = a/b · d/c = (a·d) / (b·c) </span>
+                </li>
+            </ul>
+            <p>
+                Після обчислення результат автоматично <b>скорочується</b> та, за можливості, відображається як <b>мішаний
+                    дріб</b>.
+            </p>
+        
+            <h2>Режим 2 — Спрощення дробу</h2>
+            <p>
+                Спрощення (скорочення) дробу — це поділ чисельника і знаменника на їхній <b>НСД</b> (найбільший спільний
+                дільник).
+                Якщо НСД = 1, дріб уже є найпростішим.
+            </p>
+            <ul>
+                <li><b>Формула:</b> НСД = gcd(a, b)</li>
+                <li><b>Скорочення:</b> a/b → (a/НСД) / (b/НСД)</li>
+            </ul>
+            <p>
+                Приклад: 24/36, НСД(24,36)=12 → 24/36 = 2/3.
+            </p>
+        
+            <h2>Режим 3 — Мішаний → Неправильний</h2>
+            <p>
+                Мішаний дріб має вигляд <b>w a/b</b>, де <b>w</b> — ціла частина, а <b>a/b</b> — дробова. Щоб перетворити його
+                на неправильний дріб, потрібно:
+            </p>
+            <ul>
+                <li><b>Формула:</b> w a/b = (w·b + a) / b</li>
+            </ul>
+            <p>
+                Приклад: 2 1/3 = (2·3 + 1)/3 = 7/3.
+            </p>
+        
+            <h2>Режим 4 — Неправильний → Мішаний</h2>
+            <p>
+                Неправильний дріб — це дріб, де чисельник більший або дорівнює знаменнику (<b>a ≥ b</b>). Щоб перетворити його
+                на
+                мішаний дріб, виконуємо ділення з остачею:
+            </p>
+            <ul>
+                <li><b>Ціла частина:</b> w = ⌊a / b⌋</li>
+                <li><b>Остача:</b> r = a mod b</li>
+                <li><b>Результат:</b> a/b = w r/b</li>
+            </ul>
+            <p>
+                Приклад: 29/4 → w=7, r=1 → 29/4 = 7 1/4.
+            </p>
+        
+            <h2>Поради для точних результатів</h2>
+            <ul>
+                <li>Знаменник <b>не може бути 0</b>.</li>
+                <li>Якщо отримали великий дріб — скорочення спростить відповідь.</li>
+                <li>Для ділення пам’ятай: ділення на дріб — це множення на обернений дріб.</li>
+            </ul>
+        </section>
+        
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+        
+            <div class="cc-faq-item">
+                <h3>Що таке правильний і неправильний дріб?</h3>
+                <p>
+                    <b>Правильний</b> — коли чисельник менший за знаменник (a &lt; b).
+                    <b>Неправильний</b> — коли a ≥ b, наприклад 9/4.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Як спростити дріб до найпростішого вигляду?</h3>
+                <p>
+                    Знайди НСД чисельника і знаменника та поділи обидва числа на НСД.
+                    Наприклад: 18/24, НСД=6 → 3/4.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Як додавати дроби з різними знаменниками?</h3>
+                <p>
+                    Використай формулу: a/b + c/d = (a·d + c·b)/(b·d).
+                    Це автоматично приводить до спільного знаменника.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Як ділити дроби?</h3>
+                <p>
+                    Ділення замінюється множенням на обернений дріб:
+                    a/b ÷ c/d = a/b · d/c. Головне — щоб c ≠ 0.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Як перетворити мішаний дріб у неправильний?</h3>
+                <p>
+                    Формула: w a/b = (w·b + a)/b. Наприклад: 3 2/5 = (3·5 + 2)/5 = 17/5.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Як перетворити неправильний дріб у мішаний?</h3>
+                <p>
+                    Поділи чисельник на знаменник: ціла частина — це результат ділення,
+                    а чисельник дробової частини — остача. Наприклад: 11/4 = 2 3/4.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Чому калькулятор показує і дріб, і мішане число?</h3>
+                <p>
+                    Це зручно: дріб корисний для точних обчислень, а мішаний формат — для читабельності.
+                    Наприклад 29/4 = 7 1/4.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Що робити, якщо знаменник дорівнює нулю?</h3>
+                <p>
+                    Дріб із знаменником 0 не має сенсу в звичайній математиці, тому потрібно змінити знаменник на ненульове
+                    число.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

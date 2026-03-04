@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Steel Weight Calculator — Калькулятор ваги металу | CalcCore</title>
+    <meta name="description"
+        content="Steel weight calculator for metal shapes: round bar, pipe, rectangular tube, strip, square bar, sheet, angle. Includes chart, table, copy, CSV (Excel) and optional cost estimate." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calccore.net/en/construction/steel-weight-calculator" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/steel-weight-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/steel-weight-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <!-- CSS (local via ../ because /en/...) -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/steel-weight-calculator.css" />
+
+    <!-- JS (local via ../) -->
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/steel-weight-calculator.js?v=20260219" defer></script>
+    <!-- FAQ Schema (EN) -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@graph":[
+        {
+          "@type":"Organization",
+          "@id":"https://calccore.net/#org",
+          "name":"CalcCore",
+          "url":"https://calccore.net/",
+          "logo":{"@type":"ImageObject","url":"https://calccore.net/img/logo.png"}
+        },
+        {
+          "@type":"WebSite",
+          "@id":"https://calccore.net/#website",
+          "url":"https://calccore.net/",
+          "name":"CalcCore",
+          "publisher":{"@id":"https://calccore.net/#org"},
+          "inLanguage":"en"
+        },
+        {
+          "@type":"WebPage",
+          "@id":"https://calccore.net/en/construction/steel-weight-calculator#webpage",
+          "url":"https://calccore.net/en/construction/steel-weight-calculator",
+          "name":"Steel Weight Calculator — Metal weight by shape | CalcCore",
+          "description":"Steel weight calculator for metal shapes: round bar, pipe, rectangular tube, strip, square bar, sheet, angle. Includes chart, table, copy, CSV (Excel) and optional cost estimate.",
+          "isPartOf":{"@id":"https://calccore.net/#website"},
+          "publisher":{"@id":"https://calccore.net/#org"},
+          "inLanguage":"en",
+          "breadcrumb":{"@id":"https://calccore.net/en/construction/steel-weight-calculator#breadcrumb"},
+          "about":{"@id":"https://calccore.net/en/construction/steel-weight-calculator#app"}
+        },
+        {
+          "@type":"BreadcrumbList",
+          "@id":"https://calccore.net/en/construction/steel-weight-calculator#breadcrumb",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"CalcCore","item":"https://calccore.net/"},
+            {"@type":"ListItem","position":2,"name":"Construction","item":"https://calccore.net/en/construction/"},
+            {"@type":"ListItem","position":3,"name":"Steel Weight Calculator","item":"https://calccore.net/en/construction/steel-weight-calculator"}
+          ]
+        },
+        {
+          "@type":"SoftwareApplication",
+          "@id":"https://calccore.net/en/construction/steel-weight-calculator#app",
+          "name":"Steel Weight Calculator",
+          "description":"Online metal weight calculator for common shapes: round bar, pipe, rectangular tube, flat bar, square bar, sheet and angle. Calculates volume, weight, waste allowance and supports CSV export and optional cost estimate.",
+          "url":"https://calccore.net/en/construction/steel-weight-calculator",
+          "applicationCategory":"UtilitiesApplication",
+          "operatingSystem":"Any",
+          "isAccessibleForFree":true,
+          "inLanguage":"en",
+          "publisher":{"@id":"https://calccore.net/#org"},
+          "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+        },
+        {
+          "@type":"FAQPage",
+          "@id":"https://calccore.net/en/construction/steel-weight-calculator#faq",
+          "url":"https://calccore.net/en/construction/steel-weight-calculator",
+          "inLanguage":"en",
+          "mainEntity":[
+            {
+              "@type":"Question",
+              "name":"How do I calculate steel weight?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Steel weight is calculated as: mass = volume × density. In this calculator, select the shape, enter dimensions and length (when applicable), and it will compute volume and weight automatically."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"What density should I use for steel?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"A common default density for steel is 7850 kg/m³. You can change the density value if you calculate another metal."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Why is the angle steel formula approximate?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"The simplified angle calculation does not include inner/outer fillet radii and profile details from official standards, so the result is an estimate rather than a reference table value."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Can I calculate channel and I-beam weight?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Yes. There are two modes: by mass per meter (kg/m) or an approximate geometry mode (h×b×s×t). The kg/m mode is usually more accurate because it matches reference tables."
+              }
+            },
+            {
+              "@type":"Question",
+              "name":"Does the calculator include a waste/allowance percentage?",
+              "acceptedAnswer":{
+                "@type":"Answer",
+                "text":"Yes. You can add a waste/allowance percentage (e.g., 5–10%), and the calculator will add it on top of the computed volume and weight to account for cutting losses."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="credit-page csteel">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc csteel" id="csteel">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Steel Weight Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate <b>steel/metal weight</b> from geometry: bars, pipes, profiles, strips and sheets.
+                        Includes chart, table, copy and CSV (Excel). Optional cost estimate.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto calculation</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter data</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="shape">Element type</label>
+
+                                <div class="m-shapes" id="shapeTabs" aria-label="Element type">
+                                    <button type="button" class="m-shape is-active" data-shape="round">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Round bar</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="pipe">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Pipe</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="rectPipe">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Profile</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="flat">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Strip</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="square">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Square</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="plate">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Sheet</span>
+                                    </button>
+                                    <button type="button" class="m-shape" data-shape="angle">
+                                        <span class="m-ico2" aria-hidden="true"></span>
+                                        <span>Angle</span>
+                                    </button>
+                                </div>
+
+                                <select id="shape" class="mcalc__select">
+                                    <option value="round" selected>Round bar (Ø)</option>
+                                    <option value="pipe">Round pipe (Ø D + thickness)</option>
+                                    <option value="rectPipe">Rectangular tube (A×B + thickness)</option>
+                                    <option value="square">Square bar (a×a)</option>
+                                    <option value="flat">Strip (width × thickness)</option>
+                                    <option value="plateSheet">Sheet/plate (W×H×t)</option>
+                                    <option value="plateStrip">Strip from sheet (W×t×L)</option>
+                                    <option value="angle">Angle (A×B×t) (no radii)</option>
+                                </select>
+
+                                <div class="mcalc__hint">
+                                    This field changes the set of parameters and the formula.
+                                </div>
+                            </div>
+
+                            <!-- Common -->
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="lengthM">Length - L (m)</label>
+                                <input class="mcalc__input" id="lengthM" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 6" />
+                                <div class="mcalc__hint" id="lengthHint">For “Sheet W×H×t”, length is not required.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="qty">Quantity (pcs)</label>
+                                <input class="mcalc__input" id="qty" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 10" />
+                                <div class="mcalc__hint">If not needed — leave 1 or empty.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="density">Density (kg/m³)</label>
+                                <input class="mcalc__input" id="density" type="text" inputmode="decimal"
+                                    placeholder="7850" />
+                                <div class="mcalc__hint">Typical steel density: 7850 kg/m³ (adjust for other metals).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastePct">Waste / extra, %</label>
+                                <input class="mcalc__input" id="wastePct" type="text" inputmode="decimal"
+                                    placeholder="8" />
+                                <div class="mcalc__hint">Usually 0–10% depending on cutting and losses.</div>
+                            </div>
+
+                            <!-- Geometry: Round -->
+                            <div id="roundFields" class="m-full">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="diameterMm">Diameter Ø (mm)</label>
+                                        <input class="mcalc__input" id="diameterMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 12" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Pipe -->
+                            <div id="pipeFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="odMm">Outer diameter Ø D (mm)</label>
+                                        <input class="mcalc__input" id="odMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 48.3" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="thicknessMm">Wall thickness t (mm)</label>
+                                        <input class="mcalc__input" id="thicknessMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 3.2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Rect pipe -->
+                            <div id="rectPipeFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="aMm">Side A (mm)</label>
+                                        <input class="mcalc__input" id="aMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 40" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="bMm">Side B (mm)</label>
+                                        <input class="mcalc__input" id="bMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 20" />
+                                    </div>
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="thicknessMm2">Wall thickness t (mm)</label>
+                                        <input class="mcalc__input" id="thicknessMm2" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Square -->
+                            <div id="squareFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="sideMm">Side a (mm)</label>
+                                        <input class="mcalc__input" id="sideMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 12" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Flat -->
+                            <div id="flatFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="flatWidthMm">Width (mm)</label>
+                                        <input class="mcalc__input" id="flatWidthMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 40" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="flatThicknessMm">Thickness (mm)</label>
+                                        <input class="mcalc__input" id="flatThicknessMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 4" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Plate sheet -->
+                            <div id="plateSheetFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="plateWidthMm">Width (mm)</label>
+                                        <input class="mcalc__input" id="plateWidthMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 1250" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="plateHeightMm">Sheet length (mm)</label>
+                                        <input class="mcalc__input" id="plateHeightMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 2500" />
+                                    </div>
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="plateThicknessMm">Thickness (mm)</label>
+                                        <input class="mcalc__input" id="plateThicknessMm" type="text"
+                                            inputmode="decimal" placeholder="e.g.: 4" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Plate strip -->
+                            <div id="plateStripFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="stripWidthMm">Width (mm)</label>
+                                        <input class="mcalc__input" id="stripWidthMm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 100" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="stripThicknessMm">Thickness (mm)</label>
+                                        <input class="mcalc__input" id="stripThicknessMm" type="text"
+                                            inputmode="decimal" placeholder="e.g.: 4" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Geometry: Angle -->
+                            <div id="angleFields" class="m-full" style="display:none;">
+                                <div class="mcalc__rows">
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="angleAmm">Leg A (mm)</label>
+                                        <input class="mcalc__input" id="angleAmm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 50" />
+                                    </div>
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="angleBmm">Leg B (mm)</label>
+                                        <input class="mcalc__input" id="angleBmm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 50" />
+                                    </div>
+                                    <div class="mcalc__field m-full">
+                                        <label class="mcalc__label" for="angleTmm">Thickness t (mm)</label>
+                                        <input class="mcalc__input" id="angleTmm" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 5" />
+                                    </div>
+                                    <div class="mcalc__hint m-full">Simplified formula without inner/outer radii.</div>
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+                        <div class="m-viz" id="shapeViz" aria-label="Element visualization"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Chart</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280" aria-label="Steel weight chart"></canvas>
+                            <div class="m-hintSmall">Visualization of key values (volume/weight).</div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Download (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Steel materials table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Qty</th>
+                                            <th>Unit</th>
+                                            <th>Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <!-- COST -->
+                        <details class="m-schedule" id="costWrap">
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Cost <span class="muted">(optional)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools" style="padding-bottom:0;">
+                                <div class="m-costgrid">
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="priceMode">Price</label>
+                                        <select id="priceMode" class="mcalc__select">
+                                            <option value="kg" selected>per 1 kg</option>
+                                            <option value="ton">per 1 t</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="pricePerUnit">Price per selected unit</label>
+                                        <input id="pricePerUnit" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="e.g.: 55" />
+                                        <div class="mcalc__hint">Currency is flexible (₴/€/$) — we just multiply.</div>
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="delivery">Delivery (fixed)</label>
+                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="0" />
+                                    </div>
+
+                                    <div class="mcalc__field">
+                                        <label class="mcalc__label" for="wastePctCost">Waste/extra, % (for cost)</label>
+                                        <input id="wastePctCost" class="mcalc__input" type="text" inputmode="decimal"
+                                            placeholder="5" />
+                                        <div class="mcalc__hint">Separate from the weight calculation waste.</div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices"
+                                                type="button">Save prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices"
+                                                type="button">Reset prices</button>
+                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost"
+                                                type="button">Copy cost</button>
+                                        </div>
+                                        <div class="mcalc__toast" id="costToast"></div>
+                                    </div>
+
+                                    <div class="mcalc__field m-full">
+                                        <div class="mcalc__bigNumber" id="costTotal">Enter prices to see the total cost.
+                                        </div>
+                                        <div class="m-details" id="costDetails"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a class="mcalc__btn" href="/en/construction/plastering-calculator">Plaster calculator</a>
+                            <a class="mcalc__btn" href="/en/construction/flooring-calculator">Flooring calculator</a>
+                            <a class="mcalc__btn" href="/en/construction/brick-calculator">Brick calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Online Metal Weight Calculator</h2>
+            <p>
+                A metal weight calculator helps quickly estimate the mass of metal products without using
+                reference tables or manual formulas. The calculation principle is simple: first the
+                <b>volume</b> of the element is determined based on its geometry, and then the volume
+                is multiplied by the <b>material density</b>. For most steel applications in construction
+                and engineering, a standard density of <b>7850 kg/m³</b> is used. However, the calculator
+                allows you to change the density if you are working with another metal such as aluminum,
+                copper, or stainless steel.
+        
+                For profiles that have a defined length, the volume is calculated as
+                <b>cross-sectional area × length</b>. The cross-sectional area depends on the element type:
+                for a round bar it is the area of a circle, for a pipe it is the difference between two
+                circles (outer and inner), for a rectangular tube it is the difference between two
+                rectangles, for a flat bar it is width multiplied by thickness, and for a square bar
+                it is the square of the side length.
+        
+                For sheet metal, the volume is calculated as
+                <b>width × height × thickness</b>, and length in meters is not required.
+                After calculating the mass, the calculator can also include a
+                <b>waste or allowance percentage</b>, which is useful when cutting material or accounting
+                for production losses.
+        
+                It is important to remember that the result is an estimated value. The actual weight may
+                differ slightly due to manufacturing tolerances, rounded corners, wall thickness
+                variations, coatings, or other production characteristics. For channel and I-beam
+                sections, it is often more accurate to use the <b>kg/m mode</b> (mass per linear meter
+                from steel standards) rather than simplified geometry calculations.
+            </p>
+        </section>
+        
+        <section class="m-faq">
+            <h2>Frequently Asked Questions</h2>
+        
+            <div class="m-faq-item">
+                <h3>How does the metal weight calculator work?</h3>
+                <p>
+                    The algorithm consists of two steps: 1) calculating the volume based on dimensions
+                    (cross-sectional area × length or width × height × thickness for sheet metal),
+                    and 2) multiplying the volume by the material density. A waste percentage can
+                    also be applied if needed.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>What density should be used for steel?</h3>
+                <p>
+                    The typical density for structural steel is <b>7850 kg/m³</b>. If you are working
+                    with another metal or alloy, simply enter the appropriate density value to obtain
+                    an accurate result.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Why may the calculated weight differ from the actual weight?</h3>
+                <p>
+                    The difference may occur due to manufacturing tolerances, geometric deviations,
+                    rounded corners, coatings, profile production features, and material losses
+                    during cutting or installation.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>How do you calculate the weight of a round pipe?</h3>
+                <p>
+                    Enter the outer diameter <b>D</b> and wall thickness <b>t</b>. The inner diameter
+                    equals <b>D − 2t</b>. The cross-sectional area of the pipe is calculated as the
+                    difference between the outer and inner circle areas, which is then multiplied
+                    by the length.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>How do you calculate sheet metal or strips from sheet?</h3>
+                <p>
+                    For sheet metal, enter the width, height, and thickness — the length in meters
+                    is not required. For strips cut from sheet metal, you need the width, thickness,
+                    and total length in meters (linear meters), since the weight depends on the
+                    total strip length.
+                </p>
+            </div>
+        
+            <div class="m-faq-item">
+                <h3>Channel and I-beam: which mode should I choose — kg/m or geometry?</h3>
+                <p>
+                    If you have standard steel data, choose the <b>kg/m mode</b> because it is faster
+                    and more accurate. The geometry mode is useful for approximate estimates when
+                    the exact mass per meter is unknown or when evaluating non-standard profiles.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

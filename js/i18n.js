@@ -1180,11 +1180,104 @@ brick: {
   row_truck: "Місткість машини",
   row_trips: "Рейси",
 },
+steel: {
+    h1: "Калькулятор ваги металу",
+    subtitle: "Розрахунок маси металопрокату за геометрією або за кг/м (де доступно).",
+    input_title: "Введи дані",
+    result_title: "Результат",
+    chart_title: "Графік",
+    chart_hint: "Зроби розрахунок, щоб побачити графік.",
+    need_inputs: "Введи дані для розрахунку.",
+
+    type_label: "Тип елемента",
+    type_rebar: "Арматура/пруток",
+    type_pipe: "Труба",
+    type_profile: "Профіль",
+    type_strip: "Смуга",
+    type_square: "Квадрат",
+    type_sheet: "Лист",
+    type_angle: "Кутник",
+    type_round: "Катанка",
+    type_channel: "Швелер",
+    type_ibeam: "Двотавр",
+
+    auto_calc: "Авто-розрахунок",
+    density: "Густина (кг/м³)",
+    length: "Довжина (м)",
+    qty: "Кількість (шт)",
+    waste: "Запас / втрати, %",
+    btn_calc: "Розрахувати",
+    btn_reset: "Скинути",
+    btn_copy: "Копіювати результат",
+
+    len_ph: "напр.: 6",
+    qty_ph: "1",
+    density_ph: "7850",
+    waste_ph: "0",
+
+    // strip visualization / formula hint (те, що ти просив уточнити)
+    strip_vis_title: "Смуга",
+    strip_vis_inputs: "Ввід: b (мм), t (мм), L (м)",
+    strip_vis_formula: "Формула: V = b × t × L",
+
+    // common dimensions labels if показуєш у UI
+    b_mm: "b (мм)",
+    t_mm: "t (мм)",
+    h_mm: "h (мм)",
+    s_mm: "s (мм)",
+    L_m: "L (м)",
+  },
+
 
 
     },
 
     en: {
+      steel: {
+    h1: "Steel Weight Calculator",
+    subtitle: "Estimate steel weight by geometry or by kg/m (where available).",
+    input_title: "Enter data",
+    result_title: "Result",
+    chart_title: "Chart",
+    chart_hint: "Run a calculation to see the chart.",
+    need_inputs: "Enter inputs to calculate.",
+
+    type_label: "Element type",
+    type_rebar: "Rebar / round bar",
+    type_pipe: "Pipe",
+    type_profile: "Profile",
+    type_strip: "Strip",
+    type_square: "Square bar",
+    type_sheet: "Sheet",
+    type_angle: "Angle",
+    type_round: "Wire rod",
+    type_channel: "Channel",
+    type_ibeam: "I-beam",
+
+    auto_calc: "Auto calculation",
+    density: "Density (kg/m³)",
+    length: "Length (m)",
+    qty: "Quantity (pcs)",
+    waste: "Waste / extra, %",
+    btn_calc: "Calculate",
+    btn_reset: "Reset",
+    btn_copy: "Copy result",
+
+    len_ph: "e.g.: 6",
+    qty_ph: "1",
+    density_ph: "7850",
+    waste_ph: "0",
+
+    strip_vis_title: "Strip",
+    strip_vis_inputs: "Inputs: b (mm), t (mm), L (m)",
+    strip_vis_formula: "Formula: V = b × t × L",
+
+    b_mm: "b (mm)",
+    t_mm: "t (mm)",
+    h_mm: "h (mm)",
+    s_mm: "s (mm)",
+    L_m: "L (m)",
+  },
       excavation: {
   h1: "Earthworks Volume Calculator",
   subtitle: "Estimate soil volume: trench/pit/area/manual input, overdig, bulking factor, truck trips and tonnage. Includes chart, table, copy and CSV (Excel).",

@@ -1,0 +1,905 @@
+/* =========================
+   Fraction Calculator (scoped)
+   only inside .fcalc / .ccalc
+========================= */
+
+.fcalc,
+.fcalc * {
+    box-sizing: border-box;
+}
+
+.fcalc {
+    --cc-card: #fff;
+    --cc-text: #222;
+    --cc-muted: #6b7280;
+    --cc-brand: #283b69;
+    --cc-brand2: #1f2f55;
+    --cc-border: #e6e8ef;
+    --cc-shadow: 0 10px 25px rgba(16, 24, 40, 0.08);
+    --cc-radius: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cc-text);
+}
+
+/* Wrap */
+.fcalc .ccalc__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+/* Titlebar */
+.fcalc .ccalc__titlebar {
+    background: linear-gradient(180deg, var(--cc-brand), var(--cc-brand2));
+    color: #fff;
+    border-radius: var(--cc-radius);
+    padding: 16px;
+    box-shadow: var(--cc-shadow);
+    margin-bottom: 14px;
+}
+
+.fcalc .ccalc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.fcalc .ccalc__p {
+    margin: 6px 0 0;
+    opacity: 0.92;
+    font-size: 13px;
+}
+
+/* grid layout */
+.fcalc .ccalc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+/* Topline (checkbox) */
+.fcalc .ccalc__grid>.evc-topline {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    padding: 0 2px 6px;
+}
+
+/* Left card */
+.fcalc .ccalc__grid>.ccalc__card:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/* Right card */
+.fcalc .ccalc__grid>.ccalc__card:last-of-type {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin-top: 46px;
+}
+
+@media (max-width: 980px) {
+    .fcalc .ccalc__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fcalc .ccalc__grid>.evc-topline,
+    .fcalc .ccalc__grid>.ccalc__card:first-of-type,
+    .fcalc .ccalc__grid>.ccalc__card:last-of-type {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 0;
+    }
+}
+
+/* Card */
+.fcalc .ccalc__card {
+    background: var(--cc-card);
+    border: 1px solid var(--cc-border);
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow);
+    padding: 14px;
+    min-width: 0;
+}
+
+/* Section title */
+.fcalc .ccalc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.fcalc .ccalc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--cc-brand2);
+}
+
+.fcalc .ccalc__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Tabs (5) */
+.fcalc-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 720px) {
+    .fcalc-tabs {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* default = soft red, active = green */
+.fcalc-tab {
+    height: 40px;
+    border-radius: 12px;
+    background: #fbf1f1;
+    border: 1px solid #e7caca;
+    font-weight: 900;
+    font-size: 12px;
+    color: #7a3b3b;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.fcalc-tab:hover {
+    background: #f6e4e4;
+    border-color: #ddb5b5;
+    box-shadow: 0 6px 14px rgba(160, 80, 80, 0.08);
+}
+
+.fcalc-tab.is-active {
+    background: #e6f5ec;
+    border-color: #b7dec9;
+    color: #1f513a;
+    box-shadow: 0 4px 12px rgba(46, 125, 90, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Panels */
+.fcalc-panel {
+    display: none;
+}
+
+.fcalc-panel.is-active {
+    display: block;
+}
+
+/* Fields */
+.fcalc .ccalc__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .fcalc .ccalc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.fcalc .ccalc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.fcalc-full {
+    grid-column: 1 / -1;
+}
+
+.fcalc .ccalc__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.fcalc .ccalc__input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+}
+
+.fcalc .ccalc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.fcalc .ccalc__input:focus {
+    border-color: rgba(40, 59, 105, 0.55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, 0.12);
+    color: #111827;
+}
+
+/* Radio */
+.fcalc-radio {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    border: 1px solid #d4d7de;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.fcalc-radio label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 900;
+    color: #1f2f55;
+    font-size: 13px;
+    user-select: none;
+}
+
+.fcalc-radio input {
+    accent-color: #283b69;
+}
+
+/* Actions */
+.fcalc .ccalc__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.fcalc .ccalc__btn {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+.fcalc .ccalc__btn:hover {
+    background: #f6f7fb;
+    border-color: #b9c2da;
+    box-shadow: 0 4px 12px rgba(31, 47, 85, 0.08);
+    transform: translateY(-1px);
+}
+
+.fcalc .ccalc__btn--primary {
+    background: rgba(40, 59, 105, 0.08);
+    border: 1px solid rgba(40, 59, 105, 0.35);
+}
+
+.fcalc .ccalc__btn--primary:hover {
+    background: rgba(40, 59, 105, 0.14);
+}
+
+.fcalc .ccalc__mt10 {
+    margin-top: 10px;
+}
+
+/* Result (green block like percent) */
+.fcalc .ccalc__bigNumber {
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    border: 1px solid #bfe3cd;
+    color: #1f513a;
+    border-radius: var(--cc-radius);
+    padding: 12px;
+    font-weight: 900;
+    font-size: 16px;
+    box-shadow: 0 8px 20px rgba(46, 125, 90, 0.1);
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+.fcalc .ccalc__bigNumber:not(:empty) {
+    animation: resultGlow 0.35s ease;
+}
+
+@keyframes resultGlow {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.fcalc-details {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.fcalc-details:empty {
+    display: none;
+}
+
+/* Toast */
+.fcalc .ccalc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cc-muted);
+    min-height: 16px;
+}
+
+/* Divider + SEO + FAQ */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+}
+
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222;
+}
+
+.cc-seo ul {
+    margin: 0 0 14px 18px;
+    padding: 0;
+}
+
+.cc-seo li {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #222;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(40, 59, 105, 0.1);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+    font-weight: 900;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+
+    .cc-seo h2,
+    .cc-faq h2 {
+        font-size: 18px;
+    }
+
+    .cc-seo p,
+    .cc-seo li {
+        font-size: 14px;
+    }
+
+    .cc-faq-item {
+        padding: 14px;
+    }
+}
+
+/* Auto-calc checkbox */
+.evc-topline {
+    margin: 10px 0 10px;
+}
+
+.evc-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.evc-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+/* ===== Dynamic mixed-fraction inputs (T1 + T2/T3/T4 blocks) ===== */
+
+.fcalc-toprow {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.fcalc-toprow .ccalc__actions .ccalc__btn {
+    min-width: auto;
+}
+
+.fcalc-chain {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+/* one mixed fraction block: [whole] + vertical fraction */
+.fcalc-fr {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid rgba(40, 59, 105, 0.14);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    min-width: 0;
+}
+
+.fcalc-fr input {
+    border: 1px solid #d4d7de;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    font-weight: 900;
+    text-align: center;
+    background: #fff;
+}
+
+.fcalc-fr input:focus {
+    border-color: rgba(40, 59, 105, 0.55);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, 0.12);
+}
+
+/* whole number */
+.fcalc-whole {
+    width: 56px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+/* fraction stack */
+.fcalc-frac {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.fcalc-frac .fcalc-num,
+.fcalc-frac .fcalc-den {
+    width: 72px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.fcalc-frac .fcalc-bar {
+    width: 78px;
+    height: 2px;
+    background: rgba(40, 59, 105, 0.35);
+    border-radius: 2px;
+}
+
+/* operator select between fractions */
+.fcalc-op {
+    height: 40px;
+    min-width: 64px;
+    border-radius: 12px;
+    border: 1px solid #d4d7de;
+    font-weight: 900;
+    background: #fff;
+    color: #1f2f55;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* ===== Disabled block (X position) ===== */
+.fcalc-fr--disabled {
+    position: relative;
+    opacity: 0.5;
+    pointer-events: none;
+    background: #f3f4f7;
+}
+
+.fcalc-fr--disabled::after {
+    content: "X";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 22px;
+    color: #283b69;
+    letter-spacing: 1px;
+}
+
+/* ===== Result fraction display ===== */
+.fcalc-result-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.fcalc-result-frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    font-weight: 900;
+    font-size: 18px;
+    color: #1f513a;
+    line-height: 1.1;
+}
+
+.fcalc-result-num,
+.fcalc-result-den {
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.fcalc-result-bar {
+    width: 100%;
+    height: 2px;
+    background: #1f513a;
+    border-radius: 2px;
+    margin: 4px 0;
+}
+
+.fcalc-result-eq {
+    font-weight: 900;
+    font-size: 14px;
+    color: #1f513a;
+}
+
+/* =========================================================
+   T5 FIND X — FIXED LAYOUT (stable, no "floating")
+   Works with your current HTML
+========================================================= */
+
+.fcalc-prop {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    min-width: 0;
+}
+
+/* each side becomes flex row and can wrap */
+.fcalc-prop-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* key */
+    min-width: 0;
+}
+
+.fcalc-prop-label {
+    width: auto;
+    min-width: 14px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+}
+
+.fcalc-prop-slash,
+.fcalc-prop-eq {
+    width: auto;
+    min-width: 14px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+    color: #1f2f55;
+    opacity: 0.9;
+    line-height: 1;
+}
+
+.fcalc-prop-mid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    font-weight: 900;
+    font-size: 22px;
+    color: #1f2f55;
+}
+
+/* mini blocks: fixed-ish width but can shrink */
+.fcalc-fr--mini {
+    width: 170px;
+    max-width: 100%;
+    flex: 0 1 170px;
+    justify-content: center;
+    padding: 8px 10px;
+}
+
+/* compact inputs inside mini */
+.fcalc-fr--mini .fcalc-whole {
+    width: 52px;
+    height: 38px;
+}
+
+.fcalc-fr--mini .fcalc-frac .fcalc-num,
+.fcalc-fr--mini .fcalc-frac .fcalc-den {
+    width: 68px;
+    height: 34px;
+}
+
+.fcalc-fr--mini .fcalc-frac .fcalc-bar {
+    width: 74px;
+}
+
+/* stack on smaller */
+@media (max-width: 980px) {
+    .fcalc-prop {
+        grid-template-columns: 1fr;
+    }
+
+    .fcalc-prop-mid {
+        justify-content: flex-start;
+        padding-left: 6px;
+    }
+}
+
+/* very narrow: blocks full width */
+@media (max-width: 520px) {
+    .fcalc-fr--mini {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+}
+/* =========================
+   Pretty result (two blocks)
+========================= */
+
+.fcalc-details {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.fcalc-details:empty {
+    display: none;
+}
+
+/* whole row */
+.fcalc-result-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/* left block (vertical fraction) */
+.fcalc-result-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(31, 81, 58, .22);
+    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
+    box-shadow: 0 10px 22px rgba(46, 125, 90, .12);
+    min-width: 140px;
+}
+
+/* "=" in the middle */
+.fcalc-result-sign {
+    font-weight: 900;
+    font-size: 18px;
+    color: #1f2f55;
+    opacity: .9;
+}
+
+/* right block (mixed / plain text) */
+.fcalc-result-card2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(40, 59, 105, .18);
+    background: linear-gradient(180deg, rgba(40, 59, 105, .06), rgba(40, 59, 105, .02));
+    box-shadow: 0 10px 22px rgba(31, 47, 85, .10);
+    min-width: 180px;
+}
+
+.fcalc-result-mixed {
+    font-weight: 900;
+    font-size: 18px;
+    color: #1f2937;
+    line-height: 1.15;
+    text-align: center;
+}
+
+/* vertical fraction inside left card */
+.fcalc-result-frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    font-weight: 900;
+    font-size: 20px;
+    color: #1f513a;
+    line-height: 1.1;
+}
+
+.fcalc-result-num,
+.fcalc-result-den {
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.fcalc-result-bar {
+    width: 100%;
+    height: 2px;
+    background: #1f513a;
+    border-radius: 2px;
+    margin: 4px 0;
+}
+
+/* mobile: stack nicely */
+@media (max-width: 520px) {
+    .fcalc-result-wrap {
+        gap: 10px;
+    }
+
+    .fcalc-result-card,
+    .fcalc-result-card2 {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .fcalc-result-sign {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* =========================
+   Result row style
+========================= */
+
+.fcalc-result-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* центр по горизонталі */
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.fcalc-result-box {
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(31, 81, 58, .25);
+    background: linear-gradient(180deg, #e9f7ef, #f7fbf9);
+    box-shadow: 0 8px 20px rgba(31, 81, 58, .12);
+}
+
+.fcalc-result-box2 {
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(40, 59, 105, .25);
+    background: linear-gradient(180deg, #eef2ff, #f8f9ff);
+    box-shadow: 0 8px 20px rgba(40, 59, 105, .12);
+}
+
+.fcalc-result-main {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+.fcalc-result-eq {
+    font-size: 22px;
+    font-weight: 900;
+    color: #283b69;
+}
+/* mixed fraction */
+
+.fcalc-mixed {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.fcalc-mixed-whole{
+  font-size:24px;
+  display:flex;
+  align-items:center;
+}
+
+/* fraction inside mixed */
+
+.fcalc-mixed .fcalc-result-frac {
+    font-size: 18px;
+}
+.fcalc-details {
+    display: flex;
+    justify-content: center;
+}
+.fcalc-result-box3 {
+    background: #f1f5f9;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+}
