@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Linear Equation Solver Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Linear Equation Solver: solve equations in the form ax + b = 0, find x, see step-by-step explanation, and handle special cases." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/linear-equation-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/linear-equation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/linear-equation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/linear.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/linear.js?v=20260307" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/en/education/linear-equation-calculator#app",
+      "name":"Linear Equation Solver",
+      "description":"Online solver for linear equations in the form ax + b = 0, find x and see a step-by-step explanation.",
+      "url":"https://calccore.net/en/education/linear-equation-calculator",
+      "applicationCategory":"EducationalApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"en",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"What is a linear equation?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"A linear equation is a first-degree equation, for example ax + b = 0, where a and b are numbers and x is a variable."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you solve ax + b = 0?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Move b to the other side: ax = -b, then divide both sides by a. The formula is x = -b / a."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What happens if a = 0?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"If a = 0, the equation no longer depends on x. Then there are either no solutions or infinitely many solutions."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"When does a linear equation have infinitely many solutions?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"If a = 0 and b = 0, the equation becomes 0 = 0, so there are infinitely many solutions."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"When does a linear equation have no solution?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"If a = 0 and b ≠ 0, the equation becomes impossible, for example 5 = 0, so there is no solution."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Can I enter decimal coefficients?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Yes, the calculator supports both integers and decimal numbers."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="linear-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc lcalc" id="lcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Linear Equation Solver</h1>
+                    <p class="ccalc__p">
+                        Solve equations in the form <b>ax + b = 0</b>, find <b>x</b>,
+                        see a step-by-step explanation, and handle special cases.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter coefficients</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="lcalc-formula">
+                            <span class="lcalc-formula__part">a·x</span>
+                            <span class="lcalc-formula__part">+</span>
+                            <span class="lcalc-formula__part">b</span>
+                            <span class="lcalc-formula__part">= 0</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="la">Coefficient a</label>
+                                <input class="ccalc__input" id="la" inputmode="decimal" placeholder="2" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="lb">Coefficient b</label>
+                                <input class="ccalc__input" id="lb" inputmode="decimal" placeholder="-8" />
+                            </div>
+                        </div>
+
+                        <div class="lin-examples">
+                            <div class="lin-examples-title">Examples of linear equations</div>
+                        
+                            <div class="lin-examples-list">
+                                <button type="button" class="lin-example" data-a="2" data-b="-8">
+                                    2x − 8 = 0
+                                </button>
+                        
+                                <button type="button" class="lin-example" data-a="5" data-b="15">
+                                    5x + 15 = 0
+                                </button>
+                        
+                                <button type="button" class="lin-example" data-a="-3" data-b="9">
+                                    -3x + 9 = 0
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">Calculate</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="lToast"></div>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="lResult">
+                            Enter coefficients and click “Calculate”.
+                        </div>
+
+                        <div class="lcalc-details" id="lDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 lcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+                        <div class="calc-nav">
+                            <a href="/en/education/quadratic-equation-calculator" class="calc-nav-btn">
+                                Quadratic equations
+                            </a>
+                        
+                            <a href="/en/education/fraction-calculator" class="calc-nav-btn">
+                                Fractions
+                            </a>
+                        
+                            <a href="/en/education/system-of-equations-calculator" class="calc-nav-btn">
+                                Systems of equations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Linear Equation Solver — How It Works</h2>
+            <p>
+                This calculator helps you solve <b>linear equations</b> in the form
+                <b>ax + b = 0</b>. It finds the value of <b>x</b>, shows the main
+                transformation steps, and explains special cases.
+            </p>
+
+            <h2>Linear Equation Form</h2>
+            <p>
+                The standard form is:
+                <b>ax + b = 0</b>, where <b>a</b> and <b>b</b> are numbers and <b>x</b> is a variable.
+            </p>
+
+            <h2>How to find x</h2>
+            <p>
+                To solve the equation:
+            </p>
+            <ul>
+                <li>move <b>b</b> to the right side: <b>ax = -b</b></li>
+                <li>divide both sides by <b>a</b>: <b>x = -b / a</b></li>
+            </ul>
+
+            <h2>Special cases</h2>
+            <p>
+                If <b>a = 0</b>, the variable <b>x</b> disappears from the equation.
+            </p>
+            <ul>
+                <li><b>a = 0, b = 0</b> — infinitely many solutions</li>
+                <li><b>a = 0, b ≠ 0</b> — no solution</li>
+            </ul>
+
+            <h2>Example</h2>
+            <p>
+                For the equation <b>2x − 8 = 0</b>:
+            </p>
+            <ul>
+                <li><b>2x = 8</b></li>
+                <li><b>x = 8 / 2 = 4</b></li>
+            </ul>
+
+            <h2>When to use this calculator</h2>
+            <p>
+                This calculator is suitable for simple first-degree equations with one variable.
+                For quadratic equations, use a separate quadratic equation calculator.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="cc-faq-item">
+                <h3>What is a linear equation?</h3>
+                <p>
+                    It is a first-degree equation, for example <b>ax + b = 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the formula for x?</h3>
+                <p>
+                    If <b>a ≠ 0</b>, then <b>x = -b / a</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What happens if a = 0?</h3>
+                <p>
+                    Then the equation does not contain x. It either has no solutions
+                    or infinitely many solutions.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When are there infinitely many solutions?</h3>
+                <p>
+                    When <b>a = 0</b> and <b>b = 0</b>, the equation becomes <b>0 = 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When is there no solution?</h3>
+                <p>
+                    When <b>a = 0</b> and <b>b ≠ 0</b>, the equation becomes impossible,
+                    for example <b>7 = 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter decimal numbers?</h3>
+                <p>
+                    Yes, the calculator supports both integer and decimal coefficients.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

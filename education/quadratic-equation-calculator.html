@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор квадратного рівняння онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор квадратного рівняння CalcCore: розв’язання рівнянь ax² + bx + c = 0, дискримінант, 1 або 2 корені, покрокове пояснення." />
+
+    <link rel="canonical" href="https://calccore.net/education/quadratic-equation-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/quadratic-equation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/quadratic-equation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/quadratic.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/quadratic.js?v=20260307" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/education/quadratic-equation-calculator#app",
+      "name":"Калькулятор квадратного рівняння",
+      "description":"Онлайн калькулятор для розв’язання квадратних рівнянь ax² + bx + c = 0: дискримінант, корені, покрокове пояснення.",
+      "url":"https://calccore.net/education/quadratic-equation-calculator",
+      "applicationCategory":"EducationApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"uk",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Що таке квадратне рівняння?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Квадратне рівняння — це рівняння виду ax² + bx + c = 0, де a ≠ 0."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти дискримінант?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Дискримінант обчислюється за формулою D = b² − 4ac. Він показує кількість дійсних коренів."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Скільки коренів може мати квадратне рівняння?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Якщо D > 0 — два різні дійсні корені, якщо D = 0 — один дійсний корінь, якщо D < 0 — дійсних коренів немає."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Яка формула коренів квадратного рівняння?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Корені обчислюються за формулою x = (-b ± √D) / (2a)."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Що буде, якщо a = 0?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Якщо a = 0, рівняння вже не є квадратним. У такому випадку потрібно використовувати калькулятор лінійного рівняння."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Чи показує калькулятор покрокове рішення?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Так, калькулятор показує підстановку коефіцієнтів, дискримінант та формули для знаходження коренів."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="quadratic-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc qcalc" id="qcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор квадратного рівняння</h1>
+                    <p class="ccalc__p">
+                        Розв’язання рівняння <b>ax² + bx + c = 0</b>, обчислення <b>дискримінанта</b>,
+                        знаходження <b>коренів</b> і покрокове пояснення.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи коефіцієнти</h2>
+                            <span class="ccalc__badge">Освіта</span>
+                        </div>
+
+                        <div class="qcalc-formula">
+                            <span class="qcalc-formula__part">a·x²</span>
+                            <span class="qcalc-formula__part">+</span>
+                            <span class="qcalc-formula__part">b·x</span>
+                            <span class="qcalc-formula__part">+</span>
+                            <span class="qcalc-formula__part">c</span>
+                            <span class="qcalc-formula__part">= 0</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="qa">Коефіцієнт a</label>
+                                <input class="ccalc__input" id="qa" inputmode="decimal" placeholder="1" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="qb">Коефіцієнт b</label>
+                                <input class="ccalc__input" id="qb" inputmode="decimal" placeholder="-3" />
+                            </div>
+
+                            <div class="ccalc__field qcalc-full">
+                                <label class="ccalc__label" for="qc">Коефіцієнт c</label>
+                                <input class="ccalc__input" id="qc" inputmode="decimal" placeholder="2" />
+                            </div>
+                        </div>
+
+                        <div class="quad-examples">
+                            <div class="quad-examples-title">Приклади квадратних рівнянь</div>
+                        
+                            <div class="quad-examples-list">
+                                <button class="quad-example" data-a="1" data-b="-3" data-c="2">
+                                    x² − 3x + 2 = 0
+                                </button>
+                        
+                                <button class="quad-example" data-a="1" data-b="2" data-c="1">
+                                    x² + 2x + 1 = 0
+                                </button>
+                        
+                                <button class="quad-example" data-a="1" data-b="0" data-c="4">
+                                    x² + 4 = 0
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                id="btnCalc">Розрахувати</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="qToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="qResult">
+                            Введи коефіцієнти та натисни «Розрахувати».
+                        </div>
+
+                        <div class="qcalc-details" id="qDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 qcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+                        <div class="calc-nav">
+                            <a href="/education/linear-equation-calculator.html" class="calc-nav-btn">
+                                Лінійні рівняння
+                            </a>
+                        
+                            <a href="/education/system-of-equations-calculator.html" class="calc-nav-btn">
+                                Системи рівнянь
+                            </a>
+                        
+                            <a href="/education/fraction-calculator.html" class="calc-nav-btn">
+                                Калькулятор дробів
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор квадратного рівняння CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор допомагає розв’язувати <b>квадратні рівняння</b> виду
+                <b>ax² + bx + c = 0</b>. Він автоматично обчислює <b>дискримінант</b>,
+                визначає кількість коренів і показує покрокове рішення.
+            </p>
+
+            <h2>Формула квадратного рівняння</h2>
+            <p>
+                Загальний вигляд квадратного рівняння:
+                <b>ax² + bx + c = 0</b>, де <b>a ≠ 0</b>.
+            </p>
+
+            <h2>Дискримінант</h2>
+            <p>
+                Щоб знайти корені, спочатку обчислюють дискримінант:
+            </p>
+            <ul>
+                <li><b>D = b² − 4ac</b></li>
+            </ul>
+            <p>
+                Від значення дискримінанта залежить кількість дійсних розв’язків.
+            </p>
+            <ul>
+                <li><b>D &gt; 0</b> — два різні дійсні корені</li>
+                <li><b>D = 0</b> — один дійсний корінь</li>
+                <li><b>D &lt; 0</b> — дійсних коренів немає</li>
+            </ul>
+
+            <h2>Формула коренів</h2>
+            <p>
+                Якщо <b>D ≥ 0</b>, корені знаходять за формулою:
+            </p>
+            <ul>
+                <li><b>x₁ = (-b + √D) / (2a)</b></li>
+                <li><b>x₂ = (-b − √D) / (2a)</b></li>
+            </ul>
+
+            <h2>Приклад</h2>
+            <p>
+                Для рівняння <b>x² − 3x + 2 = 0</b> маємо:
+            </p>
+            <ul>
+                <li><b>a = 1</b>, <b>b = -3</b>, <b>c = 2</b></li>
+                <li><b>D = (-3)² − 4·1·2 = 9 − 8 = 1</b></li>
+                <li><b>x₁ = 2</b>, <b>x₂ = 1</b></li>
+            </ul>
+
+            <h2>Коли цей калькулятор не підходить</h2>
+            <p>
+                Якщо <b>a = 0</b>, рівняння перестає бути квадратним. У такому випадку
+                треба використовувати калькулятор лінійного рівняння.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Що таке квадратне рівняння?</h3>
+                <p>
+                    Це рівняння виду <b>ax² + bx + c = 0</b>, де <b>a ≠ 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що показує дискримінант?</h3>
+                <p>
+                    Дискримінант показує, скільки дійсних коренів має рівняння:
+                    два, один або жодного.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що робити, якщо D менше нуля?</h3>
+                <p>
+                    У такому випадку рівняння не має дійсних коренів.
+                    Якщо потрібно, можна розглядати комплексні корені.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому a не може дорівнювати нулю?</h3>
+                <p>
+                    Бо тоді член <b>ax²</b> зникає, і рівняння стає лінійним, а не квадратним.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи показує калькулятор покрокове рішення?</h3>
+                <p>
+                    Так, він показує підстановку у формулу дискримінанта і формули для коренів.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вводити дробові числа?</h3>
+                <p>
+                    Так, можна вводити як цілі, так і десяткові коефіцієнти.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

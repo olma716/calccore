@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>System of Equations Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore 2x2 System of Equations Calculator: solve systems of the form a1x + b1y = c1 and a2x + b2y = c2, determinants, x and y, and step-by-step explanation." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/system-of-equations-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/system-of-equations-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/system-of-equations-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/system-equations.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/system-equations.js?v=20260307" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/en/education/system-of-equations-calculator#app",
+      "name":"System of Equations Calculator",
+      "description":"Online calculator for solving a 2x2 system of linear equations: a1x + b1y = c1 and a2x + b2y = c2.",
+      "url":"https://calccore.net/en/education/system-of-equations-calculator",
+      "applicationCategory":"EducationalApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"en",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"What is a system of two linear equations?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"It is a pair of equations with two unknowns that must be satisfied at the same time. For example: a1x + b1y = c1 and a2x + b2y = c2."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find x and y in a 2x2 system?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"One method is Cramer's rule. First calculate the main determinant D, then Dx and Dy. If D ≠ 0, then x = Dx / D and y = Dy / D."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What is the determinant D?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"For the system a1x + b1y = c1, a2x + b2y = c2, the main determinant is D = a1·b2 − a2·b1."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What does D = 0 mean?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"If D = 0, the system may either have no solutions or infinitely many solutions. You need to analyze Dx and Dy as well."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"When does the system have a unique solution?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"When the main determinant D is not equal to zero. Then x and y are determined uniquely."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Can I enter decimal numbers?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Yes, the calculator supports both integer and decimal coefficients."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="sys-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc scalc" id="scalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">System of Equations Calculator</h1>
+                    <p class="ccalc__p">
+                        Solve a <b>2x2 system of linear equations</b>:
+                        <b>a₁x + b₁y = c₁</b> and <b>a₂x + b₂y = c₂</b>.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter coefficients</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="scalc-system">
+                            <div class="scalc-eq">
+                                <input class="ccalc__input scalc-mini" id="a1" inputmode="decimal" placeholder="2" />
+                                <span class="scalc-part">x +</span>
+                                <input class="ccalc__input scalc-mini" id="b1" inputmode="decimal" placeholder="3" />
+                                <span class="scalc-part">y =</span>
+                                <input class="ccalc__input scalc-mini" id="c1" inputmode="decimal" placeholder="13" />
+                            </div>
+
+                            <div class="scalc-eq">
+                                <input class="ccalc__input scalc-mini" id="a2" inputmode="decimal" placeholder="1" />
+                                <span class="scalc-part">x +</span>
+                                <input class="ccalc__input scalc-mini" id="b2" inputmode="decimal" placeholder="-1" />
+                                <span class="scalc-part">y =</span>
+                                <input class="ccalc__input scalc-mini" id="c2" inputmode="decimal" placeholder="1" />
+                            </div>
+                        </div>
+
+                        <div class="sys-examples">
+                        
+                            <div class="sys-examples-title">
+                                Examples of systems
+                            </div>
+                        
+                            <div class="sys-examples-list">
+                        
+                                <button class="sys-example" data-fill="1,1,4,2,-1,1">
+                                    <span>x + y = 4</span>
+                                    <span>2x − y = 1</span>
+                                </button>
+                        
+                                <button class="sys-example" data-fill="2,3,13,1,-1,1">
+                                    <span>2x + 3y = 13</span>
+                                    <span>x − y = 1</span>
+                                </button>
+                        
+                                <button class="sys-example" data-fill="3,2,16,1,1,7">
+                                    <span>3x + 2y = 16</span>
+                                    <span>x + y = 7</span>
+                                </button>
+                        
+                            </div>
+                        
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">Calculate</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="sToast"></div>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="sResult">
+                            Enter coefficients and click “Calculate”.
+                        </div>
+
+                        <div class="scalc-details" id="sDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+                        <div class="calc-nav">
+                            <a href="/en/education/quadratic-equation-calculator" class="calc-nav-btn">
+                                Quadratic equations
+                            </a>
+                        
+                            <a href="/en/education/linear-equation-calculator" class="calc-nav-btn">
+                                Linear equations
+                            </a>
+                        
+                            <a href="/en/education/fraction-calculator" class="calc-nav-btn">
+                                Fractions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+        
+            <h2>What Is a System of Equations</h2>
+        
+            <p>
+                A <b>system of equations</b> is a set of two or more equations that share the same variables and must be solved
+                together.
+                In algebra, the most common case is a system of two linear equations with two unknowns:
+            </p>
+        
+            <p>
+                <b>a₁x + b₁y = c₁</b><br>
+                <b>a₂x + b₂y = c₂</b>
+            </p>
+        
+            <p>
+                The goal is to find values of <b>x</b> and <b>y</b> that satisfy both equations at the same time.
+            </p>
+        
+            <h2>How to Solve a System of Linear Equations</h2>
+        
+            <p>
+                There are several methods used to solve systems of equations:
+            </p>
+        
+            <ul>
+                <li>Substitution method</li>
+                <li>Elimination (addition) method</li>
+                <li>Cramer's rule</li>
+                <li>Graphical method</li>
+            </ul>
+        
+            <p>
+                This calculator uses <b>Cramer's rule</b>, which is a fast and reliable way to solve a system of two linear
+                equations.
+            </p>
+        
+            <h2>Cramer's Rule Formula</h2>
+        
+            <p>
+                For the system:
+            </p>
+        
+            <p>
+                <b>a₁x + b₁y = c₁</b><br>
+                <b>a₂x + b₂y = c₂</b>
+            </p>
+        
+            <p>
+                First calculate the main determinant:
+            </p>
+        
+            <p>
+                <b>D = a₁b₂ − a₂b₁</b>
+            </p>
+        
+            <p>
+                Then calculate the auxiliary determinants:
+            </p>
+        
+            <p>
+                <b>Dx = c₁b₂ − c₂b₁</b><br>
+                <b>Dy = a₁c₂ − a₂c₁</b>
+            </p>
+        
+            <p>
+                Finally compute the solutions:
+            </p>
+        
+            <p>
+                <b>x = Dx / D</b><br>
+                <b>y = Dy / D</b>
+            </p>
+        
+            <h2>How Many Solutions Can a System Have</h2>
+        
+            <p>
+                Depending on the value of the determinant, a system of equations can have different types of solutions:
+            </p>
+        
+            <ul>
+                <li><b>D ≠ 0</b> — the system has exactly one solution</li>
+                <li><b>D = 0</b> and <b>Dx = 0</b>, <b>Dy = 0</b> — the system has infinitely many solutions</li>
+                <li><b>D = 0</b> but <b>Dx ≠ 0</b> or <b>Dy ≠ 0</b> — the system has no solution</li>
+            </ul>
+        
+            <h2>Example of Solving a System of Equations</h2>
+        
+            <p>
+                Consider the system:
+            </p>
+        
+            <p>
+                <b>2x + 3y = 13</b><br>
+                <b>x − y = 1</b>
+            </p>
+        
+            <p>
+                Calculate the determinants:
+            </p>
+        
+            <p>
+                <b>D = 2 · (-1) − 1 · 3 = -5</b><br>
+                <b>Dx = 13 · (-1) − 1 · 3 = -16</b><br>
+                <b>Dy = 2 · 1 − 13 · 1 = -11</b>
+            </p>
+        
+            <p>
+                Then compute:
+            </p>
+        
+            <p>
+                <b>x = -16 / -5 = 3.2</b><br>
+                <b>y = -11 / -5 = 2.2</b>
+            </p>
+        
+            <p>
+                These are exactly the values calculated by the CalcCore system of equations calculator.
+            </p>
+        
+            <h2>Where Systems of Equations Are Used</h2>
+        
+            <p>
+                Systems of equations are widely used in mathematics, engineering, physics, economics, and computer science.
+                They allow us to model situations where multiple variables interact with each other.
+            </p>
+        
+            <p>
+                Common applications include:
+            </p>
+        
+            <ul>
+                <li>physics calculations</li>
+                <li>engineering problems</li>
+                <li>economic models</li>
+                <li>data analysis</li>
+                <li>optimization problems</li>
+            </ul>
+        
+        </section>
+
+        <section class="cc-faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="cc-faq-item">
+                <h3>What is a system of two equations with two unknowns?</h3>
+                <p>
+                    It is a pair of equations that must both be true for the same
+                    values of <b>x</b> and <b>y</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When does the system have a unique solution?</h3>
+                <p>
+                    When the main determinant <b>D</b> is not zero.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does D = 0 mean?</h3>
+                <p>
+                    It means the lines may be parallel or coincide.
+                    Then the system either has no solution or infinitely many solutions.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are Dx and Dy?</h3>
+                <p>
+                    These are helper determinants used in Cramer's rule
+                    to find <b>x</b> and <b>y</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter fractional or decimal numbers?</h3>
+                <p>
+                    Yes, the calculator supports both integer and decimal coefficients.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why can the system have no solution?</h3>
+                <p>
+                    This happens when the equations represent parallel lines that
+                    never intersect.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

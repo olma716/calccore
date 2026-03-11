@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Scientific Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Scientific Calculator: arithmetic, brackets, powers, roots, sin, cos, tan, log, ln, π, e, DEG/RAD, and calculation history." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/scientific-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/scientific-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/scientific-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/scientific.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/scientific.js?v=20260307-2" defer></script>
+</head>
+
+<body class="scientific-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc scicalc" id="scicalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Scientific Calculator</h1>
+                    <p class="ccalc__p">
+                        Online calculator for <b>arithmetic</b>, <b>trigonometry</b>,
+                        <b>logarithms</b>, <b>powers</b>, <b>roots</b>, and constants <b>π</b> and <b>e</b>.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Calculator</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="scicalc-topbar">
+                            <div class="scicalc-mode" role="group" aria-label="Angle mode">
+                                <button type="button" class="scicalc-mode__btn is-active" data-mode="DEG">DEG</button>
+                                <button type="button" class="scicalc-mode__btn" data-mode="RAD">RAD</button>
+                            </div>
+                        </div>
+
+                        <div class="scicalc-screen">
+                            <div class="scicalc-expression" id="sciExpression">0</div>
+                            <div class="scicalc-result" id="sciResult">0</div>
+                        </div>
+
+                        <div class="scicalc-actions-top">
+                            <button class="ccalc__btn" type="button" data-action="clear">AC</button>
+                            <button class="ccalc__btn" type="button" data-action="backspace">⌫</button>
+                            <button class="ccalc__btn" type="button" data-action="ans">Ans</button>
+                            <button class="ccalc__btn" type="button" data-action="copy">Копіювати</button>
+                        </div>
+                        
+                        <div class="scicalc-funcs">
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="sin(">sin</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="cos(">cos</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="tan(">tan</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="sqrt(">√</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="log(">log</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="ln(">ln</button>
+                        
+                            <button type="button" class="scicalc-key scicalc-key--func" data-action="square">x²</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-action="inverse">1/x</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-action="abs">|x|</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="^">xʸ</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="E">EXP</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-action="negate">±</button>
+                        
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="(">(</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert=")">)</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="pi">π</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-insert="e">e</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-action="percent">%</button>
+                            <button type="button" class="scicalc-key scicalc-key--func" data-action="preview">=?</button>
+                        </div>
+                        
+                        <div class="scicalc-numpad">
+                            <button type="button" class="scicalc-key" data-insert="7">7</button>
+                            <button type="button" class="scicalc-key" data-insert="8">8</button>
+                            <button type="button" class="scicalc-key" data-insert="9">9</button>
+                            <button type="button" class="scicalc-key scicalc-key--op" data-insert="/">÷</button>
+                        
+                            <button type="button" class="scicalc-key" data-insert="4">4</button>
+                            <button type="button" class="scicalc-key" data-insert="5">5</button>
+                            <button type="button" class="scicalc-key" data-insert="6">6</button>
+                            <button type="button" class="scicalc-key scicalc-key--op" data-insert="*">×</button>
+                        
+                            <button type="button" class="scicalc-key" data-insert="1">1</button>
+                            <button type="button" class="scicalc-key" data-insert="2">2</button>
+                            <button type="button" class="scicalc-key" data-insert="3">3</button>
+                            <button type="button" class="scicalc-key scicalc-key--op" data-insert="-">−</button>
+                        
+                            <button type="button" class="scicalc-key scicalc-key--zero" data-insert="0">0</button>
+                            <button type="button" class="scicalc-key" data-insert=".">.</button>
+                            <button type="button" class="scicalc-key scicalc-key--op" data-insert="+">+</button>
+                        
+                            <button type="button" class="scicalc-key scicalc-key--eq scicalc-key--full" data-action="equals">=</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="sciToast"></div>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">History</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="scicalc-history" id="sciHistory">
+                            <div class="scicalc-history__empty">History is empty.</div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn" type="button" data-action="clear-history">Clear history</button>
+                            <button class="ccalc__btn" type="button" data-action="use-last">Use last result</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+        
+            <h2>What Is a Scientific Calculator</h2>
+            <p>
+                A <b>scientific calculator</b> is an advanced calculator designed to perform complex mathematical calculations.
+                Unlike a basic calculator that handles only addition, subtraction, multiplication, and division,
+                a scientific calculator supports functions such as <b>powers</b>, <b>square roots</b>,
+                <b>trigonometric functions</b>, <b>logarithms</b>, and calculations using mathematical constants like <b>π</b>
+                and <b>e</b>.
+            </p>
+        
+            <p>
+                The CalcCore <b>online scientific calculator</b> works directly in your browser and can be used
+                for mathematics, engineering, physics, education, and everyday calculations that require more
+                advanced math operations.
+            </p>
+        
+            <h2>Functions Available in the Calculator</h2>
+            <p>
+                This scientific calculator supports a wide range of mathematical operations, including:
+            </p>
+        
+            <ul>
+                <li><b>basic arithmetic</b>: addition, subtraction, multiplication, division</li>
+                <li><b>powers and exponents</b>: x², xʸ</li>
+                <li><b>square roots</b>: √x</li>
+                <li><b>trigonometric functions</b>: sin, cos, tan</li>
+                <li><b>logarithms</b>: log and ln</li>
+                <li><b>absolute value</b>: |x|</li>
+                <li><b>reciprocal function</b>: 1/x</li>
+                <li><b>parentheses</b> for complex expressions</li>
+                <li><b>mathematical constants</b>: π and e</li>
+                <li><b>angle modes</b>: DEG (degrees) and RAD (radians)</li>
+                <li><b>calculation history</b> and the ability to reuse the previous result using <b>Ans</b></li>
+            </ul>
+        
+            <h2>How to Use the Scientific Calculator</h2>
+            <p>
+                Using the calculator is simple. Enter your mathematical expression using the buttons
+                or your keyboard, and then press <b>=</b> to get the result.
+                For complex expressions you can use parentheses to control the order of operations.
+            </p>
+        
+            <p>Examples:</p>
+        
+            <ul>
+                <li><b>(2 + 3) × 4 = 20</b></li>
+                <li><b>sqrt(144) = 12</b></li>
+                <li><b>2^3 = 8</b></li>
+                <li><b>sin(90)</b> in DEG mode = <b>1</b></li>
+                <li><b>sin(π/2)</b> in RAD mode = <b>1</b></li>
+            </ul>
+        
+            <h2>DEG vs RAD Mode</h2>
+            <p>
+                Trigonometric functions depend on the angle measurement mode used by the calculator.
+            </p>
+        
+            <ul>
+                <li><b>DEG</b> — angles are measured in degrees</li>
+                <li><b>RAD</b> — angles are measured in radians</li>
+            </ul>
+        
+            <p>
+                For example, <b>sin(90)</b> equals <b>1</b> when the calculator is set to DEG mode,
+                while <b>sin(π/2)</b> equals <b>1</b> in RAD mode.
+                If a trigonometric result seems incorrect, check which mode is currently active.
+            </p>
+        
+            <h2>Order of Operations</h2>
+            <p>
+                The calculator follows the standard mathematical order of operations:
+            </p>
+        
+            <ul>
+                <li>operations inside parentheses</li>
+                <li>powers and roots</li>
+                <li>multiplication and division</li>
+                <li>addition and subtraction</li>
+            </ul>
+        
+            <p>
+                For example, the expression <b>2 + 3 × 4</b> equals <b>14</b>, not 20,
+                because multiplication is performed before addition.
+                Using parentheses changes the order: <b>(2 + 3) × 4 = 20</b>.
+            </p>
+        
+            <h2>When to Use a Scientific Calculator</h2>
+            <p>
+                A scientific calculator is useful for many types of calculations, including:
+            </p>
+        
+            <ul>
+                <li>trigonometry and geometry problems</li>
+                <li>algebra and exponent calculations</li>
+                <li>logarithmic functions in advanced math</li>
+                <li>engineering and physics formulas</li>
+                <li>complex everyday calculations</li>
+            </ul>
+        
+            <h2>Why Use an Online Scientific Calculator</h2>
+            <p>
+                An <b>online scientific calculator</b> allows you to perform advanced calculations
+                without installing any software. It works on any device, including smartphones,
+                tablets, and desktop computers.
+            </p>
+        
+            <p>
+                CalcCore provides a clean interface, quick access to advanced functions,
+                calculation history, and the ability to copy results for further use.
+            </p>
+        
+            <h2>Tips for Accurate Calculations</h2>
+            <ul>
+                <li>check whether DEG or RAD mode is selected</li>
+                <li>use parentheses for complex expressions</li>
+                <li>remember that <b>log</b> and <b>ln</b> represent different logarithms</li>
+                <li>avoid dividing by zero</li>
+                <li>use the <b>Ans</b> function to reuse previous results</li>
+            </ul>
+        
+        </section>
+
+        <section class="cc-faq">
+        
+            <h2>Frequently Asked Questions</h2>
+        
+            <div class="cc-faq-item">
+                <h3>What is a scientific calculator used for?</h3>
+                <p>
+                    A scientific calculator is used for advanced mathematical calculations such as
+                    trigonometric functions, logarithms, powers, square roots, and complex expressions.
+                    It is commonly used in mathematics, engineering, physics, and technical fields.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>What is the difference between a basic calculator and a scientific calculator?</h3>
+                <p>
+                    A basic calculator performs simple operations like addition, subtraction,
+                    multiplication, and division. A scientific calculator supports more advanced
+                    functions such as trigonometry, logarithms, exponents, and calculations
+                    with mathematical constants like π and e.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>What do DEG and RAD mean?</h3>
+                <p>
+                    DEG stands for degrees and RAD stands for radians. These are two different
+                    units used to measure angles in trigonometric functions.
+                    If you calculate sin(90) in DEG mode you get 1, while sin(π/2) equals 1 in RAD mode.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Can I use this scientific calculator on my phone?</h3>
+                <p>
+                    Yes. The CalcCore scientific calculator works directly in your browser and is fully
+                    responsive, so it can be used on smartphones, tablets, and desktop computers
+                    without installing any apps.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Does the calculator follow the correct order of operations?</h3>
+                <p>
+                    Yes. The calculator follows the standard mathematical order of operations:
+                    parentheses first, then powers and roots, followed by multiplication and division,
+                    and finally addition and subtraction.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Can I calculate trigonometric functions like sin, cos, and tan?</h3>
+                <p>
+                    Yes. The calculator supports trigonometric functions such as sin, cos, and tan.
+                    You can also switch between DEG and RAD modes depending on whether your angles
+                    are measured in degrees or radians.
+                </p>
+            </div>
+        
+            <div class="cc-faq-item">
+                <h3>Does the calculator support complex expressions?</h3>
+                <p>
+                    Yes. You can enter complex expressions using parentheses, powers, roots,
+                    and multiple operations in one calculation.
+                </p>
+            </div>
+        
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

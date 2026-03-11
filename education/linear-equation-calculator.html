@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор лінійного рівняння онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор лінійного рівняння CalcCore: розв’язання рівнянь виду ax + b = 0, знаходження x, покрокове пояснення та особливі випадки." />
+
+    <link rel="canonical" href="https://calccore.net/education/linear-equation-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/linear-equation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/linear-equation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/linear.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/linear.js?v=20260307" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/education/linear-equation-calculator#app",
+      "name":"Калькулятор лінійного рівняння",
+      "description":"Онлайн калькулятор для розв’язання лінійних рівнянь виду ax + b = 0, знаходження x та покрокового пояснення.",
+      "url":"https://calccore.net/education/linear-equation-calculator",
+      "applicationCategory":"EducationApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"uk",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Що таке лінійне рівняння?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Лінійне рівняння — це рівняння першого степеня, наприклад ax + b = 0, де a і b — числа, а x — змінна."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти x у рівнянні ax + b = 0?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Потрібно перенести b в іншу частину рівняння: ax = -b, а потім поділити обидві частини на a. Формула: x = -b / a."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Що буде, якщо a = 0?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Якщо a = 0, рівняння перестає залежати від x. Тоді можливі два випадки: або немає розв’язків, або розв’язків безліч."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Коли лінійне рівняння має безліч розв’язків?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Якщо a = 0 і b = 0, маємо тотожність 0 = 0, тому розв’язків безліч."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Коли лінійне рівняння не має розв’язків?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Якщо a = 0 і b ≠ 0, отримуємо неможливу рівність, наприклад 5 = 0, тому розв’язків немає."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Чи можна вводити дробові коефіцієнти?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Так, калькулятор підтримує як цілі, так і десяткові числа."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="linear-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc lcalc" id="lcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор лінійного рівняння</h1>
+                    <p class="ccalc__p">
+                        Розв’язання рівнянь виду <b>ax + b = 0</b>, знаходження <b>x</b>,
+                        покрокове пояснення та аналіз особливих випадків.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи коефіцієнти</h2>
+                            <span class="ccalc__badge">Освіта</span>
+                        </div>
+
+                        <div class="lcalc-formula">
+                            <span class="lcalc-formula__part">a·x</span>
+                            <span class="lcalc-formula__part">+</span>
+                            <span class="lcalc-formula__part">b</span>
+                            <span class="lcalc-formula__part">= 0</span>
+                        </div>
+
+                        <div class="ccalc__rows">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="la">Коефіцієнт a</label>
+                                <input class="ccalc__input" id="la" inputmode="decimal" placeholder="2" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="lb">Коефіцієнт b</label>
+                                <input class="ccalc__input" id="lb" inputmode="decimal" placeholder="-8" />
+                            </div>
+                        </div>
+
+                        <div class="lin-examples">
+                            <div class="lin-examples-title">Приклади лінійних рівнянь</div>
+                        
+                            <div class="lin-examples-list">
+                                <button type="button" class="lin-example" data-a="2" data-b="-8">
+                                    2x − 8 = 0
+                                </button>
+                        
+                                <button type="button" class="lin-example" data-a="5" data-b="15">
+                                    5x + 15 = 0
+                                </button>
+                        
+                                <button type="button" class="lin-example" data-a="-3" data-b="9">
+                                    -3x + 9 = 0
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                id="btnCalc">Розрахувати</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="lToast"></div>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="lResult">
+                            Введи коефіцієнти та натисни «Розрахувати».
+                        </div>
+
+                        <div class="lcalc-details" id="lDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 lcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+                        <div class="calc-nav">
+                            <a href="/education/quadratic-equation-calculator" class="calc-nav-btn">
+                                Квадратні рівняння
+                            </a>
+                        
+                            <a href="/education/fraction-calculator" class="calc-nav-btn">
+                                Дроби
+                            </a>
+                        
+                            <a href="/education/system-of-equations-calculator" class="calc-nav-btn">
+                                Системи рівнянь
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор лінійного рівняння CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор допомагає розв’язувати <b>лінійні рівняння</b> виду
+                <b>ax + b = 0</b>. Він знаходить значення <b>x</b>, показує основні кроки
+                перетворення та пояснює особливі випадки.
+            </p>
+
+            <h2>Форма лінійного рівняння</h2>
+            <p>
+                Стандартний вигляд:
+                <b>ax + b = 0</b>, де <b>a</b> і <b>b</b> — числа, а <b>x</b> — змінна.
+            </p>
+
+            <h2>Як знайти x</h2>
+            <p>
+                Щоб розв’язати рівняння, потрібно:
+            </p>
+            <ul>
+                <li>перенести <b>b</b> в праву частину: <b>ax = -b</b></li>
+                <li>поділити обидві частини на <b>a</b>: <b>x = -b / a</b></li>
+            </ul>
+
+            <h2>Особливі випадки</h2>
+            <p>
+                Якщо <b>a = 0</b>, змінна <b>x</b> зникає з рівняння.
+            </p>
+            <ul>
+                <li><b>a = 0, b = 0</b> — безліч розв’язків</li>
+                <li><b>a = 0, b ≠ 0</b> — розв’язків немає</li>
+            </ul>
+
+            <h2>Приклад</h2>
+            <p>
+                Для рівняння <b>2x − 8 = 0</b>:
+            </p>
+            <ul>
+                <li><b>2x = 8</b></li>
+                <li><b>x = 8 / 2 = 4</b></li>
+            </ul>
+
+            <h2>Коли використовувати цей калькулятор</h2>
+            <p>
+                Цей калькулятор підходить для простих рівнянь з однією змінною першого степеня.
+                Для квадратних рівнянь слід використовувати окремий калькулятор квадратного рівняння.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Що таке лінійне рівняння?</h3>
+                <p>
+                    Це рівняння першого степеня, наприклад <b>ax + b = 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка формула для x?</h3>
+                <p>
+                    Якщо <b>a ≠ 0</b>, то <b>x = -b / a</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що буде, якщо a = 0?</h3>
+                <p>
+                    Тоді рівняння не містить змінної x. Воно або не має розв’язків,
+                    або має безліч розв’язків.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Коли розв’язків безліч?</h3>
+                <p>
+                    Коли <b>a = 0</b> і <b>b = 0</b>, маємо рівність <b>0 = 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Коли розв’язків немає?</h3>
+                <p>
+                    Коли <b>a = 0</b> і <b>b ≠ 0</b>, отримуємо неправильну рівність,
+                    наприклад <b>7 = 0</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вводити десяткові числа?</h3>
+                <p>
+                    Так, калькулятор підтримує цілі та десяткові коефіцієнти.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
