@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор об’єму онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор об’єму CalcCore: обчислення об’єму куба, сфери та циліндра. Формули, покрокове пояснення, приклади та візуалізація." />
+
+    <link rel="canonical" href="https://calccore.net/education/volume-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/volume-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/volume-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/volume-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/volume-calculator.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/education/volume-calculator#app",
+      "name":"Калькулятор об’єму",
+      "description":"Онлайн калькулятор для обчислення об’єму куба, сфери та циліндра.",
+      "url":"https://calccore.net/education/volume-calculator",
+      "applicationCategory":"EducationApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"uk",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Як знайти об’єм куба?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Об’єм куба обчислюється за формулою V = a³, де a — довжина ребра."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти об’єм сфери?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Об’єм сфери обчислюється за формулою V = 4/3 × π × r³, де r — радіус."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти об’єм циліндра?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Об’єм циліндра обчислюється за формулою V = π × r² × h, де r — радіус основи, h — висота."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Які фігури підтримує цей калькулятор?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Калькулятор підтримує куб, сферу та циліндр."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Чи можна вводити десяткові числа?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Так, калькулятор підтримує як цілі, так і десяткові значення."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Яке число π використовується?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Калькулятор використовує стандартне математичне значення π з достатньою точністю для практичних розрахунків."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="volume-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc vcalc" id="vcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор об’єму</h1>
+                    <p class="ccalc__p">
+                        Обчислення об’єму <b>куба</b>, <b>сфери</b> та <b>циліндра</b>
+                        з покроковим поясненням і візуалізацією.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Освіта</span>
+                        </div>
+
+                        <div class="vcalc-mode">
+                            <label class="ccalc__label" for="vMode">Фігура</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input vcalc-select calc-select" id="vMode">
+                                <option value="cube">Куб</option>
+                                <option value="sphere">Сфера</option>
+                                <option value="cylinder">Циліндр</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="vcalc-formula" id="vFormulaBox">
+                            <span class="vcalc-formula__part">V = a³</span>
+                        </div>
+
+                        <!-- CUBE -->
+                        <div class="ccalc__rows vcalc-panel" id="panelCube">
+                            <div class="ccalc__field vcalc-full">
+                                <label class="ccalc__label" for="vcCubeA">Ребро a</label>
+                                <input class="ccalc__input" id="vcCubeA" inputmode="decimal" placeholder="5" />
+                            </div>
+                        </div>
+
+                        <!-- SPHERE -->
+                        <div class="ccalc__rows vcalc-panel" id="panelSphere" hidden>
+                            <div class="ccalc__field vcalc-full">
+                                <label class="ccalc__label" for="vcSphereR">Радіус r</label>
+                                <input class="ccalc__input" id="vcSphereR" inputmode="decimal" placeholder="4" />
+                            </div>
+                        </div>
+
+                        <!-- CYLINDER -->
+                        <div class="ccalc__rows vcalc-panel" id="panelCylinder" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="vcCylinderR">Радіус r</label>
+                                <input class="ccalc__input" id="vcCylinderR" inputmode="decimal" placeholder="3" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="vcCylinderH">Висота h</label>
+                                <input class="ccalc__input" id="vcCylinderH" inputmode="decimal" placeholder="10" />
+                            </div>
+                        </div>
+
+                        <div class="volume-examples">
+                            <div class="volume-examples-title">Приклади</div>
+
+                            <div class="volume-examples-list">
+                                <button class="volume-example" data-mode="cube" data-v1="5">
+                                    Куб: a = 5
+                                </button>
+
+                                <button class="volume-example" data-mode="sphere" data-v1="4">
+                                    Сфера: r = 4
+                                </button>
+
+                                <button class="volume-example" data-mode="cylinder" data-v1="3" data-v2="10">
+                                    Циліндр: r = 3, h = 10
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                id="btnCalc">Розрахувати</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="vToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="vResult">
+                            Введи дані та натисни «Розрахувати».
+                        </div>
+
+                        <div class="vcalc-visual" id="vVisual" aria-label="Схема об’ємної фігури"></div>
+
+                        <div class="vcalc-details" id="vDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 vcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/education/circle-area-calculator" class="calc-nav-btn">
+                                Площа кола
+                            </a>
+
+                            <a href="/education/triangle-area-calculator" class="calc-nav-btn">
+                                Площа трикутника
+                            </a>
+
+                            <a href="/education/pythagorean-theorem-calculator" class="calc-nav-btn">
+                                Теорема Піфагора
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор об’єму CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор допомагає швидко знайти <b>об’єм геометричних тіл</b>.
+                Ти можеш виконати розрахунок для <b>куба</b>, <b>сфери</b> або <b>циліндра</b>.
+            </p>
+
+            <h2>Об’єм куба</h2>
+            <p>
+                Якщо відома довжина ребра куба, використовують формулу:
+            </p>
+            <ul>
+                <li><b>V = a³</b></li>
+            </ul>
+            <p>
+                Де <b>a</b> — довжина ребра куба.
+            </p>
+
+            <h2>Об’єм сфери</h2>
+            <p>
+                Для сфери формула така:
+            </p>
+            <ul>
+                <li><b>V = 4/3 × π × r³</b></li>
+            </ul>
+            <p>
+                Де <b>r</b> — радіус сфери.
+            </p>
+
+            <h2>Об’єм циліндра</h2>
+            <p>
+                Для циліндра використовують формулу:
+            </p>
+            <ul>
+                <li><b>V = π × r² × h</b></li>
+            </ul>
+            <p>
+                Де <b>r</b> — радіус основи, а <b>h</b> — висота циліндра.
+            </p>
+
+            <h2>Приклад обчислення</h2>
+            <p>
+                Якщо маємо циліндр з радіусом <b>3</b> і висотою <b>10</b>, тоді:
+            </p>
+            <ul>
+                <li><b>V = π × 3² × 10 = π × 9 × 10 = 90π ≈ 282.7433</b></li>
+            </ul>
+
+            <h2>Що зручно в цьому калькуляторі</h2>
+            <p>
+                Калькулятор автоматично показує формулу, проміжні кроки,
+                візуалізацію фігури та готовий результат. Підтримуються як цілі,
+                так і десяткові значення.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти об’єм куба?</h3>
+                <p>
+                    Треба піднести довжину ребра до третього степеня:
+                    <b>V = a³</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти об’єм сфери?</h3>
+                <p>
+                    Використовується формула <b>V = 4/3 × π × r³</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти об’єм циліндра?</h3>
+                <p>
+                    Треба помножити площу круга основи на висоту:
+                    <b>V = π × r² × h</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які фігури підтримує калькулятор?</h3>
+                <p>
+                    Куб, сферу та циліндр.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вводити десяткові числа?</h3>
+                <p>
+                    Так, підтримуються і цілі, і десяткові значення.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яке значення π використовується?</h3>
+                <p>
+                    Використовується стандартне математичне значення π
+                    з достатньою точністю для практичних розрахунків.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

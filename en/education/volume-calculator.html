@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Volume Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Volume Calculator: find the volume of a cube, sphere, and cylinder. Includes formulas, step-by-step explanation, examples, and visualization." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/volume-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/volume-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/volume-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/volume-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/volume-calculator.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/en/education/volume-calculator#app",
+      "name":"Volume Calculator",
+      "description":"Online calculator to find the volume of a cube, sphere, and cylinder.",
+      "url":"https://calccore.net/en/education/volume-calculator",
+      "applicationCategory":"EducationalApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"en",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"How do you find the volume of a cube?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The volume of a cube is calculated using the formula V = a³, where a is the edge length."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find the volume of a sphere?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The volume of a sphere is calculated using the formula V = 4/3 × π × r³, where r is the radius."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find the volume of a cylinder?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The volume of a cylinder is calculated using the formula V = π × r² × h, where r is the radius of the base and h is the height."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Which shapes are supported by this calculator?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The calculator supports a cube, sphere, and cylinder."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Can I enter decimal numbers?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Yes, the calculator supports both integers and decimal values."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What value of π is used?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The calculator uses the standard mathematical value of π with sufficient precision for practical calculations."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="volume-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc vcalc" id="vcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Volume Calculator</h1>
+                    <p class="ccalc__p">
+                        Calculate the volume of a <b>cube</b>, <b>sphere</b>, and <b>cylinder</b>
+                        with step-by-step explanation and visualization.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter values</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="vcalc-mode">
+                            <label class="ccalc__label" for="vMode">Shape</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input vcalc-select calc-select" id="vMode">
+                                <option value="cube">Cube</option>
+                                <option value="sphere">Sphere</option>
+                                <option value="cylinder">Cylinder</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="vcalc-formula" id="vFormulaBox">
+                            <span class="vcalc-formula__part">V = a³</span>
+                        </div>
+
+                        <!-- CUBE -->
+                        <div class="ccalc__rows vcalc-panel" id="panelCube">
+                            <div class="ccalc__field vcalc-full">
+                                <label class="ccalc__label" for="vcCubeA">Edge a</label>
+                                <input class="ccalc__input" id="vcCubeA" inputmode="decimal" placeholder="5" />
+                            </div>
+                        </div>
+
+                        <!-- SPHERE -->
+                        <div class="ccalc__rows vcalc-panel" id="panelSphere" hidden>
+                            <div class="ccalc__field vcalc-full">
+                                <label class="ccalc__label" for="vcSphereR">Radius r</label>
+                                <input class="ccalc__input" id="vcSphereR" inputmode="decimal" placeholder="4" />
+                            </div>
+                        </div>
+
+                        <!-- CYLINDER -->
+                        <div class="ccalc__rows vcalc-panel" id="panelCylinder" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="vcCylinderR">Radius r</label>
+                                <input class="ccalc__input" id="vcCylinderR" inputmode="decimal" placeholder="3" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="vcCylinderH">Height h</label>
+                                <input class="ccalc__input" id="vcCylinderH" inputmode="decimal" placeholder="10" />
+                            </div>
+                        </div>
+
+                        <div class="volume-examples">
+                            <div class="volume-examples-title">Examples</div>
+
+                            <div class="volume-examples-list">
+                                <button class="volume-example" data-mode="cube" data-v1="5">
+                                    Cube: a = 5
+                                </button>
+
+                                <button class="volume-example" data-mode="sphere" data-v1="4">
+                                    Sphere: r = 4
+                                </button>
+
+                                <button class="volume-example" data-mode="cylinder" data-v1="3" data-v2="10">
+                                    Cylinder: r = 3, h = 10
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">Calculate</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="vToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="vResult">
+                            Enter values and click “Calculate”.
+                        </div>
+
+                        <div class="vcalc-visual" id="vVisual" aria-label="Volume shape diagram"></div>
+
+                        <div class="vcalc-details" id="vDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 vcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/en/education/circle-area-calculator" class="calc-nav-btn">
+                                Circle area
+                            </a>
+
+                            <a href="/en/education/triangle-area-calculator" class="calc-nav-btn">
+                                Triangle area
+                            </a>
+
+                            <a href="/en/education/pythagorean-theorem-calculator" class="calc-nav-btn">
+                                Pythagorean theorem
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Volume Calculator — How it works</h2>
+            <p>
+                This calculator helps you quickly find the <b>volume of geometric solids</b>.
+                You can calculate the volume of a <b>cube</b>, <b>sphere</b>, or <b>cylinder</b>.
+            </p>
+
+            <h2>Volume of a cube</h2>
+            <p>
+                If the edge length of the cube is known, use the formula:
+            </p>
+            <ul>
+                <li><b>V = a³</b></li>
+            </ul>
+            <p>
+                Here <b>a</b> is the edge length of the cube.
+            </p>
+
+            <h2>Volume of a sphere</h2>
+            <p>
+                For a sphere, the formula is:
+            </p>
+            <ul>
+                <li><b>V = 4/3 × π × r³</b></li>
+            </ul>
+            <p>
+                Here <b>r</b> is the radius of the sphere.
+            </p>
+
+            <h2>Volume of a cylinder</h2>
+            <p>
+                For a cylinder, use the formula:
+            </p>
+            <ul>
+                <li><b>V = π × r² × h</b></li>
+            </ul>
+            <p>
+                Here <b>r</b> is the radius of the base and <b>h</b> is the height of the cylinder.
+            </p>
+
+            <h2>Example calculation</h2>
+            <p>
+                If a cylinder has radius <b>3</b> and height <b>10</b>, then:
+            </p>
+            <ul>
+                <li><b>V = π × 3² × 10 = π × 9 × 10 = 90π ≈ 282.7433</b></li>
+            </ul>
+
+            <h2>What is useful about this calculator</h2>
+            <p>
+                The calculator automatically shows the formula, intermediate steps,
+                shape visualization, and the final result. Both whole and decimal values are supported.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="cc-faq-item">
+                <h3>How do you find the volume of a cube?</h3>
+                <p>
+                    Raise the edge length to the third power:
+                    <b>V = a³</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do you find the volume of a sphere?</h3>
+                <p>
+                    Use the formula <b>V = 4/3 × π × r³</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do you find the volume of a cylinder?</h3>
+                <p>
+                    Multiply the area of the circular base by the height:
+                    <b>V = π × r² × h</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which shapes does the calculator support?</h3>
+                <p>
+                    A cube, a sphere, and a cylinder.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter decimal numbers?</h3>
+                <p>
+                    Yes, both whole and decimal values are supported.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What value of π is used?</h3>
+                <p>
+                    The standard mathematical value of π is used
+                    with sufficient precision for practical calculations.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

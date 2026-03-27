@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Pythagorean Theorem Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Pythagorean Theorem Calculator: find the hypotenuse or a leg using a² + b² = c². Includes formulas, step-by-step explanation, examples, and visualization." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/pythagorean-theorem-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/pythagorean-theorem-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/pythagorean-theorem-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pythagorean.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pythagorean.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/en/education/pythagorean-theorem-calculator#app",
+      "name":"Pythagorean Theorem Calculator",
+      "description":"Online calculator to find the hypotenuse or a leg in a right triangle using the Pythagorean theorem.",
+      "url":"https://calccore.net/en/education/pythagorean-theorem-calculator",
+      "applicationCategory":"EducationalApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"en",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"What is the Pythagorean theorem?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of the squares of the legs: a² + b² = c²."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find the hypotenuse?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"To find the hypotenuse, use the formula c = √(a² + b²)."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find a leg?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"To find a leg, use the formula a = √(c² − b²) or b = √(c² − a²)."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"For which triangles does the Pythagorean theorem work?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The Pythagorean theorem works only for right triangles."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What if the hypotenuse is smaller than a leg?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"In that case the input values are invalid, because the hypotenuse is always the longest side of a right triangle."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Can I enter decimal numbers?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Yes, the calculator supports both integers and decimal values."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="pythagorean-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc pcalc" id="pcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Pythagorean Theorem Calculator</h1>
+                    <p class="ccalc__p">
+                        Find the <b>hypotenuse</b> or a <b>leg</b> in a right triangle
+                        using the formula <b>a² + b² = c²</b>, with step-by-step explanation
+                        and visualization.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter values</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="pcalc-mode">
+                            <label class="ccalc__label" for="pMode">What to find</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input pcalc-select calc-select" id="pMode">
+                                <option value="hypotenuse">Hypotenuse c</option>
+                                <option value="leg-a">Leg a</option>
+                                <option value="leg-b">Leg b</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="pcalc-formula" id="pFormulaBox">
+                            <span class="pcalc-formula__part">c = √(a² + b²)</span>
+                        </div>
+
+                        <!-- FIND HYPOTENUSE -->
+                        <div class="ccalc__rows pcalc-panel" id="panelHypotenuse">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="phA">Leg a</label>
+                                <input class="ccalc__input" id="phA" inputmode="decimal" placeholder="3" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="phB">Leg b</label>
+                                <input class="ccalc__input" id="phB" inputmode="decimal" placeholder="4" />
+                            </div>
+                        </div>
+
+                        <!-- FIND LEG A -->
+                        <div class="ccalc__rows pcalc-panel" id="panelLegA" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="paC">Hypotenuse c</label>
+                                <input class="ccalc__input" id="paC" inputmode="decimal" placeholder="5" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="paB">Leg b</label>
+                                <input class="ccalc__input" id="paB" inputmode="decimal" placeholder="4" />
+                            </div>
+                        </div>
+
+                        <!-- FIND LEG B -->
+                        <div class="ccalc__rows pcalc-panel" id="panelLegB" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="pbC">Hypotenuse c</label>
+                                <input class="ccalc__input" id="pbC" inputmode="decimal" placeholder="5" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="pbA">Leg a</label>
+                                <input class="ccalc__input" id="pbA" inputmode="decimal" placeholder="3" />
+                            </div>
+                        </div>
+
+                        <div class="pyth-examples">
+                            <div class="pyth-examples-title">Examples</div>
+
+                            <div class="pyth-examples-list">
+                                <button class="pyth-example" data-mode="hypotenuse" data-v1="3" data-v2="4">
+                                    a = 3, b = 4
+                                </button>
+
+                                <button class="pyth-example" data-mode="leg-a" data-v1="5" data-v2="4">
+                                    c = 5, b = 4
+                                </button>
+
+                                <button class="pyth-example" data-mode="leg-b" data-v1="13" data-v2="5">
+                                    c = 13, a = 5
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">Calculate</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="pToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="pResult">
+                            Enter values and click “Calculate”.
+                        </div>
+
+                        <div class="pcalc-visual" id="pVisual" aria-label="Right triangle diagram"></div>
+
+                        <div class="pcalc-details" id="pDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 pcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/en/education/triangle-area-calculator" class="calc-nav-btn">
+                                Triangle area
+                            </a>
+
+                            <a href="/en/education/circle-area-calculator" class="calc-nav-btn">
+                                Circle area
+                            </a>
+
+                            <a href="/en/education/volume-calculator" class="calc-nav-btn">
+                                Volume calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Pythagorean Theorem Calculator — How it works</h2>
+            <p>
+                This calculator helps you quickly find the unknown side of a
+                <b>right triangle</b>. You can calculate the <b>hypotenuse</b>
+                or one of the <b>legs</b> using the known values of the other sides.
+            </p>
+
+            <h2>Pythagorean theorem formula</h2>
+            <p>
+                The main formula is:
+            </p>
+            <ul>
+                <li><b>a² + b² = c²</b></li>
+            </ul>
+            <p>
+                Here <b>a</b> and <b>b</b> are the legs, and <b>c</b> is the hypotenuse.
+            </p>
+
+            <h2>How to find the hypotenuse</h2>
+            <p>
+                If both legs are known, use the formula:
+            </p>
+            <ul>
+                <li><b>c = √(a² + b²)</b></li>
+            </ul>
+
+            <h2>How to find a leg</h2>
+            <p>
+                If the hypotenuse and one leg are known:
+            </p>
+            <ul>
+                <li><b>a = √(c² − b²)</b></li>
+                <li><b>b = √(c² − a²)</b></li>
+            </ul>
+
+            <h2>Example</h2>
+            <p>
+                For a triangle with legs <b>3</b> and <b>4</b>:
+            </p>
+            <ul>
+                <li><b>c = √(3² + 4²) = √(9 + 16) = √25 = 5</b></li>
+            </ul>
+
+            <h2>What is important to check</h2>
+            <p>
+                The hypotenuse must always be <b>longer</b> than any leg.
+                If it is not, the values do not describe a valid right triangle.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="cc-faq-item">
+                <h3>What is the Pythagorean theorem?</h3>
+                <p>
+                    It is the rule for a right triangle: the square of the hypotenuse
+                    equals the sum of the squares of the legs.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do you find the hypotenuse?</h3>
+                <p>
+                    Use the formula <b>c = √(a² + b²)</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do you find a leg?</h3>
+                <p>
+                    Use the formula <b>a = √(c² − b²)</b> or <b>b = √(c² − a²)</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>For which triangles does this work?</h3>
+                <p>
+                    Only for right triangles.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if the hypotenuse is smaller than a leg?</h3>
+                <p>
+                    Those values are invalid, so the calculator will show an error.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are decimal numbers supported?</h3>
+                <p>
+                    Yes, you can enter both whole and decimal values.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

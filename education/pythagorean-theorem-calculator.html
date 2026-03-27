@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор теореми Піфагора онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор теореми Піфагора CalcCore: знаходження гіпотенузи або катета за формулами a² + b² = c². Покрокове пояснення, приклади та візуалізація." />
+
+    <link rel="canonical" href="https://calccore.net/education/pythagorean-theorem-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/pythagorean-theorem-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/pythagorean-theorem-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pythagorean.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pythagorean.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/education/pythagorean-theorem-calculator#app",
+      "name":"Калькулятор теореми Піфагора",
+      "description":"Онлайн калькулятор для знаходження гіпотенузи або катета у прямокутному трикутнику за теоремою Піфагора.",
+      "url":"https://calccore.net/education/pythagorean-theorem-calculator",
+      "applicationCategory":"EducationApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"uk",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Що таке теорема Піфагора?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Теорема Піфагора стверджує, що у прямокутному трикутнику квадрат гіпотенузи дорівнює сумі квадратів катетів: a² + b² = c²."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти гіпотенузу?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Щоб знайти гіпотенузу, використовуйте формулу c = √(a² + b²)."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти катет?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Щоб знайти катет, використовуйте формулу a = √(c² − b²) або b = √(c² − a²)."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Для яких трикутників працює теорема Піфагора?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Теорема Піфагора працює тільки для прямокутних трикутників."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Що буде, якщо гіпотенуза менша за катет?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"У такому випадку дані некоректні, тому що гіпотенуза завжди найбільша сторона прямокутного трикутника."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Чи можна вводити десяткові числа?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Так, калькулятор підтримує і цілі, і десяткові значення."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="pythagorean-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc pcalc" id="pcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор теореми Піфагора</h1>
+                    <p class="ccalc__p">
+                        Знаходження <b>гіпотенузи</b> або <b>катета</b> у прямокутному трикутнику
+                        за формулою <b>a² + b² = c²</b>, з покроковим поясненням і візуалізацією.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Освіта</span>
+                        </div>
+
+                        <div class="pcalc-mode">
+                            <label class="ccalc__label" for="pMode">Що знайти</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input pcalc-select calc-select" id="pMode">
+                                <option value="hypotenuse">Гіпотенузу c</option>
+                                <option value="leg-a">Катет a</option>
+                                <option value="leg-b">Катет b</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="pcalc-formula" id="pFormulaBox">
+                            <span class="pcalc-formula__part">c = √(a² + b²)</span>
+                        </div>
+
+                        <!-- FIND HYPOTENUSE -->
+                        <div class="ccalc__rows pcalc-panel" id="panelHypotenuse">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="phA">Катет a</label>
+                                <input class="ccalc__input" id="phA" inputmode="decimal" placeholder="3" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="phB">Катет b</label>
+                                <input class="ccalc__input" id="phB" inputmode="decimal" placeholder="4" />
+                            </div>
+                        </div>
+
+                        <!-- FIND LEG A -->
+                        <div class="ccalc__rows pcalc-panel" id="panelLegA" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="paC">Гіпотенуза c</label>
+                                <input class="ccalc__input" id="paC" inputmode="decimal" placeholder="5" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="paB">Катет b</label>
+                                <input class="ccalc__input" id="paB" inputmode="decimal" placeholder="4" />
+                            </div>
+                        </div>
+
+                        <!-- FIND LEG B -->
+                        <div class="ccalc__rows pcalc-panel" id="panelLegB" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="pbC">Гіпотенуза c</label>
+                                <input class="ccalc__input" id="pbC" inputmode="decimal" placeholder="5" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="pbA">Катет a</label>
+                                <input class="ccalc__input" id="pbA" inputmode="decimal" placeholder="3" />
+                            </div>
+                        </div>
+
+                        <div class="pyth-examples">
+                            <div class="pyth-examples-title">Приклади</div>
+
+                            <div class="pyth-examples-list">
+                                <button class="pyth-example" data-mode="hypotenuse" data-v1="3" data-v2="4">
+                                    a = 3, b = 4
+                                </button>
+
+                                <button class="pyth-example" data-mode="leg-a" data-v1="5" data-v2="4">
+                                    c = 5, b = 4
+                                </button>
+
+                                <button class="pyth-example" data-mode="leg-b" data-v1="13" data-v2="5">
+                                    c = 13, a = 5
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                id="btnCalc">Розрахувати</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="pToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="pResult">
+                            Введи дані та натисни «Розрахувати».
+                        </div>
+
+                        <div class="pcalc-visual" id="pVisual" aria-label="Схема прямокутного трикутника"></div>
+
+                        <div class="pcalc-details" id="pDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 pcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/education/triangle-area-calculator" class="calc-nav-btn">
+                                Площа трикутника
+                            </a>
+
+                            <a href="/education/circle-area-calculator" class="calc-nav-btn">
+                                Площа кола
+                            </a>
+
+                            <a href="/education/volume-calculator" class="calc-nav-btn">
+                                Калькулятор об’єму
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор теореми Піфагора CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор допомагає швидко знайти невідому сторону
+                <b>прямокутного трикутника</b>. Ти можеш обчислити <b>гіпотенузу</b>
+                або один із <b>катетів</b> за відомими значеннями інших сторін.
+            </p>
+
+            <h2>Формула теореми Піфагора</h2>
+            <p>
+                Основна формула:
+            </p>
+            <ul>
+                <li><b>a² + b² = c²</b></li>
+            </ul>
+            <p>
+                Де <b>a</b> і <b>b</b> — катети, а <b>c</b> — гіпотенуза.
+            </p>
+
+            <h2>Як знайти гіпотенузу</h2>
+            <p>
+                Якщо відомі обидва катети, використовують формулу:
+            </p>
+            <ul>
+                <li><b>c = √(a² + b²)</b></li>
+            </ul>
+
+            <h2>Як знайти катет</h2>
+            <p>
+                Якщо відома гіпотенуза і один катет:
+            </p>
+            <ul>
+                <li><b>a = √(c² − b²)</b></li>
+                <li><b>b = √(c² − a²)</b></li>
+            </ul>
+
+            <h2>Приклад</h2>
+            <p>
+                Для трикутника з катетами <b>3</b> і <b>4</b>:
+            </p>
+            <ul>
+                <li><b>c = √(3² + 4²) = √(9 + 16) = √25 = 5</b></li>
+            </ul>
+
+            <h2>Що важливо перевіряти</h2>
+            <p>
+                Гіпотенуза завжди повинна бути <b>більшою</b> за будь-який катет.
+                Якщо це не так, введені дані не підходять для прямокутного трикутника.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Що таке теорема Піфагора?</h3>
+                <p>
+                    Це правило для прямокутного трикутника: квадрат гіпотенузи дорівнює
+                    сумі квадратів катетів.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти гіпотенузу?</h3>
+                <p>
+                    Треба використати формулу <b>c = √(a² + b²)</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти катет?</h3>
+                <p>
+                    Треба використати формулу <b>a = √(c² − b²)</b> або <b>b = √(c² − a²)</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Для яких трикутників це працює?</h3>
+                <p>
+                    Лише для прямокутних трикутників.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що буде, якщо гіпотенуза менша за катет?</h3>
+                <p>
+                    Такі дані некоректні, тому калькулятор покаже помилку.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи підтримуються десяткові числа?</h3>
+                <p>
+                    Так, можна вводити і цілі, і десяткові значення.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

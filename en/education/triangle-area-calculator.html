@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Triangle Area Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Triangle Area Calculator: find the area of a triangle using base and height, three sides (Heron's formula), or two sides and the angle. Step-by-step explanation included." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/triangle-area-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/triangle-area-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/triangle-area-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/triangle-area.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/triangle-area.js?v=20260327" defer></script>
+
+    <!-- SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/en/education/triangle-area-calculator#app",
+      "name":"Triangle Area Calculator",
+      "description":"Online calculator to find triangle area using base and height, three sides, or two sides and an angle.",
+      "url":"https://calccore.net/en/education/triangle-area-calculator",
+      "applicationCategory":"EducationalApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"en",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    }
+    </script>
+
+    <!-- FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"How do you find the area of a triangle?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"You can find the area using S = (a × h) / 2, Heron's formula, or using two sides and the angle between them."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What is Heron's formula?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Heron's formula calculates area using three sides: S = √(p(p-a)(p-b)(p-c)), where p is the semiperimeter."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How to find area using two sides and angle?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Use S = (a × b × sin(γ)) / 2, where γ is the angle between the sides."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Can I enter decimal values?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Yes, the calculator supports both integers and decimal numbers."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What if the sides do not form a triangle?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The calculator will show that such a triangle does not exist."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="triangle-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc tcalc" id="tcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Triangle Area Calculator</h1>
+                    <p class="ccalc__p">
+                        Calculate triangle area using <b>base and height</b>,
+                        <b>three sides</b>, or <b>two sides and angle</b> with step-by-step explanation.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter values</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="tcalc-mode">
+                            <label class="ccalc__label" for="tMode">Calculation method</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input tcalc-select calc-select" id="tMode">
+                                <option value="base-height">Base and height</option>
+                                <option value="three-sides">Three sides (Heron)</option>
+                                <option value="two-sides-angle">Two sides and angle</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="tcalc-formula" id="tFormulaBox">
+                            <span class="tcalc-formula__part">S = (a × h) / 2</span>
+                        </div>
+
+                        <!-- Base + height -->
+                        <div class="ccalc__rows tcalc-panel" id="panelBaseHeight">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Base a</label>
+                                <input class="ccalc__input" id="tbBase" placeholder="10" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Height h</label>
+                                <input class="ccalc__input" id="tbHeight" placeholder="6" />
+                            </div>
+                        </div>
+
+                        <!-- Three sides -->
+                        <div class="ccalc__rows tcalc-panel" id="panelThreeSides" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Side a</label>
+                                <input class="ccalc__input" id="tsA" placeholder="3" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Side b</label>
+                                <input class="ccalc__input" id="tsB" placeholder="4" />
+                            </div>
+
+                            <div class="ccalc__field tcalc-full">
+                                <label class="ccalc__label">Side c</label>
+                                <input class="ccalc__input" id="tsC" placeholder="5" />
+                            </div>
+                        </div>
+
+                        <!-- Two sides + angle -->
+                        <div class="ccalc__rows tcalc-panel" id="panelTwoSidesAngle" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Side a</label>
+                                <input class="ccalc__input" id="taA" placeholder="8" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label">Side b</label>
+                                <input class="ccalc__input" id="taB" placeholder="5" />
+                            </div>
+
+                            <div class="ccalc__field tcalc-full">
+                                <label class="ccalc__label">Angle γ (degrees)</label>
+                                <input class="ccalc__input" id="taAngle" placeholder="30" />
+                            </div>
+                        </div>
+
+                        <div class="tri-examples">
+                            <div class="tri-examples-title">Examples</div>
+
+                            <div class="tri-examples-list">
+                                <button class="tri-example" data-mode="base-height" data-v1="10" data-v2="6">
+                                    Base 10, height 6
+                                </button>
+
+                                <button class="tri-example" data-mode="three-sides" data-v1="3" data-v2="4" data-v3="5">
+                                    Sides 3, 4, 5
+                                </button>
+
+                                <button class="tri-example" data-mode="two-sides-angle" data-v1="8" data-v2="5"
+                                    data-v3="30">
+                                    8 & 5, angle 30°
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" id="btnCalc">Calculate</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="tToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="tResult">
+                            Enter values and click “Calculate”.
+                        </div>
+
+                        <div class="tcalc-visual" id="tVisual"></div>
+
+                        <div class="tcalc-details" id="tDetails"></div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn calc-reset-btn" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" data-copy>Copy result</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/en/education/circle-area-calculator" class="calc-nav-btn">
+                                Circle area
+                            </a>
+
+                            <a href="/en/education/pythagorean-theorem-calculator" class="calc-nav-btn">
+                                Pythagorean theorem
+                            </a>
+
+                            <a href="/en/education/volume-calculator" class="calc-nav-btn">
+                                Volume calculator
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <!-- SEO -->
+        <section class="cc-seo">
+            <h2>Triangle Area Calculator — How it works</h2>
+            <p>
+                This calculator helps you find the <b>area of a triangle</b> using different methods:
+                base and height, three sides, or two sides with an angle.
+            </p>
+
+            <h2>Base and height formula</h2>
+            <ul>
+                <li><b>S = (a × h) / 2</b></li>
+            </ul>
+
+            <h2>Heron's formula</h2>
+            <ul>
+                <li><b>p = (a + b + c) / 2</b></li>
+                <li><b>S = √(p(p − a)(p − b)(p − c))</b></li>
+            </ul>
+
+            <h2>Two sides and angle</h2>
+            <ul>
+                <li><b>S = (a × b × sin(γ)) / 2</b></li>
+            </ul>
+        </section>
+
+        <!-- FAQ -->
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>What is the easiest way?</h3>
+                <p>Use base and height if available.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When to use Heron's formula?</h3>
+                <p>When all three sides are known.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I use angles?</h3>
+                <p>Yes, with two sides and the included angle.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are decimals supported?</h3>
+                <p>Yes, all numeric inputs are supported.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Invalid triangle?</h3>
+                <p>The calculator will warn you.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

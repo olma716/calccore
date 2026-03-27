@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Circle Area Calculator Online — CalcCore</title>
+    <meta name="description"
+        content="CalcCore Circle Area Calculator: find circle area using radius, diameter, or circumference. Includes formulas, step-by-step explanation, and examples." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/circle-area-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/circle-area-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/circle-area-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/circle-area.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/circle-area.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/en/education/circle-area-calculator#app",
+      "name":"Circle Area Calculator",
+      "description":"Online calculator to find the area of a circle using radius, diameter, or circumference.",
+      "url":"https://calccore.net/en/education/circle-area-calculator",
+      "applicationCategory":"EducationalApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"en",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"How do you find the area of a circle?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The area of a circle is calculated using the formula A = πr², where r is the radius."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find circle area from diameter?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"First find the radius using r = d / 2, then use the formula A = πr²."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"How do you find circle area from circumference?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"First calculate the radius using r = C / (2π), then find the area with A = πr²."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What is the difference between radius and diameter?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The radius is the distance from the center of the circle to the edge. The diameter goes across the circle through the center and equals two radii."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Can I enter decimal numbers?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Yes, the calculator supports both integers and decimal values."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"What value of π is used?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"The calculator uses the standard mathematical value of π with sufficient precision for practical calculations."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="circle-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc cicalc" id="cicalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Circle Area Calculator</h1>
+                    <p class="ccalc__p">
+                        Calculate circle area using <b>radius</b>, <b>diameter</b>,
+                        or <b>circumference</b> with step-by-step explanation.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Enter values</h2>
+                            <span class="ccalc__badge">Education</span>
+                        </div>
+
+                        <div class="cicalc-mode">
+                            <label class="ccalc__label" for="ciMode">Calculation method</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input cicalc-select calc-select" id="ciMode">
+                                <option value="radius">By radius</option>
+                                <option value="diameter">By diameter</option>
+                                <option value="circumference">By circumference</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="cicalc-formula" id="ciFormulaBox">
+                            <span class="cicalc-formula__part">A = πr²</span>
+                        </div>
+
+                        <!-- RADIUS -->
+                        <div class="ccalc__rows cicalc-panel" id="panelRadius">
+                            <div class="ccalc__field cicalc-full">
+                                <label class="ccalc__label" for="ciRadius">Radius r</label>
+                                <input class="ccalc__input" id="ciRadius" inputmode="decimal" placeholder="5" />
+                            </div>
+                        </div>
+
+                        <!-- DIAMETER -->
+                        <div class="ccalc__rows cicalc-panel" id="panelDiameter" hidden>
+                            <div class="ccalc__field cicalc-full">
+                                <label class="ccalc__label" for="ciDiameter">Diameter d</label>
+                                <input class="ccalc__input" id="ciDiameter" inputmode="decimal" placeholder="10" />
+                            </div>
+                        </div>
+
+                        <!-- CIRCUMFERENCE -->
+                        <div class="ccalc__rows cicalc-panel" id="panelCircumference" hidden>
+                            <div class="ccalc__field cicalc-full">
+                                <label class="ccalc__label" for="ciCircumference">Circumference C</label>
+                                <input class="ccalc__input" id="ciCircumference" inputmode="decimal"
+                                    placeholder="31.4159" />
+                            </div>
+                        </div>
+
+                        <div class="circle-examples">
+                            <div class="circle-examples-title">Examples</div>
+
+                            <div class="circle-examples-list">
+                                <button class="circle-example" data-mode="radius" data-v1="5">
+                                    Radius 5
+                                </button>
+
+                                <button class="circle-example" data-mode="diameter" data-v1="10">
+                                    Diameter 10
+                                </button>
+
+                                <button class="circle-example" data-mode="circumference" data-v1="31.4159">
+                                    Circumference 31.4159
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button" id="btnCalc">Calculate</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="ciToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Result</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="ciResult">
+                            Enter values and click “Calculate”.
+                        </div>
+
+                        <div class="cicalc-visual" id="ciVisual" aria-label="Circle diagram"></div>
+
+                        <div class="cicalc-details" id="ciDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 cicalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Reset</button>
+                            <button class="ccalc__btn" type="button" data-copy>Copy result</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/en/education/triangle-area-calculator" class="calc-nav-btn">
+                                Triangle area
+                            </a>
+
+                            <a href="/en/education/pythagorean-theorem-calculator" class="calc-nav-btn">
+                                Pythagorean theorem
+                            </a>
+
+                            <a href="/en/education/volume-calculator" class="calc-nav-btn">
+                                Volume calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Circle Area Calculator — How it works</h2>
+            <p>
+                This calculator helps you quickly find the <b>area of a circle</b> in different ways.
+                You can calculate it <b>from radius</b>, <b>from diameter</b>,
+                or <b>from circumference</b>.
+            </p>
+
+            <h2>Circle area formula</h2>
+            <p>
+                The main formula is:
+            </p>
+            <ul>
+                <li><b>A = πr²</b></li>
+            </ul>
+            <p>
+                Here <b>r</b> is the radius of the circle, and <b>π</b> is the mathematical constant
+                approximately equal to 3.14159.
+            </p>
+
+            <h2>Area from diameter</h2>
+            <p>
+                If the diameter is known, first find the radius:
+            </p>
+            <ul>
+                <li><b>r = d / 2</b></li>
+                <li><b>A = π(d / 2)²</b></li>
+            </ul>
+
+            <h2>Area from circumference</h2>
+            <p>
+                If the circumference is known, find the radius like this:
+            </p>
+            <ul>
+                <li><b>r = C / (2π)</b></li>
+            </ul>
+            <p>
+                Then use the area formula:
+            </p>
+            <ul>
+                <li><b>A = πr²</b></li>
+            </ul>
+
+            <h2>Example calculation</h2>
+            <p>
+                If the radius of the circle is <b>5</b>, then:
+            </p>
+            <ul>
+                <li><b>A = π × 5² = π × 25 ≈ 78.5398</b></li>
+            </ul>
+
+            <h2>What is useful about this calculator</h2>
+            <p>
+                You can enter both whole numbers and decimal values, and the calculator
+                will automatically show the formula, intermediate steps, and final result.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="cc-faq-item">
+                <h3>How do you find the area of a circle?</h3>
+                <p>
+                    The area of a circle is calculated using the formula <b>A = πr²</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the radius?</h3>
+                <p>
+                    The radius is the distance from the center of the circle to its edge.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the diameter?</h3>
+                <p>
+                    The diameter is a line segment that goes through the center of the circle
+                    and equals two radii.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can you find area from diameter?</h3>
+                <p>
+                    Yes, first divide the diameter by 2 to get the radius.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can you find area from circumference?</h3>
+                <p>
+                    Yes, first find the radius using <b>C / (2π)</b>, then calculate the area.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are decimal numbers supported?</h3>
+                <p>
+                    Yes, the calculator supports both whole and decimal values.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

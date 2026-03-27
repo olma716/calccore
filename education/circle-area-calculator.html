@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор площі кола онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор площі кола CalcCore: обчислення площі за радіусом, діаметром або довжиною кола. Покрокове пояснення, формули та приклади." />
+
+    <link rel="canonical" href="https://calccore.net/education/circle-area-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/circle-area-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/circle-area-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/circle-area.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/circle-area.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/education/circle-area-calculator#app",
+      "name":"Калькулятор площі кола",
+      "description":"Онлайн калькулятор для обчислення площі кола за радіусом, діаметром або довжиною кола.",
+      "url":"https://calccore.net/education/circle-area-calculator",
+      "applicationCategory":"EducationApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"uk",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Як знайти площу кола?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Площа кола обчислюється за формулою S = πr², де r — радіус кола."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти площу кола за діаметром?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Спочатку треба знайти радіус: r = d / 2, після чого використати формулу S = πr²."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти площу кола за довжиною кола?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Спочатку обчислюють радіус за формулою r = C / (2π), а потім площу S = πr²."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Що таке радіус і діаметр?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Радіус — це відстань від центра кола до його краю. Діаметр — це відрізок через центр, який дорівнює двом радіусам."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Чи можна вводити десяткові числа?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Так, калькулятор підтримує цілі та десяткові значення."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Яке число π використовується?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Калькулятор використовує стандартне математичне значення π з достатньою точністю для практичних розрахунків."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="circle-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc cicalc" id="cicalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор площі кола</h1>
+                    <p class="ccalc__p">
+                        Обчислення площі кола <b>за радіусом</b>, <b>за діаметром</b>
+                        або <b>за довжиною кола</b> з покроковим поясненням.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Освіта</span>
+                        </div>
+
+                        <div class="cicalc-mode">
+                            <label class="ccalc__label" for="ciMode">Спосіб обчислення</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input cicalc-select calc-select" id="ciMode">
+                                    <option value="radius">За радіусом</option>
+                                    <option value="diameter">За діаметром</option>
+                                    <option value="circumference">За довжиною кола</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="cicalc-formula" id="ciFormulaBox">
+                            <span class="cicalc-formula__part">S = πr²</span>
+                        </div>
+
+                        <!-- RADIUS -->
+                        <div class="ccalc__rows cicalc-panel" id="panelRadius">
+                            <div class="ccalc__field cicalc-full">
+                                <label class="ccalc__label" for="ciRadius">Радіус r</label>
+                                <input class="ccalc__input" id="ciRadius" inputmode="decimal" placeholder="5" />
+                            </div>
+                        </div>
+
+                        <!-- DIAMETER -->
+                        <div class="ccalc__rows cicalc-panel" id="panelDiameter" hidden>
+                            <div class="ccalc__field cicalc-full">
+                                <label class="ccalc__label" for="ciDiameter">Діаметр d</label>
+                                <input class="ccalc__input" id="ciDiameter" inputmode="decimal" placeholder="10" />
+                            </div>
+                        </div>
+
+                        <!-- CIRCUMFERENCE -->
+                        <div class="ccalc__rows cicalc-panel" id="panelCircumference" hidden>
+                            <div class="ccalc__field cicalc-full">
+                                <label class="ccalc__label" for="ciCircumference">Довжина кола C</label>
+                                <input class="ccalc__input" id="ciCircumference" inputmode="decimal"
+                                    placeholder="31.4159" />
+                            </div>
+                        </div>
+
+                        <div class="circle-examples">
+                            <div class="circle-examples-title">Приклади</div>
+
+                            <div class="circle-examples-list">
+                                <button class="circle-example" data-mode="radius" data-v1="5">
+                                    Радіус 5
+                                </button>
+
+                                <button class="circle-example" data-mode="diameter" data-v1="10">
+                                    Діаметр 10
+                                </button>
+
+                                <button class="circle-example" data-mode="circumference" data-v1="31.4159">
+                                    Довжина кола 31.4159
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                id="btnCalc">Розрахувати</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="ciToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="ciResult">
+                            Введи дані та натисни «Розрахувати».
+                        </div>
+
+                        <div class="cicalc-visual" id="ciVisual" aria-label="Схема кола"></div>
+
+                        <div class="cicalc-details" id="ciDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 cicalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/education/triangle-area-calculator" class="calc-nav-btn">
+                                Площа трикутника
+                            </a>
+
+                            <a href="/education/pythagorean-theorem-calculator" class="calc-nav-btn">
+                                Теорема Піфагора
+                            </a>
+
+                            <a href="/education/volume-calculator" class="calc-nav-btn">
+                                Калькулятор об’єму
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор площі кола CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор допомагає швидко знайти <b>площу кола</b> різними способами.
+                Ти можеш виконати розрахунок <b>за радіусом</b>, <b>за діаметром</b>
+                або <b>за довжиною кола</b>.
+            </p>
+
+            <h2>Формула площі кола</h2>
+            <p>
+                Основна формула:
+            </p>
+            <ul>
+                <li><b>S = πr²</b></li>
+            </ul>
+            <p>
+                Де <b>r</b> — радіус кола, а <b>π</b> — математична константа приблизно 3.14159.
+            </p>
+
+            <h2>Площа за діаметром</h2>
+            <p>
+                Якщо відомий діаметр, спочатку потрібно знайти радіус:
+            </p>
+            <ul>
+                <li><b>r = d / 2</b></li>
+                <li><b>S = π(d / 2)²</b></li>
+            </ul>
+
+            <h2>Площа за довжиною кола</h2>
+            <p>
+                Якщо відома довжина кола, радіус знаходять так:
+            </p>
+            <ul>
+                <li><b>r = C / (2π)</b></li>
+            </ul>
+            <p>
+                Після цього використовують формулу площі:
+            </p>
+            <ul>
+                <li><b>S = πr²</b></li>
+            </ul>
+
+            <h2>Приклад обчислення</h2>
+            <p>
+                Якщо радіус кола дорівнює <b>5</b>, тоді:
+            </p>
+            <ul>
+                <li><b>S = π × 5² = π × 25 ≈ 78.5398</b></li>
+            </ul>
+
+            <h2>Що зручно в цьому калькуляторі</h2>
+            <p>
+                Ти можеш вводити як цілі, так і десяткові значення, а калькулятор
+                автоматично покаже формулу, проміжні обчислення і готовий результат.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти площу кола?</h3>
+                <p>
+                    Площа кола обчислюється за формулою <b>S = πr²</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке радіус?</h3>
+                <p>
+                    Радіус — це відстань від центра кола до його краю.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке діаметр?</h3>
+                <p>
+                    Діаметр — це відрізок, який проходить через центр кола і дорівнює
+                    двом радіусам.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна знайти площу за діаметром?</h3>
+                <p>
+                    Так, треба спочатку поділити діаметр навпіл, щоб отримати радіус.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна знайти площу за довжиною кола?</h3>
+                <p>
+                    Так, спочатку знаходять радіус через <b>C / (2π)</b>, а потім площу.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи підтримуються десяткові числа?</h3>
+                <p>
+                    Так, калькулятор підтримує як цілі, так і дробові значення.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

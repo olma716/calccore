@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор площі трикутника онлайн — CalcCore</title>
+    <meta name="description"
+        content="Калькулятор площі трикутника CalcCore: обчислення площі за основою і висотою, за трьома сторонами, за двома сторонами і кутом. Покрокове пояснення та приклади." />
+
+    <link rel="canonical" href="https://calccore.net/education/triangle-area-calculator" />
+
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/triangle-area-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/triangle-area-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/triangle-area.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/triangle-area.js?v=20260327" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "@id":"https://calccore.net/education/triangle-area-calculator#app",
+      "name":"Калькулятор площі трикутника",
+      "description":"Онлайн калькулятор для обчислення площі трикутника за основою і висотою, за трьома сторонами, а також за двома сторонами і кутом.",
+      "url":"https://calccore.net/education/triangle-area-calculator",
+      "applicationCategory":"EducationApplication",
+      "operatingSystem":"Any",
+      "isAccessibleForFree":true,
+      "inLanguage":"uk",
+      "publisher":{"@id":"https://calccore.net/#org"},
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Як знайти площу трикутника?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Площу трикутника можна знайти кількома способами: за формулою S = (a × h) / 2, за формулою Герона через три сторони або за двома сторонами і кутом між ними."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Яка формула площі через основу і висоту?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Площа трикутника через основу і висоту обчислюється за формулою S = (a × h) / 2."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Що таке формула Герона?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Формула Герона дозволяє знайти площу трикутника за трьома сторонами: S = √(p(p-a)(p-b)(p-c)), де p — півпериметр."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Як знайти площу за двома сторонами і кутом?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Площа обчислюється за формулою S = (a × b × sin(γ)) / 2, де γ — кут між сторонами."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Чи можна вводити дробові значення?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Так, калькулятор підтримує як цілі, так і десяткові числа."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"Що буде, якщо сторони не утворюють трикутник?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"У такому випадку калькулятор покаже, що задані значення не утворюють коректний трикутник."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="triangle-page">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="ccalc tcalc" id="tcalc">
+            <div class="ccalc__wrap">
+
+                <div class="ccalc__titlebar">
+                    <h1 class="ccalc__h1">Калькулятор площі трикутника</h1>
+                    <p class="ccalc__p">
+                        Обчислення площі трикутника <b>за основою і висотою</b>,
+                        <b>за трьома сторонами</b> або <b>за двома сторонами і кутом</b>,
+                        з покроковим поясненням.
+                    </p>
+                </div>
+
+                <div class="ccalc__grid">
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Введи дані</h2>
+                            <span class="ccalc__badge">Освіта</span>
+                        </div>
+
+                        <div class="tcalc-mode">
+                            <label class="ccalc__label" for="tMode">Спосіб обчислення</label>
+                            <div class="select-wrap">
+                                <select class="ccalc__input tcalc-select calc-select" id="tMode">
+                                    <option value="base-height">Основа і висота</option>
+                                    <option value="three-sides">Три сторони (формула Герона)</option>
+                                    <option value="two-sides-angle">Дві сторони і кут</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="tcalc-formula" id="tFormulaBox">
+                            <span class="tcalc-formula__part">S = (a × h) / 2</span>
+                        </div>
+
+                        <!-- BASE + HEIGHT -->
+                        <div class="ccalc__rows tcalc-panel" id="panelBaseHeight">
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="tbBase">Основа a</label>
+                                <input class="ccalc__input" id="tbBase" inputmode="decimal" placeholder="10" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="tbHeight">Висота h</label>
+                                <input class="ccalc__input" id="tbHeight" inputmode="decimal" placeholder="6" />
+                            </div>
+                        </div>
+
+                        <!-- THREE SIDES -->
+                        <div class="ccalc__rows tcalc-panel" id="panelThreeSides" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="tsA">Сторона a</label>
+                                <input class="ccalc__input" id="tsA" inputmode="decimal" placeholder="3" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="tsB">Сторона b</label>
+                                <input class="ccalc__input" id="tsB" inputmode="decimal" placeholder="4" />
+                            </div>
+
+                            <div class="ccalc__field tcalc-full">
+                                <label class="ccalc__label" for="tsC">Сторона c</label>
+                                <input class="ccalc__input" id="tsC" inputmode="decimal" placeholder="5" />
+                            </div>
+                        </div>
+
+                        <!-- TWO SIDES + ANGLE -->
+                        <div class="ccalc__rows tcalc-panel" id="panelTwoSidesAngle" hidden>
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="taA">Сторона a</label>
+                                <input class="ccalc__input" id="taA" inputmode="decimal" placeholder="8" />
+                            </div>
+
+                            <div class="ccalc__field">
+                                <label class="ccalc__label" for="taB">Сторона b</label>
+                                <input class="ccalc__input" id="taB" inputmode="decimal" placeholder="5" />
+                            </div>
+
+                            <div class="ccalc__field tcalc-full">
+                                <label class="ccalc__label" for="taAngle">Кут γ (градуси)</label>
+                                <input class="ccalc__input" id="taAngle" inputmode="decimal" placeholder="30" />
+                            </div>
+                        </div>
+
+                        <div class="tri-examples">
+                            <div class="tri-examples-title">Приклади</div>
+
+                            <div class="tri-examples-list">
+                                <button class="tri-example" data-mode="base-height" data-v1="10" data-v2="6">
+                                    Основа 10, висота 6
+                                </button>
+
+                                <button class="tri-example" data-mode="three-sides" data-v1="3" data-v2="4" data-v3="5">
+                                    Сторони 3, 4, 5
+                                </button>
+
+                                <button class="tri-example" data-mode="two-sides-angle" data-v1="8" data-v2="5"
+                                    data-v3="30">
+                                    Сторони 8 і 5, кут 30°
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary" type="button"
+                                id="btnCalc">Розрахувати</button>
+                        </div>
+
+                        <div class="ccalc__toast" id="tToast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ccalc__card">
+                        <div class="ccalc__sectionTitle">
+                            <h2 class="ccalc__h2">Результат</h2>
+                            <span class="ccalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__bigNumber" id="tResult">
+                            Введи дані та натисни «Розрахувати».
+                        </div>
+                        <div class="tcalc-visual" id="tVisual" aria-label="Схема трикутника"></div>
+
+                        <div class="tcalc-details" id="tDetails" aria-live="polite"></div>
+
+                        <div class="ccalc__actions ccalc__mt10 tcalc-result-actions">
+                            <button class="ccalc__btn calc-reset-btn" type="button" data-reset="all">Скинути</button>
+                            <button class="ccalc__btn" type="button" data-copy>Копіювати результат</button>
+                        </div>
+
+                        <div class="calc-nav">
+                            <a href="/education/circle-area-calculator" class="calc-nav-btn">
+                                Площа кола
+                            </a>
+
+                            <a href="/education/pythagorean-theorem-calculator" class="calc-nav-btn">
+                                Теорема Піфагора
+                            </a>
+
+                            <a href="/education/volume-calculator" class="calc-nav-btn">
+                                Калькулятор об’єму
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Калькулятор площі трикутника CalcCore — як працює</h2>
+            <p>
+                Цей калькулятор допомагає швидко знайти <b>площу трикутника</b> різними способами.
+                Ти можеш обрати розрахунок <b>за основою і висотою</b>, <b>за трьома сторонами</b>
+                або <b>за двома сторонами і кутом між ними</b>.
+            </p>
+
+            <h2>Формула площі трикутника через основу і висоту</h2>
+            <p>
+                Найвідоміша формула:
+            </p>
+            <ul>
+                <li><b>S = (a × h) / 2</b></li>
+            </ul>
+            <p>
+                Де <b>a</b> — основа трикутника, а <b>h</b> — висота, опущена на цю основу.
+            </p>
+
+            <h2>Формула Герона</h2>
+            <p>
+                Якщо відомі всі три сторони трикутника, можна використати <b>формулу Герона</b>.
+            </p>
+            <ul>
+                <li><b>p = (a + b + c) / 2</b></li>
+                <li><b>S = √(p(p − a)(p − b)(p − c))</b></li>
+            </ul>
+            <p>
+                Тут <b>p</b> — це півпериметр трикутника.
+            </p>
+
+            <h2>Площа за двома сторонами і кутом</h2>
+            <p>
+                Якщо відомі дві сторони і кут між ними, площу знаходять так:
+            </p>
+            <ul>
+                <li><b>S = (a × b × sin(γ)) / 2</b></li>
+            </ul>
+            <p>
+                Де <b>γ</b> — кут між сторонами <b>a</b> і <b>b</b>.
+            </p>
+
+            <h2>Приклад обчислення</h2>
+            <p>
+                Для трикутника з основою <b>10</b> і висотою <b>6</b>:
+            </p>
+            <ul>
+                <li><b>S = (10 × 6) / 2 = 30</b></li>
+            </ul>
+
+            <h2>Коли потрібно перевіряти коректність даних</h2>
+            <p>
+                Якщо ти обираєш режим <b>три сторони</b>, вони повинні задовольняти
+                <b>нерівність трикутника</b>. Якщо це не так, такого трикутника не існує,
+                і площу обчислити не можна.
+            </p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти площу трикутника?</h3>
+                <p>
+                    Найпростіший спосіб — використати формулу <b>S = (a × h) / 2</b>,
+                    якщо відомі основа і висота.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке формула Герона?</h3>
+                <p>
+                    Це формула для обчислення площі трикутника за трьома сторонами через півпериметр.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна знайти площу за двома сторонами і кутом?</h3>
+                <p>
+                    Так, для цього використовують формулу <b>S = (a × b × sin(γ)) / 2</b>.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що буде, якщо сторони не утворюють трикутник?</h3>
+                <p>
+                    Калькулятор покаже, що введені значення некоректні, бо такий трикутник не існує.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вводити десяткові числа?</h3>
+                <p>
+                    Так, калькулятор підтримує і цілі, і дробові значення.
+                </p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який спосіб обчислення найкращий?</h3>
+                <p>
+                    Це залежить від того, які дані тобі відомі. Якщо є основа і висота —
+                    краще використовувати найпростішу формулу. Якщо є лише сторони —
+                    підійде формула Герона.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
