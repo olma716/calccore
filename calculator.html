@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Науковий калькулятор онлайн — точні розрахунки | CalcCore</title>
+    <meta name="description"
+        content="Науковий калькулятор онлайн: арифметика, тригонометрія, логарифми, степені, корені, факторіал, π, e, пам'ять та історія обчислень." />
+
+    <link rel="canonical" href="https://calccore.net/calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/calculator.js?v=20260907" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/calculator#app",
+    "name":"Scientific Calculator",
+    "description":"Науковий калькулятор: арифметика, тригонометрія, логарифми, степені, корені, факторіал, пам'ять та історія.",
+    "url":"https://calccore.net/calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page ccalc">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc ccalc" id="ccalc">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Науковий калькулятор</h1>
+                    <p class="mcalc__p">
+                        Базові операції та наукові функції: тригонометрія, логарифми, степені, корені,
+                        факторіал, пам'ять і історія обчислень.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid ccalc__grid">
+
+                    <!-- LEFT: calculator -->
+                    <div class="mcalc__card ccalc__card">
+
+                        <div class="ccalc__toolbar">
+                            <div class="ccalc__toggleGroup">
+                                <button class="ccalc__toggleBtn is-active" id="modeDeg" type="button">DEG</button>
+                                <button class="ccalc__toggleBtn" id="modeRad" type="button">RAD</button>
+                            </div>
+                            <button class="ccalc__toggleBtn" id="invToggle" type="button">Inv</button>
+                        </div>
+
+                        <div class="ccalc__display">
+                            <div class="ccalc__expr" id="calcExpr">0</div>
+                            <div class="ccalc__result" id="calcResult"></div>
+                            <div class="ccalc__toast" id="calcToast"></div>
+                        </div>
+
+                        <div class="ccalc__keys">
+                            <!-- Row: memory -->
+                            <button class="ccalc__key ccalc__key--fn" data-fn="mc" type="button">MC</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="mr" type="button">MR</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="mplus" type="button">M+</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="mminus" type="button">M−</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="ms" type="button">MS</button>
+
+                            <!-- Row: trig -->
+                            <button class="ccalc__key ccalc__key--fn" data-fn="trig" data-trig="sin"
+                                type="button">sin</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="trig" data-trig="cos"
+                                type="button">cos</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="trig" data-trig="tan"
+                                type="button">tan</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="log" type="button">log</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="ln" type="button">ln</button>
+
+                            <!-- Row: powers -->
+                            <button class="ccalc__key ccalc__key--fn" data-key="^" type="button">xʸ</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="sq" type="button">x²</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="sqrt" type="button">√</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="inv1x" type="button">1/x</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="fact" type="button">n!</button>
+
+                            <!-- Row: parens / const -->
+                            <button class="ccalc__key ccalc__key--fn" data-key="(" type="button">(</button>
+                            <button class="ccalc__key ccalc__key--fn" data-key=")" type="button">)</button>
+                            <button class="ccalc__key ccalc__key--fn" data-key="π" type="button">π</button>
+                            <button class="ccalc__key ccalc__key--fn" data-key="e" type="button">e</button>
+                            <button class="ccalc__key ccalc__key--fn" data-key="%" type="button">%</button>
+
+                            <!-- Row: 7 8 9 / -->
+                            <button class="ccalc__key" data-key="7" type="button">7</button>
+                            <button class="ccalc__key" data-key="8" type="button">8</button>
+                            <button class="ccalc__key" data-key="9" type="button">9</button>
+                            <button class="ccalc__key ccalc__key--op" data-key="/" type="button">÷</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="ce" type="button">CE</button>
+
+                            <!-- Row: 4 5 6 * -->
+                            <button class="ccalc__key" data-key="4" type="button">4</button>
+                            <button class="ccalc__key" data-key="5" type="button">5</button>
+                            <button class="ccalc__key" data-key="6" type="button">6</button>
+                            <button class="ccalc__key ccalc__key--op" data-key="*" type="button">×</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="clear" type="button">C</button>
+
+                            <!-- Row: 1 2 3 - -->
+                            <button class="ccalc__key" data-key="1" type="button">1</button>
+                            <button class="ccalc__key" data-key="2" type="button">2</button>
+                            <button class="ccalc__key" data-key="3" type="button">3</button>
+                            <button class="ccalc__key ccalc__key--op" data-key="-" type="button">−</button>
+                            <button class="ccalc__key ccalc__key--fn" data-fn="back" type="button">⌫</button>
+
+                            <!-- Row: ± 0 . + -->
+                            <button class="ccalc__key ccalc__key--fn" data-fn="sign" type="button">±</button>
+                            <button class="ccalc__key" data-key="0" type="button">0</button>
+                            <button class="ccalc__key" data-key="." type="button">.</button>
+                            <button class="ccalc__key ccalc__key--op" data-key="+" type="button">+</button>
+                            <button class="ccalc__key ccalc__key--equals" data-fn="equals" type="button">=</button>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT: history -->
+                    <div class="mcalc__card ccalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Історія обчислень</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="ccalc__historyActions">
+                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyResult" type="button">Копіювати
+                                результат</button>
+                            <button class="mcalc__btn mcalc__btn--small" id="btnClearHistory" type="button">Очистити
+                                історію</button>
+                        </div>
+
+                        <div class="ccalc__history" id="historyList"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                            <a href="/education/fraction-calculator">Калькулятор дробів</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як користуватись науковим калькулятором</h2>
+            <p>
+                Цей калькулятор поєднує <b>базові арифметичні операції</b> (+, −, ×, ÷) з <b>науковими функціями</b>:
+                тригонометрія (sin, cos, tan), логарифми (log, ln), степені, корені, факторіал, а також <b>пам'ять</b>
+                та <b>історію обчислень</b>.
+            </p>
+
+            <h2>Основні можливості</h2>
+            <ul>
+                <li><b>Тригонометрія</b> — sin, cos, tan та обернені функції (кнопка «Inv»), перемикання
+                    градуси/радіани.</li>
+                <li><b>Степені й корені</b> — x², xʸ, √, 1/x.</li>
+                <li><b>Логарифми</b> — log (за основою 10) та ln (натуральний).</li>
+                <li><b>Факторіал</b> — n! для цілих невід'ємних чисел.</li>
+                <li><b>Пам'ять</b> — MC, MR, M+, M−, MS для збереження проміжних результатів.</li>
+                <li><b>Історія</b> — усі попередні обчислення, клік по запису підставляє результат.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Підтримується введення з клавіатури: цифри, +, −, *, /, дужки, Enter (=), Backspace, Escape (скидання).
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як переключити градуси на радіани?</h3>
+                <p>Використовуй перемикач <b>DEG/RAD</b> над дисплеєм. Він впливає на sin, cos, tan та обернені функції.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що робить кнопка «Inv»?</h3>
+                <p>Перемикає sin/cos/tan на обернені функції — arcsin, arccos, arctan.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як користуватись пам'яттю?</h3>
+                <p><b>MS</b> зберігає поточний результат, <b>MR</b> викликає його, <b>M+</b>/<b>M−</b> додають чи
+                    віднімають від пам'яті, <b>MC</b> очищує.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна вводити з клавіатури?</h3>
+                <p>Так — цифри, основні оператори, дужки, Enter для «=», Backspace для видалення, Escape для повного
+                    скидання.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
