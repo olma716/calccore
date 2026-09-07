@@ -982,11 +982,19 @@ main,
     opacity: .9;
 }
 /* Featured "Calculator" badge next to logo */
-.calc-badge {
+/* Featured quick-tools badges next to logo */
+.quick-tools {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 14px;
+    flex-wrap: nowrap;
+}
+
+.quick-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-left: 14px;
     padding: 6px 12px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.14);
@@ -999,22 +1007,33 @@ main,
     transition: background .15s ease, transform .15s ease;
 }
 
-.calc-badge:hover {
+.quick-badge:hover {
     background: rgba(255, 255, 255, 0.22);
     transform: translateY(-1px);
 }
 
-.calc-badge svg {
+.quick-badge svg {
     flex-shrink: 0;
 }
 
-@media (max-width: 520px) {
-    .calc-badge span {
+@media (max-width: 720px) {
+    .quick-badge span {
         display: none;
     }
 
-    .calc-badge {
+    .quick-badge {
         padding: 6px 8px;
+    }
+
+    .quick-tools {
         margin-left: 8px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 420px) {
+    .quick-tools a:nth-child(3) {
+        display: none;
+        /* ховаємо валюту на дуже вузьких екранах, лишаючи calc+percent */
     }
 }
