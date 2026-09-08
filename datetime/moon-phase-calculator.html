@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Фази Місяця онлайн — календар за датою | CalcCore</title>
+    <meta name="description"
+        content="Дізнайся фазу Місяця на будь-яку дату: молодик, перша чверть, повний місяць, остання чверть та проміжні фази. Відсоток освітленості." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/moon-phase-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/moon-phase-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/moon-phase-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/moon-phase-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/moon-phase-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/moon-phase-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Скільки триває місячний цикл?",
+        "acceptedAnswer":{"@type":"Answer","text":"Синодичний місяць (повний цикл фаз Місяця) триває приблизно 29.53 доби."}
+      },
+      {
+        "@type":"Question",
+        "name":"Скільки всього фаз Місяця?",
+        "acceptedAnswer":{"@type":"Answer","text":"Виділяють 8 основних фаз: молодик, зростаючий серп, перша чверть, зростаючий випуклий, повний місяць, спадаючий випуклий, остання чверть, спадаючий серп."}
+      },
+      {
+        "@type":"Question",
+        "name":"Наскільки точний цей розрахунок?",
+        "acceptedAnswer":{"@type":"Answer","text":"Розрахунок базується на середній тривалості синодичного місяця і дає точність в межах приблизно ±1 дня для більшості практичних цілей."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/moon-phase-calculator#app",
+    "name":"Moon Phase Calculator",
+    "description":"Розрахунок фази Місяця на будь-яку дату з відсотком освітленості.",
+    "url":"https://calccore.net/datetime/moon-phase-calculator",
+    "applicationCategory":"LifestyleApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmoon">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Фази Місяця за датою</h1>
+                    <p class="mcalc__p">
+                        Дізнайся, яка фаза Місяця була чи буде на будь-яку дату — минулу чи майбутню.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дату</h2>
+                        <span class="mcalc__badge">Date/Time</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="moonDate">Дата</label>
+                            <input class="mcalc__input" id="moonDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnToday" type="button">Сьогодні</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="moon-result" id="moonResult" style="display:none;">
+                        <div class="moon-emoji" id="moonEmoji">🌕</div>
+                        <div class="moon-name" id="moonName"></div>
+                        <div class="moon-illumination" id="moonIllumination"></div>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/datetime/zodiac-calculator">Калькулятор зодіакального знаку</a>
+                    <a href="/datetime/age-calculator">Калькулятор віку</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке фази Місяця</h2>
+            <p>
+                Фази Місяця — це зміна вигляду освітленої частини Місяця, яку ми бачимо з Землі,
+                залежно від взаємного розташування Сонця, Землі та Місяця. Повний цикл — від одного
+                молодика до наступного — називається <b>синодичним місяцем</b> і триває приблизно
+                <b>29.53 доби</b>.
+            </p>
+
+            <h2>8 основних фаз Місяця</h2>
+            <ul>
+                <li><b>🌑 Молодик</b> — Місяць не видно, освітлена сторона повернута від Землі.</li>
+                <li><b>🌒 Зростаючий серп</b> — тонкий серп світла з правого боку (у північній півкулі).</li>
+                <li><b>🌓 Перша чверть</b> — освітлена рівно половина диска.</li>
+                <li><b>🌔 Зростаючий випуклий</b> — освітлено більше половини, наближення до повного.</li>
+                <li><b>🌕 Повний місяць</b> — весь диск повністю освітлений.</li>
+                <li><b>🌖 Спадаючий випуклий</b> — освітлена частина починає зменшуватись.</li>
+                <li><b>🌗 Остання чверть</b> — знову освітлена половина диска, з іншого боку.</li>
+                <li><b>🌘 Спадаючий серп</b> — тонкий серп перед новим молодиком.</li>
+            </ul>
+
+            <h2>Навіщо знати фазу Місяця</h2>
+            <ul>
+                <li><b>Астрономічні спостереження:</b> повний місяць — гірший час для спостереження зірок через яскраве
+                    світло, новий місяць — найкращий.</li>
+                <li><b>Садівництво:</b> деякі традиції садівництва орієнтуються на місячний календар для посадки рослин.
+                </li>
+                <li><b>Риболовля та полювання:</b> активність деяких тварин пов'язують з фазами Місяця.</li>
+                <li><b>Культурні та релігійні свята:</b> багато календарів (ісламський, єврейський) базуються на
+                    місячних циклах.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Розрахунок базується на середній тривалості синодичного місяця відносно відомого
+                молодика і дає точність в межах приблизно ±1 дня — достатньо для більшості практичних
+                і розважальних цілей.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Скільки триває місячний цикл?</h3>
+                <p>Синодичний місяць (повний цикл фаз Місяця) триває приблизно 29.53 доби.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Скільки всього фаз Місяця?</h3>
+                <p>Виділяють 8 основних фаз: молодик, зростаючий серп, перша чверть, зростаючий випуклий, повний місяць,
+                    спадаючий випуклий, остання чверть, спадаючий серп.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Наскільки точний цей розрахунок?</h3>
+                <p>Розрахунок базується на середній тривалості синодичного місяця і дає точність в межах приблизно ±1
+                    дня для більшості практичних цілей.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
