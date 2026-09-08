@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Таймер зворотного відліку онлайн — скільки часу до події | CalcCore</title>
+    <meta name="description"
+        content="Живий таймер зворотного відліку до будь-якої дати чи події: Новий рік, день народження, весілля, відпустка. Дні, години, хвилини, секунди в реальному часі." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/countdown-timer" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/countdown-timer" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/countdown-timer" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/countdown-timer" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/countdown-timer.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/countdown-timer.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чи оновлюється таймер автоматично?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, таймер оновлюється щосекунди в реальному часі без необхідності перезавантажувати сторінку."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що станеться, коли час події настане?",
+        "acceptedAnswer":{"@type":"Answer","text":"Таймер покаже спеціальне повідомлення про те, що подія вже настала."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна вибрати дату в минулому?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, у такому випадку калькулятор покаже, скільки часу минуло з тієї події, а не залишилось до неї."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/countdown-timer#app",
+    "name":"Countdown Timer",
+    "description":"Живий таймер зворотного відліку до будь-якої дати чи події.",
+    "url":"https://calccore.net/datetime/countdown-timer",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="ccountdown">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Таймер зворотного відліку</h1>
+                    <p class="mcalc__p">
+                        Обери подію — і дивись, скільки часу залишилось у реальному часі.
+                    </p>
+                </div>
+
+                <div class="mcalc__card countdown-card">
+
+                    <div class="mcalc__rows">
+
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="eventName">Назва події (опц.)</label>
+                            <input class="mcalc__input" id="eventName" type="text"
+                                placeholder="напр.: Мій день народження" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="eventDate">Дата події</label>
+                            <input class="mcalc__input" id="eventDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="eventTime">Час (опц.)</label>
+                            <input class="mcalc__input" id="eventTime" type="time" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="countdown-quick">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnNewYear" type="button">Новий
+                                    рік</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnWeekend"
+                                    type="button">Вихідні</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="countdown-display" id="countdownDisplay" style="display:none;">
+                        <div class="countdown-title" id="countdownTitle"></div>
+                        <div class="countdown-grid">
+                            <div class="countdown-unit">
+                                <div class="countdown-num" id="cdDays">0</div>
+                                <div class="countdown-label" id="lblDays">днів</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-num" id="cdHours">00</div>
+                                <div class="countdown-label" id="lblHours">год</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-num" id="cdMinutes">00</div>
+                                <div class="countdown-label" id="lblMinutes">хв</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-num" id="cdSeconds">00</div>
+                                <div class="countdown-label" id="lblSeconds">сек</div>
+                            </div>
+                        </div>
+                        <div class="countdown-message" id="countdownMessage"></div>
+                    </div>
+
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/datetime/date-difference-calculator">Різниця між датами</a>
+                    <a href="/datetime/age-calculator">Калькулятор віку</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке таймер зворотного відліку</h2>
+            <p>
+                Таймер зворотного відліку показує в реальному часі, скільки днів, годин, хвилин і
+                секунд залишилось до обраної дати чи події. На відміну від статичного розрахунку,
+                цей таймер оновлюється щосекунди прямо на сторінці.
+            </p>
+
+            <h2>Для чого використовують таймери зворотного відліку</h2>
+            <ul>
+                <li><b>Особисті події:</b> день народження, весілля, річниця стосунків.</li>
+                <li><b>Свята:</b> Новий рік, інші важливі дати календаря.</li>
+                <li><b>Подорожі:</b> відлік до відпустки чи важливої поїздки.</li>
+                <li><b>Дедлайни:</b> здача проєкту, іспит, важлива зустріч.</li>
+                <li><b>Запуски продуктів:</b> очікування релізу гри, фільму чи технологічного анонсу.</li>
+            </ul>
+
+            <h2>Як користуватись</h2>
+            <p>
+                Просто вибери дату (і опційно точний час) події, за бажанням додай назву — і таймер
+                автоматично почне живий відлік. Якщо обрана дата вже в минулому, калькулятор покаже,
+                скільки часу минуло з того моменту.
+            </p>
+
+            <p class="m-hintSmall">
+                Таймер працює на основі часу твого пристрою та браузера. Тримай вкладку відкритою,
+                щоб бачити відлік у реальному часі.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чи оновлюється таймер автоматично?</h3>
+                <p>Так, таймер оновлюється щосекунди в реальному часі без необхідності перезавантажувати сторінку.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що станеться, коли час події настане?</h3>
+                <p>Таймер покаже спеціальне повідомлення про те, що подія вже настала.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна вибрати дату в минулому?</h3>
+                <p>Так, у такому випадку калькулятор покаже, скільки часу минуло з тієї події, а не залишилось до неї.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
