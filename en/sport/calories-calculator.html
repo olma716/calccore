@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Calorie Calculator Online — BMR and TDEE | CalcCore</title>
+    <meta name="description"
+        content="Calculate your basal metabolic rate (BMR) and total daily energy expenditure (TDEE) using the Mifflin-St Jeor formula. Recommendations for weight loss, maintenance, and muscle gain." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/calories-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/calories-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/calories-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/calories-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/calories-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What are BMR and TDEE?",
+        "acceptedAnswer":{"@type":"Answer","text":"BMR (basal metabolic rate) is the number of calories your body burns at complete rest. TDEE is BMR multiplied by an activity factor — your actual daily calorie expenditure."}
+      },
+      {
+        "@type":"Question",
+        "name":"Which formula does this calculator use?",
+        "acceptedAnswer":{"@type":"Answer","text":"The Mifflin-St Jeor formula — considered the most accurate among popular formulas for modern populations."}
+      },
+      {
+        "@type":"Question",
+        "name":"How many calories should I cut for weight loss?",
+        "acceptedAnswer":{"@type":"Answer","text":"A deficit of 10-20% from TDEE is considered a moderate, sustainable rate of weight loss without significant muscle loss."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/calories-calculator#app",
+    "name":"Calorie Calculator (BMR/TDEE)",
+    "description":"Calculate your basal metabolic rate and daily calorie needs using the Mifflin-St Jeor formula with recommendations for different goals.",
+    "url":"https://calccore.net/en/sport/calories-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="ccalories">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Calorie Calculator (BMR / TDEE)</h1>
+                    <p class="mcalc__p">
+                        Basal metabolic rate (BMR) and total daily energy expenditure (TDEE) using the
+                        <b>Mifflin-St Jeor</b> formula. Recommendations for weight loss, maintenance, or muscle gain.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="sex">Sex</label>
+                                <select id="sex" class="mcalc__select">
+                                    <option value="male" selected>Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="age">Age (years)</label>
+                                <input class="mcalc__input" id="age" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Weight (kg)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 75" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="height">Height (cm)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 178" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="activity">Activity level</label>
+                                <select id="activity" class="mcalc__select">
+                                    <option value="1.2">Sedentary (desk job, no exercise)</option>
+                                    <option value="1.375">Light (exercise 1-3 times/week)</option>
+                                    <option value="1.55" selected>Moderate (exercise 3-5 times/week)</option>
+                                    <option value="1.725">Active (exercise 6-7 times/week)</option>
+                                    <option value="1.9">Very active (physical job + training)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Calories by goal <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Calories by goal">
+                                    <thead>
+                                        <tr>
+                                            <th>Goal</th>
+                                            <th>Calories/day</th>
+                                            <th>Diff from TDEE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/1pm-calculator">One-Rep Max Calculator</a>
+                            <a href="/en/calculator">Scientific Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What are BMR and TDEE</h2>
+            <p>
+                <b>BMR</b> (basal metabolic rate) is the number of calories your body burns at complete rest to
+                maintain vital functions: breathing, circulation, organ function.
+                <b>TDEE</b> (total daily energy expenditure) is BMR multiplied by an activity factor — your actual
+                daily calorie burn including workouts and everyday activity.
+            </p>
+
+            <h2>The Mifflin-St Jeor formula</h2>
+            <p>
+                This calculator uses the Mifflin-St Jeor formula (1990) — considered the most accurate among
+                popular formulas for modern populations, more precise than the older Harris-Benedict formula.
+            </p>
+            <ul>
+                <li><b>Men:</b> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5</li>
+                <li><b>Women:</b> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161</li>
+            </ul>
+
+            <h2>How to choose your activity level</h2>
+            <ul>
+                <li><b>Sedentary:</b> desk job, little to no exercise</li>
+                <li><b>Light:</b> light exercise 1-3 times per week</li>
+                <li><b>Moderate:</b> moderate-intensity exercise 3-5 times per week</li>
+                <li><b>Active:</b> intense exercise 6-7 times per week</li>
+                <li><b>Very active:</b> physical job plus regular training</li>
+            </ul>
+
+            <h2>How to use the result for your goal</h2>
+            <p>
+                For <b>weight loss</b>, a deficit of 10-20% from TDEE is typically recommended — this allows
+                gradual fat loss while preserving muscle mass. For <b>muscle gain</b> — a surplus of 10-15%.
+                For <b>maintenance</b> — calorie intake equal to TDEE.
+            </p>
+
+            <p class="m-hintSmall">
+                This is an estimate based on population-average formulas. Individual metabolism can vary
+                based on genetics, body composition, hormones, and other factors. For a more precise
+                assessment, consult a dietitian or sports physician.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What are BMR and TDEE?</h3>
+                <p>BMR (basal metabolic rate) is the number of calories your body burns at complete rest. TDEE is BMR
+                    multiplied by an activity factor — your actual daily calorie expenditure.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Which formula does this calculator use?</h3>
+                <p>The Mifflin-St Jeor formula — considered the most accurate among popular formulas for modern
+                    populations.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How many calories should I cut for weight loss?</h3>
+                <p>A deficit of 10-20% from TDEE is considered a moderate, sustainable rate of weight loss without
+                    significant muscle loss.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why might the result differ from reality?</h3>
+                <p>Formulas give a statistical estimate. Actual metabolism depends on genetics, muscle mass, hormones,
+                    and stress levels — so it's worth tracking your weight over a few weeks and adjusting calories based
+                    on actual results.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
