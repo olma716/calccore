@@ -105,22 +105,21 @@
 }
 
   function getOffsetMinutes(tz, date) {
-    // Get the UTC offset for a given IANA timezone at a given date, in minutes
-    const dtf = new Intl.DateTimeFormat("en-US", {
-      timeZone: tz,
-      hour12: false,
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", second: "2-digit",
-    });
-    const parts = dtf.formatToParts(date);
-    const map = {};
-    parts.forEach(p => { map[p.type] = p.value; });
-    const asUTC = Date.UTC(
-      Number(map.year), Number(map.month) - 1, Number(map.day),
-      Number(map.hour) === 24 ? 0 : Number(map.hour), Number(map.minute), Number(map.second)
-    );
-    return (asUTC - date.getTime()) / 60000;
-  }
+  const dtf = new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    hour12: false,
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+  });
+  const parts = dtf.formatToParts(date);
+  const map = {};
+  parts.forEach(p => { map[p.type] = p.value; });
+  const asUTC = Date.UTC(
+    Number(map.year), Number(map.month) - 1, Number(map.day),
+    Number(map.hour) === 24 ? 0 : Number(map.hour), Number(map.minute), Number(map.second)
+  );
+  return Math.round((asUTC - date.getTime()) / 60000);
+}
 
   function calc({ silent = false } = {}) {
     const dateVal = dateInput?.value;
