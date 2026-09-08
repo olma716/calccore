@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Конвертер кулінарних мір онлайн — склянки, ложки, грами | CalcCore</title>
+    <meta name="description"
+        content="Конвертація кулінарних мір: склянки, столові та чайні ложки, грами, мілілітри, унції. Враховує різну густину продуктів (борошно, цукор, масло та інші)." />
+
+    <link rel="canonical" href="https://calccore.net/kitchen/measurement-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/measurement-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/kitchen/measurement-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/kitchen/measurement-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/measurement-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чому конвертація залежить від обраного продукту?",
+        "acceptedAnswer":{"@type":"Answer","text":"Різні продукти мають різну густину — склянка борошна важить менше, ніж склянка цукру чи меду, тому переведення об'єму в масу відрізняється залежно від інгредієнта."}
+      },
+      {
+        "@type":"Question",
+        "name":"Яка склянка використовується — американська чи метрична?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор використовує стандартну американську склянку (240 мл), яка найчастіше зустрічається в англомовних рецептах."}
+      },
+      {
+        "@type":"Question",
+        "name":"Наскільки точна ця конвертація?",
+        "acceptedAnswer":{"@type":"Answer","text":"Значення базуються на середніх показниках густини продуктів і можуть трохи відрізнятись залежно від того, як щільно продукт утрамбований у мірну ємність."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/kitchen/measurement-converter#app",
+    "name":"Cooking Measurement Converter",
+    "description":"Конвертація кулінарних мір з урахуванням густини продуктів: склянки, ложки, грами, мілілітри, унції.",
+    "url":"https://calccore.net/kitchen/measurement-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmeasure">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Конвертер кулінарних мір</h1>
+                    <p class="mcalc__p">
+                        Переводь склянки, ложки, грами та мілілітри одне в одне — з урахуванням
+                        густини конкретного продукту.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Kitchen</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="ingredient">Продукт</label>
+                                <select id="ingredient" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="amount">Кількість</label>
+                                <input class="mcalc__input" id="amount" type="text" inputmode="decimal"
+                                    placeholder="напр.: 1" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="fromUnit">З одиниці</label>
+                                <select id="fromUnit" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="toUnit">В одиницю</label>
+                                <select id="toUnit" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Конвертувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для конвертації.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Усі одиниці одразу <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="All units">
+                                    <thead>
+                                        <tr>
+                                            <th>Одиниця</th>
+                                            <th>Значення</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                            <a href="/calculator">Науковий калькулятор</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен конвертер кулінарних мір</h2>
+            <p>
+                Багато рецептів, особливо з англомовних джерел, використовують об'ємні міри —
+                склянки, столові та чайні ложки — тоді як у пострадянських країнах прийнято зважувати
+                продукти у грамах. Цей конвертер допомагає точно перевести одну систему в іншу.
+            </p>
+
+            <h2>Чому важлива густина продукту</h2>
+            <p>
+                Об'єм і маса — це різні фізичні величини, пов'язані через густину. Склянка борошна
+                важить значно менше, ніж склянка меду чи цукру, тому універсального коефіцієнта
+                "1 склянка = X грамів" не існує — все залежить від конкретного продукту. Цей калькулятор
+                враховує середню густину популярних інгредієнтів для точнішої конвертації.
+            </p>
+
+            <h2>Стандартні об'єми, які використовує калькулятор</h2>
+            <ul>
+                <li><b>1 склянка (US cup)</b> = 240 мл</li>
+                <li><b>1 столова ложка (tbsp)</b> = 15 мл</li>
+                <li><b>1 чайна ложка (tsp)</b> = 5 мл</li>
+                <li><b>1 рідинна унція (fl oz)</b> = ~29.57 мл</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Значення густини — середньостатистичні і можуть трохи відрізнятись залежно від
+                вологості продукту, способу утрамбування в мірній ємності та конкретного бренду.
+                Для критично важливих рецептів (наприклад, точна випічка) рекомендується використовувати
+                кухонні ваги.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чому конвертація залежить від обраного продукту?</h3>
+                <p>Різні продукти мають різну густину — склянка борошна важить менше, ніж склянка цукру чи меду, тому
+                    переведення об'єму в масу відрізняється залежно від інгредієнта.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Яка склянка використовується — американська чи метрична?</h3>
+                <p>Калькулятор використовує стандартну американську склянку (240 мл), яка найчастіше зустрічається в
+                    англомовних рецептах.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Наскільки точна ця конвертація?</h3>
+                <p>Значення базуються на середніх показниках густини продуктів і можуть трохи відрізнятись залежно від
+                    того, як щільно продукт утрамбований у мірну ємність.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

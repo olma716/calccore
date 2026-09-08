@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Cooking Measurement Converter Online — Cups, Spoons, Grams | CalcCore</title>
+    <meta name="description"
+        content="Convert cooking measurements: cups, tablespoons, teaspoons, grams, milliliters, ounces. Accounts for ingredient density (flour, sugar, butter, and more)." />
+
+    <link rel="canonical" href="https://calccore.net/en/kitchen/measurement-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/measurement-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/kitchen/measurement-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/kitchen/measurement-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/measurement-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why does conversion depend on the selected ingredient?",
+        "acceptedAnswer":{"@type":"Answer","text":"Different ingredients have different densities — a cup of flour weighs less than a cup of sugar or honey, so converting volume to weight varies by ingredient."}
+      },
+      {
+        "@type":"Question",
+        "name":"Which cup size is used — US or metric?",
+        "acceptedAnswer":{"@type":"Answer","text":"The calculator uses the standard US cup (240 ml), which is most common in English-language recipes."}
+      },
+      {
+        "@type":"Question",
+        "name":"How accurate is this conversion?",
+        "acceptedAnswer":{"@type":"Answer","text":"The values are based on average ingredient densities and may vary slightly depending on how densely the product is packed into the measuring cup."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/kitchen/measurement-converter#app",
+    "name":"Cooking Measurement Converter",
+    "description":"Convert cooking measurements accounting for ingredient density: cups, spoons, grams, milliliters, ounces.",
+    "url":"https://calccore.net/en/kitchen/measurement-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmeasure">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Cooking Measurement Converter</h1>
+                    <p class="mcalc__p">
+                        Convert cups, spoons, grams, and milliliters into each other — accounting
+                        for the specific ingredient's density.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Kitchen</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="ingredient">Ingredient</label>
+                                <select id="ingredient" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="amount">Amount</label>
+                                <input class="mcalc__input" id="amount" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 1" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="fromUnit">From unit</label>
+                                <select id="fromUnit" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="toUnit">To unit</label>
+                                <select id="toUnit" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Convert</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to convert.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    All units at once <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="All units">
+                                    <thead>
+                                        <tr>
+                                            <th>Unit</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/education/percent-calculator">Percentage Calculator</a>
+                            <a href="/en/calculator">Scientific Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why you need a cooking measurement converter</h2>
+            <p>
+                Many recipes, especially from English-language sources, use volume measurements —
+                cups, tablespoons, teaspoons — while other countries typically weigh ingredients in
+                grams. This converter helps accurately translate one system into the other.
+            </p>
+
+            <h2>Why ingredient density matters</h2>
+            <p>
+                Volume and weight are different physical quantities, related through density. A cup
+                of flour weighs significantly less than a cup of honey or sugar, so there's no
+                universal "1 cup = X grams" conversion — it all depends on the specific ingredient.
+                This calculator accounts for the average density of popular ingredients for a more
+                accurate conversion.
+            </p>
+
+            <h2>Standard volumes used by the calculator</h2>
+            <ul>
+                <li><b>1 cup (US)</b> = 240 ml</li>
+                <li><b>1 tablespoon (tbsp)</b> = 15 ml</li>
+                <li><b>1 teaspoon (tsp)</b> = 5 ml</li>
+                <li><b>1 fluid ounce (fl oz)</b> = ~29.57 ml</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Density values are population averages and may vary slightly depending on ingredient
+                moisture, how densely it's packed into the measuring cup, and the specific brand. For
+                critical recipes (such as precise baking), a kitchen scale is recommended.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why does conversion depend on the selected ingredient?</h3>
+                <p>Different ingredients have different densities — a cup of flour weighs less than a cup of sugar or
+                    honey, so converting volume to weight varies by ingredient.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Which cup size is used — US or metric?</h3>
+                <p>The calculator uses the standard US cup (240 ml), which is most common in English-language recipes.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How accurate is this conversion?</h3>
+                <p>The values are based on average ingredient densities and may vary slightly depending on how densely
+                    the product is packed into the measuring cup.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
