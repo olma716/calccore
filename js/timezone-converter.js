@@ -75,24 +75,34 @@
   };
 
   function populateZones() {
-    if (!fromZone || !toZone) return;
-    const opts = ZONES.map(z => `<option value="${z.id}">${z.label}</option>`).join("");
-    fromZone.innerHTML = opts;
-    toZone.innerHTML = opts;
+  if (!fromZone || !toZone) return;
 
-    // try to detect user's zone as default "from"
-    try {
-      const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (ZONES.some(z => z.id === userTz)) {
-        fromZone.value = userTz;
-      } else {
-        fromZone.value = "Europe/Kyiv";
-      }
-    } catch {
+  const now = new Date();
+  const opts = ZONES.map(z => {
+    const offsetMin = getOffsetMinutes(z.id, now);
+    const sign = offsetMin >= 0 ? "+" : "-";
+    const absMin = Math.abs(offsetMin);
+    const h = Math.floor(absMin / 60);
+    const m = absMin % 60;
+    const offsetStr = m === 0 ? `UTC${sign}${h}` : `UTC${sign}${h}:${String(m).padStart(2, "0")}`;
+    return `<option value="${z.id}">${z.label} (${offsetStr})</option>`;
+  }).join("");
+
+  fromZone.innerHTML = opts;
+  toZone.innerHTML = opts;
+
+  try {
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (ZONES.some(z => z.id === userTz)) {
+      fromZone.value = userTz;
+    } else {
       fromZone.value = "Europe/Kyiv";
     }
-    toZone.value = "America/New_York";
+  } catch {
+    fromZone.value = "Europe/Kyiv";
   }
+  toZone.value = "America/New_York";
+}
 
   function getOffsetMinutes(tz, date) {
     // Get the UTC offset for a given IANA timezone at a given date, in minutes
