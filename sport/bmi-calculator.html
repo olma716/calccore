@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор ІМТ онлайн — індекс маси тіла | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок індексу маси тіла (ІМТ/BMI) за зростом і вагою. Категорії: недостатня вага, норма, надлишкова вага, ожиріння. Шкала ВООЗ." />
+
+    <link rel="canonical" href="https://calccore.net/sport/bmi-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/bmi-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/bmi-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/bmi-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/bmi-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке ІМТ?",
+        "acceptedAnswer":{"@type":"Answer","text":"ІМТ (індекс маси тіла) — це показник співвідношення ваги до зросту, що використовується для приблизної оцінки, чи вага людини знаходиться в межах норми."}
+      },
+      {
+        "@type":"Question",
+        "name":"Які межі норми ІМТ?",
+        "acceptedAnswer":{"@type":"Answer","text":"За класифікацією ВООЗ: менше 18.5 — недостатня вага, 18.5-24.9 — норма, 25-29.9 — надлишкова вага, від 30 — ожиріння."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи враховує ІМТ м'язову масу?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні, ІМТ не розрізняє м'язову і жирову масу. У спортсменів з великою м'язовою масою ІМТ може бути завищеним, хоча відсоток жиру в тілі низький."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/bmi-calculator#app",
+    "name":"BMI Calculator",
+    "description":"Розрахунок індексу маси тіла за зростом і вагою з категоріями за шкалою ВООЗ.",
+    "url":"https://calccore.net/sport/bmi-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cbmi">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор ІМТ (індекс маси тіла)</h1>
+                    <p class="mcalc__p">
+                        Розрахунок ІМТ за зростом і вагою з категоріями за шкалою <b>ВООЗ</b>:
+                        недостатня вага, норма, надлишкова вага, ожиріння.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Вага (кг)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="напр.: 75" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="height">Зріст (см)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="напр.: 178" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="bmi-scale" id="bmiScale" style="display:none;">
+                            <div class="bmi-scale__track">
+                                <div class="bmi-scale__segment bmi-scale__segment--under"></div>
+                                <div class="bmi-scale__segment bmi-scale__segment--normal"></div>
+                                <div class="bmi-scale__segment bmi-scale__segment--over"></div>
+                                <div class="bmi-scale__segment bmi-scale__segment--obese"></div>
+                                <div class="bmi-scale__marker" id="bmiMarker"></div>
+                            </div>
+                            <div class="bmi-scale__labels">
+                                <span>16</span>
+                                <span>18.5</span>
+                                <span>25</span>
+                                <span>30</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+
+                        <div class="m-navlinks">
+                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
+                            <a href="/sport/heart-rate-calculator">Пульсові зони</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке ІМТ (індекс маси тіла)</h2>
+            <p>
+                <b>ІМТ</b> (BMI, Body Mass Index) — це простий показник співвідношення ваги до квадрату зросту,
+                який використовується для швидкої попередньої оцінки, чи вага людини знаходиться в межах норми.
+            </p>
+
+            <h2>Формула розрахунку</h2>
+            <p>
+                <b>ІМТ = вага(кг) / зріст(м)²</b><br>
+                Наприклад, при вазі 75 кг і зрості 1.78 м: ІМТ = 75 / (1.78 × 1.78) ≈ 23.7
+            </p>
+
+            <h2>Категорії ІМТ за шкалою ВООЗ</h2>
+            <ul>
+                <li><b>Менше 18.5:</b> недостатня вага</li>
+                <li><b>18.5–24.9:</b> норма</li>
+                <li><b>25–29.9:</b> надлишкова вага</li>
+                <li><b>30 і більше:</b> ожиріння</li>
+            </ul>
+
+            <h2>Обмеження ІМТ</h2>
+            <p>
+                ІМТ — це проста скринінгова оцінка, яка <b>не враховує</b> склад тіла. У спортсменів і людей
+                з великою м'язовою масою ІМТ може бути завищеним, хоча відсоток жиру в тілі низький. Також ІМТ
+                не враховує розподіл жиру в тілі, вік і стать, які впливають на реальні ризики для здоров'я.
+            </p>
+
+            <p class="m-hintSmall">
+                Результат є орієнтовним показником, а не медичним діагнозом. Для повної оцінки стану здоров'я
+                консультуйся з лікарем, який врахує додаткові фактори: склад тіла, обхват талії, аналізи.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке ІМТ?</h3>
+                <p>ІМТ (індекс маси тіла) — це показник співвідношення ваги до зросту, що використовується для
+                    приблизної оцінки, чи вага людини знаходиться в межах норми.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Які межі норми ІМТ?</h3>
+                <p>За класифікацією ВООЗ: менше 18.5 — недостатня вага, 18.5-24.9 — норма, 25-29.9 — надлишкова вага,
+                    від 30 — ожиріння.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи враховує ІМТ м'язову масу?</h3>
+                <p>Ні, ІМТ не розрізняє м'язову і жирову масу. У спортсменів з великою м'язовою масою ІМТ може бути
+                    завищеним, хоча відсоток жиру в тілі низький.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна довіряти ІМТ на 100%?</h3>
+                <p>ІМТ — корисний скринінговий інструмент, але не діагноз. Для повної картини здоров'я варто враховувати
+                    склад тіла, обхват талії та консультацію лікаря.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
