@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Macro Calculator Online — Protein, Fat, Carbs | CalcCore</title>
+    <meta name="description"
+        content="Calculate your daily protein, fat, and carbohydrate needs based on calories and goal: weight loss, maintenance, or muscle gain." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/macros-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/macros-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/macros-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/macros-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/macros-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/macros-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What are macros?",
+        "acceptedAnswer":{"@type":"Answer","text":"Macros (macronutrients) are protein, fat, and carbohydrates, the three main components that make up the calorie content of food. Each gram of protein and carbs provides 4 kcal, fat provides 9 kcal."}
+      },
+      {
+        "@type":"Question",
+        "name":"How much protein do I need per day?",
+        "acceptedAnswer":{"@type":"Answer","text":"Active individuals and those doing resistance training should aim for 1.6-2.2g of protein per kg of body weight, depending on goal and training level."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I eat less fat when losing weight?",
+        "acceptedAnswer":{"@type":"Answer","text":"Fats play important roles in the body, including hormone balance. It's not recommended to drop fat below 20% of total calories even during aggressive weight loss."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/macros-calculator#app",
+    "name":"Macro Calculator",
+    "description":"Calculate your daily protein, fat, and carbohydrate needs based on calories and goal.",
+    "url":"https://calccore.net/en/sport/macros-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmacros">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Macro Calculator (Protein, Fat, Carbs)</h1>
+                    <p class="mcalc__p">
+                        Calculate your daily macronutrient targets based on calories, weight, and goal:
+                        weight loss, maintenance, or muscle gain.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="calories">Daily calories (kcal)</label>
+                                <input class="mcalc__input" id="calories" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 2500" />
+                                <div class="mcalc__hint">Get this from our <a
+                                        href="/en/sport/calories-calculator">calorie calculator</a>.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Weight (kg)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 75" />
+                                <div class="mcalc__hint">Used to calculate protein per kg of body weight.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="goal">Goal</label>
+                                <select id="goal" class="mcalc__select">
+                                    <option value="loss">Weight loss (more protein, fewer carbs)</option>
+                                    <option value="maintain" selected>Maintenance (balanced)</option>
+                                    <option value="gain">Muscle gain (more carbs)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="macros-bar" id="macrosBar" style="display:none;">
+                            <div class="macros-bar__segment macros-bar__segment--protein" id="barProtein"></div>
+                            <div class="macros-bar__segment macros-bar__segment--carbs" id="barCarbs"></div>
+                            <div class="macros-bar__segment macros-bar__segment--fat" id="barFat"></div>
+                        </div>
+                        <div class="macros-legend" id="macrosLegend" style="display:none;">
+                            <span class="macros-legend__item"><i
+                                    class="macros-dot macros-dot--protein"></i>Protein</span>
+                            <span class="macros-legend__item"><i class="macros-dot macros-dot--carbs"></i>Carbs</span>
+                            <span class="macros-legend__item"><i class="macros-dot macros-dot--fat"></i>Fat</span>
+                        </div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
+                            <a href="/en/sport/bmi-calculator">BMI Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What are macros</h2>
+            <p>
+                <b>Macros</b> (macronutrients) — protein, fat, and carbohydrates — are the three main
+                components that make up the calorie content of any food. Each plays different roles in the
+                body and has a different energy value: <b>protein</b> and <b>carbs</b> provide 4 kcal per gram,
+                <b>fat</b> provides 9 kcal per gram.
+            </p>
+
+            <h2>How macros are distributed by goal</h2>
+            <ul>
+                <li><b>Weight loss:</b> higher protein (to preserve muscle during a calorie deficit) and moderate carbs.
+                </li>
+                <li><b>Maintenance:</b> a balanced split — roughly 30% protein, 40% carbs, 30% fat.</li>
+                <li><b>Muscle gain:</b> enough protein for muscle growth plus more carbs for training energy.</li>
+            </ul>
+
+            <h2>How much protein do you need</h2>
+            <p>
+                Active individuals and those doing resistance training should aim for <b>1.6–2.2g of protein
+                    per kg of body weight</b> per day. This provides enough building blocks for muscle recovery
+                and growth. Less active people can do fine with 0.8–1.2g/kg.
+            </p>
+
+            <h2>Why you shouldn't cut fat too low</h2>
+            <p>
+                Fats are involved in hormone production (including testosterone), absorption of fat-soluble
+                vitamins (A, D, E, K), and maintaining cell membranes. Even during aggressive weight loss,
+                it's not recommended to drop fat intake below ~20% of total calories.
+            </p>
+
+            <p class="m-hintSmall">
+                The result is an estimate based on general sports nutrition guidelines. Individual needs
+                may vary depending on training type, health status, and other factors — consult a dietitian
+                for a personalized plan.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What are macros?</h3>
+                <p>Macros (macronutrients) are protein, fat, and carbohydrates, the three main components that make up
+                    the calorie content of food. Each gram of protein and carbs provides 4 kcal, fat provides 9 kcal.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How much protein do I need per day?</h3>
+                <p>Active individuals and those doing resistance training should aim for 1.6-2.2g of protein per kg of
+                    body weight, depending on goal and training level.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I eat less fat when losing weight?</h3>
+                <p>Fats play important roles in the body, including hormone balance. It's not recommended to drop fat
+                    below 20% of total calories even during aggressive weight loss.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Where do I get my daily calorie number for this calculator?</h3>
+                <p>Use our <a href="/en/sport/calories-calculator">calorie calculator (BMR/TDEE)</a> to find your daily
+                    need, then enter that number here to calculate your macros.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

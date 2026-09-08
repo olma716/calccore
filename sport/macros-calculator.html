@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор БЖУ онлайн — норма білків, жирів, вуглеводів | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок денної норми білків, жирів та вуглеводів (БЖУ) за калорійністю та метою: схуднення, підтримка, набір м'язової маси." />
+
+    <link rel="canonical" href="https://calccore.net/sport/macros-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/macros-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/macros-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/macros-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/macros-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/macros-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке БЖУ?",
+        "acceptedAnswer":{"@type":"Answer","text":"БЖУ — це білки, жири і вуглеводи, три основні макронутрієнти, з яких складається калорійність їжі. Кожен грам білка і вуглеводів дає 4 ккал, жиру — 9 ккал."}
+      },
+      {
+        "@type":"Question",
+        "name":"Скільки білка потрібно на день?",
+        "acceptedAnswer":{"@type":"Answer","text":"Для активних людей рекомендується 1.6-2.2 г білка на кг ваги тіла, залежно від мети та рівня тренувань."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна їсти менше жирів для схуднення?",
+        "acceptedAnswer":{"@type":"Answer","text":"Жири виконують важливі функції в організмі, включно з гормональним балансом. Не рекомендується опускати їх нижче 20% від калорійності навіть при схудненні."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/macros-calculator#app",
+    "name":"Macro Calculator",
+    "description":"Розрахунок денної норми білків, жирів та вуглеводів за калорійністю та метою.",
+    "url":"https://calccore.net/sport/macros-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmacros">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор БЖУ (білки, жири, вуглеводи)</h1>
+                    <p class="mcalc__p">
+                        Розрахунок денної норми макронутрієнтів за калорійністю, вагою та метою:
+                        схуднення, підтримка чи набір м'язової маси.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="calories">Денна калорійність (ккал)</label>
+                                <input class="mcalc__input" id="calories" type="text" inputmode="numeric"
+                                    placeholder="напр.: 2500" />
+                                <div class="mcalc__hint">Візьми зі свого <a
+                                        href="/sport/calories-calculator">калькулятора калорій</a>.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Вага (кг)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="напр.: 75" />
+                                <div class="mcalc__hint">Для розрахунку норми білка на кг ваги.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="goal">Мета</label>
+                                <select id="goal" class="mcalc__select">
+                                    <option value="loss">Схуднення (більше білка, менше вуглеводів)</option>
+                                    <option value="maintain" selected>Підтримка (збалансовано)</option>
+                                    <option value="gain">Набір м'язової маси (більше вуглеводів)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="macros-bar" id="macrosBar" style="display:none;">
+                            <div class="macros-bar__segment macros-bar__segment--protein" id="barProtein"></div>
+                            <div class="macros-bar__segment macros-bar__segment--carbs" id="barCarbs"></div>
+                            <div class="macros-bar__segment macros-bar__segment--fat" id="barFat"></div>
+                        </div>
+                        <div class="macros-legend" id="macrosLegend" style="display:none;">
+                            <span class="macros-legend__item"><i class="macros-dot macros-dot--protein"></i>Білки</span>
+                            <span class="macros-legend__item"><i
+                                    class="macros-dot macros-dot--carbs"></i>Вуглеводи</span>
+                            <span class="macros-legend__item"><i class="macros-dot macros-dot--fat"></i>Жири</span>
+                        </div>
+
+                        <div class="m-navlinks">
+                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
+                            <a href="/sport/bmi-calculator">Калькулятор ІМТ</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке БЖУ</h2>
+            <p>
+                <b>БЖУ</b> — білки, жири і вуглеводи — три основні макронутрієнти, з яких складається
+                калорійність будь-якої їжі. Кожен з них виконує різні функції в організмі та має різну
+                енергетичну цінність: <b>білки</b> і <b>вуглеводи</b> дають 4 ккал на грам, <b>жири</b> — 9 ккал на
+                грам.
+            </p>
+
+            <h2>Як розподіляються макронутрієнти залежно від мети</h2>
+            <ul>
+                <li><b>Схуднення:</b> підвищений білок (для збереження м'язів під час дефіциту калорій) та помірні
+                    вуглеводи.</li>
+                <li><b>Підтримка:</b> збалансований розподіл — приблизно 30% білка, 40% вуглеводів, 30% жирів.</li>
+                <li><b>Набір м'язової маси:</b> достатньо білка для росту м'язів плюс більше вуглеводів для енергії на
+                    тренуваннях.</li>
+            </ul>
+
+            <h2>Скільки білка потрібно</h2>
+            <p>
+                Для активних людей і тих, хто тренується із залізом, рекомендується <b>1.6–2.2 г білка на кг
+                    ваги тіла</b> на день. Це забезпечує достатньо будівельного матеріалу для відновлення та росту
+                м'язів. Менш активним людям вистачає 0.8–1.2 г/кг.
+            </p>
+
+            <h2>Чому не варто зменшувати жири надто сильно</h2>
+            <p>
+                Жири беруть участь у виробленні гормонів (включно з тестостероном), засвоєнні жиророзчинних
+                вітамінів (A, D, E, K) та підтримці клітинних мембран. Навіть при агресивному схудненні
+                не рекомендується опускати частку жирів нижче ~20% від загальної калорійності.
+            </p>
+
+            <p class="m-hintSmall">
+                Результат є орієнтовним і базується на загальних рекомендаціях спортивного харчування.
+                Індивідуальні потреби можуть відрізнятися залежно від типу тренувань, стану здоров'я
+                та інших факторів — консультуйся з дієтологом для персоналізованого плану.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке БЖУ?</h3>
+                <p>БЖУ — це білки, жири і вуглеводи, три основні макронутрієнти, з яких складається калорійність їжі.
+                    Кожен грам білка і вуглеводів дає 4 ккал, жиру — 9 ккал.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Скільки білка потрібно на день?</h3>
+                <p>Для активних людей рекомендується 1.6-2.2 г білка на кг ваги тіла, залежно від мети та рівня
+                    тренувань.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна їсти менше жирів для схуднення?</h3>
+                <p>Жири виконують важливі функції в організмі, включно з гормональним балансом. Не рекомендується
+                    опускати їх нижче 20% від калорійності навіть при схудненні.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Звідки взяти денну калорійність для цього калькулятора?</h3>
+                <p>Використай наш <a href="/sport/calories-calculator">калькулятор калорій (BMR/TDEE)</a>, щоб дізнатись
+                    свою денну норму, а потім введи це число сюди для розрахунку БЖУ.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
