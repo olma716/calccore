@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>DOTS Score Calculator Online — Powerlifting | CalcCore</title>
+    <meta name="description"
+        content="Calculate your DOTS score for powerlifting — compare relative strength between athletes of different body weights. Official IPF formula since 2020." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/dots-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/dots-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/dots-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/dots-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/dots-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is DOTS?",
+        "acceptedAnswer":{"@type":"Answer","text":"DOTS is a formula for comparing the relative strength of powerlifters of different body weights. It replaced the Wilks formula as the official IPF standard in 2020."}
+      },
+      {
+        "@type":"Question",
+        "name":"How is DOTS different from Wilks?",
+        "acceptedAnswer":{"@type":"Answer","text":"DOTS more accurately accounts for modern strength data across different bodyweight categories and is considered fairer than the older Wilks formula."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is a good DOTS score?",
+        "acceptedAnswer":{"@type":"Answer","text":"Roughly: 250+ is beginner, 300+ is intermediate, 400+ is advanced, 500+ is elite, 600+ is world class."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/dots-calculator#app",
+    "name":"DOTS Score Calculator",
+    "description":"Calculate your DOTS score to compare relative strength across different body weights.",
+    "url":"https://calccore.net/en/sport/dots-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdots">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">DOTS Score Calculator (Powerlifting)</h1>
+                    <p class="mcalc__p">
+                        Compare your relative strength to athletes of different body weights using the
+                        official <b>IPF DOTS</b> formula (replaced Wilks in 2020).
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="sex">Sex</label>
+                                <select id="sex" class="mcalc__select">
+                                    <option value="male" selected>Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="bodyweight">Body weight (kg)</label>
+                                <input class="mcalc__input" id="bodyweight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 80" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="total">Total (squat + bench + deadlift), kg</label>
+                                <input class="mcalc__input" id="total" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 500" />
+                                <div class="mcalc__hint">Or enter a single lift result if you want to compare just that.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    DOTS levels <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="DOTS levels">
+                                    <thead>
+                                        <tr>
+                                            <th>Level</th>
+                                            <th>DOTS score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/1pm-calculator">One-Rep Max Calculator</a>
+                            <a href="/en/sport/body-fat-calculator">Body Fat Percentage</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is DOTS</h2>
+            <p>
+                <b>DOTS</b> (Dynamic Objective Team Scoring) is a formula that allows comparing the
+                relative strength of powerlifters at different body weights. Since heavier athletes
+                can typically lift a larger absolute weight, DOTS "normalizes" results to fairly
+                compare athletes across different weight classes.
+            </p>
+
+            <h2>Why DOTS replaced Wilks</h2>
+            <p>
+                The Wilks formula was used for decades, but it was based on outdated strength data.
+                In 2020, the International Powerlifting Federation (IPF) officially switched to DOTS —
+                a newer formula built on more current statistical data, considered fairer for comparison
+                across a wider range of body weights.
+            </p>
+
+            <h2>How to interpret your score</h2>
+            <ul>
+                <li><b>250+ points:</b> beginner level — typical for those who recently started training.</li>
+                <li><b>300+ points:</b> intermediate level — steady training progress.</li>
+                <li><b>400+ points:</b> advanced level — serious strength training.</li>
+                <li><b>500+ points:</b> elite level — competitive at regional meets.</li>
+                <li><b>600+ points:</b> world class — level of top world-ranked powerlifters.</li>
+            </ul>
+
+            <h2>How to use this calculator</h2>
+            <p>
+                Enter your body weight and your total for the three main lifts (squat, bench press,
+                deadlift) — or the result of a single lift if you want to compare just that. The
+                calculator will output your DOTS score, which you can use to compare progress with
+                other athletes regardless of weight class.
+            </p>
+
+            <p class="m-hintSmall">
+                DOTS is a comparison tool, not an absolute measure of overall athleticism. It only
+                accounts for strength in the three main powerlifting lifts and doesn't reflect overall
+                fitness or health.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is DOTS?</h3>
+                <p>DOTS is a formula for comparing the relative strength of powerlifters of different body weights. It
+                    replaced the Wilks formula as the official IPF standard in 2020.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How is DOTS different from Wilks?</h3>
+                <p>DOTS more accurately accounts for modern strength data across different bodyweight categories and is
+                    considered fairer than the older Wilks formula.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is a good DOTS score?</h3>
+                <p>Roughly: 250+ is beginner, 300+ is intermediate, 400+ is advanced, 500+ is elite, 600+ is world
+                    class.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
