@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор додавання днів онлайн — яка буде дата | CalcCore</title>
+    <meta name="description"
+        content="Дізнайся, яка дата буде через N днів, тижнів чи місяців від обраної дати, або яка дата була N днів тому." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/add-days-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/add-days-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/add-days-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/add-days-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/add-days-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як розрахувати дату через N днів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Обери початкову дату, введи кількість днів (або тижнів чи місяців) і натисни 'додати' — калькулятор покаже точну дату в майбутньому."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна відняти дні замість додавання?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, обери режим 'відняти', щоб дізнатись, яка дата була певну кількість днів тому."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи враховуються місяці різної довжини?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, при додаванні місяців калькулятор коректно обробляє різну кількість днів у місяцях та переходи через кінець року."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/add-days-calculator#app",
+    "name":"Add/Subtract Days Calculator",
+    "description":"Розрахунок дати через N днів, тижнів або місяців від обраної дати.",
+    "url":"https://calccore.net/datetime/add-days-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cadddays">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Додати або відняти дні від дати</h1>
+                    <p class="mcalc__p">
+                        Дізнайся, яка дата буде через N днів, тижнів чи місяців — або яка дата була
+                        стільки ж часу тому.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Початкова дата</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="operation">Операція</label>
+                                <select id="operation" class="mcalc__select">
+                                    <option value="add" selected>Додати</option>
+                                    <option value="subtract">Відняти</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="amount">Кількість</label>
+                                <input class="mcalc__input" id="amount" type="text" inputmode="numeric"
+                                    placeholder="напр.: 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="unit">Одиниця</label>
+                                <select id="unit" class="mcalc__select">
+                                    <option value="days" selected>Дні</option>
+                                    <option value="weeks">Тижні</option>
+                                    <option value="months">Місяці</option>
+                                    <option value="years">Роки</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/datetime/date-difference-calculator">Різниця між датами</a>
+                            <a href="/datetime/age-calculator">Калькулятор віку</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен калькулятор додавання днів</h2>
+            <p>
+                Цей інструмент допомагає швидко дізнатись точну дату в майбутньому чи минулому, не
+                рахуючи вручну по календарю. Особливо корисний для довгих періодів (місяці, роки),
+                коли легко помилитись у ручних розрахунках.
+            </p>
+
+            <h2>Практичне застосування</h2>
+            <ul>
+                <li><b>Термін дії документів:</b> коли закінчується дія довіреності, гарантії чи візи, якщо відомий
+                    термін дії від дати видачі.</li>
+                <li><b>Планування подій:</b> яка буде дата через 90 днів для важливого дедлайну чи заходу.</li>
+                <li><b>Медичні терміни:</b> розрахунок дати наступного прийому чи завершення курсу лікування.</li>
+                <li><b>Фінансові розрахунки:</b> дата погашення кредиту чи закінчення терміну депозиту.</li>
+            </ul>
+
+            <h2>Як працює розрахунок місяців і років</h2>
+            <p>
+                При додаванні місяців чи років калькулятор зберігає той самий день місяця, коли це
+                можливо. Наприклад, додавання 1 місяця до 31 січня дасть 28 лютого (чи 29 у високосний
+                рік), оскільки лютий не має 31 дня. Це стандартна поведінка для календарних розрахунків.
+            </p>
+
+            <p class="m-hintSmall">
+                Калькулятор використовує стандартний григоріанський календар для всіх розрахунків.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як розрахувати дату через N днів?</h3>
+                <p>Обери початкову дату, введи кількість днів (або тижнів чи місяців) і натисни "додати" — калькулятор
+                    покаже точну дату в майбутньому.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна відняти дні замість додавання?</h3>
+                <p>Так, обери режим "відняти", щоб дізнатись, яка дата була певну кількість днів тому.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи враховуються місяці різної довжини?</h3>
+                <p>Так, при додаванні місяців калькулятор коректно обробляє різну кількість днів у місяцях та переходи
+                    через кінець року.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

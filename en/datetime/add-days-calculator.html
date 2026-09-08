@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Add Days Calculator Online — What Date Will It Be | CalcCore</title>
+    <meta name="description"
+        content="Find out what date it will be N days, weeks, or months from a chosen date, or what date it was N days ago." />
+
+    <link rel="canonical" href="https://calccore.net/en/datetime/add-days-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/add-days-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/add-days-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/add-days-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/add-days-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do I calculate a date N days from now?",
+        "acceptedAnswer":{"@type":"Answer","text":"Choose a start date, enter the number of days (or weeks or months), and click 'add' — the calculator will show the exact future date."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I subtract days instead of adding?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, select the 'subtract' mode to find out what date it was a certain number of days ago."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does it account for months of different lengths?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, when adding months, the calculator correctly handles varying month lengths and year-end transitions."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/datetime/add-days-calculator#app",
+    "name":"Add/Subtract Days Calculator",
+    "description":"Calculate a date N days, weeks, or months from a chosen date.",
+    "url":"https://calccore.net/en/datetime/add-days-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cadddays">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Add or Subtract Days from a Date</h1>
+                    <p class="mcalc__p">
+                        Find out what date it will be N days, weeks, or months from now — or what date
+                        it was that long ago.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="startDate">Start date</label>
+                                <input class="mcalc__input" id="startDate" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="operation">Operation</label>
+                                <select id="operation" class="mcalc__select">
+                                    <option value="add" selected>Add</option>
+                                    <option value="subtract">Subtract</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="amount">Amount</label>
+                                <input class="mcalc__input" id="amount" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="unit">Unit</label>
+                                <select id="unit" class="mcalc__select">
+                                    <option value="days" selected>Days</option>
+                                    <option value="weeks">Weeks</option>
+                                    <option value="months">Months</option>
+                                    <option value="years">Years</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/datetime/date-difference-calculator">Date Difference Calculator</a>
+                            <a href="/en/datetime/age-calculator">Age Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why you need an add days calculator</h2>
+            <p>
+                This tool helps you quickly find an exact date in the future or past without manually
+                counting on a calendar. It's especially useful for long periods (months, years), where
+                it's easy to make mistakes with manual calculations.
+            </p>
+
+            <h2>Practical uses</h2>
+            <ul>
+                <li><b>Document validity:</b> when a power of attorney, warranty, or visa expires, if you know the
+                    validity period from the issue date.</li>
+                <li><b>Event planning:</b> what date it will be 90 days from now for an important deadline or event.
+                </li>
+                <li><b>Medical timelines:</b> calculating the date of a next appointment or the end of a treatment
+                    course.</li>
+                <li><b>Financial calculations:</b> loan repayment date or deposit maturity date.</li>
+            </ul>
+
+            <h2>How month and year calculations work</h2>
+            <p>
+                When adding months or years, the calculator keeps the same day of the month whenever
+                possible. For example, adding 1 month to January 31 gives February 28 (or 29 in a leap
+                year), since February doesn't have 31 days. This is standard behavior for calendar
+                calculations.
+            </p>
+
+            <p class="m-hintSmall">
+                This calculator uses the standard Gregorian calendar for all calculations.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How do I calculate a date N days from now?</h3>
+                <p>Choose a start date, enter the number of days (or weeks or months), and click "add" — the calculator
+                    will show the exact future date.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I subtract days instead of adding?</h3>
+                <p>Yes, select the "subtract" mode to find out what date it was a certain number of days ago.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Does it account for months of different lengths?</h3>
+                <p>Yes, when adding months, the calculator correctly handles varying month lengths and year-end
+                    transitions.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
