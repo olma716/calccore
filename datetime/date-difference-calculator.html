@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор різниці між датами онлайн — дні, тижні, місяці | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок кількості днів, тижнів, місяців та років між двома датами. Точна різниця з урахуванням високосних років." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/date-difference-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/date-difference-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/date-difference-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/date-difference-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/date-difference-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як рахується різниця між датами?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор віднімає одну дату від іншої, показуючи результат у різних одиницях: загальна кількість днів, а також розбивка на роки, місяці й дні."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи враховуються вихідні дні окремо?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор показує загальну кількість днів та окремо кількість робочих днів (без вихідних субота/неділя) між датами."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна порахувати різницю у зворотньому напрямку (дата в минулому)?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, калькулятор автоматично визначає, яка дата раніша, і показує коректну різницю незалежно від порядку введення дат."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/date-difference-calculator#app",
+    "name":"Date Difference Calculator",
+    "description":"Розрахунок кількості днів, тижнів, місяців та років між двома датами.",
+    "url":"https://calccore.net/datetime/date-difference-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdatediff">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор різниці між датами</h1>
+                    <p class="mcalc__p">
+                        Розрахуй кількість днів, тижнів, місяців та років між двома датами.
+                        Включно з кількістю робочих днів.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateFrom">Дата від</label>
+                                <input class="mcalc__input" id="dateFrom" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateTo">Дата до</label>
+                                <input class="mcalc__input" id="dateTo" type="date" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дві дати для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/datetime/age-calculator">Калькулятор віку</a>
+                            <a href="/calculator">Науковий калькулятор</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується різниця між датами</h2>
+            <p>
+                Калькулятор знаходить точну кількість днів між двома датами, а також подає результат
+                у зручнішому форматі — розбивку на роки, місяці та дні. Це корисно для планування
+                подій, розрахунку термінів дії документів, дедлайнів проєктів чи просто для цікавості.
+            </p>
+
+            <h2>Що показує калькулятор</h2>
+            <ul>
+                <li><b>Загальна кількість днів</b> — точна різниця між двома датами.</li>
+                <li><b>Роки, місяці, дні</b> — розбивка для зручнішого сприйняття довгих періодів.</li>
+                <li><b>Кількість тижнів</b> — альтернативний вимір часу.</li>
+                <li><b>Робочі дні</b> — кількість днів без урахування суботи й неділі, корисно для розрахунку дедлайнів
+                    у бізнесі.</li>
+            </ul>
+
+            <h2>Практичне застосування</h2>
+            <p>
+                Цей калькулятор часто використовують для розрахунку: терміну вагітності, віку стосунків
+                чи весілля, кількості днів до відпустки чи важливої події, строку дії контракту чи візи,
+                а також для точного розрахунку робочого стажу.
+            </p>
+
+            <p class="m-hintSmall">
+                Калькулятор автоматично визначає, яка з двох дат раніша, тому порядок введення дат
+                не впливає на результат — різниця завжди буде позитивним числом.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як рахується різниця між датами?</h3>
+                <p>Калькулятор віднімає одну дату від іншої, показуючи результат у різних одиницях: загальна кількість
+                    днів, а також розбивка на роки, місяці й дні.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи враховуються вихідні дні окремо?</h3>
+                <p>Калькулятор показує загальну кількість днів та окремо кількість робочих днів (без вихідних
+                    субота/неділя) між датами.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна порахувати різницю у зворотньому напрямку?</h3>
+                <p>Так, калькулятор автоматично визначає, яка дата раніша, і показує коректну різницю незалежно від
+                    порядку введення дат.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

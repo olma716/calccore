@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Date Difference Calculator Online — Days, Weeks, Months | CalcCore</title>
+    <meta name="description"
+        content="Calculate the number of days, weeks, months, and years between two dates. Precise difference accounting for leap years." />
+
+    <link rel="canonical" href="https://calccore.net/en/datetime/date-difference-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/date-difference-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/date-difference-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/date-difference-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/date-difference-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How is the difference between dates calculated?",
+        "acceptedAnswer":{"@type":"Answer","text":"The calculator subtracts one date from another, showing the result in different units: total number of days, plus a breakdown into years, months, and days."}
+      },
+      {
+        "@type":"Question",
+        "name":"Are weekends counted separately?",
+        "acceptedAnswer":{"@type":"Answer","text":"The calculator shows the total number of days plus a separate count of business days (excluding Saturday/Sunday) between the dates."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I calculate the difference in reverse order (a past date)?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, the calculator automatically detects which date is earlier and shows the correct difference regardless of input order."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/datetime/date-difference-calculator#app",
+    "name":"Date Difference Calculator",
+    "description":"Calculate the number of days, weeks, months, and years between two dates.",
+    "url":"https://calccore.net/en/datetime/date-difference-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdatediff">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Date Difference Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate the number of days, weeks, months, and years between two dates.
+                        Includes business days count.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateFrom">Date from</label>
+                                <input class="mcalc__input" id="dateFrom" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateTo">Date to</label>
+                                <input class="mcalc__input" id="dateTo" type="date" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter two dates to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/datetime/age-calculator">Age Calculator</a>
+                            <a href="/en/calculator">Scientific Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How date difference is calculated</h2>
+            <p>
+                The calculator finds the exact number of days between two dates, and also presents the
+                result in a more readable format — a breakdown into years, months, and days. This is
+                useful for event planning, document validity calculations, project deadlines, or just
+                out of curiosity.
+            </p>
+
+            <h2>What the calculator shows</h2>
+            <ul>
+                <li><b>Total days</b> — the exact difference between the two dates.</li>
+                <li><b>Years, months, days</b> — a breakdown for easier understanding of long periods.</li>
+                <li><b>Number of weeks</b> — an alternative time measure.</li>
+                <li><b>Business days</b> — the number of days excluding Saturday and Sunday, useful for business
+                    deadline calculations.</li>
+            </ul>
+
+            <h2>Practical uses</h2>
+            <p>
+                This calculator is commonly used for: calculating pregnancy duration, relationship or
+                wedding anniversary length, days until a vacation or important event, contract or visa
+                validity periods, and precise work tenure calculations.
+            </p>
+
+            <p class="m-hintSmall">
+                The calculator automatically detects which of the two dates is earlier, so input order
+                doesn't affect the result — the difference will always be a positive number.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How is the difference between dates calculated?</h3>
+                <p>The calculator subtracts one date from another, showing the result in different units: total number
+                    of days, plus a breakdown into years, months, and days.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Are weekends counted separately?</h3>
+                <p>The calculator shows the total number of days plus a separate count of business days (excluding
+                    Saturday/Sunday) between the dates.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I calculate the difference in reverse order?</h3>
+                <p>Yes, the calculator automatically detects which date is earlier and shows the correct difference
+                    regardless of input order.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
