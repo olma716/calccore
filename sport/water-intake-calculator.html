@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор норми води онлайн — скільки пити на день | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок денної норми води за вагою, активністю та кліматом. Дізнайся, скільки літрів води потрібно пити щодня для здоров'я та тренувань." />
+
+    <link rel="canonical" href="https://calccore.net/sport/water-intake-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/water-intake-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/water-intake-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/water-intake-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/water-intake-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Скільки води потрібно пити на день?",
+        "acceptedAnswer":{"@type":"Answer","text":"Базова рекомендація — приблизно 30-35 мл води на кг ваги тіла, з коригуванням на рівень активності та клімат."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи входить кава і чай у денну норму води?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, усі рідини, включно з кавою і чаєм, зараховуються до загального споживання рідини, хоча кофеїн має легкий сечогінний ефект."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна випити забагато води?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, надмірне споживання води може призвести до гіпонатріємії (розведення солей у крові). Це рідкісний стан, але важливо не перевищувати норму значно без потреби."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/water-intake-calculator#app",
+    "name":"Water Intake Calculator",
+    "description":"Розрахунок денної норми води за вагою, активністю та кліматом.",
+    "url":"https://calccore.net/sport/water-intake-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cwater">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор норми води на день</h1>
+                    <p class="mcalc__p">
+                        Розрахунок денної норми води за вагою, рівнем активності та кліматом.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Вага (кг)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="напр.: 75" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="activity">Активність</label>
+                                <select id="activity" class="mcalc__select">
+                                    <option value="low">Низька (сидяча робота)</option>
+                                    <option value="moderate" selected>Помірна (тренування 3-5 разів/тиждень)</option>
+                                    <option value="high">Висока (щоденні інтенсивні тренування)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="climate">Клімат/погода</label>
+                                <select id="climate" class="mcalc__select">
+                                    <option value="normal" selected>Помірний клімат</option>
+                                    <option value="hot">Спекотний клімат / літо</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Розподіл протягом дня <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Water schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>Час</th>
+                                            <th>Кількість</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
+                            <a href="/sport/macros-calculator">Калькулятор БЖУ</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Скільки води потрібно пити на день</h2>
+            <p>
+                Точна потреба у воді залежить від ваги тіла, рівня фізичної активності, клімату та
+                загального стану здоров'я. Базова формула — приблизно <b>30-35 мл води на кг ваги тіла</b>
+                на день, з додатковим коригуванням на тренування та спеку.
+            </p>
+
+            <h2>Чому вода важлива</h2>
+            <ul>
+                <li><b>Терморегуляція:</b> вода допомагає організму охолоджуватись через потовиділення.</li>
+                <li><b>Транспорт поживних речовин:</b> кров, яка на 90% складається з води, доставляє кисень і поживні
+                    речовини до клітин.</li>
+                <li><b>Функція суглобів:</b> вода є частиною синовіальної рідини, що змащує суглоби.</li>
+                <li><b>Спортивна продуктивність:</b> навіть 2% зневоднення може суттєво знизити витривалість і силу.
+                </li>
+            </ul>
+
+            <h2>Фактори, що впливають на потребу у воді</h2>
+            <ul>
+                <li><b>Фізична активність:</b> тренування збільшують втрати рідини через піт, тому потрібно пити більше.
+                </li>
+                <li><b>Клімат:</b> спекотна погода підвищує потовиділення навіть без фізичного навантаження.</li>
+                <li><b>Дієта:</b> високобілкова дієта та кофеїн можуть трохи підвищувати потребу у воді.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Це орієнтовний розрахунок. Індивідуальні потреби можуть відрізнятися залежно від стану
+                здоров'я (наприклад, захворювання нирок чи серця вимагають іншого підходу до споживання
+                рідини) — консультуйся з лікарем при особливих медичних умовах.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Скільки води потрібно пити на день?</h3>
+                <p>Базова рекомендація — приблизно 30-35 мл води на кг ваги тіла, з коригуванням на рівень активності та
+                    клімат.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи входить кава і чай у денну норму води?</h3>
+                <p>Так, усі рідини, включно з кавою і чаєм, зараховуються до загального споживання рідини, хоча кофеїн
+                    має легкий сечогінний ефект.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна випити забагато води?</h3>
+                <p>Так, надмірне споживання води може призвести до гіпонатріємії (розведення солей у крові). Це
+                    рідкісний стан, але важливо не перевищувати норму значно без потреби.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Water Intake Calculator — How Much Water to Drink Daily | CalcCore</title>
+    <meta name="description"
+        content="Calculate your daily water intake based on weight, activity level, and climate. Find out how many liters of water you need each day for health and training." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/water-intake-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/water-intake-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/water-intake-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/water-intake-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/water-intake-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How much water should I drink per day?",
+        "acceptedAnswer":{"@type":"Answer","text":"The basic recommendation is about 30-35 ml of water per kg of body weight, adjusted for activity level and climate."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does coffee and tea count toward daily water intake?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, all fluids, including coffee and tea, count toward total fluid intake, though caffeine has a mild diuretic effect."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I drink too much water?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, excessive water intake can lead to hyponatremia (dilution of salts in the blood). This is a rare condition, but it's important not to significantly exceed your needs without reason."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/water-intake-calculator#app",
+    "name":"Water Intake Calculator",
+    "description":"Calculate your daily water intake based on weight, activity level, and climate.",
+    "url":"https://calccore.net/en/sport/water-intake-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cwater">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Daily Water Intake Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate your daily water needs based on weight, activity level, and climate.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Weight (kg)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 75" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="activity">Activity level</label>
+                                <select id="activity" class="mcalc__select">
+                                    <option value="low">Low (desk job)</option>
+                                    <option value="moderate" selected>Moderate (exercise 3-5 times/week)</option>
+                                    <option value="high">High (daily intense training)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="climate">Climate/weather</label>
+                                <select id="climate" class="mcalc__select">
+                                    <option value="normal" selected>Moderate climate</option>
+                                    <option value="hot">Hot climate / summer</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Daily schedule <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Water schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
+                            <a href="/en/sport/macros-calculator">Macro Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How much water should you drink daily</h2>
+            <p>
+                Exact water needs depend on body weight, physical activity level, climate, and overall
+                health. The basic formula is approximately <b>30-35 ml of water per kg of body weight</b>
+                per day, with additional adjustments for exercise and heat.
+            </p>
+
+            <h2>Why water matters</h2>
+            <ul>
+                <li><b>Thermoregulation:</b> water helps your body cool down through sweating.</li>
+                <li><b>Nutrient transport:</b> blood, which is 90% water, delivers oxygen and nutrients to cells.</li>
+                <li><b>Joint function:</b> water is part of synovial fluid, which lubricates joints.</li>
+                <li><b>Athletic performance:</b> even 2% dehydration can significantly reduce endurance and strength.
+                </li>
+            </ul>
+
+            <h2>Factors affecting water needs</h2>
+            <ul>
+                <li><b>Physical activity:</b> exercise increases fluid loss through sweat, so you need more water.</li>
+                <li><b>Climate:</b> hot weather increases sweating even without exercise.</li>
+                <li><b>Diet:</b> a high-protein diet and caffeine can slightly increase water needs.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                This is an estimate. Individual needs may vary depending on health conditions (for
+                example, kidney or heart disease requires a different approach to fluid intake) — consult
+                a doctor for specific medical conditions.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How much water should I drink per day?</h3>
+                <p>The basic recommendation is about 30-35 ml of water per kg of body weight, adjusted for activity
+                    level and climate.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Does coffee and tea count toward daily water intake?</h3>
+                <p>Yes, all fluids, including coffee and tea, count toward total fluid intake, though caffeine has a
+                    mild diuretic effect.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I drink too much water?</h3>
+                <p>Yes, excessive water intake can lead to hyponatremia (dilution of salts in the blood). This is a rare
+                    condition, but it's important not to significantly exceed your needs without reason.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
