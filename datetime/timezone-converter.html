@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Конвертер часових поясів онлайн — котра година в іншому місті | CalcCore</title>
+    <meta name="description"
+        content="Дізнайся котра година в будь-якому місті світу. Конвертація часу між часовими поясами для дзвінків, зустрічей та подорожей." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/timezone-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/timezone-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/timezone-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/timezone-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/timezone-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чи враховується літній/зимовий час?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, конвертер використовує актуальні дані часових поясів браузера, які автоматично враховують перехід на літній/зимовий час там, де він застосовується."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому час у деяких країнах відрізняється не на цілу годину?",
+        "acceptedAnswer":{"@type":"Answer","text":"Деякі країни (Індія, Іран, частина Австралії) використовують зсуви у 30 чи 45 хвилин відносно UTC, а не рівну годину."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як дізнатись різницю в часі для дзвінка?",
+        "acceptedAnswer":{"@type":"Answer","text":"Обери свій часовий пояс і пояс співрозмовника — калькулятор одразу покаже відповідний час у обох місцях."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/timezone-converter#app",
+    "name":"Time Zone Converter",
+    "description":"Конвертація часу між часовими поясами для планування дзвінків та подорожей.",
+    "url":"https://calccore.net/datetime/timezone-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="ctz">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Конвертер часових поясів</h1>
+                    <p class="mcalc__p">
+                        Дізнайся, котра година в іншому місті світу — зручно для дзвінків,
+                        зустрічей та планування подорожей.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateInput">Дата</label>
+                                <input class="mcalc__input" id="dateInput" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="timeInput">Час</label>
+                                <input class="mcalc__input" id="timeInput" type="time" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="fromZone">З часового поясу</label>
+                                <select id="fromZone" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="toZone">У часовий пояс</label>
+                                <select id="toZone" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnNow" type="button">Зараз</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Обери часові пояси для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/datetime/countdown-timer">Таймер зворотного відліку</a>
+                            <a href="/datetime/age-calculator">Калькулятор віку</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен конвертер часових поясів</h2>
+            <p>
+                При спілкуванні з людьми в інших країнах, плануванні онлайн-зустрічей чи подорожей
+                легко помилитись у розрахунку часу вручну. Конвертер миттєво показує відповідний час
+                у будь-якому часовому поясі світу.
+            </p>
+
+            <h2>Особливості часових поясів</h2>
+            <ul>
+                <li><b>UTC зсув:</b> кожен часовий пояс визначається зсувом відносно UTC (Всесвітнього координованого
+                    часу).</li>
+                <li><b>Літній/зимовий час:</b> деякі країни переводять годинники двічі на рік, що тимчасово змінює зсув
+                    на годину.</li>
+                <li><b>Нецілі зсуви:</b> деякі регіони (Індія +5:30, Непал +5:45) використовують зсуви в 30 чи 45
+                    хвилин.</li>
+                <li><b>Дата може відрізнятись:</b> при великій різниці в часі дата в іншому поясі може бути іншим днем.
+                </li>
+            </ul>
+
+            <h2>Практичне застосування</h2>
+            <p>
+                Конвертер часових поясів корисний для планування міжнародних відеодзвінків, координації
+                роботи розподілених команд, бронювання авіарейсів з пересадками, а також для розуміння,
+                коли краще телефонувати рідним чи друзям за кордоном.
+            </p>
+
+            <p class="m-hintSmall">
+                Розрахунок базується на даних часових поясів твого браузера, які автоматично враховують
+                правила переходу на літній/зимовий час для кожного регіону.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чи враховується літній/зимовий час?</h3>
+                <p>Так, конвертер використовує актуальні дані часових поясів браузера, які автоматично враховують
+                    перехід на літній/зимовий час там, де він застосовується.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому час у деяких країнах відрізняється не на цілу годину?</h3>
+                <p>Деякі країни (Індія, Іран, частина Австралії) використовують зсуви у 30 чи 45 хвилин відносно UTC, а
+                    не рівну годину.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як дізнатись різницю в часі для дзвінка?</h3>
+                <p>Обери свій часовий пояс і пояс співрозмовника — калькулятор одразу покаже відповідний час у обох
+                    місцях.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

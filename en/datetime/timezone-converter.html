@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Time Zone Converter Online — What Time Is It There | CalcCore</title>
+    <meta name="description"
+        content="Find out what time it is in any city around the world. Convert time between time zones for calls, meetings, and travel planning." />
+
+    <link rel="canonical" href="https://calccore.net/en/datetime/timezone-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/timezone-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/timezone-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/timezone-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/timezone-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Does it account for daylight saving time?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, the converter uses your browser's current time zone data, which automatically accounts for daylight saving transitions where applicable."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why do some countries have time offsets that aren't a full hour?",
+        "acceptedAnswer":{"@type":"Answer","text":"Some countries (India, Iran, parts of Australia) use 30 or 45-minute offsets from UTC instead of a whole hour."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I find the time difference for a call?",
+        "acceptedAnswer":{"@type":"Answer","text":"Select your time zone and the other person's time zone — the calculator will immediately show the corresponding time in both places."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/datetime/timezone-converter#app",
+    "name":"Time Zone Converter",
+    "description":"Convert time between time zones for planning calls and travel.",
+    "url":"https://calccore.net/en/datetime/timezone-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="ctz">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Time Zone Converter</h1>
+                    <p class="mcalc__p">
+                        Find out what time it is in another city around the world — handy for calls,
+                        meetings, and travel planning.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateInput">Date</label>
+                                <input class="mcalc__input" id="dateInput" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="timeInput">Time</label>
+                                <input class="mcalc__input" id="timeInput" type="time" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="fromZone">From time zone</label>
+                                <select id="fromZone" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="toZone">To time zone</label>
+                                <select id="toZone" class="mcalc__select"></select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnNow" type="button">Now</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Select time zones to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/datetime/countdown-timer">Countdown Timer</a>
+                            <a href="/en/datetime/age-calculator">Age Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why you need a time zone converter</h2>
+            <p>
+                When communicating with people in other countries, planning online meetings, or
+                traveling, it's easy to make mistakes calculating time manually. The converter instantly
+                shows the corresponding time in any time zone worldwide.
+            </p>
+
+            <h2>Time zone characteristics</h2>
+            <ul>
+                <li><b>UTC offset:</b> every time zone is defined by an offset relative to UTC (Coordinated Universal
+                    Time).</li>
+                <li><b>Daylight saving time:</b> some countries change their clocks twice a year, temporarily shifting
+                    the offset by one hour.</li>
+                <li><b>Non-whole offsets:</b> some regions (India +5:30, Nepal +5:45) use 30 or 45-minute offsets.</li>
+                <li><b>Date may differ:</b> with a large time difference, the date in another zone may be a different
+                    day.</li>
+            </ul>
+
+            <h2>Practical uses</h2>
+            <p>
+                A time zone converter is useful for planning international video calls, coordinating
+                distributed team work, booking flights with layovers, and figuring out the best time to
+                call family or friends abroad.
+            </p>
+
+            <p class="m-hintSmall">
+                The calculation is based on your browser's time zone data, which automatically accounts
+                for daylight saving transition rules for each region.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Does it account for daylight saving time?</h3>
+                <p>Yes, the converter uses your browser's current time zone data, which automatically accounts for
+                    daylight saving transitions where applicable.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why do some countries have time offsets that aren't a full hour?</h3>
+                <p>Some countries (India, Iran, parts of Australia) use 30 or 45-minute offsets from UTC instead of a
+                    whole hour.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How do I find the time difference for a call?</h3>
+                <p>Select your time zone and the other person's time zone — the calculator will immediately show the
+                    corresponding time in both places.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
