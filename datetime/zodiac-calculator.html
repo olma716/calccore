@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор зодіакального знаку онлайн — за датою народження | CalcCore</title>
+    <meta name="description"
+        content="Дізнайся свій західний зодіакальний знак та символ китайського календаря за датою народження. Стихія, планета-покровитель та基основні риси характеру." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/zodiac-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/zodiac-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/zodiac-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/zodiac-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/zodiac-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/zodiac-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як визначається зодіакальний знак?",
+        "acceptedAnswer":{"@type":"Answer","text":"Західний зодіакальний знак визначається за днем і місяцем народження — кожен знак відповідає певному діапазону дат протягом року."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чим відрізняється китайський зодіак від західного?",
+        "acceptedAnswer":{"@type":"Answer","text":"Китайський зодіак визначається роком народження (12-річний цикл тварин), тоді як західний — днем і місяцем народження."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи має астрологічне значення науковий доказ?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні, астрологія не має наукового підтвердження впливу на характер чи долю. Це радше культурна та розважальна традиція."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/zodiac-calculator#app",
+    "name":"Zodiac Sign Calculator",
+    "description":"Визначення західного зодіакального знаку та китайського символу за датою народження.",
+    "url":"https://calccore.net/datetime/zodiac-calculator",
+    "applicationCategory":"LifestyleApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="czodiac">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор зодіакального знаку</h1>
+                    <p class="mcalc__p">
+                        Дізнайся свій західний зодіакальний знак та символ китайського календаря
+                        за датою народження.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дату народження</h2>
+                        <span class="mcalc__badge">Date/Time</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="birthDate">Дата народження</label>
+                            <input class="mcalc__input" id="birthDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="zodiac-result" id="zodiacResult" style="display:none;">
+                        <div class="zodiac-card">
+                            <div class="zodiac-emoji" id="westernEmoji">♈</div>
+                            <div class="zodiac-name" id="westernName"></div>
+                            <div class="zodiac-details" id="westernDetails"></div>
+                        </div>
+                        <div class="zodiac-card">
+                            <div class="zodiac-emoji" id="chineseEmoji">🐉</div>
+                            <div class="zodiac-name" id="chineseName"></div>
+                            <div class="zodiac-details" id="chineseDetails"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/datetime/age-calculator">Калькулятор віку</a>
+                    <a href="/datetime/day-of-week-calculator">День тижня за датою</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке зодіакальний знак</h2>
+            <p>
+                <b>Західний зодіак</b> складається з 12 знаків, кожен з яких відповідає певному
+                проміжку дат протягом року, залежно від позиції Сонця відносно сузір'їв на момент
+                народження. Кожен знак асоціюється зі стихією (вогонь, земля, повітря, вода) та
+                планетою-покровителем.
+            </p>
+
+            <h2>Китайський зодіак</h2>
+            <p>
+                На відміну від західного, <b>китайський зодіак</b> визначається роком народження за
+                12-річним циклом тварин: Щур, Бик, Тигр, Кролик, Дракон, Змія, Кінь, Коза, Мавпа,
+                Півень, Собака, Свиня. Кожна тварина символізує певні риси характеру та має свою
+                стихію за системою у-сін (метал, дерево, вода, вогонь, земля).
+            </p>
+
+            <h2>12 знаків західного зодіаку</h2>
+            <ul>
+                <li><b>Овен</b> (21 бер — 19 кві) — вогонь</li>
+                <li><b>Телець</b> (20 кві — 20 тра) — земля</li>
+                <li><b>Близнюки</b> (21 тра — 20 чер) — повітря</li>
+                <li><b>Рак</b> (21 чер — 22 лип) — вода</li>
+                <li><b>Лев</b> (23 лип — 22 сер) — вогонь</li>
+                <li><b>Діва</b> (23 сер — 22 вер) — земля</li>
+                <li><b>Терези</b> (23 вер — 22 жов) — повітря</li>
+                <li><b>Скорпіон</b> (23 жов — 21 лис) — вода</li>
+                <li><b>Стрілець</b> (22 лис — 21 гру) — вогонь</li>
+                <li><b>Козеріг</b> (22 гру — 19 січ) — земля</li>
+                <li><b>Водолій</b> (20 січ — 18 лют) — повітря</li>
+                <li><b>Риби</b> (19 лют — 20 бер) — вода</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Це розважальний і культурний інструмент. Астрологія не має наукового підтвердження
+                впливу на характер, долю чи сумісність людей.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як визначається зодіакальний знак?</h3>
+                <p>Західний зодіакальний знак визначається за днем і місяцем народження — кожен знак відповідає певному
+                    діапазону дат протягом року.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чим відрізняється китайський зодіак від західного?</h3>
+                <p>Китайський зодіак визначається роком народження (12-річний цикл тварин), тоді як західний — днем і
+                    місяцем народження.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи має астрологічне значення науковий доказ?</h3>
+                <p>Ні, астрологія не має наукового підтвердження впливу на характер чи долю. Це радше культурна та
+                    розважальна традиція.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
