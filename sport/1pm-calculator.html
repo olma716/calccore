@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор 1ПМ онлайн — одноповторний максимум | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок одноповторного максимуму (1ПМ) за формулами Еплі та Бжицького. Таблиця відсотків від 1ПМ для планування тренувань." />
+
+    <link rel="canonical" href="https://calccore.net/sport/1pm-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/1pm-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/1pm-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/1pm-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/1pm-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке 1ПМ?",
+        "acceptedAnswer":{"@type":"Answer","text":"1ПМ (одноповторний максимум) — це максимальна вага, яку можна підняти один раз з правильною технікою в конкретній вправі."}
+      },
+      {
+        "@type":"Question",
+        "name":"Яка формула точніша: Еплі чи Бжицького?",
+        "acceptedAnswer":{"@type":"Answer","text":"Обидві формули дають приблизну оцінку. Бжицького вважається трохи точнішою для 2–10 повторень, Еплі — простіша і популярніша. Різниця зазвичай невелика."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна довіряти розрахунку на 100%?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні, це оцінка. Точність падає при великій кількості повторень (понад 10–12). Найточніший спосіб — реальний тест 1ПМ під наглядом досвідченого тренера."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/1pm-calculator#app",
+    "name":"One-Rep Max Calculator",
+    "description":"Розрахунок одноповторного максимуму (1ПМ) за формулами Еплі та Бжицького з таблицею відсотків для тренувань.",
+    "url":"https://calccore.net/sport/1pm-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="c1pm">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор одноповторного максимуму (1ПМ)</h1>
+                    <p class="mcalc__p">
+                        Розрахунок 1ПМ за формулами <b>Еплі</b> та <b>Бжицького</b>. Таблиця відсотків
+                        для планування тренувань на силу, гіпертрофію чи витривалість.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="formula">Формула</label>
+                                <select id="formula" class="mcalc__select">
+                                    <option value="epley" selected>Еплі</option>
+                                    <option value="brzycki">Бжицького</option>
+                                    <option value="avg">Середнє (Еплі + Бжицького)</option>
+                                </select>
+                                <div class="mcalc__hint">Для 2–10 повторень обидві формули дають близький результат.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="weight">Піднята вага (кг)</label>
+                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
+                                    placeholder="напр.: 100" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="reps">Повторення</label>
+                                <input class="mcalc__input" id="reps" type="text" inputmode="numeric"
+                                    placeholder="напр.: 5" />
+                                <div class="mcalc__hint">Найточніше при 1–10 повтореннях. Понад 12 — похибка зростає.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Графік ваги за % від 1ПМ</div>
+                            </div>
+                            <canvas id="growthChart" width="900" height="280"
+                                aria-label="1RM percentage chart"></canvas>
+                            <div class="m-hintSmall">Вага для кожного відсотка від розрахованого 1ПМ.</div>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця відсотків <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Завантажити (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Percentage table">
+                                    <thead>
+                                        <tr>
+                                            <th>% від 1ПМ</th>
+                                            <th>Вага</th>
+                                            <th>Повторення</th>
+                                            <th>Мета</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                            <a href="/calculator">Науковий калькулятор</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке одноповторний максимум (1ПМ)</h2>
+            <p>
+                <b>1ПМ</b> — це максимальна вага, яку атлет може підняти один раз з правильною технікою в конкретній
+                вправі (присідання, жим лежачи, станова тяга тощо). Знання свого 1ПМ дозволяє точно планувати
+                тренувальні ваги для різних цілей — від набору сили до витривалості.
+            </p>
+        
+            <h2>Навіщо рахувати 1ПМ без реального тесту</h2>
+            <p>
+                Реальний тест на 1ПМ — це підйом максимальної ваги один раз, що створює високе навантаження на суглоби
+                та зв'язки і підвищує ризик травми, особливо для новачків. Формули дозволяють оцінити 1ПМ безпечно —
+                достатньо виконати підхід на кілька повторень із помірною вагою, і калькулятор екстраполює результат.
+            </p>
+        
+            <h2>Формули розрахунку</h2>
+            <ul>
+                <li><b>Еплі:</b> 1ПМ = вага × (1 + повторення / 30) — проста й найпопулярніша формула, добре працює для 1–10
+                    повторень.</li>
+                <li><b>Бжицького:</b> 1ПМ = вага × 36 / (37 − повторення) — трохи консервативніша, часто точніша при 2–6
+                    повтореннях.</li>
+                <li><b>Середнє:</b> середнє арифметичне обох формул — компроміс, якщо не впевнений, якій формулі довіряти
+                    більше.</li>
+            </ul>
+        
+            <h2>Як користуватись таблицею відсотків</h2>
+            <p>
+                Після розрахунку 1ПМ калькулятор будує таблицю: скільки важити для тренування різних якостей.
+            </p>
+            <ul>
+                <li><b>Сила (85–100% від 1ПМ, 1–5 повторень):</b> низька кількість повторень з великою вагою, довгий відпочинок
+                    між підходами (3–5 хв). Підходить для пікових силових циклів.</li>
+                <li><b>Гіпертрофія (65–85%, 6–12 повторень):</b> класичний діапазон для росту м'язової маси, відпочинок 60–90
+                    сек.</li>
+                <li><b>Витривалість (менше 65%, 12+ повторень):</b> легша вага, багато повторень, короткий відпочинок — розвиває
+                    м'язову витривалість.</li>
+            </ul>
+        
+            <h2>Обмеження та точність</h2>
+            <p>
+                Формули дають хорошу оцінку при 1–10 повтореннях. Чим більше повторень у підході, тим менш точний
+                прогноз — після 12–15 повторень похибка може сягати 10–15%, бо в гру вступає витривалість м'язів,
+                а не лише сила. Також результат залежить від техніки виконання, розминки, дня та рівня втоми — тому
+                це орієнтир для планування тренувань, а не точна медична чи спортивна метрика.
+            </p>
+        
+            <p class="m-hintSmall">
+                Результат є оціночним. Найточніше значення 1ПМ визначається реальним тестуванням під наглядом
+                досвідченого тренера з дотриманням техніки безпеки та належною розминкою.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке 1ПМ?</h3>
+                <p>1ПМ (одноповторний максимум) — це максимальна вага, яку можна підняти один раз з правильною технікою
+                    в конкретній вправі.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Яка формула точніша: Еплі чи Бжицького?</h3>
+                <p>Обидві формули дають приблизну оцінку. Бжицького вважається трохи точнішою для 2–10 повторень, Еплі —
+                    простіша і популярніша. Різниця зазвичай невелика.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна довіряти розрахунку на 100%?</h3>
+                <p>Ні, це оцінка. Точність падає при великій кількості повторень (понад 10–12). Найточніший спосіб —
+                    реальний тест 1ПМ під наглядом досвідченого тренера.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Скільки повторень вводити для найточнішого результату?</h3>
+                <p>Оптимально 2–10 повторень. При 1 повторенні результат — це і є фактичний 1ПМ (формули майже не
+                    впливають).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
