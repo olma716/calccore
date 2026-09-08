@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Age Calculator Online — Exact Age in Years, Months, Days | CalcCore</title>
+    <meta name="description"
+        content="Calculate your exact age from your birth date: years, months, days, weeks. Days until your next birthday and the day of the week you were born." />
+
+    <link rel="canonical" href="https://calccore.net/en/datetime/age-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/age-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/age-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/age-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/age-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How is exact age calculated?",
+        "acceptedAnswer":{"@type":"Answer","text":"The calculator finds the full difference between the birth date and the current (or selected) date in years, months, and days, accounting for varying month lengths and leap years."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does the calculator account for leap years?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, the calculation is based on real calendar dates, so leap years (February 29) are automatically accounted for."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I calculate age on a specific future date?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, just change the 'Calculate as of' field to the desired date — the calculator will show the age at that exact moment."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/datetime/age-calculator#app",
+    "name":"Age Calculator",
+    "description":"Calculate exact age from birth date in years, months, and days.",
+    "url":"https://calccore.net/en/datetime/age-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cage">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Age Calculator</h1>
+                    <p class="mcalc__p">
+                        Exact age from your birth date: years, months, days, weeks. Days until your
+                        next birthday and the day of the week you were born.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="birthDate">Date of birth</label>
+                                <input class="mcalc__input" id="birthDate" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="toDate">Calculate as of</label>
+                                <input class="mcalc__input" id="toDate" type="date" />
+                                <div class="mcalc__hint">Defaults to today.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter your date of birth to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/education/percent-calculator">Percentage Calculator</a>
+                            <a href="/en/calculator">Scientific Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How exact age is calculated</h2>
+            <p>
+                The age calculator finds the full difference between the birth date and the selected
+                date (defaults to today), presenting the result in years, months, and days. Unlike simple
+                year subtraction, this method accounts for the actual number of days in each month and
+                leap years, giving an exact rather than approximate result.
+            </p>
+
+            <h2>What else the calculator shows</h2>
+            <ul>
+                <li><b>Total days lived</b> — useful for various purposes, from fun facts to official documents.</li>
+                <li><b>Weeks of life</b> — another way to see time lived at a different scale.</li>
+                <li><b>Days until next birthday</b> — handy for planning celebrations.</li>
+                <li><b>Day of the week born</b> — an interesting fact few people remember.</li>
+            </ul>
+
+            <h2>What the age calculator is used for</h2>
+            <p>
+                Beyond personal curiosity, exact age calculation is often needed for official purposes:
+                determining retirement age, calculating insurance payouts, verifying compliance with age
+                restrictions (e.g., for a driver's license or sports categories), and calculating a
+                child's age in months for medical consultations.
+            </p>
+
+            <p class="m-hintSmall">
+                This calculator uses the standard Gregorian calendar. For dates before 1582 (when the
+                calendar was introduced), the result may be inaccurate.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How is exact age calculated?</h3>
+                <p>The calculator finds the full difference between the birth date and the current (or selected) date in
+                    years, months, and days, accounting for varying month lengths and leap years.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Does the calculator account for leap years?</h3>
+                <p>Yes, the calculation is based on real calendar dates, so leap years (February 29) are automatically
+                    accounted for.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I calculate age on a specific future date?</h3>
+                <p>Yes, just change the "Calculate as of" field to the desired date — the calculator will show the age
+                    at that exact moment.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

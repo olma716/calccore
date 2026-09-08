@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор віку онлайн — точний вік у роках, місяцях, днях | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок точного віку за датою народження: роки, місяці, дні, тижні. Скільки днів до наступного дня народження та день тижня народження." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/age-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/age-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/age-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/age-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/age-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як точно розраховується вік?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор рахує повну різницю між датою народження і поточною (чи обраною) датою в роках, місяцях і днях, враховуючи різну кількість днів у місяцях та високосні роки."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи враховує калькулятор високосні роки?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, розрахунок базується на реальних календарних датах, тому високосні роки (29 лютого) враховуються автоматично."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можу я розрахувати вік на конкретну дату в майбутньому?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, просто зміни поле 'Розрахувати на дату' на потрібну дату — калькулятор покаже вік саме на той момент."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/age-calculator#app",
+    "name":"Age Calculator",
+    "description":"Розрахунок точного віку за датою народження в роках, місяцях і днях.",
+    "url":"https://calccore.net/datetime/age-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cage">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор віку</h1>
+                    <p class="mcalc__p">
+                        Точний вік за датою народження: роки, місяці, дні, тижні. Скільки днів до
+                        наступного дня народження та день тижня, коли ти народився.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Date/Time</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="birthDate">Дата народження</label>
+                                <input class="mcalc__input" id="birthDate" type="date" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="toDate">Розрахувати на дату</label>
+                                <input class="mcalc__input" id="toDate" type="date" />
+                                <div class="mcalc__hint">За замовчуванням — сьогодні.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дату народження для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                            <a href="/calculator">Науковий калькулятор</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується точний вік</h2>
+            <p>
+                Калькулятор віку рахує повну різницю між датою народження та обраною датою (за
+                замовчуванням — сьогодні), результат подається у роках, місяцях і днях. На відміну від
+                простого віднімання років, цей метод враховує реальну кількість днів у кожному місяці
+                та високосні роки, тому дає точний, а не приблизний результат.
+            </p>
+
+            <h2>Що ще показує калькулятор</h2>
+            <ul>
+                <li><b>Загальна кількість прожитих днів</b> — корисно знати для різних цілей, від жартівливих фактів до
+                    офіційних документів.</li>
+                <li><b>Кількість тижнів життя</b> — ще один спосіб побачити прожитий час у іншому масштабі.</li>
+                <li><b>Днів до наступного дня народження</b> — зручно для планування святкування.</li>
+                <li><b>День тижня народження</b> — цікавий факт, який рідко хто пам'ятає.</li>
+            </ul>
+
+            <h2>Для чого використовують калькулятор віку</h2>
+            <p>
+                Крім особистої цікавості, точний розрахунок віку часто потрібен для офіційних цілей:
+                визначення віку виходу на пенсію, розрахунку страхових виплат, перевірки відповідності
+                віковим обмеженням (наприклад, для водійських прав чи спортивних категорій), а також
+                для розрахунку віку дитини в місяцях для медичних консультацій.
+            </p>
+
+            <p class="m-hintSmall">
+                Калькулятор використовує стандартний григоріанський календар. Для дат до 1582 року
+                (запровадження календаря) результат може бути неточним.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як точно розраховується вік?</h3>
+                <p>Калькулятор рахує повну різницю між датою народження і поточною (чи обраною) датою в роках, місяцях і
+                    днях, враховуючи різну кількість днів у місяцях та високосні роки.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи враховує калькулятор високосні роки?</h3>
+                <p>Так, розрахунок базується на реальних календарних датах, тому високосні роки (29 лютого) враховуються
+                    автоматично.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можу я розрахувати вік на конкретну дату в майбутньому?</h3>
+                <p>Так, просто зміни поле "Розрахувати на дату" на потрібну дату — калькулятор покаже вік саме на той
+                    момент.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
