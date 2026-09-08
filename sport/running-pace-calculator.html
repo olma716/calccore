@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор темпу бігу онлайн — час, темп, дистанція | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок темпу бігу, часу на дистанції або дистанції за темпом. Прогноз часу для 5км, 10км, півмарафону та марафону." />
+
+    <link rel="canonical" href="https://calccore.net/sport/running-pace-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/running-pace-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/running-pace-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/running-pace-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/running-pace-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке темп бігу?",
+        "acceptedAnswer":{"@type":"Answer","text":"Темп бігу — це час, за який пробігається 1 кілометр (або миля). Вимірюється в хвилинах на кілометр (хв/км)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як розрахувати час фінішу на марафоні за поточним темпом?",
+        "acceptedAnswer":{"@type":"Answer","text":"Помнож свій темп (хв/км) на дистанцію марафону (42.195 км). Врахуй, що на довгих дистанціях темп зазвичай трохи сповільнюється порівняно з короткими забігами."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому мій темп на марафоні буде повільнішим, ніж на 5км?",
+        "acceptedAnswer":{"@type":"Answer","text":"На довших дистанціях організм має підтримувати темп значно довше, тому фізіологічно неможливо бігти з тією ж швидкістю, що на коротких забігах. Це називається негативним чи позитивним спліт-ефектом."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/running-pace-calculator#app",
+    "name":"Running Pace Calculator",
+    "description":"Розрахунок темпу бігу, часу на дистанції або дистанції за темпом з прогнозом для стандартних забігів.",
+    "url":"https://calccore.net/sport/running-pace-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="crun">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор темпу бігу</h1>
+                    <p class="mcalc__p">
+                        Розрахуй темп, час фінішу або дистанцію. Прогноз часу для 5км, 10км,
+                        півмарафону та марафону на основі твого темпу.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="mode">Що розрахувати</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="time" selected>Час фінішу (за дистанцією і темпом)</option>
+                                    <option value="pace">Темп (за дистанцією і часом)</option>
+                                    <option value="distance">Дистанцію (за темпом і часом)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field" id="distanceWrap">
+                                <label class="mcalc__label" for="distance">Дистанція (км)</label>
+                                <input class="mcalc__input" id="distance" type="text" inputmode="decimal"
+                                    placeholder="напр.: 10" />
+                            </div>
+
+                            <div class="mcalc__field" id="paceWrap">
+                                <label class="mcalc__label" for="paceMin">Темп (хв:сек на км)</label>
+                                <div style="display:flex; gap:6px;">
+                                    <input class="mcalc__input" id="paceMin" type="text" inputmode="numeric"
+                                        placeholder="хв" style="text-align:center;" />
+                                    <input class="mcalc__input" id="paceSec" type="text" inputmode="numeric"
+                                        placeholder="сек" style="text-align:center;" />
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full" id="timeWrap" style="display:none;">
+                                <label class="mcalc__label">Час (год:хв:сек)</label>
+                                <div style="display:flex; gap:6px;">
+                                    <input class="mcalc__input" id="timeH" type="text" inputmode="numeric"
+                                        placeholder="год" style="text-align:center;" />
+                                    <input class="mcalc__input" id="timeM" type="text" inputmode="numeric"
+                                        placeholder="хв" style="text-align:center;" />
+                                    <input class="mcalc__input" id="timeS" type="text" inputmode="numeric"
+                                        placeholder="сек" style="text-align:center;" />
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Прогноз для стандартних дистанцій <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Race predictions">
+                                    <thead>
+                                        <tr>
+                                            <th>Дистанція</th>
+                                            <th>Прогнозований час</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
+                            <a href="/sport/heart-rate-calculator">Пульсові зони</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке темп бігу</h2>
+            <p>
+                <b>Темп бігу</b> — це час, за який пробігається 1 кілометр, виражений у хвилинах і секундах
+                (наприклад, 5:30 хв/км). Це основна метрика для бігунів, зручніша за швидкість (км/год) для
+                планування тренувань і забігів.
+            </p>
+
+            <h2>Три способи використання калькулятора</h2>
+            <ul>
+                <li><b>Розрахунок часу фінішу:</b> знаючи дистанцію забігу та свій звичний темп, дізнайся приблизний час
+                    фінішу.</li>
+                <li><b>Розрахунок темпу:</b> якщо в тебе є цільовий час на дистанцію, дізнайся, з яким темпом потрібно
+                    бігти.</li>
+                <li><b>Розрахунок дистанції:</b> знаючи свій темп і час бігу, дізнайся приблизну дистанцію.</li>
+            </ul>
+
+            <h2>Прогноз для стандартних дистанцій</h2>
+            <p>
+                Калькулятор також показує орієнтовний час для популярних дистанцій (5км, 10км, півмарафон
+                21.1км, марафон 42.195км) на основі введеного темпу. Це корисно для планування цілей на
+                майбутні забіги.
+            </p>
+
+            <p class="m-hintSmall">
+                Прогноз є орієнтовним — на довших дистанціях темп зазвичай трохи сповільнюється через
+                накопичену втому, тож реальний фінішний час на марафоні може бути дещо вищим, ніж проста
+                екстраполяція темпу з коротшого забігу.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке темп бігу?</h3>
+                <p>Темп бігу — це час, за який пробігається 1 кілометр (або миля). Вимірюється в хвилинах на кілометр
+                    (хв/км).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як розрахувати час фінішу на марафоні за поточним темпом?</h3>
+                <p>Помнож свій темп (хв/км) на дистанцію марафону (42.195 км). Врахуй, що на довгих дистанціях темп
+                    зазвичай трохи сповільнюється порівняно з короткими забігами.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому мій темп на марафоні буде повільнішим, ніж на 5км?</h3>
+                <p>На довших дистанціях організм має підтримувати темп значно довше, тому фізіологічно неможливо бігти з
+                    тією ж швидкістю, що на коротких забігах.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

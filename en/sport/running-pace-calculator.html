@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Running Pace Calculator — Time, Pace, Distance | CalcCore</title>
+    <meta name="description"
+        content="Calculate running pace, finish time, or distance. Race time predictions for 5K, 10K, half marathon, and marathon." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/running-pace-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/running-pace-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/running-pace-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/running-pace-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/running-pace-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is running pace?",
+        "acceptedAnswer":{"@type":"Answer","text":"Running pace is the time it takes to run 1 kilometer (or mile), measured in minutes per kilometer (min/km)."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I calculate marathon finish time from my current pace?",
+        "acceptedAnswer":{"@type":"Answer","text":"Multiply your pace (min/km) by the marathon distance (42.195 km). Keep in mind that pace usually slows slightly over longer distances compared to shorter runs."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why will my marathon pace be slower than my 5K pace?",
+        "acceptedAnswer":{"@type":"Answer","text":"Over longer distances, the body has to sustain effort for much longer, so it's physiologically impossible to maintain the same pace as a shorter run."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/running-pace-calculator#app",
+    "name":"Running Pace Calculator",
+    "description":"Calculate running pace, finish time, or distance with race predictions for standard distances.",
+    "url":"https://calccore.net/en/sport/running-pace-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="crun">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Running Pace Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate pace, finish time, or distance. Race time predictions for 5K, 10K,
+                        half marathon, and marathon based on your pace.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="mode">What to calculate</label>
+                                <select id="mode" class="mcalc__select">
+                                    <option value="time" selected>Finish time (from distance and pace)</option>
+                                    <option value="pace">Pace (from distance and time)</option>
+                                    <option value="distance">Distance (from pace and time)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field" id="distanceWrap">
+                                <label class="mcalc__label" for="distance">Distance (km)</label>
+                                <input class="mcalc__input" id="distance" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 10" />
+                            </div>
+
+                            <div class="mcalc__field" id="paceWrap">
+                                <label class="mcalc__label" for="paceMin">Pace (min:sec per km)</label>
+                                <div style="display:flex; gap:6px;">
+                                    <input class="mcalc__input" id="paceMin" type="text" inputmode="numeric"
+                                        placeholder="min" style="text-align:center;" />
+                                    <input class="mcalc__input" id="paceSec" type="text" inputmode="numeric"
+                                        placeholder="sec" style="text-align:center;" />
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full" id="timeWrap" style="display:none;">
+                                <label class="mcalc__label">Time (h:min:sec)</label>
+                                <div style="display:flex; gap:6px;">
+                                    <input class="mcalc__input" id="timeH" type="text" inputmode="numeric"
+                                        placeholder="h" style="text-align:center;" />
+                                    <input class="mcalc__input" id="timeM" type="text" inputmode="numeric"
+                                        placeholder="min" style="text-align:center;" />
+                                    <input class="mcalc__input" id="timeS" type="text" inputmode="numeric"
+                                        placeholder="sec" style="text-align:center;" />
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Race predictions <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Race predictions">
+                                    <thead>
+                                        <tr>
+                                            <th>Distance</th>
+                                            <th>Predicted time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
+                            <a href="/en/sport/heart-rate-calculator">Heart Rate Zones</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is running pace</h2>
+            <p>
+                <b>Running pace</b> is the time it takes to run 1 kilometer, expressed in minutes and
+                seconds (e.g., 5:30 min/km). It's the main metric runners use, more convenient than speed
+                (km/h) for planning training and races.
+            </p>
+
+            <h2>Three ways to use this calculator</h2>
+            <ul>
+                <li><b>Calculate finish time:</b> knowing the race distance and your usual pace, find your estimated
+                    finish time.</li>
+                <li><b>Calculate pace:</b> if you have a target time for a distance, find out what pace you need to run.
+                </li>
+                <li><b>Calculate distance:</b> knowing your pace and running time, find the approximate distance
+                    covered.</li>
+            </ul>
+
+            <h2>Predictions for standard distances</h2>
+            <p>
+                The calculator also shows estimated times for popular race distances (5K, 10K, half marathon
+                21.1K, marathon 42.195K) based on your entered pace. This is useful for planning goals for
+                upcoming races.
+            </p>
+
+            <p class="m-hintSmall">
+                These predictions are estimates — over longer distances, pace typically slows down due to
+                accumulated fatigue, so your actual marathon finish time may be somewhat higher than a
+                simple extrapolation from a shorter run's pace.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is running pace?</h3>
+                <p>Running pace is the time it takes to run 1 kilometer (or mile), measured in minutes per kilometer
+                    (min/km).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How do I calculate marathon finish time from my current pace?</h3>
+                <p>Multiply your pace (min/km) by the marathon distance (42.195 km). Keep in mind that pace usually
+                    slows slightly over longer distances compared to shorter runs.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why will my marathon pace be slower than my 5K pace?</h3>
+                <p>Over longer distances, the body has to sustain effort for much longer, so it's physiologically
+                    impossible to maintain the same pace as a shorter run.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
