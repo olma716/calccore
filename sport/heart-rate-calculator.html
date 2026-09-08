@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор пульсових зон онлайн — 5 зон інтенсивності | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок пульсових зон для тренувань за формулою Карвонена або простою формулою 220-вік. 5 зон інтенсивності: розминка, жироспалення, аеробна, анаеробна, максимальна." />
+
+    <link rel="canonical" href="https://calccore.net/sport/heart-rate-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/heart-rate-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/heart-rate-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/heart-rate-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/heart-rate-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке пульсові зони?",
+        "acceptedAnswer":{"@type":"Answer","text":"Пульсові зони — це діапазони частоти серцевих скорочень, що відповідають різній інтенсивності тренування: від легкої розминки до максимального зусилля."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке формула Карвонена і чим вона краща?",
+        "acceptedAnswer":{"@type":"Answer","text":"Формула Карвонена враховує пульс спокою, що робить розрахунок зон точнішим і персоналізованішим порівняно з простою формулою на основі лише максимального пульсу."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як виміряти пульс спокою?",
+        "acceptedAnswer":{"@type":"Answer","text":"Виміряй пульс одразу після пробудження, лежачи в ліжку, перед тим як встати. Порахуй удари за 60 секунд для найточнішого результату."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/heart-rate-calculator#app",
+    "name":"Heart Rate Zones Calculator",
+    "description":"Розрахунок пульсових зон для тренувань за формулою Карвонена з 5 зонами інтенсивності.",
+    "url":"https://calccore.net/sport/heart-rate-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="chr">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор пульсових зон</h1>
+                    <p class="mcalc__p">
+                        5 зон інтенсивності тренувань за формулою <b>Карвонена</b> (з пульсом спокою)
+                        або простою формулою <b>220 − вік</b>.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="age">Вік (років)</label>
+                                <input class="mcalc__input" id="age" type="text" inputmode="numeric"
+                                    placeholder="напр.: 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="restHr">Пульс спокою (опц.)</label>
+                                <input class="mcalc__input" id="restHr" type="text" inputmode="numeric"
+                                    placeholder="напр.: 65" />
+                                <div class="mcalc__hint">Заміряй одразу після пробудження. Якщо не знаєш — залиш
+                                    порожнім.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Пульсові зони <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Heart rate zones">
+                                    <thead>
+                                        <tr>
+                                            <th>Зона</th>
+                                            <th>% від макс.</th>
+                                            <th>Пульс (уд/хв)</th>
+                                            <th>Мета</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
+                            <a href="/sport/1pm-calculator">Калькулятор 1ПМ</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке пульсові зони</h2>
+            <p>
+                Пульсові зони — це діапазони частоти серцевих скорочень (ЧСС), що відповідають різній
+                інтенсивності фізичного навантаження. Тренування в різних зонах дає різний ефект: від
+                покращення загальної витривалості до розвитку максимальної потужності.
+            </p>
+
+            <h2>Формула Карвонена</h2>
+            <p>
+                Якщо ти вкажеш <b>пульс спокою</b>, калькулятор використає формулу Карвонена — вона враховує
+                резерв серцевого ритму (різницю між максимальним пульсом і пульсом спокою), що дає точніший
+                і персоналізованіший розрахунок, ніж проста формула на основі лише максимального ЧСС.
+            </p>
+            <p>
+                <b>Формула:</b> Цільовий ЧСС = ((ЧССмакс − ЧССспокою) × %інтенсивності) + ЧССспокою<br>
+                <b>Максимальний ЧСС:</b> 220 − вік (спрощена оцінка)
+            </p>
+
+            <h2>5 зон інтенсивності</h2>
+            <ul>
+                <li><b>Зона 1 (50-60%):</b> розминка та відновлення — дуже легке навантаження.</li>
+                <li><b>Зона 2 (60-70%):</b> жироспалення — комфортний темп, розмова можлива без задишки.</li>
+                <li><b>Зона 3 (70-80%):</b> аеробна витривалість — покращення серцево-судинної системи.</li>
+                <li><b>Зона 4 (80-90%):</b> анаеробний поріг — розвиток швидкості та потужності.</li>
+                <li><b>Зона 5 (90-100%):</b> максимальне зусилля — короткі інтервали на межі можливостей.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Результат є орієнтовним. Формула 220-вік має похибку ±10-12 уд/хв для окремих людей.
+                Для точнішого визначення зон рекомендується лабораторний тест VO2max або консультація
+                зі спортивним лікарем.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке пульсові зони?</h3>
+                <p>Пульсові зони — це діапазони частоти серцевих скорочень, що відповідають різній інтенсивності
+                    тренування: від легкої розминки до максимального зусилля.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке формула Карвонена і чим вона краща?</h3>
+                <p>Формула Карвонена враховує пульс спокою, що робить розрахунок зон точнішим і персоналізованішим
+                    порівняно з простою формулою на основі лише максимального пульсу.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як виміряти пульс спокою?</h3>
+                <p>Виміряй пульс одразу після пробудження, лежачи в ліжку, перед тим як встати. Порахуй удари за 60
+                    секунд для найточнішого результату.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Яку зону обрати для схуднення?</h3>
+                <p>Зона 2 (жироспалення, 60-70% від максимуму) традиційно вважається оптимальною для тривалих тренувань
+                    на спалювання жиру, хоча загальна витрата калорій за тренування важливіша за конкретну зону.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

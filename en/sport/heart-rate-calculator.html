@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Heart Rate Zones Calculator — 5 Training Zones | CalcCore</title>
+    <meta name="description"
+        content="Calculate your heart rate training zones using the Karvonen formula or the simple 220-age formula. 5 intensity zones: warm-up, fat-burn, aerobic, anaerobic, maximum." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/heart-rate-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/heart-rate-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/heart-rate-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/heart-rate-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/heart-rate-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What are heart rate zones?",
+        "acceptedAnswer":{"@type":"Answer","text":"Heart rate zones are ranges of heart rate that correspond to different training intensities: from a light warm-up to maximum effort."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is the Karvonen formula and why is it better?",
+        "acceptedAnswer":{"@type":"Answer","text":"The Karvonen formula accounts for resting heart rate, making the zone calculation more accurate and personalized compared to a simple formula based only on maximum heart rate."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I measure my resting heart rate?",
+        "acceptedAnswer":{"@type":"Answer","text":"Measure your pulse right after waking up, while still lying in bed, before getting up. Count beats for a full 60 seconds for the most accurate result."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/heart-rate-calculator#app",
+    "name":"Heart Rate Zones Calculator",
+    "description":"Calculate heart rate training zones using the Karvonen formula with 5 intensity zones.",
+    "url":"https://calccore.net/en/sport/heart-rate-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="chr">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Heart Rate Zones Calculator</h1>
+                    <p class="mcalc__p">
+                        5 training intensity zones using the <b>Karvonen formula</b> (with resting heart rate)
+                        or the simple <b>220 − age</b> formula.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="age">Age (years)</label>
+                                <input class="mcalc__input" id="age" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="restHr">Resting heart rate (opt.)</label>
+                                <input class="mcalc__input" id="restHr" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 65" />
+                                <div class="mcalc__hint">Measure right after waking up. Leave empty if unknown.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Heart rate zones <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Heart rate zones">
+                                    <thead>
+                                        <tr>
+                                            <th>Zone</th>
+                                            <th>% of max</th>
+                                            <th>BPM</th>
+                                            <th>Goal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
+                            <a href="/en/sport/1pm-calculator">One-Rep Max Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What are heart rate zones</h2>
+            <p>
+                Heart rate zones are ranges of heart rate (HR) that correspond to different levels of physical
+                exertion. Training in different zones produces different effects: from improving overall
+                endurance to developing maximum power output.
+            </p>
+
+            <h2>The Karvonen formula</h2>
+            <p>
+                If you enter your <b>resting heart rate</b>, the calculator uses the Karvonen formula — it
+                accounts for heart rate reserve (the difference between max HR and resting HR), giving a more
+                accurate and personalized result than a simple formula based only on max HR.
+            </p>
+            <p>
+                <b>Formula:</b> Target HR = ((HRmax − HRrest) × %intensity) + HRrest<br>
+                <b>Max HR:</b> 220 − age (simplified estimate)
+            </p>
+
+            <h2>5 intensity zones</h2>
+            <ul>
+                <li><b>Zone 1 (50-60%):</b> warm-up and recovery — very light effort.</li>
+                <li><b>Zone 2 (60-70%):</b> fat burning — comfortable pace, you can still talk without gasping.</li>
+                <li><b>Zone 3 (70-80%):</b> aerobic endurance — improves cardiovascular fitness.</li>
+                <li><b>Zone 4 (80-90%):</b> anaerobic threshold — builds speed and power.</li>
+                <li><b>Zone 5 (90-100%):</b> maximum effort — short intervals at the limit of capacity.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                This result is an estimate. The 220-age formula has an error margin of ±10-12 bpm for
+                individuals. For a more precise zone determination, a lab VO2max test or a sports physician
+                consultation is recommended.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What are heart rate zones?</h3>
+                <p>Heart rate zones are ranges of heart rate that correspond to different training intensities: from a
+                    light warm-up to maximum effort.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is the Karvonen formula and why is it better?</h3>
+                <p>The Karvonen formula accounts for resting heart rate, making the zone calculation more accurate and
+                    personalized compared to a simple formula based only on maximum heart rate.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How do I measure my resting heart rate?</h3>
+                <p>Measure your pulse right after waking up, while still lying in bed, before getting up. Count beats
+                    for a full 60 seconds for the most accurate result.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Which zone should I pick for weight loss?</h3>
+                <p>Zone 2 (fat burning, 60-70% of max) is traditionally considered optimal for extended fat-burning
+                    sessions, though total calories burned per workout matters more than the specific zone.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
