@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор відсотка жиру в тілі онлайн — метод обхватів | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок відсотка жиру в тілі за методом ВМФ США (обхвати шиї, талії, стегон). Категорії: есенційний, спортивний, фітнес, прийнятний, ожиріння." />
+
+    <link rel="canonical" href="https://calccore.net/sport/body-fat-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/body-fat-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/body-fat-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/body-fat-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/body-fat-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Наскільки точний метод обхватів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Метод обхватів (US Navy) має похибку приблизно ±3-4% порівняно з лабораторними методами (DEXA-сканування), але є доступним і безкоштовним способом оцінки."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як правильно виміряти обхват талії?",
+        "acceptedAnswer":{"@type":"Answer","text":"Виміряй обхват на рівні пупка, стоячи прямо, не втягуючи живіт, після звичайного видиху."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому в жінок і чоловіків різні виміри?",
+        "acceptedAnswer":{"@type":"Answer","text":"Формула для жінок додатково враховує обхват стегон, оскільки розподіл жиру в тілі різниться між статями."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/sport/body-fat-calculator#app",
+    "name":"Body Fat Percentage Calculator",
+    "description":"Розрахунок відсотка жиру в тілі за методом ВМФ США з категоріями.",
+    "url":"https://calccore.net/sport/body-fat-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cbf">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор відсотка жиру в тілі</h1>
+                    <p class="mcalc__p">
+                        Розрахунок за методом <b>ВМФ США</b> (обхвати шиї, талії, стегон). Категорії:
+                        есенційний, спортивний, фітнес, прийнятний, ожиріння.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="sex">Стать</label>
+                                <select id="sex" class="mcalc__select">
+                                    <option value="male" selected>Чоловіча</option>
+                                    <option value="female">Жіноча</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="height">Зріст (см)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="напр.: 178" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="neck">Обхват шиї (см)</label>
+                                <input class="mcalc__input" id="neck" type="text" inputmode="decimal"
+                                    placeholder="напр.: 38" />
+                                <div class="mcalc__hint">Вимірюй нижче адамового яблука, злегка нахиливши голову вниз.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="waist">Обхват талії (см)</label>
+                                <input class="mcalc__input" id="waist" type="text" inputmode="decimal"
+                                    placeholder="напр.: 85" />
+                                <div class="mcalc__hint">На рівні пупка, після звичайного видиху.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full" id="hipWrap" style="display:none;">
+                                <label class="mcalc__label" for="hip">Обхват стегон (см)</label>
+                                <input class="mcalc__input" id="hip" type="text" inputmode="decimal"
+                                    placeholder="напр.: 100" />
+                                <div class="mcalc__hint">На рівні найширшої частини стегон (тільки для жінок).</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="bmi-scale" id="bfScale" style="display:none;">
+                            <div class="bmi-scale__track">
+                                <div class="bmi-scale__segment"
+                                    style="flex:6; background:#60a5fa; border-radius:999px 0 0 999px;"></div>
+                                <div class="bmi-scale__segment" style="flex:8; background:#34d399;"></div>
+                                <div class="bmi-scale__segment" style="flex:8; background:#a3e635;"></div>
+                                <div class="bmi-scale__segment" style="flex:8; background:#fbbf24;"></div>
+                                <div class="bmi-scale__segment"
+                                    style="flex:10; background:#f87171; border-radius:0 999px 999px 0;"></div>
+                                <div class="bmi-scale__marker" id="bfMarker"></div>
+                            </div>
+                            <div class="bmi-scale__labels">
+                                <span>2</span>
+                                <span>14</span>
+                                <span>18</span>
+                                <span>25</span>
+                                <span>32</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+
+                        <div class="m-navlinks">
+                            <a href="/sport/bmi-calculator">Калькулятор ІМТ</a>
+                            <a href="/sport/macros-calculator">Калькулятор БЖУ</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке відсоток жиру в тілі</h2>
+            <p>
+                <b>Відсоток жиру в тілі</b> — це частка загальної маси тіла, яка складається з жирової
+                тканини. На відміну від ІМТ, цей показник розрізняє жирову і м'язову масу, тому дає
+                точнішу картину фізичної форми.
+            </p>
+
+            <h2>Метод ВМФ США (US Navy)</h2>
+            <p>
+                Цей метод оцінює відсоток жиру за обхватами тіла — шиї, талії (і стегон для жінок) —
+                разом зі зростом. Він розроблений для військово-морського флоту США як швидкий і
+                недорогий спосіб оцінки фізичної форми без спеціального обладнання.
+            </p>
+
+            <h2>Як правильно виміряти обхвати</h2>
+            <ul>
+                <li><b>Шия:</b> нижче адамового яблука (кадика), стрічка трохи нахилена вниз спереду.</li>
+                <li><b>Талія:</b> на рівні пупка, стоячи прямо, після звичайного видиху, без втягування живота.</li>
+                <li><b>Стегна (для жінок):</b> на рівні найширшої частини сідниць.</li>
+            </ul>
+
+            <h2>Категорії відсотка жиру в тілі</h2>
+            <ul>
+                <li><b>Есенційний жир:</b> мінімум, необхідний для життєдіяльності (чоловіки ~2-5%, жінки ~10-13%).</li>
+                <li><b>Спортивний:</b> характерний для елітних спортсменів (чоловіки 6-13%, жінки 14-20%).</li>
+                <li><b>Фітнес:</b> добра фізична форма (чоловіки 14-17%, жінки 21-24%).</li>
+                <li><b>Прийнятний:</b> середній здоровий рівень (чоловіки 18-24%, жінки 25-31%).</li>
+                <li><b>Ожиріння:</b> підвищений ризик для здоров'я (чоловіки 25%+, жінки 32%+).</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Метод обхватів має похибку приблизно ±3-4% порівняно з лабораторними методами (DEXA,
+                гідростатичне зважування). Для точнішої оцінки складу тіла звернись до фахівця з
+                відповідним обладнанням.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Наскільки точний метод обхватів?</h3>
+                <p>Метод обхватів (US Navy) має похибку приблизно ±3-4% порівняно з лабораторними методами
+                    (DEXA-сканування), але є доступним і безкоштовним способом оцінки.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як правильно виміряти обхват талії?</h3>
+                <p>Виміряй обхват на рівні пупка, стоячи прямо, не втягуючи живіт, після звичайного видиху.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому в жінок і чоловіків різні виміри?</h3>
+                <p>Формула для жінок додатково враховує обхват стегон, оскільки розподіл жиру в тілі різниться між
+                    статями.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна довіряти цьому розрахунку на 100%?</h3>
+                <p>Це орієнтовна оцінка. Для точного визначення складу тіла використовуй DEXA-сканування, гідростатичне
+                    зважування або біоімпедансометрію у фахівця.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

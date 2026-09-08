@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Body Fat Percentage Calculator — Navy Method | CalcCore</title>
+    <meta name="description"
+        content="Calculate body fat percentage using the US Navy method (neck, waist, hip measurements). Categories: essential, athletic, fitness, acceptable, obese." />
+
+    <link rel="canonical" href="https://calccore.net/en/sport/body-fat-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/body-fat-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/sport/body-fat-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/sport/body-fat-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/body-fat-calculator.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How accurate is the tape measure method?",
+        "acceptedAnswer":{"@type":"Answer","text":"The US Navy tape method has an error margin of about ±3-4% compared to lab methods (DEXA scans), but it's an accessible and free estimation method."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I measure waist circumference correctly?",
+        "acceptedAnswer":{"@type":"Answer","text":"Measure at the level of the navel, standing straight, without sucking in your stomach, after a normal exhale."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why do men and women use different measurements?",
+        "acceptedAnswer":{"@type":"Answer","text":"The formula for women additionally accounts for hip circumference, since fat distribution differs between sexes."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/sport/body-fat-calculator#app",
+    "name":"Body Fat Percentage Calculator",
+    "description":"Calculate body fat percentage using the US Navy method with categories.",
+    "url":"https://calccore.net/en/sport/body-fat-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cbf">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Body Fat Percentage Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate using the <b>US Navy method</b> (neck, waist, hip measurements). Categories:
+                        essential, athletic, fitness, acceptable, obese.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="sex">Sex</label>
+                                <select id="sex" class="mcalc__select">
+                                    <option value="male" selected>Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="height">Height (cm)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 178" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="neck">Neck circumference (cm)</label>
+                                <input class="mcalc__input" id="neck" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 38" />
+                                <div class="mcalc__hint">Measure below the Adam's apple, head tilted slightly down.
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="waist">Waist circumference (cm)</label>
+                                <input class="mcalc__input" id="waist" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 85" />
+                                <div class="mcalc__hint">At the navel level, after a normal exhale.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full" id="hipWrap" style="display:none;">
+                                <label class="mcalc__label" for="hip">Hip circumference (cm)</label>
+                                <input class="mcalc__input" id="hip" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 100" />
+                                <div class="mcalc__hint">At the widest part of the hips (women only).</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="bmi-scale" id="bfScale" style="display:none;">
+                            <div class="bmi-scale__track">
+                                <div class="bmi-scale__segment"
+                                    style="flex:6; background:#60a5fa; border-radius:999px 0 0 999px;"></div>
+                                <div class="bmi-scale__segment" style="flex:8; background:#34d399;"></div>
+                                <div class="bmi-scale__segment" style="flex:8; background:#a3e635;"></div>
+                                <div class="bmi-scale__segment" style="flex:8; background:#fbbf24;"></div>
+                                <div class="bmi-scale__segment"
+                                    style="flex:10; background:#f87171; border-radius:0 999px 999px 0;"></div>
+                                <div class="bmi-scale__marker" id="bfMarker"></div>
+                            </div>
+                            <div class="bmi-scale__labels">
+                                <span>2</span>
+                                <span>14</span>
+                                <span>18</span>
+                                <span>25</span>
+                                <span>32</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/sport/bmi-calculator">BMI Calculator</a>
+                            <a href="/en/sport/macros-calculator">Macro Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is body fat percentage</h2>
+            <p>
+                <b>Body fat percentage</b> is the proportion of total body mass made up of fat tissue.
+                Unlike BMI, this metric distinguishes between fat and muscle mass, giving a more accurate
+                picture of physical condition.
+            </p>
+
+            <h2>The US Navy method</h2>
+            <p>
+                This method estimates body fat percentage using body circumferences — neck, waist (and hips
+                for women) — along with height. It was developed for the US Navy as a quick and inexpensive
+                way to assess physical fitness without special equipment.
+            </p>
+
+            <h2>How to measure correctly</h2>
+            <ul>
+                <li><b>Neck:</b> below the Adam's apple, with the tape angled slightly downward at the front.</li>
+                <li><b>Waist:</b> at the navel level, standing straight, after a normal exhale, without sucking in.</li>
+                <li><b>Hips (women):</b> at the widest part of the buttocks.</li>
+            </ul>
+
+            <h2>Body fat percentage categories</h2>
+            <ul>
+                <li><b>Essential fat:</b> minimum required for basic physical function (men ~2-5%, women ~10-13%).</li>
+                <li><b>Athletic:</b> typical of elite athletes (men 6-13%, women 14-20%).</li>
+                <li><b>Fitness:</b> good physical condition (men 14-17%, women 21-24%).</li>
+                <li><b>Acceptable:</b> average healthy level (men 18-24%, women 25-31%).</li>
+                <li><b>Obese:</b> elevated health risk (men 25%+, women 32%+).</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                The tape measure method has an error margin of about ±3-4% compared to lab methods (DEXA
+                scans, hydrostatic weighing). For a more precise body composition assessment, consult a
+                specialist with the appropriate equipment.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How accurate is the tape measure method?</h3>
+                <p>The US Navy tape method has an error margin of about ±3-4% compared to lab methods (DEXA scans), but
+                    it's an accessible and free estimation method.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How do I measure waist circumference correctly?</h3>
+                <p>Measure at the level of the navel, standing straight, without sucking in your stomach, after a normal
+                    exhale.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why do men and women use different measurements?</h3>
+                <p>The formula for women additionally accounts for hip circumference, since fat distribution differs
+                    between sexes.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I fully trust this result?</h3>
+                <p>This is an estimate. For precise body composition, use DEXA scanning, hydrostatic weighing, or
+                    bioelectrical impedance analysis with a specialist.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
