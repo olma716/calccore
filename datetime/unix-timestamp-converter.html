@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Unix Timestamp конвертер онлайн — Epoch час | CalcCore</title>
+    <meta name="description"
+        content="Конвертація Unix timestamp (epoch) у звичайну дату і навпаки. Поточний timestamp у реальному часі, підтримка секунд і мілісекунд." />
+
+    <link rel="canonical" href="https://calccore.net/datetime/unix-timestamp-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/unix-timestamp-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/unix-timestamp-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/unix-timestamp-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/unix-timestamp-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке Unix timestamp?",
+        "acceptedAnswer":{"@type":"Answer","text":"Unix timestamp (epoch time) — це кількість секунд, що минули з 1 січня 1970 року 00:00:00 UTC. Використовується в програмуванні для зберігання дати й часу як одного числа."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому timestamp іноді в мілісекундах, а іноді в секундах?",
+        "acceptedAnswer":{"@type":"Answer","text":"Unix timestamp за стандартом вимірюється в секундах. Однак JavaScript та деякі інші мови програмування часто використовують мілісекунди (timestamp × 1000) для більшої точності."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи є проблема 2038 року?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, 32-бітні системи, що зберігають timestamp як знакове ціле число, переповняться 19 січня 2038 року. Сучасні 64-бітні системи не мають цієї проблеми."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/datetime/unix-timestamp-converter#app",
+    "name":"Unix Timestamp Converter",
+    "description":"Конвертація Unix timestamp у дату і навпаки з підтримкою секунд і мілісекунд.",
+    "url":"https://calccore.net/datetime/unix-timestamp-converter",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cunix">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Unix Timestamp конвертер</h1>
+                    <p class="mcalc__p">
+                        Конвертуй Unix timestamp (epoch) у звичайну дату — і навпаки.
+                    </p>
+                </div>
+
+                <!-- Live current timestamp -->
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto 16px;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Поточний timestamp</h2>
+                        <span class="mcalc__badge">Live</span>
+                    </div>
+                    <div class="mcalc__bigNumber" id="liveTimestamp" style="font-family:monospace;">—</div>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT: timestamp to date -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Timestamp → Дата</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="tsInput">Unix timestamp</label>
+                                <input class="mcalc__input" id="tsInput" type="text" inputmode="numeric"
+                                    placeholder="напр.: 1735689600" />
+                            </div>
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="tsUnit">Одиниця</label>
+                                <select id="tsUnit" class="mcalc__select">
+                                    <option value="seconds" selected>Секунди</option>
+                                    <option value="milliseconds">Мілісекунди</option>
+                                </select>
+                            </div>
+                            <div class="mcalc__field m-full">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnToDate"
+                                    type="button">Конвертувати</button>
+                            </div>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="dateResult" style="margin-top:12px;">Введи timestamp.</div>
+                        <div class="m-details" id="dateDetails"></div>
+                    </div>
+
+                    <!-- RIGHT: date to timestamp -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Дата → Timestamp</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateInput">Дата</label>
+                                <input class="mcalc__input" id="dateInput" type="date" />
+                            </div>
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="timeInput">Час (UTC)</label>
+                                <input class="mcalc__input" id="timeInput" type="time" />
+                            </div>
+                            <div class="mcalc__field m-full">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnToTs"
+                                    type="button">Конвертувати</button>
+                            </div>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="tsResult" style="margin-top:12px;">Введи дату.</div>
+                        <div class="m-details" id="tsDetails"></div>
+                    </div>
+
+                </div>
+
+                <div class="mcalc__toast" id="mToast" style="text-align:center; max-width:900px; margin:8px auto;">
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке Unix timestamp</h2>
+            <p>
+                <b>Unix timestamp</b> (також відомий як epoch time чи POSIX time) — це кількість секунд,
+                що минули з 1 січня 1970 року 00:00:00 UTC (так звана "епоха Unix"). Це стандартний спосіб
+                представлення дати й часу як одного цілого числа, широко використовуваний у програмуванні,
+                базах даних та API.
+            </p>
+
+            <h2>Секунди vs мілісекунди</h2>
+            <p>
+                Класичний Unix timestamp вимірюється в <b>секундах</b>. Однак JavaScript (метод
+                <code>Date.now()</code>) та деякі інші мови програмування використовують timestamp у
+                <b>мілісекундах</b> для більшої точності — це просто timestamp у секундах, помножений на 1000.
+            </p>
+
+            <h2>Навіщо потрібен timestamp</h2>
+            <ul>
+                <li><b>Бази даних:</b> зберігання дат як чисел спрощує сортування та порівняння.</li>
+                <li><b>API:</b> багато REST API повертають дати саме як Unix timestamp.</li>
+                <li><b>Логи та журнали подій:</b> точна фіксація моменту події незалежно від часового поясу.</li>
+                <li><b>Дебагінг:</b> швидка конвертація timestamp з логів у зрозумілу дату.</li>
+            </ul>
+
+            <h2>Проблема 2038 року (Y2038)</h2>
+            <p>
+                Старіші 32-бітні системи зберігають Unix timestamp як знакове 32-бітне ціле число,
+                яке переповниться <b>19 січня 2038 року о 03:14:07 UTC</b>. Це може спричинити помилки
+                в старих системах, подібно до проблеми 2000 року (Y2K). Сучасні 64-бітні системи
+                не мають цього обмеження.
+            </p>
+
+            <p class="m-hintSmall">
+                Конвертація "Дата → Timestamp" використовує UTC як базовий часовий пояс.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке Unix timestamp?</h3>
+                <p>Unix timestamp (epoch time) — це кількість секунд, що минули з 1 січня 1970 року 00:00:00 UTC.
+                    Використовується в програмуванні для зберігання дати й часу як одного числа.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому timestamp іноді в мілісекундах, а іноді в секундах?</h3>
+                <p>Unix timestamp за стандартом вимірюється в секундах. Однак JavaScript та деякі інші мови
+                    програмування часто використовують мілісекунди (timestamp × 1000) для більшої точності.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи є проблема 2038 року?</h3>
+                <p>Так, 32-бітні системи, що зберігають timestamp як знакове ціле число, переповняться 19 січня 2038
+                    року. Сучасні 64-бітні системи не мають цієї проблеми.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

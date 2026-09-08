@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Unix Timestamp Converter Online — Epoch Time | CalcCore</title>
+    <meta name="description"
+        content="Convert Unix timestamp (epoch) to a regular date and vice versa. Live current timestamp, seconds and milliseconds support." />
+
+    <link rel="canonical" href="https://calccore.net/en/datetime/unix-timestamp-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/unix-timestamp-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/datetime/unix-timestamp-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/datetime/unix-timestamp-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/unix-timestamp-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a Unix timestamp?",
+        "acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's used in programming to store date and time as a single number."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is a timestamp sometimes in milliseconds and sometimes in seconds?",
+        "acceptedAnswer":{"@type":"Answer","text":"The standard Unix timestamp is measured in seconds. However, JavaScript and some other programming languages often use milliseconds (timestamp × 1000) for greater precision."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is there a Year 2038 problem?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, 32-bit systems that store the timestamp as a signed integer will overflow on January 19, 2038. Modern 64-bit systems don't have this limitation."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/datetime/unix-timestamp-converter#app",
+    "name":"Unix Timestamp Converter",
+    "description":"Convert Unix timestamp to a date and back, with seconds and milliseconds support.",
+    "url":"https://calccore.net/en/datetime/unix-timestamp-converter",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cunix">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Unix Timestamp Converter</h1>
+                    <p class="mcalc__p">
+                        Convert Unix timestamp (epoch) to a regular date — and back.
+                    </p>
+                </div>
+
+                <!-- Live current timestamp -->
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto 16px;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Current timestamp</h2>
+                        <span class="mcalc__badge">Live</span>
+                    </div>
+                    <div class="mcalc__bigNumber" id="liveTimestamp" style="font-family:monospace;">—</div>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT: timestamp to date -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Timestamp → Date</h2>
+                            <span class="mcalc__badge">Sport</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="tsInput">Unix timestamp</label>
+                                <input class="mcalc__input" id="tsInput" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 1735689600" />
+                            </div>
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="tsUnit">Unit</label>
+                                <select id="tsUnit" class="mcalc__select">
+                                    <option value="seconds" selected>Seconds</option>
+                                    <option value="milliseconds">Milliseconds</option>
+                                </select>
+                            </div>
+                            <div class="mcalc__field m-full">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnToDate"
+                                    type="button">Convert</button>
+                            </div>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="dateResult" style="margin-top:12px;">Enter a timestamp.</div>
+                        <div class="m-details" id="dateDetails"></div>
+                    </div>
+
+                    <!-- RIGHT: date to timestamp -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Date → Timestamp</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="dateInput">Date</label>
+                                <input class="mcalc__input" id="dateInput" type="date" />
+                            </div>
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="timeInput">Time (UTC)</label>
+                                <input class="mcalc__input" id="timeInput" type="time" />
+                            </div>
+                            <div class="mcalc__field m-full">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnToTs"
+                                    type="button">Convert</button>
+                            </div>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="tsResult" style="margin-top:12px;">Enter a date.</div>
+                        <div class="m-details" id="tsDetails"></div>
+                    </div>
+
+                </div>
+
+                <div class="mcalc__toast" id="mToast" style="text-align:center; max-width:900px; margin:8px auto;">
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is a Unix timestamp</h2>
+            <p>
+                A <b>Unix timestamp</b> (also known as epoch time or POSIX time) is the number of seconds
+                that have elapsed since January 1, 1970, 00:00:00 UTC (the "Unix epoch"). It's a standard
+                way of representing date and time as a single integer, widely used in programming,
+                databases, and APIs.
+            </p>
+
+            <h2>Seconds vs milliseconds</h2>
+            <p>
+                The classic Unix timestamp is measured in <b>seconds</b>. However, JavaScript (via
+                <code>Date.now()</code>) and some other programming languages use timestamps in
+                <b>milliseconds</b> for greater precision — that's simply the timestamp in seconds
+                multiplied by 1000.
+            </p>
+
+            <h2>Why timestamps are used</h2>
+            <ul>
+                <li><b>Databases:</b> storing dates as numbers simplifies sorting and comparison.</li>
+                <li><b>APIs:</b> many REST APIs return dates as Unix timestamps.</li>
+                <li><b>Logs and event records:</b> precise recording of an event's moment regardless of time zone.</li>
+                <li><b>Debugging:</b> quickly converting a timestamp from logs into a readable date.</li>
+            </ul>
+
+            <h2>The Year 2038 problem (Y2038)</h2>
+            <p>
+                Older 32-bit systems store the Unix timestamp as a signed 32-bit integer, which will
+                overflow on <b>January 19, 2038 at 03:14:07 UTC</b>. This can cause errors in legacy
+                systems, similar to the Year 2000 problem (Y2K). Modern 64-bit systems don't have this
+                limitation.
+            </p>
+
+            <p class="m-hintSmall">
+                The "Date → Timestamp" conversion uses UTC as the base time zone.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is a Unix timestamp?</h3>
+                <p>A Unix timestamp (epoch time) is the number of seconds that have elapsed since January 1, 1970,
+                    00:00:00 UTC. It's used in programming to store date and time as a single number.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why is a timestamp sometimes in milliseconds and sometimes in seconds?</h3>
+                <p>The standard Unix timestamp is measured in seconds. However, JavaScript and some other programming
+                    languages often use milliseconds (timestamp × 1000) for greater precision.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Is there a Year 2038 problem?</h3>
+                <p>Yes, 32-bit systems that store the timestamp as a signed integer will overflow on January 19, 2038.
+                    Modern 64-bit systems don't have this limitation.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
