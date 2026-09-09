@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Pregnancy Week Calculator Online — Trimester Development | CalcCore</title>
+    <meta name="description"
+        content="Find your exact pregnancy week, trimester, and estimated fetal size based on your last menstrual period." />
+
+    <link rel="canonical" href="https://calccore.net/en/pregnancy/pregnancy-week-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/pregnancy/pregnancy-week-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/pregnancy/pregnancy-week-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/pregnancy/pregnancy-week-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/pregnancy-week-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pregnancy-week-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why is pregnancy counted from the last period instead of conception?",
+        "acceptedAnswer":{"@type":"Answer","text":"The exact conception date is hard to determine, while the last menstrual period date is usually known. Medical gestational age is traditionally counted from LMP."}
+      },
+      {
+        "@type":"Question",
+        "name":"How many weeks does a normal pregnancy last?",
+        "acceptedAnswer":{"@type":"Answer","text":"A full-term pregnancy lasts 37-42 weeks, averaging 40 weeks from the first day of the last menstrual period."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is fetal size the same for all women at the same week?",
+        "acceptedAnswer":{"@type":"Answer","text":"No, sizes are population averages. Actual fetal size can vary and is individually assessed by a doctor during ultrasound."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/pregnancy/pregnancy-week-calculator#app",
+    "name":"Pregnancy Week Calculator",
+    "description":"Calculate current pregnancy week, trimester, and estimated fetal size.",
+    "url":"https://calccore.net/en/pregnancy/pregnancy-week-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cweek">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Pregnancy Week Calculator</h1>
+                    <p class="mcalc__p">
+                        Find your exact pregnancy week, trimester, and estimated
+                        fetal size.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Enter a date</h2>
+                        <span class="mcalc__badge">Pregnancy</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="lmpDate">First day of last period</label>
+                            <input class="mcalc__input" id="lmpDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Calculate</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter a date to calculate.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                    <div class="fruit-size" id="fruitSize" style="display:none;"></div>
+
+                    <div class="week-progress" id="weekProgress" style="display:none;">
+                        <div class="week-progress__bar">
+                            <div class="week-progress__fill" id="weekProgressFill"></div>
+                        </div>
+                        <div class="week-progress__label" id="weekProgressLabel"></div>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/en/pregnancy/due-date-calculator">Due Date Calculator</a>
+                    <a href="/en/pregnancy/ovulation-calculator">Ovulation Calculator</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How pregnancy week is calculated</h2>
+            <p>
+                Medical gestational age is counted from the first day of the last menstrual period
+                (LMP), not from the conception date. This is standard obstetric practice, since the
+                exact conception date is hard to determine, while the last period date is usually
+                known.
+            </p>
+
+            <h2>The three trimesters of pregnancy</h2>
+            <ul>
+                <li><b>First trimester (weeks 1-13):</b> formation of major organs and systems, highest risk of
+                    miscarriage.</li>
+                <li><b>Second trimester (weeks 14-27):</b> often called the "golden period" — morning sickness fades,
+                    energy returns, fetal movement becomes noticeable.</li>
+                <li><b>Third trimester (weeks 28-40+):</b> active fetal weight gain, body preparation for labor.</li>
+            </ul>
+
+            <h2>Why fruit-size comparisons are popular</h2>
+            <p>
+                Many parents find it helpful to visualize fetal size through comparisons with
+                familiar objects — fruits or vegetables. This isn't a medical term but a popular way
+                to make abstract centimeters more tangible and understandable.
+            </p>
+
+            <p class="m-hintSmall">
+                Fetal sizes are population averages and can vary in individual cases. An accurate
+                assessment of fetal development is provided by a doctor during a scheduled ultrasound.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why is pregnancy counted from the last period instead of conception?</h3>
+                <p>The exact conception date is hard to determine, while the last menstrual period date is usually
+                    known. Medical gestational age is traditionally counted from LMP.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How many weeks does a normal pregnancy last?</h3>
+                <p>A full-term pregnancy lasts 37-42 weeks, averaging 40 weeks from the first day of the last menstrual
+                    period.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Is fetal size the same for all women at the same week?</h3>
+                <p>No, sizes are population averages. Actual fetal size can vary and is individually assessed by a
+                    doctor during ultrasound.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

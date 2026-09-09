@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор тижня вагітності онлайн — розвиток по триместрах | CalcCore</title>
+    <meta name="description"
+        content="Дізнайся точний тиждень вагітності, триместр та розмір плода за датою останньої менструації або терміном УЗД." />
+
+    <link rel="canonical" href="https://calccore.net/pregnancy/pregnancy-week-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/pregnancy/pregnancy-week-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/pregnancy/pregnancy-week-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/pregnancy/pregnancy-week-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/pregnancy-week-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pregnancy-week-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чому вагітність рахують від останньої менструації, а не від зачаття?",
+        "acceptedAnswer":{"@type":"Answer","text":"Дату зачаття точно визначити складно, тоді як дата останньої менструації відома. Медичний термін вагітності (гестаційний вік) традиційно рахується саме від ПДМ."}
+      },
+      {
+        "@type":"Question",
+        "name":"Скільки тижнів триває нормальна вагітність?",
+        "acceptedAnswer":{"@type":"Answer","text":"Доношена вагітність триває 37-42 тижні, у середньому — 40 тижнів від першого дня останньої менструації."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи однаковий розмір плода в усіх жінок на одному тижні?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні, розміри є середньостатистичними орієнтирами. Реальний розмір плода може відрізнятись і оцінюється лікарем індивідуально на УЗД."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/pregnancy/pregnancy-week-calculator#app",
+    "name":"Pregnancy Week Calculator",
+    "description":"Розрахунок поточного тижня вагітності, триместру та орієнтовного розміру плода.",
+    "url":"https://calccore.net/pregnancy/pregnancy-week-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cweek">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор тижня вагітності</h1>
+                    <p class="mcalc__p">
+                        Дізнайся точний тиждень вагітності, триместр та орієнтовний
+                        розмір плода.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дату</h2>
+                        <span class="mcalc__badge">Pregnancy</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="lmpDate">Перший день останньої менструації</label>
+                            <input class="mcalc__input" id="lmpDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи дату для розрахунку.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                    <div class="fruit-size" id="fruitSize" style="display:none;"></div>
+
+                    <div class="week-progress" id="weekProgress" style="display:none;">
+                        <div class="week-progress__bar">
+                            <div class="week-progress__fill" id="weekProgressFill"></div>
+                        </div>
+                        <div class="week-progress__label" id="weekProgressLabel"></div>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/pregnancy/due-date-calculator">Калькулятор дати пологів</a>
+                    <a href="/pregnancy/ovulation-calculator">Калькулятор овуляції</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як рахується тиждень вагітності</h2>
+            <p>
+                Медичний термін вагітності (<b>гестаційний вік</b>) рахується від першого дня
+                останньої менструації (ПДМ), а не від дати зачаття. Це стандартна практика в
+                акушерстві, оскільки дату зачаття точно визначити складно, тоді як дата останньої
+                менструації зазвичай відома.
+            </p>
+
+            <h2>Три триместри вагітності</h2>
+            <ul>
+                <li><b>Перший триместр (1-13 тиждень):</b> формування основних органів та систем плода, найвищий ризик
+                    викидня.</li>
+                <li><b>Другий триместр (14-27 тиждень):</b> часто називають "золотим періодом" — токсикоз минає, енергія
+                    повертається, стає помітним рух плода.</li>
+                <li><b>Третій триместр (28-40+ тиждень):</b> активний ріст ваги плода, підготовка організму до пологів.
+                </li>
+            </ul>
+
+            <h2>Чому порівняння з розміром фруктів популярне</h2>
+            <p>
+                Багато батьків знаходять корисним уявляти розмір плода через порівняння зі знайомими
+                об'єктами — фруктами чи овочами. Це не медичний термін, а популярний спосіб зробити
+                абстрактні сантиметри більш наочними та зрозумілими.
+            </p>
+
+            <p class="m-hintSmall">
+                Розміри плода є середньостатистичними орієнтирами і можуть відрізнятись в
+                індивідуальних випадках. Точну оцінку розвитку плода дає лікар на плановому УЗД.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чому вагітність рахують від останньої менструації, а не від зачаття?</h3>
+                <p>Дату зачаття точно визначити складно, тоді як дата останньої менструації відома. Медичний термін
+                    вагітності (гестаційний вік) традиційно рахується саме від ПДМ.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Скільки тижнів триває нормальна вагітність?</h3>
+                <p>Доношена вагітність триває 37-42 тижні, у середньому — 40 тижнів від першого дня останньої
+                    менструації.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи однаковий розмір плода в усіх жінок на одному тижні?</h3>
+                <p>Ні, розміри є середньостатистичними орієнтирами. Реальний розмір плода може відрізнятись і оцінюється
+                    лікарем індивідуально на УЗД.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
