@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Oven Temperature Converter Online — °C, °F, Gas Mark | CalcCore</title>
+    <meta name="description"
+        content="Convert oven temperature between Celsius, Fahrenheit, and Gas Mark. Handy for recipes from different countries." />
+
+    <link rel="canonical" href="https://calccore.net/en/kitchen/oven-temperature-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/oven-temperature-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/kitchen/oven-temperature-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/kitchen/oven-temperature-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/oven-temperature-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is Gas Mark?",
+        "acceptedAnswer":{"@type":"Answer","text":"Gas Mark is an oven temperature scale traditionally used in the UK for gas ovens, with values ranging from 1 to 9."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I convert Celsius to Fahrenheit manually?",
+        "acceptedAnswer":{"@type":"Answer","text":"Formula: °F = °C × 9/5 + 32. For example, 180°C × 9/5 + 32 = 356°F."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why do American recipes use Fahrenheit?",
+        "acceptedAnswer":{"@type":"Answer","text":"The US is one of the few countries that still officially uses the Fahrenheit scale in everyday life, including cooking recipes."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/kitchen/oven-temperature-converter#app",
+    "name":"Oven Temperature Converter",
+    "description":"Convert oven temperature between Celsius, Fahrenheit, and Gas Mark.",
+    "url":"https://calccore.net/en/kitchen/oven-temperature-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="coven">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Oven Temperature Converter</h1>
+                    <p class="mcalc__p">
+                        Convert oven temperature between Celsius, Fahrenheit, and
+                        Gas Mark.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Enter a temperature</h2>
+                        <span class="mcalc__badge">Kitchen</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="tempValue">Value</label>
+                            <input class="mcalc__input" id="tempValue" type="text" inputmode="decimal"
+                                placeholder="e.g.: 180" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="tempUnit">Unit</label>
+                            <select id="tempUnit" class="mcalc__select">
+                                <option value="c" selected>Celsius (°C)</option>
+                                <option value="f">Fahrenheit (°F)</option>
+                                <option value="gas">Gas Mark</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Convert</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter a temperature.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                    <details class="m-schedule" id="scheduleWrap" style="margin-top:12px;">
+                        <summary class="m-sum">
+                            <span class="m-sum-left">
+                                <span class="m-ico" aria-hidden="true"></span>
+                                Reference table <span class="muted">(open)</span>
+                            </span>
+                            <span class="m-chevron" aria-hidden="true"></span>
+                        </summary>
+
+                        <div class="m-tablewrap">
+                            <table class="m-table" aria-label="Oven temperature table">
+                                <thead>
+                                    <tr>
+                                        <th>°C</th>
+                                        <th>°F</th>
+                                        <th>Gas Mark</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="refTableBody"></tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/en/kitchen/measurement-converter">Cooking Measurement Converter</a>
+                    <a href="/en/kitchen/recipe-scaler">Recipe Scaler</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why you need an oven temperature converter</h2>
+            <p>
+                Recipes from different countries specify oven temperature differently: American ones
+                in Fahrenheit, most others in Celsius, and traditional British recipes often use Gas
+                Mark. This converter helps you quickly translate the value into the scale you need.
+            </p>
+
+            <h2>Conversion formulas</h2>
+            <ul>
+                <li><b>Celsius → Fahrenheit:</b> °F = °C × 9/5 + 32</li>
+                <li><b>Fahrenheit → Celsius:</b> °C = (°F − 32) × 5/9</li>
+                <li><b>Gas Mark → Celsius:</b> approximately via a reference table (non-linear scale)</li>
+            </ul>
+
+            <h2>What is Gas Mark</h2>
+            <p>
+                Gas Mark is a traditional British scale for gas ovens, using numbers from ¼ to 9
+                instead of degrees. It originated before thermostat standardization and still appears
+                in British cookbooks alongside modern Celsius values.
+            </p>
+
+            <h2>Practical temperature guidelines</h2>
+            <ul>
+                <li><b>Low (~120-150°C):</b> slow roasting, drying, meringues.</li>
+                <li><b>Moderate (~160-180°C):</b> most cakes, muffins, cookies.</li>
+                <li><b>High (~200-220°C):</b> bread, pizza, "crispy-crust" vegetables.</li>
+                <li><b>Very high (230°C+):</b> quick browning, some pastries.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                The table values are approximate guidelines. Actual dish behavior depends on the
+                specific oven (convection, thermostat calibration), so also rely on visual signs of
+                doneness rather than temperature and time alone.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is Gas Mark?</h3>
+                <p>Gas Mark is an oven temperature scale traditionally used in the UK for gas ovens, with values ranging
+                    from 1 to 9.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How do I convert Celsius to Fahrenheit manually?</h3>
+                <p>Formula: °F = °C × 9/5 + 32. For example, 180°C × 9/5 + 32 = 356°F.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why do American recipes use Fahrenheit?</h3>
+                <p>The US is one of the few countries that still officially uses the Fahrenheit scale in everyday life,
+                    including cooking recipes.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
