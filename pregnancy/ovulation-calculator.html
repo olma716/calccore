@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор овуляції онлайн — фертильні дні | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок дня овуляції та фертильного вікна для планування вагітності за довжиною менструального циклу." />
+
+    <link rel="canonical" href="https://calccore.net/pregnancy/ovulation-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/pregnancy/ovulation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/pregnancy/ovulation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/pregnancy/ovulation-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ovulation-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як розраховується день овуляції?",
+        "acceptedAnswer":{"@type":"Answer","text":"Овуляція зазвичай настає за 14 днів до початку наступної менструації, незалежно від загальної довжини циклу."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке фертильне вікно?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це період приблизно 5-6 днів навколо овуляції (5 днів до і день овуляції), коли ймовірність зачаття найвища через тривалість життя сперматозоїдів."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи працює цей метод при нерегулярному циклі?",
+        "acceptedAnswer":{"@type":"Answer","text":"Розрахунок менш точний при нерегулярному циклі. У такому разі рекомендується використовувати тести на овуляцію або відстежувати базальну температуру тіла."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/pregnancy/ovulation-calculator#app",
+    "name":"Ovulation Calculator",
+    "description":"Розрахунок дня овуляції та фертильного вікна за довжиною менструального циклу.",
+    "url":"https://calccore.net/pregnancy/ovulation-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="covul">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор овуляції</h1>
+                    <p class="mcalc__p">
+                        Розрахуй день овуляції та фертильне вікно для планування
+                        вагітності.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дані</h2>
+                        <span class="mcalc__badge">Pregnancy</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="lastPeriod">Перший день останньої менструації</label>
+                            <input class="mcalc__input" id="lastPeriod" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="cycleLength">Довжина циклу (днів)</label>
+                            <input class="mcalc__input" id="cycleLength" type="text" inputmode="numeric"
+                                placeholder="напр.: 28" />
+                            <div class="mcalc__hint">Кількість днів від першого дня однієї менструації до першого дня
+                                наступної. Типово 21-35 днів.</div>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи дані для розрахунку.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/pregnancy/due-date-calculator">Калькулятор дати пологів</a>
+                    <a href="/datetime/age-calculator">Калькулятор віку</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується день овуляції</h2>
+            <p>
+                Овуляція — вихід яйцеклітини з яєчника — зазвичай настає за <b>14 днів до початку
+                    наступної менструації</b>, незалежно від загальної довжини циклу. Це означає, що при
+                28-денному циклі овуляція припадає приблизно на 14-й день циклу, а при 35-денному —
+                приблизно на 21-й день.
+            </p>
+
+            <h2>Що таке фертильне вікно</h2>
+            <p>
+                <b>Фертильне вікно</b> — це період, коли ймовірність зачаття найвища. Воно включає
+                5 днів до овуляції та сам день овуляції, оскільки сперматозоїди можуть жити в
+                організмі жінки до 5 днів, чекаючи на яйцеклітину, тоді як сама яйцеклітина живе
+                лише 12-24 години після виходу.
+            </p>
+
+            <h2>Обмеження методу</h2>
+            <p>
+                Цей розрахунок базується на середньостатистичних даних і найкраще працює при
+                регулярному менструальному циклі. Реальний день овуляції може відрізнятись від
+                розрахованого через стрес, хвороби, зміни ваги чи інші фактори. Для точнішого
+                визначення овуляції можна додатково використовувати:
+            </p>
+            <ul>
+                <li><b>Тести на овуляцію</b> — визначають пік лютеїнізуючого гормону (ЛГ) у сечі.</li>
+                <li><b>Базальну температуру тіла</b> — незначне підвищення після овуляції.</li>
+                <li><b>Цервікальний слиз</b> — змінює консистенцію в фертильні дні.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Цей калькулятор надає орієнтовну оцінку і не є методом контрацепції чи медичною
+                консультацією. Для планування вагітності чи контрацепції звертайся до лікаря.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як розраховується день овуляції?</h3>
+                <p>Овуляція зазвичай настає за 14 днів до початку наступної менструації, незалежно від загальної довжини
+                    циклу.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке фертильне вікно?</h3>
+                <p>Це період приблизно 5-6 днів навколо овуляції (5 днів до і день овуляції), коли ймовірність зачаття
+                    найвища через тривалість життя сперматозоїдів.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи працює цей метод при нерегулярному циклі?</h3>
+                <p>Розрахунок менш точний при нерегулярному циклі. У такому разі рекомендується використовувати тести на
+                    овуляцію або відстежувати базальну температуру тіла.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
