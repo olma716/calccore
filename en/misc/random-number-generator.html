@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Random Number Generator Online | CalcCore</title>
+    <meta name="description"
+        content="Generate random numbers within a specified range. One or multiple results, with or without repeats — for giveaways, games, sampling." />
+
+    <link rel="canonical" href="https://calccore.net/en/misc/random-number-generator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/random-number-generator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/random-number-generator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/random-number-generator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/random-number-generator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/random-number-generator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How random are these numbers?",
+        "acceptedAnswer":{"@type":"Answer","text":"The generator uses the browser's cryptographically secure randomness source (Web Crypto API), which provides high-quality randomness."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I get numbers without repeats?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, enable the 'no repeats' option — then every number in the result set will be unique."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is this generator suitable for lotteries or giveaways?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, for informal giveaways and personal use. Official lotteries with cash prizes use certified systems."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/misc/random-number-generator#app",
+    "name":"Random Number Generator",
+    "description":"Generate random numbers within a range with a uniqueness option.",
+    "url":"https://calccore.net/en/misc/random-number-generator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="crandom">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Random Number Generator</h1>
+                    <p class="mcalc__p">
+                        Choose a range and quantity — get random numbers
+                        instantly.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Settings</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="minValue">From</label>
+                            <input class="mcalc__input" id="minValue" type="text" inputmode="numeric" value="1" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="maxValue">To</label>
+                            <input class="mcalc__input" id="maxValue" type="text" inputmode="numeric" value="100" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="countValue">Count</label>
+                            <input class="mcalc__input" id="countValue" type="text" inputmode="numeric" value="1" />
+                        </div>
+
+                        <div class="mcalc__field" style="display:flex; align-items:flex-end;">
+                            <label class="password-checkbox">
+                                <input type="checkbox" id="uniqueCheck" />
+                                <span>No repeats</span>
+                            </label>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnGenerate"
+                                    type="button">Generate</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="random-results" id="randomResults"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/en/misc/password-generator">Password Generator</a>
+                    <a href="/en/misc/unit-converter">Unit Converter</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How the random number generator works</h2>
+            <p>
+                This tool uses the browser's <b>Web Crypto API</b> — the same mechanism used for
+                cryptographic operations, which provides high-quality randomness, far superior to
+                simple pseudo-random algorithms.
+            </p>
+
+            <h2>The "no repeats" option</h2>
+            <p>
+                When uniqueness is enabled, every generated number in the result set will differ
+                from the others — useful for giveaways where each participant needs a distinct
+                number, or for randomly selecting several unique items from a list.
+            </p>
+
+            <h2>Practical uses</h2>
+            <ul>
+                <li><b>Giveaways and raffles:</b> selecting a winner among participants by number.</li>
+                <li><b>Games and board games:</b> replacing dice or cards for random events.</li>
+                <li><b>Research and statistics:</b> random sampling from a population for surveys.</li>
+                <li><b>Software testing:</b> generating test data to verify functionality.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                For informal use (games, giveaways among friends) this generator works great. For
+                official lotteries with cash prizes, specialized certified systems with independent
+                auditing are used.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How random are these numbers?</h3>
+                <p>The generator uses the browser's cryptographically secure randomness source (Web Crypto API), which
+                    provides high-quality randomness.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I get numbers without repeats?</h3>
+                <p>Yes, enable the "no repeats" option — then every number in the result set will be unique.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Is this generator suitable for lotteries or giveaways?</h3>
+                <p>Yes, for informal giveaways and personal use. Official lotteries with cash prizes use certified
+                    systems.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Генератор випадкових чисел онлайн | CalcCore</title>
+    <meta name="description"
+        content="Згенеруй випадкові числа у вказаному діапазоні. Один чи кілька результатів, з повторами або без — для розіграшів, ігор, вибірки." />
+
+    <link rel="canonical" href="https://calccore.net/misc/random-number-generator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/random-number-generator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/random-number-generator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/random-number-generator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/random-number-generator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/random-number-generator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Наскільки випадкові ці числа?",
+        "acceptedAnswer":{"@type":"Answer","text":"Генератор використовує криптографічно надійне джерело випадковості браузера (Web Crypto API), що забезпечує високу якість випадковості."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна отримати числа без повторів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, увімкни опцію 'без повторів' — тоді кожне число у виборці буде унікальним."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи підходить цей генератор для лотерей чи розіграшів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, для неформальних розіграшів і особистого використання. Для офіційних лотерей з грошовими призами використовуються сертифіковані системи."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/misc/random-number-generator#app",
+    "name":"Random Number Generator",
+    "description":"Генерація випадкових чисел у заданому діапазоні з опцією унікальності.",
+    "url":"https://calccore.net/misc/random-number-generator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="crandom">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Генератор випадкових чисел</h1>
+                    <p class="mcalc__p">
+                        Обери діапазон і кількість — отримай випадкові числа
+                        миттєво.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Налаштування</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="minValue">Від</label>
+                            <input class="mcalc__input" id="minValue" type="text" inputmode="numeric" value="1" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="maxValue">До</label>
+                            <input class="mcalc__input" id="maxValue" type="text" inputmode="numeric" value="100" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="countValue">Кількість чисел</label>
+                            <input class="mcalc__input" id="countValue" type="text" inputmode="numeric" value="1" />
+                        </div>
+
+                        <div class="mcalc__field" style="display:flex; align-items:flex-end;">
+                            <label class="password-checkbox">
+                                <input type="checkbox" id="uniqueCheck" />
+                                <span>Без повторів</span>
+                            </label>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnGenerate"
+                                    type="button">Згенерувати</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="random-results" id="randomResults"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/misc/password-generator">Генератор паролів</a>
+                    <a href="/misc/unit-converter">Конвертер одиниць</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як працює генератор випадкових чисел</h2>
+            <p>
+                Цей інструмент використовує <b>Web Crypto API</b> браузера — той самий механізм,
+                що застосовується для криптографічних операцій, який забезпечує високоякісну
+                випадковість, значно кращу за прості псевдовипадкові алгоритми.
+            </p>
+
+            <h2>Опція "без повторів"</h2>
+            <p>
+                Коли увімкнена опція унікальності, кожне згенероване число у вибірці буде відрізнятись
+                від інших — корисно для розіграшів, де кожен учасник повинен отримати окремий номер,
+                чи для випадкового вибору кількох унікальних елементів зі списку.
+            </p>
+
+            <h2>Практичне застосування</h2>
+            <ul>
+                <li><b>Розіграші та лотереї:</b> вибір переможця серед учасників за номерами.</li>
+                <li><b>Ігри та настільні ігри:</b> заміна кубиків чи карток для випадкових подій.</li>
+                <li><b>Дослідження та статистика:</b> випадкова вибірка з популяції для опитувань.</li>
+                <li><b>Тестування ПЗ:</b> генерація тестових даних для перевірки функціональності.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Для неформального використання (ігри, розіграші серед друзів) цей генератор чудово
+                підходить. Для офіційних лотерей з грошовими призами використовуються спеціальні
+                сертифіковані системи з незалежним аудитом.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Наскільки випадкові ці числа?</h3>
+                <p>Генератор використовує криптографічно надійне джерело випадковості браузера (Web Crypto API), що
+                    забезпечує високу якість випадковості.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна отримати числа без повторів?</h3>
+                <p>Так, увімкни опцію "без повторів" — тоді кожне число у виборці буде унікальним.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи підходить цей генератор для лотерей чи розіграшів?</h3>
+                <p>Так, для неформальних розіграшів і особистого використання. Для офіційних лотерей з грошовими призами
+                    використовуються сертифіковані системи.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
