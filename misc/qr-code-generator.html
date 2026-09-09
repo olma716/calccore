@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Генератор QR-кодів онлайн — безкоштовно | CalcCore</title>
+    <meta name="description"
+        content="Створи QR-код для посилання, тексту, Wi-Fi чи контактів безкоштовно. Завантаж як зображення для друку чи використання онлайн." />
+
+    <link rel="canonical" href="https://calccore.net/misc/qr-code-generator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/qr-code-generator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/qr-code-generator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/qr-code-generator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/qr-code-generator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+    <script src="/js/qr-code-generator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чи безпечно генерувати QR-код онлайн?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, QR-код створюється повністю у твоєму браузері — введені дані нікуди не надсилаються і не зберігаються на сервері."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи закінчується термін дії QR-коду?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ні, сам QR-код не має терміну дії — він завжди буде вести на введену адресу чи показувати введений текст, доки існує сам файл посилання."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна відсканувати QR-код звичайною камерою телефону?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, більшість сучасних смартфонів розпізнають QR-коди прямо через стандартний застосунок камери, без потреби в окремому сканері."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/misc/qr-code-generator#app",
+    "name":"QR Code Generator",
+    "description":"Створення QR-коду для посилань, тексту чи контактів з можливістю завантаження.",
+    "url":"https://calccore.net/misc/qr-code-generator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cqr">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Генератор QR-кодів</h1>
+                    <p class="mcalc__p">
+                        Введи посилання чи текст — отримай готовий QR-код
+                        для друку чи поширення.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дані</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="qrText">Посилання або текст</label>
+                            <input class="mcalc__input" id="qrText" type="text"
+                                placeholder="напр.: https://calccore.net" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="qrSize">Розмір</label>
+                            <select id="qrSize" class="mcalc__select">
+                                <option value="200">Малий (200×200)</option>
+                                <option value="300" selected>Середній (300×300)</option>
+                                <option value="500">Великий (500×500)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="qr-output" id="qrOutput">
+                        <div class="qr-canvas-wrap" id="qrCanvasWrap"></div>
+                        <button class="mcalc__btn mcalc__btn--primary" id="btnDownload" type="button"
+                            style="display:none; margin-top:14px;">
+                            Завантажити QR-код
+                        </button>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/misc/roman-numeral-converter">Римські цифри</a>
+                    <a href="/misc/password-generator">Генератор паролів</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке QR-код</h2>
+            <p>
+                <b>QR-код</b> (Quick Response code) — це двовимірний штрихкод, який зчитується
+                камерою і миттєво декодує вбудовану в нього інформацію: посилання, текст, контактні
+                дані тощо. На відміну від звичайного штрихкоду, QR-код може вмістити значно більше
+                інформації завдяки двовимірній структурі.
+            </p>
+
+            <h2>Практичне застосування QR-кодів</h2>
+            <ul>
+                <li><b>Меню ресторанів:</b> посилання на цифрове меню замість паперового.</li>
+                <li><b>Візитки та реклама:</b> швидкий перехід на сайт чи портфоліо без набору адреси вручну.</li>
+                <li><b>Оплата та платежі:</b> QR-коди для швидких переказів чи оплати рахунків.</li>
+                <li><b>Wi-Fi доступ:</b> QR-код може містити дані для автоматичного підключення до мережі.</li>
+                <li><b>Упаковка товарів:</b> посилання на інструкції, гарантію чи додаткову інформацію про продукт.</li>
+            </ul>
+
+            <h2>Як користуватись цим генератором</h2>
+            <p>
+                Введи посилання чи текст, обери бажаний розмір — QR-код згенерується миттєво.
+                Натисни "Завантажити QR-код", щоб зберегти зображення для друку на візитках,
+                упаковці чи будь-де ще.
+            </p>
+
+            <p class="m-hintSmall">
+                QR-код створюється повністю у твоєму браузері — жодні дані не передаються на наші
+                сервери. Однак пам'ятай: якщо посилання, яке ти кодуєш, згодом видалять чи зміняться,
+                QR-код продовжить вести на стару (можливо, недійсну) адресу.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чи безпечно генерувати QR-код онлайн?</h3>
+                <p>Так, QR-код створюється повністю у твоєму браузері — введені дані нікуди не надсилаються і не
+                    зберігаються на сервері.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи закінчується термін дії QR-коду?</h3>
+                <p>Ні, сам QR-код не має терміну дії — він завжди буде вести на введену адресу чи показувати введений
+                    текст, доки існує сам файл посилання.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна відсканувати QR-код звичайною камерою телефону?</h3>
+                <p>Так, більшість сучасних смартфонів розпізнають QR-коди прямо через стандартний застосунок камери, без
+                    потреби в окремому сканері.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
