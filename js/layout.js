@@ -46,6 +46,41 @@ function initHeaderUI() {
   });
 }
 
+/* ================= SEARCH ICON TOGGLE + REDIRECT ================= */
+
+function initHeaderSearch() {
+  const btn = document.getElementById('searchToggleBtn');
+  const box = document.getElementById('headerSearchBox');
+  const input = document.getElementById('hubSearch');
+
+  if (!btn || !box) return;
+
+  btn.addEventListener('click', () => {
+    const isOpen = box.classList.toggle('is-open');
+    if (isOpen && input) {
+      setTimeout(() => input.focus(), 150);
+    }
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!box.contains(e.target) && !btn.contains(e.target)) {
+      box.classList.remove('is-open');
+    }
+  });
+
+  // On non-home pages (no .hub-card present), redirect search to homepage
+  if (input && !document.querySelector('.hub-card')) {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && input.value.trim()) {
+        const isEn = location.pathname.startsWith('/en/');
+        const target = isEn ? '/en/index' : '/index';
+        window.location.href = `${target}?q=${encodeURIComponent(input.value.trim())}`;
+      }
+    });
+  }
+}
+
 /* ================= LOAD PARTIALS ================= */
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -56,6 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadPartial("#footer", isEn ? "/partials/en/footer.html" : "/partials/footer.html");
 
   initHeaderUI();
+  initHeaderSearch();
 
   // 🔁 правильні лінки перемикача мов
   const ukLink = document.querySelector('.lang-switch a[data-lang="uk"]');
