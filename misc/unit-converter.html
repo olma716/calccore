@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Конвертер одиниць вимірювання онлайн — довжина, вага, об'єм | CalcCore</title>
+    <meta name="description"
+        content="Конвертація одиниць вимірювання: довжина, вага, об'єм, температура, площа, швидкість. Метричні та імперські одиниці." />
+
+    <link rel="canonical" href="https://calccore.net/misc/unit-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/unit-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/unit-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/unit-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/unit-converter.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Яка різниця між метричною та імперською системами?",
+        "acceptedAnswer":{"@type":"Answer","text":"Метрична система (кілометри, кілограми, літри) використовується в більшості країн світу, тоді як імперська (милі, фунти, галони) переважно застосовується в США."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому температура конвертується інакше, ніж інші одиниці?",
+        "acceptedAnswer":{"@type":"Answer","text":"На відміну від довжини чи ваги, шкали температури мають різні нульові точки, тому конвертація вимагає формули з додаванням/відніманням, а не простого множення."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна конвертувати між будь-якими двома одиницями напряму?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, обери потрібну категорію, введи значення в одній одиниці — і одразу побачиш результат в усіх інших одиницях цієї категорії."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/misc/unit-converter#app",
+    "name":"Unit Converter",
+    "description":"Конвертація одиниць вимірювання: довжина, вага, об'єм, температура, площа, швидкість.",
+    "url":"https://calccore.net/misc/unit-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cunit">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Конвертер одиниць вимірювання</h1>
+                    <p class="mcalc__p">
+                        Довжина, вага, об'єм, температура, площа, швидкість — обери
+                        категорію та конвертуй миттєво.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Обери категорію та значення</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="category">Категорія</label>
+                            <select id="category" class="mcalc__select">
+                                <option value="length" selected>Довжина</option>
+                                <option value="weight">Вага</option>
+                                <option value="volume">Об'єм</option>
+                                <option value="temperature">Температура</option>
+                                <option value="area">Площа</option>
+                                <option value="speed">Швидкість</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="inputValue">Значення</label>
+                            <input class="mcalc__input" id="inputValue" type="text" inputmode="decimal"
+                                placeholder="напр.: 1" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="inputUnit">Одиниця</label>
+                            <select id="inputUnit" class="mcalc__select"></select>
+                        </div>
+                    </div>
+
+                    <div class="unit-results" id="unitResults"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/calculator">Науковий калькулятор</a>
+                    <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен конвертер одиниць</h2>
+            <p>
+                У щоденному житті часто доводиться переводити значення з однієї системи вимірювання
+                в іншу — читаючи рецепт з іноземного сайту, дивлячись специфікації товару, чи
+                працюючи з міжнародними документами. Цей конвертер миттєво показує значення в усіх
+                поширених одиницях обраної категорії.
+            </p>
+
+            <h2>Метрична vs імперська система</h2>
+            <p>
+                <b>Метрична система</b> (кілометри, кілограми, літри, градуси Цельсія) — офіційний
+                стандарт у переважній більшості країн світу. <b>Імперська система</b> (милі, фунти,
+                галони, градуси Фаренгейта) залишається основною в США, а деякі її елементи
+                (наприклад, милі) використовуються у Великій Британії.
+            </p>
+
+            <h2>Категорії конвертації</h2>
+            <ul>
+                <li><b>Довжина:</b> метри, кілометри, сантиметри, милі, фути, дюйми, ярди.</li>
+                <li><b>Вага:</b> кілограми, грами, фунти, унції, тонни.</li>
+                <li><b>Об'єм:</b> літри, мілілітри, галони, кварти, пінти, чашки.</li>
+                <li><b>Температура:</b> Цельсій, Фаренгейт, Кельвін.</li>
+                <li><b>Площа:</b> квадратні метри, квадратні кілометри, гектари, акри, квадратні фути.</li>
+                <li><b>Швидкість:</b> км/год, миль/год, м/с, вузли.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Значення конвертації базуються на стандартних міжнародних коефіцієнтах і мають
+                високу точність для практичного використання.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Яка різниця між метричною та імперською системами?</h3>
+                <p>Метрична система (кілометри, кілограми, літри) використовується в більшості країн світу, тоді як
+                    імперська (милі, фунти, галони) переважно застосовується в США.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому температура конвертується інакше, ніж інші одиниці?</h3>
+                <p>На відміну від довжини чи ваги, шкали температури мають різні нульові точки, тому конвертація вимагає
+                    формули з додаванням/відніманням, а не простого множення.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна конвертувати між будь-якими двома одиницями напряму?</h3>
+                <p>Так, обери потрібну категорію, введи значення в одній одиниці — і одразу побачиш результат в усіх
+                    інших одиницях цієї категорії.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
