@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Recipe Scaler Online — Increase or Decrease Servings | CalcCore</title>
+    <meta name="description"
+        content="Automatically recalculate recipe ingredient amounts for any number of servings. Enter ingredients once — the calculator does all the math." />
+
+    <link rel="canonical" href="https://calccore.net/en/kitchen/recipe-scaler" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/recipe-scaler" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/kitchen/recipe-scaler" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/kitchen/recipe-scaler" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/recipe-scaler.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/recipe-scaler.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do I use the recipe scaler?",
+        "acceptedAnswer":{"@type":"Answer","text":"Enter each ingredient with its amount on a separate line, specify the original and desired number of servings — the calculator will automatically scale all amounts proportionally."}
+      },
+      {
+        "@type":"Question",
+        "name":"Do all ingredients scale the same way?",
+        "acceptedAnswer":{"@type":"Answer","text":"The calculator scales all amounts proportionally, but note: spices, salt, leavening agents, and cooking time don't always scale linearly — adjust them to taste."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I enter fractional numbers?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, you can enter both whole numbers and decimals (e.g., 1.5 cups)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/kitchen/recipe-scaler#app",
+    "name":"Recipe Scaler",
+    "description":"Automatically recalculate recipe ingredient amounts for any number of servings.",
+    "url":"https://calccore.net/en/kitchen/recipe-scaler",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cscaler">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Recipe Scaler</h1>
+                    <p class="mcalc__p">
+                        Enter your recipe's ingredients — and instantly recalculate the amounts
+                        for any number of servings.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter your recipe</h2>
+                            <span class="mcalc__badge">Kitchen</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="originalServings">Original servings</label>
+                                <input class="mcalc__input" id="originalServings" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="targetServings">Desired servings</label>
+                                <input class="mcalc__input" id="targetServings" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 6" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="ingredientsInput">Ingredients (one per line)</label>
+                                <textarea class="mcalc__input" id="ingredientsInput" rows="8"
+                                    style="height:auto; padding:10px 12px; font-family:inherit;"
+                                    placeholder="e.g.:&#10;2 cups flour&#10;1 cup sugar&#10;3 eggs&#10;100 g butter"></textarea>
+                                <div class="mcalc__hint">Format: number + unit/name (e.g. "2 cups flour", "3 eggs").
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button">Scale
+                                        recipe</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Scaled recipe</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter a recipe on the left.</div>
+                        <div class="recipe-output" id="recipeOutput"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/kitchen/measurement-converter">Cooking Measurement Converter</a>
+                            <a href="/en/education/percent-calculator">Percentage Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why you need a recipe scaler</h2>
+            <p>
+                Recipes are often written for a specific number of servings that may not match your
+                situation — for example, a recipe for 4 people when you have 8 guests, or the opposite —
+                you need to cook less for one person. Manually recalculating every ingredient takes time
+                and is easy to get wrong.
+            </p>
+
+            <h2>How the scaling works</h2>
+            <p>
+                The calculator computes a scaling factor as the ratio of desired servings to original
+                servings (for example, 6 servings instead of 4 = a 1.5x factor), then multiplies each
+                ingredient amount by that factor.
+            </p>
+
+            <h2>What you should still adjust manually</h2>
+            <ul>
+                <li><b>Spices and seasonings:</b> when significantly scaling up a recipe, it's better to add spices
+                    gradually and taste rather than scale them exactly proportionally.</li>
+                <li><b>Leavening agents (baking soda/powder):</b> in large quantities they can add a bitter taste — it's
+                    recommended to slightly reduce the proportion when significantly scaling up.</li>
+                <li><b>Cooking/baking time:</b> doesn't scale linearly! Doubling a recipe doesn't mean doubling the oven
+                    time — a larger pan or more food requires separate doneness checks.</li>
+                <li><b>Baking pan size:</b> when changing the number of servings, you'll likely need to change the pan
+                    size too.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                For best results, write ingredients in the format "amount + unit + name" (e.g. "2 cups
+                flour") so the calculator can correctly detect the number to scale.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How do I use the recipe scaler?</h3>
+                <p>Enter each ingredient with its amount on a separate line, specify the original and desired number of
+                    servings — the calculator will automatically scale all amounts proportionally.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Do all ingredients scale the same way?</h3>
+                <p>The calculator scales all amounts proportionally, but note: spices, salt, leavening agents, and
+                    cooking time don't always scale linearly — adjust them to taste.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I enter fractional numbers?</h3>
+                <p>Yes, you can enter both whole numbers and decimals (e.g., 1.5 cups).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

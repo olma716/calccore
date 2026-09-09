@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Перерахунок порцій рецепта онлайн — збільшити чи зменшити | CalcCore</title>
+    <meta name="description"
+        content="Автоматично перерахуй кількість інгредієнтів рецепта для будь-якої кількості порцій. Введи інгредієнти один раз — калькулятор зробить всю математику." />
+
+    <link rel="canonical" href="https://calccore.net/kitchen/recipe-scaler" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/recipe-scaler" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/kitchen/recipe-scaler" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/kitchen/recipe-scaler" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/recipe-scaler.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/recipe-scaler.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як користуватись перерахунком порцій?",
+        "acceptedAnswer":{"@type":"Answer","text":"Введи кожен інгредієнт з кількістю на окремому рядку, вкажи початкову і бажану кількість порцій — калькулятор автоматично перерахує всі кількості пропорційно."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи всі інгредієнти масштабуються однаково?",
+        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор масштабує всі кількості пропорційно, але зверни увагу: спеції, сіль, розпушувач і час випікання не завжди масштабуються лінійно — їх варто коригувати за смаком."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна ввести дробові числа?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, можна вводити як цілі числа, так і десяткові дроби (наприклад, 1.5 склянки)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/kitchen/recipe-scaler#app",
+    "name":"Recipe Scaler",
+    "description":"Автоматичний перерахунок кількості інгредієнтів рецепта для будь-якої кількості порцій.",
+    "url":"https://calccore.net/kitchen/recipe-scaler",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cscaler">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Перерахунок порцій рецепта</h1>
+                    <p class="mcalc__p">
+                        Введи інгредієнти свого рецепта — і миттєво перерахуй кількість
+                        для будь-якої кількості порцій.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи рецепт</h2>
+                            <span class="mcalc__badge">Kitchen</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="originalServings">Оригінальна кількість порцій</label>
+                                <input class="mcalc__input" id="originalServings" type="text" inputmode="numeric"
+                                    placeholder="напр.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="targetServings">Бажана кількість порцій</label>
+                                <input class="mcalc__input" id="targetServings" type="text" inputmode="numeric"
+                                    placeholder="напр.: 6" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="ingredientsInput">Інгредієнти (один на рядок)</label>
+                                <textarea class="mcalc__input" id="ingredientsInput" rows="8"
+                                    style="height:auto; padding:10px 12px; font-family:inherit;"
+                                    placeholder="напр.:&#10;2 склянки борошна&#10;1 склянка цукру&#10;3 яйця&#10;100 г масла"></textarea>
+                                <div class="mcalc__hint">Формат: число + одиниця/назва (напр. "2 склянки борошна", "3
+                                    яйця").</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Перерахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Перерахований рецепт</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи рецепт зліва.</div>
+                        <div class="recipe-output" id="recipeOutput"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/kitchen/measurement-converter">Конвертер кулінарних мір</a>
+                            <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен перерахунок порцій</h2>
+            <p>
+                Рецепти часто розраховані на конкретну кількість порцій, яка може не збігатись з
+                твоєю ситуацією — наприклад, рецепт на 4 особи, а гостей буде 8, або навпаки —
+                потрібно приготувати менше для однієї людини. Ручний перерахунок кожного інгредієнта
+                займає час і легко призводить до помилок.
+            </p>
+
+            <h2>Як працює перерахунок</h2>
+            <p>
+                Калькулятор обчислює коефіцієнт масштабування як відношення бажаної кількості порцій
+                до оригінальної (наприклад, 6 порцій замість 4 = коефіцієнт 1.5), а потім множить
+                кожну кількість інгредієнта на цей коефіцієнт.
+            </p>
+
+            <h2>Що варто коригувати вручну</h2>
+            <ul>
+                <li><b>Спеції та приправи:</b> при значному збільшенні рецепта спеції краще додавати поступово й
+                    куштувати, а не масштабувати прямо пропорційно.</li>
+                <li><b>Розпушувач і сода:</b> у великих кількостях можуть надавати гіркуватий присмак — рекомендується
+                    трохи зменшувати пропорцію при значному збільшенні рецепта.</li>
+                <li><b>Час випікання/готування:</b> не масштабується лінійно! Подвоєння рецепта не означає подвоєння
+                    часу в духовці — форма більшого розміру чи більше страв потребують окремого контролю готовності.
+                </li>
+                <li><b>Розмір форми для випічки:</b> при зміні кількості порцій, ймовірно, доведеться змінити і розмір
+                    форми.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Для найкращого результату записуй інгредієнти у форматі "кількість + одиниця + назва"
+                (наприклад "2 склянки борошна"), щоб калькулятор міг правильно розпізнати число для
+                перерахунку.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як користуватись перерахунком порцій?</h3>
+                <p>Введи кожен інгредієнт з кількістю на окремому рядку, вкажи початкову і бажану кількість порцій —
+                    калькулятор автоматично перерахує всі кількості пропорційно.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи всі інгредієнти масштабуються однаково?</h3>
+                <p>Калькулятор масштабує всі кількості пропорційно, але зверни увагу: спеції, сіль, розпушувач і час
+                    випікання не завжди масштабуються лінійно — їх варто коригувати за смаком.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна ввести дробові числа?</h3>
+                <p>Так, можна вводити як цілі числа, так і десяткові дроби (наприклад, 1.5 склянки).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
