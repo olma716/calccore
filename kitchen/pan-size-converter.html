@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Конвертер розміру форми для випічки онлайн | CalcCore</title>
+    <meta name="description"
+        content="Розрахуй, як змінити рецепт при заміні розміру чи форми для випічки — кругла, квадратна, прямокутна. Коефіцієнт масштабування за площею." />
+
+    <link rel="canonical" href="https://calccore.net/kitchen/pan-size-converter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/pan-size-converter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/kitchen/pan-size-converter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/kitchen/pan-size-converter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/pan-size-converter.js?v=20260908" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як розрахувати площу круглої форми?",
+        "acceptedAnswer":{"@type":"Answer","text":"Площа кола = π × радіус². Радіус — це половина діаметра форми."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи потрібно змінювати час випікання при зміні форми?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, зазвичай так. Менша й глибша форма потребує довшого часу випікання, а більша й дрібніша — коротшого. Перевіряй готовність за зубочисткою, а не лише за таймером."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна використовувати квадратну форму замість круглої?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, якщо площа приблизно однакова. Наприклад, кругла форма 23 см (діаметр) має площу близько 415 см², що приблизно відповідає квадратній формі 20×20 см."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/kitchen/pan-size-converter#app",
+    "name":"Pan Size Converter",
+    "description":"Розрахунок коефіцієнта масштабування рецепта при заміні форми для випічки.",
+    "url":"https://calccore.net/kitchen/pan-size-converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cpan">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Конвертер розміру форми для випічки</h1>
+                    <p class="mcalc__p">
+                        Дізнайся коефіцієнт масштабування рецепта при заміні форми —
+                        круглої, квадратної чи прямокутної.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Оригінальна форма</h2>
+                            <span class="mcalc__badge">Kitchen</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="origShape">Форма</label>
+                                <select id="origShape" class="mcalc__select">
+                                    <option value="round" selected>Кругла</option>
+                                    <option value="square">Квадратна</option>
+                                    <option value="rect">Прямокутна</option>
+                                </select>
+                            </div>
+                            <div class="mcalc__field" id="origDiameterWrap">
+                                <label class="mcalc__label" for="origDiameter">Діаметр (см)</label>
+                                <input class="mcalc__input" id="origDiameter" type="text" inputmode="decimal"
+                                    placeholder="напр.: 23" />
+                            </div>
+                            <div class="mcalc__field" id="origSideWrap" style="display:none;">
+                                <label class="mcalc__label" for="origSide">Сторона (см)</label>
+                                <input class="mcalc__input" id="origSide" type="text" inputmode="decimal"
+                                    placeholder="напр.: 20" />
+                            </div>
+                            <div class="mcalc__field" id="origLenWrap" style="display:none;">
+                                <label class="mcalc__label" for="origLen">Довжина (см)</label>
+                                <input class="mcalc__input" id="origLen" type="text" inputmode="decimal"
+                                    placeholder="напр.: 30" />
+                            </div>
+                            <div class="mcalc__field" id="origWidWrap" style="display:none;">
+                                <label class="mcalc__label" for="origWid">Ширина (см)</label>
+                                <input class="mcalc__input" id="origWid" type="text" inputmode="decimal"
+                                    placeholder="напр.: 20" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Нова форма</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="newShape">Форма</label>
+                                <select id="newShape" class="mcalc__select">
+                                    <option value="round">Кругла</option>
+                                    <option value="square" selected>Квадратна</option>
+                                    <option value="rect">Прямокутна</option>
+                                </select>
+                            </div>
+                            <div class="mcalc__field" id="newDiameterWrap" style="display:none;">
+                                <label class="mcalc__label" for="newDiameter">Діаметр (см)</label>
+                                <input class="mcalc__input" id="newDiameter" type="text" inputmode="decimal"
+                                    placeholder="напр.: 20" />
+                            </div>
+                            <div class="mcalc__field" id="newSideWrap">
+                                <label class="mcalc__label" for="newSide">Сторона (см)</label>
+                                <input class="mcalc__input" id="newSide" type="text" inputmode="decimal"
+                                    placeholder="напр.: 20" />
+                            </div>
+                            <div class="mcalc__field" id="newLenWrap" style="display:none;">
+                                <label class="mcalc__label" for="newLen">Довжина (см)</label>
+                                <input class="mcalc__input" id="newLen" type="text" inputmode="decimal"
+                                    placeholder="напр.: 25" />
+                            </div>
+                            <div class="mcalc__field" id="newWidWrap" style="display:none;">
+                                <label class="mcalc__label" for="newWid">Ширина (см)</label>
+                                <input class="mcalc__input" id="newWid" type="text" inputmode="decimal"
+                                    placeholder="напр.: 20" />
+                            </div>
+                        </div>
+
+                        <div class="mcalc__actions m-mt10">
+                            <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                type="button">Розрахувати</button>
+                            <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        </div>
+                        <div class="mcalc__toast" id="mToast"></div>
+
+                        <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи дані обох форм.</div>
+                        <div class="m-details" id="mDetails"></div>
+                    </div>
+
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/kitchen/recipe-scaler">Перерахунок порцій рецепта</a>
+                    <a href="/kitchen/oven-temperature-converter">Температура духовки</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен конвертер розміру форми</h2>
+            <p>
+                Якщо в тебе немає точно такої форми для випічки, яку вказано в рецепті, потрібно
+                перерахувати кількість тіста чи начинки пропорційно до площі форми, а не просто
+                покласти те саме тісто в іншу форму — інакше пиріг вийде занадто тонким чи товстим.
+            </p>
+
+            <h2>Як рахується коефіцієнт масштабування</h2>
+            <p>
+                Калькулятор обчислює площу обох форм і знаходить співвідношення між ними. Наприклад,
+                якщо нова форма має вдвічі більшу площу за оригінальну, тобі знадобиться вдвічі
+                більше тіста (коефіцієнт 2.0).
+            </p>
+            <ul>
+                <li><b>Кругла форма:</b> Площа = π × (діаметр/2)²</li>
+                <li><b>Квадратна форма:</b> Площа = сторона²</li>
+                <li><b>Прямокутна форма:</b> Площа = довжина × ширина</li>
+            </ul>
+
+            <h2>Що робити з часом випікання при зміні форми</h2>
+            <p>
+                Час випікання <b>не масштабується лінійно</b> разом з кількістю тіста. Загальні
+                орієнтири:
+            </p>
+            <ul>
+                <li><b>Менша й глибша форма:</b> тісто товще → потрібно довше часу, можливо, при трохи нижчій
+                    температурі, щоб середина встигла пропектись без пригорання країв.</li>
+                <li><b>Більша й дрібніша форма:</b> тісто тонше → час скорочується, температуру можна злегка підвищити.
+                </li>
+            </ul>
+            <p>
+                Завжди перевіряй готовність за допомогою зубочистки чи шпажки, а не покладайся лише
+                на вказаний у рецепті час — він розрахований для конкретного розміру форми.
+            </p>
+
+            <p class="m-hintSmall">
+                Розрахунок базується на площі форми і є хорошим орієнтиром для більшості випадків
+                (торти, пироги, брауні). Для дуже глибоких форм (наприклад, бундт-форми) також варто
+                враховувати об'єм, а не лише площу основи.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як розрахувати площу круглої форми?</h3>
+                <p>Площа кола = π × радіус². Радіус — це половина діаметра форми.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи потрібно змінювати час випікання при зміні форми?</h3>
+                <p>Так, зазвичай так. Менша й глибша форма потребує довшого часу випікання, а більша й дрібніша —
+                    коротшого. Перевіряй готовність за зубочисткою, а не лише за таймером.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна використовувати квадратну форму замість круглої?</h3>
+                <p>Так, якщо площа приблизно однакова. Наприклад, кругла форма 23 см (діаметр) має площу близько 415
+                    см², що приблизно відповідає квадратній формі 20×20 см.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
