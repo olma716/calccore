@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Pregnancy Weight Gain Calculator Online | CalcCore</title>
+    <meta name="description"
+        content="Calculate recommended pregnancy weight gain based on pre-pregnancy BMI and current week. Guidelines based on IOM/ACOG standards." />
+
+    <link rel="canonical" href="https://calccore.net/en/pregnancy/weight-gain-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/pregnancy/weight-gain-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/pregnancy/weight-gain-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/pregnancy/weight-gain-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/weight-gain-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why does recommended weight gain depend on pre-pregnancy BMI?",
+        "acceptedAnswer":{"@type":"Answer","text":"Women who were underweight before pregnancy are recommended to gain more, while overweight or obese women are recommended to gain less, to minimize risks for both mother and baby."}
+      },
+      {
+        "@type":"Question",
+        "name":"What if I'm gaining weight faster or slower than recommended?",
+        "acceptedAnswer":{"@type":"Answer","text":"Minor deviations are normal. Significant differences from the recommended pace should be discussed with your doctor at a scheduled checkup."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is weight gain evenly distributed throughout pregnancy?",
+        "acceptedAnswer":{"@type":"Answer","text":"No, gain in the first trimester is usually minimal (0.5-2 kg for the whole trimester), while the pace accelerates in the second and third trimesters."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/pregnancy/weight-gain-calculator#app",
+    "name":"Pregnancy Weight Gain Calculator",
+    "description":"Calculate recommended pregnancy weight gain based on pre-pregnancy BMI.",
+    "url":"https://calccore.net/en/pregnancy/weight-gain-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cweightgain">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Pregnancy Weight Gain Calculator</h1>
+                    <p class="mcalc__p">
+                        Find your recommended weight gain range based on pre-pregnancy
+                        BMI and current week.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Pregnancy</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="height">Height (cm)</label>
+                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 165" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="prePregWeight">Pre-pregnancy weight (kg)</label>
+                                <input class="mcalc__input" id="prePregWeight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 60" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="currentWeight">Current weight (kg)</label>
+                                <input class="mcalc__input" id="currentWeight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 68" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="currentWeek">Current pregnancy week</label>
+                                <input class="mcalc__input" id="currentWeek" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 20" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="multiple">Number of babies</label>
+                                <select id="multiple" class="mcalc__select">
+                                    <option value="1" selected>Singleton pregnancy</option>
+                                    <option value="2">Twins</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="bmi-scale" id="wgScale" style="display:none;">
+                            <div class="bmi-scale__track">
+                                <div class="bmi-scale__segment bmi-scale__segment--under"></div>
+                                <div class="bmi-scale__segment bmi-scale__segment--normal"></div>
+                                <div class="bmi-scale__segment bmi-scale__segment--over"></div>
+                                <div class="bmi-scale__segment bmi-scale__segment--obese"></div>
+                                <div class="bmi-scale__marker" id="wgMarker"></div>
+                            </div>
+                            <div class="bmi-scale__labels" id="wgScaleLabels">
+                                <span>0</span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/pregnancy/pregnancy-week-calculator">Pregnancy Week</a>
+                            <a href="/en/sport/bmi-calculator">BMI Calculator</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How much weight is normal to gain during pregnancy</h2>
+            <p>
+                Recommended weight gain depends on <b>pre-pregnancy body mass index (BMI)</b>.
+                General guidelines (based on US Institute of Medicine, IOM, standards):
+            </p>
+            <ul>
+                <li><b>Underweight (BMI &lt; 18.5):</b> 12.5-18 kg (28-40 lb)</li>
+                <li><b>Normal weight (BMI 18.5-24.9):</b> 11.5-16 kg (25-35 lb)</li>
+                <li><b>Overweight (BMI 25-29.9):</b> 7-11.5 kg (15-25 lb)</li>
+                <li><b>Obese (BMI ≥30):</b> 5-9 kg (11-20 lb)</li>
+            </ul>
+            <p>
+                For twin pregnancies, the recommended range is higher and depends on the same BMI
+                category.
+            </p>
+
+            <h2>How weight gain is distributed across trimesters</h2>
+            <ul>
+                <li><b>First trimester:</b> usually minimal gain, 0.5-2 kg for the whole trimester.</li>
+                <li><b>Second and third trimesters:</b> pace accelerates, roughly 0.3-0.5 kg per week for women with
+                    normal BMI.</li>
+            </ul>
+
+            <h2>Why excess or insufficient weight gain matters</h2>
+            <p>
+                Too little weight gain is associated with a risk of low birth weight and preterm
+                birth. Excessive gain increases the risk of gestational diabetes, preeclampsia,
+                delivery complications, and longer postpartum recovery.
+            </p>
+
+            <p class="m-hintSmall">
+                These guidelines are general reference points. Individual needs depend on health
+                status, multiple pregnancy, and other factors — always consult the doctor managing
+                your pregnancy.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why does recommended weight gain depend on pre-pregnancy BMI?</h3>
+                <p>Women who were underweight before pregnancy are recommended to gain more, while overweight or obese
+                    women are recommended to gain less, to minimize risks for both mother and baby.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What if I'm gaining weight faster or slower than recommended?</h3>
+                <p>Minor deviations are normal. Significant differences from the recommended pace should be discussed
+                    with your doctor at a scheduled checkup.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Is weight gain evenly distributed throughout pregnancy?</h3>
+                <p>No, gain in the first trimester is usually minimal (0.5-2 kg for the whole trimester), while the pace
+                    accelerates in the second and third trimesters.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
