@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Pregnancy Due Date Calculator Online — LMP Method | CalcCore</title>
+    <meta name="description"
+        content="Calculate your estimated due date based on last menstrual period, conception date, or ultrasound. Current pregnancy week and trimester." />
+
+    <link rel="canonical" href="https://calccore.net/en/pregnancy/due-date-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/pregnancy/due-date-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/pregnancy/due-date-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/pregnancy/due-date-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/due-date-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How is the due date calculated?",
+        "acceptedAnswer":{"@type":"Answer","text":"The most common method (Naegele's rule) adds 280 days (40 weeks) to the first day of the last menstrual period."}
+      },
+      {
+        "@type":"Question",
+        "name":"How accurate is this date?",
+        "acceptedAnswer":{"@type":"Answer","text":"This is an estimated date — only 4-5% of babies are born exactly on the calculated day. Most births occur within 2 weeks before or after this date."}
+      },
+      {
+        "@type":"Question",
+        "name":"What if my cycle is irregular?",
+        "acceptedAnswer":{"@type":"Answer","text":"With an irregular cycle, the LMP-based calculation may be inaccurate. In this case, a doctor typically relies on the first ultrasound, which more accurately determines gestational age."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/pregnancy/due-date-calculator#app",
+    "name":"Pregnancy Due Date Calculator",
+    "description":"Calculate estimated due date, current pregnancy week, and trimester.",
+    "url":"https://calccore.net/en/pregnancy/due-date-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdue">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Pregnancy Due Date Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate your estimated due date, current pregnancy week, and
+                        trimester using different methods.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Enter inputs</h2>
+                        <span class="mcalc__badge">Pregnancy</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="method">Calculation method</label>
+                            <select id="method" class="mcalc__select">
+                                <option value="lmp" selected>Last menstrual period (LMP)</option>
+                                <option value="conception">Conception date</option>
+                                <option value="ultrasound">Ultrasound dating</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field m-full" id="lmpWrap">
+                            <label class="mcalc__label" for="lmpDate">First day of last period</label>
+                            <input class="mcalc__input" id="lmpDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full" id="conceptionWrap" style="display:none;">
+                            <label class="mcalc__label" for="conceptionDate">Conception date</label>
+                            <input class="mcalc__input" id="conceptionDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field" id="usDateWrap" style="display:none;">
+                            <label class="mcalc__label" for="usDate">Ultrasound date</label>
+                            <input class="mcalc__input" id="usDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field" id="usWeeksWrap" style="display:none;">
+                            <label class="mcalc__label" for="usWeeks">Gestational age at scan (weeks)</label>
+                            <input class="mcalc__input" id="usWeeks" type="text" inputmode="numeric"
+                                placeholder="e.g.: 12" />
+                        </div>
+
+                        <div class="mcalc__field" id="usDaysWrap" style="display:none;">
+                            <label class="mcalc__label" for="usDays">+ days</label>
+                            <input class="mcalc__input" id="usDays" type="text" inputmode="numeric"
+                                placeholder="e.g.: 3" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Calculate</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter inputs to calculate.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/en/datetime/age-calculator">Age Calculator</a>
+                    <a href="/en/datetime/date-difference-calculator">Date Difference Calculator</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How the due date is calculated</h2>
+            <p>
+                The most common method — <b>Naegele's rule</b> — adds 280 days (40 weeks) to the
+                first day of the last menstrual period. This is based on the assumption of a standard
+                28-day menstrual cycle with ovulation on day 14.
+            </p>
+
+            <h2>Three calculation methods</h2>
+            <ul>
+                <li><b>Last menstrual period (LMP):</b> the most common method, used early in pregnancy when the exact
+                    conception date is unknown.</li>
+                <li><b>Conception date:</b> if the exact conception date is known (e.g., with IVF), 266 days (38 weeks)
+                    are added.</li>
+                <li><b>Ultrasound dating:</b> the most accurate method in early pregnancy, since it's based on the
+                    actual size of the fetus rather than cycle assumptions.</li>
+            </ul>
+
+            <h2>Pregnancy trimesters</h2>
+            <ul>
+                <li><b>First trimester:</b> weeks 1-13</li>
+                <li><b>Second trimester:</b> weeks 14-27</li>
+                <li><b>Third trimester:</b> weeks 28-40+</li>
+            </ul>
+
+            <h2>Why the date is only an estimate</h2>
+            <p>
+                Statistically, only 4-5% of babies are born exactly on the calculated day. Most births
+                occur between 37 and 42 weeks of pregnancy, so the calculated date is more of a
+                midpoint of the expected range than a precise prediction.
+            </p>
+
+            <p class="m-hintSmall">
+                This calculator provides an estimate and doesn't replace medical consultation. For
+                accurate determination of gestational age and due date, consult an OB/GYN.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How is the due date calculated?</h3>
+                <p>The most common method (Naegele's rule) adds 280 days (40 weeks) to the first day of the last
+                    menstrual period.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How accurate is this date?</h3>
+                <p>This is an estimated date — only 4-5% of babies are born exactly on the calculated day. Most births
+                    occur within 2 weeks before or after this date.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What if my cycle is irregular?</h3>
+                <p>With an irregular cycle, the LMP-based calculation may be inaccurate. In this case, a doctor
+                    typically relies on the first ultrasound, which more accurately determines gestational age.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

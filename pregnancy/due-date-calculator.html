@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор дати пологів онлайн — розрахунок за ПДМ | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок орієнтовної дати пологів за останньою менструацією, датою зачаття або терміном УЗД. Поточний тиждень вагітності та триместр." />
+
+    <link rel="canonical" href="https://calccore.net/pregnancy/due-date-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/pregnancy/due-date-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/pregnancy/due-date-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/pregnancy/due-date-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/due-date-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як розраховується дата пологів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Найпоширеніший метод (правило Негеле) додає 280 днів (40 тижнів) до першого дня останньої менструації."}
+      },
+      {
+        "@type":"Question",
+        "name":"Наскільки точна ця дата?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це орієнтовна дата — лише 4-5% дітей народжуються точно у розрахований день. Більшість пологів відбувається в межах 2 тижнів до або після цієї дати."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що робити, якщо цикл нерегулярний?",
+        "acceptedAnswer":{"@type":"Answer","text":"При нерегулярному циклі розрахунок за останньою менструацією може бути неточним. У такому разі лікар зазвичай орієнтується на дані першого УЗД, яке точніше визначає термін."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/pregnancy/due-date-calculator#app",
+    "name":"Pregnancy Due Date Calculator",
+    "description":"Розрахунок орієнтовної дати пологів, поточного тижня вагітності та триместру.",
+    "url":"https://calccore.net/pregnancy/due-date-calculator",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdue">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор дати пологів</h1>
+                    <p class="mcalc__p">
+                        Розрахуй орієнтовну дату пологів, поточний тиждень вагітності
+                        та триместр за різними методами.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дані</h2>
+                        <span class="mcalc__badge">Pregnancy</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="method">Метод розрахунку</label>
+                            <select id="method" class="mcalc__select">
+                                <option value="lmp" selected>За останньою менструацією (ПДМ)</option>
+                                <option value="conception">За датою зачаття</option>
+                                <option value="ultrasound">За терміном УЗД</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field m-full" id="lmpWrap">
+                            <label class="mcalc__label" for="lmpDate">Перший день останньої менструації</label>
+                            <input class="mcalc__input" id="lmpDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field m-full" id="conceptionWrap" style="display:none;">
+                            <label class="mcalc__label" for="conceptionDate">Дата зачаття</label>
+                            <input class="mcalc__input" id="conceptionDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field" id="usDateWrap" style="display:none;">
+                            <label class="mcalc__label" for="usDate">Дата УЗД</label>
+                            <input class="mcalc__input" id="usDate" type="date" />
+                        </div>
+
+                        <div class="mcalc__field" id="usWeeksWrap" style="display:none;">
+                            <label class="mcalc__label" for="usWeeks">Термін на УЗД (тижнів)</label>
+                            <input class="mcalc__input" id="usWeeks" type="text" inputmode="numeric"
+                                placeholder="напр.: 12" />
+                        </div>
+
+                        <div class="mcalc__field" id="usDaysWrap" style="display:none;">
+                            <label class="mcalc__label" for="usDays">+ днів</label>
+                            <input class="mcalc__input" id="usDays" type="text" inputmode="numeric"
+                                placeholder="напр.: 3" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи дані для розрахунку.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/datetime/age-calculator">Калькулятор віку</a>
+                    <a href="/datetime/date-difference-calculator">Різниця між датами</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується дата пологів</h2>
+            <p>
+                Найпоширеніший метод — <b>правило Негеле</b>: до першого дня останньої менструації
+                додається 280 днів (40 тижнів). Це базується на припущенні стандартного 28-денного
+                менструального циклу з овуляцією на 14 день.
+            </p>
+
+            <h2>Три способи розрахунку</h2>
+            <ul>
+                <li><b>За останньою менструацією (ПДМ):</b> найпоширеніший метод, використовується на ранніх термінах,
+                    коли точна дата зачаття невідома.</li>
+                <li><b>За датою зачаття:</b> якщо точно відома дата зачаття (наприклад, при ЕКЗ), додається 266 днів (38
+                    тижнів).</li>
+                <li><b>За терміном УЗД:</b> найточніший метод на ранніх термінах вагітності, оскільки базується на
+                    реальному розмірі плода, а не на припущеннях про цикл.</li>
+            </ul>
+
+            <h2>Триместри вагітності</h2>
+            <ul>
+                <li><b>Перший триместр:</b> 1-13 тиждень</li>
+                <li><b>Другий триместр:</b> 14-27 тиждень</li>
+                <li><b>Третій триместр:</b> 28-40+ тиждень</li>
+            </ul>
+
+            <h2>Чому дата є лише орієнтиром</h2>
+            <p>
+                Статистично лише 4-5% дітей народжуються точно в розрахований день. Більшість пологів
+                відбувається в діапазоні від 37 до 42 тижнів вагітності, тому розрахована дата — це
+                скоріше середина очікуваного періоду, а не точний прогноз.
+            </p>
+
+            <p class="m-hintSmall">
+                Цей калькулятор надає орієнтовну оцінку і не замінює медичну консультацію. Для точного
+                визначення терміну вагітності та дати пологів звертайся до лікаря-гінеколога.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як розраховується дата пологів?</h3>
+                <p>Найпоширеніший метод (правило Негеле) додає 280 днів (40 тижнів) до першого дня останньої
+                    менструації.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Наскільки точна ця дата?</h3>
+                <p>Це орієнтовна дата — лише 4-5% дітей народжуються точно у розрахований день. Більшість пологів
+                    відбувається в межах 2 тижнів до або після цієї дати.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що робити, якщо цикл нерегулярний?</h3>
+                <p>При нерегулярному циклі розрахунок за останньою менструацією може бути неточним. У такому разі лікар
+                    зазвичай орієнтується на дані першого УЗД, яке точніше визначає термін.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
