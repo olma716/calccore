@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Tip Calculator Online — Split the Bill | CalcCore</title>
+    <meta name="description"
+        content="Calculate tips and split the bill among multiple people. Quickly figure out how much each person owes at a restaurant or cafe." />
+
+    <link rel="canonical" href="https://calccore.net/en/misc/tip-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/tip-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/tip-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/tip-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/tip-calculator.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How much tip is customary to leave?",
+        "acceptedAnswer":{"@type":"Answer","text":"Norms vary by country: in the US, 15-20% is typical, while in most European countries it's 5-10% or simply rounding up the bill, depending on service quality."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is the tip calculated before or after splitting among people?",
+        "acceptedAnswer":{"@type":"Answer","text":"The total tip is calculated from the full bill first, then the total amount (bill + tip) is split equally among all participants."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I enter a fixed tip amount instead of a percentage?",
+        "acceptedAnswer":{"@type":"Answer","text":"This calculator computes tips as a percentage, which is the most common approach. For a fixed amount, simply add it manually to the total."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/misc/tip-calculator#app",
+    "name":"Tip Calculator",
+    "description":"Calculate tips and split the bill among multiple people.",
+    "url":"https://calccore.net/en/misc/tip-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="ctip">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Tip Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate the tip and split the bill among multiple people
+                        in seconds.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Enter inputs</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="billAmount">Bill amount</label>
+                            <input class="mcalc__input" id="billAmount" type="text" inputmode="decimal"
+                                placeholder="e.g.: 1200" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="tipPercent">Tip (%)</label>
+                            <input class="mcalc__input" id="tipPercent" type="text" inputmode="numeric"
+                                placeholder="e.g.: 10" value="10" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="peopleCount">Number of people</label>
+                            <input class="mcalc__input" id="peopleCount" type="text" inputmode="numeric"
+                                placeholder="e.g.: 2" value="1" />
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="tip-quick">
+                                <button class="mcalc__btn mcalc__btn--small" data-tip="5" type="button">5%</button>
+                                <button class="mcalc__btn mcalc__btn--small" data-tip="10" type="button">10%</button>
+                                <button class="mcalc__btn mcalc__btn--small" data-tip="15" type="button">15%</button>
+                                <button class="mcalc__btn mcalc__btn--small" data-tip="20" type="button">20%</button>
+                            </div>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Calculate</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter the bill amount.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/en/misc/unit-converter">Unit Converter</a>
+                    <a href="/en/education/percent-calculator">Percentage Calculator</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How much tip is customary to leave</h2>
+            <p>
+                Tipping norms vary significantly by country and venue type:
+            </p>
+            <ul>
+                <li><b>United States:</b> 15-20% of the bill is standard at restaurants, 20%+ for excellent service.
+                </li>
+                <li><b>Europe:</b> mostly 5-10% or simply rounding up the bill, since service is often already included
+                    in prices.</li>
+                <li><b>Cafes and bars:</b> usually less than full restaurants — 5-10% or rounding.</li>
+                <li><b>Food delivery:</b> typically 10-15% or a small fixed amount.</li>
+            </ul>
+
+            <h2>How bill splitting is calculated</h2>
+            <p>
+                The calculator first adds the tip to the bill amount to get the total due, then
+                splits that total equally among the number of people. This is the standard approach
+                when everyone ordered roughly the same amount.
+            </p>
+
+            <h2>When equal splitting doesn't work well</h2>
+            <p>
+                If people ordered dishes of very different value, it's fairer to split the bill
+                proportionally to what each person consumed rather than equally. In that case, it's
+                better to calculate each person's share separately, then add the tip proportionally
+                to their share of the bill.
+            </p>
+
+            <p class="m-hintSmall">
+                Tipping norms are a cultural practice, not a strict rule. Follow local customs and
+                the quality of service received.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How much tip is customary to leave?</h3>
+                <p>Norms vary by country: in the US, 15-20% is typical, while in most European countries it's 5-10% or
+                    simply rounding up the bill, depending on service quality.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Is the tip calculated before or after splitting among people?</h3>
+                <p>The total tip is calculated from the full bill first, then the total amount (bill + tip) is split
+                    equally among all participants.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I enter a fixed tip amount instead of a percentage?</h3>
+                <p>This calculator computes tips as a percentage, which is the most common approach. For a fixed amount,
+                    simply add it manually to the total.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
