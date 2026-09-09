@@ -92,6 +92,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initHeaderUI();
   initHeaderSearch();
+  // Notify other scripts that header is now loaded and ready
+document.dispatchEvent(new CustomEvent('headerReady'));
 
   // 🔁 правильні лінки перемикача мов
   const ukLink = document.querySelector('.lang-switch a[data-lang="uk"]');
