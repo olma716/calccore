@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Лічильник слів і символів онлайн — живий підрахунок | CalcCore</title>
+    <meta name="description"
+        content="Підрахунок слів, символів, речень та абзаців у тексті онлайн. Живе оновлення під час друку, зручно для есе, постів та SEO-описів." />
+
+    <link rel="canonical" href="https://calccore.net/misc/word-counter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/word-counter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/word-counter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/word-counter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/word-counter.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/word-counter.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як рахуються слова?",
+        "acceptedAnswer":{"@type":"Answer","text":"Слова визначаються як послідовності символів, розділені пробілами чи знаками пунктуації."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи рахуються пробіли в кількості символів?",
+        "acceptedAnswer":{"@type":"Answer","text":"Показуються два значення: кількість символів з пробілами та без — обирай залежно від вимог конкретної платформи чи завдання."}
+      },
+      {
+        "@type":"Question",
+        "name":"Для чого потрібен підрахунок символів у SEO?",
+        "acceptedAnswer":{"@type":"Answer","text":"Пошукові системи обрізають надто довгі title та meta description у видачі, тому важливо вкладатись у рекомендовану кількість символів (зазвичай 50-60 для title, 150-160 для опису)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/misc/word-counter#app",
+    "name":"Word Counter",
+    "description":"Живий підрахунок слів, символів, речень та абзаців у тексті.",
+    "url":"https://calccore.net/misc/word-counter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cwords">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Лічильник слів і символів</h1>
+                    <p class="mcalc__p">
+                        Вставляй чи друкуй текст — підрахунок оновлюється миттєво.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Твій текст</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <textarea class="word-textarea" id="textInput" rows="10"
+                        placeholder="Вставляй або друкуй текст тут..."></textarea>
+
+                    <div class="word-stats" id="wordStats">
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statWords">0</div>
+                            <div class="word-stat__label">Слів</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statCharsWithSpaces">0</div>
+                            <div class="word-stat__label">Символів (з пробілами)</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statCharsNoSpaces">0</div>
+                            <div class="word-stat__label">Символів (без пробілів)</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statSentences">0</div>
+                            <div class="word-stat__label">Речень</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statParagraphs">0</div>
+                            <div class="word-stat__label">Абзаців</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statReadTime">0 хв</div>
+                            <div class="word-stat__label">Час читання</div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__actions m-mt10">
+                        <button class="mcalc__btn" id="btnClear" type="button">Очистити</button>
+                        <button class="mcalc__btn" id="btnCopy" type="button">Копіювати текст</button>
+                    </div>
+                    <div class="mcalc__toast" id="mToast"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/misc/unit-converter">Конвертер одиниць</a>
+                    <a href="/misc/tip-calculator">Калькулятор чайових</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібен лічильник слів</h2>
+            <p>
+                Підрахунок слів і символів корисний у багатьох ситуаціях: написання есе з вимогами до
+                обсягу, дотримання лімітів символів у соціальних мережах, оптимізація SEO-метаданих
+                чи просто оцінка довжини тексту перед публікацією.
+            </p>
+
+            <h2>Що показує лічильник</h2>
+            <ul>
+                <li><b>Слова:</b> загальна кількість слів у тексті.</li>
+                <li><b>Символи з пробілами:</b> повна довжина тексту, включно з пробілами між словами.</li>
+                <li><b>Символи без пробілів:</b> корисно для платформ, які рахують лише видимі символи.</li>
+                <li><b>Речення:</b> кількість речень (визначається за розділовими знаками .!?)</li>
+                <li><b>Абзаци:</b> кількість блоків тексту, розділених порожніми рядками.</li>
+                <li><b>Час читання:</b> орієнтовний час, який знадобиться для прочитання тексту (за середньою швидкістю
+                    читання).</li>
+            </ul>
+
+            <h2>Типові ліміти символів для різних платформ</h2>
+            <ul>
+                <li><b>Twitter/X:</b> 280 символів на пост.</li>
+                <li><b>SEO title:</b> рекомендовано 50-60 символів, щоб не обрізався в результатах пошуку.</li>
+                <li><b>Meta description:</b> рекомендовано 150-160 символів.</li>
+                <li><b>Instagram підпис:</b> до 2200 символів, хоча видима частина коротша до розгортання.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Підрахунок оновлюється в реальному часі під час друку чи вставки тексту — не потрібно
+                натискати жодних додаткових кнопок.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як рахуються слова?</h3>
+                <p>Слова визначаються як послідовності символів, розділені пробілами чи знаками пунктуації.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи рахуються пробіли в кількості символів?</h3>
+                <p>Показуються два значення: кількість символів з пробілами та без — обирай залежно від вимог конкретної
+                    платформи чи завдання.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Для чого потрібен підрахунок символів у SEO?</h3>
+                <p>Пошукові системи обрізають надто довгі title та meta description у видачі, тому важливо вкладатись у
+                    рекомендовану кількість символів (зазвичай 50-60 для title, 150-160 для опису).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

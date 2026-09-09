@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Word Counter Online — Live Character Count | CalcCore</title>
+    <meta name="description"
+        content="Count words, characters, sentences, and paragraphs in your text online. Live updates as you type, handy for essays, posts, and SEO descriptions." />
+
+    <link rel="canonical" href="https://calccore.net/en/misc/word-counter" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/word-counter" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/misc/word-counter" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/misc/word-counter" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/word-counter.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/word-counter.js?v=20260909" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How are words counted?",
+        "acceptedAnswer":{"@type":"Answer","text":"Words are defined as sequences of characters separated by spaces or punctuation marks."}
+      },
+      {
+        "@type":"Question",
+        "name":"Are spaces counted in the character count?",
+        "acceptedAnswer":{"@type":"Answer","text":"Two values are shown: character count with and without spaces — choose based on the requirements of your specific platform or task."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is character counting important for SEO?",
+        "acceptedAnswer":{"@type":"Answer","text":"Search engines truncate overly long titles and meta descriptions in results, so it's important to stay within recommended character limits (usually 50-60 for titles, 150-160 for descriptions)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/misc/word-counter#app",
+    "name":"Word Counter",
+    "description":"Live word, character, sentence, and paragraph counter.",
+    "url":"https://calccore.net/en/misc/word-counter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cwords">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Word Counter</h1>
+                    <p class="mcalc__p">
+                        Paste or type your text — the count updates instantly.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Your text</h2>
+                        <span class="mcalc__badge">Misc</span>
+                    </div>
+
+                    <textarea class="word-textarea" id="textInput" rows="10"
+                        placeholder="Paste or type your text here..."></textarea>
+
+                    <div class="word-stats" id="wordStats">
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statWords">0</div>
+                            <div class="word-stat__label">Words</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statCharsWithSpaces">0</div>
+                            <div class="word-stat__label">Characters (with spaces)</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statCharsNoSpaces">0</div>
+                            <div class="word-stat__label">Characters (no spaces)</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statSentences">0</div>
+                            <div class="word-stat__label">Sentences</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statParagraphs">0</div>
+                            <div class="word-stat__label">Paragraphs</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat__value" id="statReadTime">0 min</div>
+                            <div class="word-stat__label">Read time</div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__actions m-mt10">
+                        <button class="mcalc__btn" id="btnClear" type="button">Clear</button>
+                        <button class="mcalc__btn" id="btnCopy" type="button">Copy text</button>
+                    </div>
+                    <div class="mcalc__toast" id="mToast"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/en/misc/unit-converter">Unit Converter</a>
+                    <a href="/en/misc/tip-calculator">Tip Calculator</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why you need a word counter</h2>
+            <p>
+                Word and character counting is useful in many situations: writing essays with length
+                requirements, staying within social media character limits, optimizing SEO metadata,
+                or simply gauging text length before publishing.
+            </p>
+
+            <h2>What the counter shows</h2>
+            <ul>
+                <li><b>Words:</b> total word count in the text.</li>
+                <li><b>Characters with spaces:</b> full text length, including spaces between words.</li>
+                <li><b>Characters without spaces:</b> useful for platforms that only count visible characters.</li>
+                <li><b>Sentences:</b> sentence count (determined by punctuation marks .!?)</li>
+                <li><b>Paragraphs:</b> number of text blocks separated by blank lines.</li>
+                <li><b>Read time:</b> estimated time needed to read the text (based on average reading speed).</li>
+            </ul>
+
+            <h2>Typical character limits for various platforms</h2>
+            <ul>
+                <li><b>Twitter/X:</b> 280 characters per post.</li>
+                <li><b>SEO title:</b> recommended 50-60 characters to avoid truncation in search results.</li>
+                <li><b>Meta description:</b> recommended 150-160 characters.</li>
+                <li><b>Instagram caption:</b> up to 2200 characters, though the visible portion is shorter before
+                    expansion.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                The count updates in real time as you type or paste text — no need to click any
+                additional buttons.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How are words counted?</h3>
+                <p>Words are defined as sequences of characters separated by spaces or punctuation marks.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Are spaces counted in the character count?</h3>
+                <p>Two values are shown: character count with and without spaces — choose based on the requirements of
+                    your specific platform or task.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why is character counting important for SEO?</h3>
+                <p>Search engines truncate overly long titles and meta descriptions in results, so it's important to
+                    stay within recommended character limits (usually 50-60 for titles, 150-160 for descriptions).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
