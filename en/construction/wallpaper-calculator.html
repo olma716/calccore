@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Wallpaper Calculator Online — How Many Rolls You Need | CalcCore</title>
+    <meta name="description"
+        content="Calculate how many wallpaper rolls you need based on room perimeter, ceiling height, and roll size. Accounts for pattern repeat and openings." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/wallpaper-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/wallpaper-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/wallpaper-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/wallpaper-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/wallpaper-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why does pattern repeat (rapport) matter?",
+        "acceptedAnswer":{"@type":"Answer","text":"Wallpaper with a large pattern requires matching the design between strips, so part of each new piece becomes waste — this increases the total quantity needed."}
+      },
+      {
+        "@type":"Question",
+        "name":"Should I subtract the area of doors and windows?",
+        "acceptedAnswer":{"@type":"Answer","text":"For a more precise calculation — yes, especially in smaller rooms with large windows. However, many calculators recommend a small buffer for cases where openings aren't accounted for."}
+      },
+      {
+        "@type":"Question",
+        "name":"Should I buy wallpaper from a single production batch?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, always check the batch number on the label — rolls from different batches can have a slight color shade difference."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/wallpaper-calculator#app",
+    "name":"Wallpaper Calculator",
+    "description":"Calculate how many wallpaper rolls are needed based on room perimeter and roll size.",
+    "url":"https://calccore.net/en/construction/wallpaper-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cwallpaper">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Wallpaper Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate how many wallpaper rolls you need for
+                        your room.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter dimensions</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomLength">Room length (m)</label>
+                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomWidth">Room width (m)</label>
+                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 3.5" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomHeight">Ceiling height (m)</label>
+                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2.7" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rollWidth">Roll width (m)</label>
+                                <input class="mcalc__input" id="rollWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0.53" value="0.53" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rollLength">Roll length (m)</label>
+                                <input class="mcalc__input" id="rollLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 10.05" value="10.05" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rapport">Pattern repeat (cm)</label>
+                                <input class="mcalc__input" id="rapport" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0" value="0" />
+                                <div class="mcalc__hint">0 if there's no pattern matching needed (plain or small print).
+                                </div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
+                            <a href="/en/construction/tile-calculator">Tile Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How to calculate the number of wallpaper rolls</h2>
+            <p>
+                The calculation is based on the room's perimeter (to determine the number of vertical
+                strips) and ceiling height (to determine the length of each strip). Knowing the roll
+                dimensions, you can calculate how many strips come from one roll, and from there, the
+                total number of rolls needed.
+            </p>
+
+            <h2>Why pattern repeat (rapport) matters</h2>
+            <p>
+                If the wallpaper has a distinct repeating pattern, adjacent strips need to be hung
+                with the pattern matched. This means part of each new piece is "lost" aligning the
+                pattern with the previous strip, so the actual usable strip length is shorter than
+                the physical roll length. The larger the pattern repeat, the more waste.
+            </p>
+
+            <h2>Practical tips</h2>
+            <ul>
+                <li><b>Buy extra:</b> it's recommended to add 1-2 extra rolls beyond the calculation for cutting
+                    mistakes or future repairs.</li>
+                <li><b>Check the batch number:</b> all rolls should be from the same production batch (listed on the
+                    label), otherwise there may be a noticeable shade difference.</li>
+                <li><b>Account for pattern direction:</b> some wallpaper has a direction (up/down), which also affects
+                    cutting and waste amount.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                This calculation is an estimate. For complex rooms with alcoves, protrusions, or
+                irregular shapes, consulting a professional or wallpaper store advisor is recommended.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why does pattern repeat (rapport) matter?</h3>
+                <p>Wallpaper with a large pattern requires matching the design between strips, so part of each new piece
+                    becomes waste — this increases the total quantity needed.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Should I subtract the area of doors and windows?</h3>
+                <p>For a more precise calculation — yes, especially in smaller rooms with large windows. However, many
+                    calculators recommend a small buffer for cases where openings aren't accounted for.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Should I buy wallpaper from a single production batch?</h3>
+                <p>Yes, always check the batch number on the label — rolls from different batches can have a slight
+                    color shade difference.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
