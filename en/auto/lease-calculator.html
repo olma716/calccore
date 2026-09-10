@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Car Lease Calculator Online — Monthly Payment | CalcCore</title>
+    <meta name="description"
+        content="Calculate your monthly car lease payment: price, residual value, down payment, rate, term. Compare with financing a purchase." />
+
+    <link rel="canonical" href="https://calccore.net/en/auto/lease-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/lease-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/lease-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/lease-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/lease-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How is the monthly lease payment calculated?",
+        "acceptedAnswer":{"@type":"Answer","text":"The payment consists of two parts: a depreciation portion (the difference between the car's price and residual value, divided by the term) and a finance portion (interest on the average value of the car over the lease term)."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is residual value?",
+        "acceptedAnswer":{"@type":"Answer","text":"This is the car's projected value at the end of the lease term. A higher residual value means a lower monthly payment, since you're only paying for the difference in value."}
+      },
+      {
+        "@type":"Question",
+        "name":"Lease or loan — which is better?",
+        "acceptedAnswer":{"@type":"Answer","text":"Leasing usually offers a lower monthly payment, but the car doesn't automatically become yours. A loan costs more monthly, but the car is fully yours after payoff."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/lease-calculator#app",
+    "name":"Car Lease Calculator",
+    "description":"Calculate your monthly car lease payment accounting for residual value.",
+    "url":"https://calccore.net/en/auto/lease-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="clease">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Car Lease Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate your monthly lease payment accounting for
+                        the car's residual value.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Auto-calc</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Auto</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="carPrice">Car price</label>
+                                <input class="mcalc__input" id="carPrice" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 40000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="downPayment">Down payment</label>
+                                <input class="mcalc__input" id="downPayment" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 5000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="residualPct">Residual value (%)</label>
+                                <input class="mcalc__input" id="residualPct" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 50" />
+                                <div class="mcalc__hint">% of car price at end of lease.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termMonths">Term (months)</label>
+                                <input class="mcalc__input" id="termMonths" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 36" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rate">Annual rate (%)</label>
+                                <input class="mcalc__input" id="rate" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 6" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/auto/tco-calculator">TCO Calculator</a>
+                            <a href="/en/finance/credit-calculator">Loan Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How the lease payment is calculated</h2>
+            <p>
+                A monthly lease payment consists of two parts:
+            </p>
+            <ul>
+                <li><b>Depreciation portion:</b> the difference between the car's price (after down payment) and its
+                    residual value, divided by the number of lease months. This is the core "value loss" of the car that
+                    you pay for.</li>
+                <li><b>Finance portion:</b> interest charged on the average value of the car over the lease term —
+                    essentially the "cost of borrowing" from the leasing company.</li>
+            </ul>
+
+            <h2>What is residual value</h2>
+            <p>
+                <b>Residual value</b> is the car's projected worth at the end of the lease term, usually
+                expressed as a percentage of the original price. The higher the residual value, the less
+                the car "loses" during the lease, and the lower the monthly payment. Cars that hold
+                their value well (certain premium brands, popular models) typically have higher residual
+                values.
+            </p>
+
+            <h2>Lease vs loan: which to choose</h2>
+            <ul>
+                <li><b>Leasing is better if:</b> you want a lower monthly payment, plan to change cars every few years,
+                    and don't mind not owning the car outright.</li>
+                <li><b>A loan is better if:</b> you plan to keep driving the car long after payoff, want full ownership
+                    right away, and are willing to pay more monthly for long-term savings.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                This is a simplified model. Actual lease terms may include additional fees, insurance,
+                and other charges — check the full terms with the leasing company.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How is the monthly lease payment calculated?</h3>
+                <p>The payment consists of two parts: a depreciation portion (the difference between the car's price and
+                    residual value, divided by the term) and a finance portion (interest on the average value of the car
+                    over the lease term).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is residual value?</h3>
+                <p>This is the car's projected value at the end of the lease term. A higher residual value means a lower
+                    monthly payment, since you're only paying for the difference in value.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Lease or loan — which is better?</h3>
+                <p>Leasing usually offers a lower monthly payment, but the car doesn't automatically become yours. A
+                    loan costs more monthly, but the car is fully yours after payoff.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

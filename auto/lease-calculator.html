@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор лізингу авто онлайн — щомісячний платіж | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок щомісячного платежу за лізингом авто: ціна, залишкова вартість, аванс, ставка, термін. Порівняй з покупкою в кредит." />
+
+    <link rel="canonical" href="https://calccore.net/auto/lease-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/lease-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/lease-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/lease-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/lease-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як розраховується щомісячний платіж за лізингом?",
+        "acceptedAnswer":{"@type":"Answer","text":"Платіж складається з двох частин: амортизаційної (різниця між ціною авто і залишковою вартістю, поділена на термін) та фінансової (відсотки на середню вартість авто за період лізингу)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке залишкова вартість (residual value)?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це прогнозована вартість авто наприкінці терміну лізингу. Вища залишкова вартість означає нижчий щомісячний платіж, оскільки ти платиш лише за різницю у вартості."}
+      },
+      {
+        "@type":"Question",
+        "name":"Лізинг чи кредит — що вигідніше?",
+        "acceptedAnswer":{"@type":"Answer","text":"Лізинг зазвичай дає нижчий щомісячний платіж, але авто не переходить у власність автоматично. Кредит дорожчий щомісяця, але після виплати авто повністю твоє."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/lease-calculator#app",
+    "name":"Car Lease Calculator",
+    "description":"Розрахунок щомісячного платежу за лізингом авто з урахуванням залишкової вартості.",
+    "url":"https://calccore.net/auto/lease-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="clease">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор лізингу авто</h1>
+                    <p class="mcalc__p">
+                        Розрахуй щомісячний платіж за лізингом з урахуванням
+                        залишкової вартості авто.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <div class="m-topline">
+                        <label class="m-autocalc">
+                            <input id="autoCalc" type="checkbox" checked />
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Auto</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="carPrice">Ціна авто</label>
+                                <input class="mcalc__input" id="carPrice" type="text" inputmode="decimal"
+                                    placeholder="напр.: 800000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="downPayment">Авансовий платіж</label>
+                                <input class="mcalc__input" id="downPayment" type="text" inputmode="decimal"
+                                    placeholder="напр.: 100000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="residualPct">Залишкова вартість (%)</label>
+                                <input class="mcalc__input" id="residualPct" type="text" inputmode="numeric"
+                                    placeholder="напр.: 50" />
+                                <div class="mcalc__hint">% від ціни авто наприкінці лізингу.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termMonths">Термін (місяців)</label>
+                                <input class="mcalc__input" id="termMonths" type="text" inputmode="numeric"
+                                    placeholder="напр.: 36" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rate">Річна ставка (%)</label>
+                                <input class="mcalc__input" id="rate" type="text" inputmode="decimal"
+                                    placeholder="напр.: 8" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/auto/tco-calculator">TCO калькулятор</a>
+                            <a href="/finance/credit-calculator">Кредитний калькулятор</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується платіж за лізингом</h2>
+            <p>
+                Щомісячний платіж за лізингом складається з двох частин:
+            </p>
+            <ul>
+                <li><b>Амортизаційна частина:</b> різниця між ціною авто (за вирахуванням авансу) і залишковою вартістю,
+                    поділена на кількість місяців лізингу. Це основна "втрата вартості" авто, яку ти оплачуєш.</li>
+                <li><b>Фінансова частина:</b> відсотки, нараховані на середню вартість авто протягом терміну лізингу —
+                    це "плата за користування грошима" лізингової компанії.</li>
+            </ul>
+
+            <h2>Що таке залишкова вартість</h2>
+            <p>
+                <b>Залишкова вартість</b> (residual value) — це прогнозована вартість авто наприкінці
+                терміну лізингу, зазвичай виражена у відсотках від початкової ціни. Чим вища залишкова
+                вартість, тим менше "втрачає" авто за час лізингу, і тим нижчий щомісячний платіж.
+                Автомобілі, що добре тримають вартість (деякі преміум-марки, популярні моделі), зазвичай
+                мають вищу залишкову вартість.
+            </p>
+
+            <h2>Лізинг vs кредит: що обрати</h2>
+            <ul>
+                <li><b>Лізинг вигідніший, якщо:</b> хочеш нижчий щомісячний платіж, плануєш міняти авто кожні кілька
+                    років, не проти не володіти авто безпосередньо.</li>
+                <li><b>Кредит вигідніший, якщо:</b> плануєш їздити на авто довго після завершення виплат, хочеш повного
+                    права власності одразу, готовий до вищого щомісячного платежу заради довгострокової економії.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Розрахунок є спрощеною моделлю. Реальні умови лізингу можуть включати додаткові збори,
+                страхування та інші комісії — уточнюй повні умови в лізинговій компанії.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як розраховується щомісячний платіж за лізингом?</h3>
+                <p>Платіж складається з двох частин: амортизаційної (різниця між ціною авто і залишковою вартістю,
+                    поділена на термін) та фінансової (відсотки на середню вартість авто за період лізингу).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке залишкова вартість (residual value)?</h3>
+                <p>Це прогнозована вартість авто наприкінці терміну лізингу. Вища залишкова вартість означає нижчий
+                    щомісячний платіж, оскільки ти платиш лише за різницю у вартості.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Лізинг чи кредит — що вигідніше?</h3>
+                <p>Лізинг зазвичай дає нижчий щомісячний платіж, але авто не переходить у власність автоматично. Кредит
+                    дорожчий щомісяця, але після виплати авто повністю твоє.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
