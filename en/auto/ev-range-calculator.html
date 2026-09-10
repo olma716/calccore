@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>EV Range Calculator Online — Estimate Driving Range | CalcCore</title>
+    <meta name="description"
+        content="Calculate your electric vehicle's driving range based on battery capacity, consumption, and charge level. Accounts for city, highway, and winter conditions." />
+
+    <link rel="canonical" href="https://calccore.net/en/auto/ev-range-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/ev-range-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/ev-range-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/ev-range-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ev-range-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why does real-world range differ from the manufacturer's rating?",
+        "acceptedAnswer":{"@type":"Answer","text":"Official manufacturer figures are obtained under ideal laboratory conditions. Real-world driving involves temperature swings, driving style, climate control use, and terrain, which reduce actual range."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is range lower in winter?",
+        "acceptedAnswer":{"@type":"Answer","text":"Cold reduces the efficiency of chemical processes in the battery, and cabin heating draws energy directly from the battery, unlike gas cars where heat is a byproduct of the engine."}
+      },
+      {
+        "@type":"Question",
+        "name":"Should I charge the battery to 100% every day?",
+        "acceptedAnswer":{"@type":"Answer","text":"For daily use, charging to 80-90% is recommended, reserving a full charge for long trips only — this extends battery lifespan."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/ev-range-calculator#app",
+    "name":"EV Range Calculator",
+    "description":"Calculate electric vehicle driving range based on battery capacity and driving conditions.",
+    "url":"https://calccore.net/en/auto/ev-range-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cevrange">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">EV Range Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate your estimated driving range accounting for
+                        real-world driving conditions.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Enter inputs</h2>
+                        <span class="mcalc__badge">Auto</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="batteryCapacity">Battery capacity (kWh)</label>
+                            <input class="mcalc__input" id="batteryCapacity" type="text" inputmode="decimal"
+                                placeholder="e.g.: 60" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="consumption">Consumption (kWh/100km)</label>
+                            <input class="mcalc__input" id="consumption" type="text" inputmode="decimal"
+                                placeholder="e.g.: 17" />
+                            <div class="mcalc__hint">Use your car's spec sheet (WLTP) or typical value for the model.
+                            </div>
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="chargeLevel">Charge level (%)</label>
+                            <input class="mcalc__input" id="chargeLevel" type="text" inputmode="numeric"
+                                placeholder="e.g.: 100" value="100" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="conditions">Driving conditions</label>
+                            <select id="conditions" class="mcalc__select">
+                                <option value="mixed" selected>Mixed cycle</option>
+                                <option value="city">City (summer)</option>
+                                <option value="highway">Highway (steady speed)</option>
+                                <option value="winter">Winter (cold + heating)</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Calculate</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter inputs to calculate.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/en/auto/tco-calculator">TCO Calculator (EV vs ICE)</a>
+                    <a href="/en/auto/ev-charge-calculator">EV Charging Cost</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How range is calculated</h2>
+            <p>
+                The basic formula is simple: range = (battery capacity × charge level) / consumption
+                × 100. However, actual range depends on many factors, so this calculator applies
+                adjustment factors based on the selected driving conditions.
+            </p>
+
+            <h2>Why real-world range differs from the spec sheet</h2>
+            <p>
+                Official manufacturer figures (WLTP, EPA) are obtained under controlled test
+                conditions that don't fully reflect real-world use. In practice, range is affected by:
+            </p>
+            <ul>
+                <li><b>Air temperature:</b> cold reduces the efficiency of chemical reactions in the battery, while heat
+                    requires energy for cabin cooling.</li>
+                <li><b>Driving style:</b> aggressive acceleration and high speed significantly increase energy
+                    consumption.</li>
+                <li><b>Climate control:</b> heating or air conditioning draws energy directly from the battery, unlike
+                    gas cars.</li>
+                <li><b>Road type:</b> highway driving at high speed often consumes more energy than city driving due to
+                    aerodynamic drag.</li>
+                <li><b>Load and accessories:</b> passenger and cargo weight, roof rack use.</li>
+            </ul>
+
+            <h2>Why winter range drops the most</h2>
+            <p>
+                Cold is the biggest enemy of EV range for two reasons: first, chemical processes inside
+                lithium-ion batteries slow down at low temperatures, reducing available power. Second,
+                cabin heating in cold weather requires significant energy that would come "for free"
+                from an internal combustion engine in a conventional car. Together, these factors can
+                reduce range by 20-40% in severe cold.
+            </p>
+
+            <p class="m-hintSmall">
+                The result is an estimate based on typical driving condition impact factors. Actual
+                range depends on the specific car model, driving style, and current weather conditions.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why does real-world range differ from the manufacturer's rating?</h3>
+                <p>Official manufacturer figures are obtained under ideal laboratory conditions. Real-world driving
+                    involves temperature swings, driving style, climate control use, and terrain, which reduce actual
+                    range.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why is range lower in winter?</h3>
+                <p>Cold reduces the efficiency of chemical processes in the battery, and cabin heating draws energy
+                    directly from the battery, unlike gas cars where heat is a byproduct of the engine.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Should I charge the battery to 100% every day?</h3>
+                <p>For daily use, charging to 80-90% is recommended, reserving a full charge for long trips only — this
+                    extends battery lifespan.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

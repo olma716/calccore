@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор запасу ходу електромобіля онлайн | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок запасу ходу електромобіля за ємністю батареї, споживанням та рівнем заряду. Врахування умов їзди: місто, траса, зима." />
+
+    <link rel="canonical" href="https://calccore.net/auto/ev-range-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/ev-range-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/ev-range-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/ev-range-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/ev-range-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чому реальний запас ходу відрізняється від заявленого виробником?",
+        "acceptedAnswer":{"@type":"Answer","text":"Офіційні цифри виробника отримані в ідеальних лабораторних умовах. Реальна їзда включає перепади температур, стиль водіння, використання клімат-контролю та рельєф місцевості, що знижує фактичний запас ходу."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому взимку запас ходу менший?",
+        "acceptedAnswer":{"@type":"Answer","text":"Холод знижує ефективність хімічних процесів у батареї, а обігрів салону споживає додаткову енергію напряму з батареї, на відміну від бензинових авто, де тепло — побічний продукт роботи двигуна."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи варто заряджати батарею до 100% щодня?",
+        "acceptedAnswer":{"@type":"Answer","text":"Для щоденного використання рекомендується заряджати до 80-90%, залишаючи повний заряд лише для далеких поїздок — це подовжує термін служби батареї."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/ev-range-calculator#app",
+    "name":"EV Range Calculator",
+    "description":"Розрахунок запасу ходу електромобіля за ємністю батареї та умовами їзди.",
+    "url":"https://calccore.net/auto/ev-range-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cevrange">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор запасу ходу електромобіля</h1>
+                    <p class="mcalc__p">
+                        Розрахуй орієнтовний запас ходу з урахуванням реальних
+                        умов їзди.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дані</h2>
+                        <span class="mcalc__badge">Auto</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="batteryCapacity">Ємність батареї (кВт·год)</label>
+                            <input class="mcalc__input" id="batteryCapacity" type="text" inputmode="decimal"
+                                placeholder="напр.: 60" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="consumption">Споживання (кВт·год/100км)</label>
+                            <input class="mcalc__input" id="consumption" type="text" inputmode="decimal"
+                                placeholder="напр.: 17" />
+                            <div class="mcalc__hint">Вкажи з паспорта авто (WLTP) чи типове для моделі.</div>
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="chargeLevel">Рівень заряду (%)</label>
+                            <input class="mcalc__input" id="chargeLevel" type="text" inputmode="numeric"
+                                placeholder="напр.: 100" value="100" />
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="conditions">Умови їзди</label>
+                            <select id="conditions" class="mcalc__select">
+                                <option value="mixed" selected>Змішаний цикл</option>
+                                <option value="city">Місто (літо)</option>
+                                <option value="highway">Траса (постійна швидкість)</option>
+                                <option value="winter">Зима (холод + обігрів)</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи дані для розрахунку.</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
+                    <a href="/auto/tco-calculator">TCO калькулятор (EV vs ДВЗ)</a>
+                    <a href="/auto/ev-charge-calculator">Вартість зарядки EV</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується запас ходу</h2>
+            <p>
+                Базова формула проста: запас ходу = (ємність батареї × рівень заряду) / споживання
+                × 100. Однак реальний запас ходу залежить від багатьох факторів, тому цей калькулятор
+                застосовує коригувальні коефіцієнти залежно від обраних умов їзди.
+            </p>
+
+            <h2>Чому реальний запас ходу відрізняється від паспортного</h2>
+            <p>
+                Офіційні цифри виробника (WLTP, EPA) отримуються в контрольованих умовах тестування,
+                які не повністю відображають реальну експлуатацію. На практиці на запас ходу впливають:
+            </p>
+            <ul>
+                <li><b>Температура повітря:</b> холод знижує ефективність хімічних реакцій у батареї, а спека вимагає
+                    енергії на охолодження салону.</li>
+                <li><b>Стиль водіння:</b> агресивне прискорення та висока швидкість значно збільшують споживання
+                    енергії.</li>
+                <li><b>Клімат-контроль:</b> обігрів чи кондиціонер споживають енергію напряму з батареї, на відміну від
+                    бензинових авто.</li>
+                <li><b>Тип дороги:</b> траса на високій швидкості часто споживає більше енергії, ніж місто, через
+                    аеродинамічний опір.</li>
+                <li><b>Вантаж і додаткове обладнання:</b> вага пасажирів, багажу, використання багажника на даху.</li>
+            </ul>
+
+            <h2>Чому взимку запас ходу падає найбільше</h2>
+            <p>
+                Холод — найбільший ворог запасу ходу електромобіля з двох причин: по-перше, хімічні
+                процеси всередині літій-іонної батареї сповільнюються при низьких температурах,
+                зменшуючи доступну потужність. По-друге, обігрів салону в холодну погоду вимагає
+                значної кількості енергії, яка бралась би "безкоштовно" від двигуна внутрішнього
+                згоряння в звичайному авто. Разом ці фактори можуть знижувати запас ходу на 20-40%
+                у сильні морози.
+            </p>
+
+            <p class="m-hintSmall">
+                Результат є орієнтовною оцінкою на основі типових коефіцієнтів впливу умов їзди.
+                Реальний запас ходу залежить від конкретної моделі авто, манери водіння та поточних
+                погодних умов.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чому реальний запас ходу відрізняється від заявленого виробником?</h3>
+                <p>Офіційні цифри виробника отримані в ідеальних лабораторних умовах. Реальна їзда включає перепади
+                    температур, стиль водіння, використання клімат-контролю та рельєф місцевості, що знижує фактичний
+                    запас ходу.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому взимку запас ходу менший?</h3>
+                <p>Холод знижує ефективність хімічних процесів у батареї, а обігрів салону споживає додаткову енергію
+                    напряму з батареї, на відміну від бензинових авто, де тепло — побічний продукт роботи двигуна.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи варто заряджати батарею до 100% щодня?</h3>
+                <p>Для щоденного використання рекомендується заряджати до 80-90%, залишаючи повний заряд лише для
+                    далеких поїздок — це подовжує термін служби батареї.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
