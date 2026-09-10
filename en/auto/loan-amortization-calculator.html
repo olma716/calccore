@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Car Loan Amortization Calculator — Payment Schedule | CalcCore</title>
+    <meta name="description"
+        content="Calculate your car loan payoff schedule by month: monthly payment, interest, principal, remaining balance. Full amortization table." />
+
+    <link rel="canonical" href="https://calccore.net/en/auto/loan-amortization-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/loan-amortization-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/loan-amortization-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/loan-amortization-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/loan-amortization-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a loan amortization schedule?",
+        "acceptedAnswer":{"@type":"Answer","text":"It's a table showing how each monthly payment is split between interest and principal over the entire loan term."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is more interest paid at the start of the loan than principal?",
+        "acceptedAnswer":{"@type":"Answer","text":"Interest is calculated on the remaining balance, which is highest at the start. As payments are made, the balance decreases, so the interest portion of each payment shrinks while the principal portion grows."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I pay off the loan early to save on interest?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, early payoff reduces the remaining balance sooner, so the total interest accrued over the loan's life becomes smaller."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/loan-amortization-calculator#app",
+    "name":"Car Loan Amortization Calculator",
+    "description":"Calculate a car loan amortization schedule with a monthly payment breakdown table.",
+    "url":"https://calccore.net/en/auto/loan-amortization-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="camort">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Car Loan Amortization Calculator</h1>
+                    <p class="mcalc__p">
+                        Full monthly payoff schedule: payment, interest,
+                        principal, remaining balance.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Auto</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="loanAmount">Loan amount</label>
+                                <input class="mcalc__input" id="loanAmount" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 30000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rate">Annual rate (%)</label>
+                                <input class="mcalc__input" id="rate" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 7" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termMonths">Term (months)</label>
+                                <input class="mcalc__input" id="termMonths" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 48" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Payment schedule <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
+                                    table</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Download (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Amortization schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Payment</th>
+                                            <th>Interest</th>
+                                            <th>Principal</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/auto/lease-calculator">Lease Calculator</a>
+                            <a href="/en/finance/credit-calculator">Loan Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is loan amortization</h2>
+            <p>
+                <b>Loan amortization</b> is the process of gradually paying off debt through regular
+                payments, each consisting of two parts: interest (the cost of borrowing) and principal
+                (the actual debt reduction).
+            </p>
+
+            <h2>Why the payment split changes over time</h2>
+            <p>
+                At the start of a loan, the remaining balance is highest, so the interest charged on
+                that balance is also at its peak — a large share of the monthly payment goes toward
+                interest. As the loan is paid down, the balance shrinks, so interest decreases while
+                the principal portion of the payment grows. This is standard behavior for equal
+                (annuity) payments.
+            </p>
+
+            <h2>Monthly payment formula</h2>
+            <p>
+                Payment = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly
+                interest rate, and n is the number of payments (months).
+            </p>
+
+            <h2>Why an amortization schedule matters</h2>
+            <ul>
+                <li><b>Budget planning:</b> know exactly how much to pay each month throughout the loan term.</li>
+                <li><b>Early payoff evaluation:</b> understand how much interest could be saved by paying off the loan
+                    sooner.</li>
+                <li><b>Comparing offers:</b> compare total interest paid across different rates or terms from various
+                    lenders.</li>
+                <li><b>Tax reporting:</b> in some countries, loan interest may affect tax deductions.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                The calculation assumes standard annuity payments (equal amount each month) without
+                additional fees. Actual loan terms may include insurance or other charges — check the
+                full terms with your lender.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is a loan amortization schedule?</h3>
+                <p>It's a table showing how each monthly payment is split between interest and principal over the entire
+                    loan term.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why is more interest paid at the start of the loan than principal?</h3>
+                <p>Interest is calculated on the remaining balance, which is highest at the start. As payments are made,
+                    the balance decreases, so the interest portion of each payment shrinks while the principal portion
+                    grows.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can I pay off the loan early to save on interest?</h3>
+                <p>Yes, early payoff reduces the remaining balance sooner, so the total interest accrued over the loan's
+                    life becomes smaller.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

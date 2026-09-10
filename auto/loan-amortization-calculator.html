@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Амортизація автокредиту онлайн — графік платежів | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок графіку погашення автокредиту по місяцях: щомісячний платіж, відсотки, основна сума, залишок боргу. Повна таблиця амортизації." />
+
+    <link rel="canonical" href="https://calccore.net/auto/loan-amortization-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/loan-amortization-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/loan-amortization-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/loan-amortization-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/loan-amortization-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке графік амортизації кредиту?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це таблиця, яка показує розподіл кожного щомісячного платежу на частину відсотків та частину основної суми боргу протягом усього терміну кредиту."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому на початку кредиту відсотків більше, ніж основної суми?",
+        "acceptedAnswer":{"@type":"Answer","text":"Відсотки нараховуються на залишок боргу, який на початку максимальний. З кожним платежем залишок зменшується, тому частка відсотків у платежі поступово знижується, а частка основної суми зростає."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна достроково погасити кредит, щоб заощадити на відсотках?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, дострокове погашення зменшує залишок боргу раніше, тому загальна сума нарахованих відсотків за весь термін кредиту стає меншою."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/loan-amortization-calculator#app",
+    "name":"Car Loan Amortization Calculator",
+    "description":"Розрахунок графіку амортизації автокредиту з таблицею платежів по місяцях.",
+    "url":"https://calccore.net/auto/loan-amortization-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="camort">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Амортизація автокредиту</h1>
+                    <p class="mcalc__p">
+                        Повний графік погашення кредиту по місяцях: платіж, відсотки,
+                        основна сума, залишок боргу.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Auto</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="loanAmount">Сума кредиту</label>
+                                <input class="mcalc__input" id="loanAmount" type="text" inputmode="decimal"
+                                    placeholder="напр.: 600000" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="rate">Річна ставка (%)</label>
+                                <input class="mcalc__input" id="rate" type="text" inputmode="decimal"
+                                    placeholder="напр.: 12" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="termMonths">Термін (місяців)</label>
+                                <input class="mcalc__input" id="termMonths" type="text" inputmode="numeric"
+                                    placeholder="напр.: 48" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Графік платежів <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tools">
+                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
+                                    type="button">Копіювати таблицю</button>
+                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
+                                    Завантажити (Excel)</button>
+                            </div>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Amortization schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>Місяць</th>
+                                            <th>Платіж</th>
+                                            <th>Відсотки</th>
+                                            <th>Основна сума</th>
+                                            <th>Залишок</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/auto/lease-calculator">Калькулятор лізингу</a>
+                            <a href="/finance/credit-calculator">Кредитний калькулятор</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке амортизація кредиту</h2>
+            <p>
+                <b>Амортизація кредиту</b> — це процес поступового погашення боргу через регулярні
+                платежі, кожен з яких складається з двох частин: відсотків (плата за користування
+                позиченими грошима) та основної суми (частина реального боргу, що зменшується).
+            </p>
+
+            <h2>Чому розподіл платежу змінюється з часом</h2>
+            <p>
+                На початку кредиту залишок боргу найбільший, тому відсотки, нараховані на цей залишок,
+                теж максимальні — велика частина щомісячного платежу йде саме на відсотки. У міру
+                погашення кредиту залишок зменшується, тому відсотки скорочуються, а частка основної
+                суми в платежі зростає. Це стандартна поведінка для ануїтетних (рівних) платежів.
+            </p>
+
+            <h2>Формула щомісячного платежу</h2>
+            <p>
+                Платіж = P × [r(1+r)^n] / [(1+r)^n − 1], де P — сума кредиту, r — місячна відсоткова
+                ставка, n — кількість платежів (місяців).
+            </p>
+
+            <h2>Навіщо потрібен графік амортизації</h2>
+            <ul>
+                <li><b>Планування бюджету:</b> точно знати, скільки платити щомісяця протягом усього терміну.</li>
+                <li><b>Оцінка дострокового погашення:</b> зрозуміти, скільки відсотків можна заощадити, погасивши кредит
+                    раніше.</li>
+                <li><b>Порівняння пропозицій:</b> порівняти загальну переплату при різних ставках чи термінах у різних
+                    банків.</li>
+                <li><b>Податкова звітність:</b> у деяких країнах відсотки за кредитом можуть впливати на податкові
+                    відрахування.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Розрахунок передбачає стандартні ануїтетні платежі (однакова сума щомісяця) без
+                додаткових комісій. Реальні умови кредиту можуть включати страхування чи інші збори —
+                уточнюй повні умови в банку.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке графік амортизації кредиту?</h3>
+                <p>Це таблиця, яка показує розподіл кожного щомісячного платежу на частину відсотків та частину основної
+                    суми боргу протягом усього терміну кредиту.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому на початку кредиту відсотків більше, ніж основної суми?</h3>
+                <p>Відсотки нараховуються на залишок боргу, який на початку максимальний. З кожним платежем залишок
+                    зменшується, тому частка відсотків у платежі поступово знижується, а частка основної суми зростає.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна достроково погасити кредит, щоб заощадити на відсотках?</h3>
+                <p>Так, дострокове погашення зменшує залишок боргу раніше, тому загальна сума нарахованих відсотків за
+                    весь термін кредиту стає меншою.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
