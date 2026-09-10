@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JS41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Paint Calculator Online — How Much Paint You Need | CalcCore</title>
+    <meta name="description"
+        content="Calculate how much paint you need for walls and ceiling based on room area. Accounts for number of coats, doors and windows, and paint coverage per m²." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/paint-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/paint-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/paint-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/paint-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/paint-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How much paint do I need per square meter?",
+        "acceptedAnswer":{"@type":"Answer","text":"Typical coverage is 0.1-0.15 L/m² per coat, depending on paint type, surface, and application method. Exact figures are always listed on the specific paint's packaging."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is a second coat of paint needed?",
+        "acceptedAnswer":{"@type":"Answer","text":"A second coat ensures even color coverage, hides roller or brush marks from the first coat, and improves the durability of the finish."}
+      },
+      {
+        "@type":"Question",
+        "name":"Should I buy extra paint as a buffer?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, it's recommended to add about 10% extra for surface irregularities, touch-ups, or future minor repairs in the same color."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/paint-calculator#app",
+    "name":"Paint Calculator",
+    "description":"Calculate the amount of paint needed for walls and ceiling based on room area.",
+    "url":"https://calccore.net/en/construction/paint-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cpaint">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Paint Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate how much paint you need for your room's
+                        walls or ceiling.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter room dimensions</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomLength">Room length (m)</label>
+                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomWidth">Room width (m)</label>
+                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 3.5" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomHeight">Ceiling height (m)</label>
+                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2.7" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="openings">Doors and windows area (m²)</label>
+                                <input class="mcalc__input" id="openings" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 4" />
+                                <div class="mcalc__hint">This area won't be painted and will be subtracted.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="coats">Number of coats</label>
+                                <select id="coats" class="mcalc__select">
+                                    <option value="1">1 coat</option>
+                                    <option value="2" selected>2 coats</option>
+                                    <option value="3">3 coats</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="coverage">Paint coverage (L/m² per coat)</label>
+                                <input class="mcalc__input" id="coverage" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0.12" value="0.12" />
+                                <div class="mcalc__hint">Check the packaging of your specific paint.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="password-checkbox">
+                                    <input type="checkbox" id="includeCeiling" />
+                                    <span>Also paint the ceiling</span>
+                                </label>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/flooring-calculator">Flooring Calculator</a>
+                            <a href="/en/construction/plaster-calculator">Plaster Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How to calculate the amount of paint</h2>
+            <p>
+                The calculation is based on the surface area to be painted (walls, minus doors and
+                windows, and optionally the ceiling), multiplied by the number of coats and paint
+                coverage per square meter. Formula: paint needed = area × number of coats × coverage
+                per m².
+            </p>
+
+            <h2>How much paint is used per m²</h2>
+            <p>
+                Typical coverage is <b>0.1-0.15 L/m²</b> per coat, but it depends significantly on:
+            </p>
+            <ul>
+                <li><b>Paint type:</b> water-based, latex, oil-based — different density and coverage properties.</li>
+                <li><b>Surface:</b> rough or porous surfaces (like plaster) absorb more paint than smooth ones.</li>
+                <li><b>Color:</b> going from dark to light color or vice versa often requires an extra coat.</li>
+                <li><b>Application method:</b> roller, brush, or sprayer have different paint usage efficiency.</li>
+            </ul>
+            <p>
+                Exact coverage figures are always listed on the specific paint's packaging — it's
+                best to use those for the most accurate calculation.
+            </p>
+
+            <h2>Why a second coat of paint is needed</h2>
+            <p>
+                A single coat of paint rarely provides even, saturated color coverage — especially
+                when switching to a contrasting color. A second coat evens out the tone, hides
+                streaks from the roller or brush in the first coat, and improves the finish's
+                durability against wear and washing.
+            </p>
+
+            <p class="m-hintSmall">
+                It's recommended to buy about 10% extra paint for surface irregularities, touch-ups,
+                or future minor repairs in the same shade.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How much paint do I need per square meter?</h3>
+                <p>Typical coverage is 0.1-0.15 L/m² per coat, depending on paint type, surface, and application method.
+                    Exact figures are always listed on the specific paint's packaging.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why is a second coat of paint needed?</h3>
+                <p>A second coat ensures even color coverage, hides roller or brush marks from the first coat, and
+                    improves the durability of the finish.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Should I buy extra paint as a buffer?</h3>
+                <p>Yes, it's recommended to add about 10% extra for surface irregularities, touch-ups, or future minor
+                    repairs in the same color.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

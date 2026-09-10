@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор фарби онлайн — скільки літрів потрібно | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок кількості фарби для стін і стелі за площею приміщення. Врахування кількості шарів, дверей і вікон, витрати фарби на м²." />
+
+    <link rel="canonical" href="https://calccore.net/construction/paint-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/paint-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/paint-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/paint-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/paint-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Скільки фарби потрібно на квадратний метр?",
+        "acceptedAnswer":{"@type":"Answer","text":"Типова витрата — 0.1-0.15 л/м² на один шар, залежно від типу фарби, поверхні та методу нанесення. Точні дані завжди вказані на упаковці конкретної фарби."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому потрібно фарбувати в два шари?",
+        "acceptedAnswer":{"@type":"Answer","text":"Другий шар забезпечує рівномірне покриття кольору, приховує сліди від валика чи пензля з першого шару, і покращує довговічність фарбування."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи варто купувати фарбу із запасом?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, рекомендується додати 10% запасу на випадок нерівностей поверхні, підмальовування чи майбутнього ремонту дрібних пошкоджень тим самим кольором."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/construction/paint-calculator#app",
+    "name":"Paint Calculator",
+    "description":"Розрахунок необхідної кількості фарби для стін і стелі за площею приміщення.",
+    "url":"https://calccore.net/construction/paint-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cpaint">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор фарби</h1>
+                    <p class="mcalc__p">
+                        Розрахуй, скільки літрів фарби потрібно для стін чи
+                        стелі твого приміщення.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи розміри приміщення</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomLength">Довжина кімнати (м)</label>
+                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
+                                    placeholder="напр.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomWidth">Ширина кімнати (м)</label>
+                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
+                                    placeholder="напр.: 3.5" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomHeight">Висота стелі (м)</label>
+                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
+                                    placeholder="напр.: 2.7" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="openings">Площа дверей і вікон (м²)</label>
+                                <input class="mcalc__input" id="openings" type="text" inputmode="decimal"
+                                    placeholder="напр.: 4" />
+                                <div class="mcalc__hint">Ця площа не фарбується і буде відрахована.</div>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="coats">Кількість шарів</label>
+                                <select id="coats" class="mcalc__select">
+                                    <option value="1">1 шар</option>
+                                    <option value="2" selected>2 шари</option>
+                                    <option value="3">3 шари</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="coverage">Витрата фарби (л/м² на шар)</label>
+                                <input class="mcalc__input" id="coverage" type="text" inputmode="decimal"
+                                    placeholder="напр.: 0.12" value="0.12" />
+                                <div class="mcalc__hint">Уточни на упаковці конкретної фарби.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="password-checkbox">
+                                    <input type="checkbox" id="includeCeiling" />
+                                    <span>Також фарбувати стелю</span>
+                                </label>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/construction/flooring-calculator">Калькулятор підлоги</a>
+                            <a href="/construction/plaster-calculator">Калькулятор штукатурки</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розрахувати кількість фарби</h2>
+            <p>
+                Розрахунок базується на площі поверхні для фарбування (стіни, за вирахуванням дверей
+                і вікон, і опційно стеля), помноженій на кількість шарів і витрату фарби на квадратний
+                метр. Формула: кількість фарби = площа × кількість шарів × витрата на м².
+            </p>
+
+            <h2>Скільки фарби витрачається на 1 м²</h2>
+            <p>
+                Типова витрата становить <b>0.1-0.15 л/м²</b> на один шар, але вона суттєво залежить
+                від:
+            </p>
+            <ul>
+                <li><b>Типу фарби:</b> водоемульсійна, латексна, олійна — різна густина і покривна здатність.</li>
+                <li><b>Поверхні:</b> шорстка чи пориста поверхня (наприклад, штукатурка) вбирає більше фарби, ніж
+                    гладка.</li>
+                <li><b>Кольору:</b> перехід від темного до світлого кольору чи навпаки часто вимагає додаткового шару.
+                </li>
+                <li><b>Методу нанесення:</b> валик, пензель чи розпилювач мають різну ефективність використання фарби.
+                </li>
+            </ul>
+            <p>
+                Точні дані про витрату завжди вказані на упаковці конкретної фарби — рекомендується
+                орієнтуватись саме на них для найточнішого розрахунку.
+            </p>
+
+            <h2>Навіщо потрібен другий шар фарби</h2>
+            <p>
+                Один шар фарби рідко забезпечує рівномірне, насичене покриття кольору — особливо
+                при переході на контрастний колір. Другий шар вирівнює тон, приховує розводи від
+                валика чи пензля з першого шару та підвищує стійкість покриття до стирання й миття.
+            </p>
+
+            <p class="m-hintSmall">
+                Рекомендується купувати фарбу із запасом приблизно 10% на випадок нерівностей поверхні,
+                підмальовування чи майбутнього дрібного ремонту тим самим відтінком.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Скільки фарби потрібно на квадратний метр?</h3>
+                <p>Типова витрата — 0.1-0.15 л/м² на один шар, залежно від типу фарби, поверхні та методу нанесення.
+                    Точні дані завжди вказані на упаковці конкретної фарби.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому потрібно фарбувати в два шари?</h3>
+                <p>Другий шар забезпечує рівномірне покриття кольору, приховує сліди від валика чи пензля з першого
+                    шару, і покращує довговічність фарбування.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи варто купувати фарбу із запасом?</h3>
+                <p>Так, рекомендується додати 10% запасу на випадок нерівностей поверхні, підмальовування чи майбутнього
+                    ремонту дрібних пошкоджень тим самим кольором.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
