@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Drywall Calculator Online — How Many Sheets You Need | CalcCore</title>
+    <meta name="description"
+        content="Calculate how many drywall sheets you need for walls or ceiling based on area. Accounts for cutting waste and multiple layers." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/drywall-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/drywall-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/drywall-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/drywall-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/drywall-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is the standard drywall sheet size?",
+        "acceptedAnswer":{"@type":"Answer","text":"The most common size is 1.2 × 2.5 m (3 m²), though other sizes exist, such as 1.2 × 3 m."}
+      },
+      {
+        "@type":"Question",
+        "name":"When is double-layer drywall needed?",
+        "acceptedAnswer":{"@type":"Answer","text":"Double layering is used to improve soundproofing, fire resistance, or structural strength — typical for interior partitions with elevated requirements."}
+      },
+      {
+        "@type":"Question",
+        "name":"How many fasteners are needed per sheet?",
+        "acceptedAnswer":{"@type":"Answer","text":"Roughly 40-50 screws per standard-size sheet, depending on the framing spacing (typically 40-60 cm)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/drywall-calculator#app",
+    "name":"Drywall Calculator",
+    "description":"Calculate how many drywall sheets are needed for walls or ceiling based on area.",
+    "url":"https://calccore.net/en/construction/drywall-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdrywall">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Drywall Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate the number of drywall sheets needed for
+                        walls or ceiling, including waste allowance.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="area">Surface area (m²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 40" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="sheetLength">Sheet length (m)</label>
+                                <input class="mcalc__input" id="sheetLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2.5" value="2.5" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="sheetWidth">Sheet width (m)</label>
+                                <input class="mcalc__input" id="sheetWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 1.2" value="1.2" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="layers">Number of layers</label>
+                                <select id="layers" class="mcalc__select">
+                                    <option value="1" selected>1 layer</option>
+                                    <option value="2">2 layers</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastage">Cutting waste allowance (%)</label>
+                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 10" value="10" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
+                            <a href="/en/construction/insulation-calculator">Insulation Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How to calculate drywall quantity</h2>
+            <p>
+                The calculation is based on the surface area to cover, divided by the area of one
+                drywall sheet, accounting for the number of layers and a cutting waste allowance.
+                Formula: sheets needed = (area × layers × (1 + waste%)) / area of one sheet.
+            </p>
+
+            <h2>Standard drywall sheet sizes</h2>
+            <ul>
+                <li><b>1.2 × 2.5 m (3 m²):</b> the most common size for walls and ceilings in residential spaces.</li>
+                <li><b>1.2 × 3.0 m (3.6 m²):</b> used for rooms with higher ceilings, reducing horizontal joints.</li>
+                <li><b>1.2 × 2.0 m (2.4 m²):</b> convenient for small rooms or narrow spaces.</li>
+            </ul>
+
+            <h2>When double-layer is needed</h2>
+            <p>
+                Double-layer drywall is used when enhanced soundproofing is needed (e.g., a wall
+                between apartments or bedroom and living room), fire resistance (fire-rated
+                partitions), or added structural strength (mounting heavy items on the wall).
+            </p>
+
+            <h2>Additional materials for installation</h2>
+            <p>
+                Besides the sheets themselves, you'll need: a metal frame (UD and CD tracks), screws
+                to fasten the sheets to the frame (roughly 40-50 per sheet), joint compound and mesh
+                tape for seams, and primer for finishing.
+            </p>
+
+            <p class="m-hintSmall">
+                It's recommended to always buy sheets with a buffer for cutting mistakes or damage
+                during transport and installation.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is the standard drywall sheet size?</h3>
+                <p>The most common size is 1.2 × 2.5 m (3 m²), though other sizes exist, such as 1.2 × 3 m.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>When is double-layer drywall needed?</h3>
+                <p>Double layering is used to improve soundproofing, fire resistance, or structural strength — typical
+                    for interior partitions with elevated requirements.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How many fasteners are needed per sheet?</h3>
+                <p>Roughly 40-50 screws per standard-size sheet, depending on the framing spacing (typically 40-60 cm).
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
