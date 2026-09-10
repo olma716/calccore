@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Car Depreciation Calculator Online — Value Over Time | CalcCore</title>
+    <meta name="description"
+        content="Calculate how much value your car loses over time. Find out the estimated car value after 1, 3, 5, or 10 years of use." />
+
+    <link rel="canonical" href="https://calccore.net/en/auto/depreciation-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/depreciation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/depreciation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/depreciation-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/depreciation-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How much value does a car lose in the first year?",
+        "acceptedAnswer":{"@type":"Answer","text":"A new car typically loses 20-25% of its value in the first year alone — the biggest drop over its entire lifespan."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why does depreciation slow down over the years?",
+        "acceptedAnswer":{"@type":"Answer","text":"The biggest value loss happens right after buying a new car due to the 'driving off the lot' effect. In subsequent years, the depreciation rate gradually slows."}
+      },
+      {
+        "@type":"Question",
+        "name":"What affects how fast a car depreciates?",
+        "acceptedAnswer":{"@type":"Answer","text":"Make and model, mileage, condition, popularity on the used market, reliability, maintenance cost, and the overall economic situation."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/auto/depreciation-calculator#app",
+    "name":"Car Depreciation Calculator",
+    "description":"Calculate a car's value loss over time by year of use.",
+    "url":"https://calccore.net/en/auto/depreciation-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdeprec">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Car Depreciation Calculator</h1>
+                    <p class="mcalc__p">
+                        Find out how much your car will be worth in a few years
+                        based on typical depreciation patterns.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Auto</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="carPrice">Initial car value</label>
+                                <input class="mcalc__input" id="carPrice" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 40000" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="carType">Car type</label>
+                                <select id="carType" class="mcalc__select">
+                                    <option value="average" selected>Average depreciation</option>
+                                    <option value="premium">Premium brand (holds value better)</option>
+                                    <option value="economy">Budget brand (depreciates faster)</option>
+                                    <option value="electric">Electric vehicle</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Car value by year</div>
+                            </div>
+                            <canvas id="deprecChart" width="900" height="280" aria-label="Depreciation chart"></canvas>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Yearly table <span class="muted">(open)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Depreciation schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>Year</th>
+                                            <th>Value</th>
+                                            <th>Loss</th>
+                                            <th>% of original</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/en/auto/lease-calculator">Lease Calculator</a>
+                            <a href="/en/auto/loan-amortization-calculator">Loan Amortization</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is car depreciation</h2>
+            <p>
+                <b>Depreciation</b> is the loss of a vehicle's market value over time due to wear, aging
+                technology, and reduced demand for used cars of a certain age. It's one of the biggest
+                "hidden" costs of car ownership.
+            </p>
+
+            <h2>Typical depreciation curve</h2>
+            <ul>
+                <li><b>First year:</b> the biggest drop — typically 20-25% of value (the "driving off the lot" effect).
+                </li>
+                <li><b>Years 2-3:</b> the pace slows but remains significant — roughly 15-18% per year.</li>
+                <li><b>Years 4-5:</b> further slowdown, roughly 10-12% per year.</li>
+                <li><b>After 5 years:</b> the depreciation rate stabilizes at a lower level.</li>
+            </ul>
+
+            <h2>What affects depreciation speed</h2>
+            <ul>
+                <li><b>Make and model:</b> premium brands (Toyota, Lexus) often hold value better than average brands.
+                </li>
+                <li><b>Mileage:</b> higher mileage accelerates depreciation beyond the base age factor.</li>
+                <li><b>Powertrain type:</b> electric vehicles may have a different depreciation curve due to rapid
+                    battery technology advances.</li>
+                <li><b>Used market popularity:</b> a model with high demand in used condition depreciates more slowly.
+                </li>
+                <li><b>Condition and maintenance:</b> a well-maintained car with a full service history retains more
+                    value.</li>
+            </ul>
+
+            <h2>Why knowing the depreciation curve matters</h2>
+            <p>
+                Understanding how fast a car loses value helps you make smarter decisions: whether to
+                buy new or a 2-3 year old used car (which has already passed the steepest depreciation
+                phase); the best time to sell; whether leasing instead of buying makes more sense if
+                rapid depreciation makes ownership less advantageous.
+            </p>
+
+            <p class="m-hintSmall">
+                The calculation is based on typical average depreciation rates. The actual value of a
+                specific car depends on many individual factors and may differ significantly from the
+                estimate.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How much value does a car lose in the first year?</h3>
+                <p>A new car typically loses 20-25% of its value in the first year alone — the biggest drop over its
+                    entire lifespan.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why does depreciation slow down over the years?</h3>
+                <p>The biggest value loss happens right after buying a new car due to the "driving off the lot" effect.
+                    In subsequent years, the depreciation rate gradually slows.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What affects how fast a car depreciates?</h3>
+                <p>Make and model, mileage, condition, popularity on the used market, reliability, maintenance cost, and
+                    the overall economic situation.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

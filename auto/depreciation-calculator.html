@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор амортизації авто онлайн — знос вартості з часом | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок втрати вартості авто з часом за роками. Дізнайся орієнтовну вартість авто через 1, 3, 5 чи 10 років використання." />
+
+    <link rel="canonical" href="https://calccore.net/auto/depreciation-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/depreciation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/depreciation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/auto/depreciation-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/depreciation-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"На скільки авто втрачає вартість у перший рік?",
+        "acceptedAnswer":{"@type":"Answer","text":"Нове авто типово втрачає 20-25% вартості вже в перший рік — це найбільше падіння за весь термін експлуатації."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому амортизація сповільнюється з роками?",
+        "acceptedAnswer":{"@type":"Answer","text":"Найбільша втрата вартості відбувається одразу після покупки нового авто через ефект 'виїзду з салону'. У наступні роки темп знецінення поступово сповільнюється."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що впливає на швидкість амортизації авто?",
+        "acceptedAnswer":{"@type":"Answer","text":"Марка та модель, пробіг, стан, популярність на вторинному ринку, надійність, вартість обслуговування та загальна економічна ситуація."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/auto/depreciation-calculator#app",
+    "name":"Car Depreciation Calculator",
+    "description":"Розрахунок втрати вартості авто з часом за роками використання.",
+    "url":"https://calccore.net/auto/depreciation-calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cdeprec">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор амортизації авто</h1>
+                    <p class="mcalc__p">
+                        Дізнайся, скільки коштуватиме твоє авто через кілька років
+                        з урахуванням типового знецінення.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Auto</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="carPrice">Початкова вартість авто</label>
+                                <input class="mcalc__input" id="carPrice" type="text" inputmode="decimal"
+                                    placeholder="напр.: 800000" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="carType">Тип авто</label>
+                                <select id="carType" class="mcalc__select">
+                                    <option value="average" selected>Середнє знецінення</option>
+                                    <option value="premium">Преміум-марка (тримає вартість краще)</option>
+                                    <option value="economy">Бюджетна марка (знецінюється швидше)</option>
+                                    <option value="electric">Електромобіль</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-chart">
+                            <div class="m-chart__head">
+                                <div class="m-chart__title">Вартість авто по роках</div>
+                            </div>
+                            <canvas id="deprecChart" width="900" height="280" aria-label="Depreciation chart"></canvas>
+                        </div>
+
+                        <details class="m-schedule" id="scheduleWrap" open>
+                            <summary class="m-sum">
+                                <span class="m-sum-left">
+                                    <span class="m-ico" aria-hidden="true"></span>
+                                    Таблиця по роках <span class="muted">(відкрити)</span>
+                                </span>
+                                <span class="m-chevron" aria-hidden="true"></span>
+                            </summary>
+
+                            <div class="m-tablewrap">
+                                <table class="m-table" id="scheduleTable" aria-label="Depreciation schedule">
+                                    <thead>
+                                        <tr>
+                                            <th>Рік</th>
+                                            <th>Вартість</th>
+                                            <th>Втрата</th>
+                                            <th>% від початкової</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <div class="m-navlinks">
+                            <a href="/auto/lease-calculator">Калькулятор лізингу</a>
+                            <a href="/auto/loan-amortization-calculator">Амортизація кредиту</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке амортизація авто</h2>
+            <p>
+                <b>Амортизація</b> (знецінення) авто — це втрата ринкової вартості транспортного засобу
+                з часом через знос, застарівання технологій та зменшення попиту на вживані авто певного
+                віку. Це один з найбільших "прихованих" витрат володіння авто.
+            </p>
+
+            <h2>Типова крива знецінення</h2>
+            <ul>
+                <li><b>Перший рік:</b> найбільше падіння — типово 20-25% вартості (ефект "виїзду з салону").</li>
+                <li><b>2-3 роки:</b> темп сповільнюється, але залишається значним — приблизно 15-18% на рік.</li>
+                <li><b>4-5 років:</b> подальше сповільнення, орієнтовно 10-12% на рік.</li>
+                <li><b>Після 5 років:</b> темп знецінення стабілізується на нижчому рівні.</li>
+            </ul>
+
+            <h2>Що впливає на швидкість амортизації</h2>
+            <ul>
+                <li><b>Марка та модель:</b> преміум-бренди (Toyota, Lexus) часто тримають вартість краще за
+                    середньостатистичні марки.</li>
+                <li><b>Пробіг:</b> вищий пробіг прискорює знецінення понад базовий віковий фактор.</li>
+                <li><b>Тип двигуна:</b> електромобілі можуть мати іншу криву знецінення через стрімкий розвиток
+                    технологій батарей.</li>
+                <li><b>Популярність на вторинному ринку:</b> модель з високим попитом у вживаному стані знецінюється
+                    повільніше.</li>
+                <li><b>Стан і обслуговування:</b> добре обслуговане авто з повною історією зберігає більше вартості.
+                </li>
+            </ul>
+
+            <h2>Навіщо знати криву амортизації</h2>
+            <p>
+                Розуміння того, як швидко втрачає вартість авто, допомагає приймати зваженіші рішення:
+                чи варто купувати нове авто, чи вигідніше вживане віком 2-3 роки (яке вже пройшло
+                найшвидшу фазу знецінення); коли найкращий момент продати авто; чи варто брати авто
+                в лізинг замість купівлі, якщо швидке знецінення робить володіння невигідним.
+            </p>
+
+            <p class="m-hintSmall">
+                Розрахунок базується на типових усереднених показниках знецінення. Реальна вартість
+                конкретного авто залежить від багатьох індивідуальних факторів і може суттєво
+                відрізнятись від розрахованої оцінки.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>На скільки авто втрачає вартість у перший рік?</h3>
+                <p>Нове авто типово втрачає 20-25% вартості вже в перший рік — це найбільше падіння за весь термін
+                    експлуатації.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому амортизація сповільнюється з роками?</h3>
+                <p>Найбільша втрата вартості відбувається одразу після покупки нового авто через ефект "виїзду з
+                    салону". У наступні роки темп знецінення поступово сповільнюється.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що впливає на швидкість амортизації авто?</h3>
+                <p>Марка та модель, пробіг, стан, популярність на вторинному ринку, надійність, вартість обслуговування
+                    та загальна економічна ситуація.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
