@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Tile Calculator Online — How Many Tiles You Need | CalcCore</title>
+    <meta name="description"
+        content="Calculate how many tiles you need for flooring or walls based on room area and tile size. Accounts for cutting waste and boxes." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/tile-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/tile-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/tile-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/tile-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/tile-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How much extra tile should I allow for cutting waste?",
+        "acceptedAnswer":{"@type":"Answer","text":"Typically 10% extra is recommended for straight layouts and 15-20% for diagonal or complex patterns with more cut pieces."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why does grout line width matter?",
+        "acceptedAnswer":{"@type":"Answer","text":"Grout lines between tiles take up additional space, so for precise calculations it helps to add a few millimeters to each tile's size for a more realistic count."}
+      },
+      {
+        "@type":"Question",
+        "name":"Should I buy tile from a single production batch?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes, tile from different production batches can have slight color shade differences, so it's better to buy the full amount needed from a single batch."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/tile-calculator#app",
+    "name":"Tile Calculator",
+    "description":"Calculate how many tiles are needed for flooring or wall covering.",
+    "url":"https://calccore.net/en/construction/tile-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="ctile">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Tile Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate how many tiles you need for flooring or
+                        walls with a waste allowance.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter dimensions</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomLength">Room length (m)</label>
+                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 3" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="roomWidth">Room width (m)</label>
+                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 2.5" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="tileLength">Tile length (cm)</label>
+                                <input class="mcalc__input" id="tileLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 60" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="tileWidth">Tile width (cm)</label>
+                                <input class="mcalc__input" id="tileWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 60" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="wastage">Cutting waste allowance (%)</label>
+                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 10" value="10" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="tilesPerBox">Tiles per box</label>
+                                <input class="mcalc__input" id="tilesPerBox" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 4" />
+                                <div class="mcalc__hint">Optional, listed on the tile packaging.</div>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/flooring-calculator">Flooring Calculator</a>
+                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How to calculate the number of tiles</h2>
+            <p>
+                Basic formula: room area divided by the area of a single tile gives the theoretical
+                tile count. A waste allowance is added to this number since tiles need cutting at
+                room edges or around obstacles (pipes, door openings), and part of the material
+                becomes waste.
+            </p>
+
+            <h2>How much extra to allow</h2>
+            <ul>
+                <li><b>Straight layout (10%):</b> standard allowance for a simple straight pattern along walls.</li>
+                <li><b>Diagonal layout (15%):</b> more waste due to angled cuts.</li>
+                <li><b>Complex pattern or mosaic (20%+):</b> the most waste due to non-standard shapes and cuts.</li>
+                <li><b>Irregularly shaped rooms:</b> alcoves, protrusions, or many corners also increase the needed
+                    allowance.</li>
+            </ul>
+
+            <h2>Why box count matters</h2>
+            <p>
+                Tiles are usually sold in boxes with a fixed number of pieces (e.g., 4 or 8 tiles per
+                box). Rounding the calculated tile count up to full boxes helps plan the purchase
+                precisely, without needing to buy more mid-project.
+            </p>
+
+            <p class="m-hintSmall">
+                It's recommended to buy all the tile you need from a single production batch, since
+                different batches can have slight color shade differences that become noticeable when
+                laid side by side.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How much extra tile should I allow for cutting waste?</h3>
+                <p>Typically 10% extra is recommended for straight layouts and 15-20% for diagonal or complex patterns
+                    with more cut pieces.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why does grout line width matter?</h3>
+                <p>Grout lines between tiles take up additional space, so for precise calculations it helps to add a few
+                    millimeters to each tile's size for a more realistic count.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Should I buy tile from a single production batch?</h3>
+                <p>Yes, tile from different production batches can have slight color shade differences, so it's better
+                    to buy the full amount needed from a single batch.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
