@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Rebar Calculator Online — Quantity and Weight | CalcCore</title>
+    <meta name="description"
+        content="Calculate the quantity and weight of rebar for reinforcing a slab, foundation, or screed. Accounts for grid spacing and bar diameter." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/rebar-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/rebar-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/rebar-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/rebar-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/rebar-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why is rebar mesh needed in concrete?",
+        "acceptedAnswer":{"@type":"Answer","text":"Concrete withstands compression well but is weak under tension. Rebar compensates for this weakness, significantly increasing the strength and durability of the structure."}
+      },
+      {
+        "@type":"Question",
+        "name":"What grid spacing is most commonly used?",
+        "acceptedAnswer":{"@type":"Answer","text":"For floor screeds, typically 15-20 cm; for foundation slabs, 20-25 cm, depending on load and structural thickness."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I calculate rebar weight knowing only the length?",
+        "acceptedAnswer":{"@type":"Answer","text":"Weight depends on bar diameter — reference tables give the weight per linear meter for each standard diameter (e.g., 8mm ≈ 0.395 kg/m, 10mm ≈ 0.617 kg/m)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/rebar-calculator#app",
+    "name":"Rebar Calculator",
+    "description":"Calculate rebar quantity and weight for reinforcing a slab or foundation.",
+    "url":"https://calccore.net/en/construction/rebar-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="crebar">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Rebar Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate the quantity and weight of rebar for
+                        reinforcing a slab, foundation, or screed.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter dimensions</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="areaLength">Area length (m)</label>
+                                <input class="mcalc__input" id="areaLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 6" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="areaWidth">Area width (m)</label>
+                                <input class="mcalc__input" id="areaWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="spacing">Grid spacing (cm)</label>
+                                <input class="mcalc__input" id="spacing" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 20" value="20" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="diameter">Rebar diameter (mm)</label>
+                                <select id="diameter" class="mcalc__select">
+                                    <option value="6">6 mm</option>
+                                    <option value="8" selected>8 mm</option>
+                                    <option value="10">10 mm</option>
+                                    <option value="12">12 mm</option>
+                                    <option value="14">14 mm</option>
+                                    <option value="16">16 mm</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="layers">Number of mesh layers</label>
+                                <select id="layers" class="mcalc__select">
+                                    <option value="1" selected>1 layer (single mesh)</option>
+                                    <option value="2">2 layers (double mesh)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/concrete-calculator">Concrete Calculator</a>
+                            <a href="/en/construction/steel-weight-calculator">Steel Weight</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Why rebar is needed in concrete</h2>
+            <p>
+                Concrete has excellent compressive strength but is very weak in tension and bending.
+                Steel rebar compensates for this weakness — reinforced concrete combines concrete's
+                compressive strength with steel's tensile strength, making the structure significantly
+                stronger and more durable.
+            </p>
+
+            <h2>How rebar quantity is calculated</h2>
+            <p>
+                A rebar mesh consists of bars placed in two perpendicular directions at a set spacing
+                (distance between adjacent bars). The number of bars in each direction is calculated
+                as the area's length divided by the grid spacing, plus one extra bar at the edge.
+            </p>
+
+            <h2>Typical grid spacing by structure type</h2>
+            <ul>
+                <li><b>Floor screed:</b> 15-20 cm, lower load, thinner concrete layer.</li>
+                <li><b>Foundation slab:</b> 20-25 cm, depending on building load and soil type.</li>
+                <li><b>Road surfacing:</b> 10-15 cm due to high traffic loads.</li>
+            </ul>
+
+            <h2>How to calculate rebar weight</h2>
+            <p>
+                Knowing the total rebar length and diameter, weight can be determined using reference
+                tables of weight per linear meter. Approximate weight per meter: 6mm ≈ 0.222 kg,
+                8mm ≈ 0.395 kg, 10mm ≈ 0.617 kg, 12mm ≈ 0.888 kg, 14mm ≈ 1.21 kg, 16mm ≈ 1.58 kg.
+            </p>
+
+            <p class="m-hintSmall">
+                This calculation is an estimate for basic reinforcement. For critical structures
+                (residential foundations, load-bearing elements), a design from a qualified structural
+                engineer accounting for loads and safety codes is required.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why is rebar mesh needed in concrete?</h3>
+                <p>Concrete withstands compression well but is weak under tension. Rebar compensates for this weakness,
+                    significantly increasing the strength and durability of the structure.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What grid spacing is most commonly used?</h3>
+                <p>For floor screeds, typically 15-20 cm; for foundation slabs, 20-25 cm, depending on load and
+                    structural thickness.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How do I calculate rebar weight knowing only the length?</h3>
+                <p>Weight depends on bar diameter — reference tables give the weight per linear meter for each standard
+                    diameter (e.g., 8mm ≈ 0.395 kg/m, 10mm ≈ 0.617 kg/m).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор арматури онлайн — кількість та вага | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок кількості та ваги арматури для армування плити, фундаменту чи стяжки. Врахування кроку сітки та діаметра прутків." />
+
+    <link rel="canonical" href="https://calccore.net/construction/rebar-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/rebar-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/rebar-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/rebar-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/rebar-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Навіщо потрібна арматурна сітка в бетоні?",
+        "acceptedAnswer":{"@type":"Answer","text":"Бетон добре витримує стискання, але слабкий на розтягування. Арматура компенсує цю слабкість, суттєво підвищуючи міцність та довговічність конструкції."}
+      },
+      {
+        "@type":"Question",
+        "name":"Який крок сітки використовують найчастіше?",
+        "acceptedAnswer":{"@type":"Answer","text":"Для стяжки підлоги типово 15-20 см, для фундаментних плит 20-25 см, залежно від навантаження та товщини конструкції."}
+      },
+      {
+        "@type":"Question",
+        "name":"Як розрахувати вагу арматури, знаючи лише довжину?",
+        "acceptedAnswer":{"@type":"Answer","text":"Вага залежить від діаметра прутка — довідкові таблиці вказують вагу одного погонного метра для кожного стандартного діаметра (наприклад, 8мм ≈ 0.395 кг/м, 10мм ≈ 0.617 кг/м)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/construction/rebar-calculator#app",
+    "name":"Rebar Calculator",
+    "description":"Розрахунок кількості та ваги арматури для армування плити чи фундаменту.",
+    "url":"https://calccore.net/construction/rebar-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="crebar">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор арматури</h1>
+                    <p class="mcalc__p">
+                        Розрахуй кількість та вагу арматури для армування
+                        плити, фундаменту чи стяжки.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи розміри</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="areaLength">Довжина ділянки (м)</label>
+                                <input class="mcalc__input" id="areaLength" type="text" inputmode="decimal"
+                                    placeholder="напр.: 6" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="areaWidth">Ширина ділянки (м)</label>
+                                <input class="mcalc__input" id="areaWidth" type="text" inputmode="decimal"
+                                    placeholder="напр.: 4" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="spacing">Крок сітки (см)</label>
+                                <input class="mcalc__input" id="spacing" type="text" inputmode="decimal"
+                                    placeholder="напр.: 20" value="20" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="diameter">Діаметр арматури (мм)</label>
+                                <select id="diameter" class="mcalc__select">
+                                    <option value="6">6 мм</option>
+                                    <option value="8" selected>8 мм</option>
+                                    <option value="10">10 мм</option>
+                                    <option value="12">12 мм</option>
+                                    <option value="14">14 мм</option>
+                                    <option value="16">16 мм</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="layers">Кількість шарів сітки</label>
+                                <select id="layers" class="mcalc__select">
+                                    <option value="1" selected>1 шар (однорядна сітка)</option>
+                                    <option value="2">2 шари (двошарова сітка)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/construction/concrete-calculator">Калькулятор бетону</a>
+                            <a href="/construction/steel-weight-calculator">Вага металу</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Навіщо потрібна арматура в бетоні</h2>
+            <p>
+                Бетон має чудову міцність на стискання, але дуже слабкий на розтягування та згин.
+                Сталева арматура компенсує цю слабкість — залізобетон (бетон з арматурою) поєднує
+                стискаючу міцність бетону з розтягуючою міцністю сталі, що робить конструкцію значно
+                надійнішою та довговічнішою.
+            </p>
+
+            <h2>Як розраховується кількість арматури</h2>
+            <p>
+                Арматурна сітка складається з прутків, розміщених у двох перпендикулярних напрямках
+                з певним кроком (відстанню між сусідніми прутками). Кількість прутків у кожному
+                напрямку розраховується як довжина ділянки поділена на крок сітки, плюс один додатковий
+                пруток на край.
+            </p>
+
+            <h2>Типовий крок сітки залежно від конструкції</h2>
+            <ul>
+                <li><b>Стяжка підлоги:</b> 15-20 см, менше навантаження, тонший шар бетону.</li>
+                <li><b>Фундаментна плита:</b> 20-25 см, залежно від навантаження будівлі та типу ґрунту.</li>
+                <li><b>Дорожнє покриття:</b> 10-15 см через високі навантаження від транспорту.</li>
+            </ul>
+
+            <h2>Як розрахувати вагу арматури</h2>
+            <p>
+                Знаючи загальну довжину арматури та її діаметр, вагу можна визначити за довідковими
+                таблицями погонної ваги. Наприклад, орієнтовна вага одного метра: 6мм ≈ 0.222 кг,
+                8мм ≈ 0.395 кг, 10мм ≈ 0.617 кг, 12мм ≈ 0.888 кг, 14мм ≈ 1.21 кг, 16мм ≈ 1.58 кг.
+            </p>
+
+            <p class="m-hintSmall">
+                Розрахунок є орієнтовним для базового армування. Для відповідальних конструкцій
+                (фундаменти житлових будинків, несучі елементи) обов'язково потрібен проєкт від
+                кваліфікованого інженера-конструктора з урахуванням навантажень та норм безпеки.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Навіщо потрібна арматурна сітка в бетоні?</h3>
+                <p>Бетон добре витримує стискання, але слабкий на розтягування. Арматура компенсує цю слабкість, суттєво
+                    підвищуючи міцність та довговічність конструкції.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Який крок сітки використовують найчастіше?</h3>
+                <p>Для стяжки підлоги типово 15-20 см, для фундаментних плит 20-25 см, залежно від навантаження та
+                    товщини конструкції.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як розрахувати вагу арматури, знаючи лише довжину?</h3>
+                <p>Вага залежить від діаметра прутка — довідкові таблиці вказують вагу одного погонного метра для
+                    кожного стандартного діаметра (наприклад, 8мм ≈ 0.395 кг/м, 10мм ≈ 0.617 кг/м).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
