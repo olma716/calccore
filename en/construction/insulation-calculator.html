@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Insulation Calculator Online — Insulation Thickness | CalcCore</title>
+    <meta name="description"
+        content="Calculate the recommended insulation thickness for walls, roof, or floor by material. Also calculates material quantity by area." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/insulation-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/insulation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/insulation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/insulation-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/insulation-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is thermal conductivity?",
+        "acceptedAnswer":{"@type":"Answer","text":"It's a value (λ, lambda) that indicates how well a material conducts heat. The lower the coefficient, the better the material's insulating properties."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why do different parts of a building need different insulation thickness?",
+        "acceptedAnswer":{"@type":"Answer","text":"The roof loses the most heat (warm air rises), so it needs the thickest insulation layer. Walls and floors have lower requirements."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can you insulate too much?",
+        "acceptedAnswer":{"@type":"Answer","text":"Excessive insulation thickness gives diminishing returns in efficiency while increasing cost, so there's an optimal thickness beyond which extra spending doesn't pay off in heating savings."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/insulation-calculator#app",
+    "name":"Insulation Calculator",
+    "description":"Calculate recommended insulation thickness and material quantity.",
+    "url":"https://calccore.net/en/construction/insulation-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cinsul">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Insulation Calculator</h1>
+                    <p class="mcalc__p">
+                        Find the recommended insulation thickness and
+                        material quantity for your project.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="surfaceType">Surface type</label>
+                                <select id="surfaceType" class="mcalc__select">
+                                    <option value="wall" selected>Wall</option>
+                                    <option value="roof">Roof</option>
+                                    <option value="floor">Floor</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="material">Insulation material</label>
+                                <select id="material" class="mcalc__select">
+                                    <option value="mineralWool" selected>Mineral wool (λ=0.040)</option>
+                                    <option value="eps">EPS foam (λ=0.037)</option>
+                                    <option value="xps">Extruded polystyrene XPS (λ=0.030)</option>
+                                    <option value="pur">PUR/PIR boards (λ=0.022)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="area">Surface area (m²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 80" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
+                            <a href="/en/construction/flooring-calculator">Flooring Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is thermal insulation and why it matters</h2>
+            <p>
+                Thermal insulation reduces heat loss in winter and overheating in summer, lowering
+                heating and cooling costs, improving living comfort, and reducing a building's
+                environmental footprint.
+            </p>
+
+            <h2>Thermal conductivity (λ, lambda)</h2>
+            <p>
+                Every insulation material has a thermal conductivity coefficient — a value indicating
+                how well it conducts heat (measured in W/(m·K)). The <b>lower</b> the coefficient, the
+                <b>better</b> the insulating properties, and the thinner the insulation layer needed
+                for the same effect.
+            </p>
+
+            <h2>Recommended thickness by surface type</h2>
+            <ul>
+                <li><b>Roof:</b> requires the thickest insulation layer, since warm air naturally rises and the roof is
+                    where the most heat is lost.</li>
+                <li><b>Walls:</b> moderate thickness, balancing efficiency with preserving usable room space.</li>
+                <li><b>Floor:</b> usually the least thickness among the three, especially for upper floors.</li>
+            </ul>
+
+            <h2>Material comparison</h2>
+            <ul>
+                <li><b>Mineral wool:</b> affordable, good fire resistance, breathable.</li>
+                <li><b>EPS foam:</b> lightweight, inexpensive, easy to install, but flammable.</li>
+                <li><b>Extruded polystyrene (XPS):</b> higher density and moisture resistance, suitable for foundations.
+                </li>
+                <li><b>PUR/PIR boards:</b> best insulating properties (lowest λ), allow the thinnest layer, but more
+                    expensive.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                The calculation provides an estimated thickness based on a simplified model. For
+                precise insulation design of a specific building, consulting a thermal engineer who
+                accounts for climate zone, building codes, and structural details is recommended.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>What is thermal conductivity?</h3>
+                <p>It's a value (λ, lambda) that indicates how well a material conducts heat. The lower the coefficient,
+                    the better the material's insulating properties.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Why do different parts of a building need different insulation thickness?</h3>
+                <p>The roof loses the most heat (warm air rises), so it needs the thickest insulation layer. Walls and
+                    floors have lower requirements.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Can you insulate too much?</h3>
+                <p>Excessive insulation thickness gives diminishing returns in efficiency while increasing cost, so
+                    there's an optimal thickness beyond which extra spending doesn't pay off in heating savings.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

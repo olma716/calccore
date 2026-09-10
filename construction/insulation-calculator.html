@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор теплоізоляції онлайн — товщина утеплення | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок необхідної товщини утеплювача для стін, даху чи підлоги за матеріалом та кліматичною зоною. Також кількість матеріалу за площею." />
+
+    <link rel="canonical" href="https://calccore.net/construction/insulation-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/insulation-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/insulation-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/insulation-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/insulation-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Що таке коефіцієнт теплопровідності?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це показник (λ, лямбда), що вказує, наскільки добре матеріал проводить тепло. Чим нижчий коефіцієнт, тим кращі теплоізоляційні властивості матеріалу."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чому різні частини будинку потребують різної товщини утеплення?",
+        "acceptedAnswer":{"@type":"Answer","text":"Дах втрачає найбільше тепла (гаряче повітря піднімається вгору), тому потребує найтовщого шару утеплення. Стіни і підлога мають нижчі вимоги."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи можна утеплити занадто сильно?",
+        "acceptedAnswer":{"@type":"Answer","text":"Надмірна товщина утеплення дає дедалі менший приріст ефективності при збільшенні вартості, тому існує оптимальна товщина, після якої додаткові витрати не окупаються економією на опаленні."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/construction/insulation-calculator#app",
+    "name":"Insulation Calculator",
+    "description":"Розрахунок рекомендованої товщини утеплення та кількості матеріалу.",
+    "url":"https://calccore.net/construction/insulation-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cinsul">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор теплоізоляції</h1>
+                    <p class="mcalc__p">
+                        Дізнайся рекомендовану товщину утеплювача та кількість
+                        матеріалу для твого проєкту.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="surfaceType">Тип поверхні</label>
+                                <select id="surfaceType" class="mcalc__select">
+                                    <option value="wall" selected>Стіна</option>
+                                    <option value="roof">Дах</option>
+                                    <option value="floor">Підлога</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="material">Матеріал утеплювача</label>
+                                <select id="material" class="mcalc__select">
+                                    <option value="mineralWool" selected>Мінеральна вата (λ=0.040)</option>
+                                    <option value="eps">Пінопласт EPS (λ=0.037)</option>
+                                    <option value="xps">Екструдований пінополістирол XPS (λ=0.030)</option>
+                                    <option value="pur">ППУ / PIR плити (λ=0.022)</option>
+                                </select>
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="area">Площа поверхні (м²)</label>
+                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
+                                    placeholder="напр.: 80" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/construction/paint-calculator">Калькулятор фарби</a>
+                            <a href="/construction/flooring-calculator">Калькулятор підлоги</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке теплоізоляція і навіщо вона потрібна</h2>
+            <p>
+                Теплоізоляція зменшує втрати тепла взимку та перегрів влітку, знижуючи витрати
+                на опалення й кондиціювання, покращуючи комфорт проживання та зменшуючи екологічний
+                слід будівлі.
+            </p>
+
+            <h2>Коефіцієнт теплопровідності (λ, лямбда)</h2>
+            <p>
+                Кожен теплоізоляційний матеріал має коефіцієнт теплопровідності — показник того,
+                наскільки добре він проводить тепло (вимірюється у Вт/(м·К)). Чим <b>нижчий</b>
+                коефіцієнт, тим <b>кращі</b> ізоляційні властивості, і тим тоншим може бути шар
+                утеплювача для досягнення того самого ефекту.
+            </p>
+
+            <h2>Рекомендована товщина за типом поверхні</h2>
+            <ul>
+                <li><b>Дах:</b> потребує найтовщого шару утеплення, оскільки тепле повітря природно піднімається вгору,
+                    і саме через дах втрачається найбільше тепла.</li>
+                <li><b>Стіни:</b> помірна товщина, баланс між ефективністю та збереженням корисної площі приміщення.
+                </li>
+                <li><b>Підлога:</b> зазвичай найменша товщина серед трьох, особливо для поверхів вище першого.</li>
+            </ul>
+
+            <h2>Порівняння матеріалів</h2>
+            <ul>
+                <li><b>Мінеральна вата:</b> доступна ціна, добра пожежобезпека, паропроникність.</li>
+                <li><b>Пінопласт (EPS):</b> легкий, недорогий, простий у монтажі, але горючий.</li>
+                <li><b>Екструдований пінополістирол (XPS):</b> вища щільність і вологостійкість, підходить для
+                    фундаментів.</li>
+                <li><b>ППУ/PIR плити:</b> найкращі теплоізоляційні властивості (найнижча λ), дозволяють найтонший шар,
+                    але дорожчі.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Розрахунок надає орієнтовну товщину на основі спрощеної моделі. Для точного проєктування
+                теплоізоляції конкретної будівлі рекомендується консультація з інженером-теплотехніком,
+                який врахує кліматичну зону, будівельні норми та конструктивні особливості.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке коефіцієнт теплопровідності?</h3>
+                <p>Це показник (λ, лямбда), що вказує, наскільки добре матеріал проводить тепло. Чим нижчий коефіцієнт,
+                    тим кращі теплоізоляційні властивості матеріалу.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чому різні частини будинку потребують різної товщини утеплення?</h3>
+                <p>Дах втрачає найбільше тепла (гаряче повітря піднімається вгору), тому потребує найтовщого шару
+                    утеплення. Стіни і підлога мають нижчі вимоги.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи можна утеплити занадто сильно?</h3>
+                <p>Надмірна товщина утеплення дає дедалі менший приріст ефективності при збільшенні вартості, тому існує
+                    оптимальна товщина, після якої додаткові витрати не окупаються економією на опаленні.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
