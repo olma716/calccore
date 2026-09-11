@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Roofing Calculator Online — Area and Material Quantity | CalcCore</title>
+    <meta name="description"
+        content="Calculate roof area based on house dimensions and roof pitch. Roofing material quantity accounting for overlap allowance." />
+
+    <link rel="canonical" href="https://calccore.net/en/construction/roofing-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/roofing-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/roofing-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/roofing-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/roofing-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why is roof area larger than the house's footprint?",
+        "acceptedAnswer":{"@type":"Answer","text":"Due to the slope, the actual roof surface area is always larger than the horizontal projection (the house footprint) — the steeper the pitch, the greater the difference."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is the optimal roof pitch?",
+        "acceptedAnswer":{"@type":"Answer","text":"This depends on climate and roofing material type: in snowy regions, steeper pitches (35-45°) are preferred for better snow shedding, while metal roofing typically uses a 20-35° range."}
+      },
+      {
+        "@type":"Question",
+        "name":"How much extra material is needed for overlap?",
+        "acceptedAnswer":{"@type":"Answer","text":"Usually 10-15% extra beyond the calculated area — roofing materials are installed with overlap for waterproofing, and part of each sheet's area is covered by the adjacent one."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/construction/roofing-calculator#app",
+    "name":"Roofing Calculator",
+    "description":"Calculate roof area and material quantity based on house dimensions and roof pitch.",
+    "url":"https://calccore.net/en/construction/roofing-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="croofing">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Roofing Calculator</h1>
+                    <p class="mcalc__p">
+                        Calculate roof area and the amount of material needed
+                        based on house dimensions and roof pitch.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Enter inputs</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="houseLength">House length (m)</label>
+                                <input class="mcalc__input" id="houseLength" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 10" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="houseWidth">House width (m)</label>
+                                <input class="mcalc__input" id="houseWidth" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 8" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="pitch">Roof pitch angle (degrees)</label>
+                                <input class="mcalc__input" id="pitch" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 30" value="30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="overhang">Roof overhang each side (m)</label>
+                                <input class="mcalc__input" id="overhang" type="text" inputmode="decimal"
+                                    placeholder="e.g.: 0.5" value="0.5" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="wastage">Overlap allowance (%)</label>
+                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
+                                    placeholder="e.g.: 10" value="10" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Calculate</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Result</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/en/construction/insulation-calculator">Insulation Calculator</a>
+                            <a href="/en/construction/rebar-calculator">Rebar Calculator</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How roof area is calculated</h2>
+            <p>
+                The calculation is based on the horizontal footprint area of the house (length ×
+                width, plus roof overhangs), divided by the cosine of the pitch angle. This accounts
+                for the geometric fact that a sloped surface has a larger area than its horizontal
+                projection.
+            </p>
+
+            <h2>Why roof area is always larger than the house footprint</h2>
+            <p>
+                Imagine the roof as an inclined plane stretched over the horizontal rectangle of the
+                house. The steeper the pitch, the "longer" this sloped surface becomes relative to
+                its horizontal projection. For example, at a 30° pitch the roof area exceeds the
+                footprint by about 15%, and at 45° — already by 41%.
+            </p>
+
+            <h2>How to choose a roof pitch</h2>
+            <ul>
+                <li><b>Low slope (5-20°):</b> suitable for regions with little precipitation, requires more reliable
+                    waterproofing.</li>
+                <li><b>Moderate pitch (20-35°):</b> the most common range, suitable for most roofing materials,
+                    including metal tile.</li>
+                <li><b>Steep roof (35-50°+):</b> better for snowy regions (snow sheds faster), also traditional for
+                    certain architectural styles.</li>
+            </ul>
+
+            <h2>Why an overlap allowance is needed</h2>
+            <p>
+                Roofing materials (tiles, metal roofing, slate) are installed overlapping each other
+                to ensure watertight joints. This means part of each sheet or element's area is
+                "covered" by the adjacent one, so more material is actually needed than the calculated
+                net roof area.
+            </p>
+
+            <p class="m-hintSmall">
+                This calculation is a simplified model for a rectangular gable or hip roof of simple
+                shape. For roofs with complex configurations (dormers, multiple levels, complex
+                geometry), a detailed design from an architect or roofer is recommended.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why is roof area larger than the house's footprint?</h3>
+                <p>Due to the slope, the actual roof surface area is always larger than the horizontal projection (the
+                    house footprint) — the steeper the pitch, the greater the difference.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is the optimal roof pitch?</h3>
+                <p>This depends on climate and roofing material type: in snowy regions, steeper pitches (35-45°) are
+                    preferred for better snow shedding, while metal roofing typically uses a 20-35° range.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>How much extra material is needed for overlap?</h3>
+                <p>Usually 10-15% extra beyond the calculated area — roofing materials are installed with overlap for
+                    waterproofing, and part of each sheet's area is covered by the adjacent one.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

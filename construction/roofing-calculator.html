@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор даху онлайн — площа та кількість матеріалу | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок площі покрівлі за розмірами будинку та кутом нахилу даху. Кількість покрівельного матеріалу з урахуванням запасу на нахлест." />
+
+    <link rel="canonical" href="https://calccore.net/construction/roofing-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/roofing-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/roofing-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/roofing-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/roofing-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чому площа даху більша за площу будинку?",
+        "acceptedAnswer":{"@type":"Answer","text":"Через нахил схилів фактична площа покрівлі завжди більша за горизонтальну проєкцію (площу основи будинку) — чим більший кут нахилу, тим суттєвіша різниця."}
+      },
+      {
+        "@type":"Question",
+        "name":"Який кут нахилу даху оптимальний?",
+        "acceptedAnswer":{"@type":"Answer","text":"Це залежить від клімату та типу покрівельного матеріалу: у сніжних регіонах перевагу надають крутішим схилам (35-45°) для кращого сходження снігу, тоді як для металочерепиці типовий діапазон 20-35°."}
+      },
+      {
+        "@type":"Question",
+        "name":"Скільки запасу матеріалу потрібно на нахлест?",
+        "acceptedAnswer":{"@type":"Answer","text":"Зазвичай 10-15% додатково до розрахованої площі — покрівельні матеріали укладаються внахлест для водонепроникності, і частина площі кожного листа перекривається сусіднім."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/construction/roofing-calculator#app",
+    "name":"Roofing Calculator",
+    "description":"Розрахунок площі покрівлі та кількості матеріалу за розмірами будинку і кутом нахилу.",
+    "url":"https://calccore.net/construction/roofing-calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="croofing">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор даху</h1>
+                    <p class="mcalc__p">
+                        Розрахуй площу покрівлі та потрібну кількість матеріалу
+                        за розмірами будинку і кутом нахилу.
+                    </p>
+                </div>
+
+                <div class="mcalc__grid">
+
+                    <!-- LEFT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Введи дані</h2>
+                            <span class="mcalc__badge">Construction</span>
+                        </div>
+
+                        <div class="mcalc__rows">
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="houseLength">Довжина будинку (м)</label>
+                                <input class="mcalc__input" id="houseLength" type="text" inputmode="decimal"
+                                    placeholder="напр.: 10" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="houseWidth">Ширина будинку (м)</label>
+                                <input class="mcalc__input" id="houseWidth" type="text" inputmode="decimal"
+                                    placeholder="напр.: 8" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="pitch">Кут нахилу даху (градуси)</label>
+                                <input class="mcalc__input" id="pitch" type="text" inputmode="numeric"
+                                    placeholder="напр.: 30" value="30" />
+                            </div>
+
+                            <div class="mcalc__field">
+                                <label class="mcalc__label" for="overhang">Звис даху з кожного боку (м)</label>
+                                <input class="mcalc__input" id="overhang" type="text" inputmode="decimal"
+                                    placeholder="напр.: 0.5" value="0.5" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <label class="mcalc__label" for="wastage">Запас на нахлест (%)</label>
+                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
+                                    placeholder="напр.: 10" value="10" />
+                            </div>
+
+                            <div class="mcalc__field m-full">
+                                <div class="mcalc__actions m-mt10">
+                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                        type="button">Розрахувати</button>
+                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                                </div>
+                                <div class="mcalc__toast" id="mToast"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="mcalc__card">
+                        <div class="mcalc__sectionTitle">
+                            <h2 class="mcalc__h2">Результат</h2>
+                            <span class="mcalc__badge">CalcCore</span>
+                        </div>
+
+                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
+                        <div class="m-details" id="mDetails" aria-live="polite"></div>
+
+                        <div class="m-navlinks">
+                            <a href="/construction/insulation-calculator">Калькулятор теплоізоляції</a>
+                            <a href="/construction/rebar-calculator">Калькулятор арматури</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується площа даху</h2>
+            <p>
+                Розрахунок базується на площі горизонтальної проєкції будинку (довжина × ширина, плюс
+                звиси даху), поділеній на косинус кута нахилу. Це враховує геометричний факт, що
+                похилий схил має більшу площу, ніж його горизонтальна проєкція.
+            </p>
+
+            <h2>Чому площа даху завжди більша за площу будинку</h2>
+            <p>
+                Уяви, що дах — це нахилена площина, натягнута над горизонтальним прямокутником
+                будинку. Чим більший кут нахилу, тим "довшою" стає ця похила поверхня відносно своєї
+                горизонтальної проєкції. Наприклад, при куті 30° площа даху перевищує площу основи
+                приблизно на 15%, а при 45° — вже на 41%.
+            </p>
+
+            <h2>Як обрати кут нахилу даху</h2>
+            <ul>
+                <li><b>Пологий дах (5-20°):</b> підходить для регіонів з малою кількістю опадів, вимагає надійнішої
+                    гідроізоляції.</li>
+                <li><b>Помірний нахил (20-35°):</b> найпоширеніший діапазон, підходить для більшості типів покрівельних
+                    матеріалів, включно з металочерепицею.</li>
+                <li><b>Крутий дах (35-50°+):</b> кращий для снігових регіонів (сніг швидше сходить), також традиційний
+                    для деяких архітектурних стилів.</li>
+            </ul>
+
+            <h2>Навіщо потрібен запас на нахлест</h2>
+            <p>
+                Покрівельні матеріали (черепиця, металочерепиця, шифер) укладаються з нахлестом одне
+                на одного для забезпечення водонепроникності стиків. Це означає, що частина площі
+                кожного листа чи елемента "перекривається" сусіднім, тому фактично потрібно більше
+                матеріалу, ніж чиста розрахована площа даху.
+            </p>
+
+            <p class="m-hintSmall">
+                Цей розрахунок є спрощеною моделлю для прямокутного двосхилого чи чотирисхилого даху
+                простої форми. Для дахів складної конфігурації (з мансардними вікнами, кількома
+                рівнями, складною геометрією) рекомендується детальний проєкт від архітектора чи
+                покрівельника.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чому площа даху більша за площу будинку?</h3>
+                <p>Через нахил схилів фактична площа покрівлі завжди більша за горизонтальну проєкцію (площу основи
+                    будинку) — чим більший кут нахилу, тим суттєвіша різниця.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Який кут нахилу даху оптимальний?</h3>
+                <p>Це залежить від клімату та типу покрівельного матеріалу: у сніжних регіонах перевагу надають крутішим
+                    схилам (35-45°) для кращого сходження снігу, тоді як для металочерепиці типовий діапазон 20-35°.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Скільки запасу матеріалу потрібно на нахлест?</h3>
+                <p>Зазвичай 10-15% додатково до розрахованої площі — покрівельні матеріали укладаються внахлест для
+                    водонепроникності, і частина площі кожного листа перекривається сусіднім.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
