@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Matrix Calculator Online — Addition, Multiplication, Determinant | CalcCore</title>
+    <meta name="description"
+        content="Online matrix calculator: addition, subtraction, multiplication, transpose, and determinant. Sizes from 1×1 to 4×4 with step-by-step results." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/matrix-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/matrix-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/matrix-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/education/matrix-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/matrix-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/matrix-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Why can't you multiply any two matrices?",
+        "acceptedAnswer":{"@type":"Answer","text":"Multiplying A×B is only possible if the number of columns in matrix A equals the number of rows in matrix B. This is a fundamental rule of matrix multiplication."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is a matrix determinant?",
+        "acceptedAnswer":{"@type":"Answer","text":"The determinant is a number computed from a square matrix that indicates whether the matrix has an inverse (determinant ≠ 0), and is used in many linear algebra applications."}
+      },
+      {
+        "@type":"Question",
+        "name":"What is matrix transpose?",
+        "acceptedAnswer":{"@type":"Answer","text":"Transpose is an operation that turns a matrix's rows into columns and vice versa. The element at position (i,j) moves to position (j,i)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/education/matrix-calculator#app",
+    "name":"Matrix Calculator",
+    "description":"Matrix calculator: addition, subtraction, multiplication, transpose, determinant.",
+    "url":"https://calccore.net/en/education/matrix-calculator",
+    "applicationCategory":"EducationApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmatrix">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Matrix Calculator</h1>
+                    <p class="mcalc__p">
+                        Addition, subtraction, multiplication, transpose,
+                        and determinant for matrices up to 4×4.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Enter matrices</h2>
+                        <span class="mcalc__badge">Education</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="sizeA">Matrix A size</label>
+                            <select id="sizeA" class="mcalc__select">
+                                <option value="1x1">1×1</option>
+                                <option value="2x2" selected>2×2</option>
+                                <option value="3x3">3×3</option>
+                                <option value="4x4">4×4</option>
+                                <option value="2x3">2×3</option>
+                                <option value="3x2">3×2</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="sizeB">Matrix B size</label>
+                            <select id="sizeB" class="mcalc__select">
+                                <option value="1x1">1×1</option>
+                                <option value="2x2" selected>2×2</option>
+                                <option value="3x3">3×3</option>
+                                <option value="4x4">4×4</option>
+                                <option value="2x3">2×3</option>
+                                <option value="3x2">3×2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="matrix-inputs-wrap">
+                        <div class="matrix-block">
+                            <div class="matrix-block__label">Matrix A</div>
+                            <div class="matrix-grid" id="matrixA"></div>
+                        </div>
+                        <div class="matrix-block">
+                            <div class="matrix-block__label">Matrix B</div>
+                            <div class="matrix-grid" id="matrixB"></div>
+                        </div>
+                    </div>
+
+                    <div class="matrix-ops">
+                        <button class="mcalc__btn mcalc__btn--primary" data-op="add" type="button">A + B</button>
+                        <button class="mcalc__btn mcalc__btn--primary" data-op="sub" type="button">A − B</button>
+                        <button class="mcalc__btn mcalc__btn--primary" data-op="mul" type="button">A × B</button>
+                        <button class="mcalc__btn" data-op="transposeA" type="button">Aᵀ</button>
+                        <button class="mcalc__btn" data-op="detA" type="button">det(A)</button>
+                    </div>
+
+                    <div class="mcalc__toast" id="mToast"></div>
+
+                    <div class="matrix-result-wrap" id="matrixResultWrap" style="display:none;">
+                        <div class="matrix-block__label" id="resultLabel">Result</div>
+                        <div class="matrix-grid matrix-grid--result" id="matrixResult"></div>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/en/education/system-of-equations-calculator">System of Equations</a>
+                    <a href="/en/calculator">Scientific Calculator</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>What is a matrix</h2>
+            <p>
+                A matrix is a rectangular array of numbers arranged in rows and columns. Matrices are
+                widely used in mathematics, physics, computer graphics, machine learning, and economics
+                to compactly represent systems of equations, transformations, and data.
+            </p>
+
+            <h2>Basic matrix operations</h2>
+            <ul>
+                <li><b>Addition/subtraction:</b> only possible for matrices of the same size — corresponding elements
+                    are simply added or subtracted.</li>
+                <li><b>Multiplication:</b> the number of columns in the first matrix must equal the number of rows in
+                    the second. The result is a new matrix with the rows of the first and columns of the second.</li>
+                <li><b>Transpose:</b> turns rows into columns — the element at (i,j) moves to position (j,i).</li>
+                <li><b>Determinant:</b> a number that can only be computed for square matrices, showing the scaling
+                    factor of the transformation and whether an inverse matrix exists.</li>
+            </ul>
+
+            <h2>The matrix multiplication rule</h2>
+            <p>
+                Unlike ordinary numbers, matrix multiplication <b>is not commutative</b> — meaning
+                A×B usually doesn't equal B×A. Additionally, multiplication is only possible if the
+                matrix dimensions are compatible: the number of columns in A must exactly match the
+                number of rows in B.
+            </p>
+
+            <h2>Where matrices are used</h2>
+            <ul>
+                <li><b>Computer graphics:</b> rotating, scaling, and translating 3D objects.</li>
+                <li><b>Machine learning:</b> neural networks operate on data as matrices and tensors.</li>
+                <li><b>Systems of equations:</b> a compact way to write and solve systems of linear equations.</li>
+                <li><b>Economics:</b> input-output models, market equilibrium analysis.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                This calculator supports matrices up to 4×4. For larger matrices or more complex
+                operations (matrix inverse, eigenvalues), specialized software (MATLAB, Python NumPy)
+                is recommended.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>Why can't you multiply any two matrices?</h3>
+                <p>Multiplying A×B is only possible if the number of columns in matrix A equals the number of rows in
+                    matrix B. This is a fundamental rule of matrix multiplication.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is a matrix determinant?</h3>
+                <p>The determinant is a number computed from a square matrix that indicates whether the matrix has an
+                    inverse (determinant ≠ 0), and is used in many linear algebra applications.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What is matrix transpose?</h3>
+                <p>Transpose is an operation that turns a matrix's rows into columns and vice versa. The element at
+                    position (i,j) moves to position (j,i).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

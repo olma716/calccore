@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор матриць онлайн — додавання, множення, визначник | CalcCore</title>
+    <meta name="description"
+        content="Онлайн калькулятор матриць: додавання, віднімання, множення, транспонування та визначник. Розміри від 1×1 до 4×4 з покроковим результатом." />
+
+    <link rel="canonical" href="https://calccore.net/education/matrix-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/matrix-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/matrix-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/education/matrix-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/matrix-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/matrix-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Чому не можна множити будь-які дві матриці?",
+        "acceptedAnswer":{"@type":"Answer","text":"Множення A×B можливе лише якщо кількість стовпців матриці A дорівнює кількості рядків матриці B. Це фундаментальне правило множення матриць."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке визначник матриці?",
+        "acceptedAnswer":{"@type":"Answer","text":"Визначник — це число, обчислене з квадратної матриці, яке показує, чи має матриця обернену (визначник ≠ 0), та використовується в багатьох застосуваннях лінійної алгебри."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке транспонування матриці?",
+        "acceptedAnswer":{"@type":"Answer","text":"Транспонування — це операція, яка перетворює рядки матриці на стовпці і навпаки. Елемент на позиції (i,j) переходить у позицію (j,i)."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/education/matrix-calculator#app",
+    "name":"Matrix Calculator",
+    "description":"Калькулятор матриць: додавання, віднімання, множення, транспонування, визначник.",
+    "url":"https://calccore.net/education/matrix-calculator",
+    "applicationCategory":"EducationApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cmatrix">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор матриць</h1>
+                    <p class="mcalc__p">
+                        Додавання, віднімання, множення, транспонування та
+                        визначник матриць розміром до 4×4.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи матриці</h2>
+                        <span class="mcalc__badge">Education</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="sizeA">Розмір матриці A</label>
+                            <select id="sizeA" class="mcalc__select">
+                                <option value="1x1">1×1</option>
+                                <option value="2x2" selected>2×2</option>
+                                <option value="3x3">3×3</option>
+                                <option value="4x4">4×4</option>
+                                <option value="2x3">2×3</option>
+                                <option value="3x2">3×2</option>
+                            </select>
+                        </div>
+
+                        <div class="mcalc__field">
+                            <label class="mcalc__label" for="sizeB">Розмір матриці B</label>
+                            <select id="sizeB" class="mcalc__select">
+                                <option value="1x1">1×1</option>
+                                <option value="2x2" selected>2×2</option>
+                                <option value="3x3">3×3</option>
+                                <option value="4x4">4×4</option>
+                                <option value="2x3">2×3</option>
+                                <option value="3x2">3×2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="matrix-inputs-wrap">
+                        <div class="matrix-block">
+                            <div class="matrix-block__label">Матриця A</div>
+                            <div class="matrix-grid" id="matrixA"></div>
+                        </div>
+                        <div class="matrix-block">
+                            <div class="matrix-block__label">Матриця B</div>
+                            <div class="matrix-grid" id="matrixB"></div>
+                        </div>
+                    </div>
+
+                    <div class="matrix-ops">
+                        <button class="mcalc__btn mcalc__btn--primary" data-op="add" type="button">A + B</button>
+                        <button class="mcalc__btn mcalc__btn--primary" data-op="sub" type="button">A − B</button>
+                        <button class="mcalc__btn mcalc__btn--primary" data-op="mul" type="button">A × B</button>
+                        <button class="mcalc__btn" data-op="transposeA" type="button">Aᵀ</button>
+                        <button class="mcalc__btn" data-op="detA" type="button">det(A)</button>
+                    </div>
+
+                    <div class="mcalc__toast" id="mToast"></div>
+
+                    <div class="matrix-result-wrap" id="matrixResultWrap" style="display:none;">
+                        <div class="matrix-block__label" id="resultLabel">Результат</div>
+                        <div class="matrix-grid matrix-grid--result" id="matrixResult"></div>
+                    </div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/education/system-of-equations-calculator">Система рівнянь</a>
+                    <a href="/calculator">Науковий калькулятор</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке матриця</h2>
+            <p>
+                Матриця — це прямокутна таблиця чисел, впорядкована в рядки і стовпці. Матриці широко
+                використовуються в математиці, фізиці, комп'ютерній графіці, машинному навчанні та
+                економіці для компактного представлення систем рівнянь, перетворень та даних.
+            </p>
+
+            <h2>Основні операції з матрицями</h2>
+            <ul>
+                <li><b>Додавання/віднімання:</b> можливе лише для матриць однакового розміру — відповідні елементи
+                    просто додаються чи віднімаються.</li>
+                <li><b>Множення:</b> кількість стовпців першої матриці має дорівнювати кількості рядків другої.
+                    Результат — нова матриця з рядками першої та стовпцями другої.</li>
+                <li><b>Транспонування:</b> перетворює рядки на стовпці — елемент (i,j) переходить у позицію (j,i).</li>
+                <li><b>Визначник:</b> число, яке можна обчислити лише для квадратних матриць, показує масштабуючий
+                    фактор перетворення та наявність оберненої матриці.</li>
+            </ul>
+
+            <h2>Правило множення матриць</h2>
+            <p>
+                На відміну від звичайних чисел, множення матриць <b>не є комутативним</b> — тобто
+                A×B зазвичай не дорівнює B×A. Крім того, множення можливе лише якщо розміри матриць
+                сумісні: кількість стовпців A повинна точно дорівнювати кількості рядків B.
+            </p>
+
+            <h2>Де застосовуються матриці</h2>
+            <ul>
+                <li><b>Комп'ютерна графіка:</b> обертання, масштабування та переміщення 3D-об'єктів.</li>
+                <li><b>Машинне навчання:</b> нейронні мережі оперують даними у вигляді матриць і тензорів.</li>
+                <li><b>Системи рівнянь:</b> компактний запис і розв'язання систем лінійних рівнянь.</li>
+                <li><b>Економіка:</b> моделі "витрати-випуск", аналіз ринкової рівноваги.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Цей калькулятор підтримує матриці розміром до 4×4. Для більших матриць чи складніших
+                операцій (обернена матриця, власні значення) рекомендується використовувати спеціалізоване
+                програмне забезпечення (MATLAB, Python NumPy).
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Чому не можна множити будь-які дві матриці?</h3>
+                <p>Множення A×B можливе лише якщо кількість стовпців матриці A дорівнює кількості рядків матриці B. Це
+                    фундаментальне правило множення матриць.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке визначник матриці?</h3>
+                <p>Визначник — це число, обчислене з квадратної матриці, яке показує, чи має матриця обернену (визначник
+                    ≠ 0), та використовується в багатьох застосуваннях лінійної алгебри.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке транспонування матриці?</h3>
+                <p>Транспонування — це операція, яка перетворює рядки матриці на стовпці і навпаки. Елемент на позиції
+                    (i,j) переходить у позицію (j,i).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
