@@ -899,15 +899,28 @@
             const cards = Array.from(document.querySelectorAll('.hub-card'));
             const empty = document.getElementById('hubEmpty');
 
-            function apply() {
+          function apply() {
                 const q = (search?.value || '').trim().toLowerCase();
+                const queryWords = q.split(/\s+/).filter(Boolean);
                 let shown = 0;
 
                 cards.forEach(card => {
                     const title = (card.getAttribute('data-title') || '').toLowerCase();
                     const text = (card.innerText || '').toLowerCase();
+                    const combined = title + ' ' + text;
 
-                    const show = (!q) || title.includes(q) || text.includes(q);
+                    let show = true;
+                    if (queryWords.length) {
+                        show = queryWords.every(word => {
+                            if (combined.includes(word)) return true;
+                            if (word.length > 4) {
+                                const stem = word.slice(0, word.length - 2);
+                                if (combined.includes(stem)) return true;
+                            }
+                            return false;
+                        });
+                    }
+
                     card.style.display = show ? '' : 'none';
                     if (show) shown++;
                 });
