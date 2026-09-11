@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Статистичний калькулятор онлайн — середнє, медіана, відхилення | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок основних статистичних показників: середнє арифметичне, медіана, мода, стандартне відхилення, дисперсія та діапазон набору чисел." />
+
+    <link rel="canonical" href="https://calccore.net/education/statistics-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/statistics-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/statistics-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/education/statistics-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/statistics-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"У чому різниця між середнім і медіаною?",
+        "acceptedAnswer":{"@type":"Answer","text":"Середнє арифметичне — це сума всіх значень поділена на їх кількість. Медіана — це середнє значення у відсортованому наборі. Медіана менш чутлива до викидів (аномально великих чи малих значень)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що показує стандартне відхилення?",
+        "acceptedAnswer":{"@type":"Answer","text":"Стандартне відхилення показує, наскільки значення в наборі розкидані відносно середнього. Менше значення означає, що дані щільно згруповані навколо середнього, більше — що вони сильно розкидані."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чи може набір чисел мати кілька мод?",
+        "acceptedAnswer":{"@type":"Answer","text":"Так, якщо кілька значень зустрічаються з однаковою найвищою частотою, набір є мультимодальним. Якщо всі значення унікальні, моди не існує."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/education/statistics-calculator#app",
+    "name":"Statistics Calculator",
+    "description":"Розрахунок основних статистичних показників: середнє, медіана, мода, стандартне відхилення.",
+    "url":"https://calccore.net/education/statistics-calculator",
+    "applicationCategory":"EducationApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cstats">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Статистичний калькулятор</h1>
+                    <p class="mcalc__p">
+                        Введи набір чисел — отримай усі основні статистичні
+                        показники миттєво.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дані</h2>
+                        <span class="mcalc__badge">Education</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="numbersInput">Числа (через кому чи пробіл)</label>
+                            <textarea class="mcalc__input" id="numbersInput" rows="4"
+                                style="height:auto; padding:10px 12px; font-family:inherit;"
+                                placeholder="напр.: 4, 8, 15, 16, 23, 42"></textarea>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи числа для розрахунку.
+                    </div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/education/gpa-calculator">Калькулятор GPA</a>
+                    <a href="/calculator">Науковий калькулятор</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Основні статистичні показники</h2>
+            <ul>
+                <li><b>Середнє арифметичне:</b> сума всіх значень поділена на їх кількість — найпоширеніший показник
+                    центральної тенденції.</li>
+                <li><b>Медіана:</b> середнє значення у відсортованому наборі даних. Якщо кількість значень парна,
+                    медіана — середнє арифметичне двох центральних чисел.</li>
+                <li><b>Мода:</b> значення (чи значення), які зустрічаються найчастіше в наборі даних.</li>
+                <li><b>Стандартне відхилення:</b> міра розкиду даних відносно середнього значення.</li>
+                <li><b>Дисперсія:</b> квадрат стандартного відхилення, ще одна міра розкиду даних.</li>
+                <li><b>Діапазон (розмах):</b> різниця між найбільшим і найменшим значенням у наборі.</li>
+            </ul>
+
+            <h2>Чому медіана іноді краще за середнє</h2>
+            <p>
+                Середнє арифметичне чутливе до екстремальних значень (викидів). Наприклад, у наборі
+                зарплат [30000, 32000, 35000, 500000] середнє буде спотворене одним дуже великим
+                значенням і не відображатиме типову зарплату. Медіана в такому випадку дає точнішу
+                картину "типового" значення, оскільки не залежить від того, наскільки далеко викид
+                від решти даних.
+            </p>
+
+            <h2>Як інтерпретувати стандартне відхилення</h2>
+            <p>
+                Стандартне відхилення показує "типову" відстань значень від середнього. Невелике
+                стандартне відхилення означає, що дані щільно згруповані навколо середнього (низька
+                варіативність). Велике стандартне відхилення означає широкий розкид значень (висока
+                варіативність). Це ключовий показник у статистиці, фінансах (волатильність) та якісному
+                контролі.
+            </p>
+
+            <h2>Практичне застосування статистики</h2>
+            <ul>
+                <li><b>Навчання:</b> аналіз результатів тестів, порівняння оцінок групи студентів.</li>
+                <li><b>Наукові дослідження:</b> опис вибірки даних перед подальшим статистичним аналізом.</li>
+                <li><b>Бізнес:</b> аналіз продажів, оцінка стабільності показників.</li>
+                <li><b>Спорт:</b> аналіз результативності гравців чи команд протягом сезону.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Цей калькулятор обчислює вибіркове стандартне відхилення (з діленням на n−1), яке є
+                стандартом при роботі з вибіркою даних, а не всією генеральною сукупністю.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>У чому різниця між середнім і медіаною?</h3>
+                <p>Середнє арифметичне — це сума всіх значень поділена на їх кількість. Медіана — це середнє значення у
+                    відсортованому наборі. Медіана менш чутлива до викидів (аномально великих чи малих значень).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що показує стандартне відхилення?</h3>
+                <p>Стандартне відхилення показує, наскільки значення в наборі розкидані відносно середнього. Менше
+                    значення означає, що дані щільно згруповані навколо середнього, більше — що вони сильно розкидані.
+                </p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чи може набір чисел мати кілька мод?</h3>
+                <p>Так, якщо кілька значень зустрічаються з однаковою найвищою частотою, набір є мультимодальним. Якщо
+                    всі значення унікальні, моди не існує.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
