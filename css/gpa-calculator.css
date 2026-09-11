@@ -1,0 +1,98 @@
+/* =========================
+   GPA calculator rows
+========================= */
+
+.gpa-table-wrap {
+    margin-top: 10px;
+}
+
+.gpa-table-header {
+    display: grid;
+    grid-template-columns: 1fr 120px 100px 40px;
+    gap: 8px;
+    padding: 0 4px 8px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.gpa-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 100px 40px;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.gpa-row input,
+.gpa-row select {
+    height: 40px;
+    border: 1px solid #d4d7de;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: #1f2937;
+    outline: none;
+    width: 100%;
+}
+
+.gpa-row input:focus,
+.gpa-row select:focus {
+    border-color: rgba(15, 118, 110, .55);
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, .12);
+}
+
+.gpa-row-remove {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(239, 68, 68, .3);
+    background: rgba(239, 68, 68, .06);
+    color: #dc2626;
+    cursor: pointer;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gpa-row-remove:hover {
+    background: rgba(239, 68, 68, .12);
+}
+
+@media (max-width: 600px) {
+    .gpa-table-header {
+        display: none;
+    }
+
+    .gpa-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "name name"
+            "grade credits"
+            "remove remove";
+        gap: 6px;
+        padding: 10px;
+        border: 1px solid rgba(15, 118, 110, .12);
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .gpa-row input[data-field="name"] {
+        grid-area: name;
+    }
+
+    .gpa-row select[data-field="grade"] {
+        grid-area: grade;
+    }
+
+    .gpa-row input[data-field="credits"] {
+        grid-area: credits;
+    }
+
+    .gpa-row-remove {
+        grid-area: remove;
+        width: 100%;
+    }
+}

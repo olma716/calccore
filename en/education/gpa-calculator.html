@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>GPA Calculator Online — Grade Point Average | CalcCore</title>
+    <meta name="description"
+        content="Calculate your GPA (Grade Point Average) on the standard US 4.0 scale. Add courses with grades and credit hours for an accurate calculation." />
+
+    <link rel="canonical" href="https://calccore.net/en/education/gpa-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/gpa-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/gpa-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/education/gpa-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/gpa-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/gpa-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How is GPA calculated?",
+        "acceptedAnswer":{"@type":"Answer","text":"GPA is calculated by dividing the sum of (grade point value × course credit hours) for all courses by the total number of credit hours."}
+      },
+      {
+        "@type":"Question",
+        "name":"What are credit hours?",
+        "acceptedAnswer":{"@type":"Answer","text":"Credit hours represent a course's 'weight' — how many hours of coursework it represents. Courses with more credits have a greater impact on the final GPA."}
+      },
+      {
+        "@type":"Question",
+        "name":"What's the difference between weighted and unweighted GPA?",
+        "acceptedAnswer":{"@type":"Answer","text":"Unweighted GPA uses the standard 4.0 scale for all courses. Weighted GPA adds bonus points for advanced courses (Honors, AP), which can push the scale above 4.0."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/en/education/gpa-calculator#app",
+    "name":"GPA Calculator",
+    "description":"Calculate your Grade Point Average (GPA) on the standard US 4.0 scale.",
+    "url":"https://calccore.net/en/education/gpa-calculator",
+    "applicationCategory":"EducationApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"en",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cgpa">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">GPA Calculator</h1>
+                    <p class="mcalc__p">
+                        Add your courses with grades and credit hours —
+                        we'll calculate your GPA.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Your courses</h2>
+                        <span class="mcalc__badge">Education</span>
+                    </div>
+
+                    <div class="gpa-table-wrap">
+                        <div class="gpa-table-header">
+                            <span>Course name</span>
+                            <span>Grade</span>
+                            <span>Credits</span>
+                            <span></span>
+                        </div>
+                        <div class="gpa-rows" id="gpaRows"></div>
+                    </div>
+
+                    <div class="mcalc__actions m-mt10">
+                        <button class="mcalc__btn" id="btnAddRow" type="button">+ Add course</button>
+                        <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button">Calculate GPA</button>
+                        <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
+                    </div>
+                    <div class="mcalc__toast" id="mToast"></div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Add courses and click "Calculate
+                        GPA".</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/en/education/percent-calculator">Percentage Calculator</a>
+                    <a href="/en/calculator">Scientific Calculator</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>How GPA is calculated</h2>
+            <p>
+                <b>GPA (Grade Point Average)</b> is the standard US system for measuring academic
+                performance on a scale from 0 to 4.0. Each letter grade corresponds to a numeric
+                value:
+            </p>
+            <ul>
+                <li><b>A (90-100%)</b> = 4.0 points</li>
+                <li><b>B (80-89%)</b> = 3.0 points</li>
+                <li><b>C (70-79%)</b> = 2.0 points</li>
+                <li><b>D (60-69%)</b> = 1.0 point</li>
+                <li><b>F (below 60%)</b> = 0.0 points</li>
+            </ul>
+
+            <h2>The role of credit hours in the calculation</h2>
+            <p>
+                GPA is not a simple average of grades but a <b>weighted average</b>, where the weight
+                is each course's credit hours. Formula: GPA = sum of (grade point × credits) / sum of
+                all credits. This means a course with more credit hours (e.g., a core subject)
+                influences the final GPA more than a course with fewer credits (e.g., an elective).
+            </p>
+
+            <h2>Weighted vs unweighted GPA</h2>
+            <p>
+                <b>Unweighted GPA</b> uses the standard 4.0 scale equally for all courses, regardless
+                of difficulty. <b>Weighted GPA</b> adds bonus points for advanced courses (Honors, AP,
+                IB) — for example, an "A" in an AP course might count as 5.0 instead of 4.0, allowing
+                the GPA scale to exceed 4.0.
+            </p>
+
+            <h2>Why tracking your GPA matters</h2>
+            <ul>
+                <li><b>College admissions:</b> GPA is one of the key factors considered in admission applications.</li>
+                <li><b>Scholarships:</b> many scholarship programs have minimum GPA requirements.</li>
+                <li><b>Academic standing:</b> some institutions require maintaining a minimum GPA to keep student
+                    status.</li>
+                <li><b>Course load planning:</b> understanding how a specific course affects GPA helps make informed
+                    decisions when choosing subjects.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                This calculator uses the standard unweighted 4.0 scale. Specific grade conversion
+                rules may vary by institution — check your college or university's official policy.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>FAQ</h2>
+
+            <div class="m-faq-item">
+                <h3>How is GPA calculated?</h3>
+                <p>GPA is calculated by dividing the sum of (grade point value × course credit hours) for all courses by
+                    the total number of credit hours.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What are credit hours?</h3>
+                <p>Credit hours represent a course's "weight" — how many hours of coursework it represents. Courses with
+                    more credits have a greater impact on the final GPA.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>What's the difference between weighted and unweighted GPA?</h3>
+                <p>Unweighted GPA uses the standard 4.0 scale for all courses. Weighted GPA adds bonus points for
+                    advanced courses (Honors, AP), which can push the scale above 4.0.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>

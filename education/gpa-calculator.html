@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор GPA онлайн — середній бал успішності | CalcCore</title>
+    <meta name="description"
+        content="Розрахунок GPA (Grade Point Average) за американською шкалою 4.0. Додай курси з оцінками та кредит-годинами для точного розрахунку середнього балу." />
+
+    <link rel="canonical" href="https://calccore.net/education/gpa-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/gpa-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/gpa-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/education/gpa-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/gpa-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/gpa-calculator.js?v=20260911" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Як розраховується GPA?",
+        "acceptedAnswer":{"@type":"Answer","text":"GPA обчислюється діленням суми (числовий бал оцінки × кредит-години курсу) для всіх курсів на загальну кількість кредит-годин."}
+      },
+      {
+        "@type":"Question",
+        "name":"Що таке кредит-години?",
+        "acceptedAnswer":{"@type":"Answer","text":"Кредит-години показують 'вагу' курсу — скільки годин навчального навантаження він представляє. Курси з більшою кількістю кредитів мають більший вплив на підсумковий GPA."}
+      },
+      {
+        "@type":"Question",
+        "name":"Чим відрізняється зважений GPA від незваженого?",
+        "acceptedAnswer":{"@type":"Answer","text":"Незважений GPA використовує стандартну шкалу 4.0 для всіх курсів. Зважений GPA додає бонусні бали за курси підвищеної складності (Honors, AP), що може підняти шкалу вище 4.0."}
+      }
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "@id":"https://calccore.net/education/gpa-calculator#app",
+    "name":"GPA Calculator",
+    "description":"Розрахунок середнього бала успішності (GPA) за американською шкалою 4.0.",
+    "url":"https://calccore.net/education/gpa-calculator",
+    "applicationCategory":"EducationApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "inLanguage":"uk",
+    "publisher":{"@id":"https://calccore.net/#org"},
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
+  }
+  </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cgpa">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор GPA</h1>
+                    <p class="mcalc__p">
+                        Додай свої курси з оцінками та кредит-годинами —
+                        розрахуємо твій середній бал (GPA).
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Твої курси</h2>
+                        <span class="mcalc__badge">Education</span>
+                    </div>
+
+                    <div class="gpa-table-wrap">
+                        <div class="gpa-table-header">
+                            <span>Назва курсу</span>
+                            <span>Оцінка</span>
+                            <span>Кредити</span>
+                            <span></span>
+                        </div>
+                        <div class="gpa-rows" id="gpaRows"></div>
+                    </div>
+
+                    <div class="mcalc__actions m-mt10">
+                        <button class="mcalc__btn" id="btnAddRow" type="button">+ Додати курс</button>
+                        <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button">Розрахувати
+                            GPA</button>
+                        <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                    </div>
+                    <div class="mcalc__toast" id="mToast"></div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Додай курси та натисни
+                        "Розрахувати GPA".</div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                    <a href="/calculator">Науковий калькулятор</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Як розраховується GPA</h2>
+            <p>
+                <b>GPA (Grade Point Average)</b> — середній бал успішності, стандартна американська
+                система оцінювання академічної успішності за шкалою від 0 до 4.0. Кожна літерна
+                оцінка відповідає числовому значенню:
+            </p>
+            <ul>
+                <li><b>A (90-100%)</b> = 4.0 балів</li>
+                <li><b>B (80-89%)</b> = 3.0 балів</li>
+                <li><b>C (70-79%)</b> = 2.0 балів</li>
+                <li><b>D (60-69%)</b> = 1.0 бал</li>
+                <li><b>F (нижче 60%)</b> = 0.0 балів</li>
+            </ul>
+
+            <h2>Роль кредит-годин у розрахунку</h2>
+            <p>
+                GPA — це не проста середня арифметична оцінок, а <b>зважене середнє</b>, де вагою
+                виступають кредит-години кожного курсу. Формула: GPA = сума (бал оцінки × кредити) /
+                сума всіх кредитів. Це означає, що курс з більшою кількістю кредит-годин (наприклад,
+                профільний предмет) впливає на підсумковий GPA сильніше, ніж курс з меншою кількістю
+                кредитів (наприклад, факультатив).
+            </p>
+
+            <h2>Зважений vs незважений GPA</h2>
+            <p>
+                <b>Незважений GPA</b> використовує стандартну шкалу 4.0 однаково для всіх курсів,
+                незалежно від складності. <b>Зважений GPA</b> додає бонусні бали за курси підвищеної
+                складності (Honors, AP, IB) — наприклад, оцінка "A" на курсі AP може рахуватись як 5.0
+                замість 4.0, що дозволяє шкалі GPA перевищувати 4.0.
+            </p>
+
+            <h2>Навіщо відстежувати свій GPA</h2>
+            <ul>
+                <li><b>Вступ до коледжу:</b> GPA — один з ключових факторів при розгляді заявок на вступ.</li>
+                <li><b>Стипендії:</b> багато стипендіальних програм мають мінімальні вимоги до GPA.</li>
+                <li><b>Академічний статус:</b> деякі навчальні заклади вимагають підтримання мінімального GPA для
+                    збереження статусу студента.</li>
+                <li><b>Планування навантаження:</b> розуміння, як конкретний курс вплине на GPA, допомагає приймати
+                    зважені рішення при виборі предметів.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Цей калькулятор використовує стандартну незважену шкалу 4.0. Конкретні правила
+                конвертації оцінок можуть відрізнятись залежно від навчального закладу — звіряйся
+                з офіційною політикою свого коледжу чи університету.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Як розраховується GPA?</h3>
+                <p>GPA обчислюється діленням суми (числовий бал оцінки × кредит-години курсу) для всіх курсів на
+                    загальну кількість кредит-годин.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке кредит-години?</h3>
+                <p>Кредит-години показують "вагу" курсу — скільки годин навчального навантаження він представляє. Курси
+                    з більшою кількістю кредитів мають більший вплив на підсумковий GPA.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Чим відрізняється зважений GPA від незваженого?</h3>
+                <p>Незважений GPA використовує стандартну шкалу 4.0 для всіх курсів. Зважений GPA додає бонусні бали за
+                    курси підвищеної складності (Honors, AP), що може підняти шкалу вище 4.0.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
