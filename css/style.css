@@ -271,7 +271,7 @@ main,
 }
 
 /* На вужчих екранах підпис не вміщається поруч з кнопками: лишаємо тільки значок */
-@media (max-width: 760px) {
+@media (max-width: 800px) {
     .social-icons {
         margin-right: 0;
     }
@@ -1043,6 +1043,14 @@ main,
         background: var(--menu-grad);
         border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: 0 18px 44px rgba(31, 47, 85, 0.34);
+
+        /* Панель закріплена разом із шапкою. Довгий список (напр. «Різне») виходив за екран,
+           а свайп гортав сторінку під ним. Тепер панель має власну прокрутку. */
+        max-height: calc(100vh - 150px);
+        max-height: calc(100dvh - 150px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
     }
 
     /* відкриття */
@@ -1050,6 +1058,11 @@ main,
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
+
+    /* пункти не стискаються, а прокручуються */
+    .site-header.nav-open .nav-panel>* {
+        flex-shrink: 0;
     }
 
     /* пошук лишається на місці (в шапці) */
@@ -1129,7 +1142,9 @@ main,
     flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
+/* Нижче ~740px кнопки з текстом не вміщаються поруч з логотипом (він стискався до нуля):
+   лишаємо тільки іконки */
+@media (max-width: 740px) {
     .quick-tools {
         margin-left: 6px;
         gap: 4px;
@@ -1147,9 +1162,36 @@ main,
 
 
 
+/* На телефоні значок Telegram переїжджає з шапки в бургер-меню */
 @media (max-width: 480px) {
     .social-icons {
         display: none;
+    }
+}
+
+.nav-tg {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .nav-tg {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        color: #fff;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+    .nav-tg img {
+        width: 22px;
+        height: 22px;
+        display: block;
     }
 }
 /* Search icon + expandable box */
