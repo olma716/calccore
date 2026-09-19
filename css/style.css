@@ -35,8 +35,26 @@ img {
     --shadow-brand: 0 6px 16px rgba(40, 59, 105, 0.30);
     --shadow-brand-hover: 0 10px 24px rgba(40, 59, 105, 0.38);
 
-    --brand-grad: linear-gradient(135deg, #34497f 0%, #283b69 55%, #1f2f55 100%);
+    /* ті самі кольори, що в хедері: зверху темніше, знизу світліше */
+    --brand-grad: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    --btn-inset: inset 0 1px 0 rgba(255, 255, 255, 0.14);
     --ring: 0 0 0 3px rgba(74, 105, 189, 0.35);
+
+    /* колір хедера і бургер-меню */
+    --header-grad: linear-gradient(180deg,
+            rgba(31, 47, 85, 0.94) 0%,
+            rgba(44, 64, 112, 0.90) 55%,
+            rgba(60, 83, 143, 0.86) 100%);
+    --header-grad-scrolled: linear-gradient(180deg,
+            rgba(31, 47, 85, 0.94) 0%,
+            rgba(40, 59, 105, 0.90) 100%);
+    --header-blur: blur(16px) saturate(160%);
+    /* те саме, але непрозоре: кольори хедера, як він виглядає на світлому фоні сторінки.
+       Для бургер-панелі: блюр усередині хедера не працює, і вміст під нею просвічував би */
+    --header-grad-solid: linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%);
+    /* бургер-панель висока (~500px), тому беремо світлішу частину градієнта хедера,
+       інакше вона виглядає темнішою за шапку */
+    --menu-grad: linear-gradient(180deg, #4d6093 0%, #5f74a8 100%);
 }
 
 /* ========================= BODY + FULL BG ========================= */
@@ -88,6 +106,13 @@ main,
     z-index: 1;
 }
 
+/* Хедер і футер однакові на всіх сторінках: у калькуляторах клас на <body>
+   (напр. .cbrick) задає Arial для всієї сторінки, зокрема й для шапки */
+.site-header,
+.site-footer {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 @media (max-width: 900px) {
     body.home {
         background-attachment: scroll;
@@ -113,13 +138,10 @@ main,
 }
 
 .site-header {
-    /* зверху темніше, знизу світліше */
-    background: linear-gradient(180deg,
-            rgba(31, 47, 85, 0.94) 0%,
-            rgba(44, 64, 112, 0.90) 55%,
-            rgba(60, 83, 143, 0.86) 100%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%);
+    /* зверху темніше, знизу світліше; ті самі змінні використовує бургер-меню */
+    background: var(--header-grad);
+    -webkit-backdrop-filter: var(--header-blur);
+    backdrop-filter: var(--header-blur);
     position: sticky;
     /* верхній рядок (логотип) при скролі їде геть, закріпленим лишається рядок меню.
        Висоту --hdr-top-h виставляє js/layout.js */
@@ -129,9 +151,7 @@ main,
 
 /* Закріплена смужка: темніша, щоб не виглядала блідою над контентом */
 .site-header.is-scrolled {
-    background: linear-gradient(180deg,
-            rgba(31, 47, 85, 0.94) 0%,
-            rgba(40, 59, 105, 0.90) 100%);
+    background: var(--header-grad-scrolled);
 }
 
 /* м'який перехід у сторінку замість різкої лінії */
@@ -221,6 +241,49 @@ main,
 .social-icons a:hover img {
     transform: translateY(-1px) scale(1.10);
     opacity: 1;
+}
+
+/* Telegram: більший значок, зсунутий вліво, з підписом і стрілочкою під ним */
+.social-icons {
+    margin-right: 14px;
+}
+
+.social-icons .tg-follow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+}
+
+.social-icons .tg-follow img {
+    width: 26px;
+    height: 26px;
+}
+
+.tg-follow__label {
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .2px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* На вужчих екранах підпис не вміщається поруч з кнопками: лишаємо тільки значок */
+@media (max-width: 760px) {
+    .social-icons {
+        margin-right: 0;
+    }
+
+    .social-icons .tg-follow img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .tg-follow__label {
+        display: none;
+    }
 }
 
 /* language */
@@ -573,19 +636,19 @@ main,
     color: #fff;
     text-decoration: none;
     font-weight: 900;
-    box-shadow: var(--shadow-brand);
+    box-shadow: var(--btn-inset), var(--shadow-brand);
     transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
 
 .btn:hover {
     filter: brightness(1.08);
-    box-shadow: var(--shadow-brand-hover);
+    box-shadow: var(--btn-inset), var(--shadow-brand-hover);
     transform: translateY(-2px);
 }
 
 .btn:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-brand);
+    box-shadow: var(--btn-inset), var(--shadow-brand);
 }
 
 /* Empty */
@@ -977,10 +1040,9 @@ main,
         padding: 12px;
 
         border-radius: 16px;
-        background: rgba(40, 59, 105, 0.97);
+        background: var(--menu-grad);
         border: 1px solid rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+        box-shadow: 0 18px 44px rgba(31, 47, 85, 0.34);
     }
 
     /* відкриття */
