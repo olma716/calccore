@@ -929,6 +929,18 @@
                     if (show) shown++;
                 });
 
+                // While searching, hide sections with no results (with their heading) and the dividers,
+                // so matches are not buried far down the page
+                const searching = queryWords.length > 0;
+                document.querySelectorAll('.hub-grid').forEach(grid => {
+                    const hasVisible = Array.from(grid.querySelectorAll('.hub-card')).some(c => c.style.display !== 'none');
+                    const hide = searching && !hasVisible;
+                    grid.style.display = hide ? 'none' : '';
+                    const heading = grid.previousElementSibling;
+                    if (heading && heading.classList.contains('section-subtitle')) heading.style.display = hide ? 'none' : '';
+                });
+                document.querySelectorAll('.divider').forEach(d => { d.style.display = searching ? 'none' : ''; });
+
                 if (empty) empty.style.display = shown ? 'none' : '';
             }
             
