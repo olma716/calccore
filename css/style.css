@@ -486,6 +486,12 @@ main,
     z-index: 10000;
 }
 
+/* пункт біля правого краю: список вирівняно по правому краю пункту (js/layout.js) */
+.main-menu>li.has-submenu.submenu-flip .submenu {
+    left: auto;
+    right: 0;
+}
+
 /* hover мостик */
 .main-menu>li.has-submenu::after {
     content: "";
@@ -1424,5 +1430,48 @@ main,
 @media (max-width: 600px) {
     .hub-grid {
         grid-template-columns: 1fr !important;
+    }
+}
+
+/* Пошук на десктопі: поле випадає під іконкою поверх сторінки і не займає місця в рядку меню,
+   інакше воно розпихало пункти й останній («Різне») перескакував на другий рядок */
+@media (min-width: 901px) {
+    .nav-search-inline {
+        position: relative;
+    }
+
+    .header-search-box {
+        position: absolute;
+        top: calc(100% + 18px);
+        right: 0;
+        width: 260px;
+        max-width: none;
+        margin: 0;
+        padding: 8px;
+        border-radius: 14px;
+        background: var(--menu-grad);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 40px rgba(31, 47, 85, 0.30);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-4px);
+        transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+        z-index: 10000;
+    }
+
+    .header-search-box.is-open {
+        max-width: none;
+        margin: 0;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+        transition-delay: 0s;
+    }
+
+    .header-search-box input {
+        height: 36px;
+        border-radius: 10px;
     }
 }

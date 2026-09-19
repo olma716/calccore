@@ -35,6 +35,27 @@ function initHeaderUI() {
   window.addEventListener('resize', measureTopRow, { passive: true });
   window.addEventListener('load', measureTopRow);
 
+  // десктоп: якщо випадаючий список не вміщається праворуч від пункту (останній пункт меню
+  // біля краю вікна), вирівнюємо його по правому краю пункту. Без цього навіть прихований
+  // список розтягував сторінку вшир і давав горизонтальну прокрутку.
+  const flipSubmenus = () => {
+    const vw = document.documentElement.clientWidth;
+    const desktop = !window.matchMedia('(max-width: 900px)').matches;
+    document.querySelectorAll('.main-menu > .has-submenu').forEach(li => {
+      const sub = li.querySelector('.submenu');
+      if (!sub) return;
+      li.classList.remove('submenu-flip');
+      if (!desktop) return;
+      const r = li.getBoundingClientRect();
+      const w = sub.offsetWidth;
+      if (r.left + w > vw && r.right - w >= 0) li.classList.add('submenu-flip');
+    });
+  };
+  flipSubmenus();
+  window.addEventListener('resize', flipSubmenus, { passive: true });
+  window.addEventListener('load', flipSubmenus);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(flipSubmenus);
+
   // burger
   if (toggle && header) {
     toggle.addEventListener('click', () => {
