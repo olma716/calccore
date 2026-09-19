@@ -26,6 +26,15 @@ function initHeaderUI() {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // sticky: висота верхнього рядка (логотип), який при скролі їде геть — для top у CSS
+  const topRow = header && header.querySelector('.header-inner');
+  const measureTopRow = () => {
+    if (topRow) header.style.setProperty('--hdr-top-h', topRow.offsetHeight + 'px');
+  };
+  measureTopRow();
+  window.addEventListener('resize', measureTopRow, { passive: true });
+  window.addEventListener('load', measureTopRow);
+
   // burger
   if (toggle && header) {
     toggle.addEventListener('click', () => {
