@@ -136,6 +136,7 @@
   }
 
   function renderHistory() {
+    if (!historyList) return; // на головній сторінці історії немає — тільки картка з клавіатурою
     const items = readHistory();
     if (!items.length) {
       historyList.innerHTML = `<div class="ccalc__historyEmpty">${T.historyEmpty}</div>`;
