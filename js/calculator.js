@@ -208,7 +208,10 @@
     const resStr = fmt(v);
     addHistory(displayExpr, resStr);
     lastResult = v;
-    tokens = [{ disp: resStr.replace(/\s/g, ""), raw: String(v) }];
+    // Один токен на символ (як при звичайному наборі з клавіатури), а не один
+    // токен на все число — інакше ⌫ стирає весь результат за одне натискання
+    // замість останньої цифри.
+    tokens = String(v).split("").map((ch) => ({ disp: ch, raw: ch }));
     renderLive();
   }
 
