@@ -196,13 +196,14 @@ button.ccalc__toggleBtn#invToggle.is-active {
 .ccalc__keys {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 8px;
+    gap: 10px;
 }
 
+/* Кнопки з тінями замість плоских рамок (той самий стиль, що на головній) */
 .ccalc__key {
     height: 48px;
-    border-radius: 12px;
-    border: 1px solid #d4d7de;
+    border: none;
+    border-radius: 14px;
     background: #fff;
     cursor: pointer;
     font-weight: 900;
@@ -211,49 +212,75 @@ button.ccalc__toggleBtn#invToggle.is-active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background .12s ease, border-color .12s ease, transform .06s ease;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 10px rgba(40, 59, 105, .10);
+    transition: background .12s ease, box-shadow .15s ease, transform .12s ease;
 }
 
 .ccalc__key:hover {
-    background: #f6f7fb;
-    border-color: #b9c2da;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .08), 0 8px 18px rgba(40, 59, 105, .16);
+    transform: translateY(-1px);
 }
 
 .ccalc__key:active {
-    transform: scale(0.96);
+    transform: translateY(0) scale(.96);
+    box-shadow: 0 1px 3px rgba(40, 59, 105, .12);
 }
 
 .ccalc__key--fn {
-    background: rgba(40, 59, 105, .05);
+    background: #f2f4fa;
     font-size: 13px;
     color: #2b3a55;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
 }
 
 .ccalc__key--fn:hover {
-    background: rgba(40, 59, 105, .10);
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
+}
+
+/* "C" (повне скидання) — м'яко-червона літера, попереджає, що дія руйнівніша за CE */
+[data-fn="clear"] {
+    color: #c1443c;
+}
+
+[data-fn="clear"]:hover {
+    color: #a83a30;
 }
 
 .ccalc__key--op {
     background: rgba(40, 59, 105, .08);
-    border-color: rgba(40, 59, 105, .28);
     color: var(--m-brand2);
     font-size: 18px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .16);
 }
 
 .ccalc__key--op:hover {
-    background: rgba(40, 59, 105, .16);
+    background: rgba(40, 59, 105, .14);
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .08), 0 8px 18px rgba(40, 59, 105, .22);
 }
 
 .ccalc__key--equals {
     grid-column: span 1;
-    background: linear-gradient(180deg, #e9f7ef, #dff4e8);
-    border-color: #bfe3cd;
-    color: #1f513a;
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
     font-size: 20px;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 4px 14px rgba(40, 59, 105, .35);
 }
 
+/* .ccalc__key:hover задає свій background (#fff) з такою самою специфічністю —
+   без повторення тут градієнт "=" ставав би білим (і невидимим, бо текст теж білий) при наведенні */
 .ccalc__key--equals:hover {
-    background: linear-gradient(180deg, #dff4e8, #cdeedb);
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: brightness(1.08);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 6px 18px rgba(40, 59, 105, .42);
+}
+
+.ccalc__key--equals:active {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: none;
+    transform: translateY(0) scale(.96);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 2px 8px rgba(40, 59, 105, .3);
 }
 
 @media (max-width: 420px) {
@@ -341,6 +368,17 @@ button.ccalc__toggleBtn#invToggle.is-active {
     font-size: 22px;
     color: #283b69;
     margin-bottom: 14px;
+}
+
+.m-seo h3 {
+    font-size: 16px;
+    color: #283b69;
+    font-weight: 900;
+    margin: 22px 0 8px;
+}
+
+.m-seo h3:first-of-type {
+    margin-top: 4px;
 }
 
 .m-seo p,
@@ -431,61 +469,29 @@ button.ccalc__toggleBtn#invToggle.is-active {
         padding: 14px;
     }
 }
-/* Distinguish memory save/clear visually */
+/* Distinguish memory save/clear visually (тіні замість рамок, як і решта кнопок) */
 .ccalc__key[data-fn="ms"] {
-    background: rgba(46, 125, 90, .08);
-    border-color: rgba(46, 125, 90, .30);
+    background: rgba(46, 125, 90, .10);
     color: #1f513a;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(46, 125, 90, .16);
 }
 
 .ccalc__key[data-fn="ms"]:hover {
-    background: rgba(46, 125, 90, .16);
+    background: rgba(46, 125, 90, .18);
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(46, 125, 90, .22);
 }
 
 .ccalc__key[data-fn="mc"] {
-    background: rgba(220, 38, 38, .06);
-    border-color: rgba(220, 38, 38, .25);
+    background: rgba(220, 38, 38, .08);
     color: #7f1d1d;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(220, 38, 38, .14);
 }
 
 .ccalc__key[data-fn="mc"]:hover {
-    background: rgba(220, 38, 38, .12);
+    background: rgba(220, 38, 38, .14);
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(220, 38, 38, .2);
 }
 
-/* Distinguish memory save/clear visually */
-.ccalc__key[data-fn="ms"] {
-    background: rgba(46, 125, 90, .08);
-    border-color: rgba(46, 125, 90, .30);
-    color: #1f513a;
-}
-
-.ccalc__key[data-fn="ms"]:hover {
-    background: rgba(46, 125, 90, .16);
-}
-
-.ccalc__key[data-fn="mc"] {
-    background: rgba(220, 38, 38, .06);
-    border-color: rgba(220, 38, 38, .25);
-    color: #7f1d1d;
-}
-
-.ccalc__key[data-fn="mc"]:hover {
-    background: rgba(220, 38, 38, .12);
-}
-
-/* Darker C / CE buttons */
-.ccalc__key[data-fn="clear"],
-.ccalc__key[data-fn="ce"] {
-    background: rgba(40, 59, 105, .14);
-    border-color: rgba(40, 59, 105, .40);
-    color: #1f2f55;
-    font-weight: 900;
-}
-
-.ccalc__key[data-fn="clear"]:hover,
-.ccalc__key[data-fn="ce"]:hover {
-    background: rgba(40, 59, 105, .22);
-}
 /* Fix unstyled buttons in history panel */
 .ccalc .mcalc__btn {
     height: 44px;
@@ -533,81 +539,10 @@ button.ccalc__toggleBtn#invToggle.is-active {
     box-shadow: var(--shadow, var(--m-shadow));
 }
 
-/* Кнопки з тінями замість плоских рамок — об'ємніше й сучасніше на головній */
-.home-calc .ccalc__keys {
-    gap: 10px;
-}
-
-.home-calc .ccalc__key {
-    border: none;
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 10px rgba(40, 59, 105, .10);
-    transition: background .12s ease, box-shadow .15s ease, transform .12s ease;
-}
-
-.home-calc .ccalc__key:hover {
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(31, 47, 85, .08), 0 8px 18px rgba(40, 59, 105, .16);
-    transform: translateY(-1px);
-}
-
-.home-calc .ccalc__key:active {
-    transform: translateY(0) scale(.96);
-    box-shadow: 0 1px 3px rgba(40, 59, 105, .12);
-}
-
-.home-calc .ccalc__key--fn {
-    background: #f2f4fa;
-    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
-}
-
-.home-calc .ccalc__key--fn:hover {
-    background: #eaeef8;
-    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
-}
-
-/* "C" (повне скидання) — м'яко-червона літера, попереджає, що дія руйнівніша за CE */
-.home-calc .ccalc__key--clear {
-    color: #c1443c;
-}
-
-.home-calc .ccalc__key--clear:hover {
-    color: #a83a30;
-}
-
 /* Класична розкладка: службовий рядок зверху (C, CE, ⌫), операції — завжди
-   в правому стовпці (÷ × − +) */
+   в правому стовпці (÷ × − +). Самі кнопки — спільний стиль з .ccalc__key вище. */
 .home-calc .ccalc__keys {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.home-calc .ccalc__key--op {
-    background: rgba(40, 59, 105, .08);
-    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .16);
-}
-
-.home-calc .ccalc__key--op:hover {
-    background: rgba(40, 59, 105, .14);
-    box-shadow: 0 2px 5px rgba(31, 47, 85, .08), 0 8px 18px rgba(40, 59, 105, .22);
-}
-
-.home-calc .ccalc__key--equals {
-    background: var(--brand-grad);
-    border: none;
-    color: #fff;
-    box-shadow: var(--btn-inset), 0 4px 14px rgba(40, 59, 105, .35);
-}
-
-.home-calc .ccalc__key--equals:hover {
-    filter: brightness(1.08);
-    box-shadow: var(--btn-inset), 0 6px 18px rgba(40, 59, 105, .42);
-}
-
-.home-calc .ccalc__key--equals:active {
-    filter: none;
-    transform: translateY(0) scale(.96);
-    box-shadow: var(--btn-inset), 0 2px 8px rgba(40, 59, 105, .3);
 }
 
 /* Посилання на науковий калькулятор — кнопкою прямо на картці (перевикористовує .btn
