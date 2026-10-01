@@ -101,7 +101,19 @@
     }
   });
 
-  // -------- Reset (button with data-reset="t1|t2|t3|t4") --------
+  // -------- Reset (button with data-reset="t1|t2|t3|t4|all") --------
+  function resetPanelInputs(panel) {
+    if (!panel) return;
+    panel.querySelectorAll("input").forEach((inp) => {
+      if (inp.type === "radio") return;
+      inp.value = "";
+    });
+
+    // reset radios for t3 (no-op on other panels, they have no t3_op radios)
+    const plus = panel.querySelector('input[name="t3_op"][value="plus"]');
+    if (plus) plus.checked = true;
+  }
+
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-reset]");
     if (!btn) return;
@@ -109,16 +121,10 @@
     const t = btn.getAttribute("data-reset");
     if (!t) return;
 
-    const panel = $(t);
-    panel?.querySelectorAll("input").forEach((inp) => {
-      if (inp.type === "radio") return;
-      inp.value = "";
-    });
-
-    // reset radios for t3
-    if (t === "t3") {
-      const plus = panel?.querySelector('input[name="t3_op"][value="plus"]');
-      if (plus) plus.checked = true;
+    if (t === "all") {
+      panels.forEach(resetPanelInputs);
+    } else {
+      resetPanelInputs($(t));
     }
 
     setToast(tt("percent.reset_done"));

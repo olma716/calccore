@@ -162,25 +162,27 @@
 
 .pcalc-tab {
     height: 40px;
+    border: none;
     border-radius: 12px;
-    border: 1px solid var(--cc-border);
-    background: #fff;
+    background: #f2f4fa;
     font-weight: 900;
     font-size: 12px;
-    color: var(--cc-brand2);
+    color: #2b3a55;
     cursor: pointer;
-    transition: transform .15s ease, background .15s ease, box-shadow .15s ease, border-color .15s ease;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
 }
 
 .pcalc-tab:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(31, 47, 85, .10);
-    border-color: rgba(40, 59, 105, .25);
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
 }
 
 .pcalc-tab.is-active {
-    background: rgba(40, 59, 105, .08);
-    border-color: rgba(40, 59, 105, .35);
+    background: rgba(40, 59, 105, .12);
+    color: var(--cc-brand2);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .2);
 }
 
 /* Panels */
@@ -225,7 +227,7 @@
 .pcalc .ccalc__input {
     width: 100%;
     height: 44px;
-    border: 1px solid #d4d7de;
+    border: none;
     border-radius: 12px;
     padding: 0 12px;
     outline: none;
@@ -233,6 +235,8 @@
     color: #1f2937;
     font-size: 13px;
     font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: box-shadow .15s ease;
 }
 
 .pcalc .ccalc__input::placeholder {
@@ -241,8 +245,7 @@
 }
 
 .pcalc .ccalc__input:focus {
-    border-color: rgba(40, 59, 105, .55);
-    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .18), 0 3px 8px rgba(40, 59, 105, .08);
     color: #111827;
 }
 
@@ -252,9 +255,10 @@
     gap: 14px;
     flex-wrap: wrap;
     padding: 10px 12px;
-    border: 1px solid #d4d7de;
+    border: none;
     border-radius: 12px;
     background: #fff;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
 }
 
 .pcalc-radio label {
@@ -281,9 +285,9 @@
 .pcalc .ccalc__btn {
     height: 44px;
     padding: 0 14px;
+    border: none;
     border-radius: 12px;
-    border: 1px solid #d4d7de;
-    background: #fff;
+    background: #f2f4fa;
     cursor: pointer;
     font-weight: 900;
     color: #1f2f55;
@@ -292,23 +296,40 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease, filter .15s ease;
 }
 
 .pcalc .ccalc__btn:hover {
-    background: #f6f7fb;
-    border-color: #b9c2da;
-    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
     transform: translateY(-1px);
 }
 
-.pcalc .ccalc__btn--primary {
-    background: rgba(40, 59, 105, .08);
-    border: 1px solid rgba(40, 59, 105, .35);
+.pcalc .ccalc__btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 2px 6px rgba(40, 59, 105, .1);
 }
 
+/* "Розрахувати" — та сама синя кнопка, що "=" на науковому калькуляторі */
+.pcalc .ccalc__btn--primary {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 4px 14px rgba(40, 59, 105, .35);
+}
+
+/* .ccalc__btn:hover задає свій background (#eaeef8) з такою самою специфічністю —
+   без повторення тут градієнт кнопки ставав би білим (і текст невидимим) при наведенні */
 .pcalc .ccalc__btn--primary:hover {
-    background: rgba(40, 59, 105, .14);
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: brightness(1.08);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 6px 18px rgba(40, 59, 105, .42);
+}
+
+.pcalc .ccalc__btn--primary:active {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: none;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 2px 8px rgba(40, 59, 105, .3);
 }
 
 /* Utilities */
@@ -467,38 +488,12 @@
     margin-top: 46px;
     /* висота чекбокса + відступ */
 }
-/* ===== Формули: активна зелена, неактивні червоні ===== */
-
-/* Усі кнопки формул за замовчуванням — спокійний червоний */
-.pcalc-tab {
-    background: #fbf1f1;
-    border: 1px solid #e7caca;
-    color: #7a3b3b;
-    transition: all .18s ease;
-}
-
-/* Hover по неактивних */
-.pcalc-tab:hover {
-    background: #f6e4e4;
-    border-color: #ddb5b5;
-    box-shadow: 0 6px 14px rgba(160, 80, 80, 0.08);
-}
-
-/* 🔥 АКТИВНА формула — зелена */
-.pcalc-tab.is-active {
-    background: #e6f5ec;
-    border-color: #b7dec9;
-    color: #1f513a;
-    box-shadow: 0 4px 12px rgba(46, 125, 90, 0.15);
-    transform: translateY(-1px);
-}
-/* ===== Зелений блок результату ===== */
-
+/* Блок результату — той самий нейтральний стиль дисплея, що й на науковому калькуляторі */
 .pcalc .ccalc__bigNumber {
-    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
-    border: 1px solid #bfe3cd;
-    color: #1f513a;
-    box-shadow: 0 8px 20px rgba(46, 125, 90, 0.10);
+    background: linear-gradient(180deg, #f6f7fb, #eef0f7);
+    border: none;
+    color: var(--cc-brand2);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .1);
 }
 
 /* Коли результат з'являється — легкий "живий" ефект */
