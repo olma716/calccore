@@ -789,6 +789,386 @@
     if (b) setSource(b.dataset.src);
   });
 
+  // =====================================================
+  // Блок курсів і графік динаміки (графік — лише НБУ)
+  // =====================================================
+  const BOARD_CODES = ["USD", "EUR", "GBP", "PLN", "CHF", "CZK", "CAD"];
+  const HIST_URL = "/api/nbu-history"; // проксі: діапазонний ендпоїнт НБУ не віддає CORS
+  const HIST_CACHE_KEY = "cc_nbu_hist_v1_";
+  const HIST_TTL_MS = 6 * 60 * 60 * 1000;
+  const DAY_MS = 24 * 60 * 60 * 1000;
+  const PERIODS = [7, 30, 90, 365];
+  const CRYPTO_HIST_URL = "/api/crypto-history"; // проксі до CoinGecko (ціни в UAH)
+  const CRYPTO_HIST_CACHE_KEY = "cc_crypto_hist_v1_";
+  const CRYPTO_CHART_CODES = ["BTC", "ETH", "BNB", "SOL", "XRP", "TON"];
+
+  const boardTableEl = $("boardTable");
+  const boardSrcEl = $("boardSrc");
+
+  const rateFmt = (x) =>
+    x >= 1000
+      ? x.toLocaleString(locale(), { maximumFractionDigits: 0 })
+      : x.toLocaleString(locale(), { minimumFractionDigits: 2, maximumFractionDigits: x < 10 ? 3 : 2 });
+  const signed = (x, d) =>
+    (x > 0 ? "+" : "") + x.toLocaleString(locale(), { minimumFractionDigits: Math.min(2, d), maximumFractionDigits: d });
+
+  function renderBoard() {
+    if (!boardTableEl) return;
+    const ids = ["nbu", ...BANK_SOURCES];
+
+    const cell = (id, code) => {
+      if (id === "nbu") {
+        const r = fiat[code]?.rate;
+        return r ? rateFmt(r) : "";
+      }
+      const q = bank[id]?.[code];
+      return q?.buy && q?.sell ? `${rateFmt(q.buy)} / ${rateFmt(q.sell)}` : "";
+    };
+
+    const head = `<thead><tr><th scope="col">${esc(t("currency.board_cur"))}</th>${ids
+      .map((id) => `<th scope="col">${esc(sourceName(id))}</th>`)
+      .join("")}</tr></thead>`;
+
+    const rows = BOARD_CODES.map((code) => {
+      const tds = ids
+        .map((id) => {
+          const v = cell(id, code);
+          return v ? `<td>${v}</td>` : '<td class="cb-na">—</td>';
+        })
+        .join("");
+      return `<tr><th scope="row"><span class="cb-cur">${iconHtml(code).replace('loading="lazy"', 'loading="eager"')}<span>${code}</span></span></th>${tds}</tr>`;
+    }).join("");
+
+    boardTableEl.innerHTML = head + `<tbody>${rows}</tbody>`;
+
+    if (boardSrcEl) {
+      const link = '<a href="https://minfin.com.ua/" target="_blank" rel="noopener">Minfin.com.ua</a>';
+      boardSrcEl.innerHTML = t("currency.board_src", { link });
+    }
+  }
+
+  // ---- історія курсу НБУ (одним запитом на рік) ----
+  const histMem = {};
+
+  async function loadHistory(code) {
+    if (histMem[code]) return histMem[code];
+
+    const key = HIST_CACHE_KEY + code;
+    const cache = readJson(key);
+    if (cache?.pts?.length && cache.ts && Date.now() - cache.ts < HIST_TTL_MS) {
+      return (histMem[code] = cache.pts);
+    }
+
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 10000);
+      const res = await fetch(`${HIST_URL}?code=${code}`, { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (!res.ok) throw new Error("hist not ok");
+      const data = await res.json();
+
+      const pts = (Array.isArray(data?.pts) ? data.pts : [])
+        .map((pt) => [Number(pt[0]), Number(pt[1])])
+        .filter((pt) => Number.isFinite(pt[0]) && pt[1] > 0)
+        .sort((x, y) => x[0] - y[0]);
+      if (pts.length < 2) throw new Error("hist empty");
+
+      writeJson(key, { ts: Date.now(), pts });
+      return (histMem[code] = pts);
+    } catch {
+      if (cache?.pts?.length) return (histMem[code] = cache.pts);
+      return null;
+    }
+  }
+
+  // ---- історія цін криптовалют (CoinGecko через проксі; окремий запит на кожен період) ----
+  const cryptoHistMem = {};
+
+  async function loadCryptoHistory(code, days) {
+    const id = CRYPTO_META[code]?.id;
+    if (!id) return null;
+
+    const mem = `${code}_${days}`;
+    const ttl = days <= 7 ? 10 * 60 * 1000 : days <= 30 ? 30 * 60 * 1000 : 60 * 60 * 1000;
+    if (cryptoHistMem[mem] && Date.now() - cryptoHistMem[mem].ts < ttl) return cryptoHistMem[mem].pts;
+
+    const key = CRYPTO_HIST_CACHE_KEY + mem;
+    const cache = readJson(key);
+    if (cache?.pts?.length && cache.ts && Date.now() - cache.ts < ttl) {
+      cryptoHistMem[mem] = cache;
+      return cache.pts;
+    }
+
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 12000);
+      const res = await fetch(`${CRYPTO_HIST_URL}?id=${id}&days=${days}`, { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (!res.ok) throw new Error("crypto hist not ok");
+      const data = await res.json();
+
+      const pts = (Array.isArray(data?.pts) ? data.pts : [])
+        .map((pt) => [Number(pt[0]), Number(pt[1])])
+        .filter((pt) => Number.isFinite(pt[0]) && pt[1] > 0);
+      if (pts.length < 2) throw new Error("crypto hist empty");
+
+      const entry = { ts: Date.now(), pts };
+      writeJson(key, entry);
+      cryptoHistMem[mem] = entry;
+      return pts;
+    } catch {
+      if (cache?.pts?.length) return cache.pts;
+      return null;
+    }
+  }
+
+  // ---- графік (SVG без бібліотек): спільний для НБУ і криптовалют ----
+  // o: { curEl, perEl, statsEl, boxEl, noteEl, codes, load(code, days), noteHtml(code), reloadOnPeriod, intraday }
+  function createChart(o) {
+    if (!o.boxEl) return null;
+
+    let code = o.codes[0];
+    let days = 30;
+    let pts = null;
+    let seq = 0;
+    let width = 0;
+
+    function renderControls() {
+      if (o.curEl) {
+        o.curEl.innerHTML = "";
+        for (const c of o.codes) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.dataset.cur = c;
+          b.innerHTML = iconHtml(c).replace('loading="lazy"', 'loading="eager"') + `<span>${esc(c)}</span>`;
+          b.setAttribute("aria-pressed", c === code ? "true" : "false");
+          b.classList.toggle("is-active", c === code);
+          o.curEl.appendChild(b);
+        }
+      }
+      if (o.perEl) {
+        o.perEl.innerHTML = "";
+        for (const d of PERIODS) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.dataset.days = String(d);
+          b.textContent = t(`currency.per_${d}`);
+          b.setAttribute("aria-pressed", d === days ? "true" : "false");
+          b.classList.toggle("is-active", d === days);
+          o.perEl.appendChild(b);
+        }
+      }
+      if (o.noteEl) o.noteEl.innerHTML = o.noteHtml(code);
+    }
+
+    function message(text) {
+      o.boxEl.innerHTML = `<div class="cb-msg">${esc(text)}</div>`;
+      if (o.statsEl) o.statsEl.innerHTML = "";
+    }
+
+    async function update() {
+      const mySeq = ++seq;
+      message(t("currency.chart_loading"));
+
+      const loaded = await o.load(code, days);
+      if (mySeq !== seq) return;
+
+      if (!loaded) {
+        pts = null;
+        message(t("currency.chart_failed"));
+        return;
+      }
+      pts = loaded;
+      draw();
+    }
+
+    function draw() {
+      if (!pts) return;
+
+      const lastT = pts[pts.length - 1][0];
+      const view = pts.filter((pt) => pt[0] >= lastT - days * DAY_MS);
+      if (view.length < 2) {
+        message(t("currency.chart_failed"));
+        return;
+      }
+
+      const first = view[0][1];
+      const now = view[view.length - 1][1];
+      let min = Infinity;
+      let max = -Infinity;
+      for (const pt of view) {
+        if (pt[1] < min) min = pt[1];
+        if (pt[1] > max) max = pt[1];
+      }
+      const diff = now - first;
+      const pct = (diff / first) * 100;
+      const dd = now >= 1000 ? 0 : now >= 10 ? 2 : 3;
+
+      if (o.statsEl) {
+        const tile = (label, value, sub = "") =>
+          `<div class="cb-stat"><span>${esc(label)}</span><b>${esc(value)}</b>${sub ? `<em>${esc(sub)}</em>` : ""}</div>`;
+        o.statsEl.innerHTML =
+          tile(t("currency.chart_now"), rateFmt(now)) +
+          tile(t("currency.chart_change"), signed(diff, dd), signed(pct, 2) + "%") +
+          tile(t("currency.chart_min"), rateFmt(min)) +
+          tile(t("currency.chart_max"), rateFmt(max));
+      }
+
+      const W = Math.max(260, Math.floor(o.boxEl.clientWidth));
+      width = W;
+      const H = W < 520 ? 220 : 280;
+      const padL = max >= 1000 ? 74 : 52, padR = 12, padT = 12, padB = 26;
+      const innerW = W - padL - padR;
+      const innerH = H - padT - padB;
+
+      const span = max - min || max * 0.01;
+      const lo = min - span * 0.1;
+      const hi = max + span * 0.1;
+      const t0 = view[0][0];
+      const t1 = view[view.length - 1][0];
+
+      const xOf = (ts) => padL + ((ts - t0) / (t1 - t0 || 1)) * innerW;
+      const yOf = (v) => padT + (1 - (v - lo) / (hi - lo)) * innerH;
+
+      const line = view.map((pt, i) => `${i ? "L" : "M"}${xOf(pt[0]).toFixed(1)},${yOf(pt[1]).toFixed(1)}`).join("");
+      const area = `${line}L${xOf(t1).toFixed(1)},${padT + innerH}L${xOf(t0).toFixed(1)},${padT + innerH}Z`;
+
+      let grid = "";
+      for (let i = 0; i <= 4; i++) {
+        const v = lo + ((hi - lo) * i) / 4;
+        const y = yOf(v).toFixed(1);
+        grid += `<line x1="${padL}" x2="${W - padR}" y1="${y}" y2="${y}" class="cb-grid"/>` +
+          `<text x="${padL - 8}" y="${y}" class="cb-ax" text-anchor="end" dominant-baseline="middle">${esc(rateFmt(v))}</text>`;
+      }
+
+      const dateOpts = days >= 365 ? { month: "short", year: "2-digit" } : { day: "2-digit", month: "2-digit" };
+      const xTicks = W < 420 ? 3 : 5;
+      for (let i = 0; i < xTicks; i++) {
+        const ts = t0 + ((t1 - t0) * i) / (xTicks - 1);
+        const anchor = i === 0 ? "start" : i === xTicks - 1 ? "end" : "middle";
+        const label = new Date(ts).toLocaleDateString(locale(), dateOpts);
+        grid += `<text x="${xOf(ts).toFixed(1)}" y="${H - 8}" class="cb-ax" text-anchor="${anchor}">${esc(label)}</text>`;
+      }
+
+      o.boxEl.innerHTML =
+        `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(t("currency.chart_aria", { cur: code }))}">` +
+        grid +
+        `<path d="${area}" class="cb-area"/><path d="${line}" class="cb-line"/>` +
+        `<line class="cb-cross" y1="${padT}" y2="${padT + innerH}" x1="0" x2="0" visibility="hidden"/>` +
+        `<circle class="cb-dot" r="4.5" cx="0" cy="0" visibility="hidden"/>` +
+        `</svg><div class="cb-tip" hidden></div>`;
+
+      const svg = o.boxEl.querySelector("svg");
+      const cross = svg.querySelector(".cb-cross");
+      const dot = svg.querySelector(".cb-dot");
+      const tip = o.boxEl.querySelector(".cb-tip");
+
+      // для погодинних даних (7–90 днів) у підказці показуємо ще й час
+      const tipOpts = o.intraday && days <= 90
+        ? { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }
+        : { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" };
+
+      function hide() {
+        cross.setAttribute("visibility", "hidden");
+        dot.setAttribute("visibility", "hidden");
+        tip.hidden = true;
+      }
+
+      function show(ev) {
+        const rect = svg.getBoundingClientRect();
+        const px = ((ev.clientX - rect.left) / rect.width) * W;
+        const ts = t0 + ((px - padL) / innerW) * (t1 - t0);
+
+        let best = 0;
+        let bestD = Infinity;
+        for (let i = 0; i < view.length; i++) {
+          const d = Math.abs(view[i][0] - ts);
+          if (d < bestD) { bestD = d; best = i; }
+        }
+
+        const x = xOf(view[best][0]);
+        const y = yOf(view[best][1]);
+        cross.setAttribute("x1", x);
+        cross.setAttribute("x2", x);
+        cross.setAttribute("visibility", "visible");
+        dot.setAttribute("cx", x);
+        dot.setAttribute("cy", y);
+        dot.setAttribute("visibility", "visible");
+
+        const date = new Date(view[best][0]).toLocaleString(locale(), tipOpts);
+        tip.innerHTML = `<span>${esc(date)}</span><b>${esc(rateFmt(view[best][1]))} UAH</b>`;
+        tip.hidden = false;
+
+        const tw = tip.offsetWidth;
+        tip.style.left = Math.min(Math.max(x - tw / 2, 0), W - tw) + "px";
+        tip.style.top = Math.max(y - tip.offsetHeight - 12, 0) + "px";
+      }
+
+      svg.addEventListener("pointermove", show);
+      svg.addEventListener("pointerdown", show);
+      svg.addEventListener("pointerleave", hide);
+      svg.addEventListener("pointercancel", hide);
+    }
+
+    o.curEl?.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-cur]");
+      if (!b || b.dataset.cur === code) return;
+      code = b.dataset.cur;
+      renderControls();
+      update();
+    });
+
+    o.perEl?.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-days]");
+      if (!b || Number(b.dataset.days) === days) return;
+      days = Number(b.dataset.days);
+      renderControls();
+      if (o.reloadOnPeriod) update();
+      else draw();
+    });
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(() => {
+        const w = Math.floor(o.boxEl.clientWidth);
+        if (w && w !== width && pts) draw();
+      }).observe(o.boxEl);
+    }
+
+    return { init() { renderControls(); update(); } };
+  }
+
+  function initBoard() {
+    renderBoard();
+    Promise.all(BANK_SOURCES.map((id) => loadBank(id))).then(renderBoard);
+
+    createChart({
+      curEl: $("chartCur"),
+      perEl: $("chartPer"),
+      statsEl: $("chartStats"),
+      boxEl: $("chartBox"),
+      noteEl: $("chartNote"),
+      codes: BOARD_CODES,
+      load: (code) => loadHistory(code),
+      noteHtml: (code) => esc(t("currency.chart_note", { cur: code }))
+    })?.init();
+
+    createChart({
+      curEl: $("cryptoCur"),
+      perEl: $("cryptoPer"),
+      statsEl: $("cryptoStats"),
+      boxEl: $("cryptoBox"),
+      noteEl: $("cryptoNote"),
+      codes: CRYPTO_CHART_CODES,
+      load: loadCryptoHistory,
+      reloadOnPeriod: true,
+      intraday: true,
+      noteHtml: (code) => {
+        const link = '<a href="https://www.coingecko.com/" target="_blank" rel="noopener">CoinGecko</a>';
+        return t("currency.crypto_note", { cur: code, link });
+      }
+    })?.init();
+  }
+
   // init
   (async () => {
     setResult(t("currency.loading"), "");
@@ -804,6 +1184,7 @@
     renderSourceSwitch();
     fillSelects();
     setRateDateBadge();
+    initBoard();
 
     if ((amountEl?.value || "").trim() && isAutoOn()) scheduleAuto();
     else setResult(t("currency.hint_enter"), "");
