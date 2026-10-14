@@ -155,7 +155,8 @@ button.ccalc__toggleBtn#invToggle.is-active {
     border-radius: 14px;
     padding: 16px;
     margin-bottom: 12px;
-    min-height: 92px;
+    /* фіксована висота: коли вираз або результат довшають, клавіатура не зсувається */
+    height: 104px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -166,10 +167,15 @@ button.ccalc__toggleBtn#invToggle.is-active {
 
 .ccalc__expr {
     font-size: 14px;
+    line-height: 20px;
+    height: 20px;
     color: var(--m-muted);
     font-variant-numeric: tabular-nums;
-    word-break: break-all;
-    text-align: right;
+    /* один рядок: довгий вираз обрізається зліва, а кінець (останній ввід) лишається видимим */
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -178,10 +184,13 @@ button.ccalc__toggleBtn#invToggle.is-active {
     font-weight: 900;
     color: var(--m-brand2);
     font-variant-numeric: tabular-nums;
-    word-break: break-all;
     text-align: right;
     width: 100%;
-    min-height: 36px;
+    /* один рядок фіксованої висоти; розмір шрифту підганяє calculator.js */
+    height: 40px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .ccalc__toast {
@@ -555,4 +564,14 @@ button.ccalc__toggleBtn#invToggle.is-active {
     gap: 8px;
     font-size: 14px;
     white-space: nowrap;
+}
+
+/* Тапи по кнопках: без подвійного тапу на збільшення сторінки (iOS), без виділення тексту й сірого блиску */
+.ccalc__keys,
+.ccalc__key,
+.ccalc__toggleBtn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
 }

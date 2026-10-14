@@ -54,6 +54,8 @@
   function fmt(n) {
     if (!Number.isFinite(n)) return T.err;
     if (Math.abs(n) < 1e-12) n = 0;
+    // понад 15 цифр double усе одно неточний — показуємо науковий запис, щоб результат вміщався в один рядок
+    if (Math.abs(n) >= 1e15) return n.toLocaleString(LOCALE, { notation: "scientific", maximumFractionDigits: 8 });
     const rounded = Math.round(n * 1e10) / 1e10;
     return rounded.toLocaleString(LOCALE, { maximumFractionDigits: 10 });
   }
@@ -129,10 +131,22 @@
   }
 
   // ---------- render ----------
+  // Зменшує шрифт, поки текст не вміститься в один рядок: висота дисплея не змінюється,
+  // тому клавіатура під пальцем не стрибає
+  function fitText(el, maxPx, minPx) {
+    let size = maxPx;
+    el.style.fontSize = size + "px";
+    while (el.scrollWidth > el.clientWidth && size > minPx) {
+      size -= 1;
+      el.style.fontSize = size + "px";
+    }
+  }
+
   function renderLive() {
     exprEl.textContent = dispString() || "0";
     const v = tryEvaluate();
     resultEl.textContent = v !== null ? fmt(v) : "";
+    fitText(resultEl, 30, 14);
   }
 
   function renderHistory() {
