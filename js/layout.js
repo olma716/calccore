@@ -111,6 +111,28 @@ function initHeaderSearch() {
   }
 }
 
+/* ================= PWA: manifest, service worker, пропозиція встановлення ================= */
+
+(function initPwa() {
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const link = document.createElement('link');
+    link.rel = 'manifest';
+    link.href = '/site.webmanifest';
+    document.head.appendChild(link);
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
+  const script = document.createElement('script');
+  script.src = '/js/install-prompt.js?v=1';
+  script.async = true;
+  document.head.appendChild(script);
+})();
+
 /* ================= LOAD PARTIALS ================= */
 
 document.addEventListener("DOMContentLoaded", async () => {

@@ -1,0 +1,116 @@
+/* Вікно "Встановіть CalcCore": нижня панель на телефоні, картка в куті на десктопі */
+
+.cc-install {
+    position: fixed;
+    z-index: 10050;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 44px 14px 16px;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    background: #fff;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -6px 30px rgba(31, 47, 85, .28);
+    transform: translateY(110%);
+    opacity: 0;
+    transition: transform .28s ease, opacity .28s ease;
+}
+
+.cc-install.is-open {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.cc-install__ico {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+}
+
+.cc-install__body {
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+.cc-install__title {
+    margin: 0 0 2px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.cc-install__text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #4b5563;
+}
+
+.cc-install__actions {
+    display: flex;
+    gap: 8px;
+    flex: 1 1 100%;
+    justify-content: flex-end;
+}
+
+.cc-install__btn {
+    height: 40px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.cc-install__btn--later {
+    background: #f2f4fa;
+    color: #2b3a55;
+}
+
+.cc-install__btn--primary {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(40, 59, 105, .35);
+}
+
+.cc-install__x {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: #8a94ab;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media (min-width: 641px) {
+    .cc-install {
+        left: auto;
+        right: 16px;
+        bottom: 16px;
+        width: 360px;
+        padding-bottom: 14px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(40, 59, 105, .28);
+        transform: translateY(24px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cc-install {
+        transition: none;
+    }
+}
