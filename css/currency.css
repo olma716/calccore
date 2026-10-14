@@ -135,8 +135,9 @@
     font-size: 12px;
     font-weight: 900;
     color: #1f2f55;
-    background: rgba(40, 59, 105, .08);
-    border: 1px solid rgba(40, 59, 105, .18);
+    background: #f2f4fa;
+    border: none;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
     padding: 6px 10px;
     border-radius: 999px;
 }
@@ -206,7 +207,7 @@
 .cconv .ccalc__select {
     width: 100%;
     height: 44px;
-    border: 1px solid #d4d7de;
+    border: none;
     border-radius: 12px;
     padding: 0 12px;
     outline: none;
@@ -214,6 +215,8 @@
     color: #1f2937;
     font-size: 13px;
     font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: box-shadow .15s ease;
 }
 
 .cconv .ccalc__input::placeholder {
@@ -223,8 +226,7 @@
 
 .cconv .ccalc__input:focus,
 .cconv .ccalc__select:focus {
-    border-color: rgba(40, 59, 105, .55);
-    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .18), 0 3px 8px rgba(40, 59, 105, .08);
     color: #111827;
 }
 
@@ -239,8 +241,8 @@
     height: 44px;
     padding: 0 14px;
     border-radius: 12px;
-    border: 1px solid #d4d7de;
-    background: #fff;
+    border: none;
+    background: #f2f4fa;
     cursor: pointer;
     font-weight: 900;
     color: #1f2f55;
@@ -249,23 +251,38 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease, filter .15s ease;
 }
 
 .cconv .ccalc__btn:hover {
-    background: #f6f7fb;
-    border-color: #b9c2da;
-    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
     transform: translateY(-1px);
 }
 
-.cconv .ccalc__btn--primary {
-    background: rgba(40, 59, 105, .08);
-    border: 1px solid rgba(40, 59, 105, .35);
+.cconv .ccalc__btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 2px 6px rgba(40, 59, 105, .1);
 }
 
+.cconv .ccalc__btn--primary {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 4px 14px rgba(40, 59, 105, .35);
+}
+
+/* .ccalc__btn:hover має ту саму специфічність і задає background — повторюємо градієнт, інакше кнопка біліє */
 .cconv .ccalc__btn--primary:hover {
-    background: rgba(40, 59, 105, .14);
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: brightness(1.08);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 6px 18px rgba(40, 59, 105, .42);
+}
+
+.cconv .ccalc__btn--primary:active {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: none;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 2px 8px rgba(40, 59, 105, .3);
 }
 
 /* Utilities */
@@ -273,16 +290,16 @@
     margin-top: 10px;
 }
 
-/* Result box (зелений як "успіх") */
+/* Result box — нейтральний стиль дисплея, як на науковому калькуляторі */
 .cconv .ccalc__bigNumber {
-    background: linear-gradient(180deg, #e9f7ef, #f6fbf8);
-    border: 1px solid #bfe3cd;
+    background: linear-gradient(180deg, #f6f7fb, #eef0f7);
+    border: none;
     border-radius: var(--cc-radius);
     padding: 12px;
     font-weight: 900;
     font-size: 16px;
-    color: #1f513a;
-    box-shadow: 0 8px 20px rgba(46, 125, 90, 0.10);
+    color: var(--cc-brand2);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .1);
     min-height: 74px;
     display: flex;
     align-items: center;
@@ -444,4 +461,292 @@
     min-width: 0;
     /* перебиває min-width:160px */
     width: auto;
+}
+
+/* =========================================================
+   Вибір валюти (кастомний список: прапорці, пошук, вкладки)
+========================================================= */
+.cconv .cc-native {
+    display: none;
+}
+
+.cc-pick {
+    position: relative;
+    min-width: 0;
+}
+
+.cc-pick__btn {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2937;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: box-shadow .15s ease;
+}
+
+.cc-pick__btn:hover {
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
+}
+
+.cc-pick__btn:focus-visible,
+.cc-pick.is-open .cc-pick__btn {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .18), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.cc-pick__code {
+    font-weight: 900;
+    color: #1f2f55;
+    flex: none;
+}
+
+.cc-pick__name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.cc-pick__chev {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    color: #6b7a99;
+    transition: transform .15s ease;
+}
+
+.cc-pick.is-open .cc-pick__chev {
+    transform: rotate(180deg);
+}
+
+/* Іконки */
+.cc-flag {
+    flex: none;
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(31, 47, 85, .12);
+}
+
+.cc-coin {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--c, #8a94ab);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, .12);
+}
+
+/* Панель */
+.cc-pick__panel {
+    position: absolute;
+    z-index: 60;
+    top: calc(100% + 6px);
+    left: 0;
+    width: max(100%, 300px);
+    padding: 8px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 34px rgba(40, 59, 105, .24);
+}
+
+.cc-pick__panel[hidden] {
+    display: none;
+}
+
+.cc-pick--end .cc-pick__panel {
+    left: auto;
+    right: 0;
+}
+
+@media (max-width: 680px) {
+    .cc-pick__panel,
+    .cc-pick--end .cc-pick__panel {
+        left: 0;
+        right: 0;
+        width: auto;
+    }
+}
+
+.cc-pick__search {
+    width: 100%;
+    height: 36px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 0 12px;
+    background: #f2f4fa;
+    color: #1f2937;
+    font: inherit;
+    font-size: 13px;
+}
+
+.cc-pick__search:focus {
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .16);
+}
+
+.cc-pick__tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 8px 0 4px;
+}
+
+.cc-pick__tabs[hidden] {
+    display: none;
+}
+
+.cc-pick__tabs button {
+    height: 30px;
+    border: none;
+    border-radius: 9px;
+    background: #f2f4fa;
+    color: #2b3a55;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 2px 6px rgba(40, 59, 105, .06);
+    transition: background .15s ease, box-shadow .15s ease;
+}
+
+.cc-pick__tabs button:hover {
+    background: #eaeef8;
+}
+
+.cc-pick__tabs button.is-active {
+    background: rgba(40, 59, 105, .14);
+    color: #1f2f55;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 3px 8px rgba(40, 59, 105, .16);
+}
+
+.cc-pick__list {
+    max-height: 264px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    margin-top: 6px;
+}
+
+.cc-pick__group {
+    padding: 8px 8px 4px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #8a94ab;
+}
+
+.cc-opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.cc-opt.is-active {
+    background: #f2f4fa;
+}
+
+.cc-opt.is-selected {
+    background: rgba(40, 59, 105, .1);
+}
+
+.cc-opt__code {
+    flex: none;
+    min-width: 40px;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.cc-opt__name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.cc-pick__empty {
+    padding: 14px 8px;
+    font-size: 12px;
+    color: #6b7280;
+    text-align: center;
+}
+
+.cconv-src {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--cc-muted);
+}
+
+/* Перемикач джерела курсу */
+.cc-seg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 8px;
+}
+
+.cc-seg button {
+    height: 38px;
+    border: none;
+    border-radius: 12px;
+    background: #f2f4fa;
+    color: #2b3a55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.cc-seg button:hover {
+    transform: translateY(-1px);
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
+}
+
+.cc-seg button.is-active {
+    background: rgba(40, 59, 105, .14);
+    color: #1f2f55;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .2);
+}
+
+.cconv-src a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .cc-seg {
+        grid-template-columns: 1fr 1fr;
+    }
 }

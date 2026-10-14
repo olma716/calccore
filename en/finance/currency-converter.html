@@ -28,10 +28,10 @@
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/currency.css" />
+    <link rel="stylesheet" href="/css/currency.css?v=20261014e" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/currency.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261014e" defer></script>
+    <script src="/js/currency.js?v=20261014e" defer></script>
 
     <script type="application/ld+json">
   {
@@ -184,6 +184,11 @@
 
                         <div class="ccalc__rows">
                             <div class="ccalc__field cconv-full">
+                                <span class="ccalc__label" id="rateSourceLabel">Exchange rate</span>
+                                <div class="cc-seg" id="rateSource" role="group" aria-labelledby="rateSourceLabel"></div>
+                            </div>
+
+                            <div class="ccalc__field cconv-full">
                                 <label class="ccalc__label" for="amount">Amount</label>
                                 <input class="ccalc__input" id="amount" placeholder="e.g. 1000" inputmode="decimal" />
                             </div>
@@ -252,6 +257,7 @@
             <ul>
                 <li>UAH ↔ USD/EUR/PLN conversions and many other currencies</li>
                 <li>Convert an amount between any available currencies</li>
+                <li>Convert cryptocurrencies (Bitcoin, Ethereum, USDT and more) to UAH and national currencies</li>
                 <li>Quick copy of the final result</li>
             </ul>
         </section>
@@ -274,6 +280,12 @@
             <div class="cc-faq-item">
                 <h3>What if NBU is temporarily unavailable?</h3>
                 <p>The calculator may use the latest saved rates from your browser (localStorage), if available.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where do cryptocurrency rates come from?</h3>
+                <p>NBU does not publish cryptocurrency rates, so they are loaded from CoinGecko — market prices in UAH
+                    refreshed every few minutes. Currencies in the “Currencies” list use the official NBU rate.</p>
             </div>
         </section>
     </main>

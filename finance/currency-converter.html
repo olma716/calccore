@@ -29,11 +29,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/currency.css" />
+    <link rel="stylesheet" href="/css/currency.css?v=20261014e" />
 
     <!-- JS -->
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/currency.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261014e" defer></script>
+    <script src="/js/currency.js?v=20261014e" defer></script>
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -187,6 +187,11 @@
 
                         <div class="ccalc__rows">
                             <div class="ccalc__field cconv-full">
+                                <span class="ccalc__label" id="rateSourceLabel">Курс обміну</span>
+                                <div class="cc-seg" id="rateSource" role="group" aria-labelledby="rateSourceLabel"></div>
+                            </div>
+
+                            <div class="ccalc__field cconv-full">
                                 <label class="ccalc__label" for="amount">Сума</label>
                                 <input class="ccalc__input" id="amount" placeholder="наприклад: 1000"
                                     inputmode="decimal" />
@@ -257,6 +262,7 @@
             <ul>
                 <li>Конвертацію UAH ↔ USD/EUR/PLN та інших валют</li>
                 <li>Перерахунок суми в будь-яку доступну валюту зі списку</li>
+                <li>Конвертацію криптовалют (Bitcoin, Ethereum, USDT та інших) у гривню й національні валюти</li>
                 <li>Швидке копіювання готового результату</li>
             </ul>
         </section>
@@ -279,6 +285,13 @@
             <div class="cc-faq-item">
                 <h3>Що робити, якщо НБУ тимчасово не відкривається?</h3>
                 <p>Калькулятор спробує використати останні збережені курси з браузера (localStorage), якщо вони є.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Звідки беруться курси криптовалют?</h3>
+                <p>Курси криптовалют НБУ не публікує, тому вони завантажуються з сервісу CoinGecko — це ринкові ціни в
+                    гривні, які оновлюються кожні кілька хвилин. Валюти зі списку «Валюти» рахуються за офіційним курсом
+                    НБУ.</p>
             </div>
         </section>
     </main>
