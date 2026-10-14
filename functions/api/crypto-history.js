@@ -1,6 +1,6 @@
 // Проксі до історії цін CoinGecko (ціна в UAH). Кеш на сервері економить ліміт публічного API,
 // а "останній вдалий" результат рятує графік, якщо CoinGecko віддає 429.
-// Відповідь: { id, days, pts: [[unixMs, priceUah], ...] } — не більше ~500 точок.
+// Відповідь: { id, vs, days, pts: [[unixMs, price], ...] } (vs = uah | usd) — не більше ~500 точок.
 
 const UPSTREAM = "https://api.coingecko.com/api/v3/coins";
 const IDS = new Set([
@@ -29,24 +29,27 @@ function json(body, status, maxAge) {
   });
 }
 
-export async function onRequestGet({ request }) {
+export async function onRequestGet({ request, env }) {
   const params = new URL(request.url).searchParams;
   const id = String(params.get("id") || "");
   const days = Number(params.get("days"));
+  const vs = params.get("vs") === "usd" ? "usd" : "uah";
   if (!IDS.has(id)) return json({ error: "bad_id" }, 400, 0);
   if (!FRESH_TTL[days]) return json({ error: "bad_days" }, 400, 0);
 
   const cache = caches.default;
-  const freshKey = new Request(`https://cache.internal/crypto-history/${id}/${days}/fresh`);
-  const lastKey = new Request(`https://cache.internal/crypto-history/${id}/${days}/last`);
+  const freshKey = new Request(`https://cache.internal/crypto-history/${id}/${vs}/${days}/fresh`);
+  const lastKey = new Request(`https://cache.internal/crypto-history/${id}/${vs}/${days}/last`);
 
   const hit = await cache.match(freshKey);
   if (hit) return hit;
 
   try {
-    const res = await fetch(`${UPSTREAM}/${id}/market_chart?vs_currency=uah&days=${days}`, {
-      headers: { Accept: "application/json", "User-Agent": "Mozilla/5.0 (compatible; CalcCore/1.0; +https://calccore.net)" }
-    });
+    // безкоштовний демо-ключ CoinGecko (env.COINGECKO_API_KEY) піднімає ліміт запитів; без нього теж працює
+    const headers = { Accept: "application/json", "User-Agent": "Mozilla/5.0 (compatible; CalcCore/1.0; +https://calccore.net)" };
+    if (env && env.COINGECKO_API_KEY) headers["x-cg-demo-api-key"] = env.COINGECKO_API_KEY;
+
+    const res = await fetch(`${UPSTREAM}/${id}/market_chart?vs_currency=${vs}&days=${days}`, { headers });
     if (!res.ok) throw new Error(`upstream ${res.status}`);
 
     const data = await res.json();
@@ -62,7 +65,7 @@ export async function onRequestGet({ request }) {
       if (pts[pts.length - 1][0] !== last[0]) pts.push(last);
     }
 
-    const body = { id, days, pts };
+    const body = { id, vs, days, pts };
     await cache.put(freshKey, json(body, 200, FRESH_TTL[days]));
     await cache.put(lastKey, json(body, 200, TTL_LAST));
     return json(body, 200, 120);

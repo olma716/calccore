@@ -800,7 +800,7 @@
   const PERIODS = [7, 30, 90, 365];
   const CG_COIN_URL = "https://api.coingecko.com/api/v3/coins";
   const CRYPTO_HIST_URL = "/api/crypto-history"; // проксі до CoinGecko (ціни в UAH)
-  const CRYPTO_HIST_CACHE_KEY = "cc_crypto_hist_v1_";
+  const CRYPTO_HIST_CACHE_KEY = "cc_crypto_hist_v2_";
   const CRYPTO_CHART_CODES = ["BTC", "ETH", "BNB", "SOL", "XRP", "TON"];
 
   const boardTableEl = $("boardTable");
@@ -809,7 +809,7 @@
   const rateFmt = (x) =>
     x >= 1000
       ? x.toLocaleString(locale(), { maximumFractionDigits: 0 })
-      : x.toLocaleString(locale(), { minimumFractionDigits: 2, maximumFractionDigits: x < 10 ? 3 : 2 });
+      : x.toLocaleString(locale(), { minimumFractionDigits: 2, maximumFractionDigits: x < 1 ? 4 : x < 10 ? 3 : 2 });
   const signed = (x, d) =>
     (x > 0 ? "+" : "") + x.toLocaleString(locale(), { minimumFractionDigits: Math.min(2, d), maximumFractionDigits: d });
 
@@ -885,11 +885,11 @@
   // ---- історія цін криптовалют (CoinGecko через проксі; окремий запит на кожен період) ----
   const cryptoHistMem = {};
 
-  async function loadCryptoHistory(code, days) {
+  async function loadCryptoHistory(code, days, vs = "uah") {
     const id = CRYPTO_META[code]?.id;
     if (!id) return null;
 
-    const mem = `${code}_${days}`;
+    const mem = `${code}_${days}_${vs}`;
     const ttl = days <= 7 ? 10 * 60 * 1000 : days <= 30 ? 30 * 60 * 1000 : 60 * 60 * 1000;
     if (cryptoHistMem[mem] && Date.now() - cryptoHistMem[mem].ts < ttl) return cryptoHistMem[mem].pts;
 
@@ -902,8 +902,8 @@
 
     // спершу власне проксі (кеш на сервері), якщо воно недоступне — CoinGecko напряму з браузера
     const sources = [
-      `${CRYPTO_HIST_URL}?id=${id}&days=${days}`,
-      `${CG_COIN_URL}/${id}/market_chart?vs_currency=uah&days=${days}`
+      `${CRYPTO_HIST_URL}?id=${id}&days=${days}&vs=${vs}`,
+      `${CG_COIN_URL}/${id}/market_chart?vs_currency=${vs}&days=${days}`
     ];
 
     for (const url of sources) {
@@ -941,12 +941,13 @@
   }
 
   // ---- графік (SVG без бібліотек): спільний для НБУ і криптовалют ----
-  // o: { curEl, perEl, statsEl, boxEl, noteEl, codes, load(code, days), noteHtml(code), reloadOnPeriod, intraday }
+  // o: { curEl, perEl, iconFor(code), unitEl, units, unitLabel(unit), statsEl, boxEl, noteEl, codes, load(code, days, unit), noteHtml(code, unit), reloadOnPeriod, intraday }
   function createChart(o) {
     if (!o.boxEl) return null;
 
     let code = o.codes[0];
     let days = 30;
+    let unit = o.units ? o.units[0] : null;
     let pts = null;
     let seq = 0;
     let width = 0;
@@ -958,7 +959,7 @@
           const b = document.createElement("button");
           b.type = "button";
           b.dataset.cur = c;
-          b.innerHTML = iconHtml(c).replace('loading="lazy"', 'loading="eager"') + `<span>${esc(c)}</span>`;
+          b.innerHTML = (o.iconFor ? o.iconFor(c) : iconHtml(c).replace('loading="lazy"', 'loading="eager"')) + `<span>${esc(c)}</span>`;
           b.setAttribute("aria-pressed", c === code ? "true" : "false");
           b.classList.toggle("is-active", c === code);
           o.curEl.appendChild(b);
@@ -976,7 +977,19 @@
           o.perEl.appendChild(b);
         }
       }
-      if (o.noteEl) o.noteEl.innerHTML = o.noteHtml(code);
+      if (o.unitEl && o.units) {
+        o.unitEl.innerHTML = "";
+        for (const u of o.units) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.dataset.unit = u;
+          b.textContent = o.unitLabel ? o.unitLabel(u) : u;
+          b.setAttribute("aria-pressed", u === unit ? "true" : "false");
+          b.classList.toggle("is-active", u === unit);
+          o.unitEl.appendChild(b);
+        }
+      }
+      if (o.noteEl) o.noteEl.innerHTML = o.noteHtml(code, unit);
     }
 
     function message(text) {
@@ -988,7 +1001,7 @@
       const mySeq = ++seq;
       message(t("currency.chart_loading"));
 
-      const loaded = await o.load(code, days);
+      const loaded = await o.load(code, days, unit);
       if (mySeq !== seq) return;
 
       if (!loaded) {
@@ -1020,7 +1033,7 @@
       }
       const diff = now - first;
       const pct = (diff / first) * 100;
-      const dd = now >= 1000 ? 0 : now >= 10 ? 2 : 3;
+      const dd = now >= 1000 ? 0 : now >= 10 ? 2 : now >= 1 ? 3 : 4;
 
       if (o.statsEl) {
         const tile = (label, value, sub = "") =>
@@ -1114,7 +1127,7 @@
         dot.setAttribute("visibility", "visible");
 
         const date = new Date(view[best][0]).toLocaleString(locale(), tipOpts);
-        tip.innerHTML = `<span>${esc(date)}</span><b>${esc(rateFmt(view[best][1]))} UAH</b>`;
+        tip.innerHTML = `<span>${esc(date)}</span><b>${esc(rateFmt(view[best][1]))} ${esc(o.unitLabel && unit ? o.unitLabel(unit) : "UAH")}</b>`;
         tip.hidden = false;
 
         const tw = tip.offsetWidth;
@@ -1132,6 +1145,14 @@
       const b = e.target.closest("button[data-cur]");
       if (!b || b.dataset.cur === code) return;
       code = b.dataset.cur;
+      renderControls();
+      update();
+    });
+
+    o.unitEl?.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-unit]");
+      if (!b || b.dataset.unit === unit) return;
+      unit = b.dataset.unit;
       renderControls();
       update();
     });
@@ -1177,12 +1198,17 @@
       boxEl: $("cryptoBox"),
       noteEl: $("cryptoNote"),
       codes: CRYPTO_CHART_CODES,
-      load: loadCryptoHistory,
+      iconFor: (c) =>
+        `<img class="cc-logo" src="/assets/crypto/${c.toLowerCase()}.png" width="20" height="20" alt="">`,
+      unitEl: $("cryptoVs"),
+      units: ["uah", "usd"],
+      unitLabel: (u) => u.toUpperCase(),
+      load: (code, days, unit) => loadCryptoHistory(code, days, unit),
       reloadOnPeriod: true,
       intraday: true,
-      noteHtml: (code) => {
+      noteHtml: (code, unit) => {
         const link = '<a href="https://www.coingecko.com/" target="_blank" rel="noopener">CoinGecko</a>';
-        return t("currency.crypto_note", { cur: code, link });
+        return t("currency.crypto_note", { cur: code, unit: t(`currency.in_${unit || "uah"}`), link });
       }
     })?.init();
   }
