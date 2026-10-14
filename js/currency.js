@@ -798,6 +798,7 @@
   const HIST_TTL_MS = 6 * 60 * 60 * 1000;
   const DAY_MS = 24 * 60 * 60 * 1000;
   const PERIODS = [7, 30, 90, 365];
+  const CG_COIN_URL = "https://api.coingecko.com/api/v3/coins";
   const CRYPTO_HIST_URL = "/api/crypto-history"; // проксі до CoinGecko (ціни в UAH)
   const CRYPTO_HIST_CACHE_KEY = "cc_crypto_hist_v1_";
   const CRYPTO_CHART_CODES = ["BTC", "ETH", "BNB", "SOL", "XRP", "TON"];
@@ -899,27 +900,44 @@
       return cache.pts;
     }
 
-    try {
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 12000);
-      const res = await fetch(`${CRYPTO_HIST_URL}?id=${id}&days=${days}`, { signal: ctrl.signal });
-      clearTimeout(timer);
-      if (!res.ok) throw new Error("crypto hist not ok");
-      const data = await res.json();
+    // спершу власне проксі (кеш на сервері), якщо воно недоступне — CoinGecko напряму з браузера
+    const sources = [
+      `${CRYPTO_HIST_URL}?id=${id}&days=${days}`,
+      `${CG_COIN_URL}/${id}/market_chart?vs_currency=uah&days=${days}`
+    ];
 
-      const pts = (Array.isArray(data?.pts) ? data.pts : [])
-        .map((pt) => [Number(pt[0]), Number(pt[1])])
-        .filter((pt) => Number.isFinite(pt[0]) && pt[1] > 0);
-      if (pts.length < 2) throw new Error("crypto hist empty");
+    for (const url of sources) {
+      try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 12000);
+        const res = await fetch(url, { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error("crypto hist not ok");
+        const data = await res.json();
 
-      const entry = { ts: Date.now(), pts };
-      writeJson(key, entry);
-      cryptoHistMem[mem] = entry;
-      return pts;
-    } catch {
-      if (cache?.pts?.length) return cache.pts;
-      return null;
+        // проксі віддає { pts }, CoinGecko напряму — { prices }
+        let pts = (Array.isArray(data?.pts) ? data.pts : Array.isArray(data?.prices) ? data.prices : [])
+          .map((pt) => [Number(pt[0]), Number(pt[1])])
+          .filter((pt) => Number.isFinite(pt[0]) && pt[1] > 0);
+        if (pts.length < 2) throw new Error("crypto hist empty");
+
+        if (pts.length > 500) {
+          const step = Math.ceil(pts.length / 500);
+          const lastPt = pts[pts.length - 1];
+          pts = pts.filter((_, i) => i % step === 0);
+          if (pts[pts.length - 1][0] !== lastPt[0]) pts.push(lastPt);
+        }
+
+        const entry = { ts: Date.now(), pts };
+        writeJson(key, entry);
+        cryptoHistMem[mem] = entry;
+        return pts;
+      } catch {
+        // пробуємо наступне джерело
+      }
     }
+
+    return cache?.pts?.length ? cache.pts : null;
   }
 
   // ---- графік (SVG без бібліотек): спільний для НБУ і криптовалют ----

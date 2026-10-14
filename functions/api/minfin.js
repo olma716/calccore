@@ -14,6 +14,13 @@ const kyivFmt = new Intl.DateTimeFormat("uk-UA", {
   hour12: false
 });
 
+// Причина без чутливих даних: лише код відповіді джерела або "empty"/"fetch_error".
+// 5xx не віддаємо — Cloudflare підміняє їх власною сторінкою "error code: 502", і причини не видно.
+function safeReason(err) {
+  const m = String((err && err.message) || "");
+  return /^upstream \d{3}$/.test(m) || m === "empty" ? m : "fetch_error";
+}
+
 function json(body, status, maxAge) {
   return new Response(JSON.stringify(body), {
     status,
@@ -71,7 +78,7 @@ export async function onRequestGet({ request, env }) {
   if (!endpoint) return json({ error: "bad_type" }, 400, 0);
 
   const apiKey = env.MINFIN_API_KEY;
-  if (!apiKey) return json({ error: "not_configured" }, 503, 0);
+  if (!apiKey) return json({ error: "not_configured" }, 424, 0);
 
   const cache = caches.default;
   const freshKey = new Request(`https://cache.internal/minfin/${type}/fresh`);
@@ -93,7 +100,7 @@ export async function onRequestGet({ request, env }) {
     await cache.put(freshKey, json(body, 200, TTL_FRESH));
     await cache.put(lastKey, json(body, 200, TTL_LAST));
     return json(body, 200, 300);
-  } catch {
+  } catch (err) {
     const last = await cache.match(lastKey);
     if (last) {
       const stale = new Response(last.body, last);
@@ -101,6 +108,6 @@ export async function onRequestGet({ request, env }) {
       stale.headers.set("X-Stale", "1");
       return stale;
     }
-    return json({ error: "upstream" }, 502, 0);
+    return json({ error: "upstream", reason: safeReason(err) }, 424, 0);
   }
 }
