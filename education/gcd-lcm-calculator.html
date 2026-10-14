@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8HZ7JH41R');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+
+    <title>Калькулятор НСД і НСК онлайн — знайти НСД та НСК | CalcCore</title>
+    <meta name="description"
+        content="Калькулятор НСД і НСК онлайн: найбільший спільний дільник і найменше спільне кратне кількох чисел, розклад на прості множники та кроки алгоритму Евкліда." />
+
+    <link rel="canonical" href="https://calccore.net/education/gcd-lcm-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/education/gcd-lcm-calculator" />
+    <link rel="alternate" hreflang="en" href="https://calccore.net/en/education/gcd-lcm-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/education/gcd-lcm-calculator" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/gcd-lcm-calculator.js?v=20261014" defer></script>
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Що таке НСД?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "НСД (найбільший спільний дільник) — найбільше натуральне число, на яке кілька чисел діляться без остачі. Наприклад, НСД(12, 18) = 6."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Що таке НСК?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "НСК (найменше спільне кратне) — найменше натуральне число, яке ділиться без остачі на кожне з даних чисел. Наприклад, НСК(12, 18) = 36."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Як пов’язані НСД і НСК?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Для двох чисел добуток НСД і НСК дорівнює добутку самих чисел: НСД(a, b) · НСК(a, b) = a · b. Тому НСК = a · b / НСД."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Як знайти НСД трьох і більше чисел?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "НСД знаходять послідовно: НСД(a, b, c) = НСД(НСД(a, b), c). Калькулятор робить це автоматично для кількох чисел (до 20)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Які числа називають взаємно простими?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Числа, НСД яких дорівнює 1, тобто вони не мають спільних дільників, крім одиниці. Наприклад, 8 і 15."
+        }
+      }
+    ]
+  }
+    </script>
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://calccore.net/education/gcd-lcm-calculator#app",
+    "name": "Калькулятор НСД і НСК",
+    "description": "Найбільший спільний дільник і найменше спільне кратне кількох чисел з розкладом на прості множники та кроками алгоритму Евкліда.",
+    "url": "https://calccore.net/education/gcd-lcm-calculator",
+    "applicationCategory": "EducationApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "inLanguage": "uk",
+    "publisher": {
+      "@id": "https://calccore.net/#org"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "UAH"
+    }
+  }
+    </script>
+</head>
+
+<body class="credit-page c1pm">
+    <div id="header"></div>
+
+    <main class="container">
+        <section class="mcalc c1pm" id="cgcd">
+            <div class="mcalc__wrap">
+
+                <div class="mcalc__titlebar">
+                    <h1 class="mcalc__h1">Калькулятор НСД і НСК</h1>
+                    <p class="mcalc__p">
+                        Введи два або більше натуральних числа — отримай найбільший спільний дільник і найменше спільне кратне з розв’язанням.
+                    </p>
+                </div>
+
+                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
+                    <div class="mcalc__sectionTitle">
+                        <h2 class="mcalc__h2">Введи дані</h2>
+                        <span class="mcalc__badge">Education</span>
+                    </div>
+
+                    <div class="mcalc__rows">
+                        <div class="mcalc__field m-full">
+                            <label class="mcalc__label" for="numbersInput">Числа (через кому чи пробіл)</label>
+                            <textarea class="mcalc__input" id="numbersInput" rows="3"
+                                style="height:auto; padding:10px 12px; font-family:inherit;"
+                                placeholder="напр.: 12, 18, 30"></textarea>
+                        </div>
+
+                        <div class="mcalc__field m-full">
+                            <div class="mcalc__actions m-mt10">
+                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
+                                    type="button">Розрахувати</button>
+                                <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
+                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            </div>
+                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                    </div>
+
+                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи два або більше натуральних числа.
+                    </div>
+                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                </div>
+
+                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
+                    <a href="/education/fraction-calculator">Калькулятор дробів</a>
+                    <a href="/calculator">Науковий калькулятор</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="m-divider"></div>
+
+        <section class="m-seo">
+            <h2>Що таке НСД і НСК</h2>
+            <p>
+                <b>НСД (найбільший спільний дільник)</b> — найбільше натуральне число, на яке діляться без остачі всі задані
+                числа. <b>НСК (найменше спільне кратне)</b> — найменше натуральне число, яке ділиться без остачі на кожне
+                із заданих. Наприклад, для чисел 12 і 18: НСД = 6, НСК = 36.
+            </p>
+
+            <h2>Як знайти НСД: алгоритм Евкліда</h2>
+            <p>
+                Більше число ділять на менше, потім менше — на остачу, і так далі, поки остача не стане нулем. Остання
+                ненульова остача і є НСД. Для 48 і 18:
+            </p>
+            <ul>
+                <li>48 = 2 · 18 + 12</li>
+                <li>18 = 1 · 12 + 6</li>
+                <li>12 = 2 · 6 + 0 — отже, <b>НСД(48, 18) = 6</b></li>
+            </ul>
+
+            <h2>Як знайти НСК</h2>
+            <p>
+                Для двох чисел <b>НСК(a, b) = a · b / НСД(a, b)</b>. Інший спосіб — розклад на прості множники: беремо усі
+                прості множники з найбільшими степенями. Для 12 = 2² · 3 і 18 = 2 · 3² маємо НСК = 2² · 3² = 36.
+                Калькулятор показує обидва способи для кожного набору чисел.
+            </p>
+
+            <h2>Де застосовуються НСД і НСК</h2>
+            <ul>
+                <li><b>Скорочення дробів:</b> чисельник і знаменник ділять на їх НСД.</li>
+                <li><b>Спільний знаменник:</b> при додаванні дробів беруть НСК знаменників.</li>
+                <li><b>Задачі на повторення подій:</b> коли два періодичні процеси знову збігаються — це НСК їхніх періодів.</li>
+                <li><b>Розбиття на рівні групи:</b> найбільший розмір групи, на який діляться всі кількості, — це НСД.</li>
+            </ul>
+
+            <p class="m-hintSmall">
+                Калькулятор приймає до 20 натуральних чисел довжиною до 18 цифр. Розклад на прості множники
+                показується для чисел до 10<sup>12</sup>.
+            </p>
+        </section>
+
+        <section class="m-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="m-faq-item">
+                <h3>Що таке НСД?</h3>
+                <p>НСД (найбільший спільний дільник) — найбільше натуральне число, на яке кілька чисел діляться без остачі. Наприклад, НСД(12, 18) = 6.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Що таке НСК?</h3>
+                <p>НСК (найменше спільне кратне) — найменше натуральне число, яке ділиться без остачі на кожне з даних чисел. Наприклад, НСК(12, 18) = 36.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як пов’язані НСД і НСК?</h3>
+                <p>Для двох чисел добуток НСД і НСК дорівнює добутку самих чисел: НСД(a, b) · НСК(a, b) = a · b. Тому НСК = a · b / НСД.</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Як знайти НСД трьох і більше чисел?</h3>
+                <p>НСД знаходять послідовно: НСД(a, b, c) = НСД(НСД(a, b), c). Калькулятор робить це автоматично для кількох чисел (до 20).</p>
+            </div>
+
+            <div class="m-faq-item">
+                <h3>Які числа називають взаємно простими?</h3>
+                <p>Числа, НСД яких дорівнює 1, тобто вони не мають спільних дільників, крім одиниці. Наприклад, 8 і 15.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    <script src="/js/layout.js"></script>
+</body>
+
+</html>
