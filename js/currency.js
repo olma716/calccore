@@ -28,10 +28,10 @@
   const CRYPTO_CACHE_KEY = "cc_crypto_rates_v1";
   const CRYPTO_TTL_MS = 10 * 60 * 1000; // 10 хвилин
   const MONO_URL = "https://api.monobank.ua/bank/currency";
-  const MINFIN_URL = "/api/minfin"; // проксі на Cloudflare Pages Functions (ключ Мінфіну лишається на сервері)
+  const PRIVAT_URL = "/api/privat"; // проксі на Cloudflare Pages Functions (API ПриватБанку без CORS)
   const BANK_CACHE_KEY = "cc_bank_rates_v1_";
   const MONO_TTL_MS = 5 * 60 * 1000;   // ліміт monobank API — 1 запит/хв
-  const MINFIN_TTL_MS = 15 * 60 * 1000; // сервер і так кешує на 30 хв
+  const PRIVAT_TTL_MS = 15 * 60 * 1000; // сервер і так кешує на 15 хв
 
   // ---- довідники ----
   const FLAG = {
@@ -80,13 +80,13 @@
 
   const isCrypto = (code) => !!CRYPTO_META[code];
 
-  // Джерело курсу: "nbu" — офіційний (купівля = продаж); "mono" — monobank, "avg" — середній курс банків
-  // і "mb" — міжбанк (останні два — через Мінфін). Для банківських джерел є окремі купівля/продаж.
+  // Джерело курсу: "nbu" — офіційний (купівля = продаж); "mono" — monobank, "privat" — ПриватБанк
+  // (готівковий курс, через власне проксі). Для банківських джерел є окремі купівля/продаж.
   const SOURCE_KEY = "cc_rate_source";
-  const BANK_SOURCES = ["mono", "avg", "mb"];
+  const BANK_SOURCES = ["mono", "privat"];
   let source = "nbu";
-  const bank = { mono: {}, avg: {}, mb: {} };           // { USD: { buy, sell }, ... } — у UAH
-  const bankUpdated = { mono: "", avg: "", mb: "" };    // готовий текст "14.10, 10:45" для бейджа
+  const bank = { mono: {}, privat: {} };           // { USD: { buy, sell }, ... } — у UAH
+  const bankUpdated = { mono: "", privat: "" };    // готовий текст "14.10, 10:45" для бейджа
 
   // UAH, які отримуємо, продаючи 1 одиницю / віддаємо, купуючи 1 одиницю
   function priceOf(code, side) {
@@ -548,21 +548,21 @@
     return { rates, updated };
   }
 
-  // Мінфін (середній курс банків / міжбанк) — через власне проксі
-  async function fetchMinfin(id) {
+  // ПриватБанк (готівковий курс) — через власне проксі
+  async function fetchPrivat() {
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 10000);
-    const res = await fetch(`${MINFIN_URL}?type=${id}`, { signal: ctrl.signal });
+    const res = await fetch(PRIVAT_URL, { signal: ctrl.signal });
     clearTimeout(timer);
-    if (!res.ok) throw new Error("minfin not ok");
+    if (!res.ok) throw new Error("privat not ok");
     const data = await res.json();
-    if (!data?.rates || !Object.keys(data.rates).length) throw new Error("minfin empty");
+    if (!data?.rates || !Object.keys(data.rates).length) throw new Error("privat empty");
     return { rates: data.rates, updated: data.updatedText || "" };
   }
 
   async function loadBank(id) {
     const key = BANK_CACHE_KEY + id;
-    const ttl = id === "mono" ? MONO_TTL_MS : MINFIN_TTL_MS;
+    const ttl = id === "mono" ? MONO_TTL_MS : PRIVAT_TTL_MS;
     const cache = readJson(key);
 
     if (cache?.rates && cache.ts && (Date.now() - cache.ts) < ttl) {
@@ -572,7 +572,7 @@
     }
 
     try {
-      const { rates, updated } = id === "mono" ? await fetchMono() : await fetchMinfin(id);
+      const { rates, updated } = id === "mono" ? await fetchMono() : await fetchPrivat();
       bank[id] = rates;
       bankUpdated[id] = updated;
       writeJson(key, { ts: Date.now(), rates, updated });
@@ -634,11 +634,6 @@
 
     if (source !== "nbu" && (isBankLeg(from) || isBankLeg(to))) {
       extra += `<div class="cconv-src">${esc(t(`currency.note_${source}`))}</div>`;
-      if (source !== "mono") {
-        // умови Мінфіну: використання даних — лише з гіперпосиланням на minfin.com.ua
-        const link = `<a href="https://minfin.com.ua/" target="_blank" rel="noopener">Minfin.com.ua</a>`;
-        extra += `<div class="cconv-src">${t("currency.src_minfin", { link })}</div>`;
-      }
     }
 
     if (withCrypto && cryptoTs) {
@@ -718,7 +713,7 @@
   });
 
   // =====================================================
-  // Перемикач джерела курсу (НБУ / monobank / середній / міжбанк)
+  // Перемикач джерела курсу (НБУ / monobank / ПриватБанк)
   // =====================================================
   const sourceEl = $("rateSource");
   const sourceLabelEl = $("rateSourceLabel");
@@ -842,10 +837,7 @@
 
     boardTableEl.innerHTML = head + `<tbody>${rows}</tbody>`;
 
-    if (boardSrcEl) {
-      const link = '<a href="https://minfin.com.ua/" target="_blank" rel="noopener">Minfin.com.ua</a>';
-      boardSrcEl.innerHTML = t("currency.board_src", { link });
-    }
+    if (boardSrcEl) boardSrcEl.textContent = t("currency.board_src");
   }
 
   // ---- історія курсу НБУ (одним запитом на рік) ----

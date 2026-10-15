@@ -22,6 +22,7 @@
     nothingToCopy: LANG === "en" ? "Nothing to copy." : "Немає що копіювати.",
     historyCleared: LANG === "en" ? "History cleared." : "Історію очищено.",
     historyEmpty: LANG === "en" ? "No calculations yet." : "Ще немає обчислень.",
+    needNumber: LANG === "en" ? "Enter a number first." : "Спочатку введи число.",
   };
 
   const LS_HISTORY = "cc_calc_history_v1";
@@ -68,11 +69,14 @@
   function wrapTrailingNumber(dispFn, rawFn) {
     // capture contiguous trailing digit/dot tokens (a number literal)
     let i = tokens.length - 1;
-    while (i >= 0 && /^[0-9.]$/.test(tokens[i].raw) && tokens[i].raw.length === 1) i--;
+    const isNumTok = (t) => (/^[0-9.]$/.test(t.raw) && t.raw.length === 1) || t.raw === "Math.PI" || t.raw === "Math.E";
+    while (i >= 0 && isNumTok(tokens[i])) i--;
     const start = i + 1;
     if (start >= tokens.length) {
-      // no trailing number — just insert an empty function call
-      push(dispFn + "()", rawFn + "()");
+      // числа ще немає: n! без числа не має сенсу, а sin, √, log, ln відкривають дужку —
+      // подальші цифри потрапляють усередину, а закриваюча дужка додається автоматично
+      if (!dispFn) { setToast(T.needNumber); clearToastSoon(); return; }
+      push(dispFn + "(", rawFn + "(");
       return;
     }
     const captured = tokens.slice(start);
@@ -218,7 +222,7 @@
       clearToastSoon();
       return;
     }
-    const displayExpr = dispString();
+    const displayExpr = balanceParens(dispString());
     const resStr = fmt(v);
     addHistory(displayExpr, resStr);
     lastResult = v;
@@ -290,10 +294,18 @@
       case "back": backspace(); break;
       case "sign": toggleSign(); break;
       case "equals": equals(); break;
-      case "sq": push("²", "**2"); break;
+      case "sq":
+        if (!tokens.length) { setToast(T.needNumber); clearToastSoon(); break; }
+        push("²", "**2");
+        break;
       case "sqrt": wrapTrailingNumber("√", "sqrt"); break;
       case "inv1x":
-        tokens = [{ disp: "1/(" + dispString() + ")", raw: "1/(" + rawString() + ")" }];
+        if (!tokens.length) {
+          // порожній вираз: відкриваємо 1/( — число введеться всередині
+          tokens = [{ disp: "1/(", raw: "1/(" }];
+        } else {
+          tokens = [{ disp: "1/(" + dispString() + ")", raw: "1/(" + rawString() + ")" }];
+        }
         renderLive();
         break;
       case "fact": wrapTrailingNumber("", "fact"); break;
