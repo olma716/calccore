@@ -38,6 +38,7 @@
   const peopleEl = el("global_people");
   const budgetEl = el("global_budget");
   const routeNoteEl = el("route_note");
+  const rtNoteEl = el("rt_note");
   const tollsEl = el("global_tolls");
   const parkingEl = el("global_parking");
   const unitEl = el("global_unit");
@@ -48,7 +49,6 @@
   const clearBtn = el("clear");
 
   const copyBtn = el("copy_result");
-  const shareBtn = el("share_link");
   const shareStatus = el("share_status");
 
   const compareEl = el("compare_result");
@@ -159,20 +159,28 @@
     return { tolls, parking, total: tolls + parking };
   }
 
+  // Під полем відстані — переведення в км (милі, морські милі);
+  // під перемикачем «Туди й назад» — розрахунок туди й назад
   function updateRouteNote(oneWay) {
-    if (!routeNoteEl) return;
     const valid = Number.isFinite(oneWay) && oneWay > 0;
-    if (!valid || (!isRoundTrip() && isKm())) {
-      routeNoteEl.textContent = "";
-      return;
-    }
     const fmt = (v) => Number(v).toLocaleString(LOCALE, { maximumFractionDigits: 1 });
-    const total = oneWay * (isRoundTrip() ? 2 : 1);
-    let text = isRoundTrip()
-      ? tt("fuel.round_trip_note", { one: fmt(oneWay), total: fmt(total), unit: unitShort() })
-      : `${fmt(total)} ${unitShort()}`;
-    if (!isKm()) text += ` = ${fmt(total * unitFactor())} ${tt("common.unit_km")}`;
-    routeNoteEl.textContent = text;
+    const km = tt("common.unit_km");
+
+    if (routeNoteEl) {
+      routeNoteEl.textContent =
+        valid && !isKm() ? `${fmt(oneWay)} ${unitShort()} = ${fmt(oneWay * unitFactor())} ${km}` : "";
+    }
+
+    if (rtNoteEl) {
+      if (valid && isRoundTrip()) {
+        const total = oneWay * 2;
+        let text = `${fmt(oneWay)} × 2 = ${fmt(total)} ${unitShort()}`;
+        if (!isKm()) text += ` = ${fmt(total * unitFactor())} ${km}`;
+        rtNoteEl.textContent = text;
+      } else {
+        rtNoteEl.textContent = "";
+      }
+    }
   }
 
   function debounceSave() {
@@ -1000,7 +1008,21 @@ ${perPersonHtml}
   }
 
   clearBtn?.addEventListener("click", doClear);
-  document.querySelectorAll('[data-fuel-action="clear"]').forEach((b) => b.addEventListener("click", doClear));
+  // Кнопки «Скинути» у блоках результату діють лише на свій блок:
+  // Результат 1 — Авто 1, Результат 2 — Авто 2, Порівняння — усе разом
+  function clearCar(car) {
+    car.clearFields();
+    updateResultsHint();
+    saveState();
+  }
+  document.querySelectorAll('[data-fuel-action="clear"]').forEach((b) =>
+    b.addEventListener("click", () => {
+      const scope = b.dataset.fuelScope;
+      if (scope === "car1") clearCar(car1);
+      else if (scope === "car2") clearCar(car2);
+      else doClear();
+    })
+  );
 
   // --- Toggle auto ---
   if (autoToggle) {
@@ -1158,52 +1180,6 @@ ${perPersonHtml}
     }
   }
 
-  function buildShareUrl() {
-    const s = collectState();
-    const p = new URLSearchParams();
-
-    p.set("m", s.isTwoCars ? "2" : "1");
-    p.set("ac", s.autoCalcEnabled ? "1" : "0");
-
-    if (s.global_distance) p.set("d", s.global_distance);
-    if (s.global_unit && s.global_unit !== "km") p.set("u", s.global_unit);
-    if (s.global_year_km) p.set("y", s.global_year_km);
-    if (s.global_round_trip === "1") p.set("rt", "1");
-    if (s.global_people) p.set("pp", s.global_people);
-    if (s.global_budget) p.set("bg", s.global_budget);
-    if (s.global_tolls) p.set("tl", s.global_tolls);
-    if (s.global_parking) p.set("pk", s.global_parking);
-
-    p.set("t1", s.car1_type);
-    if (s.car1_fuelType) p.set("f1", s.car1_fuelType);
-    if (s.car1_consUnit && s.car1_consUnit !== "l100km") p.set("cu1", s.car1_consUnit);
-    if (s.car1_priceUnit && s.car1_priceUnit !== "l") p.set("pu1", s.car1_priceUnit);
-    if (s.car1_consumption) p.set("c1", s.car1_consumption);
-    if (s.car1_fuelPrice) p.set("p1", s.car1_fuelPrice);
-    if (s.car1_tank) p.set("tk1", s.car1_tank);
-    if (s.car1_kwhPer100) p.set("k1", s.car1_kwhPer100);
-    if (s.car1_kwhPrice) p.set("e1", s.car1_kwhPrice);
-    if (s.car1_chargeLoss) p.set("l1", s.car1_chargeLoss);
-    if (s.car1_battery) p.set("b1", s.car1_battery);
-    if (s.car1_evShare) p.set("s1", s.car1_evShare);
-
-    p.set("t2", s.car2_type);
-    if (s.car2_fuelType) p.set("f2", s.car2_fuelType);
-    if (s.car2_consUnit && s.car2_consUnit !== "l100km") p.set("cu2", s.car2_consUnit);
-    if (s.car2_priceUnit && s.car2_priceUnit !== "l") p.set("pu2", s.car2_priceUnit);
-    if (s.car2_consumption) p.set("c2", s.car2_consumption);
-    if (s.car2_fuelPrice) p.set("p2", s.car2_fuelPrice);
-    if (s.car2_tank) p.set("tk2", s.car2_tank);
-    if (s.car2_kwhPer100) p.set("k2", s.car2_kwhPer100);
-    if (s.car2_kwhPrice) p.set("e2", s.car2_kwhPrice);
-    if (s.car2_chargeLoss) p.set("l2", s.car2_chargeLoss);
-    if (s.car2_battery) p.set("b2", s.car2_battery);
-    if (s.car2_evShare) p.set("s2", s.car2_evShare);
-
-    const base = `${location.origin}${location.pathname}`;
-    return `${base}?${p.toString()}`;
-  }
-
   function applyFromQuery() {
     const q = new URLSearchParams(location.search);
     if (![...q.keys()].length) return false;
@@ -1284,16 +1260,6 @@ ${perPersonHtml}
 
   copyBtn?.addEventListener("click", () => doCopy("all"));
   document.querySelectorAll("[data-fuel-copy]").forEach((b) => b.addEventListener("click", () => doCopy(b.dataset.fuelCopy || "all")));
-
-  shareBtn?.addEventListener("click", async () => {
-    try {
-      const url = buildShareUrl();
-      await copyText(url);
-      showToast(tt("fuel.toast_link_copied"));
-    } catch {
-      showToast(tt("fuel.toast_link_copy_failed"), true);
-    }
-  });
 
   // --- Global listeners ---
   [globalDistance, globalYearKm, peopleEl, budgetEl, tollsEl, parkingEl, roundTripEl].filter(Boolean).forEach((node) => {

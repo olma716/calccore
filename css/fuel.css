@@ -2322,3 +2322,162 @@
     border-color: #283b69;
     box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
 }
+
+/* повідомлення про копіювання/скидання: блок з'являється лише коли є текст */
+.fuel-page .share-row:has(.share-status:empty) {
+    display: none;
+}
+
+/* ===== Без зеленого в картках авто та результатах: переможець позначається синім ===== */
+.fuel-page #car2_wrapper .cc-badge {
+    background: rgba(40, 59, 105, .9);
+}
+
+.fuel-page .car-card.is-winner,
+.fuel-page .car-card.is-loser {
+    background: #fff !important;
+    border-color: var(--cc-border) !important;
+}
+
+.fuel-page .car-card.is-winner .result-value,
+.fuel-page .car-card.is-loser .result-value {
+    color: #283b69;
+}
+
+.fuel-page .winner-badge,
+.fuel-page .res-panel .res-title .winner-badge {
+    background: rgba(40, 59, 105, .1);
+    border: 1px solid rgba(40, 59, 105, .22);
+    color: #1f2f55;
+}
+
+/* ===== "Скинути" — м'яка жовта підсвітка ===== */
+.fuel-page .pill[data-fuel-action="clear"],
+.fuel-page #clear {
+    background: #fff7d6;
+    color: #7a5600;
+    box-shadow: var(--cc-soft), inset 0 0 0 1px rgba(202, 138, 4, .30);
+}
+
+.fuel-page .pill[data-fuel-action="clear"]:hover,
+.fuel-page #clear:hover {
+    background: #ffefb0;
+    color: #614300;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12), inset 0 0 0 1px rgba(202, 138, 4, .45);
+}
+
+/* ===== Порівняння: плитка дешевшого авто — м'яко-зелена, дорожчого — м'яко-червона ===== */
+.fuel-page .compare .result-item:has(.result-value.win) {
+    background: #e8f6ec;
+    box-shadow: var(--cc-soft), inset 0 0 0 1px rgba(34, 139, 70, .28);
+}
+
+.fuel-page .compare .result-item:has(.result-value.lose) {
+    background: #fdeceb;
+    box-shadow: var(--cc-soft), inset 0 0 0 1px rgba(200, 62, 55, .26);
+}
+
+/* "Скинути": ще м'якший жовтий */
+.fuel-page .pill[data-fuel-action="clear"],
+.fuel-page #clear {
+    background: #fffbea;
+    color: #8a6a1c;
+    box-shadow: var(--cc-soft), inset 0 0 0 1px rgba(202, 138, 4, .16);
+}
+
+.fuel-page .pill[data-fuel-action="clear"]:hover,
+.fuel-page #clear:hover {
+    background: #fff6d2;
+    color: #755610;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12), inset 0 0 0 1px rgba(202, 138, 4, .28);
+}
+
+/* ===== Кнопки "Скинути" і "Копіювати результат" — як "Розрахувати" ===== */
+.fuel-page .res-actions .pill,
+.fuel-page .pill[data-fuel-action="clear"],
+.fuel-page #clear {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 4px 14px rgba(40, 59, 105, .35);
+}
+
+.fuel-page .res-actions .pill:hover,
+.fuel-page .pill[data-fuel-action="clear"]:hover,
+.fuel-page #clear:hover {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 6px 18px rgba(40, 59, 105, .42);
+}
+
+.fuel-page .res-actions .pill:active {
+    filter: none;
+    transform: translateY(0);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 2px 8px rgba(40, 59, 105, .3);
+}
+
+/* ===== Плитки з результатом: об'ємні, з тінями ===== */
+.fuel-page .res-panel .result-grid {
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.fuel-page .res-panel .result-hero,
+.fuel-page .compare-panel .result-hero {
+    border: 1px solid rgba(40, 59, 105, .10);
+    background: linear-gradient(180deg, #fbfcff 0%, #eef1f9 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .9),
+        0 2px 4px rgba(31, 47, 85, .06),
+        0 10px 24px rgba(40, 59, 105, .14);
+}
+
+.fuel-page .res-panel .result-item,
+.fuel-page .compare-panel .result-item {
+    border: 1px solid #e6e8ef;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fd 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .9),
+        0 1px 2px rgba(31, 47, 85, .06),
+        0 6px 16px rgba(40, 59, 105, .12);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.fuel-page .res-panel .result-item:hover,
+.fuel-page .compare-panel .result-item:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .9),
+        0 2px 4px rgba(31, 47, 85, .08),
+        0 10px 22px rgba(40, 59, 105, .16);
+}
+
+.fuel-page .res-panel .result-label,
+.fuel-page .compare-panel .result-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    color: #5b6b8c;
+    opacity: 1;
+}
+
+/* плитки порівняння зберігають м'які зелений/червоний, але з тією ж глибиною */
+.fuel-page .compare .result-item:has(.result-value.win) {
+    background: linear-gradient(180deg, #f0faf3 0%, #e1f3e7 100%);
+    border-color: rgba(34, 139, 70, .30);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .85),
+        0 1px 2px rgba(22, 101, 52, .08),
+        0 6px 16px rgba(34, 139, 70, .16);
+}
+
+.fuel-page .compare .result-item:has(.result-value.lose) {
+    background: linear-gradient(180deg, #fff3f2 0%, #fbe3e1 100%);
+    border-color: rgba(200, 62, 55, .28);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .85),
+        0 1px 2px rgba(127, 29, 29, .08),
+        0 6px 16px rgba(200, 62, 55, .14);
+}
