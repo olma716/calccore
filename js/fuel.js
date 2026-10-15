@@ -1250,7 +1250,7 @@ ${perPersonHtml}
 
   clearBtn?.addEventListener("click", doClear);
   // Кнопки «Скинути» у блоках результату:
-  // Результат 1 — лише Авто 1, Результат 2 — лише Авто 2, «Маршрут» — лише маршрут, Порівняння — усе разом
+  // Результат 1 — лише Авто 1, Результат 2 — лише Авто 2, значок у «Маршруті» — маршрут і витрати, Порівняння — усе разом
   function clearRoute() {
     if (globalDistance) globalDistance.value = "";
     if (roundTripEl) roundTripEl.checked = false;
@@ -1260,6 +1260,13 @@ ${perPersonHtml}
     }
     applyUnitLabels();
     updateRouteNote(NaN);
+  }
+
+  // блок «Витрати та бюджет»: люди, пробіг на рік, бюджет, платні дороги, паркінг
+  function clearCosts() {
+    [peopleEl, globalYearKm, budgetEl, tollsEl, parkingEl].forEach((node) => {
+      if (node) node.value = "";
+    });
   }
 
   function clearCar(car) {
@@ -1275,6 +1282,7 @@ ${perPersonHtml}
       else if (scope === "car2") clearCar(car2);
       else if (scope === "route") {
         clearRoute();
+        clearCosts();
         saveState();
         debounceAutoCalc();
       }
