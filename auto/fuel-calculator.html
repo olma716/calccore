@@ -17,7 +17,7 @@
 
     <title>Калькулятор пального: вартість поїздки та порівняння авто | CalcCore</title>
     <meta name="description"
-        content="Калькулятор пального: вартість поїздки в км або милях, туди й назад, на людину, з платними дорогами. Порівняння 1–2 авто: бензин, дизель, гібрид, EV." />
+        content="Калькулятор пального: вартість поїздки в км або милях, у гривнях, USD, EUR та інших валютах, туди й назад, на людину. Порівняння 1–2 авто." />
 
     <!-- Canonical (CLEAN URL) -->
     <link rel="canonical" href="https://calccore.net/auto/fuel-calculator" />
@@ -29,11 +29,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fuel.css?v=20261015final8" />
+    <link rel="stylesheet" href="/css/fuel.css?v=20261015cur8" />
 
     <!-- i18n BEFORE calculator -->
-    <script src="/js/i18n.js?v=20261015final8" defer></script>
-    <script src="/js/fuel.js?v=20261015final8" defer></script>
+    <script src="/js/i18n.js?v=20261015cur8" defer></script>
+    <script src="/js/fuel.js?v=20261015cur8" defer></script>
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -42,7 +42,7 @@
   "@type": "SoftwareApplication",
   "@id": "https://calccore.net/auto/fuel-calculator#app",
   "name": "Калькулятор пального",
-  "description": "Калькулятор пального: вартість поїздки в км або милях, туди й назад, на людину, з платними дорогами. Порівняння 1–2 авто: бензин, дизель, гібрид, EV.",
+  "description": "Калькулятор пального: вартість поїздки в км або милях, у гривнях, USD, EUR та інших валютах, туди й назад, на людину. Порівняння 1–2 авто.",
   "url": "https://calccore.net/auto/fuel-calculator",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
@@ -64,7 +64,8 @@
     "Витрата в л/100 км, л/100 миль, км/л і mpg",
     "Ціна пального за літр або галон",
     "Платні дороги та паркінг",
-    "Порівняння двох авто: бензин, дизель, гібрид, EV"
+    "Порівняння двох авто: бензин, дизель, гібрид, EV",
+    "Вибір валюти: гривня, USD, EUR, GBP, PLN та інші (курс НБУ)"
   ]
 }
 </script>
@@ -97,7 +98,7 @@
       "@id": "https://calccore.net/auto/fuel-calculator#webpage",
       "url": "https://calccore.net/auto/fuel-calculator",
       "name": "Калькулятор пального: вартість поїздки та порівняння авто | CalcCore",
-      "description": "Калькулятор пального: вартість поїздки в км або милях, туди й назад, на людину, з платними дорогами. Порівняння 1–2 авто: бензин, дизель, гібрид, EV.",
+      "description": "Калькулятор пального: вартість поїздки в км або милях, у гривнях, USD, EUR та інших валютах, туди й назад, на людину. Порівняння 1–2 авто.",
       "isPartOf": {
         "@id": "https://calccore.net/#website"
       },
@@ -110,7 +111,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://calccore.net/auto/fuel-calculator#app",
       "name": "Калькулятор пального",
-      "description": "Калькулятор пального: вартість поїздки в км або милях, туди й назад, на людину, з платними дорогами. Порівняння 1–2 авто: бензин, дизель, гібрид, EV.",
+      "description": "Калькулятор пального: вартість поїздки в км або милях, у гривнях, USD, EUR та інших валютах, туди й назад, на людину. Порівняння 1–2 авто.",
       "url": "https://calccore.net/auto/fuel-calculator",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
@@ -132,7 +133,8 @@
         "Витрата в л/100 км, л/100 миль, км/л і mpg",
         "Ціна пального за літр або галон",
         "Платні дороги та паркінг",
-        "Порівняння двох авто: бензин, дизель, гібрид, EV"
+        "Порівняння двох авто: бензин, дизель, гібрид, EV",
+        "Вибір валюти: гривня, USD, EUR, GBP, PLN та інші (курс НБУ)"
       ]
     },
     {
@@ -231,6 +233,14 @@
             "@type": "Answer",
             "text": "Розгорніть блок «Витрати та бюджет» і вкажіть платні дороги (в один бік — при «Туди й назад» вони подвоюються) та паркінг за всю поїздку: ці суми додадуться до вартості пального в загальному результаті."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна рахувати в іншій валюті?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. Оберіть валюту у верхній частині калькулятора: USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD або TRY. Уже введені суми й орієнтовні ціни пального перераховуються за курсом НБУ, а всі результати показуються у вибраній валюті."
+          }
         }
       ]
     }
@@ -264,7 +274,18 @@
             <!-- GLOBAL INPUTS -->
             <div class="global-cards">
                     <div class="global-card">
-                        <div class="cc-title"><h2 class="cc-h2">Маршрут</h2><span class="cc-badge">Поїздка</span></div>
+                        <div class="cc-title"><h2 class="cc-h2">Маршрут</h2>
+                        <button type="button" class="icon-btn route-reset" data-fuel-action="clear" data-fuel-scope="route" title="Скинути маршрут" aria-label="Скинути маршрут"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+                        <div class="cur-dd" id="cur_dd">
+                            <button type="button" class="cur-btn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта">
+                                <img class="cur-flag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt="" />
+                                <span class="cur-code" id="cur_code">UAH</span>
+                                <span class="cur-caret" aria-hidden="true"></span>
+                            </button>
+                            <ul class="cur-list" id="cur_list" role="listbox" aria-label="Валюта" hidden></ul>
+                            <select id="currency_select" hidden aria-hidden="true" tabindex="-1"><option value="UAH">UAH</option></select>
+                        </div>
+                        </div>
                         <div class="global-grid">
                         <div class="field">
                         <label for="global_distance">Відстань маршруту (<span data-unit-label>км</span>)</label>
@@ -285,19 +306,19 @@
                         </div>
                     </div>
                     <details class="global-card cc-collapse" id="costs_card">
-                        <summary class="cc-title"><h2 class="cc-h2">Витрати та бюджет</h2><span class="cc-badge">UAH</span></summary>
+                        <summary class="cc-title"><h2 class="cc-h2">Витрати та бюджет</h2><span class="cc-badge" data-cur-code>UAH</span></summary>
                         <div class="global-grid">
                         <div class="field">
-                        <label for="global_budget">Бюджет на пальне (грн)</label>
+                        <label for="global_budget">Бюджет на пальне (<span data-cur>грн</span>)</label>
                         <input id="global_budget" type="number" inputmode="decimal" placeholder="Напр: 1000" />
                         </div>
                         <div class="field">
-                        <label for="global_tolls">Платні дороги (грн)</label>
+                        <label for="global_tolls">Платні дороги (<span data-cur>грн</span>)</label>
                         <input id="global_tolls" type="number" inputmode="decimal" placeholder="Напр: 150" title="Платні дороги в один бік; при «Туди й назад» подвоюються" />
                         <div class="field-note">в один бік; при «Туди й назад» — ×2</div>
                         </div>
                         <div class="field">
-                        <label for="global_parking">Паркінг та інше (грн)</label>
+                        <label for="global_parking">Паркінг та інше (<span data-cur>грн</span>)</label>
                         <input id="global_parking" type="number" inputmode="decimal" placeholder="Напр: 100" title="Паркінг та інші витрати за всю поїздку" />
                         <div class="field-note">разом за всю поїздку</div>
                         </div>
@@ -365,7 +386,7 @@
                         </div>
 
                         <div class="field">
-                            <label for="car1_kwhPrice">Ціна електроенергії (грн / кВт·год)</label>
+                            <label for="car1_kwhPrice">Ціна електроенергії (<span data-cur>грн</span> / кВт·год)</label>
                             <input id="car1_kwhPrice" type="number" inputmode="decimal" placeholder="Напр: 6" />
                         </div>
 
@@ -399,7 +420,7 @@
                         <!-- ADD CAR 2 -->
                         <div class="add-car-row">
                             <button id="car2_toggle" class="pill add-car" type="button" aria-expanded="false" aria-controls="car2_wrapper"
-                                data-label-add="＋ Додати Авто 2" data-label-remove="− Прибрати Авто 2">＋ Додати Авто 2</button>
+                                data-label-add="Додати Авто 2" data-label-remove="Прибрати Авто 2">Додати Авто 2</button>
                         </div>
 
                 <!-- CAR 2 -->
@@ -452,7 +473,7 @@
                         </div>
 
                         <div class="field">
-                            <label for="car2_kwhPrice">Ціна електроенергії (грн / кВт·год)</label>
+                            <label for="car2_kwhPrice">Ціна електроенергії (<span data-cur>грн</span> / кВт·год)</label>
                             <input id="car2_kwhPrice" type="number" inputmode="decimal" placeholder="Напр: 6" />
                         </div>
 
@@ -549,12 +570,17 @@
             Для бензину А-95 і А-92, дизеля та автогазу є орієнтовні ціни, які можна змінити вручну.
         </p>
 
-        <h3>Кілометри, милі та галони</h3>
+        <h3>Одиниці виміру та валюти</h3>
         <p>
             Відстань можна вводити в <strong>кілометрах, милях або морських милях</strong>, витрату пального —
             в л/100 км, л/100 миль, км/л або <strong>mpg</strong> (США та Британія), а ціну пального — за літр
             або <strong>за галон</strong>. Калькулятор сам переведе все в одну систему одиниць і покаже результат
             у гривнях.
+        </p>
+        <p>
+            Для іноземних користувачів доступний <strong>вибір валюти</strong>: USD, EUR, GBP, CHF, PLN, CZK, HUF, RON,
+            CAD, AUD та TRY. Уже введені суми й орієнтовні ціни пального перераховуються за курсом НБУ, а всі результати
+            показуються у вибраній валюті.
         </p>
 
         <h3>Порівняння двох автомобілів</h3>
@@ -640,6 +666,11 @@
         <div class="faq-item">
             <h3>Як врахувати платні дороги та паркінг?</h3>
             <p>Розгорніть блок «Витрати та бюджет» і вкажіть платні дороги (в один бік — при «Туди й назад» вони подвоюються) та паркінг за всю поїздку: ці суми додадуться до вартості пального в загальному результаті.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Чи можна рахувати в іншій валюті?</h3>
+            <p>Так. Оберіть валюту у верхній частині калькулятора: USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD або TRY. Уже введені суми й орієнтовні ціни пального перераховуються за курсом НБУ, а всі результати показуються у вибраній валюті.</p>
         </div>
     </section>
 

@@ -17,7 +17,7 @@
 
     <title>Fuel Cost Calculator: Trip Cost and Car Comparison | CalcCore</title>
     <meta name="description"
-        content="Fuel cost calculator: trip cost in km or miles, round trip, cost per person, tolls and parking. Compare 1–2 cars: gasoline, diesel, hybrid, EV." />
+        content="Fuel cost calculator: trip cost in km or miles, in UAH, USD, EUR and other currencies, round trip, per person. Compare 1–2 cars." />
 
     <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/auto/fuel-calculator" />
@@ -29,11 +29,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fuel.css?v=20261015final8" />
+    <link rel="stylesheet" href="/css/fuel.css?v=20261015cur8" />
 
     <!-- JS -->
-    <script src="/js/i18n.js?v=20261015final8" defer></script>
-    <script src="/js/fuel.js?v=20261015final8" defer></script>
+    <script src="/js/i18n.js?v=20261015cur8" defer></script>
+    <script src="/js/fuel.js?v=20261015cur8" defer></script>
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
@@ -42,7 +42,7 @@
   "@type": "SoftwareApplication",
   "@id": "https://calccore.net/en/auto/fuel-calculator#app",
   "name": "Fuel Cost Calculator",
-  "description": "Fuel cost calculator: trip cost in km or miles, round trip, cost per person, tolls and parking. Compare 1–2 cars: gasoline, diesel, hybrid, EV.",
+  "description": "Fuel cost calculator: trip cost in km or miles, in UAH, USD, EUR and other currencies, round trip, per person. Compare 1–2 cars.",
   "url": "https://calccore.net/en/auto/fuel-calculator",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
@@ -64,7 +64,8 @@
     "Consumption in L/100 km, L/100 mi, km/L and mpg",
     "Fuel price per litre or gallon",
     "Tolls and parking",
-    "Compare two cars: gasoline, diesel, hybrid, EV"
+    "Compare two cars: gasoline, diesel, hybrid, EV",
+    "Currency selection: hryvnia, USD, EUR, GBP, PLN and more (NBU rate)"
   ]
 }
 </script>
@@ -97,7 +98,7 @@
       "@id": "https://calccore.net/en/auto/fuel-calculator#webpage",
       "url": "https://calccore.net/en/auto/fuel-calculator",
       "name": "Fuel Cost Calculator: Trip Cost and Car Comparison | CalcCore",
-      "description": "Fuel cost calculator: trip cost in km or miles, round trip, cost per person, tolls and parking. Compare 1–2 cars: gasoline, diesel, hybrid, EV.",
+      "description": "Fuel cost calculator: trip cost in km or miles, in UAH, USD, EUR and other currencies, round trip, per person. Compare 1–2 cars.",
       "isPartOf": {
         "@id": "https://calccore.net/#website"
       },
@@ -132,7 +133,8 @@
         "Consumption in L/100 km, L/100 mi, km/L and mpg",
         "Fuel price per litre or gallon",
         "Tolls and parking",
-        "Compare two cars: gasoline, diesel, hybrid, EV"
+        "Compare two cars: gasoline, diesel, hybrid, EV",
+        "Currency selection: hryvnia, USD, EUR, GBP, PLN and more (NBU rate)"
       ]
     },
     {
@@ -231,6 +233,14 @@
             "@type": "Answer",
             "text": "Open the “Costs and budget” block and enter the tolls (one way — doubled for a round trip) and parking for the whole trip: these amounts are added to the fuel cost in the total result."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I calculate in another currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Choose a currency at the top of the calculator: USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD or TRY. Amounts you've entered and the approximate fuel prices are converted at the NBU rate, and all results are shown in the selected currency."
+          }
         }
       ]
     }
@@ -265,7 +275,18 @@
                 <!-- GLOBAL INPUTS -->
                 <div class="global-cards">
                     <div class="global-card">
-                        <div class="cc-title"><h2 class="cc-h2">Route</h2><span class="cc-badge">Trip</span></div>
+                        <div class="cc-title"><h2 class="cc-h2">Route</h2>
+                        <button type="button" class="icon-btn route-reset" data-fuel-action="clear" data-fuel-scope="route" title="Reset route" aria-label="Reset route"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+                        <div class="cur-dd" id="cur_dd">
+                            <button type="button" class="cur-btn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency">
+                                <img class="cur-flag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt="" />
+                                <span class="cur-code" id="cur_code">UAH</span>
+                                <span class="cur-caret" aria-hidden="true"></span>
+                            </button>
+                            <ul class="cur-list" id="cur_list" role="listbox" aria-label="Currency" hidden></ul>
+                            <select id="currency_select" hidden aria-hidden="true" tabindex="-1"><option value="UAH">UAH</option></select>
+                        </div>
+                        </div>
                         <div class="global-grid">
                         <div class="field">
                         <label for="global_distance">Trip distance (<span data-unit-label>km</span>)</label>
@@ -286,19 +307,19 @@
                         </div>
                     </div>
                     <details class="global-card cc-collapse" id="costs_card">
-                        <summary class="cc-title"><h2 class="cc-h2">Costs and budget</h2><span class="cc-badge">UAH</span></summary>
+                        <summary class="cc-title"><h2 class="cc-h2">Costs and budget</h2><span class="cc-badge" data-cur-code>UAH</span></summary>
                         <div class="global-grid">
                         <div class="field">
-                        <label for="global_budget">Fuel budget (UAH)</label>
+                        <label for="global_budget">Fuel budget (<span data-cur>UAH</span>)</label>
                         <input id="global_budget" type="number" inputmode="decimal" placeholder="e.g. 1000" />
                         </div>
                         <div class="field">
-                        <label for="global_tolls">Tolls (UAH)</label>
+                        <label for="global_tolls">Tolls (<span data-cur>UAH</span>)</label>
                         <input id="global_tolls" type="number" inputmode="decimal" placeholder="e.g. 150" title="Tolls for one way; doubled for a round trip" />
                         <div class="field-note">one way; doubled for a round trip</div>
                         </div>
                         <div class="field">
-                        <label for="global_parking">Parking and other (UAH)</label>
+                        <label for="global_parking">Parking and other (<span data-cur>UAH</span>)</label>
                         <input id="global_parking" type="number" inputmode="decimal" placeholder="e.g. 100" title="Parking and other costs for the whole trip" />
                         <div class="field-note">total for the whole trip</div>
                         </div>
@@ -367,7 +388,7 @@
                             </div>
 
                             <div class="field">
-                                <label for="car1_kwhPrice">Electricity price (UAH / kWh)</label>
+                                <label for="car1_kwhPrice">Electricity price (<span data-cur>UAH</span> / kWh)</label>
                                 <input id="car1_kwhPrice" type="number" inputmode="decimal" placeholder="e.g. 6" />
                             </div>
 
@@ -402,7 +423,7 @@
                         <!-- ADD CAR 2 -->
                         <div class="add-car-row">
                             <button id="car2_toggle" class="pill add-car" type="button" aria-expanded="false" aria-controls="car2_wrapper"
-                                data-label-add="＋ Add Car 2" data-label-remove="− Remove Car 2">＋ Add Car 2</button>
+                                data-label-add="Add Car 2" data-label-remove="Remove Car 2">Add Car 2</button>
                         </div>
 
                     <!-- CAR 2 -->
@@ -456,7 +477,7 @@
                             </div>
 
                             <div class="field">
-                                <label for="car2_kwhPrice">Electricity price (UAH / kWh)</label>
+                                <label for="car2_kwhPrice">Electricity price (<span data-cur>UAH</span> / kWh)</label>
                                 <input id="car2_kwhPrice" type="number" inputmode="decimal" placeholder="e.g. 6" />
                             </div>
 
@@ -552,12 +573,17 @@
             Approximate prices for gasoline A-95 and A-92, diesel and LPG are provided and can be edited by hand.
         </p>
 
-        <h3>Kilometres, miles and gallons</h3>
+        <h3>Units and currencies</h3>
         <p>
             Enter the distance in <strong>kilometres, miles or nautical miles</strong>, fuel consumption in L/100 km,
             L/100 mi, km/L or <strong>mpg</strong> (US and UK), and the fuel price per litre or
             <strong>per gallon</strong>. The calculator converts everything to one system of units and shows the
             result in hryvnias.
+        </p>
+        <p>
+            Visitors from abroad can <strong>choose a currency</strong>: USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD
+            and TRY. Amounts you have entered and the approximate fuel prices are converted at the NBU rate, and all
+            results are shown in the selected currency.
         </p>
 
         <h3>Comparing two cars</h3>
@@ -639,6 +665,11 @@
         <div class="faq-item">
             <h3>How do I include tolls and parking?</h3>
             <p>Open the “Costs and budget” block and enter the tolls (one way — doubled for a round trip) and parking for the whole trip: these amounts are added to the fuel cost in the total result.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I calculate in another currency?</h3>
+            <p>Yes. Choose a currency at the top of the calculator: USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD or TRY. Amounts you've entered and the approximate fuel prices are converted at the NBU rate, and all results are shown in the selected currency.</p>
         </div>
     </section>
 

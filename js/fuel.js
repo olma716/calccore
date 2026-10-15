@@ -11,7 +11,7 @@
   const el = (id) => document.getElementById(id);
 
   // ---- i18n safe wrapper ----
-  const tt =
+  const ttBase =
     typeof window.t === "function"
       ? window.t
       : (k, vars) => {
@@ -21,6 +21,17 @@
           }
           return s;
         };
+
+  // --- Валюта: усе рахується у вибраній валюті, курс НБУ потрібен лише для перерахунку
+  // введених сум при зміні валюти та орієнтовних цін пального (задані в грн) ---
+  const CURRENCIES = ["UAH", "USD", "EUR", "GBP", "CHF", "PLN", "CZK", "HUF", "RON", "CAD", "AUD", "TRY"];
+  const CUR_FLAG = { UAH: "ua", USD: "us", EUR: "eu", GBP: "gb", CHF: "ch", PLN: "pl", CZK: "cz", HUF: "hu", RON: "ro", CAD: "ca", AUD: "au", TRY: "tr" };
+  let currency = "UAH";
+  const rates = { UAH: 1 }; // грн за 1 одиницю валюти (НБУ)
+
+  // у рядках інтерфейсу «грн»/«UAH» замінюється кодом вибраної валюти
+  const curSub = (s) => (currency === "UAH" ? s : String(s).replace(/грн|UAH/g, currency));
+  const tt = (k, vars) => curSub(ttBase(k, vars));
 
   const LOCALE = typeof window.i18nLocale === "function" ? window.i18nLocale() : "uk-UA";
 
@@ -213,14 +224,20 @@
   // --- Winner highlight helpers ---
   function clearWinnerBadges() {
     document.querySelectorAll(".winner-badge").forEach((b) => b.remove());
-    [car1Wrapper, car2Wrapper].forEach((w) => {
+    [car1Wrapper, car2Wrapper, el("res_car1"), el("res_car2")].forEach((w) => {
       if (w) w.classList.remove("is-winner", "is-loser");
     });
+  }
+
+  // блок результату відповідного авто (для підсвітки плитки «Вартість маршруту»)
+  function resultPanelOf(wrapper) {
+    return el(wrapper === car1Wrapper ? "res_car1" : "res_car2");
   }
 
   function setWinner(wrapper) {
     if (!wrapper) return;
     wrapper.classList.add("is-winner");
+    resultPanelOf(wrapper)?.classList.add("is-winner");
     // значок «Дешевше» — у заголовку відповідного блоку результату
     const title = el(wrapper === car1Wrapper ? "res_car1_title" : "res_car2_title");
     if (!title) return;
@@ -233,6 +250,7 @@
   function setLoser(wrapper) {
     if (!wrapper) return;
     wrapper.classList.add("is-loser");
+    resultPanelOf(wrapper)?.classList.add("is-loser");
   }
 
   // --- Render helpers ---
@@ -653,7 +671,7 @@
 
     type?.addEventListener("change", updateUI);
 
-    // Одиниці середньої витрати: перемикання перераховує введене число (витрата лишається тією самою)
+    // Одиниці середньої витрати: введене число лишається як є, змінюється лише одиниця
     function syncConsUnit() {
       if (!consUnit) return;
       if (!CONS_UNITS[consUnit.value]) consUnit.value = "l100km";
@@ -671,66 +689,95 @@
       consUnit.value = "l100km";
       syncConsUnit();
 
+      // зміна одиниць НЕ чіпає введене число — воно лише трактується в новій одиниці
       consUnit.addEventListener("change", () => {
-        const from = CONS_UNITS[consUnit.dataset.prev] || CONS_UNITS.l100km;
-        const to = CONS_UNITS[consUnit.value] || CONS_UNITS.l100km;
-        const v = num(consumption);
-        if (consumption && Number.isFinite(v) && v > 0) {
-          const converted = to.fromL100(from.toL100(v));
-          if (Number.isFinite(converted) && converted > 0) {
-            consumption.value = String(Number(converted.toFixed(2)));
-          }
-        }
         syncConsUnit();
       });
     }
 
-    // Одиниці ціни пального: перемикання перераховує введену ціну (ціна лишається тією самою)
+    // Одиниці ціни пального: введена ціна лишається як є, змінюється лише одиниця
     function syncPriceUnit() {
       if (!priceUnit) return;
       if (!PRICE_UNITS[priceUnit.value]) priceUnit.value = "l";
       priceUnit.dataset.prev = priceUnit.value;
-      if (fuelPrice) fuelPrice.placeholder = tt("fuel.eg") + PRICE_UNITS[priceUnit.value].example;
+      if (fuelPrice) {
+        const ex = PRICE_UNITS[priceUnit.value].example;
+        const r = rates[currency];
+        const shown = currency === "UAH" || !(r > 0) ? ex : String(Number((Number(ex) / r).toPrecision(2)));
+        fuelPrice.placeholder = tt("fuel.eg") + shown;
+      }
     }
 
-    if (priceUnit) {
+    function buildPriceUnitOptions() {
+      if (!priceUnit) return;
+      const keep = priceUnit.value;
       priceUnit.innerHTML = Object.entries(PRICE_UNITS)
         .map(([id, u]) => `<option value="${id}">${tt(u.key)}</option>`)
         .join("");
+      priceUnit.value = PRICE_UNITS[keep] ? keep : "l";
+    }
+
+    if (priceUnit) {
+      buildPriceUnitOptions();
       priceUnit.value = "l";
       syncPriceUnit();
 
+      // зміна одиниць НЕ чіпає введену ціну — вона лише трактується в новій одиниці
       priceUnit.addEventListener("change", () => {
-        const from = PRICE_UNITS[priceUnit.dataset.prev] || PRICE_UNITS.l;
-        const to = PRICE_UNITS[priceUnit.value] || PRICE_UNITS.l;
-        const v = num(fuelPrice);
-        if (fuelPrice && Number.isFinite(v) && v > 0) {
-          const converted = to.fromL(from.toL(v));
-          if (Number.isFinite(converted) && converted > 0) {
-            fuelPrice.value = String(Number(converted.toFixed(2)));
-          }
-        }
         syncPriceUnit();
       });
     }
 
     // Вибір виду пального підставляє орієнтовну ціну; своя ціна повертає "Своя ціна"
-    if (fuelType) {
+    // орієнтовна ціна пального в обраній валюті (пресети задані в грн/л)
+    const presetPrice = (p) => {
+      const r = rates[currency];
+      return Number.isFinite(r) && r > 0 ? p.price / r : NaN;
+    };
+    const roundPrice = (v) => Number(v.toFixed(v >= 100 ? 0 : 2));
+
+    function buildFuelTypeOptions() {
+      if (!fuelType) return;
+      const keep = fuelType.value;
       fuelType.innerHTML =
         `<option value="">${tt("fuel.fuel_type_custom")}</option>` +
-        FUEL_PRESETS.map(
-          (p) =>
-            `<option value="${p.id}">${tt(p.key)} · ~${p.price} ${tt("common.unit_uah")} / ${tt("common.unit_l")}</option>`
-        ).join("");
+        FUEL_PRESETS.map((p) => {
+          const v = presetPrice(p);
+          const price = Number.isFinite(v) ? ` · ~${roundPrice(v)} ${tt("common.unit_uah")} / ${tt("common.unit_l")}` : "";
+          return `<option value="${p.id}">${tt(p.key)}${price}</option>`;
+        }).join("");
+      fuelType.value = FUEL_PRESETS.some((p) => p.id === keep) ? keep : "";
+    }
 
-      fuelType.addEventListener("change", () => {
-        const p = FUEL_PRESETS.find((x) => x.id === fuelType.value);
-        if (p && fuelPrice) {
-          const unit = PRICE_UNITS[priceUnit?.value] || PRICE_UNITS.l;
-          fuelPrice.value = String(Number(unit.fromL(p.price).toFixed(2)));
-          fuelPrice.dispatchEvent(new Event("input", { bubbles: true }));
-        }
+    function applyFuelPreset() {
+      const p = FUEL_PRESETS.find((x) => x.id === fuelType?.value);
+      const v = p ? presetPrice(p) : NaN;
+      if (p && fuelPrice && Number.isFinite(v)) {
+        const unit = PRICE_UNITS[priceUnit?.value] || PRICE_UNITS.l;
+        fuelPrice.value = String(roundPrice(unit.fromL(v)));
+        fuelPrice.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    }
+
+    // зміна валюти: перераховуємо введені суми (factor = стара_ціна → нова), оновлюємо підписи
+    function convertMoney(factor) {
+      [fuelPrice, kwhPrice].forEach((inp) => {
+        const v = num(inp);
+        if (inp && Number.isFinite(v) && v > 0) inp.value = String(roundPrice(v * factor));
       });
+      if (fuelType?.value) applyFuelPreset();
+    }
+
+    function refreshCurrencyLabels() {
+      buildPriceUnitOptions();
+      buildFuelTypeOptions();
+      syncPriceUnit();
+    }
+
+    if (fuelType) {
+      buildFuelTypeOptions();
+
+      fuelType.addEventListener("change", applyFuelPreset);
 
       // ручна зміна ціни — це вже "своя ціна" (програмні події ігноруємо)
       fuelPrice?.addEventListener("input", (e) => {
@@ -760,11 +807,205 @@
       });
 
     updateUI();
-    return { calculateAndRender, clearFields, resultEl, syncConsUnit, syncPriceUnit };
+    return { calculateAndRender, clearFields, resultEl, syncConsUnit, syncPriceUnit, convertMoney, refreshCurrencyLabels };
   }
 
   const car1 = setupCar("car1");
   const car2 = setupCar("car2");
+
+  // --- Валюта: вибір, курси НБУ, перерахунок введених сум ---
+  const currencySelect = el("currency_select");
+  const RATES_KEY = "fuel_nbu_rates_v1";
+  const round2 = (v) => Number(v.toFixed(v >= 100 ? 0 : 2));
+  let ratesPromise = null;
+
+  function loadRates() {
+    if (ratesPromise) return ratesPromise;
+    ratesPromise = (async () => {
+      try {
+        const c = JSON.parse(localStorage.getItem(RATES_KEY) || "null");
+        if (c && c.map && Date.now() - c.t < 6 * 3600 * 1000) {
+          Object.assign(rates, c.map);
+          return true;
+        }
+      } catch {}
+      try {
+        const ctl = new AbortController();
+        const timer = setTimeout(() => ctl.abort(), 7000);
+        const res = await fetch("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", { signal: ctl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error("http " + res.status);
+        const data = await res.json();
+        const map = {};
+        data.forEach((r) => {
+          if (CURRENCIES.includes(r.cc) && Number(r.rate) > 0) map[r.cc] = Number(r.rate);
+        });
+        Object.assign(rates, map);
+        try {
+          localStorage.setItem(RATES_KEY, JSON.stringify({ t: Date.now(), map }));
+        } catch {}
+        return true;
+      } catch {
+        ratesPromise = null; // дозволяємо повторну спробу
+        return false;
+      }
+    })();
+    return ratesPromise;
+  }
+
+  const curBtn = el("cur_btn");
+  const curList = el("cur_list");
+  const flagImg = (code) =>
+    `<img class="cur-flag" src="/assets/flags/${CUR_FLAG[code]}.png" width="20" height="14" alt="" loading="lazy" decoding="async">`;
+
+  function currencyName(code, names) {
+    try {
+      const nm = names ? names.of(code) : "";
+      return nm ? nm.charAt(0).toUpperCase() + nm.slice(1) : "";
+    } catch {
+      return "";
+    }
+  }
+
+  function buildCurrencyOptions() {
+    let names = null;
+    try {
+      names = new Intl.DisplayNames([LOCALE.split("-")[0]], { type: "currency" });
+    } catch {}
+
+    if (currencySelect) {
+      currencySelect.innerHTML = CURRENCIES.map((code) => {
+        const name = currencyName(code, names);
+        return `<option value="${code}">${code}${name ? " — " + name : ""}</option>`;
+      }).join("");
+      currencySelect.value = currency;
+    }
+
+    if (curList) {
+      curList.innerHTML = CURRENCIES.map((code) => {
+        const name = currencyName(code, names);
+        return (
+          `<li role="option" tabindex="-1" data-code="${code}" aria-selected="${code === currency}">` +
+          `${flagImg(code)}<span class="cur-item-code">${code}</span><span class="cur-item-name">${name}</span></li>`
+        );
+      }).join("");
+    }
+  }
+
+  function closeCurrencyList() {
+    if (!curList || curList.hidden) return;
+    curList.hidden = true;
+    curBtn?.setAttribute("aria-expanded", "false");
+  }
+
+  // кнопка показує поточну валюту; у списку позначено вибрану
+  function syncCurrencyUi() {
+    const flag = el("cur_flag");
+    if (flag) flag.src = `/assets/flags/${CUR_FLAG[currency] || "ua"}.png`;
+    const code = el("cur_code");
+    if (code) code.textContent = currency;
+    curList?.querySelectorAll("li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.code === currency)));
+  }
+
+  curBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!curList) return;
+    const open = curList.hidden;
+    curList.hidden = !open;
+    curBtn.setAttribute("aria-expanded", String(open));
+    if (open) curList.querySelector('li[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+  });
+
+  curList?.addEventListener("click", (e) => {
+    const li = e.target.closest("li[data-code]");
+    if (!li) return;
+    closeCurrencyList();
+    if (currencySelect) currencySelect.value = li.dataset.code;
+    setCurrency(li.dataset.code);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#cur_dd")) closeCurrencyList();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeCurrencyList();
+  });
+
+  // підписи, бейдж і підказки (placeholder) у вибраній валюті
+  function applyCurrencyLabels() {
+    document.querySelectorAll("[data-cur]").forEach((n) => {
+      n.textContent = tt("common.unit_uah");
+    });
+    document.querySelectorAll("[data-cur-code]").forEach((n) => {
+      n.textContent = currency;
+    });
+
+    [budgetEl, tollsEl, parkingEl, el("car1_kwhPrice"), el("car2_kwhPrice")].forEach((inp) => {
+      if (!inp) return;
+      if (inp.dataset.ph0 === undefined) inp.dataset.ph0 = inp.placeholder;
+      const m = inp.dataset.ph0.match(/^(\D*)([\d.,]+)$/);
+      const r = rates[currency];
+      if (!m || currency === "UAH" || !(r > 0)) {
+        inp.placeholder = inp.dataset.ph0;
+        return;
+      }
+      inp.placeholder = m[1] + String(Number((Number(m[2].replace(",", ".")) / r).toPrecision(2)));
+    });
+
+    car1.refreshCurrencyLabels();
+    car2.refreshCurrencyLabels();
+    syncCurrencyUi();
+  }
+
+  // opts.restore — відновлення стану/посилання: суми вже у цій валюті, не перераховуємо
+  async function setCurrency(code, opts = {}) {
+    if (!CURRENCIES.includes(code)) code = "UAH";
+    const prev = currency;
+
+    if (opts.restore) {
+      currency = code;
+      if (currencySelect) currencySelect.value = code;
+      applyCurrencyLabels();
+      if (code !== "UAH" && !(rates[code] > 0)) {
+        if (await loadRates()) {
+          applyCurrencyLabels();
+          if (!opts.silent) runCalculation(true);
+        }
+      }
+      return;
+    }
+
+    if (code === prev) return;
+
+    if (code !== "UAH" && !(rates[code] > 0)) await loadRates();
+    if (code !== "UAH" && !(rates[code] > 0)) {
+      if (currencySelect) currencySelect.value = prev;
+      syncCurrencyUi();
+      showToast(tt("fuel.toast_rate_failed"), true);
+      return;
+    }
+
+    const prevRate = rates[prev];
+    currency = code;
+    if (currencySelect) currencySelect.value = code;
+
+    if (prevRate > 0 && rates[code] > 0) {
+      const factor = prevRate / rates[code];
+      [budgetEl, tollsEl, parkingEl].forEach((inp) => {
+        const v = num(inp);
+        if (inp && Number.isFinite(v) && v > 0) inp.value = String(round2(v * factor));
+      });
+      car1.convertMoney(factor);
+      car2.convertMoney(factor);
+    }
+
+    applyCurrencyLabels();
+    saveState();
+    runCalculation(true);
+  }
+
+  buildCurrencyOptions();
+  currencySelect?.addEventListener("change", () => setCurrency(currencySelect.value));
 
   // --- Compare ---
   function getYearKm() {
@@ -1008,18 +1249,35 @@ ${perPersonHtml}
   }
 
   clearBtn?.addEventListener("click", doClear);
-  // Кнопки «Скинути» у блоках результату діють лише на свій блок:
-  // Результат 1 — Авто 1, Результат 2 — Авто 2, Порівняння — усе разом
+  // Кнопки «Скинути» у блоках результату:
+  // Результат 1 — лише Авто 1, Результат 2 — лише Авто 2, «Маршрут» — лише маршрут, Порівняння — усе разом
+  function clearRoute() {
+    if (globalDistance) globalDistance.value = "";
+    if (roundTripEl) roundTripEl.checked = false;
+    if (unitEl) {
+      unitEl.value = "km";
+      unitEl.dataset.prev = "km";
+    }
+    applyUnitLabels();
+    updateRouteNote(NaN);
+  }
+
   function clearCar(car) {
     car.clearFields();
     updateResultsHint();
     saveState();
   }
+
   document.querySelectorAll('[data-fuel-action="clear"]').forEach((b) =>
     b.addEventListener("click", () => {
       const scope = b.dataset.fuelScope;
       if (scope === "car1") clearCar(car1);
       else if (scope === "car2") clearCar(car2);
+      else if (scope === "route") {
+        clearRoute();
+        saveState();
+        debounceAutoCalc();
+      }
       else doClear();
     })
   );
@@ -1057,6 +1315,7 @@ ${perPersonHtml}
     return {
       isTwoCars,
       autoCalcEnabled,
+      currency,
       global_distance: globalDistance?.value ?? "",
       global_unit: unitEl?.value ?? "km",
       global_year_km: globalYearKm?.value ?? "",
@@ -1107,6 +1366,8 @@ ${perPersonHtml}
     if (autoToggle) autoToggle.checked = autoCalcEnabled;
 
     setMode(Boolean(s.isTwoCars), true);
+
+    setCurrency(CURRENCIES.includes(s.currency) ? s.currency : "UAH", { restore: true, silent: true });
 
     if (unitEl) {
       unitEl.value = DIST_UNITS[s.global_unit] ? s.global_unit : "km";
@@ -1182,13 +1443,15 @@ ${perPersonHtml}
 
   function applyFromQuery() {
     const q = new URLSearchParams(location.search);
-    if (![...q.keys()].length) return false;
+    // сторонні параметри (utm_*, ?v=…) не повинні скидати збережений стан
+    if (!["m", "d", "t1", "t2", "c1", "p1", "cur"].some((k) => q.has(k))) return false;
 
     const s = collectState();
 
     s.isTwoCars = q.get("m") === "2";
     s.autoCalcEnabled = q.get("ac") !== "0";
 
+    s.currency = q.get("cur") ?? "UAH";
     s.global_distance = q.get("d") ?? "";
     s.global_unit = DIST_UNITS[q.get("u")] ? q.get("u") : "km";
     s.global_year_km = q.get("y") ?? "";
@@ -1269,21 +1532,9 @@ ${perPersonHtml}
     node.addEventListener("change", debounceAutoCalc);
   });
 
-  // перемикач км/милі: переводимо вже введені числа, щоб маршрут лишився тим самим
+  // перемикач км/милі: введені числа НЕ змінюються — лише одиниця, у якій вони трактуються
   unitEl?.addEventListener("change", () => {
-    const from = unitEl.dataset.prev || "km";
-    const to = unitEl.value;
-    unitEl.dataset.prev = to;
-    if (from !== to) {
-      const ratio = (DIST_UNITS[from]?.km || 1) / (DIST_UNITS[to]?.km || 1);
-      [
-        [globalDistance, 2],
-        [globalYearKm, 0],
-      ].forEach(([node, digits]) => {
-        const v = num(node);
-        if (node && Number.isFinite(v) && v > 0) node.value = String(Number((v * ratio).toFixed(digits)));
-      });
-    }
+    unitEl.dataset.prev = unitEl.value;
     applyUnitLabels();
     updateRouteNote(num(globalDistance));
     debounceSave();
