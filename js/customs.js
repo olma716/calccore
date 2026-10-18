@@ -385,7 +385,6 @@
       .map((p) => `<span class="ccalc__splitSeg" style="width:${((p.value / sum) * 100).toFixed(2)}%;background:${SPLIT_COLORS[p.key]}" title="${p.label}: ${fmtUAH(p.value)}"></span>`)
       .join("");
     els.splitLegend.innerHTML = parts
-      .filter((p) => p.value > 0)
       .map((p) => `<span><i style="background:${SPLIT_COLORS[p.key]}"></i>${p.label} <b>${fmtUAH(p.value)}</b> (${Math.round((p.value / sum) * 100)}%)</span>`)
       .join("");
     const pct = customsValueUAH > 0 ? Math.round((taxTotal / customsValueUAH) * 100) : 0;
@@ -437,6 +436,13 @@
 
     updateRatesBadge();
     syncResultCurrency();
+
+    // підпис рядка мита в таблиці — зі ставкою, наприклад «Ввізне мито (10%)»
+    const dutyCell = els.duty?.parentElement?.firstElementChild;
+    if (dutyCell) {
+      const dr = (els.dutyRate?.value || "").trim();
+      dutyCell.textContent = t("customs.lbl_duty_full") + (dr === "" ? "" : ` (${dr}%)`);
+    }
 
     // зірочка біля року випуску — лише коли вік впливає на акциз
     if (els.yearReq) els.yearReq.style.display = usesAge() ? "" : "none";
@@ -540,7 +546,7 @@
     // діаграма розбивки платежів
     renderSplit(
       [
-        { key: "duty", label: t("customs.lbl_duty"), value: dutyUAH },
+        { key: "duty", label: t("customs.lbl_duty_full"), value: dutyUAH },
         { key: "excise", label: t("customs.lbl_excise"), value: exciseUAH },
         { key: "vat", label: t("customs.lbl_vat"), value: vatUAH },
         ...(pensionOn ? [{ key: "pension", label: t("customs.lbl_pension"), value: pensionUAH }] : [])
