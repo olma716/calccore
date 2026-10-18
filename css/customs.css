@@ -569,3 +569,829 @@
     }
 
 }
+
+/* підзаголовок у синій шапці — світлий (раніше сірий і майже невидимий) */
+.ccalc__titlebar .ccalc__p {
+    color: rgba(255, 255, 255, .92);
+    opacity: 1;
+}
+
+.ccalc__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    line-height: 1.35;
+}
+
+/* вибір категорії (4 кнопки з іконками) і типу двигуна (чіпи) */
+.ccalc__toggle--4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ccalc__toggle--4 .ccalc__toggleBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 2px;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.ccalc__toggle--4 .ccalc__ico {
+    width: 20px;
+    height: 20px;
+}
+
+.ccalc__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ccalc__chip {
+    border: 1px solid var(--cc-border, #e6e8ef);
+    border-radius: 999px;
+    background: #fff;
+    color: #2b3a55;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.ccalc__chip:hover {
+    background: #f3f6fd;
+}
+
+.ccalc__chip.is-active {
+    background: #eaf1fc;
+    border-color: #8fa8d6;
+    color: #1f2f55;
+}
+
+.ccalc__chip[hidden] {
+    display: none;
+}
+
+@media (max-width: 420px) {
+    .ccalc__toggle--4 .ccalc__toggleBtn {
+        font-size: 11px;
+    }
+}
+
+/* кнопки категорій: висота за вмістом, щоб іконка не стискалась до нуля */
+.ccalc__toggle--4 .ccalc__toggleBtn {
+    height: auto;
+    min-height: 56px;
+}
+
+.ccalc__toggle--4 .ccalc__ico {
+    flex: 0 0 auto;
+}
+
+/* ===== валюта з прапорцем ===== */
+.ccalc__curWrap {
+    position: relative;
+}
+
+.ccalc__curFlag {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+    pointer-events: none;
+}
+
+.ccalc select.ccalc__input.ccalc__curSelect {
+    padding-left: 42px;
+    width: 100%;
+}
+
+/* ===== згортні блоки (додаткові витрати, курс) ===== */
+.ccalc__details {
+    border: 1px solid var(--cc-border, #e6e8ef);
+    border-radius: 14px;
+    background: #f6f7fb;
+    padding: 0 14px;
+}
+
+.ccalc__details[open] {
+    padding-bottom: 14px;
+}
+
+.ccalc__details > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+    padding: 12px 0;
+}
+
+.ccalc__details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.ccalc__details > summary::after {
+    content: "▾";
+    float: right;
+    transition: transform .15s ease;
+}
+
+.ccalc__details[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+/* ===== підсумкова плитка «авто в Україні» ===== */
+.ccalc__landed {
+    margin-top: 10px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #283b69, #1f2f55);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(31, 47, 85, .25);
+}
+
+.ccalc__landedLabel {
+    font-size: 12px;
+    font-weight: 900;
+    opacity: .85;
+}
+
+.ccalc__landedValue {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-top: 2px;
+}
+
+.ccalc__landedSub {
+    font-size: 13px;
+    font-weight: 700;
+    opacity: .85;
+    margin-top: 2px;
+    min-height: 1em;
+}
+
+/* ===== діаграма розбивки платежів ===== */
+.ccalc__split {
+    margin-top: 14px;
+}
+
+.ccalc__splitTitle {
+    font-size: 13px;
+    font-weight: 900;
+    color: #2b3a55;
+    margin-bottom: 8px;
+}
+
+.ccalc__splitBar {
+    display: flex;
+    height: 16px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #eef0f6;
+}
+
+.ccalc__splitSeg {
+    display: block;
+    height: 100%;
+}
+
+.ccalc__splitLegend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #2b3a55;
+}
+
+.ccalc__splitLegend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 5px;
+    vertical-align: -1px;
+}
+
+.ccalc__split .ccalc__hint {
+    margin-top: 6px;
+}
+
+/* ===== порівняння варіантів ===== */
+.ccalc__cmp {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed #d4d7de;
+}
+
+.ccalc__cmpHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.ccalc__cmpClear {
+    border: 0;
+    background: none;
+    color: #6b7280;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ccalc__cmpDesc td {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.ccalc__cmpTable td,
+.ccalc__cmpTable th {
+    vertical-align: top;
+}
+
+@media (max-width: 680px) {
+    .ccalc__landedValue {
+        font-size: 26px;
+    }
+}
+
+/* бейдж курсу не вилазить за екран на мобільних */
+@media (max-width: 680px) {
+    .ccalc__rates {
+        white-space: normal;
+        max-width: 100%;
+    }
+}
+
+/* =========================================================
+   Кольори полів і кнопок — як у калькуляторах пального та TCO
+   ========================================================= */
+
+/* поля вводу: білі, без рамки, з м'якою тінню */
+.ccalc input.ccalc__input,
+.ccalc input.ccalc__input[type="number"],
+.ccalc input.ccalc__input[type="text"],
+.ccalc input.ccalc__input[type="date"] {
+    height: 36px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.ccalc input.ccalc__input::placeholder {
+    color: #9ca3af;
+}
+
+/* випадні списки: блакитні */
+.ccalc select.ccalc__input {
+    height: 36px;
+    padding: 0 10px;
+    border: .8px solid #b9cdee;
+    border-radius: 10px;
+    background-color: #eaf1fc;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.ccalc select.ccalc__input.ccalc__curSelect {
+    padding-left: 42px;
+}
+
+.ccalc input.ccalc__input:focus,
+.ccalc select.ccalc__input:focus {
+    outline: none;
+    border-color: #8fa8d6;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.ccalc input.ccalc__input:focus {
+    border: 0;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+/* кнопки: темно-синій градієнт, як «Розрахувати» */
+.ccalc .ccalc__btn,
+.ccalc .ccalc__btn--primary {
+    height: 38px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(40, 59, 105, .35);
+    transition: filter .15s ease, transform .15s ease;
+}
+
+.ccalc .ccalc__btn:hover,
+.ccalc .ccalc__btn--primary:hover {
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    border: 0;
+    filter: brightness(1.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 6px 18px rgba(40, 59, 105, .4);
+}
+
+.ccalc .ccalc__btn:active {
+    transform: translateY(1px);
+}
+
+/* другорядні кнопки («Приклад», «Зберегти як варіант A») — блакитні, як «Приклад» у TCO */
+.ccalc .ccalc__btn[data-cc-action="example"],
+.ccalc .ccalc__btn[data-cc-action="saveVariant"] {
+    background: #eaf1fc;
+    color: #1f2f55;
+    box-shadow: inset 0 0 0 1px #b9cdee;
+}
+
+.ccalc .ccalc__btn[data-cc-action="example"]:hover,
+.ccalc .ccalc__btn[data-cc-action="saveVariant"]:hover {
+    background: #dfe9fa;
+    filter: none;
+    box-shadow: inset 0 0 0 1px #9fb7e3;
+}
+
+/* посилання на повний калькулятор імпорту — м'яко-зелене (навігація, не дія) */
+.ccalc .ccalc__btn--success {
+    height: auto;
+    min-height: 38px;
+    padding: 6px 12px;
+    background: rgba(34, 197, 94, .10);
+    color: #166534;
+    box-shadow: inset 0 0 0 1px rgba(34, 197, 94, .35);
+}
+
+.ccalc .ccalc__btn--success:hover {
+    background: rgba(34, 197, 94, .16);
+    filter: none;
+    box-shadow: inset 0 0 0 1px rgba(34, 197, 94, .5);
+}
+
+/* поточні значення у заголовку згорнутого блоку */
+.ccalc__sumVal {
+    font-weight: 700;
+    color: #6b7280;
+}
+
+/* позначка обов'язкового поля — як у TCO */
+.ccalc__req {
+    margin-left: 2px;
+    font-weight: 900;
+    color: #d64545;
+    cursor: help;
+}
+
+/* вибір валюти — компактніший */
+.ccalc__curWrap {
+    max-width: 190px;
+}
+
+.ccalc select.ccalc__input.ccalc__curSelect {
+    padding-left: 38px;
+    padding-right: 6px;
+    font-size: 12px;
+}
+
+/* ===== бейдж курсу НБУ: підпис + чіпи валют + дата ===== */
+.ccalc .ccalc__rates {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+    padding: 5px 6px 5px 5px;
+    border: 1px solid #b9cdee;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 12px rgba(40, 59, 105, .12);
+    font-size: 12px;
+    font-weight: 700;
+    color: #1f2f55;
+    white-space: normal;
+}
+
+.ccalc__rLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px 4px 8px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    font-weight: 900;
+}
+
+.ccalc__rIco {
+    flex: 0 0 auto;
+}
+
+.ccalc__rChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: #eaf1fc;
+    box-shadow: inset 0 0 0 1px #b9cdee;
+    white-space: nowrap;
+}
+
+.ccalc__rChip img {
+    width: 16px;
+    height: 11px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+}
+
+.ccalc__rChip b {
+    font-weight: 900;
+}
+
+.ccalc__rDate,
+.ccalc__rTag {
+    padding: 0 8px 0 2px;
+    color: #5b6b8c;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ccalc__rTag {
+    margin: 0 2px 0 0;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: #fff4d6;
+    box-shadow: inset 0 0 0 1px #f0d48a;
+    color: #8a5a00;
+}
+
+/* при переносі рядків на мобільних — менше скруглення контейнера */
+.ccalc .ccalc__rates {
+    border-radius: 22px;
+}
+
+/* =========================================================
+   Категорія / двигун / звідки авто — картки й чіпи з тінями
+   ========================================================= */
+
+/* категорія: окремі картки з іконкою в колі */
+.ccalc .ccalc__toggle--4 {
+    gap: 10px;
+    padding: 4px 4px 10px;
+    border: 0;
+    background: transparent;
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn {
+    gap: 7px;
+    padding: 12px 4px 10px;
+    min-height: 82px;
+    border: 1px solid #dfe5f2;
+    border-radius: 16px;
+    background: #fff;
+    color: #1f2f55;
+    font-size: 12.5px;
+    font-weight: 900;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .10);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn:hover {
+    transform: translateY(-2px);
+    border-color: #b9cdee;
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 10px 20px rgba(40, 59, 105, .16);
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__ico {
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    border-radius: 50%;
+    background: #eaf1fc;
+    color: #2c4070;
+    transition: background .15s ease, color .15s ease;
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn.is-active {
+    border-color: transparent;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 8px 20px rgba(40, 59, 105, .38);
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn.is-active .ccalc__ico {
+    background: rgba(255, 255, 255, .18);
+    color: #fff;
+}
+
+/* двигун та звідки авто: чіпи з тінню, активний — темно-синій */
+.ccalc .ccalc__chips {
+    gap: 8px;
+}
+
+.ccalc .ccalc__chip {
+    padding: 8px 16px;
+    border: 1px solid #dfe5f2;
+    background: #fff;
+    color: #1f2f55;
+    font-size: 12.5px;
+    font-weight: 900;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 10px rgba(40, 59, 105, .10);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+}
+
+.ccalc .ccalc__chip:hover {
+    background: #f3f6fd;
+    border-color: #b9cdee;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 8px 16px rgba(40, 59, 105, .16);
+}
+
+.ccalc .ccalc__chip.is-active {
+    border-color: transparent;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 6px 16px rgba(40, 59, 105, .35);
+}
+
+.ccalc .ccalc__chip[hidden] {
+    display: none;
+}
+
+@media (max-width: 420px) {
+    .ccalc .ccalc__toggle--4 {
+        gap: 6px;
+    }
+
+    .ccalc .ccalc__toggle--4 .ccalc__toggleBtn {
+        font-size: 11px;
+        min-height: 74px;
+    }
+
+    .ccalc .ccalc__toggle--4 .ccalc__ico {
+        width: 32px;
+        height: 32px;
+        padding: 7px;
+    }
+}
+
+/* якщо валюта розрахунку — гривня, друга колонка таблиці зайва */
+.ccalc__table.is-uah .ccalc__colCur {
+    display: none;
+}
+
+/* таблиці без горизонтального скролу: колонки стискаються, довгі підписи переносяться */
+.ccalc .ccalc__table {
+    min-width: 0;
+    table-layout: auto;
+}
+
+.ccalc__tableWrap {
+    overflow-x: visible;
+}
+
+.ccalc .ccalc__table th,
+.ccalc .ccalc__table td {
+    padding: 9px 8px;
+}
+
+.ccalc .ccalc__table td.ccalc__right,
+.ccalc .ccalc__table th.ccalc__right {
+    white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+    .ccalc .ccalc__table th,
+    .ccalc .ccalc__table td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+}
+
+/* опис варіантів у порівнянні може переноситись */
+.ccalc .ccalc__cmpDesc td,
+.ccalc .ccalc__cmpDesc td.ccalc__right {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+}
+
+.ccalc .ccalc__cmpTable td:first-child,
+.ccalc .ccalc__cmpTable th:first-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+    .ccalc .ccalc__cmpTable td:first-child,
+    .ccalc .ccalc__cmpTable th:first-child {
+        width: auto;
+        white-space: normal;
+        max-width: 72px;
+    }
+
+    .ccalc .ccalc__cmpTable th,
+    .ccalc .ccalc__cmpTable td {
+        padding: 8px 4px;
+        font-size: 11.5px;
+    }
+}
+
+/* ===== Споріднені калькулятори ===== */
+.cc-related {
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 0 16px;
+}
+
+.cc-related h2 {
+    color: #283b69;
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.cc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cc-related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #fff;
+    text-decoration: none;
+    color: #444;
+    box-shadow: 0 6px 20px rgba(40, 59, 105, .12);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.cc-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(40, 59, 105, .2);
+}
+
+.cc-related-card b {
+    color: #283b69;
+    font-size: 15px;
+}
+
+.cc-related-card span {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.cc-seo a {
+    color: #283b69;
+    font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    .cc-related-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   Категорія / двигун / звідки авто: значки в кожній групі
+   ========================================================= */
+.ccalc .ccalc__toggle--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 4px 4px 8px;
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn,
+.ccalc .ccalc__chip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid #dfe5f2;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 900;
+    text-align: left;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 10px rgba(40, 59, 105, .08);
+    transform: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn {
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 10px 14px;
+}
+
+.ccalc .ccalc__chip {
+    display: inline-flex;
+    padding: 9px 14px;
+    border-radius: 12px;
+}
+
+.ccalc .ccalc__chip[hidden] {
+    display: none;
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__ico,
+.ccalc .ccalc__chipIco {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: #5b78b8;
+}
+
+.ccalc .ccalc__chipFlag {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn:hover,
+.ccalc .ccalc__chip:hover {
+    transform: translateY(-1px);
+    border-color: #b9cdee;
+    background: #f6f9ff;
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 8px 16px rgba(40, 59, 105, .14);
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn.is-active,
+.ccalc .ccalc__chip.is-active {
+    border-color: #8fa8d6;
+    background: #eaf1fc;
+    color: #1f2f55;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(60, 99, 196, .22);
+}
+
+.ccalc .ccalc__toggle--4 .ccalc__toggleBtn.is-active .ccalc__ico,
+.ccalc .ccalc__chip.is-active .ccalc__chipIco {
+    background: none;
+    color: #283b69;
+}
+
+@media (max-width: 420px) {
+    .ccalc .ccalc__toggle--4 .ccalc__toggleBtn {
+        font-size: 12px;
+        padding: 9px 10px;
+        min-height: 0;
+    }
+
+    .ccalc .ccalc__chip {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+}
+
+/* плитка «Авто в Україні коштуватиме» — м'яка блакитна заливка */
+.ccalc .ccalc__landed {
+    background: linear-gradient(135deg, #eef4fd 0%, #dfe9fa 100%);
+    border: 1px solid #c5d6f1;
+    color: #1f2f55;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 8px 20px rgba(40, 59, 105, .12);
+}
+
+.ccalc .ccalc__landedLabel {
+    color: #4a5f8f;
+    opacity: 1;
+}
+
+.ccalc .ccalc__landedValue {
+    color: #1f2f55;
+}
+
+.ccalc .ccalc__landedSub {
+    color: #4a5f8f;
+    opacity: 1;
+}

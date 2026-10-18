@@ -1,33 +1,36 @@
-/* customs.js — i18n-ready
-   + Таблиця результатів: UAH / EUR / USD
-   + Дефолти: мито 10%, ПДВ 20% (і після reset)
-   + EV: мито 0% якщо поле порожнє або було 10
-   + Автопідтягування курсів НБУ (USD/EUR) (без полів у формі)
-   + Вивід курсу НБУ у правому верхньому куті
-   + Якщо ціна авто порожня — у результаті "—" (не рахуємо 0)
-   + ICE акциз: автоматичні ставки для великих обʼємів
-   + EV (варіант A): ставка акцизу фіксована 1€/кВт·год (поле прибрано)
+/* customs.js — калькулятор розмитнення (i18n-ready)
+   - категорії: легкові / вантажні / мото / автобуси; двигун: бензин / дизель / електро / гібрид
+   - регіон: Європа / США / Інше (мито 0% для авто європейського походження за сертифікатом)
+   - вбудовані ставки акцизу для легкових (бензин, дизель, електро), решта — ставка вручну
+   - збір до ПФ (3 / 4 / 5% за прожитковим мінімумом; лише легкові, не електро), додаткові витрати в Україні
+   - загальна вартість «авто в Україні», діаграма розбивки платежів, порівняння двох варіантів
+   - курс НБУ: сьогодні / на дату / власний (USD, EUR); 12 валют ціни
+   - групування тисяч при вводі, кнопка «Приклад»
 */
 (() => {
   // ========= i18n =========
   const t = (key, vars) => (window.t ? window.t(key, vars) : key);
   const locale = () => (window.i18nLocale ? window.i18nLocale() : "uk-UA");
+  const IS_EN = !String(locale()).toLowerCase().startsWith("uk");
 
-  // ========= 1) НБУ курси =========
-  async function fetchNbuRates() {
-    const url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+  const CURRENCIES = ["EUR", "USD", "UAH", "GBP", "CHF", "PLN", "CZK", "HUF", "RON", "CAD", "AUD", "TRY"];
+  const CUR_FLAG = { UAH: "ua", USD: "us", EUR: "eu", GBP: "gb", CHF: "ch", PLN: "pl", CZK: "cz", HUF: "hu", RON: "ro", CAD: "ca", AUD: "au", TRY: "tr" };
+
+  // ========= 1) Курси НБУ (на сьогодні або на дату) =========
+  async function fetchNbuRates(dateYmd) {
+    const url =
+      "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?" + (dateYmd ? `date=${dateYmd}&` : "") + "json";
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("NBU request failed");
     const data = await res.json();
+    if (!Array.isArray(data) || !data.length) throw new Error("NBU: no data for date");
 
-    const usd = data.find((x) => x.cc === "USD");
-    const eur = data.find((x) => x.cc === "EUR");
-
-    return {
-      usd: usd?.rate,
-      eur: eur?.rate,
-      date: usd?.exchangedate || eur?.exchangedate || null
-    };
+    const map = {};
+    data.forEach((x) => {
+      if (CURRENCIES.includes(x.cc) && Number(x.rate) > 0) map[x.cc] = Number(x.rate);
+    });
+    const any = data.find((x) => x.cc === "USD") || data.find((x) => x.cc === "EUR") || data[0];
+    return { map, date: any?.exchangedate || null };
   }
 
   // ========= 2) Root + elements =========
@@ -37,80 +40,90 @@
   const $ = (key) => root.querySelector(`[data-cc="${key}"]`);
   const $$ = (sel) => Array.from(root.querySelectorAll(sel));
 
+  const CATS = ["car", "truck", "moto", "bus"];
+  // які типи двигуна доступні в кожній категорії
+  const ENGINES = {
+    car: ["gasoline", "diesel", "electric", "hybrid"],
+    truck: ["diesel", "gasoline", "electric", "hybrid"],
+    moto: ["gasoline", "electric"],
+    bus: ["diesel", "gasoline", "electric", "hybrid"]
+  };
+  const REGIONS = ["eu", "us", "other"];
+
   const state = {
+    category: "car",
+    engine: "gasoline",
+    region: "eu",
     mode: "ICE",
-    rates: { eur: null, usd: null, date: null }
+    rates: {}, // грн за 1 одиницю валюти (НБУ)
+    ratesDate: null,
+    saved: null // збережений варіант A для порівняння
   };
 
-  const els = {
-    modeBadge: $("modeBadge"),
-    ageBadge: $("ageBadge"),
-    ratesBadge: $("ratesBadge"),
+  const els = {};
+  [
+    "modeBadge", "ageBadge", "ratesBadge", "currency", "curFlag", "year", "price", "shipping",
+    "usBlock", "auctionFee", "usInland", "seaFreight",
+    "iceBlock", "engineCC", "evBlock", "batteryKwh", "manualBlock", "exciseRate", "ageCoef",
+    "euBlock", "euOrigin", "dutyRate", "vatRate",
+    "includePension", "pensionBlock", "subMin", "pensionHint",
+    "extrasDetails", "broker", "registration", "osago", "domestic",
+    "yearReq", "curHead", "ratesDetails", "ratesSummary", "rateDetails", "rateDate", "rateUsd", "rateEur",
+    "totalCustoms", "subHint", "landedTotal", "landedSub", "splitBar", "splitLegend", "splitNote",
+    "pensionRow", "extrasRow",
+    "cmpPanel", "cmpDescA", "cmpDescB", "cmpCustomsA", "cmpCustomsB", "cmpCustomsD", "cmpLandedA", "cmpLandedB", "cmpLandedD",
+    "toast"
+  ].forEach((k) => (els[k] = $(k)));
 
-    currency: $("currency"),
-    year: $("year"),
-    price: $("price"),
-    shipping: $("shipping"),
+  // рядки таблиці: UAH / EUR / USD
+  const ROWS = ["customsValue", "duty", "excise", "vat", "pension", "grandTotal", "extras", "landed"];
+  ROWS.forEach((r) => {
+    els[r] = $(r);
+    els[r + "Cur"] = $(r + "Cur");
+  });
 
-    fuelType: $("fuelType"),
-    engineCC: $("engineCC"),
-
-    batteryKwh: $("batteryKwh"),
-
-    dutyRate: $("dutyRate"),
-    vatRate: $("vatRate"),
-
-    includePension: $("includePension"),
-    pensionBlock: $("pensionBlock"),
-    pensionT1: $("pensionT1"),
-    pensionT2: $("pensionT2"),
-
-    iceBlock: $("iceBlock"),
-    evBlock: $("evBlock"),
-
-    totalCustoms: $("totalCustoms"),
-    subHint: $("subHint"),
-
-    // UAH
-    customsValue: $("customsValue"),
-    duty: $("duty"),
-    excise: $("excise"),
-    vat: $("vat"),
-    pensionRow: $("pensionRow"),
-    pension: $("pension"),
-    grandTotal: $("grandTotal"),
-
-    // EUR / USD
-    customsValueEur: $("customsValueEur"),
-    customsValueUsd: $("customsValueUsd"),
-
-    dutyEur: $("dutyEur"),
-    dutyUsd: $("dutyUsd"),
-
-    exciseEur: $("exciseEur"),
-    exciseUsd: $("exciseUsd"),
-
-    vatEur: $("vatEur"),
-    vatUsd: $("vatUsd"),
-
-    pensionEur: $("pensionEur"),
-    pensionUsd: $("pensionUsd"),
-
-    grandTotalEur: $("grandTotalEur"),
-    grandTotalUsd: $("grandTotalUsd"),
-
-    toast: $("toast"),
-  };
+  const MONEY_FIELDS = ["price", "shipping", "auctionFee", "usInland", "seaFreight", "broker", "registration", "osago", "domestic"];
 
   // ========= 3) Helpers =========
+  // англійською кома — роздільник тисяч, українською — десятковий роздільник
+  const NUM_CHARS = IS_EN ? /[\d.]/ : /[\d.,]/;
+  const NON_NUM_CHARS = IS_EN ? /[^\d.]/g : /[^\d.,]/g;
+
   function num(v, fallback = 0) {
-    const n = Number(String(v ?? "").replace(",", "."));
+    const raw = String(v ?? "").replace(/\s+/g, "");
+    const s = IS_EN ? raw.replace(/,/g, "") : raw.replace(",", ".");
+    const n = Number(s);
     return Number.isFinite(n) ? n : fallback;
   }
 
+  const val = (k) => num(els[k]?.value, 0);
+  const isBlank = (k) => (els[k]?.value || "").trim() === "";
+
+  function groupNumber(raw) {
+    const s = String(raw ?? "").replace(NON_NUM_CHARS, "");
+    const m = s.match(/^(\d*)([.,]?)([\s\S]*)$/);
+    const intPart = m[1].replace(/\B(?=(\d{3})+(?!\d))/g, IS_EN ? "," : " ");
+    return intPart + m[2] + m[3].replace(/[^\d]/g, "");
+  }
+
+  // групування тисяч під час вводу зі збереженням позиції курсора
+  function formatWhileTyping(inp) {
+    const old = inp.value;
+    const pos = inp.selectionStart ?? old.length;
+    const digitsBefore = old.slice(0, pos).replace(NON_NUM_CHARS, "").length;
+    const next = groupNumber(old);
+    if (next === old) return;
+    inp.value = next;
+    let seen = 0;
+    let i = 0;
+    for (; i < next.length && seen < digitsBefore; i++) if (NUM_CHARS.test(next[i])) seen++;
+    try {
+      inp.setSelectionRange(i, i);
+    } catch {}
+  }
+
   function fmtUAH(v) {
-    const n = Math.round(v);
-    return n.toLocaleString(locale()) + " ₴";
+    return Math.round(v).toLocaleString(locale()) + " ₴";
   }
 
   function fmtMoney(v, cur) {
@@ -118,342 +131,538 @@
     const s = n.toLocaleString(locale(), { maximumFractionDigits: 2 });
     if (cur === "EUR") return s + " €";
     if (cur === "USD") return s + " $";
-    return s + " ₴";
+    if (cur === "UAH") return s + " ₴";
+    return s + " " + cur;
   }
 
   function safeDiv(a, b) {
     const bb = Number(b);
     if (!Number.isFinite(bb) || bb === 0) return null;
     const aa = Number(a);
-    if (!Number.isFinite(aa)) return null;
-    return aa / bb;
+    return Number.isFinite(aa) ? aa / bb : null;
   }
 
-  function setCellMoneyOrDash(el, value, cur) {
-    if (!el) return;
-    el.textContent = value === null ? "—" : fmtMoney(value, cur);
-  }
-
-  function currentYear() {
-    return new Date().getFullYear();
+  function setText(k, text) {
+    if (els[k]) els[k].textContent = text;
   }
 
   function toast(msg) {
     if (!els.toast) return;
     els.toast.textContent = msg;
     clearTimeout(toast._t);
-    toast._t = setTimeout(() => (els.toast.textContent = ""), 1800);
+    toast._t = setTimeout(() => (els.toast.textContent = ""), 2200);
   }
 
+  function currentYear() {
+    return new Date().getFullYear();
+  }
+
+  // коефіцієнт віку для акцизу: кількість років від року випуску, але не менше 1 і не більше 15
   function getAge() {
     const yRaw = (els.year?.value || "").trim();
     if (yRaw === "") return null;
-
     const y = num(yRaw, NaN);
     if (!Number.isFinite(y)) return null;
+    return Math.min(15, Math.max(1, currentYear() - y));
+  }
 
-    const age = currentYear() - y;
-    return Math.max(0, age);
+  // ---- курси ----
+  const manualRate = (k) => {
+    const v = val(k);
+    return v > 0 ? v : null;
+  };
+
+  function rateOf(code) {
+    if (code === "UAH") return 1;
+    if (code === "USD" && manualRate("rateUsd")) return manualRate("rateUsd");
+    if (code === "EUR" && manualRate("rateEur")) return manualRate("rateEur");
+    const r = state.rates[code];
+    return Number.isFinite(r) && r > 0 ? r : null;
   }
 
   function updateRatesBadge() {
     if (!els.ratesBadge) return;
-    const { usd, eur, date } = state.rates;
-    if (Number.isFinite(usd) && Number.isFinite(eur)) {
-      const d = date ? ` • ${date}` : "";
-      els.ratesBadge.textContent =
-        `Курс НБУ: USD ${usd.toFixed(4)} / EUR ${eur.toFixed(4)}${d}`;
+    const usd = rateOf("USD");
+    const eur = rateOf("EUR");
+    const icon =
+      '<svg class="ccalc__rIco" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8m4-8v8m6-8v8m4-8v8M3 20h18"/></svg>';
+    const label = `<span class="ccalc__rLabel">${icon}${t("customs.rates_label")}</span>`;
+    if (usd && eur) {
+      const manual = !!(manualRate("rateUsd") || manualRate("rateEur"));
+      const chip = (flag, code, v) => `<span class="ccalc__rChip"><img src="/assets/flags/${flag}.png" width="16" height="11" alt="">${code} <b>${v.toFixed(4)}</b></span>`;
+      const tail = manual
+        ? `<span class="ccalc__rTag">${t("customs.rates_manual_tag")}</span>`
+        : state.ratesDate
+          ? `<span class="ccalc__rDate">${state.ratesDate}</span>`
+          : "";
+      els.ratesBadge.innerHTML = label + chip("us", "USD", usd) + chip("eu", "EUR", eur) + tail;
     } else {
-      els.ratesBadge.textContent = "Курс НБУ: —";
+      els.ratesBadge.innerHTML = label + `<span class="ccalc__rDate">—</span>`;
     }
   }
 
-  function getRateToUAH(currency) {
-    if (currency === "UAH") return 1;
-    if (currency === "EUR") return Number.isFinite(state.rates.eur) ? state.rates.eur : null;
-    if (currency === "USD") return Number.isFinite(state.rates.usd) ? state.rates.usd : null;
-    return null;
+  function syncFlag() {
+    const f = CUR_FLAG[els.currency?.value] || "ua";
+    if (els.curFlag) els.curFlag.src = `/assets/flags/${f}.png`;
   }
 
-  // ========= 4) Mode =========
-  function syncModeButtons(mode) {
-    $$('.ccalc__toggleBtn[data-cc-action="setMode"]').forEach((b) => {
-      b.classList.toggle("is-active", b.getAttribute("data-mode") === mode);
+  // ========= 4) Категорія, двигун, регіон =========
+  // вбудовані ставки акцизу: легкові на бензині, дизелі та електро; решта — вручну
+  const builtInExcise = () => state.category === "car" && state.engine !== "hybrid";
+  // коефіцієнт віку застосовується до ДВЗ (вбудовано) та до ручної ставки, якщо ввімкнено перемикач
+  const usesAge = () => (builtInExcise() ? state.engine !== "electric" : !!els.ageCoef?.checked);
+
+  function syncUI() {
+    $$('[data-cc-action="setCategory"]').forEach((b) => b.classList.toggle("is-active", b.getAttribute("data-category") === state.category));
+    $$('[data-cc-action="setEngine"]').forEach((b) => {
+      const eng = b.getAttribute("data-engine");
+      b.hidden = !ENGINES[state.category].includes(eng);
+      b.classList.toggle("is-active", eng === state.engine);
     });
-  }
-
-  function ensureDefaultsForICE() {
-    if (els.dutyRate && (els.dutyRate.value || "").trim() === "") els.dutyRate.value = "10";
-    if (els.vatRate && (els.vatRate.value || "").trim() === "") els.vatRate.value = "20";
-  }
-
-  function setMode(mode) {
-    state.mode = mode;
+    $$('[data-cc-action="setRegion"]').forEach((b) => b.classList.toggle("is-active", b.getAttribute("data-region") === state.region));
 
     if (els.modeBadge) {
-      els.modeBadge.textContent = mode === "EV" ? t("customs.mode_ev") : t("customs.mode_ice");
+      els.modeBadge.textContent = t("customs.cat_" + state.category) + " · " + t("customs.eng_" + state.engine);
     }
+    if (els.iceBlock) els.iceBlock.style.display = state.engine === "electric" ? "none" : "";
+    if (els.evBlock) els.evBlock.style.display = state.engine === "electric" ? "" : "none";
+    if (els.manualBlock) els.manualBlock.style.display = builtInExcise() ? "none" : "";
+    if (els.euBlock) els.euBlock.style.display = state.region === "eu" ? "" : "none";
+    if (els.usBlock) els.usBlock.style.display = state.region === "us" ? "" : "none";
+  }
 
-    // EV: duty 0% if empty or was 10
-    if (mode === "EV" && els.dutyRate) {
-      const dr = (els.dutyRate.value || "").trim();
-      if (dr === "" || dr === "10") els.dutyRate.value = "0";
+  // типове мито: 0% для електро або для авто європейського походження (сертифікат), інакше 10%
+  function defaultDuty() {
+    if (state.engine === "electric") return "0";
+    if (state.region === "eu" && els.euOrigin?.checked) return "0";
+    return "10";
+  }
+
+  // підставляємо типове мито лише якщо поле порожнє, стоїть 10% або мито виставлене автоматично (власну ставку не чіпаємо)
+  function syncDutyDefault() {
+    const el = els.dutyRate;
+    if (!el) return;
+    const v = (el.value || "").trim();
+    if (v === "" || v === "10" || el.dataset.auto === "1") {
+      const want = defaultDuty();
+      el.value = want;
+      if (want === "10") delete el.dataset.auto;
+      else el.dataset.auto = "1";
     }
+  }
 
-    // ICE defaults
-    if (mode === "ICE") ensureDefaultsForICE();
-
-    if (els.iceBlock) els.iceBlock.style.display = mode === "ICE" ? "" : "none";
-    if (els.evBlock) els.evBlock.style.display = mode === "EV" ? "" : "none";
-
-    syncModeButtons(mode);
+  function afterEngineChange() {
+    state.mode = state.engine === "electric" ? "EV" : "ICE";
+    syncDutyDefault();
+    if (els.vatRate && isBlank("vatRate")) els.vatRate.value = "20";
+    syncUI();
     recalc();
   }
 
-  // ========= 5) Calculations =========
-  function calcExciseEUR(ageOrNull) {
-    const age = ageOrNull === null ? 0 : ageOrNull;
-
-    if (state.mode === "EV") {
-      const kwh = num(els.batteryKwh?.value, 0);
-      const EV_EXCISE_RATE = 1; // € / кВт·год (фіксована ставка)
-      return kwh * EV_EXCISE_RATE;
-    }
-
-    const cc = num(els.engineCC?.value, 0);
-    const fuel = els.fuelType?.value;
-
-    // Автопідстановка ставки при великих обʼємах
-    let base;
-    if (fuel === "diesel") {
-      base = cc > 3500 ? 150 : 75;
-    } else {
-      base = cc > 3000 ? 100 : 50;
-    }
-
-    return base * (cc / 1000) * age;
+  function setCategory(cat) {
+    if (!CATS.includes(cat)) return;
+    state.category = cat;
+    if (!ENGINES[cat].includes(state.engine)) state.engine = ENGINES[cat][0];
+    afterEngineChange();
   }
 
-  function calcPensionUAH(baseUAH) {
-    const t1 = num(els.pensionT1?.value, 0);
-    const t2 = num(els.pensionT2?.value, 0);
+  function setEngine(eng) {
+    if (!ENGINES[state.category].includes(eng)) return;
+    state.engine = eng;
+    afterEngineChange();
+  }
+
+  function setRegion(region) {
+    if (!REGIONS.includes(region)) return;
+    state.region = region;
+    // якщо ціну ще не введено — підставляємо типову валюту (USD зі США, EUR з Європи)
+    if (els.currency && isBlank("price")) {
+      if (region === "us") els.currency.value = "USD";
+      else if (region === "eu") els.currency.value = "EUR";
+      syncFlag();
+    }
+    if (region !== "eu" && els.euOrigin) els.euOrigin.checked = false;
+    syncDutyDefault();
+    syncUI();
+    recalc();
+  }
+
+  // ========= 5) Розрахунки =========
+  function calcExciseEUR(age) {
+    const k = age === null ? 1 : age;
+    const cc = val("engineCC");
+    const kwh = val("batteryKwh");
+
+    if (builtInExcise()) {
+      if (state.engine === "electric") return kwh * 1; // 1 € за кВт·год батареї
+      // ставка залежить від пального та обʼєму двигуна
+      let base;
+      if (state.engine === "diesel") base = cc > 3500 ? 150 : 75;
+      else base = cc > 3000 ? 100 : 50;
+      return base * (cc / 1000) * k;
+    }
+
+    // інші категорії та гібриди: ставку акцизу вводить користувач
+    const rate = val("exciseRate");
+    const kk = els.ageCoef?.checked ? k : 1;
+    return state.engine === "electric" ? rate * kwh * kk : rate * (cc / 1000) * kk;
+  }
+
+  // збір до ПФ при першій реєстрації: 3% до 165 прожиткових мінімумів, 4% від 165 до 290, 5% понад 290
+  // (прожитковий мінімум для працездатних на 1 січня; база — вартість авто без ПДВ, тут — митна вартість у грн)
+  function pensionInfo(baseUAH) {
+    const sm = Math.max(0, val("subMin"));
+    const t1 = 165 * sm;
+    const t2 = 290 * sm;
     let rate = 0.03;
     if (baseUAH > t2) rate = 0.05;
     else if (baseUAH > t1) rate = 0.04;
-    return baseUAH * rate;
+    return { t1, t2, rate, amount: baseUAH * rate };
   }
+
+  // що ще треба заповнити, щоб результат не був заниженим
+  function labelOf(el) {
+    return (el?.closest(".ccalc__field")?.querySelector("label")?.textContent || "").replace(/\([^)]*\)/g, "").replace(/\*/g, "").trim();
+  }
+
+  function missingFields() {
+    const miss = [];
+    if (usesAge() && getAge() === null) miss.push(labelOf(els.year));
+    if (state.engine === "electric") {
+      if (!(val("batteryKwh") > 0)) miss.push(labelOf(els.batteryKwh));
+    } else if (!(val("engineCC") > 0)) {
+      miss.push(labelOf(els.engineCC));
+    }
+    if (!builtInExcise() && isBlank("exciseRate")) miss.push(labelOf(els.exciseRate));
+    return miss;
+  }
+
+  const DASH = "—";
 
   function setResultDashes() {
-    const dash = "—";
-
-    // UAH
-    if (els.customsValue) els.customsValue.textContent = dash;
-    if (els.duty) els.duty.textContent = dash;
-    if (els.excise) els.excise.textContent = dash;
-    if (els.vat) els.vat.textContent = dash;
-    if (els.totalCustoms) els.totalCustoms.textContent = dash;
-    if (els.pension) els.pension.textContent = dash;
-    if (els.grandTotal) els.grandTotal.textContent = dash;
-    if (els.subHint) els.subHint.textContent = "";
-
-    // EUR / USD
-    if (els.customsValueEur) els.customsValueEur.textContent = dash;
-    if (els.customsValueUsd) els.customsValueUsd.textContent = dash;
-
-    if (els.dutyEur) els.dutyEur.textContent = dash;
-    if (els.dutyUsd) els.dutyUsd.textContent = dash;
-
-    if (els.exciseEur) els.exciseEur.textContent = dash;
-    if (els.exciseUsd) els.exciseUsd.textContent = dash;
-
-    if (els.vatEur) els.vatEur.textContent = dash;
-    if (els.vatUsd) els.vatUsd.textContent = dash;
-
-    if (els.pensionEur) els.pensionEur.textContent = dash;
-    if (els.pensionUsd) els.pensionUsd.textContent = dash;
-
-    if (els.grandTotalEur) els.grandTotalEur.textContent = dash;
-    if (els.grandTotalUsd) els.grandTotalUsd.textContent = dash;
+    ROWS.forEach((r) => {
+      setText(r, DASH);
+      setText(r + "Cur", DASH);
+    });
+    setText("totalCustoms", DASH);
+    setText("landedTotal", DASH);
+    setText("pensionHint", "");
+    setText("landedSub", "");
+    setText("subHint", "");
+    setText("splitNote", "");
+    if (els.splitBar) els.splitBar.innerHTML = "";
+    if (els.splitLegend) els.splitLegend.innerHTML = "";
+    updateCompare(null);
   }
+
+  // друга колонка таблиці — у валюті, обраній для розрахунку (для UAH колонка прихована)
+  function syncResultCurrency() {
+    const cur = els.currency?.value || "EUR";
+    setText("curHead", cur);
+    $("resTable")?.classList.toggle("is-uah", cur === "UAH");
+  }
+
+  // рядок таблиці: гривні + валюта розрахунку
+  function setRow(key, uah, curRate, cur) {
+    setText(key, fmtUAH(uah));
+    const v = safeDiv(uah, curRate);
+    setText(key + "Cur", v === null ? DASH : fmtMoney(v, cur));
+  }
+
+  const SPLIT_COLORS = { duty: "#5b7bd5", excise: "#e07b39", vat: "#1f8f52", pension: "#8a6fd1" };
+
+  function renderSplit(parts, taxTotal, customsValueUAH) {
+    if (!els.splitBar || !els.splitLegend) return;
+    const sum = parts.reduce((a, p) => a + p.value, 0);
+    if (!(sum > 0)) {
+      els.splitBar.innerHTML = "";
+      els.splitLegend.innerHTML = "";
+      setText("splitNote", "");
+      return;
+    }
+    els.splitBar.innerHTML = parts
+      .filter((p) => p.value > 0)
+      .map((p) => `<span class="ccalc__splitSeg" style="width:${((p.value / sum) * 100).toFixed(2)}%;background:${SPLIT_COLORS[p.key]}" title="${p.label}: ${fmtUAH(p.value)}"></span>`)
+      .join("");
+    els.splitLegend.innerHTML = parts
+      .filter((p) => p.value > 0)
+      .map((p) => `<span><i style="background:${SPLIT_COLORS[p.key]}"></i>${p.label} <b>${fmtUAH(p.value)}</b> (${Math.round((p.value / sum) * 100)}%)</span>`)
+      .join("");
+    const pct = customsValueUAH > 0 ? Math.round((taxTotal / customsValueUAH) * 100) : 0;
+    setText("splitNote", t("customs.split_note", { pct }));
+  }
+
+  // ---- порівняння двох варіантів ----
+  function describeCurrent() {
+    const cur = els.currency?.value || "EUR";
+    return t("customs.cmp_desc", {
+      cat: t("customs.cat_" + state.category),
+      eng: t("customs.eng_" + state.engine),
+      region: t("customs.reg_" + state.region),
+      year: (els.year?.value || "").trim() || DASH,
+      price: fmtMoney(val("price"), cur)
+    });
+  }
+
+  function updateCompare(current) {
+    if (!els.cmpPanel) return;
+    if (!state.saved) {
+      els.cmpPanel.style.display = "none";
+      return;
+    }
+    els.cmpPanel.style.display = "";
+    setText("cmpDescA", state.saved.desc);
+    setText("cmpCustomsA", fmtUAH(state.saved.customs));
+    setText("cmpLandedA", fmtUAH(state.saved.landed));
+    if (!current) {
+      setText("cmpDescB", DASH);
+      setText("cmpCustomsB", DASH);
+      setText("cmpLandedB", DASH);
+      setText("cmpCustomsD", DASH);
+      setText("cmpLandedD", DASH);
+      return;
+    }
+    const diff = (b, a) => (b - a >= 0 ? "+" : "−") + fmtUAH(Math.abs(b - a));
+    setText("cmpDescB", current.desc);
+    setText("cmpCustomsB", fmtUAH(current.customs));
+    setText("cmpLandedB", fmtUAH(current.landed));
+    setText("cmpCustomsD", diff(current.customs, state.saved.customs));
+    setText("cmpLandedD", diff(current.landed, state.saved.landed));
+  }
+
+  let lastResult = null; // останній коректний результат (для «Зберегти варіант A»)
 
   function recalc() {
     if (!els.currency || !els.price) return;
 
-    // if price empty => no calc
-    if ((els.price.value || "").trim() === "") {
+    updateRatesBadge();
+    syncResultCurrency();
+
+    // зірочка біля року випуску — лише коли вік впливає на акциз
+    if (els.yearReq) els.yearReq.style.display = usesAge() ? "" : "none";
+
+    // поточні ставки мита й ПДВ у заголовку згорнутого блоку
+    setText("ratesSummary", `· ${t("customs.lbl_duty")} ${(els.dutyRate?.value || "0").trim() || 0}% · ${t("customs.lbl_vat")} ${(els.vatRate?.value || "0").trim() || 0}%`);
+
+    // ціну не введено — нічого не рахуємо
+    if (isBlank("price")) {
       if (els.ageBadge) els.ageBadge.textContent = t("customs.age_dash");
+      lastResult = null;
       setResultDashes();
+      return;
+    }
+
+    const age = getAge();
+    if (els.ageBadge) els.ageBadge.textContent = age === null ? t("customs.age_dash") : t("customs.age_years", { age });
+
+    const miss = missingFields();
+    if (miss.length) {
+      lastResult = null;
+      setResultDashes();
+      setText("subHint", t("customs.missing", { list: miss.join(", ") }));
       return;
     }
 
     const currency = els.currency.value;
-
-    const price = num(els.price.value, 0);
-    const shipping = num(els.shipping?.value, 0);
-    const dutyRate = num(els.dutyRate?.value, 0) / 100;
-    const vatRate = num(els.vatRate?.value, 0) / 100;
-
-    const age = getAge();
-    if (els.ageBadge) {
-      els.ageBadge.textContent =
-        age === null ? t("customs.age_dash") : t("customs.age_years", { age });
-    }
-
-    const customsValue = price + shipping;
-
-    const toUAH = getRateToUAH(currency);
+    const toUAH = rateOf(currency);
     if (toUAH === null) {
-      // немає курсів — не можемо порахувати коректно
+      lastResult = null;
       setResultDashes();
-      if (els.subHint) els.subHint.textContent = "Немає курсу НБУ для обраної валюти.";
+      setText("subHint", t("customs.no_rate"));
       return;
     }
+    const eurRate = rateOf("EUR");
 
+    const dutyRate = val("dutyRate") / 100;
+    const vatRate = val("vatRate") / 100;
+
+    // митна вартість: ціна + доставка/страховка до кордону (+ витрати зі США: аукціон, порт, море)
+    const usExtra = state.region === "us" ? val("auctionFee") + val("usInland") + val("seaFreight") : 0;
+    const customsValue = val("price") + val("shipping") + usExtra;
     const customsValueUAH = customsValue * toUAH;
 
     const dutyUAH = customsValueUAH * dutyRate;
-
     const exciseEUR = calcExciseEUR(age);
-    const eurRate = state.rates.eur;
-    const usdRate = state.rates.usd;
-
-    const exciseUAH = exciseEUR * (Number.isFinite(eurRate) ? eurRate : 0);
-
+    const exciseUAH = exciseEUR * (eurRate || 0);
     const vatUAH = (customsValueUAH + dutyUAH + exciseUAH) * vatRate;
-
     const totalCustomsUAH = dutyUAH + exciseUAH + vatUAH;
 
-    const pensionOn = !!els.includePension?.checked;
-    if (els.pensionBlock) els.pensionBlock.style.display = pensionOn ? "" : "none";
+    // збір стосується лише легкових авто; електромобілі від нього звільнені
+    const pensionChecked = !!els.includePension?.checked;
+    const pensionNa = state.category !== "car" ? "customs.pension_na_cat" : state.engine === "electric" ? "customs.pension_na_ev" : "";
+    const pensionOn = pensionChecked && !pensionNa;
+    if (els.pensionBlock) els.pensionBlock.style.display = pensionChecked ? "" : "none";
     if (els.pensionRow) els.pensionRow.style.display = pensionOn ? "" : "none";
-
-    const pensionUAH = pensionOn ? calcPensionUAH(customsValueUAH) : 0;
+    const pInfo = pensionInfo(customsValueUAH);
+    const pensionUAH = pensionOn ? pInfo.amount : 0;
+    if (els.pensionHint) {
+      els.pensionHint.textContent = pensionNa
+        ? pensionChecked
+          ? t(pensionNa)
+          : ""
+        : pensionOn
+          ? t("customs.pension_hint", { t1: fmtUAH(pInfo.t1), t2: fmtUAH(pInfo.t2), rate: Math.round(pInfo.rate * 100) })
+          : "";
+    }
     const grandUAH = totalCustomsUAH + pensionUAH;
 
-    // output UAH
-    if (els.customsValue) els.customsValue.textContent = fmtUAH(customsValueUAH);
-    if (els.duty) els.duty.textContent = fmtUAH(dutyUAH);
-    if (els.excise) els.excise.textContent = fmtUAH(exciseUAH);
-    if (els.vat) els.vat.textContent = fmtUAH(vatUAH);
+    // додаткові витрати в Україні (грн), не входять у митну вартість
+    const extrasUAH = val("broker") + val("registration") + val("osago") + val("domestic");
+    if (els.extrasRow) els.extrasRow.style.display = extrasUAH > 0 ? "" : "none";
+    const landedUAH = customsValueUAH + grandUAH + extrasUAH;
 
-    if (els.totalCustoms) els.totalCustoms.textContent = fmtUAH(totalCustomsUAH);
-    if (els.pension) els.pension.textContent = fmtUAH(pensionUAH);
-    if (els.grandTotal) els.grandTotal.textContent = fmtUAH(grandUAH);
+    // таблиця
+    setRow("customsValue", customsValueUAH, toUAH, currency);
+    setRow("duty", dutyUAH, toUAH, currency);
+    setRow("excise", exciseUAH, toUAH, currency);
+    setRow("vat", vatUAH, toUAH, currency);
+    if (pensionOn) setRow("pension", pensionUAH, toUAH, currency);
+    else ["pension", "pensionCur"].forEach((k) => setText(k, DASH));
+    setRow("grandTotal", grandUAH, toUAH, currency);
+    if (extrasUAH > 0) setRow("extras", extrasUAH, toUAH, currency);
+    setRow("landed", landedUAH, toUAH, currency);
 
-    // output EUR / USD
-    const customsValueEUR = safeDiv(customsValueUAH, eurRate);
-    const customsValueUSD = safeDiv(customsValueUAH, usdRate);
-
-    const dutyEUR = safeDiv(dutyUAH, eurRate);
-    const dutyUSD = safeDiv(dutyUAH, usdRate);
-
-    const exciseEUR_out = safeDiv(exciseUAH, eurRate);
-    const exciseUSD_out = safeDiv(exciseUAH, usdRate);
-
-    const vatEUR = safeDiv(vatUAH, eurRate);
-    const vatUSD = safeDiv(vatUAH, usdRate);
-
-    const pensionEUR = safeDiv(pensionUAH, eurRate);
-    const pensionUSD = safeDiv(pensionUAH, usdRate);
-
-    const grandEUR = safeDiv(grandUAH, eurRate);
-    const grandUSD = safeDiv(grandUAH, usdRate);
-
-    setCellMoneyOrDash(els.customsValueEur, customsValueEUR, "EUR");
-    setCellMoneyOrDash(els.customsValueUsd, customsValueUSD, "USD");
-
-    setCellMoneyOrDash(els.dutyEur, dutyEUR, "EUR");
-    setCellMoneyOrDash(els.dutyUsd, dutyUSD, "USD");
-
-    setCellMoneyOrDash(els.exciseEur, exciseEUR_out, "EUR");
-    setCellMoneyOrDash(els.exciseUsd, exciseUSD_out, "USD");
-
-    setCellMoneyOrDash(els.vatEur, vatEUR, "EUR");
-    setCellMoneyOrDash(els.vatUsd, vatUSD, "USD");
-
-    if (pensionOn) {
-      setCellMoneyOrDash(els.pensionEur, pensionEUR, "EUR");
-      setCellMoneyOrDash(els.pensionUsd, pensionUSD, "USD");
-    } else {
-      if (els.pensionEur) els.pensionEur.textContent = "—";
-      if (els.pensionUsd) els.pensionUsd.textContent = "—";
-    }
-
-    setCellMoneyOrDash(els.grandTotalEur, grandEUR, "EUR");
-    setCellMoneyOrDash(els.grandTotalUsd, grandUSD, "USD");
-
-    if (els.subHint) {
-      els.subHint.textContent = t("customs.sub_hint", {
+    setText("totalCustoms", fmtUAH(totalCustomsUAH));
+    setText(
+      "subHint",
+      t("customs.sub_hint", {
         customs_value_input: fmtMoney(customsValue, currency),
         customs_value_uah: fmtUAH(customsValueUAH),
-        excise_eur: exciseEUR.toFixed(2),
-      });
-    }
+        excise_eur: exciseEUR.toFixed(2)
+      })
+    );
+
+    // загальна вартість «авто в Україні»
+    setText("landedTotal", fmtUAH(landedUAH));
+    const lc = safeDiv(landedUAH, toUAH);
+    setText("landedSub", currency === "UAH" || lc === null ? "" : "≈ " + fmtMoney(lc, currency));
+
+    // діаграма розбивки платежів
+    renderSplit(
+      [
+        { key: "duty", label: t("customs.lbl_duty"), value: dutyUAH },
+        { key: "excise", label: t("customs.lbl_excise"), value: exciseUAH },
+        { key: "vat", label: t("customs.lbl_vat"), value: vatUAH },
+        ...(pensionOn ? [{ key: "pension", label: t("customs.lbl_pension"), value: pensionUAH }] : [])
+      ],
+      grandUAH,
+      customsValueUAH
+    );
+
+    lastResult = { desc: describeCurrent(), customs: grandUAH, landed: landedUAH };
+    updateCompare(lastResult);
   }
 
-  // ========= 6) Reset / Share / URL =========
-  function resetAll() {
-    if (els.currency) els.currency.value = "EUR";
+  // ========= 6) Приклад / скидання / посилання =========
+  function setValue(k, v) {
+    if (k === "year") ensureYearOption(v);
+    if (els[k]) els[k].value = v;
+  }
 
-    if (els.year) els.year.value = "";
-    if (els.price) els.price.value = "";
-    if (els.shipping) els.shipping.value = "";
+  // список років випуску: від поточного до 1980 (акциз старших за 15 років однаковий)
+  function ensureYearOption(v) {
+    const sel = els.year;
+    const y = String(v || "").trim();
+    if (!sel || !/^[0-9]{4}$/.test(y) || Array.from(sel.options).some((o) => o.value === y)) return;
+    const opt = new Option(y, y);
+    const next = Array.from(sel.options).find((o) => o.value && Number(o.value) < Number(y));
+    sel.add(opt, next || null);
+  }
 
-    if (els.fuelType) els.fuelType.value = "gasoline";
-    if (els.engineCC) els.engineCC.value = "";
+  function fillYears() {
+    const sel = els.year;
+    if (!sel) return;
+    const keep = sel.value;
+    const first = sel.options[0];
+    sel.innerHTML = "";
+    if (first) sel.add(first);
+    for (let y = currentYear(); y >= 1980; y--) sel.add(new Option(String(y), String(y)));
+    sel.value = keep;
+  }
 
-    if (els.batteryKwh) els.batteryKwh.value = "";
-
-    if (els.dutyRate) els.dutyRate.value = "10";
-    if (els.vatRate) els.vatRate.value = "20";
-
+  function fillExample() {
+    state.category = "car";
+    state.engine = "gasoline";
+    state.region = "eu";
+    if (els.euOrigin) els.euOrigin.checked = false;
+    setValue("currency", "EUR");
+    syncFlag();
+    setValue("year", String(currentYear() - 8));
+    setValue("price", groupNumber("10000"));
+    setValue("shipping", groupNumber("1000"));
+    setValue("engineCC", "2000");
+    setValue("batteryKwh", "");
+    setValue("exciseRate", "");
+    if (els.ageCoef) els.ageCoef.checked = true;
+    ["auctionFee", "usInland", "seaFreight"].forEach((k) => setValue(k, ""));
+    setValue("broker", groupNumber("6000"));
+    setValue("registration", groupNumber("12000"));
+    setValue("osago", groupNumber("4000"));
+    setValue("domestic", groupNumber("3000"));
+    if (els.dutyRate) {
+      els.dutyRate.value = "10";
+      delete els.dutyRate.dataset.auto;
+    }
+    setValue("vatRate", "20");
     if (els.includePension) els.includePension.checked = false;
-    if (els.pensionT1) els.pensionT1.value = "";
-    if (els.pensionT2) els.pensionT2.value = "";
+    if (els.extrasDetails) els.extrasDetails.open = true;
+    afterEngineChange();
+    toast(t("customs.example_done"));
+  }
 
+  function resetAll() {
+    setValue("currency", "EUR");
+    syncFlag();
+    ["year", "price", "shipping", "engineCC", "batteryKwh", "exciseRate", "auctionFee", "usInland", "seaFreight", "broker", "registration", "osago", "domestic", "rateDate", "rateUsd", "rateEur"].forEach((k) => setValue(k, ""));
+
+    state.category = "car";
+    state.engine = "gasoline";
+    state.region = "eu";
+    if (els.euOrigin) els.euOrigin.checked = false;
+    if (els.ageCoef) els.ageCoef.checked = true;
+
+    if (els.dutyRate) {
+      els.dutyRate.value = "10";
+      delete els.dutyRate.dataset.auto;
+    }
+    setValue("vatRate", "20");
+    if (els.includePension) els.includePension.checked = false;
+    setValue("subMin", "3328");
     if (els.pensionBlock) els.pensionBlock.style.display = "none";
     if (els.pensionRow) els.pensionRow.style.display = "none";
+    if (els.extrasDetails) els.extrasDetails.open = false;
+    if (els.rateDetails) els.rateDetails.open = false;
+    if (els.ratesDetails) els.ratesDetails.open = false;
 
-    setMode("ICE");
-
+    afterEngineChange();
     if (els.ageBadge) els.ageBadge.textContent = t("customs.age_dash");
     setResultDashes();
-
-    // оновити курси і перерахувати
-    fetchNbuRates()
-      .then((rates) => {
-        state.rates = {
-          eur: Number.isFinite(rates.eur) ? rates.eur : null,
-          usd: Number.isFinite(rates.usd) ? rates.usd : null,
-          date: rates.date || null
-        };
-        updateRatesBadge();
-        recalc();
-      })
-      .catch(() => {
-        updateRatesBadge();
-        recalc();
-      });
+    loadRates(null).then(recalc);
   }
+
+  // параметри посилання: ключ → елемент
+  const URL_FIELDS = [
+    ["cur", "currency"], ["y", "year"], ["p", "price"], ["s", "shipping"], ["cc", "engineCC"], ["kwh", "batteryKwh"],
+    ["d", "dutyRate"], ["vat", "vatRate"], ["sm", "subMin"], ["xr", "exciseRate"],
+    ["au", "auctionFee"], ["ui", "usInland"], ["sf", "seaFreight"],
+    ["br", "broker"], ["rt", "registration"], ["os", "osago"], ["dm", "domestic"],
+    ["rd", "rateDate"], ["ru", "rateUsd"], ["re", "rateEur"]
+  ];
 
   function copyLink() {
     const params = new URLSearchParams();
-    params.set("mode", state.mode);
-    params.set("cur", els.currency?.value || "EUR");
-    params.set("y", els.year?.value || "");
-    params.set("p", els.price?.value || "");
-    params.set("s", els.shipping?.value || "");
-    params.set("ft", els.fuelType?.value || "gasoline");
-    params.set("cc", els.engineCC?.value || "");
-    params.set("kwh", els.batteryKwh?.value || "");
-    params.set("d", els.dutyRate?.value || "");
-    params.set("vat", els.vatRate?.value || "");
+    params.set("cat", state.category);
+    params.set("eng", state.engine);
+    params.set("rg", state.region);
+    params.set("eu", els.euOrigin?.checked ? "1" : "0");
+    params.set("ac", els.ageCoef?.checked ? "1" : "0");
     params.set("pen", els.includePension?.checked ? "1" : "0");
-    params.set("t1", els.pensionT1?.value || "");
-    params.set("t2", els.pensionT2?.value || "");
-
+    URL_FIELDS.forEach(([key, el]) => {
+      let v = (els[el]?.value || "").trim();
+      if (v && MONEY_FIELDS.includes(el)) v = String(num(v)); // у посиланні без групування тисяч
+      if (v) params.set(key, v);
+    });
     const url = `${location.origin}${location.pathname}?${params.toString()}`;
-
     navigator.clipboard?.writeText(url)
       .then(() => toast(t("customs.link_copied")))
       .catch(() => toast(t("customs.link_copy_failed")));
@@ -461,44 +670,75 @@
 
   function loadFromUrl() {
     const q = new URLSearchParams(location.search);
-    if (!q.size) return;
+    if (![...q.keys()].some((k) => ["cat", "eng", "rg", "cur", "p", "y", "mode"].includes(k))) return false;
 
-    const mode = q.get("mode");
-    if (mode === "EV" || mode === "ICE") setMode(mode);
+    const cat = q.get("cat");
+    if (CATS.includes(cat)) state.category = cat;
+    const rg = q.get("rg");
+    if (REGIONS.includes(rg)) state.region = rg;
+    if (els.euOrigin && q.get("eu") !== null) els.euOrigin.checked = q.get("eu") === "1" && state.region === "eu";
 
-    const setIf = (el, key) => {
+    // категорія й двигун (а також старі параметри mode/ft)
+    let eng = q.get("eng");
+    if (!eng) {
+      const mode = q.get("mode");
+      if (mode === "EV") eng = "electric";
+      else if (q.get("ft") === "diesel") eng = "diesel";
+      else if (mode === "ICE") eng = "gasoline";
+    }
+    if (eng && ENGINES[state.category].includes(eng)) state.engine = eng;
+
+    URL_FIELDS.forEach(([key, el]) => {
       const v = q.get(key);
-      if (v !== null && el) el.value = v;
-    };
-
-    setIf(els.currency, "cur");
-    setIf(els.year, "y");
-    setIf(els.price, "p");
-    setIf(els.shipping, "s");
-    setIf(els.fuelType, "ft");
-    setIf(els.engineCC, "cc");
-    setIf(els.batteryKwh, "kwh");
-    setIf(els.dutyRate, "d");
-    setIf(els.vatRate, "vat");
-    setIf(els.pensionT1, "t1");
-    setIf(els.pensionT2, "t2");
-
+      if (el === "year" && v !== null) ensureYearOption(v);
+      if (v !== null && els[el]) els[el].value = MONEY_FIELDS.includes(el) ? groupNumber(v) : v;
+    });
+    if (els.ageCoef && q.get("ac") !== null) els.ageCoef.checked = q.get("ac") === "1";
     if (els.includePension) els.includePension.checked = q.get("pen") === "1";
-    recalc();
+    syncFlag();
+    if (els.extrasDetails && ["broker", "registration", "osago", "domestic"].some((k) => !isBlank(k))) els.extrasDetails.open = true;
+    // нестандартні ставки з посилання — показуємо блок відкритим
+    if (els.ratesDetails && ((q.get("d") !== null && q.get("d") !== "10") || (q.get("vat") !== null && q.get("vat") !== "20"))) els.ratesDetails.open = true;
+    if (els.rateDetails && ["rateDate", "rateUsd", "rateEur"].some((k) => !isBlank(k))) els.rateDetails.open = true;
+    afterEngineChange();
+    return true;
   }
 
-  // ========= 7) Events =========
-  $$('.ccalc__toggleBtn[data-cc-action="setMode"]').forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const mode = btn.getAttribute("data-mode");
-      setMode(mode);
-    });
+  // ========= 7) Курси: завантаження (сьогодні / на дату) =========
+  const ymd = (isoDate) => String(isoDate || "").replace(/-/g, "");
+
+  async function loadRates(isoDate) {
+    try {
+      const r = await fetchNbuRates(isoDate ? ymd(isoDate) : null);
+      state.rates = r.map;
+      state.ratesDate = r.date;
+    } catch (e) {
+      if (isoDate) {
+        // для вибраної дати даних немає — лишаємо поточні курси і повідомляємо
+        toast(t("customs.rate_date_fail"));
+      } else {
+        console.warn("NBU fetch failed:", e);
+        state.rates = {};
+        state.ratesDate = null;
+      }
+    }
+    updateRatesBadge();
+  }
+
+  // ========= 8) Events =========
+  $$('[data-cc-action="setCategory"]').forEach((btn) => btn.addEventListener("click", () => setCategory(btn.getAttribute("data-category"))));
+  $$('[data-cc-action="setRegion"]').forEach((btn) => btn.addEventListener("click", () => setRegion(btn.getAttribute("data-region"))));
+  $$('[data-cc-action="setEngine"]').forEach((btn) => btn.addEventListener("click", () => setEngine(btn.getAttribute("data-engine"))));
+
+  els.euOrigin?.addEventListener("change", () => {
+    syncDutyDefault();
+    recalc();
   });
 
   [
-    "currency", "year", "price", "shipping", "fuelType", "engineCC",
-    "batteryKwh", "dutyRate", "vatRate",
-    "includePension", "pensionT1", "pensionT2"
+    "currency", "year", "price", "shipping", "engineCC", "exciseRate", "ageCoef", "batteryKwh", "dutyRate", "vatRate",
+    "includePension", "subMin", "auctionFee", "usInland", "seaFreight", "broker", "registration", "osago", "domestic",
+    "rateUsd", "rateEur"
   ].forEach((k) => {
     const el = els[k];
     if (!el) return;
@@ -506,33 +746,73 @@
     el.addEventListener("change", recalc);
   });
 
+  els.currency?.addEventListener("change", syncFlag);
+
+  // групування тисяч у грошових полях
+  MONEY_FIELDS.forEach((k) => els[k]?.addEventListener("input", () => formatWhileTyping(els[k])));
+
+  // ручна зміна мита знімає позначку «виставлено автоматично»
+  els.dutyRate?.addEventListener("input", (e) => {
+    if (e.isTrusted) delete els.dutyRate.dataset.auto;
+  });
+
+  // курс на дату
+  els.rateDate?.addEventListener("change", async () => {
+    await loadRates(els.rateDate.value || null);
+    recalc();
+  });
+
   root.querySelector('[data-cc-action="reset"]')?.addEventListener("click", () => {
     resetAll();
     toast(t("customs.reset_done"));
   });
-
   root.querySelector('[data-cc-action="copyLink"]')?.addEventListener("click", copyLink);
+  root.querySelector('[data-cc-action="example"]')?.addEventListener("click", fillExample);
+  root.querySelector('[data-cc-action="saveVariant"]')?.addEventListener("click", () => {
+    if (!lastResult) {
+      toast(t("customs.variant_need_data"));
+      return;
+    }
+    state.saved = { ...lastResult };
+    updateCompare(lastResult);
+    toast(t("customs.variant_saved"));
+  });
+  root.querySelector('[data-cc-action="clearVariant"]')?.addEventListener("click", () => {
+    state.saved = null;
+    updateCompare(lastResult);
+    toast(t("customs.variant_cleared"));
+  });
 
-  // ========= 8) Init =========
+  // ========= 9) Init =========
   document.addEventListener("DOMContentLoaded", async () => {
-    if (els.dutyRate && (els.dutyRate.value || "").trim() === "") els.dutyRate.value = "10";
-    if (els.vatRate && (els.vatRate.value || "").trim() === "") els.vatRate.value = "20";
+    fillYears();
 
-    try {
-      const rates = await fetchNbuRates();
-      state.rates = {
-        eur: Number.isFinite(rates.eur) ? rates.eur : null,
-        usd: Number.isFinite(rates.usd) ? rates.usd : null,
-        date: rates.date || null
-      };
-    } catch (e) {
-      console.warn("NBU fetch failed:", e);
-      state.rates = { eur: null, usd: null, date: null };
+    // поле валюти: 12 валют із назвами
+    if (els.currency) {
+      let names = null;
+      try {
+        names = new Intl.DisplayNames([locale().split("-")[0]], { type: "currency" });
+      } catch {}
+      const keep = els.currency.value || "EUR";
+      els.currency.innerHTML = CURRENCIES.map((c) => {
+        let nm = "";
+        try {
+          nm = names ? names.of(c) : "";
+        } catch {}
+        return `<option value="${c}">${c}${nm ? " — " + nm.charAt(0).toUpperCase() + nm.slice(1) : ""}</option>`;
+      }).join("");
+      els.currency.value = CURRENCIES.includes(keep) ? keep : "EUR";
+      syncFlag();
     }
 
-    updateRatesBadge();
-    setMode("ICE");
-    loadFromUrl();
+    if (els.dutyRate && isBlank("dutyRate")) els.dutyRate.value = "10";
+    if (els.vatRate && isBlank("vatRate")) els.vatRate.value = "20";
+    if (els.rateDate) els.rateDate.max = new Date().toISOString().slice(0, 10);
+
+    const fromUrl = loadFromUrl();
+    await loadRates(fromUrl && !isBlank("rateDate") ? els.rateDate.value : null);
+    if (!fromUrl) afterEngineChange();
+    syncUI();
     recalc();
   });
 })();
