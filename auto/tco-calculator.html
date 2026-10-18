@@ -2,7 +2,7 @@
 <html lang="uk">
 
 <head>
-    <!-- Google tag -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -15,9 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>TCO калькулятор — EV vs ДВЗ — CalcCore</title>
-    <meta name="description"
-        content="TCO калькулятор: повна вартість володіння EV та ДВЗ (ціна покупки + енергія + сервіс) за 3–10 років." />
+    <title>TCO калькулятор: вартість володіння авто, EV vs ДВЗ | CalcCore</title>
+    <meta name="description" content="TCO калькулятор: вартість володіння EV та ДВЗ (бензин, дизель, газ) — покупка, енергія, сервіс, страховка, податок, шини, перепродаж. Валюти, км і милі." />
 
     <!-- Canonical (CLEAN URL) -->
     <link rel="canonical" href="https://calccore.net/auto/tco-calculator" />
@@ -27,34 +26,51 @@
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/tco-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
 
-    <!-- CSS -->
+    <!-- CSS: спільні стилі карток з калькулятором пального + власні -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/tco.css" />
+    <link rel="stylesheet" href="/css/fuel.css?v=20261018tco29" />
+    <link rel="stylesheet" href="/css/tco.css?v=20261018tco29" />
 
-    <!-- i18n ENGINE -->
-    <script src="/js/i18n.js" defer></script>
+    <!-- i18n BEFORE calculator -->
+    <script src="/js/i18n.js?v=20261018tco29" defer></script>
+    <script src="/js/tco.js?v=20261018tco29" defer></script>
 
-    <!-- Calculator logic (cache busting) -->
-    <script src="/js/tco.js?v=20260209" defer></script>
-
-    <!-- Schema -->
+    <!-- Structured data -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/auto/tco-calculator#app",
-    "name":"TCO калькулятор (EV vs ДВЗ)",
-    "description":"Порівняння повної вартості володіння авто (EV та ДВЗ) на горизонті 3–10 років.",
-    "url":"https://calccore.net/auto/tco-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
-<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://calccore.net/auto/tco-calculator#app",
+  "name": "TCO калькулятор (EV vs ДВЗ)",
+  "description": "Порівняння повної вартості володіння авто (EV та ДВЗ): ціна покупки, енергія, сервіс, страховка, податок, шини та перепродаж на горизонті кількох років, у різних валютах.",
+  "url": "https://calccore.net/auto/tco-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@id": "https://calccore.net/#org"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Повна вартість володіння EV та ДВЗ за обраний період",
+    "Паливо ДВЗ на вибір: бензин, дизель або газ",
+    "Кредит: відсотки за період володіння",
+    "Зарядка EV вдома та на станціях зі своїми тарифами",
+    "Графік накопичення витрат з точкою перетину",
+    "Сервіс, страховка, податок, шини та перепродаж",
+    "Окупність різниці в ціні в кілометрах і роках",
+    "Структура витрат і накопичення по роках",
+    "Вибір валюти: гривня, USD, EUR, GBP, PLN та інші (курс НБУ)",
+    "Кілометри та милі, л/100 км, mpg, галони"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -73,37 +89,63 @@
       "@id": "https://calccore.net/#website",
       "url": "https://calccore.net/",
       "name": "CalcCore",
-      "publisher": { "@id": "https://calccore.net/#org" },
+      "publisher": {
+        "@id": "https://calccore.net/#org"
+      },
       "inLanguage": "uk"
     },
     {
       "@type": "WebPage",
       "@id": "https://calccore.net/auto/tco-calculator#webpage",
       "url": "https://calccore.net/auto/tco-calculator",
-      "name": "TCO калькулятор — EV vs ДВЗ — CalcCore",
-      "description": "TCO калькулятор: повна вартість володіння EV та ДВЗ (ціна покупки + енергія + сервіс) за 3–10 років.",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
-      "about": { "@id": "https://calccore.net/auto/tco-calculator#app" },
+      "name": "TCO калькулятор: вартість володіння авто, EV vs ДВЗ | CalcCore",
+      "description": "TCO калькулятор: вартість володіння EV та ДВЗ (бензин, дизель, газ) — покупка, енергія, сервіс, страховка, податок, шини, перепродаж. Валюти, км і милі.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/auto/tco-calculator#app"
+      },
       "inLanguage": "uk"
     },
     {
       "@type": "SoftwareApplication",
       "@id": "https://calccore.net/auto/tco-calculator#app",
       "name": "TCO калькулятор (EV vs ДВЗ)",
-      "description": "Порівняння повної вартості володіння авто (EV та ДВЗ): ціна покупки + енергія (паливо/електрика) + сервіс на горизонті 3–10 років.",
+      "description": "Порівняння повної вартості володіння авто (EV та ДВЗ): ціна покупки, енергія, сервіс, страховка, податок, шини та перепродаж на горизонті кількох років, у різних валютах.",
       "url": "https://calccore.net/auto/tco-calculator",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
       "isAccessibleForFree": true,
       "inLanguage": "uk",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" }
+      "publisher": {
+        "@id": "https://calccore.net/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "UAH"
+      },
+      "featureList": [
+        "Повна вартість володіння EV та ДВЗ за обраний період",
+        "Паливо ДВЗ на вибір: бензин, дизель або газ",
+        "Кредит: відсотки за період володіння",
+        "Зарядка EV вдома та на станціях зі своїми тарифами",
+        "Графік накопичення витрат з точкою перетину",
+        "Сервіс, страховка, податок, шини та перепродаж",
+        "Окупність різниці в ціні в кілометрах і роках",
+        "Структура витрат і накопичення по роках",
+        "Вибір валюти: гривня, USD, EUR, GBP, PLN та інші (курс НБУ)",
+        "Кілометри та милі, л/100 км, mpg, галони"
+      ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://calccore.net/auto/tco-calculator#faq",
       "url": "https://calccore.net/auto/tco-calculator",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
       "inLanguage": "uk",
       "mainEntity": [
         {
@@ -119,7 +161,39 @@
           "name": "Які витрати враховано, а яких немає?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Враховано: ціна покупки + енергія (паливо/електрика) + сервіс/рік. Не враховано: страховка, податки, амортизація, шини, ремонти поза ТО, домашня зарядка та інші додаткові витрати."
+            "text": "Враховано: ціна покупки, енергія (паливо або електрика), сервіс, страховка, податок і шини за рік, а також залишкова вартість (перепродаж) наприкінці періоду. Кредит (відсотки за період володіння) додається, якщо заповнити блок «Кредит». Не враховано: ремонти поза плановим ТО та домашня зарядна станція."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке залишкова вартість і як її вводити?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це частка ціни, яку ви виручите, продавши авто наприкінці періоду володіння. Вкажіть її у відсотках від ціни покупки (наприклад, 40). Ця сума віднімається від загальних витрат; якщо поле порожнє, перепродаж не враховується."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна порахувати для дизеля або газу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. У блоці «Загальні дані» оберіть паливо ДВЗ: бензин, дизель або газ (LPG). Підписи й підказки в картці ДВЗ адаптуються під обране паливо. Ціну палива введіть вручну, бо вона часто змінюється, — так результат буде точнішим."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як вибрати валюту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть валюту у блоці «Загальні дані»: UAH, USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD або TRY. Уже введені суми перераховуються за курсом НБУ, а всі результати показуються у вибраній валюті."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна вводити милі, mpg і галони?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. Біля кожного поля є вибір одиниць: пробіг у км або милях, витрата пального в л/100 км, км/л, л/100 миль або mpg, ціна пального за літр чи галон, витрата EV в кВт·год/100 км, кВт·год/100 миль, миль/кВт·год або км/кВт·год. Введене число при зміні одиниці не змінюється."
           }
         },
         {
@@ -127,7 +201,7 @@
           "name": "Чи можна вводити дробові значення з комою?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Так. Можна вводити 1,6 або 1.6 — калькулятор має коректно обробляти обидва формати."
+            "text": "Так. Можна писати 1,6 або 1.6 — калькулятор коректно обробляє обидва формати."
           }
         },
         {
@@ -135,256 +209,318 @@
           "name": "Що таке “вартість 1 км” у результатах?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Це загальні витрати за період, поділені на сумарний пробіг за цей період. Так простіше порівнювати різні авто та сценарії."
+            "text": "Це загальні витрати за період, поділені на сумарний пробіг за цей період. Так простіше порівнювати різні сценарії та авто."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як рахується окупність?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Різницю в ціні покупки (EV дорожчий) ділять на щорічну економію на енергії, сервісі, страховці, податку та шинах. Результат показується в кілометрах і роках за поточних цін; перепродаж і кредит в окупності не враховано."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як врахувати кредит?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Розгорніть блок «Кредит» і вкажіть первинний внесок у відсотках, ставку та строк. Калькулятор додасть до TCO відсотки, які ви сплатите за період володіння (умови однакові для обох авто); залишок боргу погашається з перепродажу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як врахувати зарядку вдома і на станціях?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вкажіть ціну електрики вдома, ціну на станціях і частку зарядки вдома у відсотках. Калькулятор візьме середньозважену ціну. Якщо частку не вказати, вважається, що ви заряджаєтеся лише вдома."
           }
         }
       ]
     }
   ]
 }
-</script>
+    </script>
 </head>
 
-
-
-<body class="tco-page">
+<body class="fuel-page tco-page">
     <div id="header"></div>
 
-    <main class="container">
-
-        <section class="ccalc tcoCalc" id="tcoCalc">
-            <div class="ccalc__wrap">
-
-                <div class="ccalc__titlebar">
-                    <h1 class="ccalc__h1">TCO калькулятор (EV vs ДВЗ)</h1>
-                    <p class="ccalc__p">
-                        Повна вартість володіння: ціна покупки + енергія (паливо/електрика) + сервіс за обраний період.
-                    </p>
+    <main class="fuel-main">
+        <section class="fuel-shell">
+            <div class="fuel-wrap">
+                <div class="fuel-titlebar">
+                    <h1 class="fuel-h1">TCO калькулятор (EV vs ДВЗ)</h1>
+                    <p class="fuel-p">Повна вартість володіння: ціна покупки + енергія + сервіс, страховка, податок і шини за обраний період, мінус перепродаж.</p>
                 </div>
 
-                <div class="ccalc__grid">
-
-                    <!-- LEFT -->
-                    <div class="ccalc__card">
-                        <div class="ccalc__sectionTitle">
-                            <h2 class="ccalc__h2">Дані для розрахунку</h2>
-
-                            <div class="evc-topline">
-                                <label class="evc-autocalc">
-                                    <input type="checkbox" id="evAutoCalc" checked>
-                                    <span>Авто-розрахунок</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="ccalc__rows ccalc__mb10">
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="currencySelect">Валюта</label>
-                                <select class="ccalc__input" id="currencySelect">
-                                    <option value="UAH">₴ UAH</option>
-                                    <option value="USD">$ USD</option>
-                                    <option value="EUR">€ EUR</option>
-                                </select>
-                                <div class="ccalc__hint tco-currency-hint" id="tcoCurrencyHint"></div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="mileage">Пробіг на рік (км)</label>
-                                <input class="ccalc__input" id="mileage" placeholder="наприклад: 15000"
-                                    inputmode="numeric">
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="years">Період володіння (років)</label>
-                                <input class="ccalc__input" id="years" placeholder="наприклад: 5" inputmode="numeric">
-                            </div>
-                        </div>
-
-                        <div class="tcoCompare">
-                            <!-- ICE -->
-                            <div class="tcoMiniCard">
-                                <div class="tcoMiniHead">
-                                    <div class="tcoMiniTitle">🚗 ДВЗ</div>
-                                    <div class="tcoMiniBadge">ICE</div>
-                                </div>
-
-                                <div class="tcoMiniFields">
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ice_price">Ціна авто (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ice_price" placeholder="наприклад: 800000"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ice_consumption">Витрата палива (л / 100
-                                            км)</label>
-                                        <input class="ccalc__input" id="ice_consumption" placeholder="наприклад: 7"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="fuel_price">Ціна палива (<span
-                                                class="curSym">₴</span> / л)</label>
-                                        <input class="ccalc__input" id="fuel_price" placeholder="наприклад: 60"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ice_service">Сервіс на рік (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ice_service" placeholder="наприклад: 20000"
-                                            inputmode="decimal">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- EV -->
-                            <div class="tcoMiniCard">
-                                <div class="tcoMiniHead">
-                                    <div class="tcoMiniTitle">⚡ Електро</div>
-                                    <div class="tcoMiniBadge">EV</div>
-                                </div>
-
-                                <div class="tcoMiniFields">
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ev_price">Ціна авто (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ev_price" placeholder="наприклад: 1100000"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ev_consumption">Витрата (кВт⋅год / 100
-                                            км)</label>
-                                        <input class="ccalc__input" id="ev_consumption" placeholder="наприклад: 18"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="electric_price">Ціна електрики (<span
-                                                class="curSym">₴</span> / кВт⋅год)</label>
-                                        <input class="ccalc__input" id="electric_price" placeholder="наприклад: 6"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ev_service">Сервіс на рік (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ev_service" placeholder="наприклад: 8000"
-                                            inputmode="decimal">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ✅ ACTIONS: 2 групи в одному рядку -->
-                        <div class="ccalc__actions ccalc__mt10 tco-actions-row">
-                            <!-- Ліва група (вліво) -->
-                            <div class="tco-actions-left">
-                                <button class="ccalc__btn ccalc__btn--primary" id="tcoCalcBtn" type="button">
-                                    Розрахувати
-                                </button>
-                                <button class="ccalc__btn" id="tcoResetBtn" type="button">
-                                    Скинути
-                                </button>
-                                <button class="ccalc__btn" id="tcoShareBtn" type="button">
-                                    Поділитись
-                                </button>
-                            </div>
-
-                            <!-- Права група (праворуч, більший розрив між кнопками) -->
-                            <div class="tco-actions-right">
-                                <a href="/auto/fuel-calculator" class="ccalc__btn tco-btn-green" role="button">
-                                    ⛽ Витрати палива
-                                </a>
-
-                                <a href="/auto/ev-charge-calculator" class="ccalc__btn tco-btn-green"
-                                    role="button">
-                                    ⚡ Зарядка EV
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="ccalc__toast" id="tcoToast"></div>
-                    </div>
-
-                    <!-- RIGHT -->
-                    <div class="ccalc__card">
-                        <div class="ccalc__sectionTitle">
-                            <h2 class="ccalc__h2">Результат</h2>
-                            <span class="ccalc__badge">TCO</span>
-                        </div>
-
-                        <div class="ccalc__bigNumber" id="result">
-                            Введи дані та натисни «Розрахувати».
-                        </div>
-
-                        <div class="tcoYearlyWrap" id="tcoYearly"></div>
-                    </div>
-
+                <div class="fuel-topbar">
+                    <label class="auto-toggle" title="Якщо вимкнути — розрахунок тільки по кнопці">
+                        <input type="checkbox" id="tcoAutoCalc" checked />
+                        <span class="auto-ui"></span>
+                        <span class="auto-text">Авто-розрахунок</span>
+                    </label>
                 </div>
+
+                <div class="global-cards">
+                    <div class="global-card">
+                        <div class="cc-title"><h2 class="cc-h2">Загальні дані</h2>
+                            <button type="button" class="icon-btn route-reset" id="tcoTopReset" title="Скинути все" aria-label="Скинути все"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+                        </div>
+                        <div class="global-grid">
+                            <div class="field">
+                                <label for="mileage">Пробіг на рік (<span data-dist>км</span>) <span class="tco-req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                <div class="input-unit">
+                                    <input id="mileage" type="text" inputmode="decimal" placeholder="наприклад: 15000" />
+                                    <select id="dist_unit" aria-label="Одиниця відстані"></select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="cur_btn">Валюта</label>
+                        <div class="cur-dd" id="cur_dd">
+                            <button type="button" class="cur-btn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта">
+                                <img class="cur-flag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt="" />
+                                <span class="cur-code" id="cur_code">UAH</span>
+                                <span class="cur-caret" aria-hidden="true"></span>
+                            </button>
+                            <ul class="cur-list" id="cur_list" role="listbox" aria-label="Валюта" hidden></ul>
+                            <select id="currency_select" hidden aria-hidden="true" tabindex="-1"><option value="UAH">UAH</option></select>
+                        </div>
+                            </div>
+                            <div class="field">
+                                <label for="years">Період володіння (років) <span class="tco-req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                <input id="years" type="text" inputmode="numeric" placeholder="наприклад: 5" />
+                            </div>
+                            <div class="field">
+                                <label for="ice_fuel">Паливо ДВЗ</label>
+                                <select id="ice_fuel" aria-label="Паливо ДВЗ"></select>
+                            </div>
+                        </div>
+                        <div class="tco-rate" id="tcoRateNote" aria-live="polite"></div>
+                    </div>
+
+                    <details class="global-card cc-collapse" id="loan_card">
+                        <summary class="cc-title"><h2 class="cc-h2">Кредит (необов'язково)</h2></summary>
+                        <div class="global-grid">
+                        <div class="field">
+                            <label for="loan_down">Первинний внесок (%)</label>
+                            <input id="loan_down" type="text" inputmode="decimal" placeholder="наприклад: 20" />
+                        </div>
+                        <div class="field">
+                            <label for="loan_rate">Ставка (% річних)</label>
+                            <input id="loan_rate" type="text" inputmode="decimal" placeholder="наприклад: 12" />
+                        </div>
+                        <div class="field">
+                            <label for="loan_term">Строк кредиту (років)</label>
+                            <input id="loan_term" type="text" inputmode="decimal" placeholder="наприклад: 5" />
+                        </div>
+                        </div>
+                        <div class="tco-loan-hint">Однакові умови для обох авто. У TCO додаються відсотки за період володіння.</div>
+                    </details>
+                </div>
+
+                <div class="tco-cars">
+                <section class="car-card tco-car" id="ice_card">
+                    <div class="car-head cc-title"><h2 class="cc-h2">ДВЗ</h2><span class="cc-badge" id="ice_badge">ICE</span></div>
+                    <div class="dyn-block">
+                        <div class="field">
+                            <label for="ice_price">Ціна авто (<span data-cur>грн</span>)</label>
+                            <input id="ice_price" type="text" inputmode="decimal" placeholder="наприклад: 800000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_consumption">Витрата <span data-fuel-gen>палива</span></label>
+                            <div class="input-unit">
+                                <input id="ice_consumption" type="text" inputmode="decimal" placeholder="наприклад: 7" />
+                                <select id="ice_consUnit" aria-label="Одиниці витрати"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="fuel_price">Ціна <span data-fuel-gen>палива</span></label>
+                            <div class="input-unit">
+                                <input id="fuel_price" type="text" inputmode="decimal" placeholder="наприклад: 60" />
+                                <select id="fuel_priceUnit" aria-label="Одиниці ціни"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="ice_service">Сервіс на рік (<span data-cur>грн</span>)</label>
+                            <input id="ice_service" type="text" inputmode="decimal" placeholder="наприклад: 20000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_insurance">Страховка на рік (<span data-cur>грн</span>)</label>
+                            <input id="ice_insurance" type="text" inputmode="decimal" placeholder="наприклад: 15000" />
+                        </div>
+                    </div>
+                    <details class="cc-collapse tco-extra" id="ice_extra">
+                        <summary class="cc-title tco-extra-sum">Податок, шини та перепродаж</summary>
+                        <div class="dyn-block">
+                        <div class="field">
+                            <label for="ice_tax">Податок на рік (<span data-cur>грн</span>)</label>
+                            <input id="ice_tax" type="text" inputmode="decimal" placeholder="наприклад: 3000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_tyres">Шини на рік (<span data-cur>грн</span>)</label>
+                            <input id="ice_tyres" type="text" inputmode="decimal" placeholder="наприклад: 5000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_resale">Залишкова вартість наприкінці (% від ціни)</label>
+                            <input id="ice_resale" type="text" inputmode="decimal" placeholder="наприклад: 40" />
+                        </div>
+                        </div>
+                    </details>
+                </section>
+
+                <section class="car-card tco-car" id="ev_card">
+                    <div class="car-head cc-title"><h2 class="cc-h2">Електро</h2><span class="cc-badge">EV</span></div>
+                    <div class="dyn-block">
+                        <div class="field">
+                            <label for="ev_price">Ціна авто (<span data-cur>грн</span>)</label>
+                            <input id="ev_price" type="text" inputmode="decimal" placeholder="наприклад: 1100000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_consumption">Витрата електроенергії</label>
+                            <div class="input-unit">
+                                <input id="ev_consumption" type="text" inputmode="decimal" placeholder="наприклад: 18" />
+                                <select id="ev_consUnit" aria-label="Одиниці витрати"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="electric_price">Ціна електрики вдома (<span data-cur>грн</span> / кВт·год)</label>
+                            <input id="electric_price" type="text" inputmode="decimal" placeholder="наприклад: 6" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_public_price">Ціна на станціях (<span data-cur>грн</span> / кВт·год)</label>
+                            <input id="ev_public_price" type="text" inputmode="decimal" placeholder="наприклад: 14" />
+                        </div>
+                        <div class="field tco-wide">
+                            <label for="ev_home_share">Частка зарядки вдома (%)</label>
+                            <input id="ev_home_share" type="text" inputmode="decimal" placeholder="наприклад: 70" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_service">Сервіс на рік (<span data-cur>грн</span>)</label>
+                            <input id="ev_service" type="text" inputmode="decimal" placeholder="наприклад: 8000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_insurance">Страховка на рік (<span data-cur>грн</span>)</label>
+                            <input id="ev_insurance" type="text" inputmode="decimal" placeholder="наприклад: 18000" />
+                        </div>
+                    </div>
+                    <details class="cc-collapse tco-extra" id="ev_extra">
+                        <summary class="cc-title tco-extra-sum">Податок, шини та перепродаж</summary>
+                        <div class="dyn-block">
+                        <div class="field">
+                            <label for="ev_tax">Податок на рік (<span data-cur>грн</span>)</label>
+                            <input id="ev_tax" type="text" inputmode="decimal" placeholder="наприклад: 1000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_tyres">Шини на рік (<span data-cur>грн</span>)</label>
+                            <input id="ev_tyres" type="text" inputmode="decimal" placeholder="наприклад: 6000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_resale">Залишкова вартість наприкінці (% від ціни)</label>
+                            <input id="ev_resale" type="text" inputmode="decimal" placeholder="наприклад: 40" />
+                        </div>
+                        </div>
+                    </details>
+                </section>
+                </div>
+
+                <div class="tco-calc-row">
+                    <button id="tcoCalcBtn" class="pill primary" type="button">Розрахувати</button>
+                    <button id="tcoExampleBtn" class="pill tco-example" type="button" title="Заповнити типовий приклад (ДВЗ проти EV)">Приклад</button>
+                </div>
+
+                <section class="res-panel" id="tcoResultPanel">
+                    <h2 class="res-title">Результат · TCO</h2>
+                    <div id="result" class="result"></div>
+                    <div class="res-actions">
+                        <button class="pill" type="button" id="tcoResetBtn">Скинути</button>
+                        <button class="pill" type="button" id="tcoCopyBtn">Копіювати результат</button>
+                    </div>
+                    <div id="tcoToast" class="share-status"></div>
+                </section>
             </div>
         </section>
-
-        <div class="cc-divider"></div>
-
-        <section class="cc-seo">
-            <h2>Що таке TCO і навіщо він потрібен?</h2>
-            <p>
-                TCO (Total Cost of Ownership) — це <b>повна вартість володіння авто</b> за обраний період:
-                ціна покупки + витрати на енергію (паливо або електрика) + планове обслуговування.
-                Такий підхід дає більш реалістичну картину, ніж порівняння тільки витрати пального/електрики.
-            </p>
-            <p>
-                Наприклад, електро може бути значно дешевшим у щоденній експлуатації, але мати вищу стартову ціну.
-                TCO показує, за яких умов (пробіг, ціни енергії, сервіс) EV стає вигіднішим за ДВЗ — або навпаки.
-            </p>
-
-            <h2>Як читати результат</h2>
-            <p>
-                Калькулятор порівнює сумарні витрати по двох сценаріях та допомагає оцінити “вартість 1 км”.
-                Це зручно, якщо ти хочеш зіставити різні авто при однаковому річному пробігу.
-            </p>
-        </section>
-
-        <section class="cc-faq">
-            <h2>Часті запитання</h2>
-
-            <div class="cc-faq-item">
-                <h3>Чому EV інколи виходить дорожче, навіть якщо електрика дешевша?</h3>
-                <p>
-                    Найчастіше через вищу початкову ціну авто. При невеликому пробігу економія на енергії може не
-                    встигнути
-                    перекрити різницю в ціні покупки.
-                </p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>Які витрати враховано, а яких немає?</h3>
-                <p>
-                    Враховано: ціна покупки + енергія + сервіс/рік. Не враховано: страховка, податки, амортизація,
-                    шини, ремонти поза ТО, домашня зарядка тощо.
-                </p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>Чи можна вводити дробові значення з комою?</h3>
-                <p>
-                    Так. Можна писати <b>1,6</b> або <b>1.6</b> — калькулятор має це коректно обробляти.
-                </p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>Що таке “вартість 1 км” у результатах?</h3>
-                <p>
-                    Це загальні витрати за період, поділені на сумарний пробіг. Так простіше порівнювати різні сценарії
-                    та авто.
-                </p>
-            </div>
-        </section>
-
     </main>
+
+    <section class="fuel-related">
+        <h2>Також може стати в пригоді</h2>
+        <div class="fuel-related-grid">
+            <a class="fuel-related-card" href="/auto/fuel-calculator"><b>Калькулятор пального</b><span>Вартість поїздки, туди й назад, порівняння двох авто.</span></a>
+            <a class="fuel-related-card" href="/auto/ev-charge-calculator"><b>Калькулятор вартості зарядки EV</b><span>Скільки коштує зарядити електромобіль вдома чи на станції.</span></a>
+            <a class="fuel-related-card" href="/auto/ev-range-calculator"><b>Калькулятор запасу ходу EV</b><span>Скільки кілометрів проїде електромобіль на одному заряді.</span></a>
+        </div>
+    </section>
+
+    <section class="fuel-seo">
+        <h2>Що таке TCO і навіщо він потрібен?</h2>
+        <p>TCO (Total Cost of Ownership) — це <b>повна вартість володіння авто</b> за обраний період: ціна покупки + витрати на енергію (паливо або електрика) + обслуговування, страховка, податок і шини, мінус гроші від перепродажу. Такий підхід дає значно реалістичнішу картину, ніж порівняння тільки витрати пального чи електрики.</p>
+        <p>Наприклад, електромобіль може бути значно дешевшим у щоденній експлуатації, але мати вищу стартову ціну. TCO показує, за яких умов (пробіг, ціни енергії, сервіс, залишкова вартість) EV стає вигіднішим за ДВЗ — або навпаки.</p>
+        <h3>Що враховує калькулятор</h3>
+        <p>Для ДВЗ можна обрати паливо — <b>бензин, дизель або газ (LPG)</b>: підписи й підказки в картці ДВЗ адаптуються під обране паливо, а ціну палива ви вводите самі. Ціна авто, витрата та ціна палива або електроенергії, сервіс, <b>страховка, податок і шини</b> за рік, а також <b>залишкова вартість</b> (перепродаж) наприкінці періоду, яка віднімається від загальної суми. Додатково можна ввімкнути <b>кредит</b> (внесок, ставка, строк): відсотки за період володіння додадуться до TCO, а для EV — вказати <b>частку зарядки вдома і на станціях</b> з різними тарифами. Не враховано: ремонти поза плановим ТО та вартість домашньої зарядної станції.</p>
+        <h3>Як читати результат</h3>
+        <p>Калькулятор показує сумарні витрати по двох авто, різницю між ними, <b>вартість 1 км</b>, окупність різниці в ціні покупки (у кілометрах і роках), структуру витрат, <b>графік накопичення витрат</b> з точкою перетину та таблицю по роках. Це зручно, якщо ти хочеш зіставити різні авто при однаковому річному пробігу.</p>
+        <h3>Валюти та одиниці виміру</h3>
+        <p>Можна обрати валюту — <b>UAH, USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD або TRY</b>: уже введені суми перераховуються за курсом НБУ. Пробіг вводиться в кілометрах або милях, витрата пального — в л/100 км, км/л, л/100 миль чи <b>mpg</b> (США та Британія), ціна пального — за літр або <b>за галон</b>, витрата EV — в кВт·год/100 км, кВт·год/100 миль, миль/кВт·год або км/кВт·год.</p>
+    </section>
+
+    <section class="fuel-faq">
+        <h2>Часті запитання</h2>
+
+        <div class="faq-item">
+            <h3>Чому EV інколи виходить дорожче, навіть якщо електрика дешевша?</h3>
+            <p>Найчастіше через вищу початкову ціну авто. При невеликому пробігу економія на енергії може не встигнути перекрити різницю в ціні покупки.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Які витрати враховано, а яких немає?</h3>
+            <p>Враховано: ціна покупки, енергія (паливо або електрика), сервіс, страховка, податок і шини за рік, а також залишкова вартість (перепродаж) наприкінці періоду. Кредит (відсотки за період володіння) додається, якщо заповнити блок «Кредит». Не враховано: ремонти поза плановим ТО та домашня зарядна станція.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Що таке залишкова вартість і як її вводити?</h3>
+            <p>Це частка ціни, яку ви виручите, продавши авто наприкінці періоду володіння. Вкажіть її у відсотках від ціни покупки (наприклад, 40). Ця сума віднімається від загальних витрат; якщо поле порожнє, перепродаж не враховується.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Чи можна порахувати для дизеля або газу?</h3>
+            <p>Так. У блоці «Загальні дані» оберіть паливо ДВЗ: бензин, дизель або газ (LPG). Підписи й підказки в картці ДВЗ адаптуються під обране паливо. Ціну палива введіть вручну, бо вона часто змінюється, — так результат буде точнішим.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Як вибрати валюту?</h3>
+            <p>Оберіть валюту у блоці «Загальні дані»: UAH, USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD або TRY. Уже введені суми перераховуються за курсом НБУ, а всі результати показуються у вибраній валюті.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Чи можна вводити милі, mpg і галони?</h3>
+            <p>Так. Біля кожного поля є вибір одиниць: пробіг у км або милях, витрата пального в л/100 км, км/л, л/100 миль або mpg, ціна пального за літр чи галон, витрата EV в кВт·год/100 км, кВт·год/100 миль, миль/кВт·год або км/кВт·год. Введене число при зміні одиниці не змінюється.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Чи можна вводити дробові значення з комою?</h3>
+            <p>Так. Можна писати 1,6 або 1.6 — калькулятор коректно обробляє обидва формати.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Що таке “вартість 1 км” у результатах?</h3>
+            <p>Це загальні витрати за період, поділені на сумарний пробіг за цей період. Так простіше порівнювати різні сценарії та авто.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Як рахується окупність?</h3>
+            <p>Різницю в ціні покупки (EV дорожчий) ділять на щорічну економію на енергії, сервісі, страховці, податку та шинах. Результат показується в кілометрах і роках за поточних цін; перепродаж і кредит в окупності не враховано.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Як врахувати кредит?</h3>
+            <p>Розгорніть блок «Кредит» і вкажіть первинний внесок у відсотках, ставку та строк. Калькулятор додасть до TCO відсотки, які ви сплатите за період володіння (умови однакові для обох авто); залишок боргу погашається з перепродажу.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Як врахувати зарядку вдома і на станціях?</h3>
+            <p>Вкажіть ціну електрики вдома, ціну на станціях і частку зарядки вдома у відсотках. Калькулятор візьме середньозважену ціну. Якщо частку не вказати, вважається, що ви заряджаєтеся лише вдома.</p>
+        </div>
+    </section>
 
     <div id="footer"></div>
 

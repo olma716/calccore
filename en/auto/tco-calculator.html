@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <!-- Google tag -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -15,11 +15,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>TCO Calculator — EV vs ICE — CalcCore</title>
-    <meta name="description"
-        content="TCO calculator: total cost of ownership for EV vs ICE (purchase price + energy + service) over 3–10 years." />
+    <title>TCO Calculator: Cost of Owning a Car, EV vs ICE | CalcCore</title>
+    <meta name="description" content="TCO calculator: cost of owning an EV vs a petrol, diesel or LPG car — purchase, energy, service, insurance, tax, tyres, resale. Currencies, km and miles." />
 
-    <!-- Canonical (EN clean URL) -->
+    <!-- Canonical (CLEAN URL) -->
     <link rel="canonical" href="https://calccore.net/en/auto/tco-calculator" />
 
     <!-- hreflang -->
@@ -27,34 +26,51 @@
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/tco-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
 
-    <!-- CSS -->
+    <!-- CSS: спільні стилі карток з калькулятором пального + власні -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/tco.css" />
+    <link rel="stylesheet" href="/css/fuel.css?v=20261018tco29" />
+    <link rel="stylesheet" href="/css/tco.css?v=20261018tco29" />
 
-    <!-- i18n ENGINE -->
-    <script src="/js/i18n.js" defer></script>
+    <!-- i18n BEFORE calculator -->
+    <script src="/js/i18n.js?v=20261018tco29" defer></script>
+    <script src="/js/tco.js?v=20261018tco29" defer></script>
 
-    <!-- TCO calculator logic (cache busting) -->
-    <script src="/js/tco.js?v=20260209" defer></script>
-
-    <!-- Schema -->
+    <!-- Structured data -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/auto/tco-calculator#app",
-    "name":"TCO Calculator (EV vs ICE)",
-    "description":"Compare total cost of ownership for EV and ICE vehicles over 3–10 years.",
-    "url":"https://calccore.net/en/auto/tco-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
-<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://calccore.net/en/auto/tco-calculator#app",
+  "name": "TCO Calculator (EV vs ICE)",
+  "description": "Compare the total cost of owning an EV and a gasoline car: purchase price, energy, service, insurance, tax, tyres and resale over several years, in many currencies.",
+  "url": "https://calccore.net/en/auto/tco-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@id": "https://calccore.net/#org"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Total cost of ownership of an EV vs an ICE car over a chosen period",
+    "ICE fuel to choose from: petrol, diesel or LPG",
+    "Loan: interest during ownership",
+    "EV charging at home and at stations with separate tariffs",
+    "Cumulative cost chart with a crossing point",
+    "Service, insurance, tax, tyres and resale",
+    "Payback of the price gap in kilometres and years",
+    "Cost breakdown and year-by-year accumulation",
+    "Currency selection: hryvnia, USD, EUR, GBP, PLN and more (NBU rate)",
+    "Kilometres and miles, L/100 km, mpg, gallons"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -73,45 +89,71 @@
       "@id": "https://calccore.net/#website",
       "url": "https://calccore.net/",
       "name": "CalcCore",
-      "publisher": { "@id": "https://calccore.net/#org" },
+      "publisher": {
+        "@id": "https://calccore.net/#org"
+      },
       "inLanguage": "en"
     },
     {
       "@type": "WebPage",
       "@id": "https://calccore.net/en/auto/tco-calculator#webpage",
       "url": "https://calccore.net/en/auto/tco-calculator",
-      "name": "TCO Calculator — EV vs ICE — CalcCore",
-      "description": "TCO calculator: total cost of ownership for EV vs ICE (purchase price + energy + service) over 3–10 years.",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
-      "about": { "@id": "https://calccore.net/en/auto/tco-calculator#app" },
+      "name": "TCO Calculator: Cost of Owning a Car, EV vs ICE | CalcCore",
+      "description": "TCO calculator: cost of owning an EV vs a petrol, diesel or LPG car — purchase, energy, service, insurance, tax, tyres, resale. Currencies, km and miles.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/auto/tco-calculator#app"
+      },
       "inLanguage": "en"
     },
     {
       "@type": "SoftwareApplication",
       "@id": "https://calccore.net/en/auto/tco-calculator#app",
       "name": "TCO Calculator (EV vs ICE)",
-      "description": "Compares the total cost of ownership for EV vs ICE: purchase price + energy (fuel/electricity) + yearly service over a 3–10 year period.",
+      "description": "Compare the total cost of owning an EV and a gasoline car: purchase price, energy, service, insurance, tax, tyres and resale over several years, in many currencies.",
       "url": "https://calccore.net/en/auto/tco-calculator",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
       "isAccessibleForFree": true,
       "inLanguage": "en",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" }
+      "publisher": {
+        "@id": "https://calccore.net/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Total cost of ownership of an EV vs an ICE car over a chosen period",
+        "ICE fuel to choose from: petrol, diesel or LPG",
+        "Loan: interest during ownership",
+        "EV charging at home and at stations with separate tariffs",
+        "Cumulative cost chart with a crossing point",
+        "Service, insurance, tax, tyres and resale",
+        "Payback of the price gap in kilometres and years",
+        "Cost breakdown and year-by-year accumulation",
+        "Currency selection: hryvnia, USD, EUR, GBP, PLN and more (NBU rate)",
+        "Kilometres and miles, L/100 km, mpg, gallons"
+      ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://calccore.net/en/auto/tco-calculator#faq",
       "url": "https://calccore.net/en/auto/tco-calculator",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
       "inLanguage": "en",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Why can an EV be more expensive even if electricity is cheaper?",
+          "name": "Why is an EV sometimes more expensive even if electricity is cheaper?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Most often because of a higher upfront purchase price. With low annual mileage, energy savings may not be enough to offset the initial price difference."
+            "text": "Most often because of the higher purchase price. With low mileage the energy savings may not be enough to cover the price difference."
           }
         },
         {
@@ -119,273 +161,370 @@
           "name": "Which costs are included and which are not?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Included: purchase price + energy (fuel/electricity) + yearly service. Not included: insurance, taxes, depreciation, tires, repairs outside scheduled service, home charging equipment, and other extra costs."
+            "text": "Included: purchase price, energy (fuel or electricity), service, insurance, tax and tyres per year, plus the residual value (resale) at the end of the period. Loan interest (during ownership) is added if you fill in the “Loan” block. Not included: repairs outside scheduled service and a home charger."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I enter decimal values using a comma?",
+          "name": "What is residual value and how do I enter it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. You can type 1,6 or 1.6 — the calculator should handle both formats correctly."
+            "text": "It is the share of the price you get back by selling the car at the end of the ownership period. Enter it as a percentage of the purchase price (for example, 40). This amount is subtracted from the total cost; if the field is empty, resale is not counted."
           }
         },
         {
           "@type": "Question",
-          "name": "What does “cost per 1 km” mean in the results?",
+          "name": "Can I calculate for diesel or LPG?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It’s the total cost over the selected period divided by the total mileage for that period. It makes it easier to compare cars and scenarios."
+            "text": "Yes. In the “General data” block choose the ICE fuel: petrol, diesel or LPG. The labels and hints in the ICE card adapt to the chosen fuel. Enter the fuel price yourself because it changes often — this keeps the result accurate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I choose a currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick a currency in the “General data” block: UAH, USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD or TRY. Amounts you have entered are converted at the NBU rate, and all results are shown in the selected currency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I enter miles, mpg and gallons?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Each field has a unit selector: mileage in km or miles, fuel consumption in L/100 km, km/L, L/100 mi or mpg, fuel price per litre or gallon, EV consumption in kWh/100 km, kWh/100 mi, mi/kWh or km/kWh. The number you typed does not change when you switch the unit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I enter fractional values with a comma?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can type 1,6 or 1.6 — the calculator handles both formats."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is “cost per 1 km” in the results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the total cost for the period divided by the total mileage over that period. It makes it easier to compare different scenarios and cars."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is payback calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The purchase price gap (the EV costs more) is divided by the yearly saving on energy, service, insurance, tax and tyres. The result is shown in kilometres and years at current prices; resale and loan are not counted in payback."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I include a loan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Loan” block and enter the down payment in percent, the rate and the term. The calculator adds the interest you pay during ownership to the TCO (same terms for both cars); the remaining debt is paid off from the resale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I include home and public charging?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the home electricity price, the public charging price and the share of charging at home in percent. The calculator uses the weighted average price. If you leave the share empty, it assumes you charge only at home."
           }
         }
       ]
     }
   ]
 }
-</script>
+    </script>
 </head>
 
-
-<body class="tco-page">
+<body class="fuel-page tco-page">
     <div id="header"></div>
 
-    <main class="container">
-
-        <section class="ccalc tcoCalc" id="tcoCalc">
-            <div class="ccalc__wrap">
-
-                <div class="ccalc__titlebar">
-                    <h1 class="ccalc__h1">TCO Calculator (EV vs ICE)</h1>
-                    <p class="ccalc__p">
-                        Total cost of ownership: purchase price + energy (fuel/electricity) + service over the selected
-                        period.
-                    </p>
+    <main class="fuel-main">
+        <section class="fuel-shell">
+            <div class="fuel-wrap">
+                <div class="fuel-titlebar">
+                    <h1 class="fuel-h1">TCO Calculator (EV vs ICE)</h1>
+                    <p class="fuel-p">Total cost of ownership: purchase price + energy + service, insurance, tax and tyres over the chosen period, minus resale.</p>
                 </div>
 
-                <div class="ccalc__grid">
-
-                    <!-- LEFT -->
-                    <div class="ccalc__card">
-                        <div class="ccalc__sectionTitle">
-                            <h2 class="ccalc__h2">Inputs</h2>
-
-                            <div class="evc-topline">
-                                <label class="evc-autocalc">
-                                    <input type="checkbox" id="evAutoCalc" checked>
-                                    <span>Auto-calculate</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="ccalc__rows ccalc__mb10">
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="currencySelect">Currency</label>
-                                <select class="ccalc__input" id="currencySelect">
-                                    <option value="UAH">₴ UAH</option>
-                                    <option value="USD">$ USD</option>
-                                    <option value="EUR">€ EUR</option>
-                                </select>
-                                <div class="ccalc__hint tco-currency-hint" id="tcoCurrencyHint"></div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="mileage">Annual mileage (km)</label>
-                                <input class="ccalc__input" id="mileage" placeholder="e.g. 15000" inputmode="numeric">
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="years">Ownership period (years)</label>
-                                <input class="ccalc__input" id="years" placeholder="e.g. 5" inputmode="numeric">
-                            </div>
-                        </div>
-
-                        <div class="tcoCompare">
-                            <!-- ICE -->
-                            <div class="tcoMiniCard">
-                                <div class="tcoMiniHead">
-                                    <div class="tcoMiniTitle">🚗 ICE</div>
-                                    <div class="tcoMiniBadge">ICE</div>
-                                </div>
-
-                                <div class="tcoMiniFields">
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ice_price">Car price (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ice_price" placeholder="e.g. 800000"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ice_consumption">Fuel consumption (L / 100
-                                            km)</label>
-                                        <input class="ccalc__input" id="ice_consumption" placeholder="e.g. 7"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="fuel_price">Fuel price (<span
-                                                class="curSym">₴</span> / L)</label>
-                                        <input class="ccalc__input" id="fuel_price" placeholder="e.g. 60"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ice_service">Annual service (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ice_service" placeholder="e.g. 20000"
-                                            inputmode="decimal">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- EV -->
-                            <div class="tcoMiniCard">
-                                <div class="tcoMiniHead">
-                                    <div class="tcoMiniTitle">⚡ EV</div>
-                                    <div class="tcoMiniBadge">EV</div>
-                                </div>
-
-                                <div class="tcoMiniFields">
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ev_price">Car price (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ev_price" placeholder="e.g. 1100000"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ev_consumption">Consumption (kWh / 100
-                                            km)</label>
-                                        <input class="ccalc__input" id="ev_consumption" placeholder="e.g. 18"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="electric_price">Electricity price (<span
-                                                class="curSym">₴</span> / kWh)</label>
-                                        <input class="ccalc__input" id="electric_price" placeholder="e.g. 6"
-                                            inputmode="decimal">
-                                    </div>
-
-                                    <div class="ccalc__field">
-                                        <label class="ccalc__label" for="ev_service">Annual service (<span
-                                                class="curSym">₴</span>)</label>
-                                        <input class="ccalc__input" id="ev_service" placeholder="e.g. 8000"
-                                            inputmode="decimal">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ACTIONS -->
-                        <div class="ccalc__actions ccalc__mt10 tco-actions-row">
-                            <div class="tco-actions-left">
-                                <button class="ccalc__btn ccalc__btn--primary" id="tcoCalcBtn" type="button">
-                                    Calculate
-                                </button>
-                                <button class="ccalc__btn" id="tcoResetBtn" type="button">
-                                    Reset
-                                </button>
-                                <button class="ccalc__btn" id="tcoShareBtn" type="button">
-                                    Share
-                                </button>
-                            </div>
-
-                            <div class="tco-actions-right">
-                                <a href="/en/auto/fuel-calculator" class="ccalc__btn tco-btn-green" role="button">
-                                    ⛽ Fuel cost
-                                </a>
-
-                                <a href="/en/auto/ev-charge-calculator" class="ccalc__btn tco-btn-green"
-                                    role="button">
-                                    ⚡ EV charging
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="ccalc__toast" id="tcoToast"></div>
-                    </div>
-
-                    <!-- RIGHT -->
-                    <div class="ccalc__card">
-                        <div class="ccalc__sectionTitle">
-                            <h2 class="ccalc__h2">Result</h2>
-                            <span class="ccalc__badge">TCO</span>
-                        </div>
-
-                        <div class="ccalc__bigNumber" id="result">
-                            Enter values and click “Calculate”.
-                        </div>
-
-                        <div class="tcoYearlyWrap" id="tcoYearly"></div>
-                    </div>
-
+                <div class="fuel-topbar">
+                    <label class="auto-toggle" title="If turned off, calculation runs only on the button">
+                        <input type="checkbox" id="tcoAutoCalc" checked />
+                        <span class="auto-ui"></span>
+                        <span class="auto-text">Auto-calculate</span>
+                    </label>
                 </div>
+
+                <div class="global-cards">
+                    <div class="global-card">
+                        <div class="cc-title"><h2 class="cc-h2">General data</h2>
+                            <button type="button" class="icon-btn route-reset" id="tcoTopReset" title="Reset all" aria-label="Reset all"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+                        </div>
+                        <div class="global-grid">
+                            <div class="field">
+                                <label for="mileage">Annual mileage (<span data-dist>km</span>) <span class="tco-req" title="Required field" aria-label="Required field">*</span></label>
+                                <div class="input-unit">
+                                    <input id="mileage" type="text" inputmode="decimal" placeholder="e.g. 15000" />
+                                    <select id="dist_unit" aria-label="Distance unit"></select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="cur_btn">Currency</label>
+                        <div class="cur-dd" id="cur_dd">
+                            <button type="button" class="cur-btn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency">
+                                <img class="cur-flag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt="" />
+                                <span class="cur-code" id="cur_code">UAH</span>
+                                <span class="cur-caret" aria-hidden="true"></span>
+                            </button>
+                            <ul class="cur-list" id="cur_list" role="listbox" aria-label="Currency" hidden></ul>
+                            <select id="currency_select" hidden aria-hidden="true" tabindex="-1"><option value="UAH">UAH</option></select>
+                        </div>
+                            </div>
+                            <div class="field">
+                                <label for="years">Ownership period (years) <span class="tco-req" title="Required field" aria-label="Required field">*</span></label>
+                                <input id="years" type="text" inputmode="numeric" placeholder="e.g. 5" />
+                            </div>
+                            <div class="field">
+                                <label for="ice_fuel">ICE fuel</label>
+                                <select id="ice_fuel" aria-label="ICE fuel"></select>
+                            </div>
+                        </div>
+                        <div class="tco-rate" id="tcoRateNote" aria-live="polite"></div>
+                    </div>
+
+                    <details class="global-card cc-collapse" id="loan_card">
+                        <summary class="cc-title"><h2 class="cc-h2">Loan (optional)</h2></summary>
+                        <div class="global-grid">
+                        <div class="field">
+                            <label for="loan_down">Down payment (%)</label>
+                            <input id="loan_down" type="text" inputmode="decimal" placeholder="e.g. 20" />
+                        </div>
+                        <div class="field">
+                            <label for="loan_rate">Interest rate (% per year)</label>
+                            <input id="loan_rate" type="text" inputmode="decimal" placeholder="e.g. 12" />
+                        </div>
+                        <div class="field">
+                            <label for="loan_term">Loan term (years)</label>
+                            <input id="loan_term" type="text" inputmode="decimal" placeholder="e.g. 5" />
+                        </div>
+                        </div>
+                        <div class="tco-loan-hint">Same terms for both cars. The interest paid during ownership is added to the TCO.</div>
+                    </details>
+                </div>
+
+                <div class="tco-cars">
+                <section class="car-card tco-car" id="ice_card">
+                    <div class="car-head cc-title"><h2 class="cc-h2">ICE</h2><span class="cc-badge" id="ice_badge">ICE</span></div>
+                    <div class="dyn-block">
+                        <div class="field">
+                            <label for="ice_price">Car price (<span data-cur>UAH</span>)</label>
+                            <input id="ice_price" type="text" inputmode="decimal" placeholder="e.g. 800000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_consumption">Consumption of <span data-fuel-gen>fuel</span></label>
+                            <div class="input-unit">
+                                <input id="ice_consumption" type="text" inputmode="decimal" placeholder="e.g. 7" />
+                                <select id="ice_consUnit" aria-label="Consumption units"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="fuel_price">Price of <span data-fuel-gen>fuel</span></label>
+                            <div class="input-unit">
+                                <input id="fuel_price" type="text" inputmode="decimal" placeholder="e.g. 60" />
+                                <select id="fuel_priceUnit" aria-label="Price units"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="ice_service">Service per year (<span data-cur>UAH</span>)</label>
+                            <input id="ice_service" type="text" inputmode="decimal" placeholder="e.g. 20000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_insurance">Insurance per year (<span data-cur>UAH</span>)</label>
+                            <input id="ice_insurance" type="text" inputmode="decimal" placeholder="e.g. 15000" />
+                        </div>
+                    </div>
+                    <details class="cc-collapse tco-extra" id="ice_extra">
+                        <summary class="cc-title tco-extra-sum">Tax, tyres and resale</summary>
+                        <div class="dyn-block">
+                        <div class="field">
+                            <label for="ice_tax">Tax per year (<span data-cur>UAH</span>)</label>
+                            <input id="ice_tax" type="text" inputmode="decimal" placeholder="e.g. 3000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_tyres">Tyres per year (<span data-cur>UAH</span>)</label>
+                            <input id="ice_tyres" type="text" inputmode="decimal" placeholder="e.g. 5000" />
+                        </div>
+                        <div class="field">
+                            <label for="ice_resale">Residual value at the end (% of price)</label>
+                            <input id="ice_resale" type="text" inputmode="decimal" placeholder="e.g. 40" />
+                        </div>
+                        </div>
+                    </details>
+                </section>
+
+                <section class="car-card tco-car" id="ev_card">
+                    <div class="car-head cc-title"><h2 class="cc-h2">Electric</h2><span class="cc-badge">EV</span></div>
+                    <div class="dyn-block">
+                        <div class="field">
+                            <label for="ev_price">Car price (<span data-cur>UAH</span>)</label>
+                            <input id="ev_price" type="text" inputmode="decimal" placeholder="e.g. 1100000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_consumption">Electricity consumption</label>
+                            <div class="input-unit">
+                                <input id="ev_consumption" type="text" inputmode="decimal" placeholder="e.g. 18" />
+                                <select id="ev_consUnit" aria-label="Consumption units"></select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="electric_price">Home electricity price (<span data-cur>UAH</span> / kWh)</label>
+                            <input id="electric_price" type="text" inputmode="decimal" placeholder="e.g. 6" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_public_price">Public charging price (<span data-cur>UAH</span> / kWh)</label>
+                            <input id="ev_public_price" type="text" inputmode="decimal" placeholder="e.g. 14" />
+                        </div>
+                        <div class="field tco-wide">
+                            <label for="ev_home_share">Share of charging at home (%)</label>
+                            <input id="ev_home_share" type="text" inputmode="decimal" placeholder="e.g. 70" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_service">Service per year (<span data-cur>UAH</span>)</label>
+                            <input id="ev_service" type="text" inputmode="decimal" placeholder="e.g. 8000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_insurance">Insurance per year (<span data-cur>UAH</span>)</label>
+                            <input id="ev_insurance" type="text" inputmode="decimal" placeholder="e.g. 18000" />
+                        </div>
+                    </div>
+                    <details class="cc-collapse tco-extra" id="ev_extra">
+                        <summary class="cc-title tco-extra-sum">Tax, tyres and resale</summary>
+                        <div class="dyn-block">
+                        <div class="field">
+                            <label for="ev_tax">Tax per year (<span data-cur>UAH</span>)</label>
+                            <input id="ev_tax" type="text" inputmode="decimal" placeholder="e.g. 1000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_tyres">Tyres per year (<span data-cur>UAH</span>)</label>
+                            <input id="ev_tyres" type="text" inputmode="decimal" placeholder="e.g. 6000" />
+                        </div>
+                        <div class="field">
+                            <label for="ev_resale">Residual value at the end (% of price)</label>
+                            <input id="ev_resale" type="text" inputmode="decimal" placeholder="e.g. 40" />
+                        </div>
+                        </div>
+                    </details>
+                </section>
+                </div>
+
+                <div class="tco-calc-row">
+                    <button id="tcoCalcBtn" class="pill primary" type="button">Calculate</button>
+                    <button id="tcoExampleBtn" class="pill tco-example" type="button" title="Fill in a typical example (ICE vs EV)">Example</button>
+                </div>
+
+                <section class="res-panel" id="tcoResultPanel">
+                    <h2 class="res-title">Result · TCO</h2>
+                    <div id="result" class="result"></div>
+                    <div class="res-actions">
+                        <button class="pill" type="button" id="tcoResetBtn">Reset</button>
+                        <button class="pill" type="button" id="tcoCopyBtn">Copy result</button>
+                    </div>
+                    <div id="tcoToast" class="share-status"></div>
+                </section>
             </div>
         </section>
-
-        <div class="cc-divider"></div>
-
-        <section class="cc-seo">
-            <h2>What is TCO and why it matters?</h2>
-            <p>
-                TCO (Total Cost of Ownership) is the <b>full cost of owning a car</b> over a selected period:
-                purchase price + energy (fuel or electricity) + planned service.
-                This gives a more realistic picture than comparing fuel/electricity costs only.
-            </p>
-            <p>
-                For example, an EV can be much cheaper to run day-to-day but have a higher upfront price.
-                TCO shows when (mileage, energy prices, service) an EV becomes cheaper than an ICE — or vice versa.
-            </p>
-
-            <h2>How to read the result</h2>
-            <p>
-                The calculator compares total costs for both scenarios and helps estimate the “cost per 1 km”.
-                It’s useful when you want to compare different cars under the same annual mileage assumptions.
-            </p>
-        </section>
-
-        <section class="cc-faq">
-            <h2>FAQ</h2>
-
-            <div class="cc-faq-item">
-                <h3>Why can an EV be more expensive even if electricity is cheaper?</h3>
-                <p>
-                    Most often because of a higher purchase price. With low mileage, energy savings may not have time
-                    to offset the upfront difference.
-                </p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>What costs are included and what’s not?</h3>
-                <p>
-                    Included: purchase price + energy + annual service. Not included: insurance, taxes, depreciation,
-                    tires, repairs beyond routine service, home charging hardware, etc.
-                </p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>Can I enter decimals with comma?</h3>
-                <p>
-                    Yes. You can type <b>1,6</b> or <b>1.6</b> — the calculator should handle both.
-                </p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>What does “cost per 1 km” mean?</h3>
-                <p>
-                    It’s total costs over the period divided by total mileage. This makes it easier to compare scenarios
-                    and vehicles.
-                </p>
-            </div>
-        </section>
-
     </main>
 
-    <div id="footer"></div>
-    
-    <script src="/js/layout.js"></script>
+    <section class="fuel-related">
+        <h2>You may also need</h2>
+        <div class="fuel-related-grid">
+            <a class="fuel-related-card" href="/en/auto/fuel-calculator"><b>Fuel cost calculator</b><span>Trip cost, round trip, comparing two cars.</span></a>
+            <a class="fuel-related-card" href="/en/auto/ev-charge-calculator"><b>EV charging cost calculator</b><span>How much it costs to charge an EV at home or at a station.</span></a>
+            <a class="fuel-related-card" href="/en/auto/ev-range-calculator"><b>EV range calculator</b><span>How far an EV can drive on a single charge.</span></a>
+        </div>
+    </section>
 
+    <section class="fuel-seo">
+        <h2>What is TCO and why does it matter?</h2>
+        <p>TCO (Total Cost of Ownership) is the <b>full cost of owning a car</b> over a chosen period: purchase price + energy (fuel or electricity) + service, insurance, tax and tyres, minus the money you get from reselling the car. This gives a far more realistic picture than comparing fuel or electricity consumption alone.</p>
+        <p>For example, an EV can be much cheaper to run every day but have a higher purchase price. TCO shows under which conditions (mileage, energy prices, service, residual value) an EV becomes cheaper than a gasoline car — or the other way round.</p>
+        <h3>What the calculator includes</h3>
+        <p>For the ICE car you can choose the fuel — <b>petrol, diesel or LPG</b>: the labels and hints in the ICE card adapt to the chosen fuel, and you enter the fuel price yourself. Car price, fuel or electricity consumption and price, service, <b>insurance, tax and tyres</b> per year, and the <b>residual value</b> (resale) at the end of the period, which is subtracted from the total. You can also turn on a <b>loan</b> (down payment, rate, term): interest paid during ownership is added to the TCO, and for the EV you can set the <b>share of home and public charging</b> with different tariffs. Not included: repairs outside scheduled service and the cost of a home charger.</p>
+        <h3>How to read the result</h3>
+        <p>The calculator shows the total cost of both cars, the difference between them, the <b>cost per 1 km</b>, the payback of the price gap (in kilometres and years), the cost breakdown, a <b>cumulative cost chart</b> with the crossing point and a year-by-year table. It is handy for comparing different cars at the same yearly mileage.</p>
+        <h3>Currencies and units</h3>
+        <p>You can choose a currency — <b>UAH, USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD or TRY</b>: amounts you have entered are converted at the NBU rate. Mileage can be entered in kilometres or miles, fuel consumption in L/100 km, km/L, L/100 mi or <b>mpg</b> (US and UK), fuel price per litre or <b>per gallon</b>, EV consumption in kWh/100 km, kWh/100 mi, mi/kWh or km/kWh.</p>
+    </section>
+
+    <section class="fuel-faq">
+        <h2>FAQ</h2>
+
+        <div class="faq-item">
+            <h3>Why is an EV sometimes more expensive even if electricity is cheaper?</h3>
+            <p>Most often because of the higher purchase price. With low mileage the energy savings may not be enough to cover the price difference.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Which costs are included and which are not?</h3>
+            <p>Included: purchase price, energy (fuel or electricity), service, insurance, tax and tyres per year, plus the residual value (resale) at the end of the period. Loan interest (during ownership) is added if you fill in the “Loan” block. Not included: repairs outside scheduled service and a home charger.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is residual value and how do I enter it?</h3>
+            <p>It is the share of the price you get back by selling the car at the end of the ownership period. Enter it as a percentage of the purchase price (for example, 40). This amount is subtracted from the total cost; if the field is empty, resale is not counted.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I calculate for diesel or LPG?</h3>
+            <p>Yes. In the “General data” block choose the ICE fuel: petrol, diesel or LPG. The labels and hints in the ICE card adapt to the chosen fuel. Enter the fuel price yourself because it changes often — this keeps the result accurate.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I choose a currency?</h3>
+            <p>Pick a currency in the “General data” block: UAH, USD, EUR, GBP, CHF, PLN, CZK, HUF, RON, CAD, AUD or TRY. Amounts you have entered are converted at the NBU rate, and all results are shown in the selected currency.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I enter miles, mpg and gallons?</h3>
+            <p>Yes. Each field has a unit selector: mileage in km or miles, fuel consumption in L/100 km, km/L, L/100 mi or mpg, fuel price per litre or gallon, EV consumption in kWh/100 km, kWh/100 mi, mi/kWh or km/kWh. The number you typed does not change when you switch the unit.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I enter fractional values with a comma?</h3>
+            <p>Yes. You can type 1,6 or 1.6 — the calculator handles both formats.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is “cost per 1 km” in the results?</h3>
+            <p>It is the total cost for the period divided by the total mileage over that period. It makes it easier to compare different scenarios and cars.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How is payback calculated?</h3>
+            <p>The purchase price gap (the EV costs more) is divided by the yearly saving on energy, service, insurance, tax and tyres. The result is shown in kilometres and years at current prices; resale and loan are not counted in payback.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I include a loan?</h3>
+            <p>Open the “Loan” block and enter the down payment in percent, the rate and the term. The calculator adds the interest you pay during ownership to the TCO (same terms for both cars); the remaining debt is paid off from the resale.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I include home and public charging?</h3>
+            <p>Enter the home electricity price, the public charging price and the share of charging at home in percent. The calculator uses the weighted average price. If you leave the share empty, it assumes you charge only at home.</p>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="/js/layout.js"></script>
 </body>
 
 </html>

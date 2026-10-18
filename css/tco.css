@@ -1,686 +1,430 @@
-/* =========================
-   TCO Calculator (scoped)
-   все тільки всередині .tcoCalc / .ccalc
-========================= */
+/* =========================================================
+   TCO калькулятор — власні доповнення.
+   Основні стилі карток, полів, кнопок, вибору валюти, SEO/FAQ
+   беруться зі спільного /css/fuel.css (body.fuel-page.tco-page).
+========================================================= */
 
-.tcoCalc,
-.tcoCalc * {
-    box-sizing: border-box;
-}
-
-.tcoCalc {
-    --cc-card: #fff;
-    --cc-text: #222;
-    --cc-muted: #6b7280;
-    --cc-brand: #283b69;
-    --cc-brand2: #1f2f55;
-    --cc-border: #e6e8ef;
-    --cc-shadow: 0 1px 3px rgba(31, 47, 85, .06), 0 10px 30px rgba(40, 59, 105, .14);
-    --cc-radius: 20px;
-
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--cc-text);
-}
-
-/* Wrap */
-.tcoCalc .ccalc__wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 18px 0 40px;
-}
-
-/* Titlebar */
-.tcoCalc .ccalc__titlebar {
-    background: var(--header-grad-solid, linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%));
-    color: #fff;
-    border-radius: var(--cc-radius);
-    padding: 16px;
-    box-shadow: var(--cc-shadow);
+/* --- Розкладка: дві картки авто поруч --- */
+.fuel-page.tco-page .tco-cars {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
     margin-bottom: 14px;
 }
 
-.tcoCalc .ccalc__h1 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 800;
-}
-
-.tcoCalc .ccalc__p {
-    margin: 6px 0 0;
-    opacity: 0.92;
-    font-size: 13px;
-}
-
-/* Grid */
-.tcoCalc .ccalc__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap: 14px;
-    align-items: start;
+.fuel-page.tco-page .tco-cars > .car-card {
+    margin: 0 !important;
 }
 
 @media (max-width: 980px) {
-    .tcoCalc .ccalc__grid {
-        grid-template-columns: 1fr;
+    .fuel-page.tco-page .tco-cars {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
-/* Card */
-.tcoCalc .ccalc__card {
-    background: var(--cc-card);
-    border: 1px solid var(--cc-border);
-    border-radius: var(--cc-radius);
-    box-shadow: var(--cc-shadow);
-    padding: 14px;
-    min-width: 0;
+.fuel-page.tco-page .tco-calc-row {
+    margin: 0 0 14px;
 }
 
-/* Section title */
-.tcoCalc .ccalc__sectionTitle {
+.fuel-page.tco-page .tco-calc-row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid var(--cc-border);
 }
 
-.tcoCalc .ccalc__h2 {
-    font-size: 15px;
-    margin: 0;
-    font-weight: 800;
-    color: var(--cc-brand2);
+.fuel-page.tco-page .tco-calc-row .pill {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 150px;
+    height: 38px;
+    padding: 0 24px;
 }
 
-.tcoCalc .ccalc__badge {
-    font-size: 12px;
-    color: #fff;
-    background: rgba(40, 59, 105, 0.9);
-    padding: 6px 10px;
-    border-radius: 999px;
-    white-space: nowrap;
+/* «Приклад» — світло-блакитна кнопка, як списки */
+.fuel-page.tco-page .tco-calc-row .tco-example {
+    background: #eaf1fc;
+    color: #1f2f55;
+    box-shadow: inset 0 0 0 1px #b9cdee;
 }
 
-/* Autocalc checkbox (HTML class = evc-autocalc) */
-.evc-topline {
+.fuel-page.tco-page .tco-calc-row .tco-example:hover {
+    background: #dfeafb;
+    box-shadow: inset 0 0 0 1px #8fa8d6;
+}
+
+@media (max-width: 520px) {
+    .fuel-page.tco-page .tco-calc-row .pill {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 0 12px;
+    }
+}
+
+/* --- Блок «Загальні дані»: пробіг (з одиницею) і період поруч --- */
+@media (min-width: 761px) {
+    .fuel-page.tco-page .global-cards .global-card:first-child .global-grid {
+        grid-template-columns: minmax(0, 280px) minmax(0, 160px) minmax(0, 210px) minmax(0, 240px);
+        align-items: end;
+        column-gap: 24px;
+    }
+}
+
+.fuel-page.tco-page .tco-rate {
     margin-top: 8px;
-}
-
-.evc-autocalc {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 800;
-    color: #111827;
-    font-size: 13px;
-    user-select: none;
-    white-space: nowrap;
-}
-
-.evc-autocalc input {
-    width: 16px;
-    height: 16px;
-    accent-color: #283b69;
-}
-
-/* Fields */
-.tcoCalc .ccalc__rows {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 10px;
-}
-
-@media (max-width: 680px) {
-    .tcoCalc .ccalc__rows {
-        grid-template-columns: 1fr;
-    }
-}
-
-.tcoCalc .ccalc__field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 0;
-}
-
-.tcoCalc .ccalc__label {
-    font-weight: 800;
-    color: #111827;
-    font-size: 13px;
-}
-
-.tcoCalc .ccalc__input {
-    width: 100%;
-    height: 40px;
-    border: 1px solid var(--cc-border);
-    border-radius: 12px;
-    padding: 0 12px;
-    outline: none;
-    background: #fff;
-    color: #1f2937;
-    font-variant-numeric: tabular-nums;
-}
-
-.tcoCalc .ccalc__input::placeholder {
-    color: #9ca3af;
-    opacity: 1;
-}
-
-.tcoCalc .ccalc__input:focus {
-    border-color: rgba(40, 59, 105, 0.45);
-    box-shadow: 0 0 0 4px rgba(40, 59, 105, 0.1);
-    color: #111827;
-}
-
-.tcoCalc .ccalc__hint {
     font-size: 12px;
-    color: var(--cc-muted);
-    margin-top: 2px;
+    font-weight: 700;
+    color: #5b6b8c;
 }
 
-/* Currency hint */
-.tco-currency-hint:empty {
+.fuel-page.tco-page .tco-rate:empty {
     display: none;
 }
 
-/* Actions */
-.tcoCalc .ccalc__actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.tcoCalc .ccalc__btn {
-    height: 40px;
-    padding: 0 14px;
-    border-radius: 12px;
-    border: 1px solid var(--cc-border);
-    background: #fff;
-    cursor: pointer;
-    font-weight: 800;
-    color: var(--cc-brand2);
-    min-width: 160px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.tcoCalc .ccalc__btn--primary {
-    border-color: rgba(40, 59, 105, 0.35);
-    background: rgba(40, 59, 105, 0.08);
-}
-
-.tcoCalc .ccalc__toast {
-    margin-top: 10px;
-    font-size: 12px;
-    color: var(--cc-muted);
-    min-height: 16px;
-}
-
-/* Actions row layout (left + right groups) */
-.tco-actions-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.tco-actions-left {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.tco-actions-right {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-/* green buttons */
-.ccalc__btn.tco-btn-green {
-    background: #e8f7ec;
-    border: 1px solid #9bd3af;
-    color: #14532d;
+/* --- Списки (вибір одиниць) — блакитні, як у калькуляторі пального --- */
+.fuel-page.tco-page .car-card .field select,
+.fuel-page.tco-page .global-card .field select {
+    background: #eaf1fc;
+    background-image: none;
+    border: 1px solid #b9cdee;
+    box-shadow: none;
+    color: #1f2f55;
     font-weight: 700;
 }
 
-.ccalc__btn.tco-btn-green:hover {
-    background: #dcf3e4;
-    border-color: #7bc49a;
+.fuel-page.tco-page .car-card .field select:focus,
+.fuel-page.tco-page .global-card .field select:focus {
+    background: #f3f7fe;
+    border-color: #283b69;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
 }
 
-@media (max-width: 768px) {
-    .tco-actions-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .tco-actions-left,
-    .tco-actions-right {
-        justify-content: center;
-    }
-
-    .tco-actions-right {
-        gap: 16px;
-    }
-
-    .tcoCalc .ccalc__btn {
-        min-width: 0;
-        width: 100%;
-    }
-}
-
-/* Spacing utilities */
-.tcoCalc .ccalc__mt10 {
-    margin-top: 10px;
-}
-
-.tcoCalc .ccalc__mb10 {
-    margin-bottom: 10px;
-}
-
-/* Big result box */
-.tcoCalc .ccalc__bigNumber {
-    background: linear-gradient(180deg,
-            rgba(40, 59, 105, 0.08),
-            rgba(40, 59, 105, 0.03));
-    border: 1px solid rgba(40, 59, 105, 0.16);
-    border-radius: var(--cc-radius);
-    padding: 12px;
-}
-
-/* Compare cards */
-.tcoCompare {
+/* поля на всю картку: у картці авто два стовпці, одиниці — на повний ряд (правило fuel.css) */
+.fuel-page.tco-page .car-card .dyn-block {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 10px;
 }
 
-@media (max-width: 860px) {
-    .tcoCompare {
-        grid-template-columns: 1fr;
-    }
+/* --- Блок «Додаткові витрати та перепродаж» усередині картки авто --- */
+.fuel-page.tco-page .tco-extra {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #e6e8ef;
 }
 
-.tcoMiniCard {
-    border: 1px solid var(--cc-border);
-    border-radius: 14px;
-    background: #fbfcff;
-    padding: 12px;
-}
-
-.tcoMiniHead {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px dashed rgba(40, 59, 105, 0.22);
-}
-
-.tcoMiniTitle {
-    font-weight: 900;
-    color: var(--cc-brand2);
+.fuel-page.tco-page .tco-extra > summary.tco-extra-sum {
+    margin: 0;
+    padding: 0;
+    border-bottom: 0;
     font-size: 14px;
-}
-
-.tcoMiniBadge {
-    font-size: 12px;
     font-weight: 800;
-    color: #fff;
-    background: rgba(40, 59, 105, 0.85);
-    padding: 6px 10px;
-    border-radius: 999px;
+    color: #1f2f55;
 }
 
-/* Yearly block (JS fills it) */
-.tcoYearlyWrap {
-    margin-top: 12px;
-    background: #fff;
-    border: 1px solid var(--cc-border);
-    border-radius: 14px;
-    padding: 12px;
-    overflow-x: auto;
+.fuel-page.tco-page .tco-extra[open] > summary.tco-extra-sum {
+    margin-bottom: 12px;
 }
 
-/* Result components injected by JS */
-.tcoResultWrap {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.fuel-page.tco-page .tco-extra > summary.tco-extra-sum::after {
+    margin-left: auto;
 }
 
-.tcoResultGrid {
+/* --- Результат --- */
+.fuel-page.tco-page .res-panel .result {
+    margin-top: 0;
+}
+
+.fuel-page.tco-page .tco-kpis {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
 }
 
-@media (max-width: 900px) {
-    .tcoResultGrid {
-        grid-template-columns: 1fr;
+@media (max-width: 680px) {
+    .fuel-page.tco-page .tco-kpis {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
-.tcoKpiCard {
-    background: #fff;
-    border: 1px solid rgba(40, 59, 105, 0.16);
-    border-radius: 16px;
+.fuel-page.tco-page .tco-kpi {
     padding: 14px;
-    box-shadow: 0 10px 25px rgba(40, 59, 105, .10);
+    border: 1px solid #e6e8ef;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fd 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .9),
+        0 1px 2px rgba(31, 47, 85, .06),
+        0 6px 16px rgba(40, 59, 105, .12);
 }
 
-.tcoKpiHead {
+.fuel-page.tco-page .tco-kpi.is-win {
+    background: linear-gradient(180deg, #f0faf3 0%, #e1f3e7 100%);
+    border-color: rgba(34, 139, 70, .30);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .85),
+        0 1px 2px rgba(22, 101, 52, .08),
+        0 6px 16px rgba(34, 139, 70, .16);
+}
+
+.fuel-page.tco-page .tco-kpi.is-lose {
+    background: linear-gradient(180deg, #fff3f2 0%, #fbe3e1 100%);
+    border-color: rgba(200, 62, 55, .28);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .85),
+        0 1px 2px rgba(127, 29, 29, .08),
+        0 6px 16px rgba(200, 62, 55, .14);
+}
+
+.fuel-page.tco-page .tco-kpi-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    margin-bottom: 8px;
 }
 
-.tcoKpiTitle {
-    font-weight: 900;
-    color: #1f2f55;
-    font-size: 14px;
-}
-
-.tcoKpiValue {
-    font-weight: 900;
-    font-size: 22px;
-    color: #111827;
-    font-variant-numeric: tabular-nums;
-}
-
-.tcoKpiMeta {
-    margin-top: 4px;
-    font-size: 12px;
-    color: #6b7280;
-}
-
-.tcoBadgeMini {
-    font-size: 12px;
-    color: #fff;
-    background: rgba(40, 59, 105, 0.9);
-    padding: 6px 10px;
-    border-radius: 999px;
-    white-space: nowrap;
-}
-
-.tcoBlock {
-    background: linear-gradient(180deg,
-            rgba(40, 59, 105, 0.08),
-            rgba(40, 59, 105, 0.03));
-    border: 1px solid rgba(40, 59, 105, 0.16);
-    border-radius: 16px;
-    padding: 12px 14px;
-}
-
-.tcoBlockTitle {
-    font-weight: 900;
-    color: #1f2f55;
+.fuel-page.tco-page .tco-kpi-title {
     font-size: 13px;
-    margin-bottom: 6px;
+    font-weight: 800;
+    color: #3b4a6b;
 }
 
-.tcoBlockMain {
+.fuel-page.tco-page .tco-kpi-value {
+    margin-top: 8px;
+    font-size: 26px;
+    line-height: 1.15;
     font-weight: 900;
-    font-size: 18px;
-    color: #111827;
+    color: #1f2f55;
     font-variant-numeric: tabular-nums;
 }
 
-.tcoBlockSub {
+.fuel-page.tco-page .tco-kpi.is-win .tco-kpi-value {
+    color: #166534;
+}
+
+.fuel-page.tco-page .tco-kpi.is-lose .tco-kpi-value {
+    color: #7f1d1d;
+}
+
+.fuel-page.tco-page .tco-kpi-meta {
     margin-top: 6px;
     font-size: 12px;
-    color: #6b7280;
+    font-weight: 600;
+    color: #5b6b8c;
 }
 
-.tcoRow2 {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+.fuel-page.tco-page .tco-diff {
+    margin-top: 12px;
 }
 
-.tcoRow2>.tcoBlock {
-    flex: 1 1 260px;
+.fuel-page.tco-page .tco-tiles {
+    margin-top: 12px;
 }
 
-.tcoDiffNote {
+.fuel-page.tco-page .tco-note {
+    margin-top: 8px;
     font-size: 12px;
-    color: #6b7280;
-    margin-top: 6px;
+    font-weight: 600;
+    color: #5b6b8c;
 }
 
-/* Table styling */
-.tcoYearlyWrap table {
+.fuel-page.tco-page .tco-h3 {
+    margin: 20px 0 8px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #1f2f55;
+}
+
+/* --- Таблиці --- */
+.fuel-page.tco-page .tco-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.fuel-page.tco-page .tco-table {
     width: 100%;
-    min-width: 720px;
-    /* 6 колонок */
     border-collapse: collapse;
     font-size: 13px;
+    font-variant-numeric: tabular-nums;
 }
 
-.tcoYearlyWrap th,
-.tcoYearlyWrap td {
-    padding: 10px;
-    border-top: 1px solid #eef0f6;
+.fuel-page.tco-page .tco-table th,
+.fuel-page.tco-page .tco-table td {
+    padding: 9px 12px;
     text-align: left;
-    vertical-align: top;
+    white-space: nowrap;
+    border-bottom: 1px solid #eef0f6;
 }
 
-.tcoYearlyWrap th {
-    background: #f7f8fc;
-    color: #6b7280;
-    font-weight: 900;
+.fuel-page.tco-page .tco-table th {
+    font-size: 12px;
+    font-weight: 800;
+    color: #5b6b8c;
+    background: #f6f8fc;
 }
 
-.tcoYearlyWrap tr.is-win {
-    background: rgba(40, 59, 105, 0.06);
+.fuel-page.tco-page .tco-table tbody tr:last-child td {
+    border-bottom: 0;
 }
 
-/* Divider + SEO/Faq */
-.cc-divider {
+.fuel-page.tco-page .tco-table tr.is-win td {
+    background: #e8f6ec;
+}
+
+.fuel-page.tco-page .tco-table tr.tco-total td {
+    font-weight: 800;
+    color: #1f2f55;
+    background: #f1f4fb;
+}
+
+/* --- Підказка і тост --- */
+.fuel-page.tco-page .results-hint {
+    margin: 0;
+}
+
+.fuel-page.tco-page .share-status:empty {
+    display: none;
+}
+
+.fuel-page.tco-page .share-status {
+    margin-top: 10px;
+}
+
+/* поля в одному ряду картки стоять на одній лінії, навіть якщо один підпис переноситься на два рядки */
+.fuel-page.tco-page .tco-car .dyn-block {
+    align-items: end;
+}
+
+/* поле на весь рядок картки (ціна електрики), щоб «Сервіс на рік» і «Страховка на рік» стояли поруч */
+.fuel-page.tco-page .tco-car .field.tco-wide {
+    grid-column: 1 / -1;
+}
+
+/* вибір валюти — поле в сітці «Загальні дані» (між пробігом і періодом) */
+.fuel-page.tco-page .field .cur-dd {
+    margin: 0;
     width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
-    border-top: 2px dashed rgba(40, 59, 105, 0.35);
 }
 
-.cc-seo,
-.cc-faq {
-    max-width: 900px;
-    margin: 20px auto 0;
-    padding: 0 16px;
+.fuel-page.tco-page .field .cur-btn {
+    width: 100%;
+    justify-content: space-between;
 }
 
-.cc-seo h2,
-.cc-faq h2 {
-    font-size: 22px;
-    color: #283b69;
-    margin-bottom: 14px;
+.fuel-page.tco-page .field .cur-btn .cur-code {
+    margin-right: auto;
 }
 
-.cc-seo p {
-    margin-bottom: 14px;
-    line-height: 1.6;
-    font-size: 15px;
+.fuel-page.tco-page .field .cur-list {
+    left: 0;
+    right: auto;
 }
 
-.cc-faq-item {
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 14px;
-    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
-}
-
-.cc-faq-item h3 {
-    font-size: 16px;
-    margin-bottom: 6px;
-    color: #283b69;
-}
-
-.cc-faq-item p {
-    font-size: 14px;
-    color: #444;
-}
-/* === TCO: result block below calculator === */
-
-/* вся сітка — 1 колонка */
-.tcoCalc .ccalc__grid {
-    grid-template-columns: 1fr;
-}
-
-/* результат завжди нижче */
-.tcoCalc .ccalc__card:nth-child(2) {
-    margin-top: 14px;
-}
-/* ===== TCO: Difference highlight ===== */
-
-
-/* fallback, не чіпаємо */
-
-.tcoBlockMain {
-    position: relative;
-}
-
-/* зелена підсвітка */
-.tcoBlockMain:contains("EV вигідніше"),
-.tcoBlockMain[data-win="ev"] {
-    color: #14532d;
-}
-
-/* червона підсвітка */
-.tcoBlockMain:contains("ДВЗ вигідніше"),
-.tcoBlockMain[data-win="ice"] {
-    color: #7f1d1d;
-}
-/* ===== TCO: win/lose colors ===== */
-
-/* highlights */
-.tcoBlockMain.is-ev {
-    color: #14532d;
-}
-
-.tcoBlockMain.is-ice {
-    color: #7f1d1d;
-}
-
-.tcoKpiCard.is-win {
-    border-color: #86efac;
-    background: linear-gradient(180deg, #ecfdf5, #ffffff);
-}
-
-.tcoKpiCard.is-lose {
-    border-color: #fecaca;
-    background: linear-gradient(180deg, #fef2f2, #ffffff);
-}
-/* =========================
-   OSCPV look-alike overrides for TCO
-   (fonts + inputs + buttons)
-   ставити В КІНЕЦЬ tco.css
-========================= */
-
-/* labels як в ОСЦПВ */
-.tco-page .tcoCalc .ccalc__label {
+/* зірочка біля обов'язкового поля */
+.fuel-page.tco-page .tco-req {
+    margin-left: 2px;
     font-weight: 900;
-    font-size: 13px;
+    color: #d64545;
+    cursor: help;
+}
+
+/* пояснення про курс НБУ над таблицею по роках */
+.fuel-page.tco-page .tco-nbu {
+    margin: 0 0 8px;
+}
+
+/* ===== Графік накопичення витрат ===== */
+.fuel-page.tco-page .tco-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 16px;
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
     color: #2b3a55;
 }
 
-/* inputs/select як в ОСЦПВ */
-.tco-page .tcoCalc .ccalc__input,
-.tco-page .tcoCalc select.ccalc__input,
-.tco-page .tcoCalc .ccalc__input[type="number"],
-.tco-page .tcoCalc .ccalc__input[type="text"] {
-    height: 44px;
+.fuel-page.tco-page .tco-legend .tco-axis-note {
+    margin-left: auto;
+    font-weight: 600;
+    color: #5b6b8c;
+}
+
+.fuel-page.tco-page .tco-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+    border-radius: 50%;
+}
+
+.fuel-page.tco-page .tco-dot.tco-ice { background: #e07b39; }
+.fuel-page.tco-page .tco-dot.tco-ev { background: #1f8f52; }
+
+.fuel-page.tco-page .tco-chart {
+    padding: 8px 6px 4px;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.fuel-page.tco-page .tco-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.fuel-page.tco-page .tco-grid { stroke: #eef0f6; stroke-width: 1; }
+.fuel-page.tco-page .tco-tick { fill: #5b6b8c; font-size: 11px; font-weight: 600; }
+.fuel-page.tco-page .tco-cross { stroke: #283b69; stroke-width: 1.5; stroke-dasharray: 5 4; }
+
+/* ===== Блок «Кредит» ===== */
+.fuel-page.tco-page .global-card.cc-collapse > summary::after {
+    margin-left: auto;
+}
+
+@media (min-width: 761px) {
+    .fuel-page.tco-page #loan_card .global-grid {
+        grid-template-columns: repeat(3, minmax(0, 200px));
+        column-gap: 24px;
+    }
+}
+
+.fuel-page.tco-page .tco-loan-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5b6b8c;
+}
+
+/* стовпці графіка */
+.fuel-page.tco-page .tco-bar.tco-ice { fill: #e07b39; }
+.fuel-page.tco-page .tco-bar.tco-ev { fill: #1f8f52; }
+.fuel-page.tco-page .tco-bar:hover { opacity: .85; }
+
+/* кнопки «Розрахувати», «Приклад», «Скинути», «Копіювати результат» — один розмір */
+.fuel-page.tco-page .tco-calc-row .pill,
+.fuel-page.tco-page .res-actions .pill {
+    flex: 0 0 auto;
+    width: 160px;
+    min-width: 0;
+    height: 38px;
     padding: 0 12px;
-    border-radius: 12px;
-    border: 1px solid #d4d7de;
-    background: #fff;
-    font-size: 13px;
-    outline: none;
-    color: #1f2937;
+    white-space: nowrap;
 }
 
-/* focus як в ОСЦПВ */
-.tco-page .tcoCalc .ccalc__input:focus,
-.tco-page .tcoCalc select.ccalc__input:focus {
-    border-color: rgba(40, 59, 105, .55);
-    box-shadow: 0 0 0 3px rgba(40, 59, 105, .12);
-    color: #111827;
+.fuel-page.tco-page .res-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-/* placeholder як в ОСЦПВ */
-.tco-page .tcoCalc .ccalc__input::placeholder {
-    color: #9ca3af;
-    opacity: 1;
-}
-
-/* ===== Buttons як в ОСЦПВ ===== */
-.tco-page .tcoCalc .ccalc__btn {
-    height: 44px;
-    border-radius: 12px;
-    font-weight: 900;
-    cursor: pointer;
-    padding: 0 14px;
-    border: 1px solid #d4d7de;
-    background: #fff;
-    color: #1f2f55;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* primary як oscpv-btn */
-.tco-page .tcoCalc .ccalc__btn.ccalc__btn--primary {
-    background: rgba(40, 59, 105, .08);
-    border: 1px solid rgba(40, 59, 105, .35);
-    color: #1f2f55;
-}
-
-.tco-page .tcoCalc .ccalc__btn.ccalc__btn--primary:hover {
-    background: rgba(40, 59, 105, .14);
-}
-
-/* hover як oscpv-btn-ghost */
-.tco-page .tcoCalc .ccalc__btn:hover {
-    background: #f6f7fb;
-    border-color: #b9c2da;
-    box-shadow: 0 4px 12px rgba(31, 47, 85, .08);
-}
-
-/* зелені лінки-кнопки (tco-btn-green) — як success в ОСЦПВ */
-.tco-page .tcoCalc .ccalc__btn.tco-btn-green {
-    background: rgba(34, 197, 94, .10);
-    border: 1px solid rgba(34, 197, 94, .35);
-    color: #166534;
-    font-weight: 900;
-    box-shadow: none;
-}
-
-.tco-page .tcoCalc .ccalc__btn.tco-btn-green:hover {
-    background: rgba(34, 197, 94, .16);
-    border-color: rgba(34, 197, 94, .50);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, .10);
-}
-
-/* Авто-розрахунок (checkbox) — як у ОСЦПВ по тону */
-.tco-page .tcoCalc .evc-autocalc {
-    font-weight: 900;
-    font-size: 13px;
-    color: #1f2f55;
-}
-
-/* Бонус: вирівняємо висоту кнопок в обох групах */
-.tco-page .tcoCalc .tco-actions-left .ccalc__btn,
-.tco-page .tcoCalc .tco-actions-right .ccalc__btn {
-    height: 44px;
+@media (max-width: 520px) {
+    .fuel-page.tco-page .tco-calc-row .pill,
+    .fuel-page.tco-page .res-actions .pill {
+        flex: 1 1 0;
+        width: auto;
+        padding: 0 8px;
+    }
 }
