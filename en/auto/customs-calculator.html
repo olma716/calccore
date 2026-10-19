@@ -29,11 +29,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/customs.css?v=20261018c27" />
+    <link rel="stylesheet" href="/css/customs.css?v=20261018c34" />
 
     <!-- i18n BEFORE calculator -->
-    <script src="/js/i18n.js?v=20261018c27" defer></script>
-    <script src="/js/customs.js?v=20261018c27" defer></script>
+    <script src="/js/i18n.js?v=20261018c34" defer></script>
+    <script src="/js/customs.js?v=20261018c34" defer></script>
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -269,12 +269,6 @@
                     </p>
                 </div>
 
-                <div class="ccalc__ratesRow">
-                    <div class="ccalc__rates" data-cc="ratesBadge">
-                        NBU rates: —
-                    </div>
-                </div>
-
                 <div class="ccalc__grid">
 
                     <!-- LEFT -->
@@ -341,26 +335,6 @@
                             </div>
                         </div>
 
-                        <!-- USA only -->
-                        <div class="ccalc__block ccalc__mt10" data-cc="usBlock" style="display:none">
-                            <div class="ccalc__miniTitle">USA costs (in the price currency)</div>
-                            <div class="ccalc__rows ccalc__mt10">
-                                <div class="ccalc__field">
-                                <label class="ccalc__label">Auction fee</label>
-                                <input class="ccalc__input" data-cc="auctionFee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,200">
-                            </div>
-                                <div class="ccalc__field">
-                                <label class="ccalc__label">Delivery to US port</label>
-                                <input class="ccalc__input" data-cc="usInland" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 500">
-                            </div>
-                                <div class="ccalc__field">
-                                <label class="ccalc__label">Ocean freight</label>
-                                <input class="ccalc__input" data-cc="seaFreight" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,500">
-                            </div>
-                            </div>
-                            <div class="ccalc__hint">Included in the customs value — duty, excise and VAT are charged on them.</div>
-                        </div>
-
                         <!-- ICE only -->
                         <div class="ccalc__block ccalc__mt10" data-cc="iceBlock">
                             <div class="ccalc__rows">
@@ -380,6 +354,26 @@
                                 </div>
                             </div>
                             <div class="ccalc__hint">EV excise: 1€ × battery kWh.</div>
+                        </div>
+
+                        <!-- USA only -->
+                        <div class="ccalc__block ccalc__mt10" data-cc="usBlock" style="display:none">
+                            <div class="ccalc__miniTitle">USA costs (in the price currency)</div>
+                            <div class="ccalc__rows ccalc__mt10">
+                                <div class="ccalc__field">
+                                <label class="ccalc__label">Auction fee</label>
+                                <input class="ccalc__input" data-cc="auctionFee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,200">
+                            </div>
+                                <div class="ccalc__field">
+                                <label class="ccalc__label">Delivery to US port</label>
+                                <input class="ccalc__input" data-cc="usInland" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 500">
+                            </div>
+                                <div class="ccalc__field">
+                                <label class="ccalc__label">Ocean freight</label>
+                                <input class="ccalc__input" data-cc="seaFreight" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,500">
+                            </div>
+                            </div>
+                            <div class="ccalc__hint">Included in the customs value — duty, excise and VAT are charged on them.</div>
                         </div>
 
                         <div class="ccalc__block ccalc__mt10" data-cc="manualBlock" style="display:none">
@@ -467,6 +461,10 @@
                             <div class="ccalc__hint">Empty — the current NBU rate. An own rate takes priority over the NBU rate.</div>
                         </details>
 
+                        <div class="ccalc__actions ccalc__mt10">
+                            <button class="ccalc__btn ccalc__btn--primary ccalc__btn--wide" type="button" data-cc-action="calc">Calculate</button>
+                        </div>
+
                         <div class="ccalc__toast" data-cc="toast"></div>
                     </div>
 
@@ -549,6 +547,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="ccalc__hint ccalc__mt10" data-cc="rateNote"></div>
                         <div class="ccalc__actions ccalc__mt10">
                             <button class="ccalc__btn ccalc__btn--primary" type="button" data-cc-action="copyLink">Share link</button>
                             <button class="ccalc__btn" type="button" data-cc-action="example">Example</button>

@@ -68,7 +68,7 @@
     "euBlock", "euOrigin", "dutyRate", "vatRate",
     "includePension", "pensionBlock", "subMin", "pensionHint",
     "extrasDetails", "broker", "registration", "osago", "domestic",
-    "yearReq", "curHead", "ratesDetails", "ratesSummary", "rateDetails", "rateDate", "rateUsd", "rateEur",
+    "yearReq", "curHead", "rateNote", "ratesDetails", "ratesSummary", "rateDetails", "rateDate", "rateUsd", "rateEur",
     "totalCustoms", "subHint", "landedTotal", "landedSub", "splitBar", "splitLegend", "splitNote",
     "pensionRow", "extrasRow",
     "cmpPanel", "cmpDescA", "cmpDescB", "cmpCustomsA", "cmpCustomsB", "cmpCustomsD", "cmpLandedA", "cmpLandedB", "cmpLandedD",
@@ -180,25 +180,21 @@
     return Number.isFinite(r) && r > 0 ? r : null;
   }
 
+  // дрібна примітка під таблицею: за яким курсом пораховано
   function updateRatesBadge() {
-    if (!els.ratesBadge) return;
+    if (!els.rateNote) return;
     const usd = rateOf("USD");
     const eur = rateOf("EUR");
-    const icon =
-      '<svg class="ccalc__rIco" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8m4-8v8m6-8v8m4-8v8M3 20h18"/></svg>';
-    const label = `<span class="ccalc__rLabel">${icon}${t("customs.rates_label")}</span>`;
-    if (usd && eur) {
-      const manual = !!(manualRate("rateUsd") || manualRate("rateEur"));
-      const chip = (flag, code, v) => `<span class="ccalc__rChip"><img src="/assets/flags/${flag}.png" width="16" height="11" alt="">${code} <b>${v.toFixed(4)}</b></span>`;
-      const tail = manual
-        ? `<span class="ccalc__rTag">${t("customs.rates_manual_tag")}</span>`
-        : state.ratesDate
-          ? `<span class="ccalc__rDate">${state.ratesDate}</span>`
-          : "";
-      els.ratesBadge.innerHTML = label + chip("us", "USD", usd) + chip("eu", "EUR", eur) + tail;
-    } else {
-      els.ratesBadge.innerHTML = label + `<span class="ccalc__rDate">—</span>`;
+    if (!(usd && eur)) {
+      els.rateNote.textContent = t("customs.rates_none");
+      return;
     }
+    const manual = !!(manualRate("rateUsd") || manualRate("rateEur"));
+    els.rateNote.textContent = t(manual ? "customs.rate_note_manual" : "customs.rate_note", {
+      usd: usd.toFixed(4),
+      eur: eur.toFixed(4),
+      date: state.ratesDate || ""
+    });
   }
 
   function syncFlag() {
@@ -774,6 +770,22 @@
   });
   root.querySelector('[data-cc-action="copyLink"]')?.addEventListener("click", copyLink);
   root.querySelector('[data-cc-action="example"]')?.addEventListener("click", fillExample);
+  // «Розрахувати»: перерахунок (він і так автоматичний), підказка про незаповнені поля, прокрутка до результату
+  root.querySelector('[data-cc-action="calc"]')?.addEventListener("click", () => {
+    recalc();
+    const miss = isBlank("price") ? [labelOf(els.price)] : missingFields();
+    if (miss.length) {
+      toast(t("customs.missing", { list: miss.join(", ") }));
+      return;
+    }
+    if (els.toast) els.toast.textContent = "";
+    const card = root.querySelectorAll(".ccalc__card")[1];
+    if (!card) return;
+    // на вузьких екранах блоки стоять один під одним — прокручуємо до результату
+    const first = root.querySelector(".ccalc__card");
+    const stacked = card.getBoundingClientRect().top >= first.getBoundingClientRect().bottom - 5;
+    if (stacked) card.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   root.querySelector('[data-cc-action="saveVariant"]')?.addEventListener("click", () => {
     if (!lastResult) {
       toast(t("customs.variant_need_data"));
