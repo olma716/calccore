@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -15,47 +15,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>EV Charging Cost Calculator — CalcCore</title>
+    <title>EV Charging Cost Calculator 2026 | CalcCore</title>
     <meta name="description"
-        content="Calculate how much it costs to charge an electric car at home or at a public charging station: from current % to target % including losses and tariff." />
+        content="How much it costs to charge an electric car in 2026: home socket or station, charging time, cost per 100 km, range, car model picker, 12 currencies." />
 
-    <!-- Canonical (CLEAN URL) -->
     <link rel="canonical" href="https://calccore.net/en/auto/ev-charge-calculator" />
 
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/ev-charge-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/ev-charge-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/ev-charge.css" />
+    <link rel="stylesheet" href="/css/ev-charge.css?v=20261020evc18" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/ev-charge.js?v=20260218c" defer></script>
+    <script src="/js/i18n.js?v=20261020evc18" defer></script>
+    <script src="/js/ev-models.js?v=20261020evc18" defer></script>
+    <script src="/js/ev-charge.js?v=20261020evc18" defer></script>
+
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/auto/ev-charge-calculator#app",
+  "name": "EV Charging Cost Calculator",
+  "description": "Calculate the cost and time of charging an electric car from a home socket or a charging station, with losses, car limits, tariff, cost per 100 km, range and monthly and yearly costs, and compare two options.",
+  "url": "https://calccore.net/en/auto/ev-charge-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Charging cost from a home socket or a charging station (per kWh and per minute)",
+    "Comparison of home charging and a charging station",
+    "Charging losses and estimated time with the car’s AC/DC power limits",
+    "DC charging slowdown after 80% state of charge",
+    "Cost per 100 km and the range added by this charge",
+    "Charging costs per month and per year",
+    "12 currencies with tariff conversion at the NBU rate",
+    "Station session fee",
+    "Charging finish time from the chosen start",
+    "Remembering your data in the browser",
+    "Car model picker (30 models popular in Ukraine) with search and an approximate battery capacity"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": ["SoftwareApplication", "WebApplication"],
-      "@id": "https://calccore.net/en/auto/ev-charge-calculator#app",
-      "name": "EV Charging Cost Calculator",
-      "description": "A calculator that estimates the cost and time to charge an electric vehicle at home or at a public charging station, including losses and tariff, with a compare mode for both options.",
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/auto/ev-charge-calculator#webpage",
       "url": "https://calccore.net/en/auto/ev-charge-calculator",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any",
-      "isAccessibleForFree": true,
-      "inLanguage": "en",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://calccore.net/#org",
-        "name": "CalcCore",
-        "url": "https://calccore.net/"
+      "name": "EV Charging Cost Calculator 2026 | CalcCore",
+      "description": "How much it costs to charge an electric car in 2026: home socket or station, charging time, cost per 100 km, range, car model picker, 12 currencies.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
       },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "UAH"
-      }
+      "about": {
+        "@id": "https://calccore.net/en/auto/ev-charge-calculator#app"
+      },
+      "dateModified": "2026-10-20",
+      "inLanguage": "en"
     }
+  ]
+}
     </script>
     <script type="application/ld+json">
     {
@@ -66,295 +104,389 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Why is “from the grid (with losses)” higher than “to the battery”?",
+          "name": "How much does it cost to charge an electric car at home?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Some energy is lost due to AC/DC conversion, heat, battery balancing, and onboard electronics. That’s why grid energy is higher than what is stored in the battery."
+            "text": "For a 62 kWh battery from 20% to 80% with 10% losses about 41.3 kWh is drawn from the grid. At 4.32 UAH/kWh that is roughly UAH 179, and at a night tariff of 2.16 UAH about UAH 89. At a fast station at 24 UAH/kWh the same charge would cost about UAH 992. Enter your own data in the calculator for an exact result."
           }
         },
         {
           "@type": "Question",
-          "name": "What does “estimated charging time” mean and why can it differ in real life?",
+          "name": "How long does an electric car take to charge from a socket?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Time is estimated as grid kWh / power (kW). In real conditions, power may drop above ~70–80% SoC and results also depend on temperature and vehicle/station limits."
+            "text": "For the same 20% to 80% charge (about 41.3 kWh from the grid) a regular 2.3 kW socket takes about 18 hours, a 7.4 kW socket about 5.6 hours and 11 kW about 3.8 hours. The real time depends on the car’s maximum AC power, which you can enter in the calculator."
           }
         },
         {
           "@type": "Question",
-          "name": "How does the station tariff “UAH/min” work?",
+          "name": "Why is “from the grid (with losses)” higher than “into the battery”?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In “UAH/min” mode the calculator estimates charging time in minutes and multiplies it by the per-minute price. Some networks use this to encourage freeing the connector faster."
+            "text": "Part of the energy is lost to current conversion, heat, electronics and battery balancing. So more kWh is drawn from the grid than actually ends up in the battery."
           }
         },
         {
           "@type": "Question",
-          "name": "Does charging power affect the amount of kWh needed?",
+          "name": "What does “estimated charging time” mean and why can it differ in reality?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not directly. Power mainly affects time. Energy needed depends on battery capacity, the SoC difference, and losses. Efficiency may vary slightly depending on charging setup."
+            "text": "Time is energy from the grid ÷ power, taking the car’s limits (if entered) and an approximate DC slowdown after 80% into account. In reality speed is affected by temperature, battery condition, station and cable limits."
           }
         },
         {
           "@type": "Question",
-          "name": "What loss percentage should I use if I’m not sure?",
+          "name": "How does a “per minute” station tariff work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A practical default is 10%. Typical real-world losses are often around 5–15% depending on the vehicle, temperature, and charging setup."
+            "text": "In “per minute” mode the calculator estimates the charging time and multiplies it by the tariff. This tariff is used at some stations, so slower charging costs more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the choice of socket/power affect the cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On a home tariff the price per kWh does not change with power — mostly the time changes. But on a per-minute tariff slower charging costs more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What charging losses should I use if I don’t know?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A starting value of 10% works. For slow charging from a socket it is often 5–15%, and for other cars and conditions it can differ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do the battery capacities for the car models come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "These are usable (net) capacities from public sources: EV specification databases and manufacturer data. For some models (Tesla, Chinese cars, different years and trims) the sources disagree, so the value is approximate — check it for your car against its documents and correct it manually if needed. Charging power and car consumption are not filled in because they depend on year, market and trim."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I find the car consumption (kWh/100 km)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the trip computer or in the car app — the average consumption over recent trips. In the city it is usually lower than on a highway at high speed, and higher in winter because of heating and battery temperature."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate the charging cost per 100 km?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the car consumption in kWh/100 km. The calculator multiplies it by the real price of a kWh into the battery (including losses and tariff) — that is the cost per 100 km."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate monthly charging costs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the car consumption and the monthly mileage in km. The calculator shows costs per month and per year for the chosen charging option, or for both in compare mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the car’s maximum AC and DC power?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AC is charging with alternating current from a socket or an AC station, limited by the onboard charger (often 7–11 kW). DC is fast charging at stations with direct current, limited by the battery and the car’s electronics. Enter the values from the car’s specifications to get a more accurate time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a session fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some stations charge a one-off connection fee regardless of the kWh delivered. Enter it and it is added to the charging cost, and therefore to the cost per 100 km and monthly costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data stored?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if you turn on “Remember my data”. The values are then stored only in your browser on this device and are never sent anywhere. Turn the option off or press “Reset” to delete them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is DC charging slower after 80%?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To protect the battery the car sharply reduces power as the charge approaches full, so the last percent at a fast station takes longer. The calculator accounts for this approximately: for the part above 80% about 30% of the power is used."
           }
         }
       ]
     }
     </script>
-
-    
 </head>
 
 <body class="evc-page">
     <div id="header"></div>
 
     <main class="container">
+        <section class="evc" id="evc">
+            <div class="evc__wrap">
 
-        <div class="evc-titlebar">
-            <h1 class="evc-h1">EV Charging Cost Calculator</h1>
-            <p class="evc-p">
-                Calculate <b>how much it costs to charge an EV</b> at home or at a charging station:
-                from <b>current %</b> to <b>target %</b>, including <b>losses</b> and your tariff.
-            </p>
-        </div>
-
-        <section class="evc-shell">
-
-            <div class="evc-topbar">
-                <div class="mode-switch" aria-label="Mode">
-                    <button id="srcHome" class="pill active" type="button">Home outlet</button>
-                    <button id="srcStation" class="pill" type="button">Charging station</button>
-                    <button id="srcCompare" class="pill" type="button">Compare</button>
+                <div class="evc__titlebar">
+                    <h1 class="evc__h1">EV Charging Cost Calculator</h1>
+                    <p class="evc__p">How much it costs to charge an electric car from a home socket or a charging station: from current % to target %, including losses, the car’s limits and your tariff. Plus cost per 100 km, range and monthly costs.</p>
                 </div>
 
-                <label class="auto-toggle">
-                    <input type="checkbox" id="auto_calc_toggle" checked>
-                    <span>Auto-calculate</span>
-                </label>
-            </div>
+                <div class="evc__grid">
 
-            <!-- ===== GRID: left (battery+tariffs), right (result) ===== -->
-            <div class="evc-grid">
+                    <!-- LEFT -->
+                    <div class="evc__card">
+                        <div class="evc__sectionTitle">
+                            <h2 class="evc__h2">Input data</h2>
+                            <label class="evc__auto" title="If turned off, calculation runs only on the button">
+                                <input type="checkbox" id="auto_calc_toggle" checked>
+                                <span>Auto-calculate</span>
+                            </label>
+                        </div>
 
-                <!-- LEFT column -->
-                <div class="evc-left">
+                        <div class="evc__chips" role="group" aria-label="Mode">
+                            <button id="srcHome" class="evc__chip is-active" type="button"><svg class="evc__ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.785 6l8.215 8.215l-2.054 2.054a5.81 5.81 0 1 1-8.215-8.215l2.054-2.054z"/><path d="M4 20l3.5-3.5"/><path d="M15 4l-3.5 3.5"/><path d="M20 9l-3.5 3.5"/></svg><span>Home socket</span></button>
+                            <button id="srcStation" class="evc__chip" type="button"><svg class="evc__ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3v7h6l-8 11v-7H5l8-11"/></svg><span>Charging station</span></button>
+                            <button id="srcCompare" class="evc__chip" type="button"><svg class="evc__ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 17H3"/><path d="M6 10L3 7l3-3"/><path d="M3 7h18"/><path d="M18 20l3-3l-3-3"/></svg><span>Compare</span></button>
+                        </div>
 
-                    <!-- Battery -->
-                    <div class="evc-box">
-                        <h2>⚡ Battery details</h2>
-
-                        <label for="battery_kwh">Battery capacity (kWh)</label>
-                        <input id="battery_kwh" inputmode="decimal" placeholder="e.g. 62">
-
-                        <div class="evc-row">
-                            <div>
-                                <label for="soc_now">Current (%)</label>
-                                <input id="soc_now" inputmode="decimal" placeholder="20">
+                        <div class="evc__rows evc__mt12">
+                            <div class="evc__field evc__field--full">
+                                <label class="evc__label" for="car_btn">Car <span class="evc__hint">(optional)</span></label>
+                                <div class="evc__dd evc__dd--car" id="car_dd"><button type="button" class="evc__ddBtn" id="car_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Car"><span class="evc__ddLabel" id="car_label">Not selected</span><span class="evc__caret" aria-hidden="true"></span></button><ul class="evc__ddList" id="car_list" role="listbox" aria-label="Car" hidden></ul><select id="car" hidden aria-hidden="true" tabindex="-1" data-none="Not selected — enter the capacity manually"><option value=""></option></select></div><div class="evc__hint" id="car_hint"></div>
                             </div>
-                            <div>
-                                <label for="soc_target">Target (%)</label>
-                                <input id="soc_target" inputmode="decimal" placeholder="80">
+                            <div class="evc__field">
+                                <label class="evc__label" for="battery_kwh">Battery capacity (kWh) <span class="evc__req" title="Required field" aria-label="Required field">*</span></label>
+                                <input class="evc__input" id="battery_kwh" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 62">
+                            </div>
+                            <div class="evc__field">
+                                <label class="evc__label" for="cur_btn">Tariff currency</label>
+                                <div class="evc__dd" id="cur_dd"><button type="button" class="evc__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Tariff currency"><img class="evc__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="evc__caret" aria-hidden="true"></span></button><ul class="evc__ddList" id="cur_list" role="listbox" aria-label="Tariff currency" hidden></ul><select id="currency" hidden aria-hidden="true" tabindex="-1"><option value="UAH">UAH</option></select></div>
+                            </div>
+                            <div class="evc__field">
+                                <label class="evc__label" for="soc_now">Now (%) <span class="evc__req" title="Required field" aria-label="Required field">*</span></label>
+                                <input class="evc__input" id="soc_now" type="text" inputmode="decimal" autocomplete="off" placeholder="20">
+                            </div>
+                            <div class="evc__field">
+                                <label class="evc__label" for="soc_target">Target (%) <span class="evc__req" title="Required field" aria-label="Required field">*</span></label>
+                                <input class="evc__input" id="soc_target" type="text" inputmode="decimal" autocomplete="off" placeholder="80">
+                            </div>
+                            <div class="evc__field">
+                                <label class="evc__label" for="loss_pct">Charging losses (%) <span class="evc__hint">(optional)</span></label>
+                                <input class="evc__input" id="loss_pct" type="text" inputmode="decimal" autocomplete="off" placeholder="10">
+                            </div>
+                            <div class="evc__field">
+                                <label class="evc__label" for="start_time">Charging start time <span class="evc__hint">(optional)</span></label>
+                                <div class="evc__timeWrap" id="time_wrap"><input class="evc__input evc__timeInput" id="start_time" type="text" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="--:--"><button type="button" class="evc__timeBtn" id="time_btn" aria-haspopup="dialog" aria-expanded="false" aria-label="Pick a time" title="Pick a time"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button><div class="evc__timePop" id="time_pop" role="dialog" aria-label="Pick a time" hidden><div class="evc__timeCols"><ul id="time_h" aria-label="h"></ul><ul id="time_m" aria-label="min"></ul></div><div class="evc__timeFoot"><button type="button" id="time_now">Now</button><button type="button" id="time_clear">Clear</button></div></div></div>
                             </div>
                         </div>
 
-                        <label for="loss_pct">Charging losses (%) <span class="evc-hint">(optional)</span></label>
-                        <input id="loss_pct" inputmode="decimal" placeholder="10">
-
-                        <!-- SOCKET host (moved into tariffs in Compare mode by JS) -->
-                        <div id="socket_host_battery">
-                            <div id="socket_wrap">
-                                <label for="socket_type">Outlet type</label>
-                                <select id="socket_type">
-                                    <option value="2.3">Single-phase 230V • 10A (≈2.3 kW)</option>
-                                    <option value="3.7">Single-phase 230V • 16A (≈3.7 kW)</option>
-                                    <option value="7.4">Single-phase 230V • 32A (≈7.4 kW)</option>
-                                    <option value="11">Three-phase 400V • 16A (≈11 kW)</option>
-                                    <option value="22">Three-phase 400V • 32A (≈22 kW)</option>
-                                </select>
+                        <!-- HOME -->
+                        <div class="evc__block evc__mt12" id="home_tariff_card">
+                            <div class="evc__miniTitle">Home socket</div>
+                            <div class="evc__rows">
+                                <div class="evc__field">
+                                <label class="evc__label" for="socket_type_btn">Socket type</label>
+                                <div class="evc__dd evc__dd--fit" id="socket_type_dd"><button type="button" class="evc__ddBtn" id="socket_type_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Socket type"><span class="evc__ddLabel" id="socket_type_label">1-phase • 10A • 2.3 kW</span><span class="evc__caret" aria-hidden="true"></span></button><ul class="evc__ddList" id="socket_type_list" role="listbox" aria-label="Socket type" hidden></ul><select id="socket_type" hidden aria-hidden="true" tabindex="-1"><option value="2.3">1-phase • 10A • 2.3 kW</option><option value="3.7">1-phase • 16A • 3.7 kW</option><option value="7.4">1-phase • 32A • 7.4 kW</option><option value="11">3-phase • 16A • 11 kW</option><option value="22">3-phase • 32A • 22 kW</option></select></div>
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="price_home">Home socket price <span class="evc__req" title="Required field" aria-label="Required field">*</span></label>
+                                <input class="evc__input" id="price_home" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4.32"><div class="evc__quick" title="Household tariff (UAH/kWh)"><button type="button" class="evc__qchip" data-target="price_home" data-fill="4.32">Standard 4.32</button><button type="button" class="evc__qchip" data-target="price_home" data-fill="2.16">Night 2.16</button></div>
+                            </div>
                             </div>
                         </div>
+
+                        <!-- STATION -->
+                        <div class="evc__block evc__mt12" id="station_tariff_card" style="display:none">
+                            <div class="evc__miniTitle">Charging station</div>
+                            <div class="evc__rows">
+                                <div class="evc__field">
+                                <label class="evc__label" for="station_tariff_mode_btn">Tariff</label>
+                                <div class="evc__dd evc__dd--fit" id="station_tariff_mode_dd"><button type="button" class="evc__ddBtn" id="station_tariff_mode_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Tariff"><span class="evc__ddLabel" id="station_tariff_mode_label">per kWh</span><span class="evc__caret" aria-hidden="true"></span></button><ul class="evc__ddList" id="station_tariff_mode_list" role="listbox" aria-label="Tariff" hidden></ul><select id="station_tariff_mode" hidden aria-hidden="true" tabindex="-1"><option value="kwh">per kWh</option><option value="min">per minute</option></select></div>
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="price_station"><span id="station_price_label">Station price</span> <span class="evc__req" title="Required field" aria-label="Required field">*</span></label>
+                                <input class="evc__input" id="price_station" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 24">
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="station_power_kw_btn">Station power</label>
+                                <div class="evc__dd evc__dd--fit" id="station_power_kw_dd"><button type="button" class="evc__ddBtn" id="station_power_kw_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Station power"><span class="evc__ddLabel" id="station_power_kw_label">AC station 7 kW</span><span class="evc__caret" aria-hidden="true"></span></button><ul class="evc__ddList" id="station_power_kw_list" role="listbox" aria-label="Station power" hidden></ul><select id="station_power_kw" hidden aria-hidden="true" tabindex="-1"><option value="7">AC station 7 kW</option><option value="11">AC station 11 kW</option><option value="22">AC station 22 kW</option><option value="50">DC 50 kW</option><option value="100">DC 100 kW</option><option value="120">DC 120 kW</option></select></div>
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="session_fee">Session fee <span class="evc__hint">(optional)</span></label>
+                                <input class="evc__input" id="session_fee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                            </div>
+                            </div>
+                            <div class="evc__hint" id="station_hint"></div>
+                        </div>
+
+                        <details class="evc__details evc__mt12" id="car_details">
+                            <summary>Car parameters and costs (optional)</summary>
+                            <div class="evc__rows evc__mt12">
+                                <div class="evc__field">
+                                <label class="evc__label" for="car_max_ac">Car max AC charging (kW)</label>
+                                <input class="evc__input" id="car_max_ac" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 11">
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="car_max_dc">Car max DC charging (kW)</label>
+                                <input class="evc__input" id="car_max_dc" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100">
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="cons_kwh100">Car consumption (kWh/100 km)</label>
+                                <input class="evc__input" id="cons_kwh100" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 17">
+                            </div>
+                                <div class="evc__field">
+                                <label class="evc__label" for="km_month">Mileage per month (km)</label>
+                                <input class="evc__input" id="km_month" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,500">
+                            </div>
+                            </div>
+                            <div class="evc__hint">The car’s limits reduce the charging power (the time becomes more realistic). Consumption and mileage are needed for cost per 100 km, range and monthly and yearly costs.</div>
+                        </details>
+
+                        <div class="evc__actions evc__mt12">
+                            <button class="evc__btn evc__btn--primary evc__btn--wide" id="calcBtn" type="button">Calculate</button>
+                            <label class="evc__auto" title="Data is stored only in this browser and is never sent anywhere"><input type="checkbox" id="remember_toggle"><span>Remember my data</span></label>
+                        </div>
+
+                        <div class="evc__toast" id="toast"></div>
                     </div>
 
-                    <!-- Tariffs -->
-                    <div class="evc-box">
-                        <h2>💸 Tariffs</h2>
+                    <!-- RIGHT -->
+                    <div class="evc__card">
+                        <div class="evc__sectionTitle">
+                            <h2 class="evc__h2">Result</h2>
+                            <span class="evc__badge">EV</span>
+                        </div>
 
-                        <div class="evc-tariffs">
+                        <div class="evc__result" id="result">Fill in the data on the left — the result will appear here.</div>
+                        <div id="compare"></div>
 
-                            <!-- Home tariff -->
-                            <div class="evc-tariff-card" id="home_tariff_card">
-                                <div class="evc-tariff-title">Home outlet</div>
-                                <label for="price_home">Price (UAH / kWh)</label>
-                                <input id="price_home" inputmode="decimal" placeholder="6">
-                                <!-- In Compare mode JS inserts socket_wrap below price_home -->
-                            </div>
-
-                            <!-- Station tariff -->
-                            <div class="evc-tariff-card" id="station_tariff_card">
-                                <div class="evc-tariff-title">Charging station</div>
-
-                                <label for="station_tariff_mode">Tariff type</label>
-                                <select id="station_tariff_mode">
-                                    <option value="kwh">UAH / kWh</option>
-                                    <option value="min">UAH / min</option>
-                                </select>
-
-                                <label id="station_price_label" for="price_station">Price</label>
-                                <input id="price_station" inputmode="decimal" placeholder="14">
-                                <div class="evc-mini" id="station_hint"></div>
-
-                                <label for="station_power_kw" style="margin-top:10px;">Charging power (kW)</label>
-                                <select id="station_power_kw">
-                                    <option value="7">AC station 7 kW</option>
-                                    <option value="11">AC station 11 kW</option>
-                                    <option value="22">AC station 22 kW</option>
-                                    <option value="50">DC 50 kW</option>
-                                    <option value="100">DC 100 kW</option>
-                                    <option value="120">DC 120 kW</option>
-                                </select>
-                            </div>
-
+                        <div class="evc__actions evc__mt12">
+                            <button class="evc__btn evc__btn--primary" id="shareBtn" type="button">Share link</button>
+                            <button class="evc__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="evc__btn" id="resetBtn" type="button">Reset</button>
                         </div>
                     </div>
-
                 </div>
-
-                <!-- RIGHT column: Result -->
-                <div class="evc-right">
-                    <div class="evc-result-wrap">
-                        <div class="evc-result-head">
-                            <h2 class="evc-result-title">Result</h2>
-                            <span class="evc-result-badge">EV</span>
-                        </div>
-
-                        <div class="evc-result" id="result">
-                            Enter values and click “Calculate”.
-                        </div>
-
-                        <div class="evc-compare" id="compare"></div>
-                    </div>
-                </div>
-
             </div>
-
-            <!-- ACTIONS (kept outside like in your UA file) -->
-            <div class="evc-actions">
-                <button class="btn evc-btn" id="calcBtn" type="button">Calculate</button>
-                <button class="btn evc-btn evc-btn-ghost" id="resetBtn" type="button">Reset</button>
-                <button class="btn evc-btn evc-btn-ghost" id="shareBtn" type="button">Share</button>
-
-                <a class="btn evc-btn evc-btn-link-green" id="otherCalcBtn" href="/en/auto/tco-calculator">
-                    TCO
-                </a>
-            </div>
-
         </section>
 
-        <hr class="divider">
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/auto/fuel-calculator"><b>Fuel cost calculator</b><span>Trip cost, round trip, comparison of two cars.</span></a>
+                <a class="cc-related-card" href="/en/auto/tco-calculator"><b>TCO calculator (EV vs ICE)</b><span>Total cost of ownership: electric car vs petrol.</span></a>
+                <a class="cc-related-card" href="/en/auto/ev-range-calculator"><b>EV range calculator</b><span>How many kilometres an EV can drive on one charge.</span></a>
+            </div>
+        </section>
 
-        <!-- SEO -->
+        <div class="cc-divider"></div>
+
         <section class="cc-seo">
-            <h2>EV charging cost calculator</h2>
-            <p>
-                This calculator helps you quickly estimate the <b>cost of charging an electric vehicle</b> and the
-                <b>approximate charging time</b> in three modes: <b>home outlet</b>, <b>charging station</b>,
-                or <b>compare</b> (side-by-side). It’s useful for planning both home charging and public charging
-                sessions.
-            </p>
+            <h2>How the EV charging calculator works</h2>
+            <p>The calculator estimates the <b>cost of charging an electric car</b> and the <b>approximate time</b> in three modes: <b>home socket</b>, <b>charging station</b> and <b>comparison</b> of two options. Enter the battery capacity (or pick a car model — the calculator fills in an approximate capacity), current and target charge, losses and tariff — it does the rest.</p>
+            <p>The formulas: energy into the battery = capacity × (target % − current %), energy from the grid = energy into the battery ÷ (1 − losses), cost = energy from the grid × tariff (for per-minute stations — time × tariff).</p>
 
-            <h2>How to use the calculator</h2>
-            <p>
-                1) Enter your <b>battery capacity</b> (kWh), <b>current (%)</b> and <b>target (%)</b>.<br>
-                2) Optionally add <b>charging losses</b> (typically 5–15%). Losses mean you draw a bit more energy
-                from the grid than what ends up in the battery.<br>
-                3) Choose a mode:<br>
-                <b>Home outlet</b> — select your <b>outlet type</b> (power) and enter your <b>price per kWh</b>.<br>
-                <b>Charging station</b> — enter the station tariff (UAH/kWh or UAH/min) and station <b>power</b>.<br>
-                <b>Compare</b> — fill both tariffs to see which option is cheaper.
-            </p>
+            <h2>Realistic charging time</h2>
+            <p>Charging time depends not only on the socket or station power but also on how much power the car itself accepts. In “Car parameters” you can enter the <b>maximum AC</b> (onboard charger, often 7–11 kW) and <b>maximum DC</b> power — the calculator uses the lower of the two values. At fast DC stations the power drops sharply after 80% charge, so for that part the calculator roughly assumes a slowdown to ~30% of the power.</p>
 
-            <h2>What the result shows</h2>
-            <p>
-                You will see: <b>energy added to the battery</b>, <b>energy drawn from the grid (with losses)</b>,
-                <b>estimated charging time</b> and <b>total cost</b>. In <b>Compare</b> mode, the cheaper option is
-                highlighted
-                and the cost difference is shown.
-            </p>
+            <h2>Cost per 100 km, range and monthly costs</h2>
+            <p>Enter the <b>car consumption</b> (kWh/100 km from the trip computer) — and the calculator shows the <b>cost per 100 km</b> and the <b>range</b> this charge gives. Add the <b>mileage per month</b> to get charging costs per month and per year. To compare with petrol use the <a href="/en/auto/fuel-calculator">fuel cost calculator</a> and the <a href="/en/auto/tco-calculator">TCO calculator</a>. For the range in different conditions see the <a href="/en/auto/ev-range-calculator">EV range calculator</a>.</p>
 
-            <h2>Tariffs for 2026</h2>
-            <p>
-                <b>Home electricity (households)</b> is commonly presented as a fixed price of
-                <b>4.32 UAH/kWh</b>. With a <b>two-zone meter</b>, a <b>night tariff</b> of
-                <b>2.16 UAH/kWh</b> may apply (half price). Some special cases (e.g., electric heating) can have
-                <b>2.64 UAH/kWh up to 2000 kWh</b>, then 4.32 UAH/kWh.
-            </p>
-            <p>
-                <b>Public charging stations</b> use commercial pricing set by operators. Prices vary by network,
-                AC/DC type, location, and time. In 2026, articles and market examples often show fast DC prices roughly
-                in the
-                <b>25–32 UAH/kWh</b> range, but real prices can be lower or higher depending on the operator.
-            </p>
-            <p class="evc-mini">
-                Tip: for the most accurate result, use the tariff from your utility bill/app or from your charging
-                network app.
-            </p>
+            <h2>Session fee and finish time</h2>
+            <p>Enter the <b>start time</b> (for example, 23:00) and the calculator shows when charging will finish. For stations you can add a <b>session fee</b> (a one-off connection charge) — it is included in the cost and in the cost per 100 km.</p>
+
+            <h2>Electricity tariffs in 2026</h2>
+            <p><b>Household electricity</b> is currently often quoted at a fixed <b>4.32 UAH/kWh</b>; reportedly the government extended it until 31 October 2026, so the price may change after that date. For a <b>two-zone meter</b> at night (23:00–07:00) <b>2.16 UAH/kWh</b> applies. For electric heating in the heating season — <b>2.64 UAH/kWh</b> for the first 2,000 kWh per month.</p>
+            <p><b>Public charging stations</b> use commercial operator tariffs that depend on the network, charging type (AC/DC), location and time, so it is best to enter the tariff from your operator’s app. Fast DC charging is considerably more expensive than charging at home.</p>
+            <p class="evc-mini">Tip: for the most accurate result, enter the tariff from your supplier’s bill or the charging network app.</p>
         </section>
 
-        <!-- FAQ -->
         <section class="cc-faq">
-            <h2>Frequently asked questions</h2>
+            <h2>FAQ</h2>
 
             <div class="cc-faq-item">
-                <h3>Why is “from the grid (with losses)” higher than “to the battery”?</h3>
-                <p>
-                    Some energy is lost due to AC/DC conversion, heat, battery balancing, and onboard electronics.
-                    That’s why the grid energy is higher than what is actually stored in the battery.
-                </p>
+                <h3>How much does it cost to charge an electric car at home?</h3>
+                <p>For a 62 kWh battery from 20% to 80% with 10% losses about 41.3 kWh is drawn from the grid. At 4.32 UAH/kWh that is roughly UAH 179, and at a night tariff of 2.16 UAH about UAH 89. At a fast station at 24 UAH/kWh the same charge would cost about UAH 992. Enter your own data in the calculator for an exact result.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>What does “estimated charging time” mean and why can it differ in real life?</h3>
-                <p>
-                    Time is calculated as <b>grid kWh / power (kW)</b>. In real conditions, charging power may drop
-                    above
-                    ~70–80% SoC, and results also depend on temperature and vehicle/station limits.
-                </p>
+                <h3>How long does an electric car take to charge from a socket?</h3>
+                <p>For the same 20% to 80% charge (about 41.3 kWh from the grid) a regular 2.3 kW socket takes about 18 hours, a 7.4 kW socket about 5.6 hours and 11 kW about 3.8 hours. The real time depends on the car’s maximum AC power, which you can enter in the calculator.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>How does the station tariff “UAH/min” work?</h3>
-                <p>
-                    In “UAH/min” mode the calculator estimates charging time (minutes) and multiplies it by the
-                    per-minute price.
-                    Some networks use this model to encourage freeing the connector faster.
-                </p>
+                <h3>Why is “from the grid (with losses)” higher than “into the battery”?</h3>
+                <p>Part of the energy is lost to current conversion, heat, electronics and battery balancing. So more kWh is drawn from the grid than actually ends up in the battery.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>Does charging power affect the number of kWh needed?</h3>
-                <p>
-                    Not directly. Power mainly affects <b>time</b>. The energy needed depends on battery capacity and
-                    the SoC difference
-                    (and losses). However, efficiency and losses can vary slightly between slow and fast charging.
-                </p>
+                <h3>What does “estimated charging time” mean and why can it differ in reality?</h3>
+                <p>Time is energy from the grid ÷ power, taking the car’s limits (if entered) and an approximate DC slowdown after 80% into account. In reality speed is affected by temperature, battery condition, station and cable limits.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>What loss percentage should I use if I’m not sure?</h3>
-                <p>
-                    A good starting point is <b>10%</b>. Typical real-world losses are often around 5–15% depending on
-                    the vehicle,
-                    temperature, and charging setup.
-                </p>
+                <h3>How does a “per minute” station tariff work?</h3>
+                <p>In “per minute” mode the calculator estimates the charging time and multiplies it by the tariff. This tariff is used at some stations, so slower charging costs more.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the choice of socket/power affect the cost?</h3>
+                <p>On a home tariff the price per kWh does not change with power — mostly the time changes. But on a per-minute tariff slower charging costs more.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What charging losses should I use if I don’t know?</h3>
+                <p>A starting value of 10% works. For slow charging from a socket it is often 5–15%, and for other cars and conditions it can differ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where do the battery capacities for the car models come from?</h3>
+                <p>These are usable (net) capacities from public sources: EV specification databases and manufacturer data. For some models (Tesla, Chinese cars, different years and trims) the sources disagree, so the value is approximate — check it for your car against its documents and correct it manually if needed. Charging power and car consumption are not filled in because they depend on year, market and trim.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where can I find the car consumption (kWh/100 km)?</h3>
+                <p>On the trip computer or in the car app — the average consumption over recent trips. In the city it is usually lower than on a highway at high speed, and higher in winter because of heating and battery temperature.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate the charging cost per 100 km?</h3>
+                <p>Enter the car consumption in kWh/100 km. The calculator multiplies it by the real price of a kWh into the battery (including losses and tariff) — that is the cost per 100 km.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate monthly charging costs?</h3>
+                <p>Enter the car consumption and the monthly mileage in km. The calculator shows costs per month and per year for the chosen charging option, or for both in compare mode.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are the car’s maximum AC and DC power?</h3>
+                <p>AC is charging with alternating current from a socket or an AC station, limited by the onboard charger (often 7–11 kW). DC is fast charging at stations with direct current, limited by the battery and the car’s electronics. Enter the values from the car’s specifications to get a more accurate time.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is a session fee?</h3>
+                <p>Some stations charge a one-off connection fee regardless of the kWh delivered. Enter it and it is added to the charging cost, and therefore to the cost per 100 km and monthly costs.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is my data stored?</h3>
+                <p>Only if you turn on “Remember my data”. The values are then stored only in your browser on this device and are never sent anywhere. Turn the option off or press “Reset” to delete them.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is DC charging slower after 80%?</h3>
+                <p>To protect the battery the car sharply reduces power as the charge approaches full, so the last percent at a fast station takes longer. The calculator accounts for this approximately: for the part above 80% about 30% of the power is used.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

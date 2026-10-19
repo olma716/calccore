@@ -1,349 +1,698 @@
 /* =========================
    EV Charge калькулятор
-   FINAL / CLEAN / TCO-style
+   у єдиному стилі з калькуляторами пального, TCO та розмитнення
+   (все всередині .evc)
 ========================= */
 
-/* ===== Base (як у TCO) ===== */
-.evc-page {
+.evc,
+.evc * {
+    box-sizing: border-box;
+}
+
+.evc {
+    --e-card: #fff;
+    --e-text: #222;
+    --e-muted: #6b7280;
+    --e-brand: #283b69;
+    --e-brand2: #1f2f55;
+    --e-border: #e6e8ef;
+    --e-shadow: 0 1px 3px rgba(31, 47, 85, .06), 0 10px 30px rgba(40, 59, 105, .14);
+    --e-radius: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    color: #222;
+    color: var(--e-text);
 }
 
-.evc-page .container {
+.evc__wrap {
     max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 0 20px;
 }
 
-/* ===== Titlebar (як у TCO) ===== */
-.evc-titlebar {
+.evc__titlebar {
     background: var(--header-grad-solid, linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%));
     color: #fff;
-    border-radius: 16px;
+    border-radius: var(--e-radius);
     padding: 16px;
-    box-shadow: 0 10px 25px rgba(40, 59, 105, .12);
-    margin: 10px 0 14px;
-}
-
-.evc-h1 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.evc-p {
-    margin: 6px 0 0;
-    font-size: 13px;
-    line-height: 1.55;
-    opacity: 0.92;
-}
-
-/* ===== Shell ===== */
-.evc-shell {
-    background: #fff;
-    border: 1px solid #e6e8ee;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 10px 30px rgba(40, 59, 105, .10);
-}
-
-/* ===== Topbar ===== */
-.evc-topbar {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    box-shadow: var(--e-shadow);
     margin-bottom: 14px;
 }
 
-/* ===== Mode switch ===== */
-.mode-switch {
-    display: inline-flex;
-    gap: 6px;
-    padding: 6px;
-    border-radius: 999px;
-    border: 1px solid #e6e8ee;
-    background: #f6f8ff;
+.evc__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
 }
 
-.pill {
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    padding: 10px 14px;
+.evc__p {
+    margin: 6px 0 0;
+    color: rgba(255, 255, 255, .92);
     font-size: 13px;
-    font-weight: 900;
-    color: #1f2f55;
-    cursor: pointer;
+    line-height: 1.55;
 }
 
-.pill:hover {
-    background: rgba(40, 59, 105, 0.06);
-    border-color: rgba(40, 59, 105, 0.2);
+.evc__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: 14px;
+    align-items: start;
 }
 
-.pill.active {
-    background: rgba(40, 59, 105, 0.92);
-    border-color: rgba(40, 59, 105, 0.92);
+@media (max-width: 980px) {
+    .evc__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.evc__card {
+    background: var(--e-card);
+    border: 1px solid var(--e-border);
+    border-radius: var(--e-radius);
+    box-shadow: var(--e-shadow);
+    padding: 14px;
+    min-width: 0;
+    scroll-margin-top: 90px;
+}
+
+.evc__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--e-border);
+}
+
+.evc__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--e-brand2);
+}
+
+.evc__badge {
+    font-size: 12px;
     color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
 }
 
-/* ===== Auto toggle ===== */
-.auto-toggle {
+.evc__auto {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
+    color: #2b3a55;
+    cursor: pointer;
 }
 
-.auto-toggle input {
+.evc__auto input {
     width: 16px;
     height: 16px;
     accent-color: #283b69;
 }
 
-/* ===== Grid ===== */
-.evc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-
-@media (max-width: 900px) {
-    .evc-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ===== Boxes ===== */
-.evc-box {
-    background: #fbfcff;
-    border: 1px solid #e6e8ee;
-    border-radius: 14px;
-    padding: 14px;
-}
-
-.evc-box h2 {
-    margin: 0 0 10px;
-    font-size: 15px;
-    font-weight: 900;
-    color: #1f2f55;
-}
-
-.evc-box label {
-    display: block;
-    margin: 10px 0 6px;
-    font-size: 13px;
-    font-weight: 900;
-    color: #111827;
-}
-
-.evc-box input,
-.evc-box select {
-    width: 100%;
-    height: 40px;
-    padding: 0 12px;
-    border-radius: 12px;
-    border: 1px solid #d4d7de;
-    font-variant-numeric: tabular-nums;
-}
-
-.evc-box input:focus,
-.evc-box select:focus {
-    border-color: rgba(40, 59, 105, 0.45);
-    box-shadow: 0 0 0 4px rgba(40, 59, 105, 0.1);
-}
-
-.evc-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.evc-hint,
-.evc-mini {
-    font-size: 12px;
-    color: #6b7280;
-}
-
-/* ===== Tariffs ===== */
-.evc-tariffs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-@media (max-width: 520px) {
-    .evc-tariffs {
-        grid-template-columns: 1fr;
-    }
-}
-
-.evc-tariff-card {
-    background: #fff;
-    border: 1px solid #e6e8ee;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-.evc-tariff-title {
-    font-weight: 900;
-    color: #1f2f55;
-}
-
-/* ===== Actions ===== */
-.evc-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+.evc__mt12 {
     margin-top: 12px;
 }
 
-.evc-btn {
-    flex: 1 1 160px;
-    height: 40px;
-    border-radius: 12px;
-    font-weight: 900;
-    cursor: pointer;
-}
-
-.evc-btn#calcBtn {
-    background: rgba(40, 59, 105, 0.08);
-    border: 1px solid rgba(40, 59, 105, 0.35);
-    color: #1f2f55;
-}
-
-.evc-btn#calcBtn:hover {
-    background: rgba(40, 59, 105, 0.14);
-}
-
-.evc-btn-ghost {
-    background: #fff;
-    border: 1px solid #d4d7de;
-    color: #1f2f55;
-}
-
-.evc-btn-ghost:hover {
-    background: #f7f8fc;
-}
-
-/* ===== Result (як у TCO) ===== */
-.evc-result-wrap {
-    margin-top: 14px;
-    background: #fff;
-    border: 1px solid #e6e8ee;
-    border-radius: 16px;
-    padding: 14px;
-    box-shadow: 0 10px 25px rgba(40, 59, 105, .12);
-}
-
-.evc-result-head {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 10px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #e6e8ee;
-}
-
-.evc-result-title {
-    font-size: 15px;
-    font-weight: 900;
-    color: #1f2f55;
-}
-
-.evc-result-badge {
-    font-size: 12px;
-    font-weight: 900;
-    background: rgba(40, 59, 105, 0.9);
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 999px;
-}
-
-.evc-result {
-    background: linear-gradient(180deg,
-            rgba(40, 59, 105, 0.08),
-            rgba(40, 59, 105, 0.03));
-    border: 1px solid rgba(40, 59, 105, 0.16);
-    border-radius: 16px;
-    padding: 14px;
-}
-
-/* ===== KPI ===== */
-.evc-kpi-grid {
-    margin-top: 10px;
+/* ===== Поля ===== */
+.evc__rows {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
 }
 
 @media (max-width: 520px) {
-    .evc-kpi-grid {
+    .evc__rows {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.evc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.evc__label {
+    font-weight: 900;
+    font-size: 13px;
+    color: #2b3a55;
+}
+
+.evc__hint {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--e-muted);
+    line-height: 1.4;
+}
+
+.evc__req {
+    margin-left: 2px;
+    font-weight: 900;
+    color: #d64545;
+    cursor: help;
+}
+
+.evc input.evc__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.evc input.evc__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.evc select.evc__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: .8px solid #b9cdee;
+    border-radius: 10px;
+    background-color: #eaf1fc;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+
+.evc input.evc__input:focus {
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.evc select.evc__input:focus {
+    border-color: #8fa8d6;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+/* вибір валюти: кнопка з прапорцем і випадний список (як у калькуляторах пального та TCO) */
+.evc__dd {
+    position: relative;
+    align-self: flex-start;
+}
+
+.evc__ddBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.evc__ddBtn:hover {
+    background: #e0eafa;
+    border-color: #8fa8d6;
+}
+
+.evc__ddBtn:focus-visible {
+    outline: none;
+    border-color: #283b69;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.evc__ddFlag {
+    display: block;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(31, 47, 85, .15);
+}
+
+.evc__caret {
+    width: 7px;
+    height: 7px;
+    margin: 0 2px 3px 2px;
+    border-right: 2px solid #1f2f55;
+    border-bottom: 2px solid #1f2f55;
+    transform: rotate(45deg);
+    transition: transform .15s ease;
+}
+
+.evc__ddBtn[aria-expanded="true"] .evc__caret {
+    transform: rotate(-135deg);
+    margin-bottom: 0;
+}
+
+.evc__ddList {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 30;
+    min-width: 250px;
+    max-height: 320px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.evc__ddList[hidden] {
+    display: none;
+}
+
+.evc__ddList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.evc__ddList li:hover,
+.evc__ddList li:focus {
+    background: #eaf1fc;
+    outline: none;
+}
+
+.evc__ddList li[aria-selected="true"] {
+    background: #dfeafb;
+    font-weight: 700;
+}
+
+.evc__ddCode {
+    flex: 0 0 38px;
+    font-weight: 700;
+    color: #1f2f55;
+}
+
+.evc__ddName {
+    color: #5b6b8c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 520px) {
+    .evc__ddList {
+        min-width: 230px;
+    }
+}
+
+/* блоки всередині картки */
+.evc__block {
+    background: #f6f7fb;
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.evc__miniTitle {
+    font-weight: 800;
+    color: var(--e-brand2);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.evc__block .evc__rows {
+    margin-top: 0;
+}
+
+/* швидкі тарифи */
+.evc__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.evc__qchip {
+    border: 1px solid #b9cdee;
+    background: #fff;
+    color: #1f2f55;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.evc__qchip:hover {
+    background: #eaf1fc;
+}
+
+/* згорнутий блок */
+.evc__details {
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    background: #f6f7fb;
+    padding: 0 14px;
+}
+
+.evc__details[open] {
+    padding-bottom: 14px;
+}
+
+.evc__details > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+    padding: 12px 0;
+}
+
+.evc__details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.evc__details > summary::after {
+    content: "▾";
+    float: right;
+    transition: transform .15s ease;
+}
+
+.evc__details[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+/* ===== Режим: чіпи зі значками ===== */
+.evc__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.evc__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid #dfe5f2;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 10px rgba(40, 59, 105, .08);
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.evc__chip .evc__ico {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: #5b78b8;
+}
+
+.evc__chip:hover {
+    transform: translateY(-1px);
+    border-color: #b9cdee;
+    background: #f6f9ff;
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 8px 16px rgba(40, 59, 105, .14);
+}
+
+.evc__chip.is-active {
+    border-color: #8fa8d6;
+    background: #eaf1fc;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(60, 99, 196, .22);
+}
+
+.evc__chip.is-active .evc__ico {
+    color: #283b69;
+}
+
+/* ===== Кнопки ===== */
+.evc__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.evc__btn {
+    height: 38px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(40, 59, 105, .35);
+    transition: filter .15s ease, transform .15s ease;
+}
+
+.evc__btn:hover {
+    filter: brightness(1.12);
+}
+
+.evc__btn:active {
+    transform: translateY(1px);
+}
+
+#exampleBtn {
+    background: #eaf1fc;
+    color: #1f2f55;
+    box-shadow: inset 0 0 0 1px #b9cdee;
+}
+
+#exampleBtn:hover {
+    background: #dfe9fa;
+    filter: none;
+}
+
+.evc__btn--wide {
+    min-width: 150px;
+    padding: 0 22px;
+}
+
+.evc__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    min-height: 16px;
+}
+
+/* ===== Результат ===== */
+.evc__result {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.evc__hintbox {
+    background: #fff4d6;
+    border: 1px solid #f0d48a;
+    color: #8a5a00;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.evc__head {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+    margin-bottom: 10px;
+}
+
+.evc__kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.evc__kpi {
+    background: #fff;
+    border: 1px solid #dfe5f2;
+    border-radius: 14px;
+    padding: 11px 12px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 6px 14px rgba(40, 59, 105, .09);
+    min-width: 0;
+}
+
+.evc__kpi--main {
+    background: linear-gradient(135deg, #eef4fd 0%, #dfe9fa 100%);
+    border-color: #c5d6f1;
+}
+
+.evc__kpiT {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.evc__kpiV {
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #1f2f55;
+    line-height: 1.2;
+}
+
+.evc__kpiM {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.35;
+}
+
+.evc__sub {
+    margin: 14px 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1f2f55;
+}
+
+.evc__note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.45;
+}
+
+/* порівняння: дешевший — м'яко-зелений, дорожчий — м'яко-червоний */
+.evc__kpi.is-win {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.evc__kpi.is-lose {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+.evc__verdict {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1f2f55;
+    background: #eaf1fc;
+    border: 1px solid #c5d6f1;
+}
+
+.evc__verdict.is-home,
+.evc__verdict.is-station {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.evc__colHead {
+    grid-column: 1 / -1;
+    margin: 6px 0 -2px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #283b69;
+}
+
+.evc-mini {
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+@media (max-width: 420px) {
+    .evc__kpiV {
+        font-size: 18px;
+    }
+
+    .evc__chip {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+}
+
+/* ===== Споріднені калькулятори ===== */
+.cc-related {
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 0 16px;
+}
+
+.cc-related h2 {
+    color: #283b69;
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.cc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cc-related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #fff;
+    text-decoration: none;
+    color: #444;
+    box-shadow: 0 6px 20px rgba(40, 59, 105, .12);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.cc-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(40, 59, 105, .2);
+}
+
+.cc-related-card b {
+    color: #283b69;
+    font-size: 15px;
+}
+
+.cc-related-card span {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+    .cc-related-grid {
         grid-template-columns: 1fr;
     }
 }
 
-.evc-kpi {
-    background: #fff;
-    border: 1px solid rgba(40, 59, 105, 0.16);
-    border-radius: 16px;
-    padding: 12px 14px;
-    box-shadow: 0 10px 25px rgba(40, 59, 105, .10);
-}
-
-.evc-kpi .kpi-title {
-    font-size: 12px;
-    font-weight: 900;
-    color: #6b7280;
-}
-
-.evc-kpi .kpi-value {
-    font-size: 20px;
-    font-weight: 900;
-    margin-top: 4px;
-}
-
-/* ===== Highlights ===== */
-.evc-kpi.is-home {
-    background: linear-gradient(180deg, #ecfdf5, #fff);
-    border-color: #86efac;
-}
-
-.evc-kpi.is-station {
-    background: linear-gradient(180deg,
-            rgba(40, 59, 105, 0.08),
-            #fff);
-}
-
-/* ===== Compare ===== */
-.evc-compare-card {
-    margin-top: 10px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(40, 59, 105, 0.16);
-    font-weight: 900;
-}
-
-.evc-compare-card.is-home {
-    background: #ecfdf5;
-    border-color: #86efac;
-    color: #14532d;
-}
-
-.evc-compare-card.is-station {
-    background: rgba(40, 59, 105, 0.06);
-    color: #1f2f55;
-}
-
-/* ===== Divider ===== */
-.divider {
+/* ===== SEO / FAQ ===== */
+.cc-divider {
+    width: 100%;
     max-width: 900px;
     margin: 20px auto;
-    border: 0;
-    border-top: 2px dashed rgba(40, 59, 105, 0.35);
+    border-top: 2px dashed rgba(40, 59, 105, .35);
 }
 
-/* ===== SEO / FAQ (1:1 TCO) ===== */
 .cc-seo,
 .cc-faq {
     max-width: 900px;
@@ -354,16 +703,19 @@
 .cc-seo h2,
 .cc-faq h2 {
     font-size: 22px;
-    font-weight: 900;
     color: #283b69;
     margin-bottom: 14px;
 }
 
 .cc-seo p {
-    font-size: 15px;
-    line-height: 1.6;
     margin-bottom: 14px;
-    color: #223;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.cc-seo a {
+    color: #283b69;
+    font-weight: 700;
 }
 
 .cc-faq-item {
@@ -376,95 +728,247 @@
 
 .cc-faq-item h3 {
     font-size: 16px;
-    font-weight: 900;
-    color: #283b69;
     margin-bottom: 6px;
+    color: #283b69;
 }
 
 .cc-faq-item p {
     font-size: 14px;
-    line-height: 1.6;
     color: #444;
-}
-/* ===== SEO: зробити підзаголовки не жирними ===== */
-.cc-seo h2 {
-    font-weight: 700;
-    /* або 500, якщо хочеш трохи щільніше */
-}
-/* Коли в "Тарифи" показана тільки одна карточка — робимо 1 колонку на всю ширину */
-.evc-tariffs.evc-tariffs--single {
-    grid-template-columns: 1fr !important;
+    line-height: 1.55;
 }
 
-/* Невеликий відступ, якщо тип розетки перенесено в тарифи */
-#socket_wrap {
-    margin-top: 10px;
-}
-/* ===== Layout fix: left stack + right align to top ===== */
-
-/* 1) Щоб права колонка вирівнювалась по верху з лівою */
-.evc-grid {
-    align-items: start;
+/* довгі списки (розетка, потужність станції) — на всю ширину рядка */
+.evc__field--full {
+    grid-column: 1 / -1;
 }
 
-/* 2) Ліва колонка: акуратний вертикальний відступ між "Дані батареї" та "Тарифи" */
-.evc-left {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    /* маленький відступ між блоками */
+/* вибір авто — той самий випадний список, що й валюта, але ширший і з групами за марками */
+.evc__dd--car {
+    align-self: stretch;
+    max-width: 340px;
 }
 
-/* 3) Прибираємо зайвий margin-top у "Результат", бо він тепер не під "Тарифами", а справа */
-.evc-right .evc-result-wrap {
-    margin-top: 0;
+.evc__dd--car .evc__ddBtn {
+    width: 100%;
+    justify-content: space-between;
 }
 
-/* 4) (опційно) На мобілці: щоб коли одна колонка, результат мав відступ зверху */
-@media (max-width: 900px) {
-    .evc-right .evc-result-wrap {
-        margin-top: 12px;
-    }
-}
-/* ===== Soft red highlight for more expensive option ===== */
-.evc-kpi.is-expensive {
-    background: linear-gradient(180deg, #fff5f5, #fff);
-    border: 1px solid #f5c2c7;
+.evc__ddLabel {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.evc-kpi.is-expensive .kpi-value {
-    color: #b42318;
-    /* м’який червоний */
-}
-/* winner/loser tint in compare */
-.evc-kpi.is-win {
-    background: linear-gradient(180deg, #ecfdf5, #fff);
-    border-color: #86efac;
-}
-
-.evc-kpi.is-lose {
-    background: linear-gradient(180deg, #fff5f5, #fff);
-    border-color: #f5c2c7;
+.evc__dd--car .evc__ddList {
+    left: 0;
+    right: auto;
+    width: 100%;
+    min-width: 280px;
+    max-width: 92vw;
+    max-height: 340px;
 }
 
-.evc-kpi.is-lose .kpi-value {
-    color: #b42318;
+.evc__ddGroup {
+    padding: 8px 10px 3px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #5b6b8c;
+    cursor: default;
+    pointer-events: none;
 }
-/* Link button same size as buttons */
-.evc-actions a.btn {
+
+.evc__ddCar {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.evc__dd--car .evc__ddName {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+/* пошук у списку авто */
+.evc__ddSearchRow {
+    position: sticky;
+    top: -6px;
+    z-index: 2;
+    margin: -6px -6px 4px;
+    padding: 8px 8px 6px;
+    background: #fff;
+    border-bottom: 1px solid #eef0f6;
+    cursor: default;
+}
+
+.evc__ddList li.evc__ddSearchRow:hover {
+    background: #fff;
+}
+
+.evc__ddSearch {
+    width: 100%;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.evc__ddSearch:focus {
+    border-color: #8fa8d6;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.evc__ddEmpty {
+    padding: 12px 10px;
+    font-size: 13px;
+    color: #5b6b8c;
+    pointer-events: none;
+}
+
+.evc__ddEmpty[hidden],
+.evc__ddList li[hidden] {
+    display: none;
+}
+
+/* тип розетки — випадний список на ширину поля */
+.evc__dd--fit {
+    align-self: stretch;
+}
+
+.evc__dd--fit .evc__ddBtn {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.evc__dd--fit .evc__ddList {
+    left: 0;
+    right: auto;
+    width: 100%;
+    min-width: 210px;
+    max-width: 92vw;
+}
+
+/* поле часу початку зарядки з власним спливаючим вікном (у стилі решти списків) */
+.evc__timeWrap {
+    position: relative;
+}
+
+.evc input.evc__input.evc__timeInput {
+    padding-right: 38px;
+}
+
+.evc__timeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    color: #5b78b8;
+    cursor: pointer;
 }
 
-/* Soft green like "cheaper from outlet" */
-.evc-btn-link-green {
-    background: #ecfdf5;
-    border: 1px solid #86efac;
-    color: #14532d;
+.evc__timeBtn:hover,
+.evc__timeBtn[aria-expanded="true"] {
+    color: #283b69;
 }
 
-.evc-btn-link-green:hover {
-    background: #dcfce7;
+.evc__timePop {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 30;
+    width: 210px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.evc__timePop[hidden] {
+    display: none;
+}
+
+.evc__timeCols {
+    display: flex;
+    gap: 8px;
+}
+
+.evc__timeCols ul {
+    flex: 1;
+    max-height: 200px;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.evc__timeCols li {
+    padding: 7px 0;
+    margin-bottom: 2px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.evc__timeCols li:hover {
+    background: #eaf1fc;
+}
+
+.evc__timeCols li.is-night {
+    background: #f1f3fa;
+}
+
+.evc__timeCols li.is-on {
+    background: #283b69;
+    color: #fff;
+    font-weight: 700;
+}
+
+.evc__timeFoot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eef0f6;
+}
+
+.evc__timeFoot button {
+    border: 0;
+    background: none;
+    color: #283b69;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.evc__timeFoot button:hover {
+    text-decoration: underline;
+}
+
+.evc__qchip.is-on {
+    background: #283b69;
+    border-color: #283b69;
+    color: #fff;
+}
+
+.evc input.evc__input[aria-invalid="true"] {
+    box-shadow: 0 0 0 2px rgba(214, 69, 69, .35), 0 3px 8px rgba(40, 59, 105, .08);
 }
