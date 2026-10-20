@@ -65,55 +65,6 @@
   summary_topups: "Поповнення",
   summary_hint: "У графіку: баланс відображається в ₴ та може бути конвертований у USD/EUR за курсом НБУ.",
 },
-      import: {
-            dash: "—",
-
-            // statuses
-            calc_ready: "Розрахунок готовий ✅",
-            err_rates_not_ready: "Курси НБУ ще не завантажились. Спробуй ще раз або перезавантаж сторінку.",
-            err_car_price: "Заповни коректну ціну авто.",
-            link_copied: "Посилання скопійовано ✅",
-            copy_link_prompt: "Скопіюй посилання:",
-            no_result_to_copy: "Немає результату для копіювання.",
-            result_copied: "Результат скопійовано ✅",
-
-            // total subline
-            total_sub_customs: "розмитнення: {pct}%",
-            total_sub_top: "найбільша стаття: {label}",
-
-            // kpis
-            kpi_car: "Ціна авто",
-            kpi_delivery: "Доставка",
-            kpi_customs: "Розмитнення",
-            kpi_cert: "Сертифікація",
-            kpi_reg: "Реєстрація",
-            kpi_other: "Інше (ТО/комісія/непередбачені)",
-
-            // customs block
-            customs_value: "Митна вартість",
-            customs_value_sub: "Ціна авто + доставка",
-            duty: "Мито (10%)",
-            duty_ev_zero: "У цій моделі для EV = 0",
-            duty_10pct: "10% від митної вартості",
-            excise: "Акциз",
-            excise_ev_zero: "Для EV = 0",
-            excise_sub: "База: {base}€ • коеф. віку: {age}",
-            vat: "ПДВ (20%)",
-            vat_sub: "20% від (митна вартість + мито + акциз)",
-            customs_total: "Разом розмитнення",
-            customs_note:
-              "<b>Примітка:</b> модель спрощена для оцінки. Реальні суми можуть залежати від пільг, категорії авто, митної оцінки та документів.",
-
-            // verdict
-            verdict_ok_title: "✅ Оцінка “під ключ” готова",
-            verdict_ok_hint:
-              "Це орієнтовний розрахунок. Реальні суми залежать від документів, митної оцінки, пільг і додаткових послуг.",
-            verdict_warn_title: "⚠️ Розмитнення займає велику частку",
-            verdict_warn_hint:
-              "Якщо сума здається завеликою — перевір обʼєм/рік/тип пального та значення витрат.",
-            verdict_short: "Під ключ: ≈ {total}. Розмитнення: {pct}% від загальної суми.",
-            verdict_long: "Найбільша стаття: <b>{label}</b> — {money} ({pct}%).",
-          },
       customs: {
         mode_ev: "Електро",
         mode_ice: "ДВЗ",
@@ -2204,50 +2155,6 @@ csv_downloaded: "CSV downloaded.",
         th_balance: "Balance ({sym})",
       },
 
-      import: {
-          dash: "—",
-
-          calc_ready: "Calculation is ready ✅",
-          err_rates_not_ready: "NBU rates are not loaded yet. Try again or reload the page.",
-          err_car_price: "Enter a valid car price.",
-          link_copied: "Link copied ✅",
-          copy_link_prompt: "Copy this link:",
-          no_result_to_copy: "No result to copy.",
-          result_copied: "Result copied ✅",
-
-          total_sub_customs: "customs: {pct}%",
-          total_sub_top: "largest item: {label}",
-
-          kpi_car: "Car price",
-          kpi_delivery: "Delivery",
-          kpi_customs: "Customs",
-          kpi_cert: "Certification",
-          kpi_reg: "Registration",
-          kpi_other: "Other (service/agent/unexpected)",
-
-          customs_value: "Customs value",
-          customs_value_sub: "Car price + delivery",
-          duty: "Duty (10%)",
-          duty_ev_zero: "In this model EV duty = 0",
-          duty_10pct: "10% of customs value",
-          excise: "Excise",
-          excise_ev_zero: "For EV = 0",
-          excise_sub: "Base: €{base} • age coef: {age}",
-          vat: "VAT (20%)",
-          vat_sub: "20% of (customs value + duty + excise)",
-          customs_total: "Total customs",
-          customs_note:
-            "<b>Note:</b> simplified estimate. Real amounts depend on benefits, vehicle category, customs valuation and documents.",
-
-          verdict_ok_title: "✅ Turnkey estimate is ready",
-          verdict_ok_hint:
-            "This is an approximate estimate. Real totals depend on documents, customs valuation, benefits and extra services.",
-          verdict_warn_title: "⚠️ Customs take a large share",
-          verdict_warn_hint:
-            "If the number looks too high, double-check engine size/year/fuel type and extra costs.",
-          verdict_short: "Turnkey: ≈ {total}. Customs: {pct}% of total.",
-          verdict_long: "Largest item: <b>{label}</b> — {money} ({pct}%).",
-        },
 
       evc: {
         hint_enter_and_calc: "Fill in the data on the left — the result will appear here.",
