@@ -62,7 +62,7 @@
 
   const els = {};
   [
-    "modeBadge", "ageBadge", "ratesBadge", "currency", "curFlag", "year", "price", "shipping",
+    "modeBadge", "ageBadge", "ratesBadge", "currency", "curFlag", "curBtn", "curCode", "curList", "year", "yearBtn", "yearLabel", "yearList", "price", "shipping",
     "usBlock", "auctionFee", "usInland", "seaFreight",
     "iceBlock", "engineCC", "evBlock", "batteryKwh", "manualBlock", "exciseRate", "ageCoef",
     "euBlock", "euOrigin", "dutyRate", "vatRate",
@@ -198,8 +198,11 @@
   }
 
   function syncFlag() {
-    const f = CUR_FLAG[els.currency?.value] || "ua";
+    const cur = els.currency?.value;
+    const f = CUR_FLAG[cur] || "ua";
     if (els.curFlag) els.curFlag.src = `/assets/flags/${f}.png`;
+    if (els.curCode) els.curCode.textContent = cur || "EUR";
+    els.curList?.querySelectorAll("li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.v === cur)));
   }
 
   // ========= 4) Категорія, двигун, регіон =========
@@ -559,6 +562,7 @@
   function setValue(k, v) {
     if (k === "year") ensureYearOption(v);
     if (els[k]) els[k].value = v;
+    if (k === "year") syncYearDd();
   }
 
   // список років випуску: від поточного до 1980 (акциз старших за 15 років однаковий)
@@ -569,6 +573,7 @@
     const opt = new Option(y, y);
     const next = Array.from(sel.options).find((o) => o.value && Number(o.value) < Number(y));
     sel.add(opt, next || null);
+    buildYearList();
   }
 
   function fillYears() {
@@ -580,6 +585,96 @@
     if (first) sel.add(first);
     for (let y = currentYear(); y >= 1980; y--) sel.add(new Option(String(y), String(y)));
     sel.value = keep;
+    buildYearList();
+  }
+
+  // ========= випадні списки: валюта (з прапорцями) та рік (сітка) =========
+  function closeCcDd(exceptKey) {
+    ["curList", "yearList"].forEach((k) => {
+      const ul = els[k];
+      if (!ul || k === exceptKey || ul.hidden) return;
+      ul.hidden = true;
+      ul.closest(".ccalc__dd")?.querySelector(".ccalc__ddBtn")?.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function toggleCcDd(listKey, btn) {
+    const ul = els[listKey];
+    if (!ul) return;
+    closeCcDd(listKey);
+    const open = ul.hidden;
+    ul.hidden = !open;
+    btn.setAttribute("aria-expanded", String(open));
+    if (open) ul.querySelector('li[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+  }
+
+  function buildYearList() {
+    if (!els.yearList || !els.year) return;
+    els.yearList.innerHTML = Array.from(els.year.options)
+      .filter((o) => o.value)
+      .map((o) => '<li role="option" tabindex="-1" data-v="' + o.value + '" aria-selected="false">' + o.value + "</li>")
+      .join("");
+    syncYearDd();
+  }
+
+  function syncYearDd() {
+    if (!els.year || !els.yearLabel) return;
+    const v = els.year.value;
+    if (els.yearLabel.dataset.ph === undefined) els.yearLabel.dataset.ph = els.yearLabel.textContent;
+    els.yearLabel.textContent = v || els.yearLabel.dataset.ph;
+    els.yearBtn?.classList.toggle("is-filled", !!v);
+    els.yearList?.querySelectorAll("li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.v === v)));
+  }
+
+  function initCcDropdowns() {
+    // валюта: список із прапорцями, кодом і назвою (з опцій прихованого select)
+    if (els.currency && els.curList) {
+      els.curList.innerHTML = Array.from(els.currency.options)
+        .map((o) => {
+          const parts = o.text.split(" — ");
+          return (
+            '<li role="option" tabindex="-1" data-v="' + o.value + '" aria-selected="false"><img class="ccalc__ddFlag" src="/assets/flags/' +
+            (CUR_FLAG[o.value] || "ua") + '.png" width="20" height="14" alt="" loading="lazy" decoding="async"><span class="ccalc__ddCode">' + o.value +
+            '</span><span class="ccalc__ddName">' + (parts[1] || "") + "</span></li>"
+          );
+        })
+        .join("");
+      syncFlag();
+    }
+    els.curBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleCcDd("curList", els.curBtn);
+    });
+    els.curList?.addEventListener("click", (e) => {
+      const li = e.target.closest("li[data-v]");
+      if (!li) return;
+      closeCcDd("");
+      els.currency.value = li.dataset.v;
+      syncFlag();
+      els.currency.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    // рік: сітка років
+    buildYearList();
+    els.yearBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleCcDd("yearList", els.yearBtn);
+    });
+    els.yearList?.addEventListener("click", (e) => {
+      const li = e.target.closest("li[data-v]");
+      if (!li) return;
+      closeCcDd("");
+      els.year.value = li.dataset.v;
+      syncYearDd();
+      els.year.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".ccalc__dd")) closeCcDd("");
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeCcDd("");
+    });
   }
 
   function fillExample() {
@@ -698,6 +793,7 @@
     if (els.ageCoef && q.get("ac") !== null) els.ageCoef.checked = q.get("ac") === "1";
     if (els.includePension) els.includePension.checked = q.get("pen") === "1";
     syncFlag();
+    syncYearDd();
     if (els.extrasDetails && ["broker", "registration", "osago", "domestic"].some((k) => !isBlank(k))) els.extrasDetails.open = true;
     // нестандартні ставки з посилання — показуємо блок відкритим
     if (els.ratesDetails && ((q.get("d") !== null && q.get("d") !== "10") || (q.get("vat") !== null && q.get("vat") !== "20"))) els.ratesDetails.open = true;
@@ -822,6 +918,8 @@
       els.currency.value = CURRENCIES.includes(keep) ? keep : "EUR";
       syncFlag();
     }
+
+    initCcDropdowns();
 
     if (els.dutyRate && isBlank("dutyRate")) els.dutyRate.value = "10";
     if (els.vatRate && isBlank("vatRate")) els.vatRate.value = "20";

@@ -1555,6 +1555,105 @@ ${perPersonHtml}
     node.addEventListener("change", () => updateRouteNote(num(globalDistance)));
   });
 
+  // ===== випадні списки замість нативних <select> (тип авто, одиниці, вид пального) — як вибір валюти =====
+  // Приховані <select> лишаються джерелом значень: код працює з ними як і раніше,
+  // а список і підпис кнопки оновлюються при будь-якій зміні значення чи варіантів (у т.ч. групи <optgroup>).
+  const SEL_DD_IDS = ["global_unit", "car1_type", "car1_consUnit", "car1_fuelType", "car1_priceUnit", "car2_type", "car2_consUnit", "car2_fuelType", "car2_priceUnit"];
+
+  function closeSelDds(except) {
+    document.querySelectorAll(".sel-dd .cur-list").forEach((ul) => {
+      if (ul === except || ul.hidden) return;
+      ul.hidden = true;
+      ul.closest(".sel-dd")?.querySelector(".cur-btn")?.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function initSelectDropdowns() {
+    const valueDesc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+    SEL_DD_IDS.forEach((id) => {
+      const sel = el(id);
+      if (!sel || sel.dataset.dd === "1") return;
+      sel.dataset.dd = "1";
+
+      const wrap = document.createElement("div");
+      wrap.className = "cur-dd sel-dd";
+      wrap.setAttribute("data-for", id);
+      wrap.innerHTML =
+        '<button type="button" class="cur-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="' + (sel.getAttribute("aria-label") || "") +
+        '"><span class="sel-label"></span><span class="cur-caret" aria-hidden="true"></span></button><ul class="cur-list" role="listbox" hidden></ul>';
+      sel.parentNode.insertBefore(wrap, sel);
+      wrap.appendChild(sel);
+      sel.hidden = true;
+      sel.style.display = "none";
+      sel.setAttribute("aria-hidden", "true");
+      sel.tabIndex = -1;
+
+      const btn = wrap.querySelector(".cur-btn");
+      const list = wrap.querySelector(".cur-list");
+      const label = wrap.querySelector(".sel-label");
+
+      const sync = () => {
+        const o = sel.selectedOptions[0];
+        label.textContent = o ? o.text : "";
+        const cur = valueDesc.get.call(sel);
+        list.querySelectorAll("li[data-v]").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.v === cur)));
+      };
+      const optLi = (o) => '<li role="option" tabindex="-1" data-v="' + o.value + '" aria-selected="false">' + o.text + "</li>";
+      const rebuild = () => {
+        list.innerHTML = Array.from(sel.children)
+          .map((n) =>
+            n.tagName === "OPTGROUP"
+              ? '<li role="presentation" class="sel-group">' + n.label + "</li>" + Array.from(n.children).map(optLi).join("")
+              : optLi(n)
+          )
+          .join("");
+        sync();
+      };
+
+      // будь-яке програмне встановлення значення (скидання, збережений стан, посилання) оновлює підпис
+      Object.defineProperty(sel, "value", {
+        configurable: true,
+        get() {
+          return valueDesc.get.call(this);
+        },
+        set(v) {
+          valueDesc.set.call(this, v);
+          sync();
+        }
+      });
+      new MutationObserver(rebuild).observe(sel, { childList: true, subtree: true });
+      rebuild();
+
+      btn.addEventListener("click", () => {
+        closeSelDds(list);
+        closeCurrencyList();
+        const open = list.hidden;
+        list.hidden = !open;
+        btn.setAttribute("aria-expanded", String(open));
+        if (open) list.querySelector('li[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+      });
+      list.addEventListener("click", (e) => {
+        const li = e.target.closest("li[data-v]");
+        if (!li) return;
+        list.hidden = true;
+        btn.setAttribute("aria-expanded", "false");
+        sel.value = li.dataset.v;
+        sel.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".sel-dd")) closeSelDds(null);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSelDds(null);
+    });
+    // відкриття списку валюти закриває інші
+    curBtn?.addEventListener("click", () => closeSelDds(null));
+  }
+
+  initSelectDropdowns();
+
   // --- init ---
   setMode(false, true);
 

@@ -877,6 +877,98 @@
   }
 
   // ---------- Події ----------
+  // ===== випадні списки замість нативних <select> (одиниці, паливо) — як вибір валюти =====
+  // Приховані <select> лишаються джерелом значень: код працює з ними як і раніше,
+  // а список і підпис кнопки оновлюються при будь-якій зміні значення чи варіантів.
+  const SEL_DD_IDS = ["dist_unit", "ice_fuel", "ice_consUnit", "fuel_priceUnit", "ev_consUnit"];
+
+  function closeSelDds(except) {
+    document.querySelectorAll(".sel-dd .cur-list").forEach((ul) => {
+      if (ul === except || ul.hidden) return;
+      ul.hidden = true;
+      ul.closest(".sel-dd")?.querySelector(".cur-btn")?.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function initSelectDropdowns() {
+    const valueDesc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+    SEL_DD_IDS.forEach((id) => {
+      const sel = el(id);
+      if (!sel || sel.dataset.dd === "1") return;
+      sel.dataset.dd = "1";
+
+      const wrap = document.createElement("div");
+      wrap.className = "cur-dd sel-dd";
+      wrap.setAttribute("data-for", id);
+      wrap.innerHTML =
+        '<button type="button" class="cur-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="' + (sel.getAttribute("aria-label") || "") +
+        '"><span class="sel-label"></span><span class="cur-caret" aria-hidden="true"></span></button><ul class="cur-list" role="listbox" hidden></ul>';
+      sel.parentNode.insertBefore(wrap, sel);
+      wrap.appendChild(sel);
+      sel.hidden = true;
+      sel.style.display = "none";
+      sel.setAttribute("aria-hidden", "true");
+      sel.tabIndex = -1;
+
+      const btn = wrap.querySelector(".cur-btn");
+      const list = wrap.querySelector(".cur-list");
+      const label = wrap.querySelector(".sel-label");
+
+      const sync = () => {
+        const o = sel.selectedOptions[0];
+        label.textContent = o ? o.text : "";
+        const cur = valueDesc.get.call(sel);
+        list.querySelectorAll("li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.v === cur)));
+      };
+      const rebuild = () => {
+        list.innerHTML = Array.from(sel.options)
+          .map((o) => '<li role="option" tabindex="-1" data-v="' + o.value + '" aria-selected="false">' + o.text + "</li>")
+          .join("");
+        sync();
+      };
+
+      // будь-яке програмне встановлення значення (скидання, приклад, збережений стан) оновлює підпис
+      Object.defineProperty(sel, "value", {
+        configurable: true,
+        get() {
+          return valueDesc.get.call(this);
+        },
+        set(v) {
+          valueDesc.set.call(this, v);
+          sync();
+        }
+      });
+      new MutationObserver(rebuild).observe(sel, { childList: true });
+      rebuild();
+
+      btn.addEventListener("click", () => {
+        closeSelDds(list);
+        closeCurrencyList();
+        const open = list.hidden;
+        list.hidden = !open;
+        btn.setAttribute("aria-expanded", String(open));
+        if (open) list.querySelector('li[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+      });
+      list.addEventListener("click", (e) => {
+        const li = e.target.closest("li[data-v]");
+        if (!li) return;
+        list.hidden = true;
+        btn.setAttribute("aria-expanded", "false");
+        sel.value = li.dataset.v;
+        sel.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".sel-dd")) closeSelDds(null);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSelDds(null);
+    });
+    // відкриття списку валюти закриває інші
+    el("cur_btn")?.addEventListener("click", () => closeSelDds(null));
+  }
+
   function bindUI() {
     buildCurrencyOptions();
     buildUnitOptions();
@@ -903,6 +995,7 @@
     });
 
     buildFuelOptions();
+    initSelectDropdowns();
 
     el("ice_fuel")?.addEventListener("change", () => {
       applyLabels();
@@ -939,7 +1032,7 @@
     el("tcoCopyBtn")?.addEventListener("click", copyResult);
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !isAutoOn() && !e.target.closest("#cur_dd, summary")) calculate();
+      if (e.key === "Enter" && !isAutoOn() && !e.target.closest("#cur_dd, .sel-dd, summary")) calculate();
     });
   }
 

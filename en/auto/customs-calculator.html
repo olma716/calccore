@@ -29,11 +29,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/customs.css?v=20261018c34" />
+    <link rel="stylesheet" href="/css/customs.css?v=20261018c36" />
 
     <!-- i18n BEFORE calculator -->
-    <script src="/js/i18n.js?v=20261018c34" defer></script>
-    <script src="/js/customs.js?v=20261018c34" defer></script>
+    <script src="/js/i18n.js?v=20261018c36" defer></script>
+    <script src="/js/customs.js?v=20261018c36" defer></script>
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -309,9 +309,10 @@
                         <div class="ccalc__rows">
                             <div class="ccalc__field">
                                 <label class="ccalc__label">Price currency</label>
-                                <div class="ccalc__curWrap">
-                                    <img class="ccalc__curFlag" data-cc="curFlag" src="/assets/flags/eu.png" width="20" height="14" alt="">
-                                    <select class="ccalc__input ccalc__curSelect" data-cc="currency">
+                                <div class="ccalc__dd">
+                                    <button type="button" class="ccalc__ddBtn" data-cc="curBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Price currency"><img class="ccalc__ddFlag" data-cc="curFlag" src="/assets/flags/eu.png" width="20" height="14" alt=""><span data-cc="curCode">EUR</span><span class="ccalc__caret" aria-hidden="true"></span></button>
+                                    <ul class="ccalc__ddList" data-cc="curList" role="listbox" aria-label="Price currency" hidden></ul>
+                                    <select data-cc="currency" hidden aria-hidden="true" tabindex="-1">
                                         <option value="EUR">EUR (€)</option>
                                         <option value="USD">USD ($)</option>
                                         <option value="UAH">UAH (₴)</option>
@@ -321,7 +322,11 @@
 
                             <div class="ccalc__field">
                                 <label class="ccalc__label">Year of manufacture <span class="ccalc__req" data-cc="yearReq" title="Required field" aria-label="Required field">*</span></label>
-                                <select class="ccalc__input" data-cc="year"><option value="">Select year</option></select>
+                                <div class="ccalc__dd ccalc__dd--year">
+                                    <button type="button" class="ccalc__ddBtn" data-cc="yearBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Year of manufacture"><span class="ccalc__ddLabel" data-cc="yearLabel">Select year</span><span class="ccalc__caret" aria-hidden="true"></span></button>
+                                    <ul class="ccalc__ddList" data-cc="yearList" role="listbox" aria-label="Year of manufacture" hidden></ul>
+                                    <select data-cc="year" hidden aria-hidden="true" tabindex="-1"><option value="">Select year</option></select>
+                                </div>
                             </div>
 
                             <div class="ccalc__field">

@@ -2863,3 +2863,94 @@
 .fuel-page .route-reset + .cur-dd {
     margin-left: 8px;
 }
+
+/* ===== Випадні списки замість нативних <select> (тип авто, одиниці, вид пального) — як вибір валюти ===== */
+.fuel-page .sel-dd {
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+.fuel-page .sel-dd .cur-btn {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.fuel-page .sel-label {
+    min-width: 0;
+    margin-right: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fuel-page .sel-dd .cur-list {
+    left: 0;
+    right: auto;
+    min-width: 100%;
+    width: max-content;
+    max-width: min(340px, 90vw);
+}
+
+.fuel-page .cur-list li.sel-group {
+    padding: 8px 10px 3px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #5b6b8c;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* одиниці поруч із полем вводу: вужча кнопка, список вирівняний по правому краю */
+.fuel-page .global-card .input-unit .sel-dd {
+    flex: 0 0 120px;
+    width: 120px;
+}
+
+.fuel-page .car-card .input-unit .sel-dd {
+    flex: 0 0 190px;
+    width: 190px;
+}
+
+.fuel-page .input-unit .sel-dd .cur-list {
+    left: auto;
+    right: 0;
+}
+
+@media (max-width: 520px) {
+    .fuel-page .car-card .input-unit .sel-dd {
+        flex: 0 0 150px;
+        width: 150px;
+    }
+}
+
+/* «Тип авто» — компактніше за повну ширину поля */
+.fuel-page .field > .sel-dd[data-for="car1_type"],
+.fuel-page .field > .sel-dd[data-for="car2_type"] {
+    max-width: 240px;
+}
+
+/* ===== «Розрахувати»: коректний hover і компактний розмір =====
+   Раніше при наведенні кнопка ставала майже прозорою (світлий фон), а текст лишався білим — вона «зникала». */
+.fuel-page .pill.primary:hover {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 6px 18px rgba(40, 59, 105, .42);
+}
+
+.fuel-page .pill.primary:active {
+    filter: none;
+    transform: translateY(0);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 2px 8px rgba(40, 59, 105, .3);
+}
+
+/* кнопка «Розрахувати» внизу блоку авто: компактна, не на всю ширину */
+.fuel-page .car-actions .pill {
+    width: auto;
+    min-width: 160px;
+    height: 38px;
+    padding: 0 22px;
+    font-size: 13px;
+}

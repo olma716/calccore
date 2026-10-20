@@ -1426,3 +1426,164 @@
         font-size: 13px;
     }
 }
+
+/* =========================================================
+   Випадні списки: валюта (прапорці) та рік (сітка) — як у калькуляторах пального та TCO
+   ========================================================= */
+.ccalc__dd {
+    position: relative;
+    align-self: flex-start;
+}
+
+.ccalc__ddBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.ccalc__ddBtn:hover {
+    background: #e0eafa;
+    border-color: #8fa8d6;
+}
+
+.ccalc__ddBtn:focus-visible {
+    outline: none;
+    border-color: #283b69;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.ccalc__ddFlag {
+    display: block;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(31, 47, 85, .15);
+}
+
+.ccalc__caret {
+    width: 7px;
+    height: 7px;
+    margin: 0 2px 3px 2px;
+    border-right: 2px solid #1f2f55;
+    border-bottom: 2px solid #1f2f55;
+    transform: rotate(45deg);
+    transition: transform .15s ease;
+}
+
+.ccalc__ddBtn[aria-expanded="true"] .ccalc__caret {
+    transform: rotate(-135deg);
+    margin-bottom: 0;
+}
+
+.ccalc__ddList {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 30;
+    min-width: 250px;
+    max-height: 320px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.ccalc__ddList[hidden] {
+    display: none;
+}
+
+.ccalc__ddList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.ccalc__ddList li:hover,
+.ccalc__ddList li:focus {
+    background: #eaf1fc;
+    outline: none;
+}
+
+.ccalc__ddList li[aria-selected="true"] {
+    background: #dfeafb;
+    font-weight: 700;
+}
+
+.ccalc__ddCode {
+    flex: 0 0 38px;
+    font-weight: 700;
+    color: #1f2f55;
+}
+
+.ccalc__ddName {
+    color: #5b6b8c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* рік: кнопка на ширину поля, список-сітка з роками */
+.ccalc__dd--year {
+    align-self: stretch;
+}
+
+.ccalc__dd--year .ccalc__ddBtn {
+    width: 100%;
+    justify-content: space-between;
+    color: #6b7280;
+}
+
+.ccalc__dd--year .ccalc__ddBtn.is-filled {
+    color: #1f2f55;
+}
+
+.ccalc__ddLabel {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ccalc__dd--year .ccalc__ddList {
+    left: 0;
+    right: auto;
+    width: 100%;
+    min-width: 170px;
+    max-width: 92vw;
+    max-height: 300px;
+}
+
+.ccalc__dd--year .ccalc__ddList li {
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 520px) {
+    .ccalc__ddList {
+        min-width: 230px;
+    }
+
+    .ccalc__dd--year .ccalc__ddList {
+        min-width: 150px;
+    }
+}
