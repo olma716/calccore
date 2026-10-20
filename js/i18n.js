@@ -161,63 +161,6 @@
         no_rate: "Немає курсу НБУ для обраної валюти.",
         pension_hint: "Пороги: до {t1} — 3%, до {t2} — 4%, понад — 5%. Для цього авто: {rate}%.",
       },
-      wheels: {
-        unit_m: "м",
-          hint_enter_and_calc: "Введи дані та натисни «Розрахувати».",
-
-          err_width_mm: "ширина (мм)",
-          err_aspect_pct: "профіль (%)",
-          err_rim_r: "диск (R)",
-          err_fill_correct_size: "Заповни коректно: {fields} для Розміру {n}.",
-
-          kpi_sidewall: "Висота профілю",
-          kpi_rim_diameter: "Діаметр диска",
-          kpi_wheel_diameter: "Діаметр колеса",
-
-          difference: "Різниця",
-          diameter: "Діаметр",
-          clearance: "Кліренс",
-          circumference: "Окружність",
-          speedometer_error: "Похибка спідометра",
-          at_100: "при 100 км/год буде ≈",
-          explanation:
-            "Пояснення: якщо окружність більша — авто проїжджає більше за 1 оберт, тому реальна швидкість вища.",
-
-          single_result: "Розмір 1: {size} • Діаметр: {dia} • Окружність: {circ}",
-          compare_line: "Порівняння: {s1} → {s2} ({band})",
-          within_2: "в межах ±2%",
-          outside_2: "поза межами ±2%",
-
-          verdict_ok_title: "✅ Можна використовувати без ризику",
-          verdict_ok_short: "Різниця діаметра: {pct}% (у межах норми).",
-          verdict_ok_long:
-            "Зміна діаметра складає {pct}%, це в межах допустимого. Похибка спідометра мінімальна, ABS/ESP працюватимуть штатно.",
-
-          verdict_warn_title: "⚠️ Допустимо, але перевір зазори",
-          verdict_warn_short: "Різниця діаметра: {pct}% (на межі ±2%).",
-          verdict_warn_long:
-            "Зміна діаметра {pct}% — на межі правила ±2%. Рекомендується перевірити зазори в арках і при повному вивороті керма.",
-
-          verdict_bad_title: "❌ Не рекомендується (ризик ABS / ESP)",
-          verdict_bad_short: "Різниця діаметра: {pct}% (поза межами ±2%).",
-          verdict_bad_long:
-            "Зміна діаметра {pct}% перевищує допустиму норму ±2%. Це може вплинути на точність спідометра, роботу ABS/ESP та зазори в арках.",
-
-          verdict_hint_bigger:
-            "Спідометр буде показувати МЕНШЕ реальної швидкості (~{err}%). Кліренс збільшиться приблизно на {mm} мм.",
-          verdict_hint_smaller:
-            "Спідометр буде показувати БІЛЬШЕ реальної швидкості (~{err}%). Кліренс зменшиться приблизно на {mm} мм.",
-          verdict_hint_same:
-            "Діаметр однаковий — кліренс і покази спідометра не зміняться.",
-          verdict_seo:
-            "Чи можна ставити {s2} замість {s1}? Подивись різницю діаметра, кліренсу та похибку спідометра.",
-
-          link_copied: "Посилання скопійовано ✅",
-          copy_link_prompt: "Скопіюй посилання:",
-          nothing_to_copy: "Немає результату для копіювання.",
-          result_copied: "Результат скопійовано ✅",
-          copy_result_prompt: "Скопіюй результат:",
-        },
 
       fuel: {
         fuel_spent: "Витрачено пального",
@@ -2422,63 +2365,6 @@ csv_downloaded: "CSV downloaded.",
           rates_none: "NBU rate: —",
           no_rate: "No NBU rate for the selected currency.",
           pension_hint: "Thresholds: up to {t1} — 3%, up to {t2} — 4%, above — 5%. For this car: {rate}%.",
-        },
-      wheels: {
-        unit_m: "m",
-          hint_enter_and_calc: "Enter values and click “Calculate”.",
-
-          err_width_mm: "width (mm)",
-          err_aspect_pct: "aspect (%)",
-          err_rim_r: "rim (R)",
-          err_fill_correct_size: "Fill in correctly: {fields} for Size {n}.",
-
-          kpi_sidewall: "Sidewall height",
-          kpi_rim_diameter: "Rim diameter",
-          kpi_wheel_diameter: "Wheel diameter",
-
-          difference: "Difference",
-          diameter: "Diameter",
-          clearance: "Ground clearance",
-          circumference: "Circumference",
-          speedometer_error: "Speedometer error",
-          at_100: "at 100 km/h actual is ≈",
-          explanation:
-            "Explanation: if circumference is larger, the car travels farther per wheel revolution, so the real speed is higher.",
-
-          single_result: "Size 1: {size} • Diameter: {dia} • Circumference: {circ}",
-          compare_line: "Comparison: {s1} → {s2} ({band})",
-          within_2: "within ±2%",
-          outside_2: "outside ±2%",
-
-          verdict_ok_title: "✅ Safe to use",
-          verdict_ok_short: "Diameter difference: {pct}% (within the normal range).",
-          verdict_ok_long:
-            "Diameter change is {pct}%, which is within the acceptable range. Speedometer error is minimal, ABS/ESP should work normally.",
-
-          verdict_warn_title: "⚠️ Acceptable, but check clearances",
-          verdict_warn_short: "Diameter difference: {pct}% (near the ±2% limit).",
-          verdict_warn_long:
-            "Diameter change is {pct}%, close to the ±2% rule. Check wheel arch clearances and full steering lock.",
-
-          verdict_bad_title: "❌ Not recommended (ABS/ESP risk)",
-          verdict_bad_short: "Diameter difference: {pct}% (outside the ±2% limit).",
-          verdict_bad_long:
-            "Diameter change of {pct}% exceeds the ±2% limit. It can affect speedometer accuracy, ABS/ESP operation and clearances.",
-
-          verdict_hint_bigger:
-            "Speedometer will show LOWER than real speed (~{err}%). Ground clearance increases by about {mm} mm.",
-          verdict_hint_smaller:
-            "Speedometer will show HIGHER than real speed (~{err}%). Ground clearance decreases by about {mm} mm.",
-          verdict_hint_same:
-            "Same diameter — ground clearance and speedometer readings won’t change.",
-          verdict_seo:
-            "Can you fit {s2} instead of {s1}? Check diameter, clearance and speedometer error.",
-
-          link_copied: "Link copied ✅",
-          copy_link_prompt: "Copy this link:",
-          nothing_to_copy: "No result to copy.",
-          result_copied: "Result copied ✅",
-          copy_result_prompt: "Copy the result:",
         },
       common: {
         unit_m: "m",
