@@ -335,35 +335,6 @@
         label_mileage: "Пробіг на рік",
         label_years: "Період володіння, років",
       },
-      brake: {
-          // labels for scenario string
-          surface: { dry: "сухо", wet: "мокро", snow: "сніг", ice: "лід" },
-          tire: { summer: "літні", winter: "зимові", studs: "шипи", allseason: "всесезон", worn: "знос" },
-          temp: { warm: "+10..+30°C", cool: "0..+10°C", cold: "<0°C" },
-
-          tile_sub: "реакція {r} м + гальм. {b} м",
-
-          verdict_invalid: "Введіть коректні дані — і побачите порівняння.",
-          verdict_baseline: "На {speed} км/год: Scenario A ≈ {a} м, Scenario B ≈ {b} м.",
-          verdict_ok: "{base} Різниця невелика: +{pct}%.",
-          verdict_warn: "{base} На Scenario B зупинка довша на +{pct}%.",
-          verdict_bad: "{base} Дуже небезпечно: відстань зростає приблизно в {ratio} раз(и).",
-
-          copy_title: "Калькулятор гальмівного шляху",
-          copy_speed: "Швидкість: {speed} км/год",
-          copy_reaction: "Реакція: {rt} c → {m} м",
-          copy_scenario_a: "Scenario A: {label}",
-          copy_scenario_b: "Scenario B: {label}",
-          copy_brake: "Гальмівний шлях: {m} м",
-          copy_total: "Повна зупинка: {m} м",
-          copy_ratio: "Різниця B/A: ~{x}×",
-
-          copy_link_btn: "Скопіювати посилання",
-          copy_result_btn: "Скопіювати результат",
-          link_copied: "Посилання скопійовано ✅",
-          result_copied: "Результат скопійовано ✅",
-          copy_failed: "Не вдалось скопіювати",
-        },
         credit: {
           nbu_badge: "Курс НБУ: {date}",
           nbu_badge_title: "Дата офіційного курсу НБУ: {date}",
@@ -2516,35 +2487,6 @@ csv_downloaded: "CSV downloaded.",
         copy_title: "TCO calculator — CalcCore",
         label_mileage: "Annual mileage",
         label_years: "Ownership period, years",
-      },
-      brake: {
-        surface: { dry: "dry", wet: "wet", snow: "snow", ice: "ice" },
-        tire: { summer: "summer tires", winter: "winter tires", studs: "studded", allseason: "all-season", worn: "worn" },
-        temp: { warm: "+10..+30°C", cool: "0..+10°C", cold: "<0°C" },
-
-        tile_sub: "reaction {r} m + braking {b} m",
-
-        verdict_invalid: "Enter valid values to see the comparison.",
-        verdict_baseline: "At {speed} km/h: Scenario A ≈ {a} m, Scenario B ≈ {b} m.",
-        verdict_ok: "{base} Small difference: +{pct}%.",
-        verdict_warn: "{base} Scenario B stop is longer by +{pct}%.",
-        verdict_bad: "{base} Very dangerous: distance increases by ~{ratio}×.",
-
-        copy_title: "Braking distance calculator",
-        copy_speed: "Speed: {speed} km/h",
-        copy_reaction: "Reaction: {rt} s → {m} m",
-        copy_scenario_a: "Scenario A: {label}",
-        copy_scenario_b: "Scenario B: {label}",
-        copy_brake: "Braking distance: {m} m",
-        copy_total: "Total stopping distance: {m} m",
-        copy_ratio: "Difference B/A: ~{x}×",
-
-        copy_link_btn: "Copy link",
-        copy_result_btn: "Copy result",
-        link_copied: "Link copied ✅",
-        result_copied: "Result copied ✅",
-        copy_failed: "Copy failed",
-        
       },
       credit: {
         nbu_badge: "NBU rate: {date}",

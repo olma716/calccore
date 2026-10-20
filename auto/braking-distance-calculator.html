@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 
 <head>
@@ -11,355 +11,396 @@
         gtag('config', 'G-D8HZ7JH41R');
     </script>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор гальмівного шляху — CalcCore</title>
+    <title>Калькулятор гальмівного шляху 2026: сніг, лід, ухил | CalcCore</title>
     <meta name="description"
-        content="Калькулятор гальмівного шляху: реакція водія, гальмівний шлях та повна зупинка. Порівняння двох сценаріїв (покриття, шини, температура)." />
+        content="Калькулятор гальмівного шляху: реакція водія, гальмування й повна зупинка на сухій, мокрій дорозі, снігу та льоду. Шини, температура, ухил, перешкода й швидкість удару." />
 
-    <!-- Canonical (IMPORTANT for SEO) -->
-    <link rel="canonical" href="https://calcscore.net/auto/braking-distance-calculator" />
+    <link rel="canonical" href="https://calccore.net/auto/braking-distance-calculator" />
+    <link rel="alternate" hreflang="uk" href="https://calccore.net/auto/braking-distance-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/auto/braking-distance-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/braking-distance.css" />
+    <link rel="stylesheet" href="/css/braking-distance.css?v=20261020brk6" />
 
-    <!-- i18n MUST be before calculator -->
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/braking-distance.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261020brk6" defer></script>
+    <script src="/js/braking-distance.js?v=20261020brk6" defer></script>
 
-    <!-- Structured data -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calcscore.net/auto/braking-distance-calculator#app",
-    "name":"Калькулятор гальмівного шляху",
-    "description":"Розрахунок гальмівного шляху: реакція водія, гальмування та повна дистанція зупинки.",
-    "url":"https://calcscore.net/auto/braking-distance-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calcscore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
-<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/auto/braking-distance-calculator#app",
+  "name": "Калькулятор гальмівного шляху",
+  "description": "Розрахунок реакції водія, гальмівного шляху й повної зупинки за швидкістю, покриттям, шинами, температурою та ухилом дороги, з перевіркою перешкоди й швидкістю удару.",
+  "url": "https://calccore.net/auto/braking-distance-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Шлях за час реакції, гальмівний шлях і повна зупинка",
+    "Покриття: суха й мокра дорога, укатаний сніг, лід",
+    "Тип шин: літні, всесезонні, зимові, шиповані, зношені, з урахуванням температури",
+    "Ухил дороги вгору й вниз",
+    "Відстань до перешкоди: чи встигнете зупинитись і з якою швидкістю вдаритесь",
+    "Порівняння двох умов (A і B) та таблиця зупинки за швидкостями 30–130 км/год",
+    "Час реакції від уважного до відволіканого водія, посилання на розрахунок"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "Чому на мокрій дорозі гальмівний шлях довший?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "На мокрому менший коефіцієнт зчеплення (μ). Менше μ → довший гальмівний шлях."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Як впливають “лисі” (зношені) шини?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Знос зменшує зчеплення, особливо на мокрій дорозі та льоду — відстань зупинки може зрости дуже різко."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Скільки метрів “з’їдає” реакція?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Реакція рахується як v·t. На 100 км/год це приблизно 27.8 м за 1 секунду."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Чи точний калькулятор?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Це спрощена модель для оцінки. Реальні значення залежать від ABS, стану гуми й гальм, покриття, навантаження, ухилу дороги та інших факторів."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Що найбільше впливає на повну дистанцію зупинки?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Найбільше впливають швидкість (зростає дуже сильно), коефіцієнт зчеплення μ (покриття/шини/температура) і час реакції водія. Повна дистанція = шлях реакції + гальмівний шлях."
-      }
+      "@type": "WebPage",
+      "@id": "https://calccore.net/auto/braking-distance-calculator#webpage",
+      "url": "https://calccore.net/auto/braking-distance-calculator",
+      "name": "Калькулятор гальмівного шляху 2026: сніг, лід, ухил | CalcCore",
+      "description": "Калькулятор гальмівного шляху: реакція водія, гальмування й повна зупинка на сухій, мокрій дорозі, снігу та льоду. Шини, температура, ухил, перешкода й швидкість удару.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/auto/braking-distance-calculator#app"
+      },
+      "dateModified": "2026-10-20",
+      "inLanguage": "uk"
     }
   ]
 }
-</script>
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/auto/braking-distance-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Від чого залежить гальмівний шлях?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Найсильніше — від швидкості (шлях росте з її квадратом), далі від зчеплення шин із дорогою (покриття, тип і стан шин, температура) та ухилу. Час реакції водія додається до гальмівного шляху як окрема частина повної зупинки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому при подвоєнні швидкості гальмівний шлях зростає вчетверо?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бо кінетична енергія пропорційна квадрату швидкості, а сила гальмування обмежена зчепленням. На сухому асфальті гальмівний шлях на 50 км/год — 11,6 м, на 100 км/год — 46,3 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим гальмівний шлях відрізняється від повної зупинки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Гальмівний шлях — це відстань від початку гальмування до зупинки. Повна зупинка включає ще шлях за час реакції. Для 100 км/год і реакції 1 с на сухому асфальті це 46,3 м + 27,8 м = 74,0 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки метрів авто проїжджає за час реакції?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Швидкість, переведена в м/с, помножена на час. На 100 км/год це 27,8 м за кожну секунду; при реакції 2 с (відволікся) — 55,6 м ще до початку гальмування."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Наскільки довше гальмування на мокрій дорозі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За типових значень приблизно на 42%: зі 100 км/год 65,5 м замість 46,3 м на сухому асфальті. Зі зношеними шинами різниця більша."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Наскільки зимові шини краще за літні на снігу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У калькуляторі літні шини на укатаному снігу мають вдвічі менше зчеплення, ніж зимові: зі 100 км/год гальмівний шлях 262 м проти 131 м. У швейцарському тесті з 50 км/год було 63 м проти 32 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи допомагають шипи?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Найбільше — на льоду: у калькуляторі шиповані шини мають зчеплення на льоду приблизно на 45% вище, ніж нешиповані зимові (гальмівний шлях зі 100 км/год 226 м проти 328 м). На снігу різниця невелика."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як ухил дороги впливає на гальмування?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На спуску гальмівний шлях довший, на підйомі коротший. На сухому асфальті зі 100 км/год спуск 10% збільшує гальмування з 46,3 м до 52,7 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи залежить гальмівний шлях від ваги авто?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У спрощеній моделі маса скорочується, і гальмівний шлях від неї не залежить. У реальності важчі авто гальмують гірше через перегрів гальм і навантаження на шини, але вирішальні — швидкість і зчеплення."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор ABS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Модель припускає оптимальне гальмування, близьке до роботи ABS. Якщо колеса блокуються, зчеплення гірше й гальмівний шлях довший, особливо на мокрому й слизькому покритті."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке швидкість удару?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Якщо перешкода ближче за повну зупинку, авто вдариться в неї з певною швидкістю: калькулятор віднімає від кінетичної енергії роботу гальмування на відстані, що лишилась. Для 100 км/год на мокрій дорозі й перешкоди за 60 м це близько 71 км/год."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Наскільки точна модель?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це спрощена оцінка за типовими значеннями зчеплення. Реальні відстані залежать від ABS, стану гальм і шин, тиску, навантаження та покриття. Для безпеки завжди закладайте запас."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="bd-page">
+<body class="brk-page">
     <div id="header"></div>
 
-    <main class="page">
-        <div class="bd-wrap">
+    <main class="container">
+        <section class="brk" id="brk">
+            <div class="brk__wrap">
 
-            <!-- TOP SEO TITLE BAR -->
-            <section class="bd-titlebar">
-                <h1 class="bd-h1">Калькулятор гальмівного шляху</h1>
-                <p class="bd-p">
-                    Порахуйте <b>реакцію водія</b>, <b>гальмівний шлях</b> і <b>повну зупинку</b>.
-                    Порівняння двох умов (Scenario A vs Scenario B): покриття, тип шин та температура.
-                </p>
-            </section>
+                <div class="brk__titlebar">
+                    <h1 class="brk__h1">Калькулятор гальмівного шляху</h1>
+                    <p class="brk__p">Скільки метрів потрібно авто, щоб зупинитись: реакція водія, гальмівний шлях і повна зупинка залежно від швидкості, покриття, шин, температури та ухилу. Вкажіть відстань до перешкоди — і побачите, чи встигнете.</p>
+                </div>
 
-            <!-- CALCULATOR SHELL -->
-            <section class="bd-shell">
-                <div class="bd-grid">
+                <div class="brk__grid">
 
                     <!-- LEFT -->
-                    <div class="bd-box">
-                        <h2>🚗 Параметри</h2>
-
-                        <div class="field">
-                            <label for="speed">Швидкість (км/год)</label>
-                            <input id="speed" type="number" min="0" step="1" value="100" />
-                            <div class="quick">
-                                <button class="pill" data-speed="30" type="button">30</button>
-                                <button class="pill" data-speed="50" type="button">50</button>
-                                <button class="pill" data-speed="80" type="button">80</button>
-                                <button class="pill" data-speed="100" type="button">100</button>
-                                <button class="pill" data-speed="130" type="button">130</button>
-                            </div>
+                    <div class="brk__card">
+                        <div class="brk__sectionTitle">
+                            <h2 class="brk__h2">Умови</h2>
                         </div>
 
-                        <div class="field">
-                            <label for="reaction">Реакція водія (сек) <span class="muted">(0.7–1.5)</span></label>
-                            <input id="reaction" type="range" min="0.7" max="1.5" step="0.05" value="1.0" />
-                            <div class="range-meta">
-                                <span>0.7</span>
-                                <span class="chip">Зараз: <b id="reactionVal">1.00</b> c</span>
-                                <span>1.5</span>
-                            </div>
-                            <button class="link" id="btnReactionAvg" type="button">Поставити середнє 1.0</button>
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <h2>⚖️ Порівняння умов</h2>
-
-                        <div class="compare-grid">
-                            <!-- Scenario A -->
-                            <div class="box">
-                                <div class="box-title">Авто 1 (Scenario A)</div>
-
-                                <div class="field">
-                                    <label for="surfaceA">Покриття</label>
-                                    <select id="surfaceA">
-                                        <option value="dry">Суха дорога</option>
-                                        <option value="wet">Мокра</option>
-                                        <option value="snow">Сніг</option>
-                                        <option value="ice">Лід</option>
-                                    </select>
-                                </div>
-
-                                <div class="field">
-                                    <label for="tireA">Тип шин</label>
-                                    <select id="tireA">
-                                        <option value="summer">Літні</option>
-                                        <option value="winter">Зимові</option>
-                                        <option value="studs">Зимові шипи</option>
-                                        <option value="allseason">Всесезон</option>
-                                        <option value="worn">“Лисі” (знос)</option>
-                                    </select>
-                                </div>
-
-                                <div class="field">
-                                    <label for="tempA">Температура</label>
-                                    <select id="tempA">
-                                        <option value="warm">+10..+30°C</option>
-                                        <option value="cool">0..+10°C</option>
-                                        <option value="cold">&lt; 0°C</option>
-                                    </select>
-                                </div>
-
-                                <div class="mu-row">
-                                    <label class="mu-label">
-                                        <input type="checkbox" id="showMu" checked />
-                                        Показувати μ
-                                    </label>
-                                    <div class="mu-val">μ: <b id="muA">—</b></div>
-                                </div>
+                        <div class="brk__stack">
+                            <div class="brk__field">
+                                <label class="brk__label" for="speed">Швидкість (км/год)</label>
+                                <input class="brk__input" id="speed" type="text" inputmode="decimal" autocomplete="off" placeholder="100" value="100">
+                                <div class="brk__qrow"><button type="button" class="brk__qchip" data-speed="30">30</button><button type="button" class="brk__qchip" data-speed="50">50</button><button type="button" class="brk__qchip" data-speed="60">60</button><button type="button" class="brk__qchip" data-speed="90">90</button><button type="button" class="brk__qchip" data-speed="110">110</button><button type="button" class="brk__qchip" data-speed="130">130</button></div>
                             </div>
 
-                            <!-- Scenario B -->
-                            <div class="box">
-                                <div class="box-title">Авто 2 (Scenario B)</div>
+                            <div class="brk__field">
+                                <label class="brk__label" for="reaction">Час реакції водія: <span class="brk__rangeVal"><span id="reactionVal">1,00</span> с</span></label>
+                                <input id="reaction" type="range" min="0.5" max="2.5" step="0.05" value="1">
+                                <div class="brk__qrow"><button type="button" class="brk__qchip" data-rt="0.7">Уважний 0,7</button><button type="button" class="brk__qchip" data-rt="1">Типовий 1,0</button><button type="button" class="brk__qchip" data-rt="1.5">Втомлений 1,5</button><button type="button" class="brk__qchip" data-rt="2">Відволікся 2,0</button></div>
+                            </div>
 
-                                <div class="field">
-                                    <label for="surfaceB">Покриття</label>
-                                    <select id="surfaceB">
-                                        <option value="dry">Суха дорога</option>
-                                        <option value="wet" selected>Мокра</option>
-                                        <option value="snow">Сніг</option>
-                                        <option value="ice">Лід</option>
-                                    </select>
+                            <div class="brk__rows">
+                                <div class="brk__field">
+                                    <label class="brk__label" for="slope">Ухил дороги (%)</label>
+                                    <input class="brk__input" id="slope" type="text" inputmode="decimal" autocomplete="off" placeholder="0">
                                 </div>
-
-                                <div class="field">
-                                    <label for="tireB">Тип шин</label>
-                                    <select id="tireB">
-                                        <option value="summer">Літні</option>
-                                        <option value="winter">Зимові</option>
-                                        <option value="studs">Зимові шипи</option>
-                                        <option value="allseason">Всесезон</option>
-                                        <option value="worn" selected>“Лисі” (знос)</option>
-                                    </select>
+                                <div class="brk__field">
+                                    <label class="brk__label" for="obstacle">Відстань до перешкоди (м)</label>
+                                    <input class="brk__input" id="obstacle" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 60">
                                 </div>
+                            </div>
+                            <div class="brk__hint">Ухил і відстань до перешкоди необовʼязкові. Ухил: вгору — плюс, вниз — мінус.</div>
 
-                                <div class="field">
-                                    <label for="tempB">Температура</label>
-                                    <select id="tempB">
-                                        <option value="warm">+10..+30°C</option>
-                                        <option value="cool">0..+10°C</option>
-                                        <option value="cold" selected>&lt; 0°C</option>
-                                    </select>
+                            <div class="brk__block" id="blockA">
+                            <div class="brk__miniTitle">Умови A</div>
+                            <div class="brk__rows">
+                                <div class="brk__field">
+                                    <label class="brk__label">Покриття</label>
+                                    <div class="brk__dd brk__dd--fit" data-dd><button type="button" class="brk__ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Покриття"><span class="brk__ddLabel"></span><span class="brk__caret" aria-hidden="true"></span></button><ul class="brk__ddList" role="listbox" aria-label="Покриття" hidden></ul><select id="surfaceA" hidden aria-hidden="true" tabindex="-1"><option value="dry" selected>Суха дорога</option><option value="wet">Мокра дорога</option><option value="snow">Укатаний сніг</option><option value="ice">Лід</option></select></div>
                                 </div>
-
-                                <div class="mu-row">
-                                    <div class="mu-val">μ: <b id="muB">—</b></div>
+                                <div class="brk__field">
+                                    <label class="brk__label">Шини</label>
+                                    <div class="brk__dd brk__dd--fit" data-dd><button type="button" class="brk__ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Шини"><span class="brk__ddLabel"></span><span class="brk__caret" aria-hidden="true"></span></button><ul class="brk__ddList" role="listbox" aria-label="Шини" hidden></ul><select id="tireA" hidden aria-hidden="true" tabindex="-1"><option value="summer" selected>Літні</option><option value="allseason">Всесезонні</option><option value="winter">Зимові (без шипів)</option><option value="studs">Зимові шиповані</option><option value="worn">Зношені літні</option></select></div>
+                                </div>
+                                <div class="brk__field brk__field--full">
+                                    <label class="brk__label">Температура</label>
+                                    <div class="brk__dd brk__dd--fit" data-dd><button type="button" class="brk__ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Температура"><span class="brk__ddLabel"></span><span class="brk__caret" aria-hidden="true"></span></button><ul class="brk__ddList" role="listbox" aria-label="Температура" hidden></ul><select id="tempA" hidden aria-hidden="true" tabindex="-1"><option value="warm" selected>Вище +7 °C</option><option value="cool">0…+7 °C</option><option value="cold">Нижче 0 °C</option></select></div>
+                                    <div class="brk__hint" id="tempHintA"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bd-actions">
-                            <button class="btn bd-btn" id="btnShare" type="button">Скопіювати посилання</button>
-                            <button class="btn bd-btn-ghost" id="btnCopy" type="button">Скопіювати результат</button>
+                            <label class="brk__check"><input type="checkbox" id="cmp"><span>Порівняти з іншими умовами</span></label>
+
+                            <div class="brk__block" id="blockB" hidden>
+                            <div class="brk__miniTitle">Умови B</div>
+                            <div class="brk__rows">
+                                <div class="brk__field">
+                                    <label class="brk__label">Покриття</label>
+                                    <div class="brk__dd brk__dd--fit" data-dd><button type="button" class="brk__ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Покриття"><span class="brk__ddLabel"></span><span class="brk__caret" aria-hidden="true"></span></button><ul class="brk__ddList" role="listbox" aria-label="Покриття" hidden></ul><select id="surfaceB" hidden aria-hidden="true" tabindex="-1"><option value="dry">Суха дорога</option><option value="wet" selected>Мокра дорога</option><option value="snow">Укатаний сніг</option><option value="ice">Лід</option></select></div>
+                                </div>
+                                <div class="brk__field">
+                                    <label class="brk__label">Шини</label>
+                                    <div class="brk__dd brk__dd--fit" data-dd><button type="button" class="brk__ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Шини"><span class="brk__ddLabel"></span><span class="brk__caret" aria-hidden="true"></span></button><ul class="brk__ddList" role="listbox" aria-label="Шини" hidden></ul><select id="tireB" hidden aria-hidden="true" tabindex="-1"><option value="summer">Літні</option><option value="allseason">Всесезонні</option><option value="winter">Зимові (без шипів)</option><option value="studs">Зимові шиповані</option><option value="worn" selected>Зношені літні</option></select></div>
+                                </div>
+                                <div class="brk__field brk__field--full">
+                                    <label class="brk__label">Температура</label>
+                                    <div class="brk__dd brk__dd--fit" data-dd><button type="button" class="brk__ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Температура"><span class="brk__ddLabel"></span><span class="brk__caret" aria-hidden="true"></span></button><ul class="brk__ddList" role="listbox" aria-label="Температура" hidden></ul><select id="tempB" hidden aria-hidden="true" tabindex="-1"><option value="warm">Вище +7 °C</option><option value="cool" selected>0…+7 °C</option><option value="cold">Нижче 0 °C</option></select></div>
+                                    <div class="brk__hint" id="tempHintB"></div>
+                                </div>
+                            </div>
                         </div>
+                        </div>
+
+                        <div class="brk__actions brk__mt12">
+                            <button class="brk__btn brk__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="brk__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="bd-box">
-                        <h2>📌 Результат</h2>
-
-                        <!-- KPI GRID: A row then B row, highlight by shorter brake distance -->
-                        <div class="kpi-grid">
-                            <!-- ROW A -->
-                            <div class="kpi kpiA" id="kpiReactA">
-                                <div class="kpi-label">Реакція — A</div>
-                                <div class="kpi-value"><span id="reactionM">—</span> <span class="kpi-unit">м</span>
-                                </div>
-                            </div>
-
-                            <div class="kpi kpiA" id="kpiBrakeA">
-                                <div class="kpi-label">Гальмівний шлях — A</div>
-                                <div class="kpi-value"><span id="brakeA">—</span> <span class="kpi-unit">м</span></div>
-                            </div>
-
-                            <div class="kpi kpiA" id="kpiTotalA">
-                                <div class="kpi-label">Повна зупинка (A+B) — A</div>
-                                <div class="kpi-value"><span id="totalA">—</span> <span class="kpi-unit">м</span></div>
-                            </div>
-
-                            <!-- ROW B -->
-                            <div class="kpi kpiB" id="kpiReactB">
-                                <div class="kpi-label">Реакція — B</div>
-                                <div class="kpi-value"><span id="reactionB">—</span> <span class="kpi-unit">м</span>
-                                </div>
-                            </div>
-
-                            <div class="kpi kpiB" id="kpiBrakeB">
-                                <div class="kpi-label">Гальмівний шлях — B</div>
-                                <div class="kpi-value"><span id="brakeB">—</span> <span class="kpi-unit">м</span></div>
-                            </div>
-
-                            <div class="kpi kpiB" id="kpiTotalB">
-                                <div class="kpi-label">Повна зупинка (A+B) — B</div>
-                                <div class="kpi-value"><span id="totalB">—</span> <span class="kpi-unit">м</span></div>
-                            </div>
+                    <div class="brk__card">
+                        <div class="brk__sectionTitle">
+                            <h2 class="brk__h2">Результат</h2>
+                            <span class="brk__badge">μ</span>
                         </div>
-
-                        <div class="verdict" id="verdictBox">
-                            <div class="verdict-icon" id="verdictIcon">—</div>
-                            <div class="verdict-text" id="verdictText">Змініть параметри — і одразу побачите різницю.
-                            </div>
+                        <div class="brk__result" id="result">Вкажіть швидкість — результат зʼявиться тут.</div>
+                        <div class="brk__actions brk__mt12">
+                            <button class="brk__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="brk__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="brk__btn" id="resetBtn" type="button">Скинути</button>
                         </div>
-
-                        <div class="divider"></div>
-
-                        <div class="tiles-head">
-                            <div>
-                                <div class="bd-mini-title">Плитки “на 100 км/год”</div>
-                                <div class="muted small">Літні, +10..+30°C, реакція 1.0</div>
-                            </div>
-                            <button class="btn bd-btn-ghost" id="btnApply100" type="button">Поставити 100</button>
-                        </div>
-
-                        <div class="tile-grid" id="tiles100"></div>
                     </div>
-
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- SEO TEXT + FAQ (always open) -->
-            <section class="bd-content">
-                <h2 class="bd-content-title">Як працює калькулятор гальмівного шляху?</h2>
-                <div class="bd-content-text">
-                    <p>
-                        Калькулятор показує, скільки метрів потрібно автомобілю, щоб повністю зупинитися, і ділить
-                        зупинку на дві
-                        частини:
-                        <b>реакція водія</b> (час, поки ви зрозуміли небезпеку і натиснули гальмо) та
-                        <b>гальмівний шлях</b> (від натискання гальма до повної зупинки).
-                    </p>
-                    <p>
-                        У блоці порівняння ви можете задати два сценарії (A і B) з різним покриттям, шинами та
-                        температурою.
-                        Плитки підсвічуються: <b>зелений</b> — де гальмівний шлях менший, <b>червоний</b> — де більший.
-                    </p>
-                    <ul>
-                        <li><b>Покриття</b> впливає на зчеплення (μ): сухо краще, мокро гірше, сніг/лід — найгірше.</li>
-                        <li><b>Тип шин</b> змінює реальне зчеплення (літні/зимові/шипи/знос).</li>
-                        <li><b>Температура</b> впливає на ефективність суміші шин та покриття.</li>
-                    </ul>
-                    <p>
-                        Результати є <b>орієнтовними</b> і потрібні для розуміння порядку величин. У реальному житті
-                        впливають ABS,
-                        стан гальм, тиск у шинах, ухил дороги та інші фактори.
-                    </p>
-                </div>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/auto/wheels-calculator"><b>Калькулятор шин і дисків</b><span>Діаметр колеса, спідометр, ширина диска та виніс ET.</span></a>
+                <a class="cc-related-card" href="/auto/oscpv-calculator"><b>Калькулятор ОСЦПВ</b><span>Орієнтовна вартість автоцивілки за вашими параметрами.</span></a>
+                <a class="cc-related-card" href="/auto/fuel-calculator"><b>Калькулятор пального</b><span>Вартість поїздки, туди й назад, порівняння двох авто.</span></a>
+            </div>
+        </section>
 
-                <h2 class="bd-content-title" style="margin-top:22px;">Часті питання</h2>
+        <div class="cc-divider"></div>
 
-                <div class="bd-faq-item">
-                    <h3>Чому на мокрій дорозі гальмівний шлях довший?</h3>
-                    <p>На мокрому менший коефіцієнт зчеплення (μ). Менше μ → довший гальмівний шлях.</p>
-                </div>
+        <section class="cc-seo">
+            <h2>Як рахується гальмівний шлях</h2>
+            <p>Повна зупинка складається з двох частин. <b>Шлях за час реакції</b> — це швидкість × час реакції водія: за цей час авто їде, поки водій ще не почав гальмувати. <b>Гальмівний шлях</b> — v² ÷ (2a), де a = g × μ — уповільнення, а μ — коефіцієнт зчеплення шин із дорогою. Для 100 км/год, реакції 1 с і сухого асфальту: <b>27,8 м</b> реакції + <b>46,3 м</b> гальмування = <b>74,0 м</b>.</p>
+            <p>Швидкість у формулі стоїть у квадраті, тому при подвоєнні швидкості гальмівний шлях зростає вчетверо: на 50 км/год він 11,6 м, на 100 км/год — 46,3 м.</p>
+            <table><thead><tr><th>Швидкість</th><th class="num">Реакція, м</th><th class="num">Гальмування, м</th><th class="num">Повна зупинка, м</th></tr></thead><tbody><tr><td>30 км/год</td><td class="num">8,3</td><td class="num">4,2</td><td class="num">12,5</td></tr><tr><td>50 км/год</td><td class="num">13,9</td><td class="num">11,6</td><td class="num">25,5</td></tr><tr><td>60 км/год</td><td class="num">16,7</td><td class="num">16,7</td><td class="num">33,3</td></tr><tr><td>90 км/год</td><td class="num">25,0</td><td class="num">37,5</td><td class="num">62,5</td></tr><tr><td>110 км/год</td><td class="num">30,6</td><td class="num">56,0</td><td class="num">86,5</td></tr><tr><td>130 км/год</td><td class="num">36,1</td><td class="num">78,2</td><td class="num">114,3</td></tr></tbody></table>
 
-                <div class="bd-faq-item">
-                    <h3>Як впливають “лисi” (зношені) шини?</h3>
-                    <p>Знос зменшує зчеплення, особливо на мокрій дорозі та льоду — відстань зупинки росте різко.</p>
-                </div>
+            <h2>Зчеплення μ: покриття, шини й температура</h2>
+            <p>Основне, що змінює гальмівний шлях, — це μ. Калькулятор бере типові значення: суха дорога 0,85, мокра 0,60, укатаний сніг 0,30 і лід 0,12 для зимових шин, а далі множить їх на коефіцієнт шини. На сухому й мокрому покритті літні та зношені шини втрачають зчеплення в холоді, а зимові — у теплі. На снігу й льоду шини розрізняються сильніше: за <a href="https://www.bluewin.ch/en/lifestyle/summer-tires-in-winter-31-meters-that-make-all-the-difference-li.3629458" target="_blank" rel="noopener">швейцарським тестом</a> з 50 км/год зимові шини зупинились на снігу за 32 м, а літні — за 63 м; за <a href="https://www.tirereviews.com/Tire-Tests/All-Season-vs-Winter-vs-Nordic-vs-Studded-Tires.htm" target="_blank" rel="noopener">тестом на льоду</a> шиповані шини гальмують помітно ефективніше за нешиповані.</p>
+            <table><thead><tr><th>Умови</th><th class="num">μ</th><th class="num">Гальмування, м</th><th class="num">Повна зупинка, м</th></tr></thead><tbody><tr><td>Суха дорога, літні шини</td><td class="num">0,85</td><td class="num">46</td><td class="num">74</td></tr><tr><td>Мокра дорога, літні шини</td><td class="num">0,60</td><td class="num">66</td><td class="num">93</td></tr><tr><td>Укатаний сніг, зимові шини</td><td class="num">0,30</td><td class="num">131</td><td class="num">159</td></tr><tr><td>Укатаний сніг, всесезонні шини</td><td class="num">0,24</td><td class="num">164</td><td class="num">192</td></tr><tr><td>Укатаний сніг, літні шини</td><td class="num">0,15</td><td class="num">262</td><td class="num">290</td></tr><tr><td>Лід, зимові шини</td><td class="num">0,12</td><td class="num">328</td><td class="num">356</td></tr><tr><td>Лід, шиповані шини</td><td class="num">0,17</td><td class="num">226</td><td class="num">254</td></tr></tbody></table>
+            <p>Це оцінки, а не сертифіковані значення: у реальності μ залежить від бренду шин, глибини протектора, складу асфальту та стану покриття.</p>
 
-                <div class="bd-faq-item">
-                    <h3>Скільки метрів “з’їдає” реакція?</h3>
-                    <p>Реакція рахується як v·t. На 100 км/год це приблизно 27.8 м за 1 секунду.</p>
-                </div>
+            <h2>Ухил дороги та перешкода</h2>
+            <p>Спуск збільшує гальмівний шлях, підйом зменшує: у моделі a = g × (μ·cosθ + sinθ). Наприклад, на сухому асфальті зі 100 км/год спуск 10% дає гальмування 52,7 м замість 46,3 м. Якщо на крутому спуску зчеплення замале, авто взагалі не зупиниться — калькулятор це покаже.</p>
+            <p>Вкажіть відстань до перешкоди — і калькулятор перевірить, чи вистачить дороги. Якщо ні, він порахує швидкість удару: на мокрій дорозі зі 100 км/год перед перешкодою за 60 м (реакція 1 с) авто дістанеться неї зі швидкістю близько <b>71 км/год</b>.</p>
+            <p class="brk-mini">Результат — орієнтовна оцінка за типовими значеннями зчеплення: реальна відстань залежить від ABS, гальм, тиску в шинах, навантаження та стану дороги. Не покладайтесь на калькулятор у питаннях безпеки.</p>
+        </section>
 
-                <div class="bd-faq-item">
-                    <h3>Чи точний калькулятор?</h3>
-                    <p>Це спрощена модель для оцінки. Реальні значення залежать від ABS, гуми, гальм, покриття і
-                        навантаження.</p>
-                </div>
-            </section>
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
 
-        </div>
+            <div class="cc-faq-item">
+                <h3>Від чого залежить гальмівний шлях?</h3>
+                <p>Найсильніше — від швидкості (шлях росте з її квадратом), далі від зчеплення шин із дорогою (покриття, тип і стан шин, температура) та ухилу. Час реакції водія додається до гальмівного шляху як окрема частина повної зупинки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому при подвоєнні швидкості гальмівний шлях зростає вчетверо?</h3>
+                <p>Бо кінетична енергія пропорційна квадрату швидкості, а сила гальмування обмежена зчепленням. На сухому асфальті гальмівний шлях на 50 км/год — 11,6 м, на 100 км/год — 46,3 м.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим гальмівний шлях відрізняється від повної зупинки?</h3>
+                <p>Гальмівний шлях — це відстань від початку гальмування до зупинки. Повна зупинка включає ще шлях за час реакції. Для 100 км/год і реакції 1 с на сухому асфальті це 46,3 м + 27,8 м = 74,0 м.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки метрів авто проїжджає за час реакції?</h3>
+                <p>Швидкість, переведена в м/с, помножена на час. На 100 км/год це 27,8 м за кожну секунду; при реакції 2 с (відволікся) — 55,6 м ще до початку гальмування.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Наскільки довше гальмування на мокрій дорозі?</h3>
+                <p>За типових значень приблизно на 42%: зі 100 км/год 65,5 м замість 46,3 м на сухому асфальті. Зі зношеними шинами різниця більша.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Наскільки зимові шини краще за літні на снігу?</h3>
+                <p>У калькуляторі літні шини на укатаному снігу мають вдвічі менше зчеплення, ніж зимові: зі 100 км/год гальмівний шлях 262 м проти 131 м. У швейцарському тесті з 50 км/год було 63 м проти 32 м.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи допомагають шипи?</h3>
+                <p>Найбільше — на льоду: у калькуляторі шиповані шини мають зчеплення на льоду приблизно на 45% вище, ніж нешиповані зимові (гальмівний шлях зі 100 км/год 226 м проти 328 м). На снігу різниця невелика.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як ухил дороги впливає на гальмування?</h3>
+                <p>На спуску гальмівний шлях довший, на підйомі коротший. На сухому асфальті зі 100 км/год спуск 10% збільшує гальмування з 46,3 м до 52,7 м.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи залежить гальмівний шлях від ваги авто?</h3>
+                <p>У спрощеній моделі маса скорочується, і гальмівний шлях від неї не залежить. У реальності важчі авто гальмують гірше через перегрів гальм і навантаження на шини, але вирішальні — швидкість і зчеплення.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор ABS?</h3>
+                <p>Модель припускає оптимальне гальмування, близьке до роботи ABS. Якщо колеса блокуються, зчеплення гірше й гальмівний шлях довший, особливо на мокрому й слизькому покритті.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке швидкість удару?</h3>
+                <p>Якщо перешкода ближче за повну зупинку, авто вдариться в неї з певною швидкістю: калькулятор віднімає від кінетичної енергії роботу гальмування на відстані, що лишилась. Для 100 км/год на мокрій дорозі й перешкоди за 60 м це близько 71 км/год.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Наскільки точна модель?</h3>
+                <p>Це спрощена оцінка за типовими значеннями зчеплення. Реальні відстані залежать від ABS, стану гальм і шин, тиску, навантаження та покриття. Для безпеки завжди закладайте запас.</p>
+            </div>
+        </section>
     </main>
 
     <div id="footer"></div>
-
     <script src="/js/layout.js"></script>
-    
 </body>
 
 </html>

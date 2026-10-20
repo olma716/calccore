@@ -15,18 +15,18 @@
 
   const T = IS_EN
     ? {
-        enter: "Enter the current tyre size — the result will appear here. Add a new size to compare.",
+        enter: "Enter the current tire size — the result will appear here. Add a new size to compare.",
         missing: "{size}: fill in {list}.",
         fillFirst: "Fill in the current size first.",
         size1: "Current size", size2: "New size",
         lblW: "width", lblA: "profile", lblR: "rim (R)",
-        errW: "{size}: tyre width must be between 100 and 450 mm.",
+        errW: "{size}: tire width must be between 100 and 450 mm.",
         errA: "{size}: profile must be between 20 and 95%.",
         errR: "{size}: rim diameter must be between 10 and 30 inches.",
         errJ: "{size}: rim width must be between 2 and 15 inches.",
         errE: "{size}: offset (ET) must be between −100 and 150 mm.",
         mm: "mm", m: "m", kmh: "km/h", km: "km", inch: "″",
-        wheelDia: "Wheel diameter", sidewall: "Sidewall height", rimDia: "Rim diameter", circ: "Circumference", revs: "Revolutions per km", tyreWidth: "Tyre width on the rim",
+        wheelDia: "Wheel diameter", sidewall: "Sidewall height", rimDia: "Rim diameter", circ: "Circumference", revs: "Revolutions per km", tireWidth: "Tire width on the rim",
         addNew: "Add a new size to compare the diameter, speedometer and wheel position.",
         verdictOkT: "Diameter difference {p} — within ±2%", verdictOkD: "Such a size is usually fitted without side effects: the speedometer and ABS/ESP keep working normally.",
         verdictWarnT: "Difference {p} — between 2% and 3%", verdictWarnD: "It may work, but check the permitted sizes in the car manual or with the manufacturer: the speedometer and ABS/ESP may deviate.",
@@ -38,14 +38,14 @@
         odo: "100 km on the odometer = {x} km actually driven",
         rimSub: "Rim",
         rimRange: "For {s} the approximate rim width is {lo}–{hi}″ (measuring rim ≈ {rm}″).",
-        rimOk: "✅ A {j}″ rim fits.", rimEdge: "⚠️ {j}″ is at the edge of the range: the tyre will be stretched or squeezed, the tyre maker’s approval is needed.", rimBad: "❌ {j}″ is outside the acceptable range — not recommended.",
+        rimOk: "✅ A {j}″ rim fits.", rimEdge: "⚠️ {j}″ is at the edge of the range: the tire will be stretched or squeezed, the tire maker’s approval is needed.", rimBad: "❌ {j}″ is outside the acceptable range — not recommended.",
         posSub: "Wheel position (by ET)",
-        outerOut: "The outer edge of the tyre moves out by {x} mm.", outerIn: "The outer edge of the tyre moves in by {x} mm (more clearance to the arch).", outerSame: "The outer edge does not move.",
+        outerOut: "The outer edge of the tire moves out by {x} mm.", outerIn: "The outer edge of the tire moves in by {x} mm (more clearance to the arch).", outerSame: "The outer edge does not move.",
         innerOut: "The inner edge gets closer to the suspension by {x} mm.", innerIn: "The inner edge moves away from the suspension by {x} mm.", innerSame: "The inner edge does not move.",
         posWarn: "⚠️ Check the clearance on the car.",
         etNeed: "To see the wheel position, enter the offset (ET) for both sizes.",
         clearNote: "Ground clearance changes by half the diameter difference.",
-        modelNote: "Estimate from nominal sizes. The real diameter depends on the brand, tread wear, pressure and load; rim width and ET are approximate — check them against the tyre maker’s table.",
+        modelNote: "Estimate from nominal sizes. The real diameter depends on the brand, tread wear, pressure and load; rim width and ET are approximate — check them against the tire maker’s table.",
         linkCopied: "Link copied ✅", copyFailed: "Could not copy 😕", reset: "Reset ✅", example: "Example filled in ✅"
       }
     : {
@@ -60,7 +60,7 @@
         errJ: "{size}: ширина диска має бути від 2 до 15 дюймів.",
         errE: "{size}: виніс (ET) має бути від −100 до 150 мм.",
         mm: "мм", m: "м", kmh: "км/год", km: "км", inch: "″",
-        wheelDia: "Діаметр колеса", sidewall: "Висота профілю", rimDia: "Діаметр диска", circ: "Окружність", revs: "Оберти на 1 км", tyreWidth: "Ширина шини на диску",
+        wheelDia: "Діаметр колеса", sidewall: "Висота профілю", rimDia: "Діаметр диска", circ: "Окружність", revs: "Оберти на 1 км", tireWidth: "Ширина шини на диску",
         addNew: "Додайте новий розмір, щоб порівняти діаметр, спідометр і положення колеса.",
         verdictOkT: "Різниця діаметра {p} — у межах ±2%", verdictOkD: "Такий розмір зазвичай ставлять без побічних ефектів: спідометр і ABS/ESP працюватимуть штатно.",
         verdictWarnT: "Різниця {p} — між 2% і 3%", verdictWarnD: "Може працювати, але звірте допустимі розміри в інструкції авто або у виробника: можливі відхилення спідометра й роботи ABS/ESP.",
@@ -229,7 +229,7 @@
         tile(T.rimDia, f1(a.rimMm) + " " + T.mm, f0(a.r) + T.inch),
         tile(T.circ, f3(a.circ / 1000) + " " + T.m, ""),
         tile(T.revs, f0(a.revs), ""),
-        tile(T.tyreWidth, f0(a.tw) + " " + T.mm, a.j != null ? inchTxt(a.j) : "")
+        tile(T.tireWidth, f0(a.tw) + " " + T.mm, a.j != null ? inchTxt(a.j) : "")
       ];
       box.innerHTML =
         '<div class="whl__kpis">' + tiles.join("") + "</div>" +
@@ -255,7 +255,7 @@
       row(T.wheelDia + ", " + T.mm, f1(a.dia), f1(b.dia), signed(r.dDia, 1)) +
       row(T.circ + ", " + T.m, f3(a.circ / 1000), f3(b.circ / 1000), signed(b.circ / 1000 - a.circ / 1000, 3)) +
       row(T.revs, f0(a.revs), f0(b.revs), signed(b.revs - a.revs, 0)) +
-      row(T.tyreWidth + ", " + T.mm, f0(a.tw), f0(b.tw), signed(b.tw - a.tw, 0)) +
+      row(T.tireWidth + ", " + T.mm, f0(a.tw), f0(b.tw), signed(b.tw - a.tw, 0)) +
       "</tbody></table>";
 
     const speedNote = r.pct > 0.005 ? T.spUnder : r.pct < -0.005 ? T.spOver : T.spSame;
