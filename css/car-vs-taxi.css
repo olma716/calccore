@@ -1,0 +1,794 @@
+/* =========================
+   Калькулятор «Власне авто чи таксі»
+   у єдиному стилі з калькуляторами пального, TCO, розмитнення, EV та шин
+   (все всередині .cvt)
+========================= */
+
+.cvt,
+.cvt * {
+    box-sizing: border-box;
+}
+
+.cvt {
+    --e-card: #fff;
+    --e-text: #222;
+    --e-muted: #6b7280;
+    --e-brand: #283b69;
+    --e-brand2: #1f2f55;
+    --e-border: #e6e8ef;
+    --e-shadow: 0 1px 3px rgba(31, 47, 85, .06), 0 10px 30px rgba(40, 59, 105, .14);
+    --e-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--e-text);
+}
+
+.cvt__wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 0 20px;
+}
+
+.cvt__titlebar {
+    background: var(--header-grad-solid, linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%));
+    color: #fff;
+    border-radius: var(--e-radius);
+    padding: 16px;
+    box-shadow: var(--e-shadow);
+    margin-bottom: 14px;
+}
+
+.cvt__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.cvt__p {
+    margin: 6px 0 0;
+    color: rgba(255, 255, 255, .92);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.cvt__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: 14px;
+    align-items: start;
+}
+
+@media (max-width: 980px) {
+    .cvt__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cvt__card {
+    background: var(--e-card);
+    border: 1px solid var(--e-border);
+    border-radius: var(--e-radius);
+    box-shadow: var(--e-shadow);
+    padding: 14px;
+    min-width: 0;
+    scroll-margin-top: 90px;
+}
+
+.cvt__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--e-border);
+}
+
+.cvt__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--e-brand2);
+}
+
+.cvt__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.cvt__auto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #2b3a55;
+    cursor: pointer;
+}
+
+.cvt__auto input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+.cvt__mt12 {
+    margin-top: 12px;
+}
+
+/* ===== Поля ===== */
+.cvt__rows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .cvt__rows {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.cvt__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.cvt__label {
+    font-weight: 900;
+    font-size: 13px;
+    color: #2b3a55;
+}
+
+.cvt__hint {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--e-muted);
+    line-height: 1.4;
+}
+
+.cvt__req {
+    margin-left: 2px;
+    font-weight: 900;
+    color: #d64545;
+    cursor: help;
+}
+
+.cvt input.cvt__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.cvt input.cvt__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.cvt select.cvt__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: .8px solid #b9cdee;
+    border-radius: 10px;
+    background-color: #eaf1fc;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+
+.cvt input.cvt__input:focus {
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.cvt select.cvt__input:focus {
+    border-color: #8fa8d6;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+/* блоки всередині картки */
+.cvt__block {
+    background: #f6f7fb;
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.cvt__miniTitle {
+    font-weight: 800;
+    color: var(--e-brand2);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.cvt__block .cvt__rows {
+    margin-top: 0;
+}
+
+/* згорнутий блок */
+.cvt__details {
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    background: #f6f7fb;
+    padding: 0 14px;
+}
+
+.cvt__details[open] {
+    padding-bottom: 14px;
+}
+
+.cvt__details > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+    padding: 12px 0;
+}
+
+.cvt__details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.cvt__details > summary::after {
+    content: "▾";
+    float: right;
+    transition: transform .15s ease;
+}
+
+.cvt__details[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+/* ===== Режим: чіпи зі значками ===== */
+.cvt__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cvt__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid #dfe5f2;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 10px rgba(40, 59, 105, .08);
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.cvt__chip .cvt__ico {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: #5b78b8;
+}
+
+.cvt__chip:hover {
+    transform: translateY(-1px);
+    border-color: #b9cdee;
+    background: #f6f9ff;
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 8px 16px rgba(40, 59, 105, .14);
+}
+
+.cvt__chip.is-active {
+    border-color: #8fa8d6;
+    background: #eaf1fc;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(60, 99, 196, .22);
+}
+
+.cvt__chip.is-active .cvt__ico {
+    color: #283b69;
+}
+
+
+/* ===== Кнопки ===== */
+.cvt__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cvt__btn {
+    height: 38px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(40, 59, 105, .35);
+    transition: filter .15s ease, transform .15s ease;
+}
+
+.cvt__btn:hover {
+    filter: brightness(1.12);
+}
+
+.cvt__btn:active {
+    transform: translateY(1px);
+}
+
+#exampleBtn {
+    background: #eaf1fc;
+    color: #1f2f55;
+    box-shadow: inset 0 0 0 1px #b9cdee;
+}
+
+#exampleBtn:hover {
+    background: #dfe9fa;
+    filter: none;
+}
+
+.cvt__btn--wide {
+    min-width: 150px;
+    padding: 0 22px;
+}
+
+.cvt__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    min-height: 16px;
+}
+
+/* ===== Результат ===== */
+.cvt__result {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.cvt__hintbox {
+    background: #fff4d6;
+    border: 1px solid #f0d48a;
+    color: #8a5a00;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.cvt__head {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+    margin-bottom: 10px;
+}
+
+.cvt__kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.cvt__kpi {
+    background: #fff;
+    border: 1px solid #dfe5f2;
+    border-radius: 14px;
+    padding: 11px 12px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 6px 14px rgba(40, 59, 105, .09);
+    min-width: 0;
+}
+
+.cvt__kpi--main {
+    background: linear-gradient(135deg, #eef4fd 0%, #dfe9fa 100%);
+    border-color: #c5d6f1;
+}
+
+.cvt__kpiT {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.cvt__kpiV {
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #1f2f55;
+    line-height: 1.2;
+}
+
+.cvt__kpiM {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.35;
+}
+
+.cvt__sub {
+    margin: 14px 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1f2f55;
+}
+
+.cvt__note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.45;
+}
+
+/* порівняння: дешевший — м'яко-зелений, дорожчий — м'яко-червоний */
+.cvt__kpi.is-win {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cvt__kpi.is-lose {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+.cvt__verdict {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1f2f55;
+    background: #eaf1fc;
+    border: 1px solid #c5d6f1;
+}
+
+.cvt__verdict.is-home,
+.cvt__verdict.is-station {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cvt__colHead {
+    grid-column: 1 / -1;
+    margin: 6px 0 -2px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #283b69;
+}
+
+.cvt-mini {
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+@media (max-width: 420px) {
+    .cvt__kpiV {
+        font-size: 18px;
+    }
+}
+
+/* ===== Споріднені калькулятори ===== */
+.cc-related {
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 0 16px;
+}
+
+.cc-related h2 {
+    color: #283b69;
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.cc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cc-related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #fff;
+    text-decoration: none;
+    color: #444;
+    box-shadow: 0 6px 20px rgba(40, 59, 105, .12);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.cc-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(40, 59, 105, .2);
+}
+
+.cc-related-card b {
+    color: #283b69;
+    font-size: 15px;
+}
+
+.cc-related-card span {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+    .cc-related-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== SEO / FAQ ===== */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, .35);
+}
+
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.cc-seo a {
+    color: #283b69;
+    font-weight: 700;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.55;
+}
+
+/* довгі списки (розетка, потужність станції) — на всю ширину рядка */
+.cvt__field--full {
+    grid-column: 1 / -1;
+}
+
+/* ===== запас ходу: додаткові елементи ===== */
+.cvt__kpi--wide {
+    grid-column: 1 / -1;
+}
+
+.cvt__kpi--main .cvt__kpiV {
+    font-size: 26px;
+}
+
+.cvt__link {
+    color: #283b69;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.cvt__verdict.is-ok {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cvt__verdict.is-bad {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+/* кнопки результату — однакової ширини на всю ширину блоку */
+#shareBtn,
+#exampleBtn,
+#resetBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 8px;
+}
+
+/* ===== власне авто чи таксі: додаткові елементи ===== */
+.cvt__mt10 {
+    margin-top: 10px;
+}
+
+.cvt__block + .cvt__block {
+    margin-top: 12px;
+}
+
+.cvt__rows[hidden] {
+    display: none;
+}
+
+.cvt__rows--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cvt__chips + .cvt__rows {
+    margin-top: 12px;
+}
+
+.cvt__details .cvt__rows {
+    margin-top: 0;
+}
+
+.cvt__verdict.is-ok {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cvt__verdict.is-warn {
+    background: #eaf6f6;
+    border-color: #b9dfe0;
+}
+
+.cvt__tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.cvt__tbl th,
+.cvt__tbl td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--e-border);
+    color: #1f2f55;
+}
+
+.cvt__tbl th {
+    text-align: left;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.cvt__tbl td {
+    text-align: right;
+}
+
+.cvt__tbl thead th {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.cvt__tbl thead th:last-child {
+    text-align: right;
+}
+
+.cvt__tbl tr.cvt__total th,
+.cvt__tbl tr.cvt__total td {
+    border-bottom: 0;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.cvt__chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 6px;
+}
+
+.cvt__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+.cvt__legend i {
+    display: inline-block;
+    width: 18px;
+    height: 4px;
+    margin-right: 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+/* вирівнювання полів: підписи різної довжини не зсувають поля, рядки підсітки спільні для обох колонок */
+@supports (grid-template-rows: subgrid) {
+    .cvt__rows > .cvt__field {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        row-gap: 0;
+        align-content: start;
+    }
+
+    .cvt__rows > .cvt__field > :nth-child(2),
+    .cvt__rows > .cvt__field > :nth-child(3) {
+        margin-top: 6px;
+    }
+}
+
+/* таблиця в SEO-тексті */
+.cc-seo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 14px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
+}
+
+.cc-seo th,
+.cc-seo td {
+    padding: 9px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e6e8ef;
+}
+
+.cc-seo th {
+    background: #eaf1fc;
+    color: #1f2f55;
+}
+
+.cc-seo tr:last-child td {
+    border-bottom: 0;
+}
+
+.cc-seo .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 520px) {
+    .cc-seo th,
+    .cc-seo td {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
+}
+
+/* підказка під полями тарифу — на всю ширину рядка */
+.cvt__rows > .cvt__hint {
+    grid-column: 1 / -1;
+}

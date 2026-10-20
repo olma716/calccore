@@ -546,54 +546,6 @@
           summary_hint: "У графіку: суми відображаються в ₴ та можуть бути конвертовані у USD/EUR за курсом НБУ."
         },
 
-        oscpv: {
-          dash: "—",
-          uah: "грн",
-
-          // buttons
-          copy_link_btn: "Скопіювати посилання",
-          copy_result_btn: "Скопіювати результат",
-          link_copied: "Посилання скопійовано ✅",
-          result_copied: "Результат скопійовано ✅",
-          copy_failed: "Не вдалось скопіювати",
-
-          // verdict
-          verdict_invalid: "Введи коректні дані — і побачиш різницю між Авто 1 та Авто 2.",
-          verdict_baseline: "Авто 1 ≈ {a} грн, Авто 2 ≈ {b} грн.",
-          verdict_ok: "{base} Різниця невелика: +{pct}%.",
-          verdict_warn: "{base} Авто 2 дорожче на +{pct}%.",
-          verdict_bad: "{base} Дуже велика різниця: приблизно в {ratio}× дорожче.",
-
-          // tiles
-          tile_range: "діапазон: {min} – {max}",
-          tile_base_and_range: "база: {base} | {min} – {max}",
-
-          regions: {
-            kyiv: "Київ",
-            oblast: "Облцентр",
-            city: "Інше місто",
-            rural: "Село/район",
-          },
-
-          insurers: {
-            market: "Середній ринок",
-            tas: "ТАС",
-            arx: "ARX",
-            pzu: "PZU",
-            uniqa: "UNIQA",
-            ingo: "INGO",
-          },
-
-          // copy text
-          copy_title: "Калькулятор ОСЦПВ (ринкова модель)",
-          copy_insurer: "Страхова",
-          copy_base: "База",
-          copy_car1: "Авто 1",
-          copy_car2: "Авто 2",
-          copy_range: "від {min} до {max}",
-          copy_avg: "середня {avg}",
-          copy_ratio: "Різниця Авто 2 / Авто 1: ~{x}×",
-        },
       comp:{
           nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
           nbu_title: "Курс НБУ (USD/EUR)",
@@ -2018,54 +1970,6 @@ csv_downloaded: "CSV downloaded.",
   err_total_zero: "Total can’t be 0.",
   err_old_new: "Enter “Old” and “New”.",
   err_old_zero: "Old value can’t be 0 to calculate percent change.",
-},
-      oscpv: {
-  dash: "—",
-  uah: "UAH",
-
-  // buttons
-  copy_link_btn: "Copy link",
-  copy_result_btn: "Copy result",
-  link_copied: "Link copied ✅",
-  result_copied: "Result copied ✅",
-  copy_failed: "Copy failed",
-
-  // verdict
-  verdict_invalid: "Enter valid values to see the difference between Car 1 and Car 2.",
-  verdict_baseline: "Car 1 ≈ {a} UAH, Car 2 ≈ {b} UAH.",
-  verdict_ok: "{base} Small difference: +{pct}%.",
-  verdict_warn: "{base} Car 2 is more expensive by +{pct}%.",
-  verdict_bad: "{base} Very large difference: roughly {ratio}× more expensive.",
-
-  // tiles
-  tile_range: "range: {min} – {max}",
-  tile_base_and_range: "base: {base} | {min} – {max}",
-
-  regions: {
-    kyiv: "Kyiv",
-    oblast: "Regional center",
-    city: "Other city",
-    rural: "Rural area",
-  },
-
-  insurers: {
-    market: "Market average",
-    tas: "TAS",
-    arx: "ARX",
-    pzu: "PZU",
-    uniqa: "UNIQA",
-    ingo: "INGO",
-  },
-
-  // copy text
-  copy_title: "OSCPV calculator (market model)",
-  copy_insurer: "Insurer",
-  copy_base: "Base",
-  copy_car1: "Car 1",
-  copy_car2: "Car 2",
-  copy_range: "from {min} to {max}",
-  copy_avg: "avg {avg}",
-  copy_ratio: "Car 2 / Car 1 ratio: ~{x}×",
 },
 
       ipoteca: {
