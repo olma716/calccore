@@ -972,3 +972,47 @@
 .evc input.evc__input[aria-invalid="true"] {
     box-shadow: 0 0 0 2px rgba(214, 69, 69, .35), 0 3px 8px rgba(40, 59, 105, .08);
 }
+
+/* ===== вирівнювання полів у два стовпці ===== */
+/* підписи різної довжини (з «необовʼязково», «грн/кВт·год») не зсувають поля: рядки підсітки спільні для обох колонок */
+@supports (grid-template-rows: subgrid) {
+    .evc__rows > .evc__field {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        row-gap: 0;
+        align-content: start;
+    }
+
+    .evc__rows > .evc__field > :nth-child(2),
+    .evc__rows > .evc__field > :nth-child(3) {
+        margin-top: 6px;
+    }
+}
+
+/* кнопки результату — однакової ширини на всю ширину блоку */
+#shareBtn,
+#exampleBtn,
+#resetBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 8px;
+}
+
+/* блоки «від розетки» і «зарядна станція» — по одному полю в рядок, щоб назви в списках не обрізались */
+@media (max-width: 520px) {
+    #home_tariff_card .evc__rows,
+    #station_tariff_card .evc__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* кнопка списку не виходить за межі колонки */
+.evc__rows .evc__dd {
+    align-self: stretch;
+}
+
+/* підказка під тарифом: порожня — не займає місця */
+.evc__field > .evc__hint:empty {
+    display: none;
+}

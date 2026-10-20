@@ -628,6 +628,22 @@
     font-weight: 700;
 }
 
+/* вирівнювання полів: підписи різної довжини не зсувають поля, рядки підсітки спільні для всіх колонок */
+@supports (grid-template-rows: subgrid) {
+    .whl__rows > .whl__field {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        row-gap: 0;
+        align-content: start;
+    }
+
+    .whl__rows > .whl__field > :nth-child(2),
+    .whl__rows > .whl__field > :nth-child(3) {
+        margin-top: 6px;
+    }
+}
+
 /* таблиця в SEO-тексті */
 .cc-seo table {
     width: 100%;

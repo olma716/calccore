@@ -963,3 +963,25 @@
     min-width: 0;
     padding: 0 8px;
 }
+
+/* ===== вирівнювання полів у два стовпці ===== */
+/* підписи різної довжини (з «необовʼязково», з одиницями) не зсувають поля: рядки підсітки спільні для обох колонок */
+@supports (grid-template-rows: subgrid) {
+    .evr__rows > .evr__field {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        row-gap: 0;
+        align-content: start;
+    }
+
+    .evr__rows > .evr__field > :nth-child(2),
+    .evr__rows > .evr__field > :nth-child(3) {
+        margin-top: 6px;
+    }
+}
+
+/* випадні списки — на всю ширину колонки */
+.evr__rows .evr__dd--fit {
+    align-self: stretch;
+}
