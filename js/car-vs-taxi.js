@@ -96,6 +96,52 @@
   const f1 = (n) => nf(n, 1);
   const state = { energy: "fuel", alt: "taxi" };
 
+  // групування тисяч під час введення: 1000000 → 1 000 000 (EN: 1,000,000); курсор лишається біля тієї самої цифри
+  const GROUP_SEP = IS_EN ? "," : " ";
+  const MONEY_IDS = ["ins","parking","credit","carPrice","other"];
+  function groupInput(inp) {
+    const v = inp.value;
+    if (!/^[\d\s\u00a0.,-]*$/.test(v)) return;
+    const pos = inp.selectionStart == null ? v.length : inp.selectionStart;
+    const digitsBefore = (v.slice(0, pos).match(/\d/g) || []).length;
+    let s = v.replace(/[\s\u00a0]/g, "");
+    const neg = s.startsWith("-");
+    if (neg) s = s.slice(1);
+    let intPart, dec = "";
+    if (IS_EN) {
+      s = s.replace(/,/g, "");
+      const i = s.indexOf(".");
+      intPart = i < 0 ? s : s.slice(0, i);
+      dec = i < 0 ? "" : "." + s.slice(i + 1).replace(/\./g, "");
+    } else {
+      const i = s.search(/[.,]/);
+      intPart = i < 0 ? s : s.slice(0, i);
+      dec = i < 0 ? "" : "," + s.slice(i + 1).replace(/[.,]/g, "");
+    }
+    intPart = intPart.replace(/^0+(?=\d)/, "").replace(/\B(?=(\d{3})+(?!\d))/g, GROUP_SEP);
+    const out = (neg ? "-" : "") + intPart + dec;
+    if (out === v) return;
+    inp.value = out;
+    let idx = out.length;
+    if (digitsBefore === 0) idx = neg ? 1 : 0;
+    else {
+      let c = 0;
+      for (let k = 0; k < out.length; k++) {
+        if (/\d/.test(out[k])) c++;
+        if (c === digitsBefore) {
+          idx = k + 1;
+          break;
+        }
+      }
+    }
+    try {
+      inp.setSelectionRange(idx, idx);
+    } catch {}
+  }
+  const groupAll = () => MONEY_IDS.forEach((id) => el(id) && groupInput(el(id)));
+  // у посиланні «Поділитись» суми без розділювачів груп
+  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s\u00a0]/g, ""));
+
   function toast(msg) {
     const n = el("toast");
     if (!n) return;
@@ -333,6 +379,7 @@
     state.alt = "taxi";
     el("fixedDetails").open = true;
     applyLabels();
+    groupAll();
     calc();
     toast(T.example);
   }
@@ -340,7 +387,7 @@
   function share() {
     const p = new URLSearchParams();
     IDS.forEach((id) => {
-      const v = (el(id).value || "").trim();
+      const v = plain((el(id).value || "").trim());
       if (v) p.set(id, v);
     });
     p.set("en", state.energy);
@@ -366,7 +413,10 @@
 
   window.addEventListener("DOMContentLoaded", () => {
     IDS.forEach((id) => {
-      el(id).addEventListener("input", calc);
+      el(id).addEventListener("input", () => {
+        if (MONEY_IDS.includes(id)) groupInput(el(id));
+        calc();
+      });
       el(id).addEventListener("keydown", (e) => {
         if (e.key === "Enter") calc();
       });
@@ -388,6 +438,7 @@
     el("shareBtn").addEventListener("click", share);
 
     const used = applyFromUrl();
+    groupAll();
     applyLabels();
     if (used) calc();
     else render({ ok: false, none: true });
