@@ -67,10 +67,25 @@
     if (detailsEl) detailsEl.innerHTML = extraHtml || "";
   };
 
+  // посилання «Або лізинг?» підставляє суму, ставку й термін у калькулятор лізингу
+  const leaseLink = el("leaseLink");
+  const leaseBase = leaseLink ? leaseLink.getAttribute("href").split("?")[0] : "";
+  function updateLeaseLink(P, annualRate, n) {
+    if (!leaseLink) return;
+    if (!(P > 0) || !(n > 0)) {
+      leaseLink.setAttribute("href", leaseBase);
+      return;
+    }
+    const q = new URLSearchParams({ price: String(Math.round(P)), term: String(n), rate: String(annualRate), loanRate: String(annualRate) });
+    leaseLink.setAttribute("href", leaseBase + "?" + q.toString());
+  }
+
   function calc() {
     const P = parseNum(loanAmount?.value);
     const annualRate = parseNum(rate?.value);
     const n = Math.round(parseNum(termMonths?.value));
+
+    updateLeaseLink(P, annualRate, n);
 
     if (!(P > 0) || !(n > 0)) {
       setResult(T.enterInputs, "");
@@ -139,6 +154,7 @@
 
   function reset() {
     [loanAmount, rate, termMonths].forEach(x => { if (x) x.value = ""; });
+    updateLeaseLink(0, 0, 0);
     setToast(T.resetDone);
     setResult(T.enterInputs, "");
     if (scheduleTbody) scheduleTbody.innerHTML = "";
@@ -204,4 +220,16 @@
 
   // ---------- init ----------
   setResult(T.enterInputs, "");
+
+  // параметри з посилання (з калькулятора лізингу): amount (price), rate, term
+  {
+    const q = new URLSearchParams(location.search);
+    const amt = q.get("amount") ?? q.get("price");
+    if (amt || q.has("rate") || q.has("term")) {
+      if (amt && loanAmount) loanAmount.value = amt;
+      if (q.has("rate") && rate) rate.value = q.get("rate");
+      if (q.has("term") && termMonths) termMonths.value = q.get("term");
+      calc();
+    }
+  }
 })();

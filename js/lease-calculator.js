@@ -36,8 +36,11 @@
         kResMini: "the car is returned", kEndMini: "you keep the car",
         tblItem: "Item", tblSum: "per month",
         rowDep: "Depreciation / principal", rowFin: "Interest", rowVat: "VAT", rowIns: "Insurance",
-        cmpTitle: "Comparison with a car loan", cmpItem: "", cmpLease: "Lease", cmpLoan: "Loan",
-        cPay: "Monthly payment", cPaid: "Total paid (with the down payment)", cEnd: "Car value at the end", cNet: "Net cost of using the car",
+        cmpTitle: "Comparison with a car loan",
+        cmpLine: "Net cost of using the car: lease {a} vs loan {b}.",
+        cmpPay: "Monthly payment: lease {a}, loan {b}.",
+        cmpLink: "Calculate the car loan in detail →",
+        cmpNeed: "To compare with a car loan, enter the loan rate in the “Comparison with a car loan” block.",
         cmpAssume: "Loan: the same down payment and term, rate {r}%. Car value at the end: {m}% of the price.",
         cmpLeaseCheaper: "Lease is cheaper than a loan by {x} over the term.",
         cmpLoanCheaper: "A loan is cheaper than a lease by {x} over the term.",
@@ -70,8 +73,11 @@
         kResMini: "авто повертається", kEndMini: "авто залишається вам",
         tblItem: "Стаття", tblSum: "на місяць",
         rowDep: "Амортизація / тіло", rowFin: "Відсотки", rowVat: "ПДВ", rowIns: "Страхування",
-        cmpTitle: "Порівняння з кредитом на авто", cmpItem: "", cmpLease: "Лізинг", cmpLoan: "Кредит",
-        cPay: "Щомісячний платіж", cPaid: "Всього сплачено (з авансом)", cEnd: "Вартість авто наприкінці", cNet: "Чиста вартість користування авто",
+        cmpTitle: "Порівняння з кредитом на авто",
+        cmpLine: "Чиста вартість користування авто: лізинг {a} проти кредиту {b}.",
+        cmpPay: "Щомісячний платіж: лізинг {a}, кредит {b}.",
+        cmpLink: "Розрахувати автокредит детально →",
+        cmpNeed: "Щоб порівняти з кредитом на авто, вкажіть ставку кредиту в блоці «Порівняння з кредитом».",
         cmpAssume: "Кредит: той самий аванс і термін, ставка {r}%. Вартість авто наприкінці: {m}% від ціни.",
         cmpLeaseCheaper: "Лізинг дешевший за кредит на {x} за термін.",
         cmpLoanCheaper: "Кредит дешевший за лізинг на {x} за термін.",
@@ -148,7 +154,7 @@
       if (!(resPct >= 0 && resPct <= (op ? 95 : 100))) return { ok: false, msg: op ? T.errRes : T.errBuy };
     }
     const comm = opt("comm", T.lblComm, 0, 10), ins = opt("ins", T.lblIns, 0, 20), vat = opt("vat", T.lblVat, 0, 30), other = opt("other", T.lblOther, 0, 1e9);
-    const loanRate = opt("loanRate", T.lblLoanRate, 0, 100, rate);
+    const loanRate = opt("loanRate", T.lblLoanRate, 0, 100, 0);
     const market = opt("market", T.lblMarket, 0, 200, resPct);
     for (const r of [comm, ins, vat, other, loanRate, market]) if (r.err) return { ok: false, msg: r.err };
 
@@ -176,18 +182,20 @@
     const total = start + monthly * n + buyoutPaid;
     const interestTotal = interest * n;
 
-    // кредит
-    const loanPay = annuity(P, 0, loanRate.v, n);
-    const loanTotal = down + loanPay * n;
-    const mv = (price * market.v) / 100;
-    const leaseNet = op ? total : total - mv;
-    const loanNet = loanTotal - mv;
+    // кредит — лише якщо вказано ставку кредиту
+    let cmp = null;
+    if (loanRate.given) {
+      const loanPay = annuity(P, 0, loanRate.v, n);
+      const loanTotal = down + loanPay * n;
+      const mv = (price * market.v) / 100;
+      cmp = { loanRate: loanRate.v, loanPay, loanTotal, market: market.v, mv, leaseNet: op ? total : total - mv, loanNet: loanTotal - mv };
+    }
 
     return {
       ok: true, op, price, down, n, rate, resPct, resAmt, P,
       dep, interest, vatM, insM, base, monthly, start, buyout, buyoutPaid, total, interestTotal,
       comm: (price * comm.v) / 100, other: other.v, vatTotal: base * (k - 1) * n + buyout * (k - 1), insTotal: insM * n,
-      loanRate: loanRate.v, loanPay, loanTotal, loanInterest: loanPay * n - P, market: market.v, mv, leaseNet, loanNet
+      cmp
     };
   }
 
@@ -238,20 +246,23 @@
       tile(T.kTotal, money(r.total), r.op ? T.kResMini : T.kEndMini) +
       tile(r.op ? T.kRes : T.kEnd, money(r.resAmt), r.op ? T.kResMini : T.kEndMini);
 
-    // порівняння
-    const diff = r.loanNet - r.leaseNet; // > 0: лізинг дешевший
-    const same = Math.abs(diff) <= Math.max(r.loanNet, r.leaseNet, 1) * 0.01;
-    const verdict = same ? T.cmpSame : diff > 0 ? fill(T.cmpLeaseCheaper, { x: money(Math.abs(diff)) }) : fill(T.cmpLoanCheaper, { x: money(Math.abs(diff)) });
-    const vcls = same ? "" : diff > 0 ? "is-ok" : "is-warn";
-    const cmp =
-      '<div class="lse__sub">' + T.cmpTitle + "</div>" +
-      '<div class="lse__verdict ' + vcls + '"><b>' + verdict + "</b></div>" +
-      '<table class="lse__tbl lse__tbl--cmp"><thead><tr><th></th><th>' + T.cmpLease + "</th><th>" + T.cmpLoan + "</th></tr></thead><tbody>" +
-      "<tr><th>" + T.cPay + "</th><td>" + f0(r.monthly) + "</td><td>" + f0(r.loanPay) + "</td></tr>" +
-      "<tr><th>" + T.cPaid + "</th><td>" + f0(r.total) + "</td><td>" + f0(r.loanTotal) + "</td></tr>" +
-      "<tr><th>" + T.cEnd + "</th><td>" + (r.op ? "—" : f0(r.mv)) + "</td><td>" + f0(r.mv) + "</td></tr>" +
-      '<tr class="lse__total"><th>' + T.cNet + "</th><td>" + f0(r.leaseNet) + "</td><td>" + f0(r.loanNet) + "</td></tr></tbody></table>" +
-      '<div class="lse__note">' + fill(T.cmpAssume, { r: f1(r.loanRate), m: f1(r.market) }) + (r.op ? " " + T.cmpNoOwn : "") + "</div>";
+    // порівняння з кредитом — один вердикт; без ставки кредиту лише підказка
+    let cmp = "";
+    if (r.cmp) {
+      const c = r.cmp;
+      const diff = c.loanNet - c.leaseNet; // > 0: лізинг дешевший
+      const same = Math.abs(diff) <= Math.max(c.loanNet, c.leaseNet, 1) * 0.01;
+      const verdict = same ? T.cmpSame : diff > 0 ? fill(T.cmpLeaseCheaper, { x: money(Math.abs(diff)) }) : fill(T.cmpLoanCheaper, { x: money(Math.abs(diff)) });
+      const vcls = same ? "" : diff > 0 ? "is-ok" : "is-warn";
+      const loanUrl = (IS_EN ? "/en" : "") + "/auto/loan-amortization-calculator?" + new URLSearchParams({ amount: String(Math.round(r.P)), rate: String(c.loanRate), term: String(r.n) }).toString();
+      cmp =
+        '<div class="lse__sub">' + T.cmpTitle + "</div>" +
+        '<div class="lse__verdict ' + vcls + '"><b>' + fill(T.cmpLine, { a: money(c.leaseNet), b: money(c.loanNet) }) + "</b><br>" + verdict + "</div>" +
+        '<div class="lse__note">' + fill(T.cmpPay, { a: money(r.monthly), b: money(c.loanPay) }) + " " + fill(T.cmpAssume, { r: f1(c.loanRate), m: f1(c.market) }) + (r.op ? " " + T.cmpNoOwn : "") + "</div>" +
+        '<a class="lse__link" href="' + loanUrl + '">' + T.cmpLink + "</a>";
+    } else {
+      cmp = '<div class="lse__note">' + T.cmpNeed + "</div>";
+    }
 
     box.innerHTML =
       '<div class="lse__kpis">' + tiles + "</div>" + cmp +
