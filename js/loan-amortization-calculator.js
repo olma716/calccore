@@ -11,51 +11,47 @@
 
   const T = IS_EN
     ? {
-        enter: "Enter the loan amount (or the car price), the rate and the term — the result will appear here.",
+        enter: "Enter the loan amount, the rate and the term — the result will appear here.",
         missing: "To calculate, fill in: {list}.",
-        lblAmount: "loan amount (or car price)", lblRate: "annual rate", lblTerm: "term",
+        lblAmount: "loan amount", lblRate: "annual rate", lblTerm: "term",
         errAmount: "Loan amount must be between 1 000 and 1 000 000 000.",
         errDown: "The down payment must be between 0 and the car price.",
         errTerm: "Term must be a whole number of months from 1 to 360.",
         errRate: "Annual rate must be between 0 and 100%.",
         errNum: "Check the value in the field “{f}”.",
         errLumpMonth: "The month of the one-time payment must be a whole number from 1 to the loan term.",
-        lblPrice: "Car price", lblDown: "Down payment", lblComm: "Commission", lblIns: "Insurance", lblExtra: "Extra payment per month", lblLump: "One-time payment",
+        lblComm: "Commission", lblIns: "Insurance", lblExtra: "Extra payment per month", lblLump: "One-time payment",
         cur: { UAH: "UAH", USD: "USD", EUR: "EUR" },
-        perMo: "/ month",
-        pay: "Monthly payment", payDiffMini: "first {a}, last {b}", payAnnMini: "{n} months, loan {l}",
+                pay: "Monthly payment", payDiffMini: "first {a}, last {b}", payAnnMini: "{n} months, loan {l}",
         kInt: "Total interest", kPaid: "Total paid on the loan", kCost: "Total cost of credit", kOver: "Overpayment", kApr: "Real annual rate (approx.)",
         kCostMini: "interest + fees + insurance", kOverMini: "of the loan amount", kAprMini: "with commission and insurance",
         earlyTitle: "Early repayment", earlySaved: "You save {x} on interest and finish {m} months earlier ({t} instead of {n}).",
         earlyNone: "Early repayment does not shorten the loan with these amounts.",
-        schedTitle: "Payment schedule", byMonth: "By month", byYear: "By year", tools: "Tools",
-        thMonth: "Month", thYear: "Year", thPay: "Payment", thInt: "Interest", thPrin: "Principal", thExtra: "Early", thBal: "Balance", thTotal: "Total",
-        copyTbl: "Copy the table", csv: "Download CSV", tableCopied: "Table copied ✅", csvDone: "CSV downloaded ✅",
+                thMonth: "Month", thYear: "Year", thPay: "Payment", thInt: "Interest", thPrin: "Principal", thExtra: "Early", thBal: "Balance", thTotal: "Total",
+        tableCopied: "Table copied ✅", csvDone: "CSV downloaded ✅",
         chartTitle: "What all payments consist of", legPrin: "Principal", legInt: "Interest", legComm: "Fee", legIns: "Insurance", donutTotal: "in total",
         modelNote: "Estimate: real terms, fees and insurance are set by the bank. The real annual rate is approximate — check it in the loan agreement.",
         linkCopied: "Link copied ✅", copyFailed: "Could not copy 😕", reset: "Reset ✅", example: "Example filled in ✅"
       }
     : {
-        enter: "Вкажіть суму кредиту (або ціну авто), ставку й термін — результат зʼявиться тут.",
+        enter: "Вкажіть суму кредиту, ставку й термін — результат зʼявиться тут.",
         missing: "Щоб порахувати, заповніть: {list}.",
-        lblAmount: "суму кредиту (або ціну авто)", lblRate: "річну ставку", lblTerm: "термін",
+        lblAmount: "суму кредиту", lblRate: "річну ставку", lblTerm: "термін",
         errAmount: "Сума кредиту має бути від 1 000 до 1 000 000 000.",
         errDown: "Аванс має бути від 0 до ціни авто.",
         errTerm: "Термін — ціле число місяців від 1 до 360.",
         errRate: "Річна ставка має бути від 0 до 100%.",
         errNum: "Перевірте значення в полі «{f}».",
         errLumpMonth: "Місяць одноразового платежу — ціле число від 1 до терміну кредиту.",
-        lblPrice: "Ціна авто", lblDown: "Аванс", lblComm: "Комісія", lblIns: "Страхування", lblExtra: "Додатковий платіж на місяць", lblLump: "Одноразовий платіж",
+        lblComm: "Комісія", lblIns: "Страхування", lblExtra: "Додатковий платіж на місяць", lblLump: "Одноразовий платіж",
         cur: { UAH: "грн", USD: "USD", EUR: "EUR" },
-        perMo: "/ міс",
-        pay: "Щомісячний платіж", payDiffMini: "перший {a}, останній {b}", payAnnMini: "{n} міс, кредит {l}",
+                pay: "Щомісячний платіж", payDiffMini: "перший {a}, останній {b}", payAnnMini: "{n} міс, кредит {l}",
         kInt: "Всього відсотків", kPaid: "Всього сплачено за кредитом", kCost: "Повна вартість кредиту", kOver: "Переплата", kApr: "Реальна річна ставка (орієнтовно)",
         kCostMini: "відсотки + комісія + страхування", kOverMini: "від суми кредиту", kAprMini: "з комісією та страхуванням",
         earlyTitle: "Дострокове погашення", earlySaved: "Ви заощадите {x} на відсотках і закриєте кредит на {m} міс раніше ({t} замість {n}).",
         earlyNone: "За таких сум дострокове погашення не скорочує кредит.",
-        schedTitle: "Графік платежів", byMonth: "По місяцях", byYear: "По роках", tools: "Інструменти",
-        thMonth: "Місяць", thYear: "Рік", thPay: "Платіж", thInt: "Відсотки", thPrin: "Тіло", thExtra: "Достроково", thBal: "Залишок", thTotal: "Разом",
-        copyTbl: "Копіювати таблицю", csv: "Завантажити CSV", tableCopied: "Таблицю скопійовано ✅", csvDone: "CSV завантажено ✅",
+                thMonth: "Місяць", thYear: "Рік", thPay: "Платіж", thInt: "Відсотки", thPrin: "Тіло", thExtra: "Достроково", thBal: "Залишок", thTotal: "Разом",
+        tableCopied: "Таблицю скопійовано ✅", csvDone: "CSV завантажено ✅",
         chartTitle: "З чого складаються всі виплати", legPrin: "Тіло кредиту", legInt: "Відсотки", legComm: "Комісія", legIns: "Страхування", donutTotal: "усього",
         modelNote: "Оцінка: реальні умови, комісії й страхування задає банк. Реальна річна ставка орієнтовна — звіряйте її з кредитним договором.",
         linkCopied: "Посилання скопійовано ✅", copyFailed: "Не вдалось скопіювати 😕", reset: "Скинуто ✅", example: "Підставлено приклад ✅"
@@ -125,6 +121,17 @@
   // у посиланні «Поділитись» суми без розділювачів груп
   const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s\u00a0]/g, ""));
 
+  // сума підставляється, коли вказано і ціну, і аванс (0 — без авансу), інакше не дублює ціну;
+  // якщо потім змінити суму вручну, діє ваше значення
+  function syncAmount() {
+    if (blank("price") || blank("down")) return;
+    const price = num(el("price").value);
+    const down = num(el("down").value);
+    if (!(price >= 0) || !(down >= 0) || down > price) return;
+    el("amount").value = String(Math.round((price - down) * 100) / 100);
+    groupInput(el("amount"));
+  }
+
   function toast(msg) {
     const n = el("toast");
     if (!n) return;
@@ -177,10 +184,9 @@
 
   // ===== розрахунок =====
   function compute() {
-    const hasAmount = !blank("amount");
     const hasPrice = !blank("price");
     const miss = [];
-    if (!hasAmount && !hasPrice) miss.push(T.lblAmount);
+    if (blank("amount")) miss.push(T.lblAmount);
     if (blank("rate")) miss.push(T.lblRate);
     if (blank("term")) miss.push(T.lblTerm);
     if (miss.length) {
@@ -196,9 +202,7 @@
       down = num(el("down").value);
       if (!(down >= 0 && (hasPrice ? down <= price : down <= 1e9))) return { ok: false, msg: T.errDown };
     }
-    let P;
-    if (hasAmount) P = num(el("amount").value);
-    else P = price - down;
+    const P = num(el("amount").value);
     if (!(P >= 1000 && P <= 1e9)) return { ok: false, msg: T.errAmount };
     const rate = num(el("rate").value);
     if (!(rate >= 0 && rate <= 100)) return { ok: false, msg: T.errRate };
@@ -407,20 +411,21 @@
     state.type = "ann";
     state.cur = "UAH";
     state.view = "month";
-    ["extraDetails", "earlyDetails"].forEach((id) => (el(id).open = false));
+    ["extraDetails", "earlyDetails", "priceDetails"].forEach((id) => (el(id).open = false));
     applyState();
     syncTermChips();
     render({ ok: false, none: true });
   }
 
   function fillExample() {
-    const v = { price: "800000", down: "100000", amount: "", rate: "12", term: "36", comm: "1", ins: "", extra: "5000", lump: "", lumpMonth: "" };
+    const v = { price: "800000", down: "100000", amount: "700000", rate: "12", term: "36", comm: "1", ins: "", extra: "5000", lump: "", lumpMonth: "" };
     IDS.forEach((id) => (el(id).value = IS_EN ? v[id] : v[id].replace(".", ",")));
     state.type = "ann";
     state.cur = "UAH";
     state.view = "month";
     el("extraDetails").open = true;
     el("earlyDetails").open = true;
+    el("priceDetails").open = true;
     applyState();
     syncTermChips();
     groupAll();
@@ -451,6 +456,12 @@
     });
     if (q.get("type") === "diff") state.type = "diff";
     if (["USD", "EUR"].includes(q.get("cur"))) state.cur = q.get("cur");
+    if (blank("amount") && !blank("price")) {
+      const price = num(el("price").value);
+      const down = blank("down") ? 0 : num(el("down").value);
+      if (price >= 0 && down >= 0 && down <= price) el("amount").value = String(Math.round((price - down) * 100) / 100);
+    }
+    if (["price", "down"].some((id) => !blank(id))) el("priceDetails").open = true;
     if (["comm", "ins"].some((id) => !blank(id))) el("extraDetails").open = true;
     if (["extra", "lump"].some((id) => !blank(id))) el("earlyDetails").open = true;
     return any || q.has("type") || q.has("cur");
@@ -460,6 +471,7 @@
     IDS.forEach((id) => {
       el(id).addEventListener("input", () => {
         if (MONEY_IDS.includes(id)) groupInput(el(id));
+        if (id === "price" || id === "down") syncAmount();
         if (id === "term") syncTermChips();
         calc();
       });

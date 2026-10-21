@@ -25,10 +25,10 @@
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/loan-amortization.css?v=20261021lan6" />
+    <link rel="stylesheet" href="/css/loan-amortization.css?v=20261021lan12" />
 
-    <script src="/js/i18n.js?v=20261021lan6" defer></script>
-    <script src="/js/loan-amortization-calculator.js?v=20261021lan6" defer></script>
+    <script src="/js/i18n.js?v=20261021lan12" defer></script>
+    <script src="/js/loan-amortization-calculator.js?v=20261021lan12" defer></script>
 
     <script type="application/ld+json">
 {
@@ -209,19 +209,24 @@
                                 <button id="typeDiff" class="lan__chip" type="button" aria-pressed="false"><svg class="lan__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l16 12"/><path d="M4 18V6"/><path d="M4 18h16"/></svg><span>Диференційований</span></button>
                             </div>
                             <div class="lan__rows">
-                                <div class="lan__hint lan__chipsRow">Вкажіть суму кредиту або ціну авто (з авансом).</div>
-                                <div class="lan__field">
-                                    <label class="lan__label" for="price">Ціна авто</label>
-                                    <input class="lan__input" id="price" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 800000">
-                                </div>
-                                <div class="lan__field">
-                                    <label class="lan__label" for="down">Аванс</label>
-                                    <input class="lan__input" id="down" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 100000">
-                                </div>
                                 <div class="lan__field lan__field--full">
-                                    <label class="lan__label" for="amount">Сума кредиту</label>
-                                    <input class="lan__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 700000"><div class="lan__hint">Якщо порожнє, береться ціна авто мінус аванс.</div>
+                                    <label class="lan__label" for="amount">Сума кредиту <span class="lan__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="lan__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 700000"><div class="lan__hint">Не знаєте суму? Порахуйте її нижче з ціни авто й авансу.</div>
                                 </div>
+                                <details class="lan__details lan__chipsRow" id="priceDetails">
+                                    <summary><span class="lan__sumIco"><svg class="lan__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span><span>Порахувати суму з ціни авто й авансу <span class="lan__hint">(необовʼязково)</span></span></summary>
+                                    <div class="lan__rows">
+                                        <div class="lan__field">
+                                    <label class="lan__label" for="price">Ціна авто</label>
+                                    <input class="lan__input" id="price" type="text" inputmode="decimal" autocomplete="off" placeholder="800 000">
+                                </div>
+                                        <div class="lan__field">
+                                    <label class="lan__label" for="down">Аванс</label>
+                                    <input class="lan__input" id="down" type="text" inputmode="decimal" autocomplete="off" placeholder="100 000">
+                                </div>
+                                    </div>
+                                    <div class="lan__hint lan__mt10">Вкажіть ціну й аванс (0, якщо без авансу), і сума кредиту підставиться автоматично (ціна мінус аванс). Якщо потім змінити її вручну, діятиме ваше значення.</div>
+                                </details>
                                 <div class="lan__field">
                                     <label class="lan__label" for="rate">Річна ставка (%) <span class="lan__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
                                     <input class="lan__input" id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 12">
@@ -280,7 +285,7 @@
                             <h2 class="lan__h2">Результат</h2>
                             <span class="lan__badge">%</span>
                         </div>
-                        <div class="lan__result" id="result">Вкажіть суму кредиту (або ціну авто), ставку й термін — результат зʼявиться тут.</div>
+                        <div class="lan__result" id="result">Вкажіть суму кредиту, ставку й термін — результат зʼявиться тут.</div>
                         <div class="lan__actions lan__mt12">
                             <button class="lan__btn" id="shareBtn" type="button">Поділитись</button>
                             <button class="lan__btn" id="exampleBtn" type="button">Приклад</button>
