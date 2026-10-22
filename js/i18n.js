@@ -335,52 +335,6 @@
         label_mileage: "Пробіг на рік",
         label_years: "Період володіння, років",
       },
-        credit: {
-          nbu_badge: "Курс НБУ: {date}",
-          nbu_badge_title: "Дата офіційного курсу НБУ: {date}",
-          nbu_badge_short: "Курс НБУ",
-          nbu_badge_short_title: "Офіційний курс НБУ",
-          nbu_unavailable_cached: "⚠️ НБУ тимчасово недоступний. Використано збережені курси.",
-          nbu_unavailable_now: "⚠️ Курс НБУ не завантажився. Поки що ₴.",
-
-          th_no: "№",
-          th_date: "Дата",
-          th_payment: "Платіж",
-          th_interest: "Відсотки",
-          th_principal: "Тіло",
-          th_fees: "Комісії",
-          th_balance: "Залишок",
-
-          type_annuity: "Ануїтет",
-          type_diff: "Диференційований",
-
-          main_monthly: "{amount} / міс",
-
-          kpi_monthly_no_fees: 'Щомісячний платіж <b>(без комісій)</b>',
-          kpi_calc_type: "Розраховано: {type}",
-          kpi_monthly_with_fees: "Платіж “з витратами”",
-          kpi_fees_included: "Комісії + страхування враховані",
-          kpi_overpay_interest: "Переплата <b>(відсотки)</b>",
-          kpi_overpay_note: "Без урахування разової комісії",
-          kpi_total: "Загалом <b>(Платежі + комісії)</b>",
-          kpi_total_note: "Платежі + комісії",
-
-          summary_fees: "Комісії та додаткові витрати",
-          hint_prefix: "Підказка",
-          hint_avg: "середній платіж без комісій ≈ <b>{avg1}</b>, з витратами ≈ <b>{avg2}</b>.",
-
-          err_amount_term: "Введи коректну суму та термін.",
-          hint_enter_inputs: "Введи суму, ставку та термін.",
-          hint_enter_inputs_short: "Введи суму та обери параметри.",
-          reset_done: "Скинуто ✅",
-
-          copy_first_calc: "Спочатку зроби розрахунок 🙂",
-          copy_ok: "✅ Результат скопійовано",
-          copy_failed: "Не вдалося скопіювати (браузер заборонив).",
-          copy_table_ok: "✅ Таблицю скопійовано",
-          copy_table_failed: "Не вдалося скопіювати таблицю.",
-          csv_downloaded: "CSV завантажено ✅",
-        },
         evc: {
           hint_enter_and_calc: "Заповніть дані зліва — результат зʼявиться тут.",
           missing: "Щоб порахувати, заповніть: {list}.",
@@ -2392,52 +2346,6 @@ csv_downloaded: "CSV downloaded.",
         label_mileage: "Annual mileage",
         label_years: "Ownership period, years",
       },
-      credit: {
-        nbu_badge: "NBU rate: {date}",
-        nbu_badge_title: "Official NBU rate date: {date}",
-        nbu_badge_short: "NBU rate",
-        nbu_badge_short_title: "Official NBU exchange rate",
-        nbu_unavailable_cached: "⚠️ NBU is temporarily unavailable. Using cached rates.",
-        nbu_unavailable_now: "⚠️ NBU rates not loaded yet. Using ₴ for now.",
-
-        th_no: "#",
-        th_date: "Date",
-        th_payment: "Payment",
-        th_interest: "Interest",
-        th_principal: "Principal",
-        th_fees: "Fees",
-        th_balance: "Balance",
-
-        type_annuity: "Annuity",
-        type_diff: "Differentiated",
-
-        main_monthly: "{amount} / mo",
-
-        kpi_monthly_no_fees: "Monthly payment <b>(without fees)</b>",
-        kpi_calc_type: "Calculated: {type}",
-        kpi_monthly_with_fees: "Payment “with fees”",
-        kpi_fees_included: "Fees + insurance included",
-        kpi_overpay_interest: "Overpayment <b>(interest)</b>",
-        kpi_overpay_note: "Excludes one-time fee",
-        kpi_total: "Total <b>(Payments + fees)</b>",
-        kpi_total_note: "Payments + fees",
-
-        summary_fees: "Fees and extra costs",
-        hint_prefix: "Hint",
-        hint_avg: "avg payment without fees ≈ <b>{avg1}</b>, with fees ≈ <b>{avg2}</b>.",
-
-        err_amount_term: "Enter a valid amount and term.",
-        hint_enter_inputs: "Enter amount, rate and term.",
-        hint_enter_inputs_short: "Enter amount and choose parameters.",
-        reset_done: "Reset ✅",
-
-        copy_first_calc: "Calculate first 🙂",
-        copy_ok: "✅ Result copied",
-        copy_failed: "Copy failed (browser blocked it).",
-        copy_table_ok: "✅ Table copied",
-        copy_table_failed: "Failed to copy the table.",
-        csv_downloaded: "CSV downloaded ✅",
-      }
     },
   };
 

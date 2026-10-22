@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Loan Calculator — monthly payment, interest, schedule | CalcCore</title>
+    <title>Loan Calculator 2026: Payment, Overpayment, Schedule | CalcCore</title>
     <meta name="description"
-        content="CalcCore loan calculator: monthly payment (annuity or declining), total interest, total cost, fees and repayment schedule. Auto-calculate, copy and CSV export." />
+        content="Loan calculator: payment, overpayment, total cost and real annual rate. Rate per year, month or day, fees, insurance, early repayment, schedule and CSV export." />
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://calccore.net/en/finance/credit-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/credit-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/credit-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,428 +28,383 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Loan Calculator — monthly payment, interest, schedule" />
-    <meta property="og:description" content="CalcCore loan calculator: monthly payment (annuity or declining), total interest, total cost, fees and repayment schedule. Auto-calculate, copy and CSV export." />
+    <meta property="og:title" content="Loan Calculator 2026: Payment, Overpayment, Schedule" />
+    <meta property="og:description" content="Loan calculator: payment, overpayment, total cost and real annual rate. Rate per year, month or day, fees, insurance, early repayment, schedule and CSV export." />
     <meta property="og:url" content="https://calccore.net/en/finance/credit-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Loan Calculator — monthly payment, interest, schedule" />
-    <meta name="twitter:description" content="CalcCore loan calculator: monthly payment (annuity or declining), total interest, total cost, fees and repayment schedule. Auto-calculate, copy and CSV export." />
+    <meta name="twitter:title" content="Loan Calculator 2026: Payment, Overpayment, Schedule" />
+    <meta name="twitter:description" content="Loan calculator: payment, overpayment, total cost and real annual rate. Rate per year, month or day, fees, insurance, early repayment, schedule and CSV export." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
-    <!-- Favicons -->
-    <link rel="icon" href="/assets/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#283b69" />
-
-    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/credit-calculator.css" />
+    <link rel="stylesheet" href="/css/credit.css?v=20261022crd2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/credit-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022crd2" defer></script>
+    <script src="/js/credit-calculator.js?v=20261022crd2" defer></script>
 
-    <!-- Schema.org -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/credit-calculator#app",
-    "name":"Loan Calculator",
-    "description":"Online loan calculator: annuity or declining payment, fees, total interest, total cost and repayment schedule.",
-    "url":"https://calccore.net/en/finance/credit-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
-<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/credit-calculator#app",
+  "name": "Loan Calculator",
+  "description": "Calculates a loan: monthly payment, overpayment, total cost and approximate real annual rate, annuity and differentiated payments, rate per year, month or day, fees, insurance, early repayment, payment schedule.",
+  "url": "https://calccore.net/en/finance/credit-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Annuity and differentiated payments rounded to the cent",
+    "Rate as a percentage per year, per month or per day (card loans, microloans)",
+    "One-time and monthly fees as a percentage or an amount, insurance",
+    "Early repayment: an extra monthly payment and a one-time one, interest savings",
+    "Overpayment, total cost of credit and an approximate real annual rate",
+    "Payment schedule by month and year with dates, totals, copy and CSV for Excel",
+    "A donut chart of all payments; UAH, USD and EUR currencies; shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "@id": "https://calccore.net/#org",
-      "name": "CalcCore",
-      "url": "https://calccore.net/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://calccore.net/assets/logo.png"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://calccore.net/#website",
-      "url": "https://calccore.net/",
-      "name": "CalcCore",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "inLanguage": "en"
-    },
-    {
       "@type": "WebPage",
       "@id": "https://calccore.net/en/finance/credit-calculator#webpage",
       "url": "https://calccore.net/en/finance/credit-calculator",
-      "name": "Loan Calculator — Payment, Interest, Schedule | CalcCore",
-      "description": "CalcCore loan calculator: monthly payment (annuity or declining balance), total interest, total cost, fees, and a payment schedule. Auto-calc, copy, and CSV export.",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
-      "about": { "@id": "https://calccore.net/en/finance/credit-calculator#app" },
+      "name": "Loan Calculator 2026: Payment, Overpayment, Schedule | CalcCore",
+      "description": "Loan calculator: payment, overpayment, total cost and real annual rate. Rate per year, month or day, fees, insurance, early repayment, schedule and CSV export.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/credit-calculator#app"
+      },
+      "dateModified": "2026-10-22",
       "inLanguage": "en"
-    },
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
     {
-      "@type": "SoftwareApplication",
-      "@id": "https://calccore.net/en/finance/credit-calculator#app",
-      "name": "Loan Calculator",
-      "description": "Online loan calculator: annuity or declining (differentiated) payments, fees, total interest, total cost, and a monthly payment schedule.",
-      "url": "https://calccore.net/en/finance/credit-calculator",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any",
-      "isAccessibleForFree": true,
-      "inLanguage": "en",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" }
-    },
-    {
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": "https://calccore.net/en/finance/credit-calculator#faq",
-      "url": "https://calccore.net/en/finance/credit-calculator",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
       "inLanguage": "en",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Should I enter the loan amount with fees included or not?",
+          "name": "How is the monthly annuity payment calculated?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It’s best to enter the principal (net loan amount) without fees. Add one-time fees, monthly fees, and insurance separately so you can see both the base payment and the “payment with extra costs”."
+            "text": "Payment = P × r ÷ (1 − (1+r)⁻ⁿ), where r is the monthly rate. For 200,000 UAH, 36% per year and 24 months it is 11,809.48 UAH and the total overpayment is 83,428 UAH."
           }
         },
         {
           "@type": "Question",
-          "name": "Why does the monthly payment change with declining (differentiated) payments?",
+          "name": "How do differentiated payments differ from annuity ones?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The principal is repaid in equal parts, while interest is calculated on the remaining balance. As the balance decreases, the interest portion drops, so payments start higher and become lower over time."
+            "text": "A differentiated payment falls: the principal is the same and the interest shrinks. For the same terms it goes from 14,333.33 to 8,583.41 UAH with an overpayment of 75,000 UAH. An annuity gives a constant 11,809.48 UAH payment and a larger overpayment."
           }
         },
         {
           "@type": "Question",
-          "name": "What does “payment with extra costs” mean?",
+          "name": "How do I convert a daily or monthly rate to an annual one?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It’s an estimated payment that includes monthly fees and insurance (if provided). A one-time fee is counted in total costs but is not added to every month."
+            "text": "The calculator multiplies a monthly rate by 12 and a daily one by 365. For example 1% per day is nominally 365% per year and 3% per month is 36% per year. That lets you compare loans quoted in different units."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I download the payment schedule?",
+          "name": "What is the total cost of credit and how does it differ from overpayment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. In the payment schedule section you can download a CSV file and open it in Excel or Google Sheets."
+            "text": "Overpayment by interest is interest only. The total cost of credit adds all fees and insurance. In the example with a 2% one-time fee and 1% yearly insurance the total cost is 91,428 UAH against 83,428 UAH of interest."
           }
         },
         {
           "@type": "Question",
-          "name": "Does this calculator compute APR?",
+          "name": "What is the real annual rate (APR) and how does the calculator work it out?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It shows the impact of fees via total interest, total cost, and “payment with extra costs”. Full APR can depend on a lender’s methodology, exact dates, and rounding, so use it as a practical estimate."
+            "text": "It is a rate that counts not only interest but also fees and insurance. The calculator estimates it as the internal rate of return of the payment flow multiplied by 12. In the example it is about 39.84% instead of 36%. It is an estimate, the exact rate is stated by the lender."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I include an arrangement fee, a monthly fee and insurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter a one-time fee (as a percentage of the amount or an amount), a monthly fee (as a percentage of the initial amount or an amount) and insurance (as a percentage of the loan per year or an amount per month). They increase the total cost of credit and the real annual rate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate an installment plan with a fee instead of interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Set the rate to 0 and enter a monthly fee as a percentage of the initial amount. For example a 30,000 UAH installment plan for 10 months with a 1.7% monthly fee costs 5,100 UAH (17.0% of the amount) and the real annual rate is about 36%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does early repayment reduce the overpayment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An extra payment reduces the balance, so interest is charged on a smaller amount. In the example an extra 2,000 UAH per month shortens the loan to 20 months and saves 17,082 UAH of interest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I download the schedule to Excel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The “Download CSV” button saves the table with unformatted numbers (a dot as the decimal separator, two decimals) that Excel opens as numbers. You can also copy the table and paste it into a sheet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can the result differ from the bank?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is an estimate from standard formulas. Lenders may count days differently, round, apply fees by their own rules or change the debit date, so check the result against the loan agreement."
           }
         }
       ]
     }
-  ]
-}
-</script>
+    </script>
 </head>
 
-
-<body class="credit-page ccredit">
-    <!-- Header via layout.js -->
+<body class="crd-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="ccalc ccredit" id="ccredit">
-            <div class="ccalc__wrap">
+        <section class="crd" id="crd">
+            <div class="crd__wrap">
 
-                <!-- Titlebar -->
-                <div class="ccalc__titlebar">
-                    <h1 class="ccalc__h1">Loan Calculator</h1>
-                    <p class="ccalc__p">
-                        Calculate your monthly payment, total interest and repayment schedule.
-                        Supports annuity and declining payments, plus fees and extra monthly costs.
-                    </p>
+                <div class="crd__titlebar">
+                    <h1 class="crd__h1">Loan Calculator</h1>
+                    <p class="crd__p">Calculate the monthly payment, overpayment, total cost and payment schedule of a loan or an installment plan, with fees, insurance and early repayment.</p>
                 </div>
 
-                <div class="ccalc__grid">
+                <div class="crd__grid">
 
-                    <!-- Topline -->
-                    <div class="evc-topline">
-                        <label class="evc-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-
-                        <span class="cconv-date" id="nbuBadge" title="Official NBU rate">
-                            NBU rate: loading...
-                        </span>
-                    </div>
-
-                    <!-- LEFT card -->
-                    <div class="ccalc__card">
-                        <div class="ccalc__sectionTitle">
-                            <h2 class="ccalc__h2">Enter details</h2>
-                            <span class="ccalc__badge">Finance</span>
+                    <!-- LEFT -->
+                    <div class="crd__card">
+                        <div class="crd__sectionTitle">
+                            <h2 class="crd__h2">Input data</h2>
+                            <div class="crd__dd" id="cur_dd"><button type="button" class="crd__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="crd__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="crd__caret" aria-hidden="true"></span></button><ul class="crd__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="crd__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="crd__ddCode">UAH</span><span class="crd__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="crd__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="crd__ddCode">USD</span><span class="crd__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="crd__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="crd__ddCode">EUR</span><span class="crd__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="ccalc__rows">
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="loanAmount">Loan amount</label>
-                                <input class="ccalc__input" id="loanAmount" type="text" inputmode="decimal" placeholder="e.g. 200 000" />
-                                <div class="ccalc__hint">
-                                    Enter the principal amount (without fees).
+                        <div class="crd__block">
+                            <div class="crd__miniTitle">Payment type</div>
+                            <div class="crd__chips" role="group" aria-label="Payment type">
+                                <button id="typeAnn" class="crd__chip is-active" type="button" aria-pressed="true"><svg class="crd__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h18"/><path d="M3 12h18"/><path d="M3 7h18"/></svg><span>Annuity</span></button>
+                                <button id="typeDiff" class="crd__chip" type="button" aria-pressed="false"><svg class="crd__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l16 12"/><path d="M4 18V6"/><path d="M4 18h16"/></svg><span>Differentiated</span></button>
+                            </div>
+                            <div class="crd__rows">
+                                <div class="crd__field crd__field--full">
+                                    <label class="crd__label" for="amount">Loan amount <span class="crd__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="crd__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 200,000"><div class="crd__hint">The amount you borrow, without fees: you can add them below.</div>
                                 </div>
-                            </div>
-                            
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="calcCurrency">Currency</label>
-                                <select class="ccalc__select ccredit-curpick__select" id="calcCurrency">
-                                    <option value="UAH" selected>UAH ₴</option>
-                                    <option value="USD">USD $</option>
-                                    <option value="EUR">EUR €</option>
-                                </select>
-                                <div class="ccalc__hint">
-                                    Currency for all entered values and results.
+                                <div class="crd__field crd__field--full">
+                                    <label class="crd__label" for="rate">Rate <span class="crd__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="crd__input" id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 36"><div class="crd__qrow"><button type="button" class="crd__qchip is-on" data-unit="year">% per year</button><button type="button" class="crd__qchip" data-unit="month">% per month</button><button type="button" class="crd__qchip" data-unit="day">% per day</button></div>
                                 </div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="annualRate">Annual interest rate</label>
-                                <input class="ccalc__input" id="annualRate" type="text" inputmode="decimal"
-                                    placeholder="e.g. 36" />
-                                <div class="ccalc__hint">Annual rate in <b>%</b> (e.g. 36 means 36% per year).</div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="termMonths">Term</label>
-                                <input class="ccalc__input" id="termMonths" type="number" min="1" step="1"
-                                    placeholder="e.g. 24" />
-                                <div class="ccalc__hint">Loan term in <b>months</b>.</div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="paymentType">Payment type</label>
-                                <select class="ccalc__select" id="paymentType">
-                                    <option value="annuity" selected>Annuity (equal payments)</option>
-                                    <option value="diff">Declining (principal is equal)</option>
-                                </select>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="startDate">Start date</label>
-                                <input class="ccalc__input" id="startDate" type="date" />
-                                <div class="ccalc__hint">Used to generate payment dates in the schedule.</div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="oneTimeFee">One-time fee</label>
-                                <input class="ccalc__input" id="oneTimeFee" type="text" inputmode="decimal"
-                                    placeholder="e.g. 2,000" />
-                                <div class="ccalc__hint">A one-time fee in <b>UAH</b> paid when the loan is issued.
+                                <div class="crd__field">
+                                    <label class="crd__label" for="term">Term (months) <span class="crd__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="crd__input" id="term" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 24">
                                 </div>
-                            </div>
-
-                            <div class="ccalc__field">
-                                <label class="ccalc__label" for="monthlyFee">Monthly fee</label>
-                                <input class="ccalc__input" id="monthlyFee" type="text" inputmode="decimal"
-                                    placeholder="e.g. 150" />
-                                <div class="ccalc__hint">Extra charge in <b>UAH per month</b> (not interest).</div>
-                            </div>
-
-                            <div class="ccalc__field cconv-full">
-                                <label class="ccalc__label" for="insurance">Insurance / extra monthly costs</label>
-                                <input class="ccalc__input" id="insurance" type="text" inputmode="decimal"
-                                    placeholder="e.g. 0" />
-                                <div class="ccalc__hint">Optional — affects “payment with extras”.</div>
-                            </div>
-
-                            <div class="ccalc__field cconv-full">
-                                <div class="ccalc__actions ccalc__mt10">
-                                    <button class="ccalc__btn ccalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    
+                                <div class="crd__field">
+                                    <label class="crd__label" for="start">Issue date</label>
+                                    <input class="crd__input" id="start" type="date" autocomplete="off" placeholder="">
                                 </div>
-
-                                <div class="ccalc__toast" id="cToast"></div>
+                                <div class="crd__qrow crd__chipsRow"><button type="button" class="crd__qchip" data-term="3">3</button><button type="button" class="crd__qchip" data-term="6">6</button><button type="button" class="crd__qchip" data-term="12">12</button><button type="button" class="crd__qchip" data-term="24">24</button><button type="button" class="crd__qchip" data-term="36">36</button><button type="button" class="crd__qchip" data-term="60">60</button></div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- RIGHT card -->
-                    <div class="ccalc__card">
-                        <div class="ccalc__sectionTitle">
-                            <h2 class="ccalc__h2">Result</h2>
-                            <span class="ccalc__badge">CalcCore</span>
-                        </div>
-
-                        <div class="ccalc__bigNumber" id="cResult">
-                            Enter amount, rate and term.
-                        </div>
-
-                        <div class="cconv-details" id="cDetails" aria-live="polite"></div>
-
-                        <!-- Schedule -->
-                        <details class="ccredit-schedule" id="scheduleWrap">
-                            <summary class="ccredit-summary">
-                                <span class="ccredit-sum-left">
-                                    <span class="ccredit-ico" aria-hidden="true"></span>
-                                    Payment schedule <span class="muted">(open)</span>
-                                </span>
-                                <span class="ccredit-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="schedule-tools">
-                                <div class="ccredit-curpick">
-                                    <label class="ccredit-curpick__label" for="scheduleCurrency">Currency:</label>
-                                    <select class="ccalc__select ccredit-curpick__select" id="scheduleCurrency">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
+                        <details class="crd__details crd__mt12" id="extraDetails">
+                            <summary>Fees and insurance <span class="crd__hint">(optional)</span></summary>
+                            <div class="crd__rows">
+                                <div class="crd__field crd__field--full">
+                                    <label class="crd__label" for="oneFee">One-time fee</label>
+                                    <div class="crd__inwrap"><input class="crd__input" id="oneFee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2"><div class="crd__seg" role="group" aria-label="Unit"><button type="button" data-fu="oneFee" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="oneFee" data-u="abs" aria-pressed="false">UAH</button></div></div>
+                                    <div class="crd__hint">% of the loan or an amount; paid once at issue.</div>
                                 </div>
-
-                                <button class="ccalc__btn ccalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                                <button class="ccalc__btn ccalc__btn--small" id="btnDownloadCSV" type="button">Download
-                                    CSV</button>
+                                <div class="crd__field crd__field--full">
+                                    <label class="crd__label" for="monFee">Monthly fee</label>
+                                    <div class="crd__inwrap"><input class="crd__input" id="monFee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.5"><div class="crd__seg" role="group" aria-label="Unit"><button type="button" data-fu="monFee" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="monFee" data-u="abs" aria-pressed="false">UAH</button></div></div>
+                                    <div class="crd__hint">% of the initial amount per month (as in installment plans) or an amount per month.</div>
+                                </div>
+                                <div class="crd__field crd__field--full">
+                                    <label class="crd__label" for="ins">Insurance</label>
+                                    <div class="crd__inwrap"><input class="crd__input" id="ins" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1"><div class="crd__seg" role="group" aria-label="Unit"><button type="button" data-fu="ins" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="ins" data-u="abs" aria-pressed="false">UAH</button></div></div>
+                                    <div class="crd__hint">% of the loan per year or an amount per month.</div>
+                                </div>
                             </div>
-
-                            <div class="table-wrap">
-                                <table class="table" id="scheduleTable" aria-label="Payment schedule">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Date</th>
-                                            <th>Payment</th>
-                                            <th>Interest</th>
-                                            <th>Principal</th>
-                                            <th>Fees</th>
-                                            <th>Balance</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
+                            <div class="crd__hint crd__mt10">Fees and insurance are included in the total cost of credit and in the approximate real annual rate.</div>
                         </details>
-                        <div class="ccalc__actions ccalc__mt10">
-                            <button class="ccalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="ccalc__btn" id="btnCopy" type="button">Copy result</button>
+
+                        <details class="crd__details crd__mt12" id="earlyDetails">
+                            <summary>Early repayment <span class="crd__hint">(optional)</span></summary>
+                            <div class="crd__rows">
+                                <div class="crd__field crd__field--full">
+                                    <label class="crd__label" for="extra">Extra payment per month</label>
+                                    <input class="crd__input" id="extra" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2000">
+                                </div>
+                                <div class="crd__field">
+                                    <label class="crd__label" for="lump">One-time payment</label>
+                                    <input class="crd__input" id="lump" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 50,000">
+                                </div>
+                                <div class="crd__field">
+                                    <label class="crd__label" for="lumpMonth">In month no.</label>
+                                    <input class="crd__input" id="lumpMonth" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                            </div>
+                            <div class="crd__hint crd__mt10">The payment stays the same and the loan term gets shorter. The calculator shows the interest savings.</div>
+                        </details>
+
+                        <div class="crd__actions crd__mt12">
+                            <button class="crd__btn crd__btn--wide" id="calcBtn" type="button">Calculate</button>
                         </div>
+                        <div class="crd__toast" id="toast"></div>
                     </div>
 
+                    <!-- RIGHT -->
+                    <div class="crd__card">
+                        <div class="crd__sectionTitle">
+                            <h2 class="crd__h2">Result</h2>
+                            <span class="crd__badge">%</span>
+                        </div>
+                        <div class="crd__result" id="result">Enter the loan amount, the rate and the term — the result will appear here.</div>
+                        <div class="crd__actions crd__mt12">
+                            <button class="crd__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="crd__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="crd__btn" id="resetBtn" type="button">Reset</button>
+                        </div>
+                        <div class="m-navlinks crd__mt12"><a id="carLink" class="crd__link" href="/en/auto/loan-amortization-calculator">A car loan? →</a></div>
+                    </div>
                 </div>
+
+                <div class="crd__card crd__schedule" id="schedule" hidden>
+                    <div class="crd__schedHead">
+                        <h2 class="crd__h2">Payment schedule</h2>
+                        <div class="crd__tools">
+                            <button type="button" class="crd__qchip is-on" id="viewMonth">By month</button>
+                            <button type="button" class="crd__qchip" id="viewYear">By year</button>
+                            <button type="button" class="crd__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="crd__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="crd__tableWrap" id="schedBody"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/auto/loan-amortization-calculator"><b>Car loan calculator</b><span>Car loan: payment, overpayment and schedule.</span></a>
+                <a class="cc-related-card" href="/en/finance/ipoteca-calculator"><b>Mortgage calculator</b><span>Down payment, payment and mortgage schedule.</span></a>
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Deposit income with interest compounding.</span></a>
             </div>
         </section>
 
         <div class="cc-divider"></div>
 
-        <!-- SEO -->
         <section class="cc-seo">
-            <h2>How does the loan calculator work?</h2>
-            <p>
-                This calculator estimates the key loan metrics: monthly payment, total interest (overpayment),
-                total amount paid, and it builds a month-by-month repayment schedule.
-                It works for consumer loans, installments, auto loans and other products with regular payments.
-            </p>
-            <p>
-                Enter the loan amount, annual interest rate and the term in months. Then choose the payment type:
-                <b>annuity</b> or <b>declining</b>. If you have extra costs (one-time fee, monthly fee, insurance),
-                the calculator includes them so you can see a more realistic picture.
-            </p>
+            <h2>How a loan is calculated</h2>
+            <p>An annuity payment is the same every month: P × r ÷ (1 − (1+r)⁻ⁿ), where P is the loan amount, r is the monthly rate and n is the number of months. For a 200,000 UAH loan at 36% per year for 24 months the payment is <b>11,809.48 UAH</b> and the overpayment is <b>83,428 UAH</b>. At the start most of the payment goes to interest, at the end to principal.</p>
+            <p>In a differentiated schedule the principal is the same every month and the interest falls with the balance. The payment falls from <b>14,333.33 UAH</b> to <b>8,583.41 UAH</b> and the overpayment is <b>75,000 UAH</b>: 8,428 UAH less than with an annuity, but the first payments are larger. All amounts are rounded to the cent and the last payment closes the balance exactly to zero.</p>
 
-            <h2>Annuity vs declining — what’s the difference?</h2>
-            <ul>
-                <li><b>Annuity</b> — the payment is almost the same each month. Early payments include more interest,
-                    later payments include more principal.</li>
-                <li><b>Declining</b> — principal is repaid evenly, interest decreases as the balance goes down,
-                    so monthly payments gradually become smaller.</li>
-            </ul>
+            <h2>Rate per year, per month or per day</h2>
+            <p>Banks usually quote an annual percentage, while installment plans and card loans quote it per month or per day. The calculator converts the rate to a monthly one: an annual rate is divided by 12, a monthly one is used as is, a daily one is multiplied by 365 and divided by 12. For example, <b>1% per day</b> is nominally <b>365% per year</b>: a 10,000 UAH loan for a month at that rate costs 3,042 UAH in interest and 13,042 UAH to repay.</p>
+            <p>The rate in the calculator is nominal, without day-by-day compounding: its exact value and the way interest is charged (by calendar days, on the balance, on the initial amount) are set by the agreement.</p>
 
-            <h2>What does it calculate?</h2>
-            <ul>
-                <li><b>Monthly payment</b> (based on the chosen method)</li>
-                <li><b>Payment with extras</b> — includes monthly fees/insurance if provided</li>
-                <li><b>Total interest</b> — interest paid over the whole term</li>
-                <li><b>Total paid</b> — total cost of the loan</li>
-                <li><b>Payment schedule</b> — breakdown of interest/principal/fees by month</li>
-            </ul>
-
-            <h2>Why may it differ from a bank’s numbers?</h2>
-            <p>
-                Banks may use different day-count conventions, rounding rules, fee policies, or payment dates.
-                This calculator provides a <b>mathematical estimate</b> based on your inputs,
-                but always verify the exact terms in your contract.
-            </p>
+            <h2>Total cost of credit and the real annual rate</h2>
+            <p>Interest overpayment is only part of the cost. The <b>total cost of credit</b> is interest plus all fees and insurance. In the example with a 2% one-time fee and 1% yearly insurance it is <b>91,428 UAH</b> (45.7% of the amount), while interest alone is 83,428 UAH.</p>
+            <p>The approximate real annual rate (APR) is estimated as the internal rate of return of the cash flow (the loan received minus the one-time fee, then payments plus fees and insurance) multiplied by 12. In this example it is about <b>39.84%</b> with a nominal rate of 36%. It is an estimate: the exact formula and value are stated by the lender in the agreement.</p>
+            <p class="crd-mini">The calculation is an estimate. Real loan terms, fees, insurance and the real rate are set by the lender, so check them in the loan agreement. The real annual rate here is approximate.</p>
         </section>
 
-        <!-- FAQ -->
         <section class="cc-faq">
             <h2>FAQ</h2>
 
             <div class="cc-faq-item">
-                <h3>Should I enter the loan amount with fees or without?</h3>
-                <p>
-                    It’s best to enter the <b>principal only</b>. Add fees and insurance in the fields below —
-                    then you’ll see both the “base” payment and the payment including extras.
-                </p>
+                <h3>How is the monthly annuity payment calculated?</h3>
+                <p>Payment = P × r ÷ (1 − (1+r)⁻ⁿ), where r is the monthly rate. For 200,000 UAH, 36% per year and 24 months it is 11,809.48 UAH and the total overpayment is 83,428 UAH.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>Why isn’t the monthly payment constant for declining payments?</h3>
-                <p>
-                    Because interest is calculated on the <b>remaining balance</b>. Principal is repaid evenly,
-                    the balance decreases, so the interest part decreases too. That’s why early payments are higher
-                    and later payments are lower.
-                </p>
+                <h3>How do differentiated payments differ from annuity ones?</h3>
+                <p>A differentiated payment falls: the principal is the same and the interest shrinks. For the same terms it goes from 14,333.33 to 8,583.41 UAH with an overpayment of 75,000 UAH. An annuity gives a constant 11,809.48 UAH payment and a larger overpayment.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>What is “payment with extras”?</h3>
-                <p>
-                    It’s an estimated monthly payment including <b>monthly fees</b> and <b>insurance</b> (if provided).
-                    The one-time fee is included in total cost, but not added to every month.
-                </p>
+                <h3>How do I convert a daily or monthly rate to an annual one?</h3>
+                <p>The calculator multiplies a monthly rate by 12 and a daily one by 365. For example 1% per day is nominally 365% per year and 3% per month is 36% per year. That lets you compare loans quoted in different units.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>Can I download the repayment schedule?</h3>
-                <p>
-                    Yes. Open “Payment schedule” and click <b>Download CSV</b>.
-                    You can open it in Excel/Google Sheets.
-                </p>
+                <h3>What is the total cost of credit and how does it differ from overpayment?</h3>
+                <p>Overpayment by interest is interest only. The total cost of credit adds all fees and insurance. In the example with a 2% one-time fee and 1% yearly insurance the total cost is 91,428 UAH against 83,428 UAH of interest.</p>
             </div>
 
             <div class="cc-faq-item">
-                <h3>Does it calculate APR (effective rate)?</h3>
-                <p>
-                    It shows the impact of fees via total cost, total interest and “payment with extras”.
-                    Full APR sometimes requires extra assumptions (exact day-count, bank methodology),
-                    but for planning this is usually sufficient.
-                </p>
+                <h3>What is the real annual rate (APR) and how does the calculator work it out?</h3>
+                <p>It is a rate that counts not only interest but also fees and insurance. The calculator estimates it as the internal rate of return of the payment flow multiplied by 12. In the example it is about 39.84% instead of 36%. It is an estimate, the exact rate is stated by the lender.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I include an arrangement fee, a monthly fee and insurance?</h3>
+                <p>Enter a one-time fee (as a percentage of the amount or an amount), a monthly fee (as a percentage of the initial amount or an amount) and insurance (as a percentage of the loan per year or an amount per month). They increase the total cost of credit and the real annual rate.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate an installment plan with a fee instead of interest?</h3>
+                <p>Set the rate to 0 and enter a monthly fee as a percentage of the initial amount. For example a 30,000 UAH installment plan for 10 months with a 1.7% monthly fee costs 5,100 UAH (17.0% of the amount) and the real annual rate is about 36%.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does early repayment reduce the overpayment?</h3>
+                <p>An extra payment reduces the balance, so interest is charged on a smaller amount. In the example an extra 2,000 UAH per month shortens the loan to 20 months and saves 17,082 UAH of interest.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I download the schedule to Excel?</h3>
+                <p>Yes. The “Download CSV” button saves the table with unformatted numbers (a dot as the decimal separator, two decimals) that Excel opens as numbers. You can also copy the table and paste it into a sheet.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why can the result differ from the bank?</h3>
+                <p>It is an estimate from standard formulas. Lenders may count days differently, round, apply fees by their own rules or change the debit date, so check the result against the loan agreement.</p>
             </div>
         </section>
     </main>
 
     <div id="footer"></div>
-
     <script src="/js/layout.js"></script>
 </body>
 
