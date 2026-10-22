@@ -406,63 +406,6 @@
           car_not_found: "Нічого не знайдено",
         },
       
-        ipoteca: {
-          // UI / buttons
-          title: "Іпотечний калькулятор",
-          calculate: "Розрахувати",
-          reset: "Скинути",
-          copy: "Скопіювати",
-          share: "Поділитись",
-          copied: "Скопійовано ✅",
-          copied_result: "✅ Результат скопійовано",
-          copied_table: "✅ Таблицю скопійовано",
-          csv_downloaded: "CSV завантажено ✅",
-
-          // Down payment mode
-          dp_mode_uah: "Внесок (грн)",
-          dp_mode_pct: "Внесок (%)",
-          dp_hint_uah: "Наприклад: 400 000 ₴",
-          dp_hint_pct: "Наприклад: 20 %",
-
-          // Validation / toasts
-          toast_reset: "Скинуто ✅",
-          toast_need_calc_first: "Спочатку зроби розрахунок 🙂",
-          toast_enter_values: "Введи вартість, внесок і термін (роки).",
-          result_enter_values: "Введи вартість, внесок, ставку та термін.",
-          toast_nbu_unavailable: "⚠️ НБУ тимчасово недоступний. Використано збережені курси.",
-          toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показуємо ₴.",
-
-          // NBU badge
-          nbu_unavailable: "Курс НБУ: недоступно",
-          nbu_title: "Офіційний курс НБУ",
-          nbu_badge: "Курс НБУ: $ {usd} / € {eur}{datePart}",
-
-          // Result blocks
-          per_month: "{value} / міс",
-          type_annuity: "Ануїтет",
-          type_diff: "Диференційований",
-
-          kpi_payment_no_fees: "Платіж (без комісій)",
-          kpi_payment_with_costs: "Платіж “з витратами”",
-          kpi_overpay_interest: "Переплата (відсотки)",
-          kpi_total_paid: "Загалом (Платежі + витрати)",
-
-          kpi_calc_type: "Розраховано: {type}",
-          kpi_with_costs_note: "Щомісячні витрати враховані",
-          kpi_interest_note: "Лише відсотки за період",
-          kpi_total_note: "Платежі + разова + щомісячні",
-
-          summary_costs: "Комісії та витрати: {value}",
-          hint_avg:
-            "Підказка: середній платіж без комісій ≈ {avg}, з витратами ≈ {avg2}.",
-
-          // Schedule table
-          th_payment: "Платіж ({sym})",
-          th_interest: "Відсотки ({sym})",
-          th_principal: "Тіло ({sym})",
-          th_costs: "Витрати ({sym})",
-          th_balance: "Залишок ({sym})",
-        },
         salary:{
           nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
           nbu_title: "Курс НБУ (USD/EUR)",
@@ -1926,63 +1869,6 @@ csv_downloaded: "CSV downloaded.",
   err_old_zero: "Old value can’t be 0 to calculate percent change.",
 },
 
-      ipoteca: {
-        // UI / buttons
-        title: "Mortgage calculator",
-        calculate: "Calculate",
-        reset: "Reset",
-        copy: "Copy",
-        share: "Share",
-        copied: "Copied ✅",
-        copied_result: "✅ Result copied",
-        copied_table: "✅ Table copied",
-        csv_downloaded: "CSV downloaded ✅",
-
-        // Down payment mode
-        dp_mode_uah: "Down payment (UAH)",
-        dp_mode_pct: "Down payment (%)",
-        dp_hint_uah: "Example: 400,000 ₴",
-        dp_hint_pct: "Example: 20%",
-
-        // Validation / toasts
-        toast_reset: "Reset ✅",
-        toast_need_calc_first: "Run a calculation first 🙂",
-        toast_enter_values: "Enter price, down payment, and term (years).",
-        result_enter_values: "Enter price, down payment, rate and term.",
-        toast_nbu_unavailable: "⚠️ NBU is temporarily unavailable. Using cached rates.",
-        toast_nbu_not_loaded_fallback: "NBU rates not loaded — showing ₴.",
-
-        // NBU badge
-        nbu_unavailable: "NBU rates: unavailable",
-        nbu_title: "Official NBU exchange rates",
-        nbu_badge: "NBU: $ {usd} / € {eur}{datePart}",
-
-        // Result blocks
-        per_month: "{value} / mo",
-        type_annuity: "Annuity",
-        type_diff: "Differentiated",
-
-        kpi_payment_no_fees: "Payment (no fees)",
-        kpi_payment_with_costs: "Payment (with costs)",
-        kpi_overpay_interest: "Overpayment (interest)",
-        kpi_total_paid: "Total (payments + costs)",
-
-        kpi_calc_type: "Calculated: {type}",
-        kpi_with_costs_note: "Monthly costs included",
-        kpi_interest_note: "Interest only over the term",
-        kpi_total_note: "Payments + one-time + monthly",
-
-        summary_costs: "Fees and costs: {value}",
-        hint_avg:
-          "Tip: average payment (no fees) ≈ {avg}, with costs ≈ {avg2}.",
-
-        // Schedule table
-        th_payment: "Payment ({sym})",
-        th_interest: "Interest ({sym})",
-        th_principal: "Principal ({sym})",
-        th_costs: "Costs ({sym})",
-        th_balance: "Balance ({sym})",
-      },
 
 
       evc: {

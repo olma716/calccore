@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Mortgage Calculator — payment, interest, schedule | CalcCore</title>
+    <title>Mortgage Calculator 2026: Payment, Overpayment, Schedule | CalcCore</title>
     <meta name="description"
-        content="CalcCore mortgage calculator: down payment (₴ or %), loan amount, monthly payment (annuity or decreasing), total interest, full cost and payment schedule. CSV export and copy." />
+        content="Mortgage calculator: payment, overpayment, down payment in currency or %, total cost, real rate and share of income. Early repayment, upfront costs, schedule and CSV." />
 
-    <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/finance/ipoteca-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/ipoteca-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/ipoteca-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,400 +28,404 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Mortgage Calculator — payment, interest, schedule" />
-    <meta property="og:description" content="CalcCore mortgage calculator: down payment (₴ or %), loan amount, monthly payment (annuity or decreasing), total interest, full cost and payment schedule. CSV export and copy." />
+    <meta property="og:title" content="Mortgage Calculator 2026: Payment, Overpayment, Schedule" />
+    <meta property="og:description" content="Mortgage calculator: payment, overpayment, down payment in currency or %, total cost, real rate and share of income. Early repayment, upfront costs, schedule and CSV." />
     <meta property="og:url" content="https://calccore.net/en/finance/ipoteca-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Mortgage Calculator — payment, interest, schedule" />
-    <meta name="twitter:description" content="CalcCore mortgage calculator: down payment (₴ or %), loan amount, monthly payment (annuity or decreasing), total interest, full cost and payment schedule. CSV export and copy." />
+    <meta name="twitter:title" content="Mortgage Calculator 2026: Payment, Overpayment, Schedule" />
+    <meta name="twitter:description" content="Mortgage calculator: payment, overpayment, down payment in currency or %, total cost, real rate and share of income. Early repayment, upfront costs, schedule and CSV." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/ipoteca-calculator.css" />
+    <link rel="stylesheet" href="/css/ipoteca.css?v=20261022ipt1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/ipoteca-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022ipt1" defer></script>
+    <script src="/js/ipoteca-calculator.js?v=20261022ipt1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/ipoteca-calculator#app",
-    "name":"Mortgage Calculator",
-    "description":"Online mortgage calculator with down payment, annuity or decreasing payment type, interest, total cost and schedule.",
-    "url":"https://calccore.net/en/finance/ipoteca-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
-<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/ipoteca-calculator#app",
+  "name": "Mortgage Calculator",
+  "description": "Calculates a mortgage: monthly payment, overpayment, down payment in currency or percent, total cost of credit and approximate real annual rate, upfront costs, total cost of the purchase, early repayment, payment schedule.",
+  "url": "https://calccore.net/en/finance/ipoteca-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Down payment in currency or percent with conversion between the modes",
+    "Annuity and differentiated payments rounded to the cent",
+    "Bank fee, insurance and other costs; one-time purchase costs",
+    "Early repayment: an extra monthly payment and a one-time one, interest savings",
+    "Total cost of credit, approximate real annual rate, upfront costs and total cost of the purchase",
+    "Share of income taken by the payment",
+    "Payment schedule by month and year with dates, totals, copy and CSV for Excel; a donut chart"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "@id": "https://calccore.net/#org",
-      "name": "CalcCore",
-      "url": "https://calccore.net/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://calccore.net/assets/logo.png"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://calccore.net/#website",
-      "url": "https://calccore.net/",
-      "name": "CalcCore",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "inLanguage": "en"
-    },
-    {
       "@type": "WebPage",
       "@id": "https://calccore.net/en/finance/ipoteca-calculator#webpage",
       "url": "https://calccore.net/en/finance/ipoteca-calculator",
-      "name": "Mortgage Calculator — Payment, Interest, Schedule | CalcCore",
-      "description": "CalcCore mortgage calculator: down payment (amount or %), loan amount, monthly payment (annuity or differentiated), total interest, total paid and a payment schedule. CSV export and copy.",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
-      "about": { "@id": "https://calccore.net/en/finance/ipoteca-calculator#app" },
+      "name": "Mortgage Calculator 2026: Payment, Overpayment, Schedule | CalcCore",
+      "description": "Mortgage calculator: payment, overpayment, down payment in currency or %, total cost, real rate and share of income. Early repayment, upfront costs, schedule and CSV.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/ipoteca-calculator#app"
+      },
+      "dateModified": "2026-10-22",
       "inLanguage": "en"
-    },
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
     {
-      "@type": "SoftwareApplication",
-      "@id": "https://calccore.net/en/finance/ipoteca-calculator#app",
-      "name": "Mortgage Calculator",
-      "description": "Online mortgage calculator: down payment (amount or %), annuity or differentiated payments, total interest, total paid and a payment schedule.",
-      "url": "https://calccore.net/en/finance/ipoteca-calculator",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any",
-      "isAccessibleForFree": true,
-      "inLanguage": "en",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" }
-    },
-    {
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": "https://calccore.net/en/finance/ipoteca-calculator#faq",
-      "url": "https://calccore.net/en/finance/ipoteca-calculator",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
       "inLanguage": "en",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How do I enter the down payment correctly?",
+          "name": "How is the monthly mortgage payment calculated?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Choose ₴ or % mode. The input adapts to the selected mode and the loan amount is calculated automatically as “property price − down payment”."
+            "text": "Payment = P × r ÷ (1 − (1+r)⁻ⁿ), where P is the loan amount and r is the monthly rate. For an apartment worth 2,000,000 UAH, a 20% down payment, a 18% rate and 20 years it is 24,692.98 UAH and the interest overpayment is 4,326,326 UAH."
           }
         },
         {
           "@type": "Question",
-          "name": "Which is better: annuity or differentiated payments?",
+          "name": "Which is better: an annuity or differentiated payments?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Annuity payments are nearly the same each month and are easier for budgeting. Differentiated payments repay principal in equal parts, while interest decreases as the balance goes down—early payments are higher, but total interest is often lower."
+            "text": "An annuity gives a constant payment of 24,692.98 UAH and a larger overpayment (4,326,326 UAH). A differentiated payment falls from 30,666.67 to 6,765.86 UAH with an overpayment of 2,891,999 UAH, but needs a higher income at the start."
           }
         },
         {
           "@type": "Question",
-          "name": "What’s included in “Total (Payments + costs)”?",
+          "name": "What are the down payment and loan-to-value (LTV)?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It includes all principal + interest payments over the full term, plus any one-time fee (if provided) and monthly costs (if provided)."
+            "text": "The down payment is the part of the price you pay yourself. LTV = loan amount ÷ price. For a 20% down payment it is 80%. The minimum down payment and the allowed LTV are set by the bank or the program."
           }
         },
         {
           "@type": "Question",
-          "name": "Why can results differ from a bank’s quote?",
+          "name": "What other costs are there besides the monthly payment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Banks may use different rounding, day-count conventions, internal fees, and exact payment dates. The calculator provides a mathematical estimate based on your inputs."
+            "text": "The bank's arrangement fee, insurance (life and property), a notary, property valuation and state fees. Their amounts depend on the bank and the property, so the calculator does not fill them in: enter your own values and they go into the upfront costs and the total cost."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I download the payment schedule?",
+          "name": "What are the total cost of credit and APR?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Use the “Download CSV” button in the schedule section. The file can be opened in Excel or Google Sheets."
+            "text": "The total cost is interest plus the fee, insurance and monthly costs. In the example with a 1% fee and 0.5% yearly insurance it is 4,502,327 UAH against 4,326,326 UAH of interest, and the approximate real annual rate is about 18.75% instead of 18%. The exact rate is stated by the bank."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many times more than the price does a mortgage cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the example with fees and costs the total cost of the purchase (down payment, all payments, fees and one-time costs) is 6,542,327 UAH — 3.27 times the price of 2,000,000 UAH. The calculator shows it in the “Total cost of the purchase” block."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does early repayment reduce the overpayment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An extra payment reduces the balance, so interest is charged on a smaller amount. If in the example you pay an extra 5,000 UAH every month, the mortgage closes in 9.3 years instead of 20 and the interest savings are 2,632,304 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What income do I need for such a mortgage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Banks limit the share of income that goes to payments, usually within 40–50%, but the exact limit is set by the bank. For a payment of 24,693 UAH at a 40% share you need an income of about 61,732 UAH per month. Enter your income in the calculator to see the payment share."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator include state programs such as “eOselia”?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: program terms (rate, down payment, limits) change, so they are not filled in automatically. Enter the rate, down payment and term that apply in your program and you get the calculation for them. Check the current terms with the bank."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I download the schedule and how accurate is the calculation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the “Download CSV” button saves the table with numbers for Excel. The calculation is an estimate from standard formulas: banks may count days differently, round and apply fees by their own rules, so check the result against the loan agreement."
           }
         }
       ]
     }
-  ]
-}
-</script>
+    </script>
 </head>
 
-
-<body class="credit-page cmortgage">
+<body class="ipt-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc cmortgage" id="cmortgage">
-            <div class="mcalc__wrap">
+        <section class="ipt" id="ipt">
+            <div class="ipt__wrap">
 
-                <!-- Titlebar -->
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Mortgage Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate mortgage payment: down payment (amount or %), monthly payment, total interest, and a
-                        detailed schedule.
-                        Supports annuity and decreasing payment types.
-                    </p>
+                <div class="ipt__titlebar">
+                    <h1 class="ipt__h1">Mortgage Calculator</h1>
+                    <p class="ipt__p">Calculate the mortgage payment, the overpayment and the total cost of buying a home, with the down payment, fees, insurance and early repayment.</p>
                 </div>
 
-                <!-- Grid -->
-                <div class="mcalc__grid">
+                <div class="ipt__grid">
 
-                    <!-- Topline -->
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto calculation</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
-                            NBU rates loading…
-                        </span>
-                    </div>
-
-                    <!-- LEFT card -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter data</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <!-- LEFT -->
+                    <div class="ipt__card">
+                        <div class="ipt__sectionTitle">
+                            <h2 class="ipt__h2">Input data</h2>
+                            <div class="ipt__dd" id="cur_dd"><button type="button" class="ipt__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="ipt__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="ipt__caret" aria-hidden="true"></span></button><ul class="ipt__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="ipt__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="ipt__ddCode">UAH</span><span class="ipt__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="ipt__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="ipt__ddCode">USD</span><span class="ipt__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="ipt__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="ipt__ddCode">EUR</span><span class="ipt__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="propertyPrice">Property price</label>
-                                <input class="mcalc__input" id="propertyPrice" type="text" inputmode="decimal"
-                                    placeholder="example: 2 000 000" />
-                                <div class="mcalc__hint">Object price (apartment/house). Base currency: ₴ (UAH).</div>
+                        <div class="ipt__block">
+                            <div class="ipt__miniTitle">Payment type</div>
+                            <div class="ipt__chips" role="group" aria-label="Payment type">
+                                <button id="typeAnn" class="ipt__chip is-active" type="button" aria-pressed="true"><svg class="ipt__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h18"/><path d="M3 12h18"/><path d="M3 7h18"/></svg><span>Annuity</span></button>
+                                <button id="typeDiff" class="ipt__chip" type="button" aria-pressed="false"><svg class="ipt__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l16 12"/><path d="M4 18V6"/><path d="M4 18h16"/></svg><span>Differentiated</span></button>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label">Down payment mode</label>
-                                <div class="m-switch" role="group" aria-label="Down payment mode">
-                                    <button id="dpModeUAH" class="m-switch__btn is-active" type="button">₴</button>
-                                    <button id="dpModePCT" class="m-switch__btn" type="button">%</button>
+                            <div class="ipt__rows">
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="price">Property price <span class="ipt__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ipt__input" id="price" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2,000,000"><div class="ipt__hint">The price of the apartment or house.</div>
                                 </div>
-                                <div class="mcalc__hint">Choose amount or percent of the property price.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="downPayment">Down payment (amount or %)</label>
-                                <input class="mcalc__input" id="downPayment" type="text" inputmode="decimal"
-                                    placeholder="example: 400 000" />
-                                <div class="mcalc__hint" id="dpHint">Example: 400 000 ₴</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="loanAmount">Loan amount (auto)</label>
-                                <input class="mcalc__input" id="loanAmount" type="text" inputmode="decimal"
-                                    placeholder="auto" readonly />
-                                <div class="mcalc__hint">Auto: property price − down payment.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="annualRate">Annual rate</label>
-                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
-                                    placeholder="example: 18" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="termYears">Term</label>
-                                <input class="mcalc__input" id="termYears" type="number" min="1" step="1"
-                                    placeholder="example: 20" />
-                                <div class="mcalc__hint">In years (will be converted to months).</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="paymentType">Payment type</label>
-                                <select class="mcalc__select" id="paymentType">
-                                    <option value="annuity" selected>Annuity (equal payments)</option>
-                                    <option value="diff">Decreasing (principal evenly)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for dates in the schedule.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="oneTimeFee">One-time fee (optional)</label>
-                                <input class="mcalc__input" id="oneTimeFee" type="text" inputmode="decimal"
-                                    placeholder="example: 5 000" />
-                                    <div class="mcalc__hint">A one-time bank fee added to the total cost of the loan.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="monthlyCosts">Monthly costs (optional)</label>
-                                <input class="mcalc__input" id="monthlyCosts" type="text" inputmode="decimal"
-                                    placeholder="example: 800" />
-                                    <div class="mcalc__hint">For example: insurance, service fees, or other recurring payments.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="down">Down payment</label>
+                                    <div class="ipt__inwrap"><input class="ipt__input" id="down" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 400,000"><div class="ipt__seg" role="group" aria-label="Unit"><button type="button" data-fu="down" data-u="pct" class="" aria-pressed="false">%</button><button type="button" data-fu="down" data-u="abs" class="is-on" aria-pressed="true">UAH</button></div></div>
+                                    <div class="ipt__hint">An amount or a % of the price; 0 if none.</div>
                                 </div>
-
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="ipt__loanInfo ipt__chipsRow"><div class="ipt__hint" id="loanInfo"></div></div>
+                                <div class="ipt__field">
+                                    <label class="ipt__label" for="rate">Annual rate (%) <span class="ipt__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ipt__input" id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 18">
+                                </div>
+                                <div class="ipt__field">
+                                    <label class="ipt__label" for="term">Term (years) <span class="ipt__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ipt__input" id="term" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                <div class="ipt__qrow ipt__chipsRow"><button type="button" class="ipt__qchip" data-term="10">10</button><button type="button" class="ipt__qchip" data-term="15">15</button><button type="button" class="ipt__qchip" data-term="20">20</button><button type="button" class="ipt__qchip" data-term="25">25</button><button type="button" class="ipt__qchip" data-term="30">30</button></div>
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="start">Start date</label>
+                                    <input class="ipt__input" id="start" type="date" autocomplete="off" placeholder=""><div class="ipt__hint">For dates in the schedule (optional).</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- RIGHT card -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
-                        </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter property price, down payment, annual rate and term.
-                        </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <!-- Schedule -->
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Payment schedule <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">
-                                    Copy table
-                                </button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">
-                                    Download CSV
-                                </button>
+                        <details class="ipt__details ipt__mt12" id="extraDetails">
+                            <summary>Fees, insurance and costs <span class="ipt__hint">(optional)</span></summary>
+                            <div class="ipt__rows">
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="bankFee">Bank fee</label>
+                                    <div class="ipt__inwrap"><input class="ipt__input" id="bankFee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1"><div class="ipt__seg" role="group" aria-label="Unit"><button type="button" data-fu="bankFee" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="bankFee" data-u="abs" class="" aria-pressed="false">UAH</button></div></div>
+                                    <div class="ipt__hint">% of the loan or an amount; paid once at issue.</div>
+                                </div>
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="buyCosts">One-time purchase costs</label>
+                                    <div class="ipt__inwrap"><input class="ipt__input" id="buyCosts" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2"><div class="ipt__seg" role="group" aria-label="Unit"><button type="button" data-fu="buyCosts" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="buyCosts" data-u="abs" class="" aria-pressed="false">UAH</button></div></div>
+                                    <div class="ipt__hint">Notary, valuation, fees: % of the price or an amount. Not part of the rate, but part of the upfront costs.</div>
+                                </div>
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="ins">Insurance</label>
+                                    <div class="ipt__inwrap"><input class="ipt__input" id="ins" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5"><div class="ipt__seg" role="group" aria-label="Unit"><button type="button" data-fu="ins" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="ins" data-u="abs" class="" aria-pressed="false">UAH</button></div></div>
+                                    <div class="ipt__hint">% of the loan per year or an amount per month.</div>
+                                </div>
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="other">Other monthly costs</label>
+                                    <input class="ipt__input" id="other" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 300"><div class="ipt__hint">An amount per month added to every payment.</div>
+                                </div>
                             </div>
+                            <div class="ipt__hint ipt__mt10">The bank fee, insurance and monthly costs are included in the total cost of credit and in the approximate real annual rate.</div>
+                        </details>
 
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Payment schedule">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Date</th>
-                                            <th id="thPayment">Payment (₴)</th>
-                                            <th id="thInterest">Interest (₴)</th>
-                                            <th id="thPrincipal">Principal (₴)</th>
-                                            <th id="thFees">Costs (₴)</th>
-                                            <th id="thBalance">Balance (₴)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                        <details class="ipt__details ipt__mt12" id="earlyDetails">
+                            <summary>Early repayment <span class="ipt__hint">(optional)</span></summary>
+                            <div class="ipt__rows">
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="extra">Extra payment per month</label>
+                                    <input class="ipt__input" id="extra" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5000">
+                                </div>
+                                <div class="ipt__field">
+                                    <label class="ipt__label" for="lump">One-time payment</label>
+                                    <input class="ipt__input" id="lump" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000">
+                                </div>
+                                <div class="ipt__field">
+                                    <label class="ipt__label" for="lumpMonth">In month no.</label>
+                                    <input class="ipt__input" id="lumpMonth" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                            </div>
+                            <div class="ipt__hint ipt__mt10">The payment stays the same and the loan term gets shorter. The calculator shows the interest savings.</div>
+                        </details>
+
+                        <details class="ipt__details ipt__mt12" id="incomeDetails">
+                            <summary>Income and payment share <span class="ipt__hint">(optional)</span></summary>
+                            <div class="ipt__rows">
+                                <div class="ipt__field ipt__field--full">
+                                    <label class="ipt__label" for="income">Monthly income</label>
+                                    <input class="ipt__input" id="income" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 60,000"><div class="ipt__hint">Shows what share of your income the first payment takes. The allowed share is set by the bank (often 40–50%) — check it.</div>
+                                </div>
                             </div>
                         </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+
+                        <div class="ipt__actions ipt__mt12">
+                            <button class="ipt__btn ipt__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="ipt__toast" id="toast"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ipt__card">
+                        <div class="ipt__sectionTitle">
+                            <h2 class="ipt__h2">Result</h2>
+                            <span class="ipt__badge">%</span>
+                        </div>
+                        <div class="ipt__result" id="result">Enter the property price, the rate and the term — the result will appear here.</div>
+                        <div class="ipt__actions ipt__mt12">
+                            <button class="ipt__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="ipt__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="ipt__btn" id="resetBtn" type="button">Reset</button>
+                        </div>
+                        <div class="m-navlinks ipt__mt12"><a id="credLink" class="ipt__link" href="/en/finance/credit-calculator">A consumer loan? →</a></div>
+                    </div>
+                </div>
+
+                <div class="ipt__card ipt__schedule" id="schedule" hidden>
+                    <div class="ipt__schedHead">
+                        <h2 class="ipt__h2">Payment schedule</h2>
+                        <div class="ipt__tools">
+                            <button type="button" class="ipt__qchip is-on" id="viewMonth">By month</button>
+                            <button type="button" class="ipt__qchip" id="viewYear">By year</button>
+                            <button type="button" class="ipt__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="ipt__qchip" id="csvBtn">Download CSV</button>
                         </div>
                     </div>
+                    <div class="ipt__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>How does the mortgage calculator work?</h2>
-            <p>
-                CalcCore mortgage calculator helps you estimate your loan: monthly payment, total interest, total cost,
-                and how the payment schedule looks over time.
-            </p>
-            <p>
-                Enter the <b>property price</b>, choose a <b>down payment</b> (amount or %), set the <b>annual rate</b>
-                and the <b>term</b> in years. The calculator determines the <b>loan amount</b> as “price − down payment”
-                and builds the schedule for the full term.
-            </p>
-
-            <h2>Annuity vs decreasing payments — which is better?</h2>
-            <ul>
-                <li><b>Annuity</b> — the monthly payment is almost the same each month. Easier for budgeting.</li>
-                <li><b>Decreasing</b> — principal is repaid evenly and interest decreases with the balance. First months
-                    are higher, but total interest is often lower.</li>
-            </ul>
-
-            <h2>Why does down payment matter?</h2>
-            <p>
-                The bigger the down payment, the smaller the loan amount, the lower the payment and the total interest.
-                You can calculate down payment as a <b>fixed amount</b> or as a <b>percentage (%)</b> of the price.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/credit-calculator"><b>Loan calculator</b><span>Payment, overpayment and APR of a consumer loan.</span></a>
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Deposit income with interest compounding.</span></a>
+                <a class="cc-related-card" href="/en/finance/inflation-calculator"><b>Inflation calculator</b><span>How inflation erodes money over time.</span></a>
+            </div>
         </section>
 
-        <!-- FAQ -->
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How a mortgage is calculated</h2>
+            <p>The loan amount is the property price minus the down payment. An annuity payment is the same every month: P × r ÷ (1 − (1+r)⁻ⁿ), where P is the loan amount, r is the monthly rate (annual ÷ 12) and n is the number of months. For an apartment worth 2,000,000 UAH with a 20% down payment (400,000 UAH), a 18% rate and 20 years the loan is 1,600,000 UAH, the payment is <b>24,692.98 UAH</b> and the interest overpayment is <b>4,326,326 UAH</b>.</p>
+            <p>In a differentiated schedule the principal is the same every month and the interest falls with the balance: the payment falls from <b>30,666.67 UAH</b> to <b>6,765.86 UAH</b> and the overpayment is <b>2,891,999 UAH</b>. That is 1,434,327 UAH less than with an annuity, but the first payments are noticeably larger. All amounts are rounded to the cent and the last payment closes the balance.</p>
+
+            <h2>Down payment, loan-to-value and upfront costs</h2>
+            <p>The loan-to-value ratio (LTV) in the example is 80%. The larger the down payment, the smaller the loan, the payment and the overpayment. The “currency / %” switch converts the value: 400,000 UAH out of 2,000,000 UAH is 20%.</p>
+            <p>Besides the down payment you need the bank fee and one-time purchase costs (notary, valuation, fees) at the start. Their amounts vary, so enter them yourself. With a bank fee of 1% of the loan and one-time costs of 2% of the price you need <b>456,000 UAH</b> at the start, not just 400,000 UAH of down payment.</p>
+
+            <h2>Total cost of a mortgage and the real annual rate</h2>
+            <p>Interest overpayment is only part of the cost. The <b>total cost of credit</b> is interest plus the bank fee, insurance and monthly costs. With a 1% fee and 0.5% yearly insurance it is <b>4,502,327 UAH</b> (281.4% of the loan), while interest alone is 4,326,326 UAH.</p>
+            <p>The approximate real annual rate (APR) is estimated as the internal rate of return of the cash flow (the loan received minus the fee, then payments plus insurance and costs) multiplied by 12. In the example it is about <b>18.75%</b> with a nominal rate of 18%. It is an estimate: the exact formula and value are stated by the bank. The <b>total cost of the purchase</b> — down payment, all payments, fees and one-time costs — is 6,542,327 UAH, which is 3.27 times the price of the apartment.</p>
+            <p class="ipt-mini">The calculation is an estimate. Real mortgage terms, fees, insurance, the allowed share of income and the real rate are set by the bank, so check them in the loan agreement. The real annual rate here is approximate.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How to enter down payment correctly?</h3>
-                <p>
-                    Choose mode <b>₴</b> or <b>%</b>. The “Down payment” field adapts to the mode and automatically
-                    recalculates the loan amount.
-                </p>
+            <div class="cc-faq-item">
+                <h3>How is the monthly mortgage payment calculated?</h3>
+                <p>Payment = P × r ÷ (1 − (1+r)⁻ⁿ), where P is the loan amount and r is the monthly rate. For an apartment worth 2,000,000 UAH, a 20% down payment, a 18% rate and 20 years it is 24,692.98 UAH and the interest overpayment is 4,326,326 UAH.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What is included in “Total (payments + costs)”?</h3>
-                <p>
-                    All principal + interest payments, plus one-time fee (if set) and monthly costs (if set).
-                </p>
+            <div class="cc-faq-item">
+                <h3>Which is better: an annuity or differentiated payments?</h3>
+                <p>An annuity gives a constant payment of 24,692.98 UAH and a larger overpayment (4,326,326 UAH). A differentiated payment falls from 30,666.67 to 6,765.86 UAH with an overpayment of 2,891,999 UAH, but needs a higher income at the start.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why can it differ from a bank calculation?</h3>
-                <p>
-                    Banks may use different rounding rules, day-count conventions, internal fees and exact debit dates.
-                    This calculator provides a mathematically correct estimate based on your inputs.
-                </p>
+            <div class="cc-faq-item">
+                <h3>What are the down payment and loan-to-value (LTV)?</h3>
+                <p>The down payment is the part of the price you pay yourself. LTV = loan amount ÷ price. For a 20% down payment it is 80%. The minimum down payment and the allowed LTV are set by the bank or the program.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I download the payment schedule?</h3>
-                <p>
-                    Yes — click <b>“Download CSV”</b>. The file opens in Excel or Google Sheets.
-                </p>
+            <div class="cc-faq-item">
+                <h3>What other costs are there besides the monthly payment?</h3>
+                <p>The bank's arrangement fee, insurance (life and property), a notary, property valuation and state fees. Their amounts depend on the bank and the property, so the calculator does not fill them in: enter your own values and they go into the upfront costs and the total cost.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are the total cost of credit and APR?</h3>
+                <p>The total cost is interest plus the fee, insurance and monthly costs. In the example with a 1% fee and 0.5% yearly insurance it is 4,502,327 UAH against 4,326,326 UAH of interest, and the approximate real annual rate is about 18.75% instead of 18%. The exact rate is stated by the bank.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many times more than the price does a mortgage cost?</h3>
+                <p>In the example with fees and costs the total cost of the purchase (down payment, all payments, fees and one-time costs) is 6,542,327 UAH — 3.27 times the price of 2,000,000 UAH. The calculator shows it in the “Total cost of the purchase” block.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does early repayment reduce the overpayment?</h3>
+                <p>An extra payment reduces the balance, so interest is charged on a smaller amount. If in the example you pay an extra 5,000 UAH every month, the mortgage closes in 9.3 years instead of 20 and the interest savings are 2,632,304 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What income do I need for such a mortgage?</h3>
+                <p>Banks limit the share of income that goes to payments, usually within 40–50%, but the exact limit is set by the bank. For a payment of 24,693 UAH at a 40% share you need an income of about 61,732 UAH per month. Enter your income in the calculator to see the payment share.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator include state programs such as “eOselia”?</h3>
+                <p>No: program terms (rate, down payment, limits) change, so they are not filled in automatically. Enter the rate, down payment and term that apply in your program and you get the calculation for them. Check the current terms with the bank.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I download the schedule and how accurate is the calculation?</h3>
+                <p>Yes, the “Download CSV” button saves the table with numbers for Excel. The calculation is an estimate from standard formulas: banks may count days differently, round and apply fees by their own rules, so check the result against the loan agreement.</p>
             </div>
         </section>
     </main>
 
     <div id="footer"></div>
-
     <script src="/js/layout.js"></script>
-
 </body>
 
 </html>
