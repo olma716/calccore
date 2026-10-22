@@ -369,40 +369,6 @@
         },
       
 
-      comp:{
-          nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-          nbu_title: "Курс НБУ (USD/EUR)",
-          nbu_unavailable: "Курс НБУ: недоступно",
-
-          toast_enter_values: "Введи початкову суму та період.",
-          result_enter_values: "Введи початкову суму, ставку та період.",
-          toast_reset: "Скинуто.",
-          toast_need_calc_first: "Спочатку зроби розрахунок.",
-          copied_result: "Скопійовано результат.",
-          copy_failed: "Не вдалося скопіювати.",
-          copied_table: "Скопійовано таблицю.",
-          copy_table_failed: "Не вдалося скопіювати таблицю.",
-          csv_downloaded: "CSV завантажено.",
-          toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-
-          final: "Підсумкова сума",
-          kpi_contributed: "Внесли",
-          kpi_earned: "Заробили",
-          kpi_earned_pct: "Прибуток",
-          kpi_ratio: "Внесли vs заробили",
-          kpi_ratio_hint: "Заробили / внесли",
-          kpi_final: "Фінальний баланс",
-          kpi_years: "По роках",
-          kpi_freq: "Частота",
-
-          freq_monthly: "щомісяця",
-          freq_quarterly: "щокварталу",
-          freq_yearly: "щороку",
-
-          summary: "Внесли та заробили",
-          summary_hint: "Графік і таблиця — за балансом наприкінці кожного року. Валюту можна перемкнути на USD/EUR (курс НБУ).",
-          chart_need_data: "Зроби розрахунок, щоб побачити графік."
-        },
       roi: {
           nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
           nbu_title: "Курс НБУ (USD/EUR)",
@@ -1648,40 +1614,6 @@ csv_downloaded: "CSV downloaded.",
     summary: "Contributed and earned",
 },
 
-      comp:{
-  nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "NBU rate (USD/EUR)",
-  nbu_unavailable: "NBU rate: unavailable",
-
-  toast_enter_values: "Enter the initial amount and period.",
-  result_enter_values: "Enter the initial amount, rate, and period.",
-  toast_reset: "Reset.",
-  toast_need_calc_first: "Calculate first.",
-  copied_result: "Result copied.",
-  copy_failed: "Copy failed.",
-  copied_table: "Table copied.",
-  copy_table_failed: "Failed to copy table.",
-  csv_downloaded: "CSV downloaded.",
-  toast_nbu_not_loaded_fallback: "NBU rate didn’t load — showing UAH.",
-
-  final: "Final amount",
-  kpi_contributed: "Contributed",
-  kpi_earned: "Earned",
-  kpi_earned_pct: "Return",
-  kpi_ratio: "Contributed vs earned",
-  kpi_ratio_hint: "Earned / contributed",
-  kpi_final: "Final balance",
-  kpi_years: "Years",
-  kpi_freq: "Frequency",
-
-  freq_monthly: "monthly",
-  freq_quarterly: "quarterly",
-  freq_yearly: "yearly",
-
-  summary: "Contributed and earned",
-  summary_hint: "Chart and table use end-of-year balances. You can switch currency to USD/EUR (NBU rate).",
-  chart_need_data: "Run the calculation to see the chart."
-},
 
 
       percent: {

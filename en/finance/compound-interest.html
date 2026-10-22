@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Compound Interest Calculator: contributions, growth chart | CalcCore</title>
+    <title>Compound Interest Calculator 2026: Growth & Compounding | CalcCore</title>
     <meta name="description"
-        content="Compound interest calculator: initial amount, monthly contributions, annual rate, years and compounding frequency. Final amount, growth chart, yearly table, CSV export." />
+        content="Compound interest calculator: final amount, time to a goal, required contribution, compounding up to daily, tax, inflation, growth chart and a table with CSV export." />
 
-    <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/finance/compound-interest" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/compound-interest" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/compound-interest" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,343 +28,387 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Compound Interest Calculator: contributions, growth chart" />
-    <meta property="og:description" content="Compound interest calculator: initial amount, monthly contributions, annual rate, years and compounding frequency. Final amount, growth chart, yearly table, CSV export." />
+    <meta property="og:title" content="Compound Interest Calculator 2026: Growth & Compounding" />
+    <meta property="og:description" content="Compound interest calculator: final amount, time to a goal, required contribution, compounding up to daily, tax, inflation, growth chart and a table with CSV export." />
     <meta property="og:url" content="https://calccore.net/en/finance/compound-interest" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Compound Interest Calculator: contributions, growth chart" />
-    <meta name="twitter:description" content="Compound interest calculator: initial amount, monthly contributions, annual rate, years and compounding frequency. Final amount, growth chart, yearly table, CSV export." />
+    <meta name="twitter:title" content="Compound Interest Calculator 2026: Growth & Compounding" />
+    <meta name="twitter:description" content="Compound interest calculator: final amount, time to a goal, required contribution, compounding up to daily, tax, inflation, growth chart and a table with CSV export." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/compound-interest.css" />
+    <link rel="stylesheet" href="/css/compound.css?v=20261022cmp5" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/compound-interest.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022cmp5" defer></script>
+    <script src="/js/compound-interest.js?v=20261022cmp5" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is compound interest?",
-        "acceptedAnswer":{"@type":"Answer","text":"Compound interest means returns are calculated not only on the initial amount but also on previously earned interest."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does more frequent compounding increase returns?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. Monthly compounding leads to higher growth than annual compounding because interest is added more often."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do monthly contributions affect results?",
-        "acceptedAnswer":{"@type":"Answer","text":"Regular contributions increase the capital and the base for compounding, significantly increasing the final amount."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does the calculator guarantee exact investment returns?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. It provides a projection based on the entered rate. Actual returns may vary."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/compound-interest#app",
+  "name": "Compound Interest Calculator",
+  "description": "Calculates compound interest: the final amount, how long it takes to reach a goal, what monthly contribution is needed, compounding yearly, semi-annually, quarterly, monthly or daily, tax, inflation, effective yield, a growth chart and a table.",
+  "url": "https://calccore.net/en/finance/compound-interest",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Three modes: final amount, time to a goal, required monthly contribution",
+    "Compounding yearly, semi-annually, quarterly, monthly and daily",
+    "A monthly contribution at the start or the end of the month with yearly growth",
+    "Tax on interest (optional) and expected inflation with the real value",
+    "Effective annual yield, gain from compounding over simple interest, doubling time",
+    "Growth chart, table by year and month with totals, copy and CSV for Excel",
+    "UAH, USD and EUR currencies; shareable link"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/compound-interest#app",
-    "name":"Compound Interest Calculator",
-    "description":"Online compound interest calculator with monthly contributions, different compounding frequencies, and capital growth chart.",
-    "url":"https://calccore.net/en/finance/compound-interest",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/finance/compound-interest#webpage",
+      "url": "https://calccore.net/en/finance/compound-interest",
+      "name": "Compound Interest Calculator 2026: Growth & Compounding | CalcCore",
+      "description": "Compound interest calculator: final amount, time to a goal, required contribution, compounding up to daily, tax, inflation, growth chart and a table with CSV export.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/compound-interest#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "en"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/finance/compound-interest#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is compound interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Interest charged on the amount together with the interest accrued before. For 100,000 UAH at 10% over 10 years with monthly compounding you get 270,704 UAH, while simple interest would give 200,000 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the compound interest formula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "S = P × (1 + r/n)^(n·t), where P is the initial amount, r the annual rate, n the compoundings per year and t the years. With regular contributions the calculator works month by month and takes the moment of every contribution into account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does compounding frequency affect the result?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The more often it compounds the more you get, but the difference is small. For 100,000 UAH, 10% and 10 years: yearly 259,374, quarterly 268,506, monthly 270,704, daily 271,791 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What matters more: a higher rate or regular contributions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At the start contributions matter more, later the rate and the time. A monthly 2,000 UAH on top of 100,000 UAH gives 683,808 UAH against 270,704 UAH without contributions. Compare the options in the calculator."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the rule of 72?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An approximate doubling time = 72 ÷ the rate in %. At 10% it is 7.2 years. The calculator also shows a more precise time based on the effective yield: for 10% with monthly compounding about 7.0 years."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do compound and simple interest differ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simple interest is charged only on the initial amount, compound interest also on the accumulated interest. After 10 years at 10% that is 200,000 UAH against 270,704 UAH. The calculator shows the “gain from compounding” as the difference."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I include the tax on interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose “23%” (as on a deposit: personal income tax 18% and military levy 5%) or enter your own rate. The tax is withheld from the interest at compounding. For the example above the result is 215,446 UAH instead of 270,704 UAH. The rate is set by law, check the current one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I account for inflation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the expected inflation in % per year: the calculator shows the real value in today's money. With 8% inflation, 270,704 UAH in 10 years is about 125,388 UAH in today's money. Inflation is your assumption."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I work out how long it takes to reach a goal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose the “Time to a goal” mode and enter the initial amount, the contribution, the rate and the target. From 100,000 UAH with contributions of 5,000 UAH a month at 10% a million is saved in 8 yr 4 mo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do I need to contribute each month for a goal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose the “Contribution for a goal” mode: enter the goal, the rate and the term. To save 1,000,000 UAH in 10 years from zero at 10% with monthly compounding you need about 4,843 UAH a month."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page ccomp">
+<body class="cmp-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc ccomp" id="ccomp">
-            <div class="mcalc__wrap">
+        <section class="cmp" id="cmp">
+            <div class="cmp__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Compound Interest</h1>
-                    <p class="mcalc__p">
-                        Estimate capital growth with contributions: final amount, contributed vs earned (%),
-                        growth chart, and yearly table. Compounding: monthly / quarterly / yearly.
-                    </p>
+                <div class="cmp__titlebar">
+                    <h1 class="cmp__h1">Compound Interest Calculator</h1>
+                    <p class="cmp__p">Calculate how your money grows with compound interest, how long it takes to reach a goal and how much you need to contribute every month.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
-                            NBU rate: loading…
-                        </span>
-                    </div>
+                <div class="cmp__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter details</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <div class="cmp__card">
+                        <div class="cmp__sectionTitle">
+                            <h2 class="cmp__h2">Input data</h2>
+                            <div class="cmp__dd" id="cur_dd"><button type="button" class="cmp__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="cmp__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="cmp__caret" aria-hidden="true"></span></button><ul class="cmp__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="cmp__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="cmp__ddCode">UAH</span><span class="cmp__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="cmp__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="cmp__ddCode">USD</span><span class="cmp__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="cmp__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="cmp__ddCode">EUR</span><span class="cmp__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="principal">Initial amount</label>
-                                <input class="mcalc__input" id="principal" type="text" inputmode="decimal" placeholder="e.g.: 100 000" />
+                        <div class="cmp__block">
+                            <div class="cmp__miniTitle">What to calculate</div>
+                            <div class="cmp__modes" role="group" aria-label="What to calculate">
+                                <button class="cmp__mode is-active" type="button" data-mode="fv" aria-pressed="true"><b>Final amount</b><span>How much there will be after a given time</span></button>
+                                <button class="cmp__mode" type="button" data-mode="time" aria-pressed="false"><b>Time to a goal</b><span>How long to reach the target amount</span></button>
+                                <button class="cmp__mode" type="button" data-mode="contrib" aria-pressed="false"><b>Contribution for a goal</b><span>How much to contribute monthly</span></button>
                             </div>
-                            
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="baseCurrency">Currency</label>
-                                <select id="baseCurrency" class="mcalc__select mcalc__select--mini" style="width:50%;">
-                                    <option value="UAH" selected>UAH ₴</option>
-                                    <option value="USD">USD $</option>
-                                    <option value="EUR">EUR €</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="monthlyTopUp">Monthly contribution</label>
-                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
-                                    placeholder="e.g., 2 000" />
-                                <div class="mcalc__hint">Added at the beginning of each month (including the first).
+                            <div class="cmp__rows">
+                                <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="amount">Initial amount</label>
+                                    <input class="cmp__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000"><div class="cmp__hint">Can be 0 if there is a monthly contribution.</div>
+                                </div>
+                                <div class="cmp__field cmp__field--full" id="topField">
+                                    <label class="cmp__label" for="top">Monthly contribution</label>
+                                    <input class="cmp__input" id="top" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2,000">
+                                </div>
+                                <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="rate">Annual rate (%) <span class="cmp__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="cmp__input" id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
                                 </div>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="annualRate">Annual rate, %</label>
-                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
-                                    placeholder="e.g., 12" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="years">Period (years)</label>
-                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
-                                    placeholder="e.g., 10" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="frequency">Compounding frequency</label>
-                                <select class="mcalc__select" id="frequency">
-                                    <option value="monthly" selected>Monthly</option>
-                                    <option value="quarterly">Quarterly</option>
-                                    <option value="yearly">Yearly</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for year labels in the table.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                   
+                            <div class="cmp__miniTitle cmp__mt12">Compounding</div>
+                            <div class="cmp__qrow"><button type="button" class="cmp__qchip" data-freq="1">Yearly</button><button type="button" class="cmp__qchip" data-freq="2">Semi-annually</button><button type="button" class="cmp__qchip" data-freq="4">Quarterly</button><button type="button" class="cmp__qchip is-on" data-freq="12">Monthly</button><button type="button" class="cmp__qchip" data-freq="365">Daily</button></div>
+                            <div class="cmp__rows cmp__mt12" id="termWrap">
+                                <div class="cmp__field">
+                                    <label class="cmp__label" for="years">Term, years <span class="cmp__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="cmp__input" id="years" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="cmp__field">
+                                    <label class="cmp__label" for="months">and months</label>
+                                    <input class="cmp__input" id="months" type="text" inputmode="decimal" autocomplete="off" placeholder="0–11">
+                                </div>
+                                <div class="cmp__qrow cmp__chipsRow"><button type="button" class="cmp__qchip" data-years="1">1</button><button type="button" class="cmp__qchip" data-years="3">3</button><button type="button" class="cmp__qchip" data-years="5">5</button><button type="button" class="cmp__qchip" data-years="10">10</button><button type="button" class="cmp__qchip" data-years="15">15</button><button type="button" class="cmp__qchip" data-years="20">20</button><button type="button" class="cmp__qchip" data-years="30">30</button></div>
                             </div>
-
+                            <div class="cmp__rows cmp__mt12" id="goalWrap" hidden>
+                                <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="goal">Target amount <span class="cmp__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="cmp__input" id="goal" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,000,000">
+                                </div>
+                            </div>
                         </div>
+
+                        <details class="cmp__details cmp__mt12" id="moreDetails">
+                            <summary>More options <span class="cmp__hint">(optional)</span></summary>
+                            <div class="cmp__rows">
+                                <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="topG">Contribution growth per year (%)</label>
+                                    <input class="cmp__input" id="topG" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="cmp__hint">Every year the contribution grows by this percentage.</div>
+                                </div>
+                                <div class="cmp__field cmp__field--full">
+                                    <div class="cmp__label">Contribution is made</div>
+                                    <div class="cmp__qrow"><button type="button" class="cmp__qchip is-on" data-timing="start">At the start of the month</button><button type="button" class="cmp__qchip" data-timing="end">At the end of the month</button></div>
+                                </div>
+                                <div class="cmp__field cmp__field--full">
+                                    <div class="cmp__label">Tax on interest</div>
+                                    <div class="cmp__qrow"><button type="button" class="cmp__qchip is-on" data-tax="none">No tax</button><button type="button" class="cmp__qchip" data-tax="std">23%</button><button type="button" class="cmp__qchip" data-tax="custom">Custom</button></div>
+                                    <div class="cmp__hint">For a deposit 23% = personal income tax 18% + military levy 5% (the rate is set by law, check the current one). For investments the tax differs.</div>
+                                </div>
+                                <div class="cmp__rows cmp__chipsRow" id="taxRateWrap" hidden>
+                                    <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="taxRate">Tax rate (%)</label>
+                                    <input class="cmp__input" id="taxRate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 19.5">
+                                </div>
+                                </div>
+                                <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="infl">Expected inflation (% per year)</label>
+                                    <input class="cmp__input" id="infl" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8"><div class="cmp__hint">Shows the real value in today's money; the value is your assumption.</div>
+                                </div>
+                                <div class="cmp__field cmp__field--full">
+                                    <label class="cmp__label" for="start">Start date</label>
+                                    <input class="cmp__input" id="start" type="date" autocomplete="off" placeholder=""><div class="cmp__hint">For dates in the monthly table.</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="cmp__actions cmp__mt12">
+                            <button class="cmp__btn cmp__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="cmp__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="cmp__card">
+                        <div class="cmp__sectionTitle">
+                            <h2 class="cmp__h2">Result</h2>
+                            <span class="cmp__badge">%</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter initial amount, rate, and period.
+                        <div class="cmp__result" id="result">Enter the rate and the term — the result will appear here.</div>
+                        <div class="cmp__actions cmp__mt12">
+                            <button class="cmp__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="cmp__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="cmp__btn" id="resetBtn" type="button">Reset</button>
                         </div>
+                        <div class="m-navlinks cmp__mt12"><a class="cmp__link" href="/en/finance/deposit-calculator">Deposit calculator →</a> <a class="cmp__link" href="/en/finance/inflation-calculator">Inflation →</a></div>
+                    </div>
+                </div>
 
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Growth chart</div>
-
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                            </div>
-
-                            <canvas id="growthChart" width="900" height="280"
-                                aria-label="Capital growth chart"></canvas>
-                            <div class="m-hintSmall">
-                                The line shows the end-of-year balance.
-                            </div>
-                        </div>
-
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Yearly table <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
-                                    CSV</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Yearly compound interest table">
-                                    <thead>
-                                        <tr>
-                                            <th>Year</th>
-                                            <th>Date</th>
-                                            <th>Contributed (₴)</th>
-                                            <th>Earned (₴)</th>
-                                            <th>Balance (₴)</th>
-                                            <th>Earned, %</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                <div class="cmp__card cmp__schedule" id="schedule" hidden>
+                    <div class="cmp__schedHead">
+                        <h2 class="cmp__h2">Growth table</h2>
+                        <div class="cmp__tools">
+                            <button type="button" class="cmp__qchip is-on" id="viewYear">By year</button>
+                            <button type="button" class="cmp__qchip" id="viewMonth">By month</button>
+                            <button type="button" class="cmp__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="cmp__qchip" id="csvBtn">Download CSV</button>
                         </div>
                     </div>
-
+                    <div class="cmp__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-        
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>How does the compound interest calculator work?</h2>
-            <p>
-                The CalcCore compound interest calculator shows how your money can grow over time thanks to
-                <b>compounding</b> — interest is earned not only on your initial amount, but also on previously earned interest.
-                This is a core concept behind long-term investing and saving.
-            </p>
-            <p>
-                Enter your <b>starting amount</b>, <b>monthly additions</b>, <b>annual rate</b>, and <b>time period</b>.
-                Then choose the <b>compounding frequency</b> (monthly / quarterly / yearly).
-                The calculator estimates the final balance and breaks down how much you contributed vs how much you earned.
-            </p>
-        
-            <h2>Compounding frequency: monthly, quarterly, or yearly</h2>
-            <p>
-                Frequency matters: the more often interest is compounded, the faster the balance typically grows,
-                because gains are reinvested sooner. For the same annual rate,
-                <b>monthly compounding</b> usually produces a higher result than <b>yearly</b>.
-            </p>
-        
-            <h2>Contributed vs earned: what do these numbers mean?</h2>
-            <p>
-                The calculator separates:
-                <b>contributed</b> (initial amount + all additions) and
-                <b>earned</b> (final balance minus contributions).
-                This helps you understand how much growth comes from your deposits versus compounding returns.
-            </p>
-        
-            <h2>Growth chart and yearly table</h2>
-            <p>
-                For clarity, the calculator provides a <b>growth chart</b> and a <b>yearly table</b>,
-                showing the end-of-year balance, total contributions, and total earnings.
-                This is useful for planning goals such as saving milestones, emergency funds, or major purchases.
-            </p>
-        </section>
-        
-        <!-- FAQ -->
-        <section class="m-faq">
-            <h2>FAQ</h2>
-        
-            <div class="m-faq-item">
-                <h3>What is compound interest in simple terms?</h3>
-                <p>
-                    It means you earn interest on your balance, including the interest you already earned.
-                    In other words, your interest starts earning interest.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>How does compounding frequency affect the result?</h3>
-                <p>
-                    More frequent compounding (monthly/quarterly/yearly) generally increases growth, because returns are
-                    reinvested sooner.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>How are monthly additions calculated?</h3>
-                <p>
-                    Monthly additions increase the principal over time, which increases the base used to calculate interest.
-                    Consistent contributions can significantly boost long-term results.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Will this match my bank or broker exactly?</h3>
-                <p>
-                    This calculator provides a clean mathematical estimate. Real products may include fees, taxes, variable
-                    rates,
-                    or specific transaction dates, which can change the final outcome.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>What’s the difference between “contributed” and “earned”?</h3>
-                <p>
-                    “Contributed” is your own money (initial amount + additions). “Earned” is growth from returns:
-                    final balance minus contributions.
-                </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Net income, tax and effective yield of a deposit.</span></a>
+                <a class="cc-related-card" href="/en/finance/inflation-calculator"><b>Inflation calculator</b><span>How inflation erodes money over time.</span></a>
+                <a class="cc-related-card" href="/en/finance/roi-calculator"><b>ROI calculator</b><span>Investment return and net profit.</span></a>
             </div>
         </section>
 
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How compound interest works</h2>
+            <p>Compound interest is charged not only on the amount you put in but also on the interest accrued before. For a deposit of 100,000 UAH at 10% per year with monthly compounding, after 10 years there will be <b>270,704 UAH</b>, that is 170,704 UAH of income. Simple interest would give only 200,000 UAH.</p>
+            <p>The formula without contributions: S = P × (1 + r/n)<sup>n·t</sup>, where P is the initial amount, r the annual rate, n the number of compoundings per year and t the years. With regular contributions the calculator works month by month: a contribution earns interest from the month it is made.</p>
+
+            <h2>Compounding frequency and contributions</h2>
+            <p>The more often it compounds, the bigger the amount, but the effect fades. For 100,000 UAH at 10% over 10 years: yearly — 259,374 UAH, semi-annually — 265,330 UAH, quarterly — 268,506 UAH, monthly — 270,704 UAH, daily — 271,791 UAH.</p>
+            <p>Regular contributions speed up growth more than frequency: a monthly 2,000 UAH on top of the same 100,000 UAH gives <b>683,808 UAH</b> instead of 270,704 UAH. And starting from zero, contributions of 2,000 UAH a month alone give 413,104 UAH in 10 years.</p>
+
+            <h2>Tax, inflation and a goal</h2>
+            <p>With a 23% tax on interest (as on a deposit) the result for the same example is 215,446 UAH instead of 270,704 UAH; the effective yield before tax is 10.47%. With 8% inflation per year, 270,704 UAH in 10 years has a real value of about <b>125,388 UAH</b> in today's money.</p>
+            <p>The goal modes answer the reverse questions. To save 1,000,000 UAH from 100,000 UAH with contributions of 5,000 UAH a month at 10% you need <b>8 yr 4 mo</b>. And to save 1,000,000 UAH in 10 years from zero you need to contribute about <b>4,843 UAH a month</b>.</p>
+            <p class="cmp-mini">This is an estimate from a mathematical model. Real interest and rounding are set by the bank or the broker, investment returns are not guaranteed and the tax rate is set by law — check the current terms.</p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>What is compound interest?</h3>
+                <p>Interest charged on the amount together with the interest accrued before. For 100,000 UAH at 10% over 10 years with monthly compounding you get 270,704 UAH, while simple interest would give 200,000 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the compound interest formula?</h3>
+                <p>S = P × (1 + r/n)^(n·t), where P is the initial amount, r the annual rate, n the compoundings per year and t the years. With regular contributions the calculator works month by month and takes the moment of every contribution into account.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does compounding frequency affect the result?</h3>
+                <p>The more often it compounds the more you get, but the difference is small. For 100,000 UAH, 10% and 10 years: yearly 259,374, quarterly 268,506, monthly 270,704, daily 271,791 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What matters more: a higher rate or regular contributions?</h3>
+                <p>At the start contributions matter more, later the rate and the time. A monthly 2,000 UAH on top of 100,000 UAH gives 683,808 UAH against 270,704 UAH without contributions. Compare the options in the calculator.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the rule of 72?</h3>
+                <p>An approximate doubling time = 72 ÷ the rate in %. At 10% it is 7.2 years. The calculator also shows a more precise time based on the effective yield: for 10% with monthly compounding about 7.0 years.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do compound and simple interest differ?</h3>
+                <p>Simple interest is charged only on the initial amount, compound interest also on the accumulated interest. After 10 years at 10% that is 200,000 UAH against 270,704 UAH. The calculator shows the “gain from compounding” as the difference.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I include the tax on interest?</h3>
+                <p>Choose “23%” (as on a deposit: personal income tax 18% and military levy 5%) or enter your own rate. The tax is withheld from the interest at compounding. For the example above the result is 215,446 UAH instead of 270,704 UAH. The rate is set by law, check the current one.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I account for inflation?</h3>
+                <p>Enter the expected inflation in % per year: the calculator shows the real value in today's money. With 8% inflation, 270,704 UAH in 10 years is about 125,388 UAH in today's money. Inflation is your assumption.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I work out how long it takes to reach a goal?</h3>
+                <p>Choose the “Time to a goal” mode and enter the initial amount, the contribution, the rate and the target. From 100,000 UAH with contributions of 5,000 UAH a month at 10% a million is saved in 8 yr 4 mo.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much do I need to contribute each month for a goal?</h3>
+                <p>Choose the “Contribution for a goal” mode: enter the goal, the rate and the term. To save 1,000,000 UAH in 10 years from zero at 10% with monthly compounding you need about 4,843 UAH a month.</p>
+            </div>
+        </section>
     </main>
 
     <div id="footer"></div>

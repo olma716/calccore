@@ -1,0 +1,1225 @@
+/* =========================
+   Калькулятор складних відсотків
+   у єдиному стилі з калькуляторами пального, TCO, розмитнення, EV та шин
+   (все всередині .cmp)
+========================= */
+
+.cmp,
+.cmp * {
+    box-sizing: border-box;
+}
+
+.cmp {
+    --e-card: #fff;
+    --e-text: #222;
+    --e-muted: #6b7280;
+    --e-brand: #283b69;
+    --e-brand2: #1f2f55;
+    --e-border: #e6e8ef;
+    --e-shadow: 0 1px 3px rgba(31, 47, 85, .06), 0 10px 30px rgba(40, 59, 105, .14);
+    --e-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--e-text);
+}
+
+.cmp__wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 0 20px;
+}
+
+.cmp__titlebar {
+    background: var(--header-grad-solid, linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%));
+    color: #fff;
+    border-radius: var(--e-radius);
+    padding: 16px;
+    box-shadow: var(--e-shadow);
+    margin-bottom: 14px;
+}
+
+.cmp__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.cmp__p {
+    margin: 6px 0 0;
+    color: rgba(255, 255, 255, .92);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.cmp__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: 14px;
+    align-items: start;
+}
+
+@media (max-width: 980px) {
+    .cmp__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cmp__card {
+    background: var(--e-card);
+    border: 1px solid var(--e-border);
+    border-radius: var(--e-radius);
+    box-shadow: var(--e-shadow);
+    padding: 14px;
+    min-width: 0;
+    scroll-margin-top: 90px;
+}
+
+.cmp__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--e-border);
+}
+
+.cmp__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--e-brand2);
+}
+
+.cmp__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.cmp__auto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #2b3a55;
+    cursor: pointer;
+}
+
+.cmp__auto input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+.cmp__mt12 {
+    margin-top: 12px;
+}
+
+/* ===== Поля ===== */
+.cmp__rows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .cmp__rows {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.cmp__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.cmp__label {
+    font-weight: 900;
+    font-size: 13px;
+    color: #2b3a55;
+}
+
+.cmp__hint {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--e-muted);
+    line-height: 1.4;
+}
+
+.cmp__req {
+    margin-left: 2px;
+    font-weight: 900;
+    color: #d64545;
+    cursor: help;
+}
+
+.cmp input.cmp__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.cmp input.cmp__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.cmp select.cmp__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: .8px solid #b9cdee;
+    border-radius: 10px;
+    background-color: #eaf1fc;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+
+.cmp input.cmp__input:focus {
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.cmp select.cmp__input:focus {
+    border-color: #8fa8d6;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+/* вибір валюти: кнопка з прапорцем і випадний список (як у калькуляторах пального та TCO) */
+.cmp__dd {
+    position: relative;
+    align-self: flex-start;
+}
+
+.cmp__ddBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.cmp__ddBtn:hover {
+    background: #e0eafa;
+    border-color: #8fa8d6;
+}
+
+.cmp__ddBtn:focus-visible {
+    outline: none;
+    border-color: #283b69;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.cmp__ddFlag {
+    display: block;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(31, 47, 85, .15);
+}
+
+.cmp__caret {
+    width: 7px;
+    height: 7px;
+    margin: 0 2px 3px 2px;
+    border-right: 2px solid #1f2f55;
+    border-bottom: 2px solid #1f2f55;
+    transform: rotate(45deg);
+    transition: transform .15s ease;
+}
+
+.cmp__ddBtn[aria-expanded="true"] .cmp__caret {
+    transform: rotate(-135deg);
+    margin-bottom: 0;
+}
+
+.cmp__ddList {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 30;
+    min-width: 250px;
+    max-height: 320px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.cmp__ddList[hidden] {
+    display: none;
+}
+
+.cmp__ddList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.cmp__ddList li:hover,
+.cmp__ddList li:focus {
+    background: #eaf1fc;
+    outline: none;
+}
+
+.cmp__ddList li[aria-selected="true"] {
+    background: #dfeafb;
+    font-weight: 700;
+}
+
+.cmp__ddCode {
+    flex: 0 0 38px;
+    font-weight: 700;
+    color: #1f2f55;
+}
+
+.cmp__ddName {
+    color: #5b6b8c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 520px) {
+    .cmp__ddList {
+        min-width: 230px;
+    }
+}
+
+/* блоки всередині картки */
+.cmp__block {
+    background: #f6f7fb;
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.cmp__miniTitle {
+    font-weight: 800;
+    color: var(--e-brand2);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.cmp__block .cmp__rows {
+    margin-top: 0;
+}
+
+/* згорнутий блок */
+.cmp__details {
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    background: #f6f7fb;
+    padding: 0 14px;
+}
+
+.cmp__details[open] {
+    padding-bottom: 14px;
+}
+
+.cmp__details > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+    padding: 12px 0;
+}
+
+.cmp__details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.cmp__details > summary::after {
+    content: "▾";
+    float: right;
+    transition: transform .15s ease;
+}
+
+.cmp__details[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+/* ===== Режим: чіпи зі значками ===== */
+.cmp__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cmp__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid #dfe5f2;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 10px rgba(40, 59, 105, .08);
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.cmp__chip .cmp__ico {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: #5b78b8;
+}
+
+.cmp__chip:hover {
+    transform: translateY(-1px);
+    border-color: #b9cdee;
+    background: #f6f9ff;
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 8px 16px rgba(40, 59, 105, .14);
+}
+
+.cmp__chip.is-active {
+    border-color: #8fa8d6;
+    background: #eaf1fc;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(60, 99, 196, .22);
+}
+
+.cmp__chip.is-active .cmp__ico {
+    color: #283b69;
+}
+
+
+/* ===== Кнопки ===== */
+.cmp__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cmp__btn {
+    height: 38px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(40, 59, 105, .35);
+    transition: filter .15s ease, transform .15s ease;
+}
+
+.cmp__btn:hover {
+    filter: brightness(1.12);
+}
+
+.cmp__btn:active {
+    transform: translateY(1px);
+}
+
+#exampleBtn {
+    background: #eaf1fc;
+    color: #1f2f55;
+    box-shadow: inset 0 0 0 1px #b9cdee;
+}
+
+#exampleBtn:hover {
+    background: #dfe9fa;
+    filter: none;
+}
+
+.cmp__btn--wide {
+    min-width: 150px;
+    padding: 0 22px;
+}
+
+.cmp__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    min-height: 16px;
+}
+
+/* ===== Результат ===== */
+.cmp__result {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.cmp__hintbox {
+    background: #fff4d6;
+    border: 1px solid #f0d48a;
+    color: #8a5a00;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.cmp__head {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+    margin-bottom: 10px;
+}
+
+.cmp__kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.cmp__kpi {
+    background: #fff;
+    border: 1px solid #dfe5f2;
+    border-radius: 14px;
+    padding: 11px 12px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 6px 14px rgba(40, 59, 105, .09);
+    min-width: 0;
+}
+
+.cmp__kpi--main {
+    background: linear-gradient(135deg, #eef4fd 0%, #dfe9fa 100%);
+    border-color: #c5d6f1;
+}
+
+.cmp__kpiT {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.cmp__kpiV {
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #1f2f55;
+    line-height: 1.2;
+}
+
+.cmp__kpiM {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.35;
+}
+
+.cmp__sub {
+    margin: 14px 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1f2f55;
+}
+
+.cmp__note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.45;
+}
+
+/* порівняння: дешевший — м'яко-зелений, дорожчий — м'яко-червоний */
+.cmp__kpi.is-win {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cmp__kpi.is-lose {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+.cmp__verdict {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1f2f55;
+    background: #eaf1fc;
+    border: 1px solid #c5d6f1;
+}
+
+.cmp__verdict.is-home,
+.cmp__verdict.is-station {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cmp__colHead {
+    grid-column: 1 / -1;
+    margin: 6px 0 -2px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #283b69;
+}
+
+.cmp-mini {
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+@media (max-width: 420px) {
+    .cmp__kpiV {
+        font-size: 18px;
+    }
+}
+
+/* ===== Споріднені калькулятори ===== */
+.cc-related {
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 0 16px;
+}
+
+.cc-related h2 {
+    color: #283b69;
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.cc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cc-related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #fff;
+    text-decoration: none;
+    color: #444;
+    box-shadow: 0 6px 20px rgba(40, 59, 105, .12);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.cc-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(40, 59, 105, .2);
+}
+
+.cc-related-card b {
+    color: #283b69;
+    font-size: 15px;
+}
+
+.cc-related-card span {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+    .cc-related-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== SEO / FAQ ===== */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, .35);
+}
+
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.cc-seo a {
+    color: #283b69;
+    font-weight: 700;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.55;
+}
+
+/* довгі списки (розетка, потужність станції) — на всю ширину рядка */
+.cmp__field--full {
+    grid-column: 1 / -1;
+}
+
+/* ===== запас ходу: додаткові елементи ===== */
+.cmp__kpi--wide {
+    grid-column: 1 / -1;
+}
+
+.cmp__kpi--main .cmp__kpiV {
+    font-size: 26px;
+}
+
+.cmp__link {
+    color: #283b69;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.cmp__verdict.is-ok {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cmp__verdict.is-bad {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+/* кнопки результату — однакової ширини на всю ширину блоку */
+#shareBtn,
+#exampleBtn,
+#resetBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 8px;
+}
+
+/* ===== власне авто чи таксі: додаткові елементи ===== */
+.cmp__mt10 {
+    margin-top: 10px;
+}
+
+.cmp__block + .cmp__block {
+    margin-top: 12px;
+}
+
+.cmp__rows[hidden] {
+    display: none;
+}
+
+.cmp__rows--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cmp__chips + .cmp__rows {
+    margin-top: 12px;
+}
+
+.cmp__details .cmp__rows {
+    margin-top: 0;
+}
+
+.cmp__verdict.is-ok {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.cmp__verdict.is-warn {
+    background: #eaf6f6;
+    border-color: #b9dfe0;
+}
+
+.cmp__tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.cmp__tbl th,
+.cmp__tbl td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--e-border);
+    color: #1f2f55;
+}
+
+.cmp__tbl th {
+    text-align: left;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.cmp__tbl td {
+    text-align: right;
+}
+
+.cmp__tbl thead th {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.cmp__tbl thead th:last-child {
+    text-align: right;
+}
+
+.cmp__tbl tr.cmp__total th,
+.cmp__tbl tr.cmp__total td {
+    border-bottom: 0;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.cmp__chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 6px;
+}
+
+.cmp__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+.cmp__legend i {
+    display: inline-block;
+    width: 18px;
+    height: 4px;
+    margin-right: 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+/* вирівнювання полів: підписи різної довжини не зсувають поля, рядки підсітки спільні для обох колонок */
+@supports (grid-template-rows: subgrid) {
+    .cmp__rows > .cmp__field {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+        align-content: start;
+    }
+
+    .cmp__rows > .cmp__field > :nth-child(2),
+    .cmp__rows > .cmp__field > :nth-child(3) {
+        margin-top: 6px;
+    }
+}
+
+.cmp__tbl--cmp thead th:not(:first-child) {
+    text-align: right;
+}
+
+.cmp__qrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cmp__qchip {
+    height: 30px;
+    padding: 0 12px;
+    border: 1px solid #b9cdee;
+    border-radius: 999px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.cmp__qchip:hover {
+    background: #dfe9fa;
+    border-color: #8fa8d6;
+}
+
+.cmp__qchip.is-on {
+    background: #283b69;
+    border-color: #283b69;
+    color: #fff;
+}
+
+.cmp__chips {
+    margin-bottom: 12px;
+}
+
+.cmp__chip {
+    padding: 8px 12px;
+}
+
+@media (max-width: 520px) {
+    .cmp__chips .cmp__chip {
+        flex: 1 1 100%;
+    }
+}
+
+.cmp__cur {
+    display: flex;
+    gap: 6px;
+}
+
+.cmp__cur .cmp__chip {
+    padding: 6px 12px;
+}
+
+.cmp__titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cmp__donut {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.cmp__donutSvg {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 150px;
+}
+
+.cmp__dl {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cmp__dl li {
+    display: grid;
+    grid-template-columns: 10px 1fr;
+    column-gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.3;
+}
+
+.cmp__dl li i {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.cmp__dl li b {
+    grid-column: 2;
+    font-size: 13px;
+    color: #1f2f55;
+}
+
+.cmp__sectionTitle .cmp__ddList {
+    min-width: 250px;
+}
+
+.cmp__link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #283b69;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+.cmp__chipsRow {
+    grid-column: 1 / -1;
+}
+
+.cmp__schedule {
+    margin-top: 14px;
+}
+
+.cmp__schedHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.cmp__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cmp__tableWrap {
+    max-height: 460px;
+    overflow: auto;
+    border: 1px solid var(--e-border);
+    border-radius: 12px;
+}
+
+.cmp__tbl--sch {
+    margin-top: 0;
+    min-width: 440px;
+}
+
+.cmp__tbl--sch th,
+.cmp__tbl--sch td {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.cmp__tbl--sch thead th {
+    position: sticky;
+    top: 0;
+    background: #eaf1fc;
+    z-index: 1;
+}
+
+.cmp__tbl--sch th:first-child,
+.cmp__tbl--sch td:first-child {
+    text-align: left;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.cmp__tbl--sch tbody tr:nth-child(even) td {
+    background: #f6f7fb;
+}
+
+.cmp__tbl--sch tr.cmp__total td {
+    position: sticky;
+    bottom: 0;
+    background: #eaf1fc;
+    font-weight: 900;
+    color: #1f2f55;
+    border-bottom: 0;
+}
+
+.cmp__qchip--tool {
+    height: 32px;
+}
+
+/* таблиця в SEO-тексті */
+.cc-seo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 14px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
+}
+
+.cc-seo th,
+.cc-seo td {
+    padding: 9px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e6e8ef;
+}
+
+.cc-seo th {
+    background: #eaf1fc;
+    color: #1f2f55;
+}
+
+.cc-seo tr:last-child td {
+    border-bottom: 0;
+}
+
+.cc-seo .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 520px) {
+    .cc-seo th,
+    .cc-seo td {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cc-seo table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+.cmp__inwrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cmp__inwrap .cmp__input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.cmp__seg {
+    flex: 0 0 auto;
+    display: inline-flex;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eaf1fc;
+}
+
+.cmp__seg button {
+    height: 34px;
+    min-width: 44px;
+    padding: 0 10px;
+    border: 0;
+    background: transparent;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.cmp__seg button.is-on {
+    background: #283b69;
+    color: #fff;
+}
+
+.cmp .cmp__input[type="date"] {
+    min-height: 36px;
+    font-family: inherit;
+}
+
+.cmp__field[hidden] {
+    display: none;
+}
+
+.cmp__modes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.cmp__mode {
+    display: block;
+    min-width: 0;
+    padding: 9px 12px;
+    border: 1px solid #c5d6f1;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2f55;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.cmp__mode:hover {
+    border-color: #8fa8d6;
+}
+
+.cmp__mode.is-active {
+    border-color: #283b69;
+    background: #eaf1fc;
+    box-shadow: 0 0 0 1px #283b69;
+}
+
+.cmp__mode b {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.cmp__mode span {
+    display: block;
+    margin-top: 2px;
+    color: #5b6b8c;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.cmp__miniTitle.cmp__mt12 {
+    margin-top: 14px;
+}
+
+.cmp__block > .cmp__qrow + .cmp__rows,
+.cmp__block > .cmp__rows + .cmp__rows {
+    margin-top: 14px;
+}
+
+.cmp__tbl--sch {
+    min-width: 520px;
+}
+
+.cmp__link + .cmp__link {
+    margin-left: 14px;
+}
