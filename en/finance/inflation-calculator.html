@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Inflation Calculator: purchasing power and yearly table | CalcCore</title>
+    <title>Inflation Calculator 2026: Ukraine History & Forecast | CalcCore</title>
     <meta name="description"
-        content="Inflation calculator: real value in today's money, required nominal amount and purchasing power loss. Chart, yearly table, copy and CSV export." />
+        content="Inflation calculator: what money from past years is worth today by the State Statistics Service data (2000–2026) and a forecast at your own rate, real deposit yield, chart and CSV." />
 
-    <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/finance/inflation-calculator" />
-
-    <!-- hreflang (ABSOLUTE + CLEAN URLs) -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/inflation-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/inflation-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,309 +28,368 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Inflation Calculator: purchasing power and yearly table" />
-    <meta property="og:description" content="Inflation calculator: real value in today's money, required nominal amount and purchasing power loss. Chart, yearly table, copy and CSV export." />
+    <meta property="og:title" content="Inflation Calculator 2026: Ukraine History & Forecast" />
+    <meta property="og:description" content="Inflation calculator: what money from past years is worth today by the State Statistics Service data (2000–2026) and a forecast at your own rate, real deposit yield, chart and CSV." />
     <meta property="og:url" content="https://calccore.net/en/finance/inflation-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Inflation Calculator: purchasing power and yearly table" />
-    <meta name="twitter:description" content="Inflation calculator: real value in today's money, required nominal amount and purchasing power loss. Chart, yearly table, copy and CSV export." />
+    <meta name="twitter:title" content="Inflation Calculator 2026: Ukraine History & Forecast" />
+    <meta name="twitter:description" content="Inflation calculator: what money from past years is worth today by the State Statistics Service data (2000–2026) and a forecast at your own rate, real deposit yield, chart and CSV." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/inflation-calculator.css" />
+    <link rel="stylesheet" href="/css/inflation.css?v=20261022inf9" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/inflation-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022inf9" defer></script>
+    <script src="/js/inflation-calculator.js?v=20261022inf9" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is inflation in simple terms?",
-        "acceptedAnswer":{"@type":"Answer","text":"Inflation is the rise in prices over time, which reduces the purchasing power of money."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is real value lower than nominal value?",
-        "acceptedAnswer":{"@type":"Answer","text":"Real value accounts for inflation and shows what the money is worth in today’s prices."}
-      },
-      {
-        "@type":"Question",
-        "name":"How does the calculator estimate inflation impact?",
-        "acceptedAnswer":{"@type":"Answer","text":"It uses the entered annual inflation rate and time period to project how purchasing power declines over time."}
-      },
-      {
-        "@type":"Question",
-        "name":"Are additional contributions included?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. If regular contributions are added, the calculator also shows how inflation affects those amounts."}
-      },
-      {
-        "@type":"Question",
-        "name":"Is the inflation rate guaranteed?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. It is an assumed average rate for modeling. Actual inflation may differ."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/inflation-calculator#app",
+  "name": "Inflation Calculator",
+  "description": "Calculates inflation: the equivalent of an amount in different years from monthly Ukrainian statistics (2000–2026), total and average annual inflation, a forecast at your own rate, the real value of money, the real yield of a deposit, a chart and a table.",
+  "url": "https://calccore.net/en/finance/inflation-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Historical inflation in Ukraine from monthly State Statistics Service data since 2000",
+    "The equivalent of an amount between any two months and the reverse calculation",
+    "Total inflation, average annual inflation, loss of purchasing power",
+    "A forecast at your own constant inflation rate, including deflation",
+    "The real value of money and the real yield of a deposit after inflation",
+    "Chart and table by year, copy and CSV for Excel",
+    "UAH, USD and EUR currencies; shareable link"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/inflation-calculator#app",
-    "name":"Inflation Calculator",
-    "description":"Online inflation calculator: estimates real vs nominal money value over time using annual inflation rate, with chart and yearly table.",
-    "url":"https://calccore.net/en/finance/inflation-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/finance/inflation-calculator#webpage",
+      "url": "https://calccore.net/en/finance/inflation-calculator",
+      "name": "Inflation Calculator 2026: Ukraine History & Forecast | CalcCore",
+      "description": "Inflation calculator: what money from past years is worth today by the State Statistics Service data (2000–2026) and a forecast at your own rate, real deposit yield, chart and CSV.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/inflation-calculator#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "en"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/finance/inflation-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I work out what money from past years is worth today?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose the “Historical inflation” mode and enter the amount and the start and end months. For 100,000 UAH from January 2015 to September 2026 you need 408,296 UAH to buy the same. The total inflation is 308.3%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does the data on inflation in Ukraine come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The monthly consumer price indices of the State Statistics Service of Ukraine for 2000–2026, taken from the Minfin summary table (index.minfin.com.ua). For every full year the product of the 12 monthly indices matches the annual value. The data is updated as new months are published; the latest month in the calculator is September 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What was the highest inflation in Ukraine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In 2000–2025 the highest annual inflation was in 2015: 43.3% (December to December). In 2022 it was 26.6% and in 2014 24.9%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was there deflation in Ukraine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, in 2002 and 2012 the annual indices were below 100% (-0.6% in 2002, -0.2% in 2012). The calculator handles negative inflation correctly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the inflation over the last year?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From September 2025 to September 2026 prices rose by 10.0%, and over 10 years since September 2016 by 176.0%. Use the quick buttons “1 year”, “5 years”, “10 years” for a fresh calculation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much value has money lost since the full-scale war began?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From February 2022 to September 2026 the total inflation is 69.4%. That means 100,000 UAH of February 2022 matches 169,359 UAH today in purchasing power."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I forecast the loss of the value of money?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose the “Forecast at a rate” mode and enter a constant inflation. At 10% per year 100,000 UAH in 5 years will have a purchasing power of 62,092 UAH (a loss of 37.9%). Real inflation varies, so this is an estimate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the real yield of a deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the yield after inflation: (1 + the effective rate) ÷ (1 + inflation) − 1. A deposit at 16% per year with monthly compounding (effectively 17.23%) with 10% inflation gives about 6.6% of real yield. The calculator does not take the tax on interest into account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the start month not counted in inflation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A month's index shows the change in prices compared with the previous month. So the price level of the start month is the base, and inflation is counted from the next month to the end month inclusive."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The historical calculation relies on the official consumer price indices, so it is the general inflation, not a change in the price of a particular item. The forecast is an estimate at your rate. For important decisions check against the State Statistics Service data."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page cinflation">
+<body class="inf-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc cinflation" id="cinflation">
-            <div class="mcalc__wrap">
+        <section class="inf" id="inf">
+            <div class="inf__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Inflation Calculator</h1>
-                    <p class="mcalc__p">
-                        See how inflation affects purchasing power over time.
-                        Get real value in today’s money, required nominal amount, a chart, and a yearly table.
-                    </p>
+                <div class="inf__titlebar">
+                    <h1 class="inf__h1">Inflation Calculator</h1>
+                    <p class="inf__p">Find out what money from past years is worth today at the real inflation of Ukraine, or forecast the loss of purchasing power at your own rate.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
-                            NBU rates loading…
-                        </span>
-                    </div>
+                <div class="inf__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter details</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <div class="inf__card">
+                        <div class="inf__sectionTitle">
+                            <h2 class="inf__h2">Input data</h2>
+                            <div class="inf__dd" id="cur_dd"><button type="button" class="inf__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="inf__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="inf__caret" aria-hidden="true"></span></button><ul class="inf__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="inf__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="inf__ddCode">UAH</span><span class="inf__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="inf__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="inf__ddCode">USD</span><span class="inf__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="inf__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="inf__ddCode">EUR</span><span class="inf__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="amount">Amount today</label>
-                                <input class="mcalc__input" id="amount" type="text" inputmode="decimal"
-                                    placeholder="e.g., 100 000" />
-                                <div class="mcalc__hint">Base currency: ₴ (UAH).</div>
+                        <div class="inf__block">
+                            <div class="inf__miniTitle">What to calculate</div>
+                            <div class="inf__modes" role="group" aria-label="What to calculate">
+                                <button class="inf__mode is-active" type="button" data-mode="hist" aria-pressed="true"><b>Historical inflation</b><span>Real data of Ukraine since 2000</span></button>
+                                <button class="inf__mode" type="button" data-mode="fc" aria-pressed="false"><b>Forecast at a rate</b><span>Your constant inflation for years ahead</span></button>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="inflationRate">Annual inflation, %</label>
-                                <input class="mcalc__input" id="inflationRate" type="text" inputmode="decimal"
-                                    placeholder="e.g., 10" />
-                                <div class="mcalc__hint">Average annual inflation rate.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="years">Period (years)</label>
-                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
-                                    placeholder="e.g., 5" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="monthlyTopUp">Monthly additions (optional)</label>
-                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
-                                    placeholder="e.g., 2 000" />
-                                <div class="mcalc__hint">Added at the beginning of each month.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for year labels in the chart/table.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    
+                            <div class="inf__rows">
+                                <div class="inf__field inf__field--full">
+                                    <label class="inf__label" for="amount">Amount <span class="inf__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="inf__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000">
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
 
+                            <div id="histWrap">
+                                <div class="inf__miniTitle inf__mt12">Start of the period</div>
+                                <div class="inf__rows inf__rows--my">
+                                    <div class="inf__field"><label class="inf__label" for="fromM">Month</label><select class="inf__input inf__select" id="fromM"></select></div>
+                                    <div class="inf__field"><label class="inf__label" for="fromY">Year</label><select class="inf__input inf__select" id="fromY"></select></div>
+                                </div>
+                                <div class="inf__miniTitle inf__mt12">End of the period</div>
+                                <div class="inf__rows inf__rows--my">
+                                    <div class="inf__field"><label class="inf__label" for="toM">Month</label><select class="inf__input inf__select" id="toM"></select></div>
+                                    <div class="inf__field"><label class="inf__label" for="toY">Year</label><select class="inf__input inf__select" id="toY"></select></div>
+                                </div>
+                                <div class="inf__qrow inf__mt12"><button type="button" class="inf__qchip" data-quick="1">1 year</button><button type="button" class="inf__qchip" data-quick="5">5 years</button><button type="button" class="inf__qchip" data-quick="10">10 years</button><button type="button" class="inf__qchip" data-quick="war">Since Feb 2022</button></div>
+                            </div>
+
+                            <div id="fcWrap" hidden>
+                                <div class="inf__rows inf__mt12">
+                                    <div class="inf__field inf__field--full">
+                                    <label class="inf__label" for="rate">Inflation per year (%) <span class="inf__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="inf__input" id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="inf__field">
+                                    <label class="inf__label" for="years">Term, years <span class="inf__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="inf__input" id="years" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5">
+                                </div>
+                                    <div class="inf__field">
+                                    <label class="inf__label" for="months">and months</label>
+                                    <input class="inf__input" id="months" type="text" inputmode="decimal" autocomplete="off" placeholder="0–11">
+                                </div>
+                                </div>
+                                <details class="inf__details inf__mt12" id="fcMore">
+                                    <summary>Contributions and a deposit <span class="inf__hint">(optional)</span></summary>
+                                    <div class="inf__rows">
+                                        <div class="inf__field inf__field--full">
+                                    <label class="inf__label" for="top">Monthly contribution</label>
+                                    <input class="inf__input" id="top" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2,000"><div class="inf__hint">Money you add every month (without a deposit it does not grow).</div>
+                                </div>
+                                        <div class="inf__field inf__field--full">
+                                    <label class="inf__label" for="dep">Deposit rate (% per year)</label>
+                                    <input class="inf__input" id="dep" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 16"><div class="inf__hint">Shows the real yield of the deposit after inflation (no tax, monthly compounding).</div>
+                                </div>
+                                    </div>
+                                </details>
+                            </div>
                         </div>
+
+                        <div class="inf__actions inf__mt12">
+                            <button class="inf__btn inf__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="inf__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="inf__card">
+                        <div class="inf__sectionTitle">
+                            <h2 class="inf__h2">Result</h2>
+                            <span class="inf__badge">%</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter amount, inflation, and period.
+                        <div class="inf__result" id="result">Enter the amount — the result will appear here.</div>
+                        <div class="inf__actions inf__mt12">
+                            <button class="inf__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="inf__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="inf__btn" id="resetBtn" type="button">Reset</button>
                         </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Chart: nominal vs real</div>
-                            </div>
-
-                            <canvas id="growthChart" width="900" height="280" aria-label="Inflation chart"></canvas>
-                            <div class="m-hintSmall">
-                                “Real” = purchasing power in today’s money (inflation-adjusted).
-                            </div>
-                        </div>
-
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Yearly table <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <div class="m-tools">
-                                    <label class="m-curr">
-                                        Currency:
-                                        <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                            <option value="UAH" selected>UAH ₴</option>
-                                            <option value="USD">USD $</option>
-                                            <option value="EUR">EUR €</option>
-                                        </select>
-                                    </label>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
-                                    CSV</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Inflation yearly table">
-                                    <thead>
-                                        <tr>
-                                            <th>Year</th>
-                                            <th>Date</th>
-                                            <th>Nominal (₴)</th>
-                                            <th>Real (₴)</th>
-                                            <th>Inflation factor</th>
-                                            <th>Loss, %</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                        </div>
-
+                        <div class="m-navlinks inf__mt12"><a class="inf__link" href="/en/finance/deposit-calculator">Deposit calculator →</a> <a class="inf__link" href="/en/finance/compound-interest">Compound interest →</a></div>
                     </div>
+                </div>
 
+                <div class="inf__card inf__schedule" id="schedule" hidden>
+                    <div class="inf__schedHead">
+                        <h2 class="inf__h2">Table by year</h2>
+                        <div class="inf__tools">
+                            <button type="button" class="inf__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="inf__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="inf__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
-        <div class="m-divider"></div>
-        
-        <section class="m-seo">
-            <h2>How does the inflation calculator work?</h2>
-            <p>
-                The CalcCore inflation calculator shows how <b>purchasing power</b> changes over time.
-                Inflation reduces the real value of money — in the future, the same amount will buy fewer goods and services.
-            </p>
-            <p>
-                You enter the <b>amount today</b>, <b>annual inflation rate</b>, and <b>period in years</b>.
-                The calculator estimates the <b>real value</b> in today’s money,
-                the <b>future nominal value</b>, and the percentage loss of purchasing power.
-            </p>
-        
-            <h2>Nominal vs real value</h2>
-            <p>
-                <b>Nominal value</b> is the future amount of money without considering inflation.
-                <b>Real value</b> adjusts for inflation and shows what that money is worth in today’s terms.
-            </p>
-        
-            <h2>What do the chart and yearly table show?</h2>
-            <p>
-                The chart illustrates how nominal and real values diverge over time.
-                The yearly table shows end-of-year values, real purchasing power, and the cumulative inflation impact.
-            </p>
-        
-            <h2>Why is this important?</h2>
-            <p>
-                Understanding inflation helps with savings planning, long-term financial goals,
-                and investment decisions. Money that does not grow at least as fast as inflation
-                loses value over time.
-            </p>
-        </section>
-        
-        <section class="m-faq">
-            <h2>FAQ</h2>
-        
-            <div class="m-faq-item">
-                <h3>What is inflation in simple terms?</h3>
-                <p>
-                    Inflation is the rise in prices over time, which reduces the value of money.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Why is real value lower than nominal?</h3>
-                <p>
-                    Because inflation reduces purchasing power over time.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Are monthly additions included?</h3>
-                <p>
-                    Yes. If monthly additions are entered, they are included and adjusted for inflation.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Can this help with investment planning?</h3>
-                <p>
-                    Yes. It shows the return you need just to keep up with inflation.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Is the inflation rate guaranteed?</h3>
-                <p>
-                    No. It is an assumed average rate used for modeling. Actual inflation can vary.
-                </p>
+
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Net income, tax and effective yield of a deposit.</span></a>
+                <a class="cc-related-card" href="/en/finance/compound-interest"><b>Compound interest calculator</b><span>Money growth with compound interest and a goal.</span></a>
+                <a class="cc-related-card" href="/en/finance/pension-calculator"><b>Retirement calculator</b><span>Retirement savings with contributions and return.</span></a>
             </div>
         </section>
 
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How inflation between two dates is calculated</h2>
+            <p>The calculator multiplies the monthly consumer price indices from the month after the start to the end month inclusive. The start month is the price base. For 100,000 UAH from January 2015 to September 2026 the total inflation is <b>308.3%</b>, so to buy what 100,000 UAH bought in January 2015 you need <b>408,296 UAH</b> today. The average annual inflation over the period is 12.8%.</p>
+            <p>The data is open statistics of the State Statistics Service of Ukraine for 2000–2026 (through the Minfin summary table). The highest annual inflation was recorded in 2015 (43.3%), and in 2022 it was 26.6%. There was deflation (falling prices over a year) in 2002 and 2012. From September 2025 to September 2026 prices rose by 10.0%.</p>
+
+            <h2>A forecast at your own rate</h2>
+            <p>The forecast mode calculates a constant inflation. With inflation of 10% per year, after 5 years 100,000 UAH kept as cash will have the purchasing power of <b>62,092 UAH</b>, and to keep the value you need 161,051 UAH. The purchasing power of money halves in about 7.3 years at 10% inflation.</p>
+            <p>If you enter a deposit rate, the calculator shows the real yield: a deposit at 16% per year with monthly compounding (effectively 17.23%) with 10% inflation gives a real yield of about <b>6.6%</b>. Compare it with the deposit calculator, which accounts for tax.</p>
+
+            <h2>Prices and savings</h2>
+            <p>Inflation erodes cash and money that is not invested. If a deposit yields less than inflation, the real yield is negative: the money grows in numbers but buys less. To judge the result compare not the nominal rate but the real yield after inflation.</p>
+            <p>The inflation in the calculator is the general consumer price index. Prices of particular goods (food, rent, fuel) may change differently, so for specific purchases the result is approximate.</p>
+            <p class="inf-mini">The historical data is open statistics of the State Statistics Service of Ukraine (through the Minfin summary table) as of September 2026, updated on 22.10.2026. The forecast is an estimate at your constant rate: real inflation varies.</p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>How do I work out what money from past years is worth today?</h3>
+                <p>Choose the “Historical inflation” mode and enter the amount and the start and end months. For 100,000 UAH from January 2015 to September 2026 you need 408,296 UAH to buy the same. The total inflation is 308.3%.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where does the data on inflation in Ukraine come from?</h3>
+                <p>The monthly consumer price indices of the State Statistics Service of Ukraine for 2000–2026, taken from the Minfin summary table (index.minfin.com.ua). For every full year the product of the 12 monthly indices matches the annual value. The data is updated as new months are published; the latest month in the calculator is September 2026.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What was the highest inflation in Ukraine?</h3>
+                <p>In 2000–2025 the highest annual inflation was in 2015: 43.3% (December to December). In 2022 it was 26.6% and in 2014 24.9%.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Was there deflation in Ukraine?</h3>
+                <p>Yes, in 2002 and 2012 the annual indices were below 100% (-0.6% in 2002, -0.2% in 2012). The calculator handles negative inflation correctly.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the inflation over the last year?</h3>
+                <p>From September 2025 to September 2026 prices rose by 10.0%, and over 10 years since September 2016 by 176.0%. Use the quick buttons “1 year”, “5 years”, “10 years” for a fresh calculation.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much value has money lost since the full-scale war began?</h3>
+                <p>From February 2022 to September 2026 the total inflation is 69.4%. That means 100,000 UAH of February 2022 matches 169,359 UAH today in purchasing power.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I forecast the loss of the value of money?</h3>
+                <p>Choose the “Forecast at a rate” mode and enter a constant inflation. At 10% per year 100,000 UAH in 5 years will have a purchasing power of 62,092 UAH (a loss of 37.9%). Real inflation varies, so this is an estimate.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the real yield of a deposit?</h3>
+                <p>It is the yield after inflation: (1 + the effective rate) ÷ (1 + inflation) − 1. A deposit at 16% per year with monthly compounding (effectively 17.23%) with 10% inflation gives about 6.6% of real yield. The calculator does not take the tax on interest into account.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is the start month not counted in inflation?</h3>
+                <p>A month's index shows the change in prices compared with the previous month. So the price level of the start month is the base, and inflation is counted from the next month to the end month inclusive.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How accurate is the calculator?</h3>
+                <p>The historical calculation relies on the official consumer price indices, so it is the general inflation, not a change in the price of a particular item. The forecast is an estimate at your rate. For important decisions check against the State Statistics Service data.</p>
+            </div>
+        </section>
     </main>
 
     <div id="footer"></div>

@@ -501,44 +501,6 @@
 copy_table_failed: "Не вдалося скопіювати таблицю.",
 csv_downloaded: "CSV завантажено.",
 },
-    infl:{
-  main: "Реальна вартість",
-
-  toast_enter_values: "Введи суму та період.",
-  result_enter_values: "Введи суму, інфляцію та період.",
-  toast_reset: "Скинуто.",
-  toast_need_calc_first: "Спочатку зроби розрахунок.",
-  copied_result: "Скопійовано результат.",
-  copy_failed: "Не вдалося скопіювати.",
-
-  chart_need_data: "Зроби розрахунок, щоб побачити графік.",
-
-  legend_nominal: "Номінал",
-  legend_real: "Реально",
-
-  kpi_real: "Реально (сьогоднішні гроші)",
-  kpi_real_hint: "Купівельна спроможність",
-
-  kpi_required: "Потрібно номінально",
-  kpi_required_hint: "Щоб мати ту ж купівельну спроможність",
-
-  kpi_nominal: "Номінал наприкінці",
-  kpi_factor: "Множник інфляції",
-
-  kpi_loss: "Втрата купівельної спроможності",
-  kpi_loss_hint: "Через інфляцію за період",
-
-  summary: "Підсумок",
-  summary_hint: "“Реально” = номінал / (1+інфляція)^роки. Поповнення додаються щомісяця і також знецінюються з часом.",
-
-  copied_table: "Скопійовано таблицю.",
-  copy_table_failed: "Не вдалося скопіювати таблицю.",
-  csv_downloaded: "CSV завантажено.",
-  nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-nbu_title: "Курс НБУ (USD/EUR)",
-nbu_unavailable: "Курс НБУ: недоступно",
-toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-},
 
     cc:{
   nbu_title: "Курс НБУ (USD/EUR)",
@@ -1479,44 +1441,6 @@ steel: {
   csv_downloaded: "CSV downloaded.",
 },
 
-      infl:{
-  main: "Real value",
-
-  toast_enter_values: "Enter amount and period.",
-  result_enter_values: "Enter amount, inflation rate, and period.",
-  toast_reset: "Reset.",
-  toast_need_calc_first: "Calculate first.",
-  copied_result: "Result copied.",
-  copy_failed: "Copy failed.",
-
-  chart_need_data: "Run the calculation to see the chart.",
-
-  legend_nominal: "Nominal",
-  legend_real: "Real",
-
-  kpi_real: "Real (today’s money)",
-  kpi_real_hint: "Purchasing power",
-
-  kpi_required: "Required nominal",
-  kpi_required_hint: "To keep the same purchasing power",
-
-  kpi_nominal: "Final nominal",
-  kpi_factor: "Inflation factor",
-
-  kpi_loss: "Purchasing power loss",
-  kpi_loss_hint: "Over the selected period",
-
-  summary: "Summary",
-  summary_hint: "Real = nominal / (1+inflation)^years. Monthly additions are included and also lose value over time.",
-
-  copied_table: "Table copied.",
-  copy_table_failed: "Failed to copy table.",
-  csv_downloaded: "CSV downloaded.",
-  nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-nbu_title: "NBU rate (USD/EUR)",
-nbu_unavailable: "NBU rate: unavailable",
-toast_nbu_not_loaded_fallback: "NBU rate didn’t load — showing UAH.",
-},
 
       pension:{
   nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
