@@ -129,7 +129,7 @@
   }
   const groupAll = () => MONEY_IDS.forEach((id) => el(id) && groupInput(el(id)));
   // у посиланні «Поділитись» суми без розділювачів груп
-  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s ]/g, ""));
+  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s ]/g, "").replace(",", "."));
 
   function toast(msg) {
     const n = el("toast");

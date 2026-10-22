@@ -275,7 +275,7 @@
     } catch {}
   }
   const groupAll = () => MONEY_IDS.forEach((id) => el(id) && groupInput(el(id)));
-  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s ]/g, ""));
+  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s ]/g, "").replace(",", "."));
 
   // ===== режими =====
   function applyState() {

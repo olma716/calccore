@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Deposit Calculator — income, taxes, schedule | CalcCore</title>
+    <title>Deposit Calculator 2026: Income, Tax, Compounding | CalcCore</title>
     <meta name="description"
-        content="CalcCore deposit calculator: amount, annual rate, term, monthly top-ups, capitalization, taxes, totals, and monthly schedule. Export CSV and copy." />
+        content="Deposit calculator: net income, 23% tax, compounding, monthly or end-of-term payout, top-ups, effective yield, inflation, schedule and CSV export." />
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://calccore.net/en/finance/deposit-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/deposit-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/deposit-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,409 +28,368 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Deposit Calculator — income, taxes, schedule" />
-    <meta property="og:description" content="CalcCore deposit calculator: amount, annual rate, term, monthly top-ups, capitalization, taxes, totals, and monthly schedule. Export CSV and copy." />
+    <meta property="og:title" content="Deposit Calculator 2026: Income, Tax, Compounding" />
+    <meta property="og:description" content="Deposit calculator: net income, 23% tax, compounding, monthly or end-of-term payout, top-ups, effective yield, inflation, schedule and CSV export." />
     <meta property="og:url" content="https://calccore.net/en/finance/deposit-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Deposit Calculator — income, taxes, schedule" />
-    <meta name="twitter:description" content="CalcCore deposit calculator: amount, annual rate, term, monthly top-ups, capitalization, taxes, totals, and monthly schedule. Export CSV and copy." />
+    <meta name="twitter:title" content="Deposit Calculator 2026: Income, Tax, Compounding" />
+    <meta name="twitter:description" content="Deposit calculator: net income, 23% tax, compounding, monthly or end-of-term payout, top-ups, effective yield, inflation, schedule and CSV export." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/deposit-calculator.css" />
+    <link rel="stylesheet" href="/css/deposit.css?v=20261022dep5" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/deposit-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022dep5" defer></script>
+    <script src="/js/deposit-calculator.js?v=20261022dep5" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/deposit-calculator#app",
-    "name":"Deposit Calculator",
-    "description":"Online deposit calculator: amount, rate, term, top-ups, capitalization, taxes, and a monthly schedule.",
-    "url":"https://calccore.net/en/finance/deposit-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
-<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/deposit-calculator#app",
+  "name": "Deposit Calculator",
+  "description": "Calculates a deposit: net income, tax on interest, compounding, interest paid monthly or at the end of the term, monthly top-ups, effective annual yield, real yield after inflation, a growth chart and a schedule.",
+  "url": "https://calccore.net/en/finance/deposit-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Three modes: monthly compounding, monthly payout to the card, payout at the end",
+    "Tax on interest (23% by default) that you can switch off or set by hand",
+    "Monthly top-ups",
+    "Interest and tax rounded to the cent; accrual at 1/12 of the rate or by days (365)",
+    "Effective annual yield before and after tax, real yield after inflation",
+    "Growth chart, schedule by month and year with totals, copy and CSV for Excel",
+    "UAH, USD and EUR currencies; shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "@id": "https://calccore.net/#org",
-      "name": "CalcCore",
-      "url": "https://calccore.net/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://calccore.net/assets/logo.png"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://calccore.net/#website",
-      "url": "https://calccore.net/",
-      "name": "CalcCore",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "inLanguage": "en"
-    },
-    {
       "@type": "WebPage",
       "@id": "https://calccore.net/en/finance/deposit-calculator#webpage",
       "url": "https://calccore.net/en/finance/deposit-calculator",
-      "name": "Deposit Calculator — Interest, Taxes, Schedule | CalcCore",
-      "description": "CalcCore deposit calculator: amount, rate, term, monthly top-ups, capitalization, taxes, totals and a month-by-month schedule. CSV export and copy.",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
-      "about": { "@id": "https://calccore.net/en/finance/deposit-calculator#app" },
+      "name": "Deposit Calculator 2026: Income, Tax, Compounding | CalcCore",
+      "description": "Deposit calculator: net income, 23% tax, compounding, monthly or end-of-term payout, top-ups, effective yield, inflation, schedule and CSV export.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/deposit-calculator#app"
+      },
+      "dateModified": "2026-10-22",
       "inLanguage": "en"
-    },
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
     {
-      "@type": "SoftwareApplication",
-      "@id": "https://calccore.net/en/finance/deposit-calculator#app",
-      "name": "Deposit Calculator",
-      "description": "Online deposit calculator: principal, annual rate, term, monthly top-ups, capitalization, taxes and a month-by-month schedule.",
-      "url": "https://calccore.net/en/finance/deposit-calculator",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any",
-      "isAccessibleForFree": true,
-      "inLanguage": "en",
-      "publisher": { "@id": "https://calccore.net/#org" },
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" }
-    },
-    {
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": "https://calccore.net/en/finance/deposit-calculator#faq",
-      "url": "https://calccore.net/en/finance/deposit-calculator",
-      "isPartOf": { "@id": "https://calccore.net/#website" },
       "inLanguage": "en",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What’s the difference between “monthly” and “daily (365)” interest accrual?",
+          "name": "How is deposit income calculated?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Monthly accrual calculates interest once per month based on the current balance. Daily (365) accrual is a simplified model that accrues interest proportionally over time using a 365-day year."
+            "text": "Interest accrues every month on the current amount (the rate ÷ 12) and tax is withheld from it. For 100,000 UAH, 16% and 12 months with compounding the gross interest is 16,935.10 UAH, the tax 3,895.10 UAH and the net income 13,040.00 UAH."
           }
         },
         {
           "@type": "Question",
-          "name": "How does capitalization work in the calculator?",
+          "name": "What is interest compounding and how does it matter?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "When capitalization is enabled, interest after taxes is added to the balance at the end of each period, so future interest is calculated on a larger amount."
+            "text": "Compounding adds net interest to the deposit, so later interest is charged on a larger amount. Over a year that is 13,040 UAH against 12,320 UAH when interest is paid to the card; the effective yield is 13.04% against 12.32%."
           }
         },
         {
           "@type": "Question",
-          "name": "When are monthly top-ups applied?",
+          "name": "How do monthly payout, compounding and payout at the end differ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Top-ups are added at the beginning of each month starting from month 2, matching a common recurring contribution scenario."
+            "text": "Compounding: the balance grows and at the end you receive 113,040 UAH. To the card: the 100,000 UAH deposit stays the same and 12,320 UAH of net interest arrives monthly. At the end: simple interest, net income of 12,320 UAH in one payment."
           }
         },
         {
           "@type": "Question",
-          "name": "Which taxes are included by default?",
+          "name": "What is the tax on deposit interest?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "By default, the calculator uses a 19.5% tax rate (18% personal income tax + 1.5% military levy). You can disable taxes or set a custom rate."
+            "text": "The calculator uses 23% by default: personal income tax 18% and military levy 5%. The bank withholds it as a tax agent when interest is accrued. The rate is set by law and may change, so you can switch it off or set it by hand, and you should check the current value."
           }
         },
         {
           "@type": "Question",
-          "name": "Why can the result differ from a bank’s calculation?",
+          "name": "What is the effective annual yield?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Banks may use different day-count conventions (360/365), rounding rules, specific accrual dates, and product terms. The calculator provides a mathematical estimate based on your inputs."
+            "text": "It is an annual rate that takes compounding, tax and top-ups into account. For a 16% deposit over 12 months with compounding and 23% tax it is 13.04%, and before tax 17.23%. It is the convenient way to compare deposits with different terms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do top-ups affect income?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every top-up increases the base for interest. With a monthly top-up of 2,000 UAH over 36 months you put in 170,000 UAH and the net income is 59,021 UAH against 44,443 UAH without top-ups."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I account for inflation and what is the real yield?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the expected inflation in % per year: the calculator divides the effective yield by the price growth. With 13.04% and 10% inflation the real yield is about 2.76%. Inflation is your assumption, not a forecast."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does accrual at 1/12 of the rate differ from accrual by days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the “1/12 of the rate” mode the same share accrues every month. By days, interest is the rate ÷ 365 × the number of days in the month. For 100,000 UAH, 16% and 12 months the net income is 13,040.00 UAH against 13,039.96 UAH. Your bank states which method it uses in the deposit terms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I download the schedule to Excel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The “Download CSV” button saves the table with unformatted numbers (a dot as the decimal separator, two decimals) that Excel opens as numbers. You can also copy the table and paste it into a sheet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can the result differ from the bank?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is an estimate from standard formulas. Banks may count days differently, round, pay interest on other dates and apply extra product terms. Deposits are protected by the deposit guarantee system up to a limit set by law, so check the terms and guarantees with the bank."
           }
         }
       ]
     }
-  ]
-}
-</script>
+    </script>
 </head>
 
-<body class="credit-page cdeposit">
+<body class="dep-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc cdeposit" id="cdeposit">
-            <div class="mcalc__wrap">
+        <section class="dep" id="dep">
+            <div class="dep__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Deposit Calculator</h1>
-                    <p class="mcalc__p">
-                        Estimate your deposit income: interest, capitalization, monthly top-ups, taxes, and a detailed
-                        schedule.
-                        Supports monthly and daily (365) accrual.
-                    </p>
+                <div class="dep__titlebar">
+                    <h1 class="dep__h1">Deposit Calculator</h1>
+                    <p class="dep__p">Calculate how much you earn on a deposit: interest, tax, compounding, top-ups and the effective yield with inflation taken into account.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="NBU exchange rate (USD/EUR)">
-                            NBU rate: loading…
-                        </span>
-                    </div>
+                <div class="dep__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter details</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <div class="dep__card">
+                        <div class="dep__sectionTitle">
+                            <h2 class="dep__h2">Input data</h2>
+                            <div class="dep__dd" id="cur_dd"><button type="button" class="dep__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="dep__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="dep__caret" aria-hidden="true"></span></button><ul class="dep__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="dep__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="dep__ddCode">UAH</span><span class="dep__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="dep__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="dep__ddCode">USD</span><span class="dep__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="dep__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="dep__ddCode">EUR</span><span class="dep__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="principal">Deposit amount</label>
-                                <input class="mcalc__input" id="principal" type="text" inputmode="decimal" placeholder="e.g. 100 000" />
-                                <div class="mcalc__hint">
-                                    Amount in selected currency.
+                        <div class="dep__block">
+                            <div class="dep__miniTitle">Interest payout</div>
+                            <div class="dep__chips" role="group" aria-label="Interest payout">
+                                <button class="dep__chip is-active" type="button" data-mode="cap" aria-pressed="true"><svg class="dep__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span>Monthly compounding</span></button>
+                                <button class="dep__chip" type="button" data-mode="monthly" aria-pressed="false"><svg class="dep__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Monthly to the card</span></button>
+                                <button class="dep__chip" type="button" data-mode="end" aria-pressed="false"><svg class="dep__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg><span>At the end</span></button>
+                            </div>
+                            <div class="dep__hint dep__mb10">Compounding: interest is added to the deposit and earns more interest. To the card: the deposit does not grow. At the end: simple interest paid in one go.</div>
+                            <div class="dep__rows">
+                                <div class="dep__field dep__field--full">
+                                    <label class="dep__label" for="amount">Deposit amount <span class="dep__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dep__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000"><div class="dep__hint">The amount you put in at the start.</div>
                                 </div>
-                            </div>
-                            
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="calcCurrency">Currency</label>
-                                <select class="mcalc__select mcalc__select--mini" id="calcCurrency">
-                                    <option value="UAH" selected>UAH ₴</option>
-                                    <option value="EUR">EUR €</option>
-                                    <option value="USD">USD $</option>
-                                </select>
-                                <div class="mcalc__hint">
-                                    Used for all calculations and results.
+                                <div class="dep__field">
+                                    <label class="dep__label" for="rate">Annual rate (%) <span class="dep__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dep__input" id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 16">
                                 </div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="annualRate">Annual rate</label>
-                                <input class="mcalc__input" id="annualRate" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 16" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="termMonths">Term</label>
-                                <input class="mcalc__input" id="termMonths" type="number" min="1" step="1"
-                                    placeholder="e.g.: 12" />
-                                <div class="mcalc__hint">In months.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="interestPeriod">Interest accrual</label>
-                                <select class="mcalc__select" id="interestPeriod">
-                                    <option value="monthly" selected>Monthly</option>
-                                    <option value="daily">Daily (assume 365)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="capitalization">Capitalization</label>
-                                <select class="mcalc__select" id="capitalization">
-                                    <option value="on" selected>Yes (add interest to principal)</option>
-                                    <option value="off">No (interest separately)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="monthlyTopUp">Monthly top-up (optional)</label>
-                                <input class="mcalc__input" id="monthlyTopUp" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2 000" />
-                                <div class="mcalc__hint">Added at the start of each month starting from month 2.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="taxMode">Taxes</label>
-                                <select class="mcalc__select" id="taxMode">
-                                    <option value="standard" selected>Standard (18% PIT + 1.5% levy)</option>
-                                    <option value="none">Ignore</option>
-                                    <option value="custom">Custom</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="taxRate">Tax rate, % (if “Custom”)</label>
-                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 19.5" />
-                                <div class="mcalc__hint">Default is 19.5%.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for schedule dates.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    
+                                <div class="dep__field">
+                                    <label class="dep__label" for="term">Term (months) <span class="dep__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dep__input" id="term" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12">
                                 </div>
-
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="dep__qrow dep__chipsRow"><button type="button" class="dep__qchip" data-term="3">3</button><button type="button" class="dep__qchip" data-term="6">6</button><button type="button" class="dep__qchip" data-term="12">12</button><button type="button" class="dep__qchip" data-term="24">24</button><button type="button" class="dep__qchip" data-term="36">36</button><button type="button" class="dep__qchip" data-term="60">60</button></div>
                             </div>
-
                         </div>
+
+                        <details class="dep__details dep__mt12" id="moreDetails">
+                            <summary>More options <span class="dep__hint">(optional)</span></summary>
+                            <div class="dep__rows">
+                                <div class="dep__field dep__field--full">
+                                    <label class="dep__label" for="top">Monthly top-up</label>
+                                    <input class="dep__input" id="top" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2,000"><div class="dep__hint">Added at the start of every month, from the second one.</div>
+                                </div>
+                                <div class="dep__field dep__field--full">
+                                    <label class="dep__label" for="start">Opening date</label>
+                                    <input class="dep__input" id="start" type="date" autocomplete="off" placeholder=""><div class="dep__hint">For dates in the schedule and accrual by days.</div>
+                                </div>
+                                <div class="dep__field dep__field--full">
+                                    <div class="dep__label">Interest accrual</div>
+                                    <div class="dep__qrow"><button type="button" class="dep__qchip is-on" data-basis="month">1/12 of the rate</button><button type="button" class="dep__qchip" data-basis="days">By days (365)</button></div>
+                                </div>
+                                <div class="dep__field dep__field--full">
+                                    <div class="dep__label">Tax on interest</div>
+                                    <div class="dep__qrow"><button type="button" class="dep__qchip is-on" data-tax="std">23%</button><button type="button" class="dep__qchip" data-tax="none">No tax</button><button type="button" class="dep__qchip" data-tax="custom">Custom</button></div>
+                                    <div class="dep__hint">The standard 23% rate = personal income tax 18% + military levy 5%. It is set by law and may change — check the current one.</div>
+                                </div>
+                                <div class="dep__rows dep__chipsRow" id="taxRateWrap" hidden>
+                                    <div class="dep__field dep__field--full">
+                                    <label class="dep__label" for="taxRate">Tax rate (%)</label>
+                                    <input class="dep__input" id="taxRate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 19.5">
+                                </div>
+                                </div>
+                                <div class="dep__field dep__field--full">
+                                    <label class="dep__label" for="infl">Expected inflation (% per year)</label>
+                                    <input class="dep__input" id="infl" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10"><div class="dep__hint">Optional. Shows the real yield after inflation; the value is your assumption.</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="dep__actions dep__mt12">
+                            <button class="dep__btn dep__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="dep__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="dep__card">
+                        <div class="dep__sectionTitle">
+                            <h2 class="dep__h2">Result</h2>
+                            <span class="dep__badge">%</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter amount, rate, and term.
+                        <div class="dep__result" id="result">Enter the deposit amount, the rate and the term — the result will appear here.</div>
+                        <div class="dep__actions dep__mt12">
+                            <button class="dep__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="dep__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="dep__btn" id="resetBtn" type="button">Reset</button>
                         </div>
+                        <div class="m-navlinks dep__mt12"><a class="dep__link" href="/en/finance/compound-interest">Compound interest →</a> <a class="dep__link" href="/en/finance/inflation-calculator">Inflation →</a></div>
+                    </div>
+                </div>
 
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Schedule (monthly) <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
-                                    CSV</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Deposit schedule">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Date</th>
-                                            <th>Top-up (₴)</th>
-                                            <th>Interest (₴)</th>
-                                            <th>Tax (₴)</th>
-                                            <th>Net (₴)</th>
-                                            <th>Balance (₴)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                <div class="dep__card dep__schedule" id="schedule" hidden>
+                    <div class="dep__schedHead">
+                        <h2 class="dep__h2">Deposit schedule</h2>
+                        <div class="dep__tools">
+                            <button type="button" class="dep__qchip is-on" id="viewMonth">By month</button>
+                            <button type="button" class="dep__qchip" id="viewYear">By year</button>
+                            <button type="button" class="dep__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="dep__qchip" id="csvBtn">Download CSV</button>
                         </div>
                     </div>
-
+                    <div class="dep__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>How does the deposit calculator work?</h2>
-            <p>
-                The CalcCore deposit calculator helps you estimate how much you can earn from a deposit over a chosen
-                period.
-                It calculates <b>gross interest</b>, <b>taxes</b>, <b>net income</b>, and shows the <b>final balance</b>
-                together with a <b>monthly schedule</b>.
-            </p>
-            <p>
-                Enter the <b>deposit amount</b>, <b>annual rate</b>, and <b>term</b> in months. Optionally, enable
-                <b>capitalization</b>, set a <b>monthly top-up</b>, and choose interest accrual:
-                <b>monthly</b> or <b>daily (365)</b>.
-            </p>
-
-            <h2>Capitalization and top-ups</h2>
-            <ul>
-                <li><b>Capitalization</b> increases the interest base: interest is added to the principal, so future
-                    interest is calculated on a larger amount.</li>
-                <li><b>Top-ups</b> increase the deposit over time — which can boost total interest (especially with
-                    capitalization).</li>
-            </ul>
-
-            <h2>Taxes: standard or custom</h2>
-            <p>
-                By default, the calculator uses a <b>19.5%</b> tax rate (18% PIT + 1.5% levy).
-                You can also <b>ignore taxes</b> or set a <b>custom rate</b>.
-            </p>
-
-            <h2>Schedule currency and NBU rates</h2>
-            <p>
-                Calculations are performed in UAH (₴), but the schedule can be displayed in <b>USD</b> or <b>EUR</b>.
-                Conversion uses <b>NBU</b> exchange rates shown in the top badge.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/compound-interest"><b>Compound interest calculator</b><span>Growth of savings with contributions and compounding.</span></a>
+                <a class="cc-related-card" href="/en/finance/inflation-calculator"><b>Inflation calculator</b><span>How inflation erodes money over time.</span></a>
+                <a class="cc-related-card" href="/en/finance/roi-calculator"><b>ROI calculator</b><span>Investment return and net profit.</span></a>
+            </div>
         </section>
 
-        <!-- FAQ -->
-        <section class="m-faq">
-            <h2>Frequently asked questions</h2>
+        <div class="cc-divider"></div>
 
-            <div class="m-faq-item">
-                <h3>What’s the difference between “monthly” and “daily (365)”?</h3>
-                <p>
-                    Monthly means interest is calculated once per month based on the current balance.
-                    Daily (365) applies interest proportionally to the number of days in each month (a simplified model
-                    using 365 days/year).
-                </p>
+        <section class="cc-seo">
+            <h2>How deposit income is calculated</h2>
+            <p>Interest accrues every month on the current amount: the rate ÷ 12. The bank withholds tax from the interest, and the rest is net interest. For a deposit of 100,000 UAH at 16% per year for 12 months with compounding the gross interest is <b>16,935.10 UAH</b>, the 23% tax is 3,895.10 UAH, the net income is <b>13,040.00 UAH</b> and at the end you receive <b>113,040.00 UAH</b>. Interest and tax are rounded to the cent every month.</p>
+            <p>A top-up is added at the start of the month, from the second one. If you add 2,000 UAH every month, over 36 months you put in 170,000 UAH and the net income is <b>59,021 UAH</b> instead of 44,443 UAH without top-ups.</p>
+
+            <h2>Compounding, monthly payout or payout at the end</h2>
+            <p><b>Compounding</b> adds net interest to the deposit every month, so later interest is charged on a larger amount: over a year the net income is 13,040 UAH and the effective yield 13.04%. <b>Monthly payout to the card</b> keeps the deposit unchanged: net income 12,320 UAH (12.32%). <b>Payout at the end</b> is simple interest in one payment: net income 12,320 UAH.</p>
+            <p>So the same nominal rate gives different results depending on the payout terms. Compare deposits by the <b>effective annual yield</b> after tax that the calculator shows.</p>
+
+            <h2>Tax and the real yield</h2>
+            <p>By default the calculator uses a 23% tax (personal income tax 18% + military levy 5%) that the bank withholds from the interest. For the example above it is 3,895 UAH; under the old 19.5% rate the tax would have been 3,311 UAH. The rate is set by law and may change, so you can switch it off or set it by hand.</p>
+            <p>If you enter the expected inflation, the calculator shows the <b>real yield</b>. With an effective yield of 13.04% and 10% inflation per year it is about <b>2.76%</b>. That is the user's assumption, not a forecast.</p>
+            <p class="dep-mini">The calculation is an estimate. Accrual rules, rounding and the rate are set by the bank and the tax rate by law, so check the current terms with the bank.</p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>How is deposit income calculated?</h3>
+                <p>Interest accrues every month on the current amount (the rate ÷ 12) and tax is withheld from it. For 100,000 UAH, 16% and 12 months with compounding the gross interest is 16,935.10 UAH, the tax 3,895.10 UAH and the net income 13,040.00 UAH.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How does capitalization work here?</h3>
-                <p>
-                    When capitalization is enabled, <b>net interest</b> (after tax) is added to the balance at the end
-                    of each period,
-                    so future interest is calculated on a larger principal.
-                </p>
+            <div class="cc-faq-item">
+                <h3>What is interest compounding and how does it matter?</h3>
+                <p>Compounding adds net interest to the deposit, so later interest is charged on a larger amount. Over a year that is 13,040 UAH against 12,320 UAH when interest is paid to the card; the effective yield is 13.04% against 12.32%.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>When are monthly top-ups applied?</h3>
-                <p>
-                    Top-ups are added <b>at the start of each month starting from month 2</b>, matching a typical
-                    recurring contribution scenario.
-                </p>
+            <div class="cc-faq-item">
+                <h3>How do monthly payout, compounding and payout at the end differ?</h3>
+                <p>Compounding: the balance grows and at the end you receive 113,040 UAH. To the card: the 100,000 UAH deposit stays the same and 12,320 UAH of net interest arrives monthly. At the end: simple interest, net income of 12,320 UAH in one payment.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why can results differ from a bank’s calculation?</h3>
-                <p>
-                    Banks may use different day-count conventions (360/365), rounding rules, exact accrual/payout dates,
-                    and product-specific conditions.
-                    This calculator provides a mathematically consistent estimate based on your inputs.
-                </p>
+            <div class="cc-faq-item">
+                <h3>What is the tax on deposit interest?</h3>
+                <p>The calculator uses 23% by default: personal income tax 18% and military levy 5%. The bank withholds it as a tax agent when interest is accrued. The rate is set by law and may change, so you can switch it off or set it by hand, and you should check the current value.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the effective annual yield?</h3>
+                <p>It is an annual rate that takes compounding, tax and top-ups into account. For a 16% deposit over 12 months with compounding and 23% tax it is 13.04%, and before tax 17.23%. It is the convenient way to compare deposits with different terms.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do top-ups affect income?</h3>
+                <p>Every top-up increases the base for interest. With a monthly top-up of 2,000 UAH over 36 months you put in 170,000 UAH and the net income is 59,021 UAH against 44,443 UAH without top-ups.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I account for inflation and what is the real yield?</h3>
+                <p>Enter the expected inflation in % per year: the calculator divides the effective yield by the price growth. With 13.04% and 10% inflation the real yield is about 2.76%. Inflation is your assumption, not a forecast.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does accrual at 1/12 of the rate differ from accrual by days?</h3>
+                <p>In the “1/12 of the rate” mode the same share accrues every month. By days, interest is the rate ÷ 365 × the number of days in the month. For 100,000 UAH, 16% and 12 months the net income is 13,040.00 UAH against 13,039.96 UAH. Your bank states which method it uses in the deposit terms.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I download the schedule to Excel?</h3>
+                <p>Yes. The “Download CSV” button saves the table with unformatted numbers (a dot as the decimal separator, two decimals) that Excel opens as numbers. You can also copy the table and paste it into a sheet.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why can the result differ from the bank?</h3>
+                <p>It is an estimate from standard formulas. Banks may count days differently, round, pay interest on other dates and apply extra product terms. Deposits are protected by the deposit guarantee system up to a limit set by law, so check the terms and guarantees with the bank.</p>
             </div>
         </section>
     </main>

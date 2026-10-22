@@ -27,44 +27,6 @@
         unit_kwh_per_100_km: "кВт·год / 100 км",
         unit_m: "м",
       },
-      deposit: {
-  // NBU
-  nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "Курс НБУ (USD/EUR)",
-  nbu_unavailable: "Курс НБУ: недоступно",
-  toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-
-  // Result / toasts
-  toast_enter_values: "Введи суму та термін.",
-  toast_reset: "Скинуто.",
-  toast_need_calc_first: "Спочатку зроби розрахунок.",
-  copied_result: "Скопійовано результат.",
-  copy_failed: "Не вдалося скопіювати.",
-  copied_table: "Скопійовано таблицю.",
-  copy_table_failed: "Не вдалося скопіювати таблицю.",
-  csv_downloaded: "CSV завантажено.",
-  result_enter_values: "Введи суму, ставку та термін.",
-
-  // KPI labels
-  per_income_net: "Дохід (нетто)",
-  kpi_interest_gross: "Відсотки (брутто)",
-  kpi_period: "Періодичність",
-  kpi_tax: "Податки",
-  kpi_tax_rate: "Ставка",
-  kpi_interest_net: "Відсотки (нетто)",
-  kpi_after_tax: "Після податків",
-  kpi_final_balance: "Підсумковий баланс",
-  cap_on: "З капіталізацією",
-  cap_off: "Без капіталізації",
-
-  // Period labels
-  period_daily: "щоденно (365)",
-  period_monthly: "щомісячно",
-
-  // Summary
-  summary_topups: "Поповнення",
-  summary_hint: "У графіку: баланс відображається в ₴ та може бути конвертований у USD/EUR за курсом НБУ.",
-},
       customs: {
         mode_ev: "Електро",
         mode_ice: "ДВЗ",
@@ -1794,44 +1756,6 @@ csv_downloaded: "CSV downloaded.",
   summary_hint: "In the schedule: values are shown in ₴ and can be converted to USD/EUR using NBU rates."
 },
 
-      deposit: {
-  // NBU
-  nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "NBU exchange rate (USD/EUR)",
-  nbu_unavailable: "NBU rate: unavailable",
-  toast_nbu_not_loaded_fallback: "NBU rates not loaded — showing UAH.",
-
-  // Result / toasts
-  toast_enter_values: "Enter the amount and term.",
-  toast_reset: "Reset.",
-  toast_need_calc_first: "Calculate first.",
-  copied_result: "Result copied.",
-  copy_failed: "Copy failed.",
-  copied_table: "Table copied.",
-  copy_table_failed: "Failed to copy table.",
-  csv_downloaded: "CSV downloaded.",
-  result_enter_values: "Enter amount, rate, and term.",
-
-  // KPI labels
-  per_income_net: "Net income",
-  kpi_interest_gross: "Gross interest",
-  kpi_period: "Accrual",
-  kpi_tax: "Taxes",
-  kpi_tax_rate: "Rate",
-  kpi_interest_net: "Net interest",
-  kpi_after_tax: "After tax",
-  kpi_final_balance: "Final balance",
-  cap_on: "With capitalization",
-  cap_off: "No capitalization",
-
-  // Period labels
-  period_daily: "daily (365)",
-  period_monthly: "monthly",
-
-  // Summary
-  summary_topups: "Top-ups",
-  summary_hint: "In the schedule, values are in UAH and can be converted to USD/EUR using NBU rates.",
-},
       percent: {
   // hints
   hint_pick_mode: "Choose a mode and click “Calculate”.",
