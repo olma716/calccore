@@ -1,670 +1,758 @@
-/* =========================================================
-   pension-calculator.js — CalcCore (i18n-ready) — UPDATED
-   - NEW: base currency selector near "Savings now" (#baseCurrency)
-   - ALL calculations are done in selected base currency (UAH/USD/EUR)
-   - Chart + table can be switched to UAH/USD/EUR via NBU rates (UAH per 1 USD/EUR)
-   - NEW: auto-format big numbers with spaces in money inputs
-========================================================= */
-
+/* pension-calculator.js — пенсійний калькулятор: державна пенсія (Україна) і власні накопичення (UK/EN)
+   Державна пенсія за віком (Закон №1058-IV): П = Зп × Кс. Зп = середня зарплата для обчислення пенсій × Кз,
+   Кз = зарплата ÷ середня зарплата по країні (у моделі стала протягом усього стажу), Кс = стаж у роках × 1%.
+   Мінімум (2 595 грн) застосовується лише коли стажу достатньо; максимум — 10 прожиткових мінімумів (25 950 грн).
+   Усі параметри закону редагуються, бо змінюються. Потрібний стаж у році досягнення віку: 60 р. — 33 (+1 щороку до 35),
+   63 р. — 23 (+1 щороку до 25), 65 р. — 15.
+   Накопичення: внесок на початку місяця, нарахування щомісяця за ставкою/12, щорічна індексація внесків; сума в
+   сьогоднішніх грошах = номінал ÷ (1+і)^років; виплати — ануїтет у реальних грошах: реальна ставка за місяць
+   (1+r/12)/(1+і_міс)−1, платіж наприкінці місяця. */
 (() => {
   const el = (id) => document.getElementById(id);
+  const IS_EN = String(document.documentElement.lang || "").toLowerCase().startsWith("en");
+  const LOCALE = IS_EN ? "en-US" : "uk-UA";
 
-  // ---------- i18n helpers ----------
-  const tt =
-    typeof window.t === "function"
-      ? window.t
-      : (k, vars) => {
-          let s = String(k || "");
-          if (vars && typeof vars === "object") {
-            for (const [kk, vv] of Object.entries(vars)) s = s.replaceAll(`{${kk}}`, String(vv));
-          }
-          return s;
-        };
+  // параметри закону за замовчуванням (станом на 2026 рік; можна змінити в полях)
+  const DEF = { wage: 32243, avg: 17482.87, pct: 1, min: 2595, max: 25950 };
+  const LAW_YEAR = 2026;
 
-  const getLocale =
-    typeof window.i18nLocale === "function"
-      ? window.i18nLocale
-      : () =>
-          String(document.documentElement.lang || "")
-            .toLowerCase()
-            .startsWith("en")
-            ? "en-US"
-            : "uk-UA";
+  const T = IS_EN
+    ? {
+        enter: "Fill in the fields — the result will appear here.",
+        missing: "To calculate, fill in: {list}.",
+        lblAge: "age", lblRet: "retirement age", lblExp: "insurance experience", lblSalary: "salary", lblRate: "return",
+        errAge: "Age must be a whole number from 16 to 100.",
+        errRetState: "For the state pension choose 60, 63 or 65 years.",
+        errRetSave: "Retirement age must be a whole number above your age, up to 100.",
+        errExp: "Experience is from 0 to {max} years (not more than age minus 14).",
+        errSalary: "Salary must be above 0 and up to 1,000,000,000.",
+        errNum: "{f}: enter a valid number.",
+        errSum: "Enter the current savings or the monthly contribution.",
+        errRate: "Return must be from −50% to 100% per year.",
+        errInfl: "Inflation must be from −50% to 100% per year.",
+        errGrowth: "Contribution indexation must be from 0% to 100%.",
+        errPay: "Payout period must be a whole number from 1 to 60 years.",
+        errLaw: "Check the law parameters: {f}.",
+        fxLabel: "Exchange rate, UAH per 1 {c}", lblFx: "exchange rate", errFx: "Exchange rate must be a number above 0.",
+        nbuLoading: "Loading…", nbuOk: "NBU rate on {d}: {r} UAH per 1 {c}", nbuFail: "Could not load the NBU rate — enter it manually.",
+        fxNote: "The law parameters and the pension are calculated in hryvnias; the amounts are converted at your rate.",
+        lawAvg: "average wage for pensions", lawWage: "average wage now", lawPct: "value of a year of experience", lawMin: "minimum pension", lawMax: "maximum pension", lawReq: "required experience",
+        lblSum: "savings", lblContrib: "contribution", lblGrowth: "indexation", lblInfl: "inflation", lblGoal: "desired income",
+        sMain: "Estimated state pension", sMainMini: "per month, in today’s money",
+        sRate: "Of your salary", sRateMini: "{p} of {s}",
+        sExp: "Experience at retirement", sExpOk: "enough: {n} yr required", sExpNo: "short by {d} yr: {n} yr required",
+        sKz: "Salary coefficient Kz", sKzMini: "salary {s} ÷ average {w}",
+        sKs: "Experience coefficient Kc", sKsMini: "{t} yr × {p}%",
+        sZp: "Wage for calculation", sZpMini: "average {a} × Kz",
+        warnMin: "The calculated {raw} is below the minimum, so the minimum pension {min} is paid.",
+        warnMax: "The calculated {raw} is above the cap, so {max} is paid.",
+        warnNoExp: "With this experience the age pension is not assigned at {a}: the calculation below is hypothetical.",
+        reqTitle: "Experience required by age", reqRow: "{a} yr: {n} yr required, you will have {h} yr — {s}", reqYes: "enough", reqNo: "not enough",
+        vMain: "Retirement savings", vMainMini: "in {y} yr, contributed {c}",
+        vReal: "In today’s money", vRealMini: "inflation {i}% per year",
+        vContrib: "Contributed", vContribMini: "savings now + contributions",
+        vEarn: "Earned", vEarnMini: "{p}% of contributions",
+        vInc: "Income from savings", vIncMini: "per month for {l} yr, in today’s money",
+        vState: "State pension", vStateMini: "per month, in today’s money",
+        vTotal: "Total per month", vTotalMini: "{p}% of your salary",
+        vNeed: "Required contribution", vNeedMini: "per month to get {g} per month",
+        vGoalOk: "Goal reached: you get {g} — {x} more than needed.", vGoalNo: "The goal {g} is not reached: {x} per month is missing.",
+        vNeedZero: "Your savings alone already cover the goal — no contribution is needed.",
+        chartState: "Pension by years of experience", chartSave: "Savings growth by year",
+        chartLegend: "Grey bars — experience is not enough to retire; yours is highlighted.",
+        legIn: "Contributed", legEarn: "Earned",
+        thExp: "Experience, yr", thKs: "Kc", thPen: "Pension", thPct: "% of salary", thStat: "Status",
+        thYear: "Year", thAge: "Age", thYContrib: "Contributed in the year", thTContrib: "Contributed in total", thEarn: "Earned", thBal: "Balance", thReal: "In today’s money",
+        modelState: "The salary is assumed to stay the same relative to the national average through the whole experience; the rules, indexation and limits may change. For an exact amount use the Pension Fund calculator.",
+        modelSave: "A forecast at your constant return and inflation; real returns vary and taxes and fees are not included.",
+        yr: "{n} yr", okState: "✓", noState: "✗",
+        cur: { UAH: "UAH", USD: "USD", EUR: "EUR" },
+        linkCopied: "Link copied ✅", copyFailed: "Could not copy 😕", reset: "Reset ✅", example: "Example filled in ✅", tableCopied: "Table copied ✅", csvDone: "CSV downloaded ✅"
+      }
+    : {
+        enter: "Заповніть поля — результат зʼявиться тут.",
+        missing: "Щоб розрахувати, заповніть: {list}.",
+        lblAge: "вік", lblRet: "вік виходу на пенсію", lblExp: "страховий стаж", lblSalary: "зарплату", lblRate: "дохідність",
+        errAge: "Вік — ціле число від 16 до 100.",
+        errRetState: "Для державної пенсії оберіть вік 60, 63 або 65 років.",
+        errRetSave: "Вік виходу на пенсію — ціле число, більше за ваш вік, до 100.",
+        errExp: "Стаж — від 0 до {max} років (не більше, ніж вік мінус 14).",
+        errSalary: "Зарплата — число більше 0 і до 1 000 000 000.",
+        errNum: "{f}: вкажіть коректне число.",
+        errSum: "Вкажіть накопичення зараз або щомісячний внесок.",
+        errRate: "Дохідність — від −50% до 100% на рік.",
+        errInfl: "Інфляція — від −50% до 100% на рік.",
+        errGrowth: "Індексація внесків — від 0% до 100%.",
+        errPay: "Тривалість виплат — ціле число від 1 до 60 років.",
+        errLaw: "Перевірте параметри закону: {f}.",
+        fxLabel: "Курс, грн за 1 {c}", lblFx: "курс", errFx: "Курс — число більше 0.",
+        nbuLoading: "Завантажую…", nbuOk: "Курс НБУ на {d}: {r} грн за 1 {c}", nbuFail: "Не вдалося завантажити курс НБУ — введіть курс вручну.",
+        fxNote: "Параметри закону й пенсія рахуються в гривнях; суми переведено за вашим курсом.",
+        lawAvg: "середня зарплата для пенсій", lawWage: "середня зарплата зараз", lawPct: "оцінка року стажу", lawMin: "мінімальна пенсія", lawMax: "максимальна пенсія", lawReq: "потрібний стаж",
+        lblSum: "накопичення", lblContrib: "внесок", lblGrowth: "індексація", lblInfl: "інфляція", lblGoal: "бажаний дохід",
+        sMain: "Орієнтовна державна пенсія", sMainMini: "на місяць, у сьогоднішніх цінах",
+        sRate: "Від вашої зарплати", sRateMini: "{p} із {s}",
+        sExp: "Стаж до виходу", sExpOk: "вистачає: потрібно {n} р.", sExpNo: "бракує {d} р.: потрібно {n} р.",
+        sKz: "Коефіцієнт зарплати Кз", sKzMini: "зарплата {s} ÷ середня {w}",
+        sKs: "Коефіцієнт стажу Кс", sKsMini: "{t} р. × {p}%",
+        sZp: "Зарплата для обчислення", sZpMini: "середня {a} × Кз",
+        warnMin: "Розрахунок {raw} менший за мінімум, тому виплачується мінімальна пенсія {min}.",
+        warnMax: "Розрахунок {raw} перевищує обмеження, тому виплачується {max}.",
+        warnNoExp: "З таким стажем пенсію за віком у {a} не призначать: розрахунок нижче — гіпотетичний.",
+        reqTitle: "Потрібний стаж за віком", reqRow: "{a} р.: потрібно {n} р., у вас буде {h} р. — {s}", reqYes: "вистачає", reqNo: "не вистачає",
+        vMain: "Накопичення на пенсію", vMainMini: "через {y} р., внесли {c}",
+        vReal: "У сьогоднішніх грошах", vRealMini: "інфляція {i}% на рік",
+        vContrib: "Внесли", vContribMini: "накопичення зараз + внески",
+        vEarn: "Заробили", vEarnMini: "{p}% до внесків",
+        vInc: "Дохід з накопичень", vIncMini: "на місяць протягом {l} р., у сьогоднішніх грошах",
+        vState: "Державна пенсія", vStateMini: "на місяць, у сьогоднішніх цінах",
+        vTotal: "Разом на місяць", vTotalMini: "{p}% від вашої зарплати",
+        vNeed: "Потрібний внесок", vNeedMini: "на місяць, щоб отримувати {g} на місяць",
+        vGoalOk: "Ціль досягнута: ви отримаєте {g} — на {x} більше, ніж потрібно.", vGoalNo: "Ціль {g} не досягнута: не вистачає {x} на місяць.",
+        vNeedZero: "Вам вистачає вже наявних накопичень — внесок не потрібен.",
+        chartState: "Пенсія залежно від стажу", chartSave: "Ріст накопичень по роках",
+        chartLegend: "Сірі стовпці — стажу недостатньо для виходу; ваш стаж виділено.",
+        legIn: "Внесли", legEarn: "Заробили",
+        thExp: "Стаж, р.", thKs: "Кс", thPen: "Пенсія", thPct: "% від зарплати", thStat: "Статус",
+        thYear: "Рік", thAge: "Вік", thYContrib: "Внесено за рік", thTContrib: "Внесено всього", thEarn: "Заробили", thBal: "Баланс", thReal: "У сьогоднішніх грошах",
+        modelState: "Розрахунок вважає, що ваша зарплата протягом усього стажу лишається такою самою відносно середньої по країні; правила, індексації й обмеження можуть змінюватись. Для точної суми скористайтеся калькулятором Пенсійного фонду.",
+        modelSave: "Прогноз за вашою сталою дохідністю та інфляцією; реальна дохідність змінюється, податки й комісії не враховано.",
+        yr: "{n} р.", okState: "✓", noState: "✗",
+        cur: { UAH: "грн", USD: "USD", EUR: "EUR" },
+        linkCopied: "Посилання скопійовано ✅", copyFailed: "Не вдалось скопіювати 😕", reset: "Скинуто ✅", example: "Підставлено приклад ✅", tableCopied: "Таблицю скопійовано ✅", csvDone: "CSV завантажено ✅"
+      };
 
-  const LOCALE = getLocale();
-
-  // ---------- Inputs ----------
-  const ageNow = el("ageNow");
-  const ageRetire = el("ageRetire");
-  const savingsNow = el("savingsNow");
-  const monthlyContrib = el("monthlyContrib");
-  const annualReturn = el("annualReturn");
-  const startDate = el("startDate");
-
-  // NEW: Base currency (UAH/USD/EUR)
-  const baseCurrency = el("baseCurrency");
-
-  // Controls
-  const autoCalc = el("autoCalc");
-  const btnCalc = el("btnCalc");
-  const btnReset = el("btnReset");
-  const btnCopy = el("btnCopy");
-
-  // UI
-  const toast = el("mToast");
-  const resultEl = el("mResult");
-  const detailsEl = el("mDetails");
-
-  // NBU
-  const nbuBadge = el("nbuBadge");
-  // rates: UAH per 1 USD/EUR
-  let rates = { loaded: false, date: "", USD: null, EUR: null };
-
-  // Chart
-  const chartCurrency = el("chartCurrency");
-  const canvas = el("growthChart");
-  const ctx = canvas?.getContext?.("2d");
-
-  // Table
-  const scheduleWrap = el("scheduleWrap");
-  const scheduleCurrency = el("scheduleCurrency");
-  const scheduleTable = el("scheduleTable");
-  const scheduleTbody = scheduleTable?.querySelector("tbody");
-  const btnCopySchedule = el("btnCopySchedule");
-  const btnDownloadCSV = el("btnDownloadCSV");
-
-  // State caches in BASE currency (last calculation)
-  let lastBaseCode = "UAH";
-  let chartPointsBASE = []; // [{label, yBase}]
-  let yearRowsBASE = []; // [{year, age, dateText, contributedBase, earnedBase, balanceBase, earnedPct}]
-
-  // ---------- helpers ----------
-  function setToast(msg) {
-    if (!toast) return;
-    toast.textContent = msg || "";
-  }
-
-  function setResult(mainText, extraHtml = "") {
-    if (resultEl) resultEl.textContent = mainText || "";
-    if (detailsEl) detailsEl.innerHTML = extraHtml || "";
-  }
-
-  function parseMoney(val) {
-    if (val == null) return 0;
-    const s = String(val).replace(/\s+/g, "").replace(/,/g, ".").replace(/[^\d.]/g, "");
+  // ===== helpers =====
+  function num(v) {
+    const raw = String(v ?? "").replace(/[\s ]+/g, "").replace(/−/g, "-");
+    const s = IS_EN ? raw.replace(/,/g, "") : raw.replace(",", ".");
+    if (!/^[-+]?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
     const n = Number(s);
-    return Number.isFinite(n) ? n : 0;
+    return Number.isFinite(n) ? n : NaN;
   }
+  const blank = (id) => (el(id)?.value || "").trim() === "";
+  const fill = (s, vars) => String(s).replace(/\{(\w+)\}/g, (_, k) => (vars && vars[k] !== undefined ? vars[k] : ""));
+  const nf = (n, d) => n.toLocaleString(LOCALE, { minimumFractionDigits: d, maximumFractionDigits: d });
+  const f0 = (n) => nf(n, 0);
+  const f2 = (n) => nf(n, 2);
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const state = { mode: "state", cur: "UAH" };
+  const inclOn = () => !!el("incl") && el("incl").checked;
+  const curEff = () => state.cur;
+  const needFx = () => state.cur !== "UAH" && (state.mode === "state" || inclOn());
+  const uah0 = (n) => f0(n) + " " + T.cur.UAH;
+  const uah2 = (n) => f2(n) + " " + T.cur.UAH;
+  const money = (n) => f0(n) + " " + T.cur[curEff()];
+  const money2 = (n) => f2(n) + " " + T.cur[curEff()];
+  const mAuto = (n) => (Math.abs(n) >= 1e5 ? money(n) : money2(n));
+  const yrs = (n) => fill(T.yr, { n: Number.isInteger(n) ? f0(n) : nf(n, 1) });
 
-  function formatNumber(n, maxFrac = 2) {
-    if (!Number.isFinite(n)) return "—";
-    return n.toLocaleString(LOCALE, { maximumFractionDigits: maxFrac });
-  }
-
-  function currencySymbol(code) {
-    if (code === "USD") return "$";
-    if (code === "EUR") return "€";
-    return "₴";
-  }
-
-  function formatMoney(amount, code) {
-    if (!Number.isFinite(amount)) return "—";
-    return `${formatNumber(amount, 2)} ${currencySymbol(code)}`;
-  }
-
-  function formatDate(d) {
-    try {
-      return d.toLocaleDateString(LOCALE);
-    } catch {
-      return "";
+  // групування тисяч під час введення: 1000000 → 1 000 000 (EN: 1,000,000); курсор лишається біля тієї самої цифри
+  const GROUP_SEP = IS_EN ? "," : " ";
+  const MONEY_IDS = ["sum", "contrib", "salary", "wageNow", "lawAvg", "lawMin", "lawMax", "goal"];
+  function groupInput(inp) {
+    const v = inp.value;
+    if (!/^[\d\s .,-]*$/.test(v)) return;
+    const pos = inp.selectionStart == null ? v.length : inp.selectionStart;
+    const digitsBefore = (v.slice(0, pos).match(/\d/g) || []).length;
+    let s = v.replace(/[\s ]/g, "");
+    const neg = s.startsWith("-");
+    if (neg) s = s.slice(1);
+    let intPart, dec = "";
+    if (IS_EN) {
+      s = s.replace(/,/g, "");
+      const i = s.indexOf(".");
+      intPart = i < 0 ? s : s.slice(0, i);
+      dec = i < 0 ? "" : "." + s.slice(i + 1).replace(/\./g, "");
+    } else {
+      const i = s.search(/[.,]/);
+      intPart = i < 0 ? s : s.slice(0, i);
+      dec = i < 0 ? "" : "," + s.slice(i + 1).replace(/[.,]/g, "");
     }
-  }
-
-  function addYears(date, y) {
-    const d = new Date(date);
-    d.setFullYear(d.getFullYear() + y);
-    return d;
-  }
-
-  function needsRates(from, to) {
-    return from !== to && (from !== "UAH" || to !== "UAH");
-  }
-
-  // ---- Currency conversions through UAH pivot ----
-  function toUAH(amount, fromCode) {
-    if (!Number.isFinite(amount)) return amount;
-    if (fromCode === "UAH") return amount;
-    if (!rates.loaded) return amount;
-    const r = rates[fromCode];
-    if (!Number.isFinite(r) || r <= 0) return amount;
-    return amount * r;
-  }
-
-  function fromUAH(amountUAH, toCode) {
-    if (!Number.isFinite(amountUAH)) return amountUAH;
-    if (toCode === "UAH") return amountUAH;
-    if (!rates.loaded) return amountUAH;
-    const r = rates[toCode];
-    if (!Number.isFinite(r) || r <= 0) return amountUAH;
-    return amountUAH / r;
-  }
-
-  function convert(amount, fromCode, toCode) {
-    if (!Number.isFinite(amount)) return amount;
-    if (fromCode === toCode) return amount;
-    if (!needsRates(fromCode, toCode)) return amount;
-    if (!rates.loaded) return amount;
-    const uah = toUAH(amount, fromCode);
-    return fromUAH(uah, toCode);
-  }
-
-  // ---------- Money input formatting (spaces) ----------
-  // formats like: 100 000 / 1 000 000. Keeps decimals if typed.
-  function formatMoneyInput(inputEl) {
-    if (!inputEl) return;
-
-    const old = String(inputEl.value ?? "");
-    const selStart = inputEl.selectionStart ?? old.length;
-
-    // distance from end (simple caret preservation)
-    const fromEnd = old.length - selStart;
-
-    // keep only digits and one dot
-    let raw = old.replace(/,/g, ".").replace(/[^\d.]/g, "");
-    const firstDot = raw.indexOf(".");
-    if (firstDot !== -1) {
-      raw = raw.slice(0, firstDot + 1) + raw.slice(firstDot + 1).replace(/\./g, "");
-    }
-
-    const parts = raw.split(".");
-    let intPart = parts[0] || "";
-    let decPart = parts[1] || "";
-
-    // avoid leading zeros like 000123 -> 123 (but keep single 0)
-    intPart = intPart.replace(/^0+(?=\d)/, "");
-
-    // group by 3 with spaces
-    const spaced = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-
-    // limit decimals to 2 (optional, can remove if you want unlimited)
-    if (decPart.length > 2) decPart = decPart.slice(0, 2);
-
-    const next = decPart.length ? `${spaced}.${decPart}` : spaced;
-
-    // set if changed
-    if (next !== old) {
-      inputEl.value = next;
-      const newPos = Math.max(0, inputEl.value.length - fromEnd);
-      try {
-        inputEl.setSelectionRange(newPos, newPos);
-      } catch {}
-    }
-  }
-
-  // ---------- NBU rates ----------
-  async function loadNbuRates() {
-    try {
-      const res = await fetch("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", {
-        cache: "no-store",
-      });
-      if (!res.ok) throw new Error("NBU fetch failed");
-      const data = await res.json();
-
-      const usd = data.find((x) => String(x.cc || "").toUpperCase() === "USD");
-      const eur = data.find((x) => String(x.cc || "").toUpperCase() === "EUR");
-
-      rates.USD = Number.isFinite(Number(usd?.rate)) ? Number(usd.rate) : null;
-      rates.EUR = Number.isFinite(Number(eur?.rate)) ? Number(eur.rate) : null;
-      rates.date = usd?.exchangedate || eur?.exchangedate || "";
-      rates.loaded = Number.isFinite(rates.USD) && Number.isFinite(rates.EUR);
-
-      if (nbuBadge) {
-        if (rates.loaded) {
-          const datePart = rates.date ? ` • ${rates.date}` : "";
-          nbuBadge.textContent =
-            tt("pension.nbu_badge", { usd: formatNumber(rates.USD, 4), eur: formatNumber(rates.EUR, 4), datePart }) ||
-            `Курс НБУ: USD ${formatNumber(rates.USD, 4)} / EUR ${formatNumber(rates.EUR, 4)}${datePart}`;
-          nbuBadge.title = tt("pension.nbu_title") || "Курс НБУ (USD/EUR)";
-        } else {
-          nbuBadge.textContent = tt("pension.nbu_unavailable") || "Курс НБУ: недоступно";
-          nbuBadge.title = tt("pension.nbu_title") || "Курс НБУ (USD/EUR)";
+    intPart = intPart.replace(/^0+(?=\d)/, "").replace(/\B(?=(\d{3})+(?!\d))/g, GROUP_SEP);
+    const out = (neg ? "-" : "") + intPart + dec;
+    if (out === v) return;
+    inp.value = out;
+    let idx = out.length;
+    if (digitsBefore === 0) idx = neg ? 1 : 0;
+    else {
+      let c = 0;
+      for (let k = 0; k < out.length; k++) {
+        if (/\d/.test(out[k])) c++;
+        if (c === digitsBefore) {
+          idx = k + 1;
+          break;
         }
       }
-
-      renderAllFromCache();
-    } catch {
-      rates.loaded = false;
-      if (nbuBadge) {
-        nbuBadge.textContent = tt("pension.nbu_unavailable") || "Курс НБУ: недоступно";
-        nbuBadge.title = tt("pension.nbu_title") || "Курс НБУ (USD/EUR)";
-      }
     }
+    try {
+      inp.setSelectionRange(idx, idx);
+    } catch {}
+  }
+  const groupAll = () => MONEY_IDS.forEach((id) => el(id) && groupInput(el(id)));
+  // у посиланні «Поділитись» суми без розділювачів груп; десятковий роздільник — крапка
+  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s ]/g, "").replace(",", "."));
+
+  function toast(msg) {
+    const n = el("toast");
+    if (!n) return;
+    n.textContent = msg;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => (n.textContent = ""), 2400);
   }
 
-  // ---------- UI builder ----------
-  function buildResultUI({ finalAmount, contributed, earned, yearsToGo, monthsToGo, earnedPct, baseCode }) {
-    const main = `${tt("pension.main") || "Накопичення на пенсію"}: ${formatMoney(finalAmount, baseCode)}`;
+  // необовʼязкове число з межами; порожнє — значення за замовчуванням
+  function opt(id, label, min, max, def) {
+    if (blank(id)) return { v: def, given: false };
+    const v = num(el(id).value);
+    if (!(v >= min && v <= max)) return { err: fill(T.errNum, { f: label }) };
+    return { v, given: true };
+  }
+  const isInt = (x) => Number.isInteger(x);
 
-    const extra = `
-      <div class="m-kpis">
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("pension.kpi_final") || "Підсумкова сума"}</div>
-          <div class="m-kpi__v">${formatMoney(finalAmount, baseCode)}</div>
-          <div class="m-kpi__s">${tt("pension.kpi_horizon") || "Горизонт"}: ${yearsToGo} ${tt("pension.y") || "р."} (${monthsToGo} ${tt("pension.m") || "міс."})</div>
-        </div>
-
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("pension.kpi_contrib") || "Внесли"}</div>
-          <div class="m-kpi__v">${formatMoney(contributed, baseCode)}</div>
-          <div class="m-kpi__s">${tt("pension.kpi_contrib_hint") || "Накопичення зараз + внески"}</div>
-        </div>
-
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("pension.kpi_profit") || "Заробили"}</div>
-          <div class="m-kpi__v">${formatMoney(earned, baseCode)}</div>
-          <div class="m-kpi__s">${tt("pension.kpi_profit_pct") || "У % до внесків"}: ${formatNumber(earnedPct, 2)}%</div>
-        </div>
-
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("pension.kpi_monthly") || "Щомісячний внесок"}</div>
-          <div class="m-kpi__v">${formatMoney(parseMoney(monthlyContrib?.value), baseCode)}</div>
-          <div class="m-kpi__s">${tt("pension.kpi_monthly_hint") || "Регулярні внески до пенсії"}</div>
-        </div>
-      </div>
-
-      <div class="m-summary">
-        <div><b>${tt("pension.summary") || "Внесли та заробили"}</b>: ${formatMoney(contributed, baseCode)} / ${formatMoney(earned, baseCode)}</div>
-        <div class="m-hintSmall">${tt("pension.summary_hint") || "Графік та таблиця показують баланс наприкінці кожного року. Валюту можна перемкнути на USD/EUR за курсом НБУ."}</div>
-      </div>
-    `;
-    return { main, extra };
+  // ===== державна пенсія =====
+  // потрібний стаж для виходу у віці age у році year
+  function reqExp(age, year) {
+    const d = Math.max(0, year - LAW_YEAR);
+    if (age === 60) return Math.min(35, 33 + d);
+    if (age === 63) return Math.min(25, 23 + d);
+    return 15;
+  }
+  // пенсія за стажем E (років) при вже відомих Зп, оцінці року, мінімумі та максимумі
+  function pensionFor(E, zp, pct, min, max, need) {
+    const raw = zp * ((E * pct) / 100);
+    const ok = E >= need;
+    const pen = ok ? Math.min(max, Math.max(min, raw)) : Math.min(max, raw);
+    return { raw, pen: r2(pen), ok };
   }
 
-  // ---------- Table render ----------
-  function renderTableFromCache() {
-    if (!scheduleTbody) return;
-
-    const toCode = scheduleCurrency?.value || lastBaseCode;
-    const fromCode = lastBaseCode;
-
-    scheduleTbody.innerHTML = yearRowsBASE
-      .map((r) => {
-        const contributed = convert(r.contributedBase, fromCode, toCode);
-        const earned = convert(r.earnedBase, fromCode, toCode);
-        const balance = convert(r.balanceBase, fromCode, toCode);
-
-        return `
-          <tr>
-            <td>${r.year}</td>
-            <td>${r.age}</td>
-            <td>${r.dateText}</td>
-            <td>${formatMoney(contributed, toCode)}</td>
-            <td>${formatMoney(earned, toCode)}</td>
-            <td>${formatMoney(balance, toCode)}</td>
-            <td>${formatNumber(r.earnedPct, 2)}%</td>
-          </tr>
-        `;
-      })
-      .join("");
+  // спільні поля віку
+  function readAges(forState) {
+    const miss = [];
+    if (blank("age")) miss.push(T.lblAge);
+    if (blank("retAge")) miss.push(T.lblRet);
+    return miss;
   }
 
-  // ---------- Chart ----------
-  function drawChart() {
-    if (!ctx || !canvas) return;
+  function lawParams() {
+    const wage = opt("wageNow", T.lawWage, 1, 1e9, DEF.wage);
+    const avg = opt("lawAvg", T.lawAvg, 1, 1e9, DEF.avg);
+    const pct = opt("lawPct", T.lawPct, 0.01, 10, DEF.pct);
+    const min = opt("lawMin", T.lawMin, 0, 1e9, DEF.min);
+    const max = opt("lawMax", T.lawMax, 0, 1e9, DEF.max);
+    const req = opt("lawReq", T.lawReq, 0, 60, null);
+    for (const x of [wage, avg, pct, min, max, req]) if (x.err) return { err: x.err };
+    if (max.v < min.v) return { err: fill(T.errLaw, { f: T.lawMin + " / " + T.lawMax }) };
+    return { wage: wage.v, avg: avg.v, pct: pct.v, min: min.v, max: max.v, req: req.given ? req.v : null };
+  }
 
-    const toCode = chartCurrency?.value || lastBaseCode;
-    const fromCode = lastBaseCode;
-
-    const points = chartPointsBASE.map((p) => ({
-      label: p.label,
-      y: convert(p.yBase, fromCode, toCode),
-    }));
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (points.length < 2) {
-      ctx.font = "12px Arial";
-      ctx.fillStyle = "#1f2f55";
-      ctx.fillText(tt("pension.chart_need_data") || "Зроби розрахунок, щоб побачити графік.", 12, 24);
-      return;
+  function computeState() {
+    const miss = readAges();
+    if (blank("exp")) miss.push(T.lblExp);
+    if (blank("salary")) miss.push(T.lblSalary);
+    if (needFx() && blank("fx")) miss.push(T.lblFx);
+    if (miss.length) {
+      const any = ["age", "retAge", "exp", "salary", "fx"].some((id) => !blank(id));
+      return { ok: false, none: !any, msg: any ? fill(T.missing, { list: miss.join(", ") }) : "" };
     }
-
-    const W = canvas.width;
-    const H = canvas.height;
-    const padL = 44, padR = 16, padT = 16, padB = 34;
-    const innerW = W - padL - padR;
-    const innerH = H - padT - padB;
-
-    const ys = points.map((p) => (Number.isFinite(p.y) ? p.y : 0));
-    const yMin = 0;
-    const yMax = Math.max(...ys, 1);
-
-    const xStep = innerW / (points.length - 1);
-    const xAt = (i) => padL + i * xStep;
-    const yAt = (val) => padT + innerH * (1 - (val - yMin) / (yMax - yMin));
-
-    // grid
-    ctx.strokeStyle = "rgba(40,59,105,.18)";
-    ctx.lineWidth = 1;
-
-    const gridN = 4;
-    for (let g = 0; g <= gridN; g++) {
-      const y = padT + (innerH * g) / gridN;
-      ctx.beginPath();
-      ctx.moveTo(padL, y);
-      ctx.lineTo(W - padR, y);
-      ctx.stroke();
-
-      const v = yMax * (1 - g / gridN);
-      ctx.fillStyle = "rgba(31,47,85,.85)";
-      ctx.font = "11px Arial";
-      ctx.fillText(`${formatNumber(v, 0)} ${currencySymbol(toCode)}`, 6, y + 4);
+    const age = num(el("age").value), ret = num(el("retAge").value);
+    if (!(isInt(age) && age >= 16 && age <= 100)) return { ok: false, msg: T.errAge };
+    if (![60, 63, 65].includes(ret)) return { ok: false, msg: T.errRetState };
+    const exp = num(el("exp").value);
+    const maxExp = Math.max(0, age - 14);
+    if (!(exp >= 0 && exp <= maxExp)) return { ok: false, msg: fill(T.errExp, { max: maxExp }) };
+    const salary = num(el("salary").value);
+    if (!(salary > 0 && salary <= 1e9)) return { ok: false, msg: T.errSalary };
+    let fx = 1;
+    if (needFx()) {
+      fx = num(el("fx").value);
+      if (!(fx > 0 && fx <= 1e6)) return { ok: false, msg: T.errFx };
     }
+    const salaryU = salary * fx;
+    const law = lawParams();
+    if (law.err) return { ok: false, msg: law.err };
 
-    // line
-    ctx.strokeStyle = "#1f2f55";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    points.forEach((p, i) => {
-      const x = xAt(i);
-      const y = yAt(p.y);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
+    const togo = Math.max(0, ret - age);
+    const total = exp + togo;
+    const year = new Date().getFullYear() + togo;
+    const need = law.req != null ? law.req : reqExp(ret, year);
+    const kz = salaryU / law.wage, zp = law.avg * kz, ks = (total * law.pct) / 100;
+    const p = pensionFor(total, zp, law.pct, law.min, law.max, need);
+    const reqs = [60, 63, 65].map((a) => {
+      const t2 = Math.max(0, a - age);
+      const have = exp + t2;
+      const nd = law.req != null ? law.req : reqExp(a, new Date().getFullYear() + t2);
+      return { age: a, need: nd, have, ok: have >= nd };
     });
-    ctx.stroke();
-
-    // dots
-    ctx.fillStyle = "#1f2f55";
-    points.forEach((p, i) => {
-      const x = xAt(i);
-      const y = yAt(p.y);
-      ctx.beginPath();
-      ctx.arc(x, y, 3, 0, Math.PI * 2);
-      ctx.fill();
+    // рядки таблиці/діаграми: стаж від 15 до 45 років + ваш
+    const list = [15, 20, 25, 30, 35, 40, 45];
+    const mine = Math.round(total * 10) / 10;
+    if (!list.includes(mine)) list.push(mine);
+    list.sort((a, b) => a - b);
+    const rows = list.map((E) => {
+      const q = pensionFor(E, zp, law.pct, law.min, law.max, need);
+      return { exp: E, ks: (E * law.pct) / 100, pen: q.pen, penC: q.pen / fx, pct: (q.pen / salaryU) * 100, ok: q.ok, mine: E === mine };
     });
-
-    // x labels
-    ctx.fillStyle = "rgba(31,47,85,.9)";
-    ctx.font = "11px Arial";
-    points.forEach((p, i) => {
-      const x = xAt(i);
-      const y = H - 12;
-      const text = p.label;
-      const tw = ctx.measureText(text).width;
-      ctx.fillText(text, x - tw / 2, y);
-    });
+    return {
+      ok: true, mode: "state", age, ret, exp, salary, salaryU, fx, cur: state.cur, law, total, need, year, kz, zp, ks, raw: r2(p.raw), pen: p.pen, penC: p.pen / fx, enough: p.ok,
+      floor: p.ok && p.raw < law.min, cap: p.raw > law.max, pct: (p.pen / salaryU) * 100, short: Math.max(0, need - total), reqs, rows
+    };
   }
 
-  function renderAllFromCache() {
-    renderTableFromCache();
-    drawChart();
-  }
-
-  // ---------- Calculation ----------
-  function calc({ silent = false } = {}) {
-    const a0 = Number(ageNow?.value || 0);
-    const aR = Number(ageRetire?.value || 0);
-
-    const baseCode = baseCurrency?.value || "UAH";
-    lastBaseCode = baseCode;
-
-    const P0 = parseMoney(savingsNow?.value);
-    const mCont = Math.max(0, parseMoney(monthlyContrib?.value));
-    const rPct = parseMoney(annualReturn?.value);
-    const start = startDate?.value ? new Date(startDate.value) : new Date();
-
-    // validate ages
-    if (!(a0 > 0) || !(aR > 0) || !(aR > a0)) {
-      if (!silent) setToast(tt("pension.toast_bad_ages") || "Перевір вік і вік виходу на пенсію.");
-      setResult(tt("pension.result_enter_values") || "Введи вік, вік виходу на пенсію, суму та дохідність.", "");
-      chartPointsBASE = [];
-      yearRowsBASE = [];
-      if (scheduleTbody) scheduleTbody.innerHTML = "";
-      if (scheduleWrap) scheduleWrap.open = false;
-      renderAllFromCache();
-      return;
-    }
-
-    const yearsToGo = aR - a0;
-    const monthsToGo = yearsToGo * 12;
-
-    // validate values
-    if (!(P0 >= 0) || monthsToGo <= 0) {
-      if (!silent) setToast(tt("pension.toast_enter_values") || "Введи значення для розрахунку.");
-      setResult(tt("pension.result_enter_values") || "Введи вік, вік виходу на пенсію, суму та дохідність.", "");
-      chartPointsBASE = [];
-      yearRowsBASE = [];
-      if (scheduleTbody) scheduleTbody.innerHTML = "";
-      if (scheduleWrap) scheduleWrap.open = false;
-      renderAllFromCache();
-      return;
-    }
-
-    const rMonth = rPct > 0 ? (rPct / 100) / 12 : 0;
-
-    let balance = P0;
-    let contributed = P0;
-
-    chartPointsBASE = [];
-    yearRowsBASE = [];
-
-    for (let m = 1; m <= monthsToGo; m++) {
-      // contribution at start of month
-      if (mCont > 0) {
-        balance += mCont;
-        contributed += mCont;
-      }
-      // monthly growth
-      if (rMonth > 0) balance *= 1 + rMonth;
-
-      // end of year snapshot
+  // ===== накопичення =====
+  function simSave(sum, c, growth, rm, n) {
+    let bal = sum, contrib = sum, cm = c, yc = 0;
+    const rows = [];
+    for (let m = 1; m <= n; m++) {
+      if (m > 1 && (m - 1) % 12 === 0) cm *= 1 + growth;
+      bal += cm;
+      contrib += cm;
+      yc += cm;
+      bal *= 1 + rm;
       if (m % 12 === 0) {
-        const y = m / 12;
-        const age = a0 + y;
-
-        const earned = balance - contributed;
-        const earnedPct = contributed > 0 ? (earned / contributed) * 100 : 0;
-
-        chartPointsBASE.push({ label: `${y}`, yBase: balance });
-
-        yearRowsBASE.push({
-          year: y,
-          age,
-          dateText: formatDate(addYears(start, y)),
-          contributedBase: contributed,
-          earnedBase: earned,
-          balanceBase: balance,
-          earnedPct,
-        });
+        rows.push({ y: m / 12, yc, contrib, bal });
+        yc = 0;
       }
     }
-
-    const finalAmount = balance;
-    const earned = finalAmount - contributed;
-    const earnedPct = contributed > 0 ? (earned / contributed) * 100 : 0;
-
-    const ui = buildResultUI({
-      finalAmount,
-      contributed,
-      earned,
-      yearsToGo,
-      monthsToGo,
-      earnedPct,
-      baseCode,
-    });
-
-    setToast("");
-    setResult(ui.main, ui.extra);
-
-    renderAllFromCache();
-    if (scheduleWrap) scheduleWrap.open = false;
+    return { bal, contrib, rows };
   }
+  const annuityFactor = (rho, L) => (Math.abs(rho) < 1e-12 ? 1 / L : rho / (1 - Math.pow(1 + rho, -L)));
 
-  // ---------- reset ----------
-  function reset() {
-    if (ageNow) ageNow.value = "";
-    if (ageRetire) ageRetire.value = "";
-    if (savingsNow) savingsNow.value = "";
-    if (monthlyContrib) monthlyContrib.value = "";
-    if (annualReturn) annualReturn.value = "";
-
-    if (baseCurrency) baseCurrency.value = "UAH";
-    lastBaseCode = "UAH";
-
-    if (chartCurrency) chartCurrency.value = "UAH";
-    if (scheduleCurrency) scheduleCurrency.value = "UAH";
-
-    if (startDate) {
-      const d = new Date();
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, "0");
-      const dd = String(d.getDate()).padStart(2, "0");
-      startDate.value = `${yyyy}-${mm}-${dd}`;
+  function computeSave() {
+    const miss = readAges();
+    if (blank("ret")) miss.push(T.lblRate);
+    const incl = inclOn();
+    if (incl) {
+      if (blank("exp")) miss.push(T.lblExp);
+      if (blank("salary")) miss.push(T.lblSalary);
     }
-
-    setToast(tt("pension.toast_reset") || "Скинуто.");
-    setResult(tt("pension.result_enter_values") || "Введи вік, вік виходу на пенсію, суму та дохідність.", "");
-
-    chartPointsBASE = [];
-    yearRowsBASE = [];
-    if (scheduleTbody) scheduleTbody.innerHTML = "";
-    if (scheduleWrap) scheduleWrap.open = false;
-
-    renderAllFromCache();
-    setTimeout(() => setToast(""), 1200);
+    if (miss.length) {
+      const any = ["age", "retAge", "sum", "contrib", "ret", "infl", "growth", "payYears", "goal", "exp", "salary"].some((id) => !blank(id));
+      return { ok: false, none: !any, msg: any ? fill(T.missing, { list: miss.join(", ") }) : "" };
+    }
+    const age = num(el("age").value), retAge = num(el("retAge").value);
+    if (!(isInt(age) && age >= 16 && age <= 100)) return { ok: false, msg: T.errAge };
+    if (!(isInt(retAge) && retAge > age && retAge <= 100)) return { ok: false, msg: T.errRetSave };
+    const sum = opt("sum", T.lblSum, 0, 1e12, 0), contrib = opt("contrib", T.lblContrib, 0, 1e9, 0);
+    const growth = opt("growth", T.lblGrowth, 0, 100, 0), infl = opt("infl", T.lblInfl, -50, 100, 0), goal = opt("goal", T.lblGoal, 0, 1e9, 0);
+    if (growth.err) return { ok: false, msg: T.errGrowth };
+    if (infl.err) return { ok: false, msg: T.errInfl };
+    for (const x of [sum, contrib, goal]) if (x.err) return { ok: false, msg: x.err };
+    if (!(sum.v > 0 || contrib.v > 0)) return { ok: false, msg: T.errSum };
+    const rate = num(el("ret").value);
+    if (!(rate >= -50 && rate <= 100)) return { ok: false, msg: T.errRate };
+    let payY = 20;
+    if (!blank("payYears")) {
+      payY = num(el("payYears").value);
+      if (!(isInt(payY) && payY >= 1 && payY <= 60)) return { ok: false, msg: T.errPay };
+    }
+    let st = null;
+    if (incl) {
+      st = computeState();
+      if (!st.ok) return st;
+    }
+    const n = (retAge - age) * 12;
+    const rm = rate / 1200, im = Math.pow(1 + infl.v / 100, 1 / 12) - 1;
+    const g = growth.v / 100;
+    const s0 = simSave(sum.v, contrib.v, g, rm, n);
+    const defl = Math.pow(1 + im, n);
+    const L = payY * 12;
+    const rho = (1 + rm) / (1 + im) - 1;
+    const fac = annuityFactor(rho, L);
+    const realBal = s0.bal / defl;
+    const income = realBal * fac;
+    const rows = s0.rows.map((x) => ({ age: age + x.y, y: x.y, yc: x.yc, tc: x.contrib, earn: x.bal - x.contrib, bal: x.bal, real: x.bal / Math.pow(1 + im, x.y * 12) }));
+    const out = {
+      ok: true, mode: "save", age, retAge, n, years: retAge - age, sum: sum.v, contrib: contrib.v, growth: growth.v, rate, infl: infl.v, payY, goal: goal.given ? goal.v : 0,
+      bal: s0.bal, tc: s0.contrib, earn: s0.bal - s0.contrib, real: realBal, income, rows, st
+    };
+    if (st) {
+      out.stateP = st.penC;
+      out.total = income + st.penC;
+      out.totalPct = (out.total / st.salary) * 100;
+    }
+    if (out.goal > 0) {
+      const have = st ? st.penC : 0;
+      const needReal = Math.max(0, out.goal - have);
+      const base = simSave(sum.v, 0, g, rm, n).bal;
+      const unit = simSave(0, 1, g, rm, n).bal;
+      const balReq = (needReal / fac) * defl;
+      out.need = Math.max(0, (balReq - base) / unit);
+      out.reach = (st ? out.total : income) - out.goal;
+    }
+    return out;
   }
 
-  // ---------- copy result ----------
-  async function copyResult() {
-    const txt = (resultEl?.textContent || "").trim();
-    if (!txt || txt.includes(tt("pension.result_enter_values") || "Введи")) {
-      setToast(tt("pension.toast_need_calc_first") || "Спочатку зроби розрахунок.");
+  // ===== відображення =====
+  const tile = (title, value, mini, cls = "") =>
+    '<div class="pen__kpi ' + cls + '"><div class="pen__kpiT">' + title + '</div><div class="pen__kpiV' + (String(value).length > 12 ? " pen__kpiV--s" : "") + '">' + value + "</div>" + (mini ? '<div class="pen__kpiM">' + mini + "</div>" : "") + "</div>";
+
+  const compact = (v) => (Math.abs(v) >= 1e6 ? nf(v / 1e6, Math.abs(v) % 1e6 ? 1 : 0) + "M" : Math.abs(v) >= 1000 ? f0(v / 1000) + "k" : String(Math.round(v)));
+  const barLabel = (v) => (v >= 1000 ? nf(v / 1000, v < 10000 ? 1 : 0) + "k" : String(Math.round(v)));
+  const niceStep = (range, want = 5) => {
+    const raw = range / want, p = Math.pow(10, Math.floor(Math.log10(raw || 1)));
+    return [1, 2, 2.5, 5, 10].map((q) => q * p).find((q) => range / q <= want + 0.5) || p;
+  };
+
+  // діаграма: пенсія за стажем (стовпці), ваш стаж виділено
+  function chartState(r) {
+    const vals = r.rows.map((x) => x.penC);
+    const maxV = Math.max(...vals, 1);
+    const W = 480, H = 270, L = 56, Rr = 14, Tp = 36, B = 34;
+    const step = niceStep(maxV);
+    const top = Math.ceil(maxV / step) * step;
+    const py = (v) => Tp + (1 - v / top) * (H - Tp - B);
+    let svg = '<svg class="pen__chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + T.chartState + '">';
+    for (let v = 0; v <= top + 1e-9; v += step) {
+      svg += '<line x1="' + L + '" y1="' + py(v).toFixed(1) + '" x2="' + (W - Rr) + '" y2="' + py(v).toFixed(1) + '" stroke="' + (v === 0 ? "#c9d3e6" : "#e6ebf5") + '"/>';
+      svg += '<text x="' + (L - 8) + '" y="' + (py(v) + 4).toFixed(1) + '" font-size="11" fill="#6b7280" text-anchor="end">' + (v === 0 ? "0" : compact(v)) + "</text>";
+    }
+    svg += '<text x="' + L + '" y="18" font-size="11" fill="#5b6b8c">' + T.chartState + ", " + T.cur[state.cur] + "</text>";
+    const n = r.rows.length, slot = (W - L - Rr) / n, bw = Math.min(46, slot * 0.66);
+    r.rows.forEach((x, k) => {
+      const cx = L + slot * k + slot / 2, y0 = py(0), y1 = py(x.penC);
+      const col = x.mine ? "#0f8b8d" : x.ok ? "#283b69" : "#9aa6c2";
+      svg += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + y1.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(1, y0 - y1).toFixed(1) + '" fill="' + col + '"/>';
+      svg += '<text x="' + cx.toFixed(1) + '" y="' + (y1 - 5).toFixed(1) + '" font-size="11" font-weight="700" fill="' + col + '" text-anchor="middle">' + barLabel(x.penC) + "</text>";
+      svg += '<text x="' + cx.toFixed(1) + '" y="' + (H - B + 16) + '" font-size="11" fill="#6b7280" text-anchor="middle">' + (Number.isInteger(x.exp) ? x.exp : nf(x.exp, 1)) + "</text>";
+    });
+    return svg + "</svg>" + '<div class="pen__hint">' + T.chartLegend + "</div>";
+  }
+
+  // діаграма накопичень: стовпці «внесли / заробили» по роках (стек)
+  function chartSave(r) {
+    const rows = r.rows;
+    const maxV = Math.max(...rows.map((x) => x.bal), 1);
+    const W = 480, H = 270, L = 56, Rr = 14, Tp = 36, B = 34;
+    const step = niceStep(maxV);
+    const top = Math.ceil(maxV / step) * step;
+    const py = (v) => Tp + (1 - v / top) * (H - Tp - B);
+    let svg = '<svg class="pen__chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + T.chartSave + '">';
+    for (let v = 0; v <= top + 1e-9; v += step) {
+      svg += '<line x1="' + L + '" y1="' + py(v).toFixed(1) + '" x2="' + (W - Rr) + '" y2="' + py(v).toFixed(1) + '" stroke="' + (v === 0 ? "#c9d3e6" : "#e6ebf5") + '"/>';
+      svg += '<text x="' + (L - 8) + '" y="' + (py(v) + 4).toFixed(1) + '" font-size="11" fill="#6b7280" text-anchor="end">' + (v === 0 ? "0" : compact(v)) + "</text>";
+    }
+    svg += '<rect x="' + L + '" y="9" width="10" height="10" rx="2" fill="#283b69"/><text x="' + (L + 15) + '" y="18" font-size="11" fill="#5b6b8c">' + T.legIn + "</text>";
+    const lx = L + 28 + T.legIn.length * 5.9;
+    svg += '<rect x="' + lx + '" y="9" width="10" height="10" rx="2" fill="#0f8b8d"/><text x="' + (lx + 15) + '" y="18" font-size="11" fill="#5b6b8c">' + T.legEarn + "</text>";
+    const n = rows.length, slot = (W - L - Rr) / n, bw = Math.min(40, slot * 0.72), every = Math.ceil(n / 12);
+    rows.forEach((x, k) => {
+      const cx = L + slot * k + slot / 2, y0 = py(0), yc = py(Math.min(x.tc, x.bal)), yb = py(x.bal);
+      svg += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + yc.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(0, y0 - yc).toFixed(1) + '" fill="#283b69"/>';
+      svg += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + yb.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(0, yc - yb).toFixed(1) + '" fill="#0f8b8d"/>';
+      if (k % every === 0 || k === n - 1) svg += '<text x="' + cx.toFixed(1) + '" y="' + (H - B + 16) + '" font-size="11" fill="#6b7280" text-anchor="middle">' + x.age + "</text>";
+    });
+    svg += '<text x="' + (W - Rr) + '" y="' + (H - 4) + '" font-size="10" fill="#6b7280" text-anchor="end">' + T.thAge + "</text>";
+    return svg + "</svg>";
+  }
+
+  function tableState(r) {
+    const head = "<thead><tr><th>" + T.thExp + "</th><th>" + T.thKs + "</th><th>" + T.thPen + "</th><th>" + T.thPct + "</th><th>" + T.thStat + "</th></tr></thead>";
+    const body = r.rows
+      .map((x) => '<tr' + (x.mine ? ' class="pen__total"' : "") + "><td>" + (Number.isInteger(x.exp) ? x.exp : nf(x.exp, 1)) + "</td><td>" + nf(x.ks, 2) + "</td><td>" + f2(x.penC) + "</td><td>" + nf(x.pct, 1) + "</td><td>" + (x.ok ? T.reqYes : T.reqNo) + "</td></tr>")
+      .join("");
+    return '<table class="pen__tbl pen__tbl--sch" id="scheduleTable">' + head + "<tbody>" + body + "</tbody></table>";
+  }
+  function tableSave(r) {
+    const head = "<thead><tr><th>" + T.thYear + "</th><th>" + T.thAge + "</th><th>" + T.thYContrib + "</th><th>" + T.thTContrib + "</th><th>" + T.thEarn + "</th><th>" + T.thBal + "</th><th>" + T.thReal + "</th></tr></thead>";
+    const body = r.rows.map((x) => "<tr><td>" + x.y + "</td><td>" + x.age + "</td><td>" + f2(x.yc) + "</td><td>" + f2(x.tc) + "</td><td>" + f2(x.earn) + "</td><td>" + f2(x.bal) + "</td><td>" + f2(x.real) + "</td></tr>").join("");
+    return '<table class="pen__tbl pen__tbl--sch" id="scheduleTable">' + head + "<tbody>" + body + "</tbody></table>";
+  }
+
+  let last = null;
+
+  function reqList(r) {
+    return (
+      '<div class="pen__rq"><div class="pen__rqT">' + T.reqTitle + "</div>" +
+      r.reqs.map((q) => '<div class="pen__rqRow' + (q.ok ? " is-ok" : "") + '">' + fill(T.reqRow, { a: q.age, n: q.need, h: Number.isInteger(q.have) ? f0(q.have) : nf(q.have, 1), s: q.ok ? T.reqYes + " " + T.okState : T.reqNo + " " + T.noState }) + "</div>").join("") +
+      "</div>"
+    );
+  }
+
+  function render(r) {
+    const box = el("result");
+    const sch = el("schedule");
+    if (!r.ok) {
+      last = null;
+      box.innerHTML = r.none || !r.msg ? T.enter : '<div class="pen__hintbox">' + r.msg + "</div>";
+      sch.hidden = true;
       return;
     }
-    try {
-      await navigator.clipboard.writeText(txt);
-      setToast(tt("pension.copied_result") || "Скопійовано результат.");
-      setTimeout(() => setToast(""), 1500);
-    } catch {
-      setToast(tt("pension.copy_failed") || "Не вдалося скопіювати.");
+    last = r;
+    let tiles, chart, note, extra = "";
+    if (r.mode === "state") {
+      const t = Number.isInteger(r.total) ? f0(r.total) : nf(r.total, 1);
+      tiles =
+        tile(T.sMain, money2(r.penC), T.sMainMini, "pen__kpi--main pen__kpi--wide") +
+        tile(T.sRate, nf(r.pct, 1) + "%", fill(T.sRateMini, { p: money(r.penC), s: money(r.salary) })) +
+        tile(T.sExp, fill(T.yr, { n: t }), r.enough ? fill(T.sExpOk, { n: r.need }) : fill(T.sExpNo, { d: nf(r.short, 1), n: r.need })) +
+        tile(T.sKz, nf(r.kz, 4), fill(T.sKzMini, { s: uah0(r.salaryU), w: uah0(r.law.wage) })) +
+        tile(T.sKs, nf(r.ks, 4), fill(T.sKsMini, { t, p: nf(r.law.pct, 2) })) +
+        tile(T.sZp, uah2(r.zp), fill(T.sZpMini, { a: uah2(r.law.avg) }), "pen__kpi--wide");
+      if (!r.enough) extra += '<div class="pen__warn">' + fill(T.warnNoExp, { a: r.ret }) + "</div>";
+      if (r.floor) extra += '<div class="pen__warn">' + fill(T.warnMin, { raw: uah2(r.raw), min: uah2(r.law.min) }) + "</div>";
+      if (r.cap) extra += '<div class="pen__warn">' + fill(T.warnMax, { raw: uah2(r.raw), max: uah2(r.law.max) }) + "</div>";
+      extra += reqList(r);
+      if (r.cur !== "UAH") extra += '<div class="pen__hint">' + T.fxNote + "</div>";
+      chart = chartState(r);
+      note = T.modelState;
+      el("schedBody").innerHTML = tableState(r);
+    } else {
+      tiles = tile(T.vMain, mAuto(r.bal), fill(T.vMainMini, { y: r.years, c: money(r.tc) }), "pen__kpi--main pen__kpi--wide");
+      tiles += tile(T.vReal, mAuto(r.real), fill(T.vRealMini, { i: nf(r.infl, 2) }));
+      tiles += tile(T.vInc, mAuto(r.income), fill(T.vIncMini, { l: r.payY }));
+      tiles += tile(T.vContrib, mAuto(r.tc), T.vContribMini);
+      tiles += tile(T.vEarn, mAuto(r.earn), fill(T.vEarnMini, { p: nf(r.tc > 0 ? (r.earn / r.tc) * 100 : 0, 1) }));
+      if (r.st) {
+        tiles += tile(T.vState, mAuto(r.stateP), T.vStateMini);
+        tiles += tile(T.vTotal, mAuto(r.total), fill(T.vTotalMini, { p: nf(r.totalPct, 1) }));
+      }
+      if (r.goal > 0) {
+        tiles += tile(T.vNeed, mAuto(r.need > 0 ? r.need : 0), fill(T.vNeedMini, { g: money(r.goal) }), "pen__kpi--wide");
+        extra += '<div class="pen__warn' + (r.reach >= 0 ? " is-ok" : "") + '">' + (r.reach >= 0 ? fill(T.vGoalOk, { g: money(r.goal), x: money(r.reach) }) : fill(T.vGoalNo, { g: money(r.goal), x: money(-r.reach) })) + (r.need <= 0 ? " " + T.vNeedZero : "") + "</div>";
+      }
+      chart = chartSave(r);
+      note = T.modelSave;
+      el("schedBody").innerHTML = tableSave(r);
     }
+    box.innerHTML = '<div class="pen__kpis">' + tiles + "</div>" + extra + '<div class="pen__sub" id="chartTitle">' + (r.mode === "state" ? T.chartState : T.chartSave) + "</div>" + chart + '<div class="pen__note">' + note + "</div>";
+    sch.hidden = false;
   }
 
-  // ---------- copy table / CSV ----------
-  async function copySchedule() {
-    if (!scheduleTable) return;
-    const rows = Array.from(scheduleTable.querySelectorAll("tr"));
-    const lines = rows.map((tr) =>
-      Array.from(tr.children)
-        .map((td) => td.innerText.replace(/\s+/g, " ").trim())
-        .join("\t")
-    );
-    const text = lines.join("\n");
-    try {
-      await navigator.clipboard.writeText(text.trim());
-      setToast(tt("pension.copied_table") || "Скопійовано таблицю.");
-      setTimeout(() => setToast(""), 1500);
-    } catch {
-      setToast(tt("pension.copy_table_failed") || "Не вдалося скопіювати таблицю.");
-    }
+  const compute = () => (state.mode === "state" ? computeState() : computeSave());
+  function calc() {
+    render(compute());
   }
 
-  function downloadCSV() {
-    if (!scheduleTable) return;
-    const rows = Array.from(scheduleTable.querySelectorAll("tr")).map((tr) =>
-      Array.from(tr.children)
-        .map((td) => `"${td.innerText.replace(/"/g, '""').trim()}"`)
-        .join(",")
-    );
-    const csv = rows.join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-
+  // ===== таблиця: копіювання й CSV =====
+  const tableMatrix = () => {
+    const t = el("scheduleTable");
+    if (!t) return [];
+    return Array.from(t.querySelectorAll("tr")).map((tr) => Array.from(tr.children).map((c) => c.textContent.trim()));
+  };
+  async function copyTable() {
+    const m = tableMatrix().map((r) => r.join("\t")).join("\n");
+    try {
+      await navigator.clipboard.writeText(m);
+      toast(T.tableCopied);
+    } catch {
+      toast(T.copyFailed);
+    }
+  }
+  function downloadCsv() {
+    if (!el("scheduleTable") || !last) return;
+    // числа без форматування (крапка, 2 знаки), роздільник «;» — Excel читає як числа
+    const clean = (s) => {
+      const x = s.replace(/[\s ]/g, "");
+      if (/^[\d,.\-]+$/.test(x)) return IS_EN ? x.replace(/,/g, "") : x.replace(",", ".");
+      return s;
+    };
+    const csv = "﻿" + tableMatrix().map((row) => row.map((c) => '"' + clean(c).replace(/"/g, '""') + '"').join(";")).join("\r\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
     const a = document.createElement("a");
     a.href = url;
-    a.download = "pension-years.csv";
+    a.download = last.mode === "state" ? "pension-state.csv" : "pension-savings.csv";
     document.body.appendChild(a);
     a.click();
     a.remove();
-
     URL.revokeObjectURL(url);
-    setToast(tt("pension.csv_downloaded") || "CSV завантажено.");
-    setTimeout(() => setToast(""), 1500);
+    toast(T.csvDone);
   }
 
-  // ---------- Auto-calc debounce ----------
-  let autoTimer = null;
-  function scheduleAuto() {
-    if (!autoCalc || !autoCalc.checked) return;
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(() => calc({ silent: true }), 180);
+  // ===== режими =====
+  function applyState() {
+    document.querySelectorAll("[data-mode]").forEach((b) => {
+      const on = b.dataset.mode === state.mode;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-pressed", String(on));
+    });
+    const incl = inclOn();
+    el("saveWrap").hidden = state.mode !== "save";
+    el("stateWrap").hidden = !(state.mode === "state" || incl);
+    el("fxWrap").hidden = el("stateWrap").hidden || state.cur === "UAH";
+    el("fxLabel").textContent = fill(T.fxLabel, { c: T.cur[state.cur] });
+    const flag = { UAH: "ua", USD: "us", EUR: "eu" }[curEff()];
+    el("cur_flag").src = "/assets/flags/" + flag + ".png";
+    el("cur_code").textContent = curEff();
+    document.querySelectorAll("#cur_list li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.code === state.cur)));
+    document.querySelectorAll("[data-ret]").forEach((b) => b.classList.toggle("is-on", el("retAge").value.trim() === b.dataset.ret));
   }
 
-  function safeSetCurrencySelect(selectEl, targetCode) {
-    if (!selectEl) return;
-    selectEl.value = targetCode;
-  }
-
-  function handleDisplayCurrencyChange(selectEl) {
-    const baseCode = baseCurrency?.value || lastBaseCode || "UAH";
-    const chosen = selectEl?.value || baseCode;
-
-    // If conversion needed but NBU not loaded -> fallback to base currency (not UAH!)
-    if (needsRates(baseCode, chosen) && !rates.loaded) {
-      setToast(tt("pension.toast_nbu_not_loaded_fallback") || "Курс НБУ не завантажився — показую базову валюту.");
-      safeSetCurrencySelect(selectEl, baseCode);
-      setTimeout(() => setToast(""), 2000);
+  // ===== офіційний курс НБУ за натисненням кнопки =====
+  async function fillNbuRate() {
+    const code = state.cur;
+    const btn = el("fxNbu");
+    if (code === "UAH" || !btn || btn.disabled) return;
+    const label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = T.nbuLoading;
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 8000);
+    try {
+      const res = await fetch("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=" + code + "&json", { cache: "no-store", signal: ctl.signal });
+      if (!res.ok) throw new Error("NBU " + res.status);
+      const data = await res.json();
+      const row = Array.isArray(data) ? data.find((x) => String(x.cc || "").toUpperCase() === code) : null;
+      const rate = Number(row && row.rate);
+      if (!(rate > 0)) throw new Error("no rate");
+      const r4 = Math.round(rate * 10000) / 10000;
+      el("fx").value = IS_EN ? String(r4) : String(r4).replace(".", ",");
+      calc();
+      toast(fill(T.nbuOk, { d: (row && row.exchangedate) || "", r: nf(r4, 4), c: T.cur[code] }));
+    } catch {
+      toast(T.nbuFail);
+    } finally {
+      clearTimeout(timer);
+      btn.disabled = false;
+      btn.textContent = label;
     }
   }
 
-  // ---------- events ----------
-  // money formatting + auto calc
-  savingsNow?.addEventListener("input", () => {
-    formatMoneyInput(savingsNow);
-    scheduleAuto();
+  // ===== кнопки =====
+  const IDS = ["age", "retAge", "exp", "salary", "fx", "wageNow", "lawAvg", "lawPct", "lawMin", "lawMax", "lawReq", "sum", "contrib", "growth", "ret", "infl", "payYears", "goal"];
+
+  function resetAll() {
+    IDS.forEach((id) => (el(id).value = ""));
+    el("incl").checked = false;
+    Object.assign(state, { mode: "state", cur: "UAH" });
+    el("lawMore").open = false;
+    el("saveMore").open = false;
+    applyState();
+    render({ ok: false, none: true });
+  }
+
+  function fillExample() {
+    IDS.forEach((id) => (el(id).value = ""));
+    el("incl").checked = false;
+    el("age").value = "30";
+    el("retAge").value = "60";
+    if (state.mode === "state") {
+      el("exp").value = "8";
+      el("salary").value = "35000";
+    } else {
+      el("sum").value = "200000";
+      el("contrib").value = "3000";
+      el("growth").value = "5";
+      el("ret").value = "12";
+      el("infl").value = "7";
+      el("payYears").value = "20";
+      el("goal").value = "30000";
+      el("saveMore").open = true;
+    }
+    state.cur = "UAH";
+    applyState();
+    groupAll();
+    calc();
+    toast(T.example);
+  }
+
+  function share() {
+    const p = new URLSearchParams();
+    IDS.forEach((id) => {
+      const v = plain((el(id).value || "").trim());
+      if (v) p.set(id, v);
+    });
+    p.set("mode", state.mode);
+    p.set("cur", state.cur);
+    if (inclOn()) p.set("incl", "1");
+    const url = location.origin + location.pathname + "?" + p.toString();
+    navigator.clipboard?.writeText(url).then(() => toast(T.linkCopied)).catch(() => toast(T.copyFailed));
+  }
+
+  function applyFromUrl() {
+    const q = new URLSearchParams(location.search);
+    let any = false;
+    IDS.forEach((id) => {
+      if (q.has(id)) {
+        el(id).value = q.get(id);
+        any = true;
+      }
+    });
+    if (q.get("mode") === "save") state.mode = "save";
+    if (["USD", "EUR"].includes(q.get("cur"))) state.cur = q.get("cur");
+    if (q.get("incl") === "1") el("incl").checked = true;
+    if (["wageNow", "lawAvg", "lawPct", "lawMin", "lawMax", "lawReq"].some((id) => !blank(id))) el("lawMore").open = true;
+    if (["growth", "infl", "payYears", "goal"].some((id) => !blank(id))) el("saveMore").open = true;
+    return any || ["mode", "cur", "incl"].some((k) => q.has(k));
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    IDS.forEach((id) => {
+      el(id).addEventListener("input", () => {
+        if (MONEY_IDS.includes(id)) groupInput(el(id));
+        if (id === "retAge") applyState();
+        calc();
+      });
+      el(id).addEventListener("keydown", (e) => {
+        if (e.key === "Enter") calc();
+      });
+    });
+    el("incl").addEventListener("change", () => {
+      applyState();
+      calc();
+    });
+    document.querySelectorAll("[data-ret]").forEach((b) =>
+      b.addEventListener("click", () => {
+        el("retAge").value = b.dataset.ret;
+        applyState();
+        calc();
+      })
+    );
+    document.querySelectorAll("[data-mode]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.mode = b.dataset.mode;
+        applyState();
+        calc();
+      })
+    );
+    el("copyTbl").addEventListener("click", copyTable);
+    el("csvBtn").addEventListener("click", downloadCsv);
+
+    // валюта: випадний список із прапорцем
+    const curBtn = el("cur_btn");
+    const curList = el("cur_list");
+    const closeCur = () => {
+      curList.hidden = true;
+      curBtn.setAttribute("aria-expanded", "false");
+    };
+    curBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = curList.hidden;
+      curList.hidden = !open;
+      curBtn.setAttribute("aria-expanded", String(open));
+    });
+    curList.addEventListener("click", (e) => {
+      const li = e.target.closest("li[data-code]");
+      if (!li) return;
+      closeCur();
+      state.cur = li.dataset.code;
+      applyState();
+      calc();
+    });
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#cur_dd")) closeCur();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeCur();
+    });
+
+    el("calcBtn").addEventListener("click", () => {
+      const r = compute();
+      render(r);
+      if (!r.ok && r.msg) toast(r.msg);
+    });
+    el("exampleBtn").addEventListener("click", fillExample);
+    el("resetBtn").addEventListener("click", () => {
+      resetAll();
+      toast(T.reset);
+    });
+    el("shareBtn").addEventListener("click", share);
+    el("fxNbu").addEventListener("click", fillNbuRate);
+
+    const used = applyFromUrl();
+    groupAll();
+    applyState();
+    if (used) calc();
+    else render({ ok: false, none: true });
   });
-
-  monthlyContrib?.addEventListener("input", () => {
-    formatMoneyInput(monthlyContrib);
-    scheduleAuto();
-  });
-
-  ageNow?.addEventListener("input", scheduleAuto);
-  ageRetire?.addEventListener("input", scheduleAuto);
-  annualReturn?.addEventListener("input", scheduleAuto);
-  startDate?.addEventListener("change", scheduleAuto);
-
-  // base currency change syncs chart/table currency + recalculates
-  baseCurrency?.addEventListener("change", () => {
-    const baseCode = baseCurrency.value || "UAH";
-    safeSetCurrencySelect(chartCurrency, baseCode);
-    safeSetCurrencySelect(scheduleCurrency, baseCode);
-    calc({ silent: true });
-  });
-
-  btnCalc?.addEventListener("click", () => calc({ silent: false }));
-  btnReset?.addEventListener("click", reset);
-  btnCopy?.addEventListener("click", copyResult);
-
-  btnCopySchedule?.addEventListener("click", copySchedule);
-  btnDownloadCSV?.addEventListener("click", downloadCSV);
-
-  scheduleCurrency?.addEventListener("change", () => {
-    handleDisplayCurrencyChange(scheduleCurrency);
-    renderTableFromCache();
-  });
-
-  chartCurrency?.addEventListener("change", () => {
-    handleDisplayCurrencyChange(chartCurrency);
-    drawChart();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter") return;
-    calc({ silent: false });
-  });
-
-  // ---------- init ----------
-  reset();
-  loadNbuRates();
 })();

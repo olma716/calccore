@@ -465,42 +465,6 @@
   err_old_new: "Введи «Було» та «Стало».",
   err_old_zero: "«Було» не може бути 0 для розрахунку % зміни.",
 },
-      pension:
-      {
-  nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "Курс НБУ (USD/EUR)",
-  nbu_unavailable: "Курс НБУ: недоступно",
-
-  main: "Накопичення на пенсію",
-
-  toast_bad_ages: "Перевір вік і вік виходу на пенсію.",
-  toast_enter_values: "Введи значення для розрахунку.",
-  result_enter_values: "Введи вік, вік виходу на пенсію, суму та дохідність.",
-  toast_reset: "Скинуто.",
-  toast_need_calc_first: "Спочатку зроби розрахунок.",
-  copied_result: "Скопійовано результат.",
-  copy_failed: "Не вдалося скопіювати.",
-
-  toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-  chart_need_data: "Зроби розрахунок, щоб побачити графік.",
-
-  kpi_final: "Підсумкова сума",
-  kpi_horizon: "Горизонт",
-  y: "р.",
-  m: "міс.",
-  kpi_contrib: "Внесли",
-  kpi_contrib_hint: "Накопичення зараз + внески",
-  kpi_profit: "Заробили",
-  kpi_profit_pct: "У % до внесків",
-  kpi_monthly: "Щомісячний внесок",
-  kpi_monthly_hint: "Регулярні внески до пенсії",
-
-  summary: "Внесли та заробили",
-  summary_hint: "Графік показує баланс наприкінці кожного року. Валюту можна перемкнути на USD/EUR за курсом НБУ.",
-  copied_table: "Скопійовано таблицю.",
-copy_table_failed: "Не вдалося скопіювати таблицю.",
-csv_downloaded: "CSV завантажено.",
-},
 
     cc:{
   nbu_title: "Курс НБУ (USD/EUR)",
@@ -1442,41 +1406,6 @@ steel: {
 },
 
 
-      pension:{
-  nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "NBU rate (USD/EUR)",
-  nbu_unavailable: "NBU rate: unavailable",
-
-  main: "Retirement savings",
-
-  toast_bad_ages: "Check current age and retirement age.",
-  toast_enter_values: "Enter values to calculate.",
-  result_enter_values: "Enter ages, amount, and expected return.",
-  toast_reset: "Reset.",
-  toast_need_calc_first: "Calculate first.",
-  copied_result: "Result copied.",
-  copy_failed: "Copy failed.",
-
-  toast_nbu_not_loaded_fallback: "NBU rate didn’t load — showing UAH.",
-  chart_need_data: "Run the calculation to see the chart.",
-
-  kpi_final: "Final amount",
-  kpi_horizon: "Horizon",
-  y: "yr",
-  m: "mo",
-  kpi_contrib: "Contributed",
-  kpi_contrib_hint: "Current savings + contributions",
-  kpi_profit: "Earned",
-  kpi_profit_pct: "% of contributed",
-  kpi_monthly: "Monthly contribution",
-  kpi_monthly_hint: "Recurring contributions until retirement",
-
-  summary: "Contributed and earned",
-  summary_hint: "Chart shows end-of-year balance. Currency can be switched to USD/EUR using NBU rates.",
-  copied_table: "Table copied.",
-copy_table_failed: "Failed to copy table.",
-csv_downloaded: "CSV downloaded.",
-},
 
       roi: {
   nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",

@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Пенсійний калькулятор: накопичення, внески, графік | CalcCore</title>
+    <title>Пенсійний калькулятор України 2026: пенсія й накопичення | CalcCore</title>
     <meta name="description"
-        content="Пенсійний калькулятор: вік, накопичення, щомісячні внески й дохідність. Сума на пенсію, внесли проти заробили, графік росту. Конвертація USD/EUR за курсом НБУ." />
+        content="Пенсійний калькулятор: орієнтовна державна пенсія за стажем і зарплатою (Зп × Кс), мінімум і максимум, а також власні накопичення, інфляція, дохід у пенсії та потрібний внесок." />
 
-    <!-- Canonical (CLEAN URL) -->
     <link rel="canonical" href="https://calccore.net/finance/pension-calculator" />
-
-    <!-- hreflang (FULL + CLEAN URLs) -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/pension-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/pension-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,354 +28,418 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Пенсійний калькулятор: накопичення, внески, графік" />
-    <meta property="og:description" content="Пенсійний калькулятор: вік, накопичення, щомісячні внески й дохідність. Сума на пенсію, внесли проти заробили, графік росту. Конвертація USD/EUR за курсом НБУ." />
+    <meta property="og:title" content="Пенсійний калькулятор України 2026: пенсія й накопичення" />
+    <meta property="og:description" content="Пенсійний калькулятор: орієнтовна державна пенсія за стажем і зарплатою (Зп × Кс), мінімум і максимум, а також власні накопичення, інфляція, дохід у пенсії та потрібний внесок." />
     <meta property="og:url" content="https://calccore.net/finance/pension-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Пенсійний калькулятор: накопичення, внески, графік" />
-    <meta name="twitter:description" content="Пенсійний калькулятор: вік, накопичення, щомісячні внески й дохідність. Сума на пенсію, внесли проти заробили, графік росту. Конвертація USD/EUR за курсом НБУ." />
+    <meta name="twitter:title" content="Пенсійний калькулятор України 2026: пенсія й накопичення" />
+    <meta name="twitter:description" content="Пенсійний калькулятор: орієнтовна державна пенсія за стажем і зарплатою (Зп × Кс), мінімум і максимум, а також власні накопичення, інфляція, дохід у пенсії та потрібний внесок." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
-    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/pension-calculator.css" />
+    <link rel="stylesheet" href="/css/pension.css?v=20261022pen11" />
 
-    <!-- JS -->
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/pension-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022pen11" defer></script>
+    <script src="/js/pension-calculator.js?v=20261022pen11" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Як пенсійний калькулятор рахує накопичення?",
-        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор моделює зростання накопичень за принципом складних відсотків: нарахування відбувається на поточний баланс, який включає стартові заощадження, внески та отриманий дохід."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що означає “очікувана дохідність”?",
-        "acceptedAnswer":{"@type":"Answer","text":"Це прогнозна середня річна ставка зростання (у %), яку калькулятор використовує для моделі. Реальна дохідність може відрізнятися."}
-      },
-      {
-        "@type":"Question",
-        "name":"Як впливають щомісячні внески?",
-        "acceptedAnswer":{"@type":"Answer","text":"Регулярні внески збільшують суму інвестованого капіталу, а отже й базу для нарахування відсотків. Це суттєво підвищує підсумковий результат на довгому горизонті."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи враховує калькулятор інфляцію, податки та комісії?",
-        "acceptedAnswer":{"@type":"Answer","text":"Базовий розрахунок показує номінальне зростання за заданою ставкою. Податки, комісії та інфляція можуть вплинути на реальний результат і за потреби мають враховуватися окремо."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому вигідно почати накопичувати раніше?",
-        "acceptedAnswer":{"@type":"Answer","text":"Чим більше часу до пенсії, тим сильніше працює ефект складних відсотків. Ранні внески мають більше років для зростання, тому навіть менші суми можуть дати значний результат."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/finance/pension-calculator#app",
+  "name": "Пенсійний калькулятор",
+  "description": "Розрахунок державної пенсії за віком в Україні за формулою Зп × Кс з мінімумом і максимумом, перевірка стажу для 60, 63 і 65 років, а також власні накопичення з внесками, індексацією, інфляцією, доходом у пенсії та потрібним внеском, діаграма й таблиця.",
+  "url": "https://calccore.net/finance/pension-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Орієнтовна державна пенсія за стажем і зарплатою за формулою Зп × Кс",
+    "Перевірка потрібного стажу для виходу у 60, 63 і 65 років",
+    "Мінімальна та максимальна пенсія з редагованими параметрами закону",
+    "Власні накопичення з внесками, індексацією внесків і дохідністю",
+    "Сума в сьогоднішніх грошах з урахуванням інфляції",
+    "Дохід з накопичень у пенсії та загальний дохід разом з державною пенсією",
+    "Потрібний щомісячний внесок для бажаного доходу",
+    "Діаграма й таблиця, копіювання й CSV для Excel; посилання на розрахунок"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/finance/pension-calculator#app",
-    "name":"Пенсійний калькулятор",
-    "description":"Онлайн пенсійний калькулятор: поточний вік, вік виходу на пенсію, накопичення зараз, щомісячні внески та очікувана дохідність. Показує прогноз накопичень, графік і таблицю по роках.",
-    "url":"https://calccore.net/finance/pension-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/finance/pension-calculator#webpage",
+      "url": "https://calccore.net/finance/pension-calculator",
+      "name": "Пенсійний калькулятор України 2026: пенсія й накопичення | CalcCore",
+      "description": "Пенсійний калькулятор: орієнтовна державна пенсія за стажем і зарплатою (Зп × Кс), мінімум і максимум, а також власні накопичення, інфляція, дохід у пенсії та потрібний внесок.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/finance/pension-calculator#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "uk"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/finance/pension-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як розрахувати пенсію в Україні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть «Державна пенсія», вкажіть вік, вік виходу (60, 63 або 65), стаж і зарплату. Калькулятор рахує П = Зп × Кс. Для зарплати 30 000 грн і 35 років стажу — близько 5 693 грн на місяць (19% від зарплати)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка формула пенсії за віком?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "П = Зп × Кс, де Зп = середня зарплата для обчислення пенсій × Кз, Кз — відношення вашої зарплати до середньої по країні, Кс = стаж у роках × 1%. Для нових пенсій 2026 року середня зарплата — 17 482,87 грн (2023–2025 роки)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки потрібно стажу для пенсії?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У 2026 році: 33 роки для виходу у 60 років, 23 роки у 63 роки, 15 років у 65 років. Вимога для 60 років зростає на рік щороку до 35 років у 2028-му, для 63 років — до 25."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка мінімальна і максимальна пенсія?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мінімальна пенсія за віком — 2 595 грн (дорівнює прожитковому мінімуму для осіб, які втратили працездатність), максимальна — 25 950 грн (10 прожиткових мінімумів). Мінімум застосовується, якщо вистачає потрібного стажу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому пенсія менша за зарплату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Пенсія залежить від середньої зарплати за останні три роки перед пенсією, а не від вашої, і від стажу: 1% за рік. При зарплаті 30 000 грн і 35 роках стажу пенсія становить 19% від зарплати, тож решту доводиться покривати власними накопиченнями."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке Кз і Кс?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Кз — індивідуальний коефіцієнт зарплати: відношення вашої зарплати до середньої по країні. Кс — коефіцієнт стажу: роки стажу, помножені на 1%. Пенсія — це середня зарплата для обчислення пенсій × Кз × Кс."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки відкладати самостійно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Режим «Власні накопичення» показує, скільки вийде на пенсії і скільки це на місяць. Наприклад, 3 000 грн на місяць із 12% за 30 років дають 10 589 741 грн (1 391 144 грн у сьогоднішніх грошах при інфляції 7%). Вкажіть бажаний дохід — калькулятор підкаже потрібний внесок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки відкладати, щоб отримувати 30 000 грн на місяць?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Без державної пенсії, при 12% дохідності й інфляції 7% за 30 років потрібно відкладати близько 9 652 грн на місяць (виплати протягом 20 років, у сьогоднішніх грошах). З державною пенсією потрібний внесок менший: додайте її прапорцем «Додати державну пенсію»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор інфляцію, податки й індексацію пенсій?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Інфляцію так: сума й дохід показуються в сьогоднішніх грошах. Податки, комісії та майбутні зміни пенсійних правил — ні. Державна пенсія вважається в сьогоднішніх цінах, бо її індексують разом із зарплатами."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Наскільки точний калькулятор?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це орієнтовна оцінка. Реальний Кз рахується за весь трудовий шлях, а пенсійні правила й суми змінюються. Для точної суми скористайтеся калькулятором Пенсійного фонду, а накопичення вважайте прогнозом за вашими припущеннями."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page cpension">
+<body class="pen-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc cpension" id="cpension">
-            <div class="mcalc__wrap">
+        <section class="pen" id="pen">
+            <div class="pen__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Пенсійний калькулятор</h1>
-                    <p class="mcalc__p">
-                        Оціни, скільки можна накопичити до пенсії: поточні накопичення, регулярні внески й очікувана
-                        дохідність.
-                        Показує підсумок, внесли vs заробили та графік росту.
-                    </p>
+                <div class="pen__titlebar">
+                    <h1 class="pen__h1">Пенсійний калькулятор</h1>
+                    <p class="pen__p">Оцініть державну пенсію за стажем і зарплатою та скільки треба відкладати самостійно, щоб у пенсії отримувати бажаний дохід.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Авто-розрахунок</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
-                            Курс НБУ: завантаження…
-                        </span>
-                    </div>
+                <div class="pen__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Фінанси</span>
+                    <div class="pen__card">
+                        <div class="pen__sectionTitle">
+                            <h2 class="pen__h2">Дані для розрахунку</h2>
+                            <div class="pen__dd" id="cur_dd"><button type="button" class="pen__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="pen__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="pen__caret" aria-hidden="true"></span></button><ul class="pen__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="pen__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="pen__ddCode">UAH</span><span class="pen__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="pen__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="pen__ddCode">USD</span><span class="pen__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="pen__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="pen__ddCode">EUR</span><span class="pen__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="ageNow">Вік</label>
-                                <input class="mcalc__input" id="ageNow" type="number" min="0" max="120" step="1"
-                                    placeholder="наприклад: 30" />
+                        <div class="pen__block">
+                            <div class="pen__miniTitle">Що рахуємо</div>
+                            <div class="pen__modes" role="group" aria-label="Що рахуємо">
+                                <button class="pen__mode is-active" type="button" data-mode="state" aria-pressed="true"><b>Державна пенсія</b><span>За стажем і вашою зарплатою</span></button>
+                                <button class="pen__mode" type="button" data-mode="save" aria-pressed="false"><b>Власні накопичення</b><span>Внески, дохідність, інфляція</span></button>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="ageRetire">Вік виходу на пенсію</label>
-                                <input class="mcalc__input" id="ageRetire" type="number" min="0" max="120" step="1"
-                                    placeholder="наприклад: 60" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                            
-                                <label class="mcalc__label" for="savingsNow">
-                                    Накопичення зараз
-                                </label>
-                            
-                                <div class="m-invest-line">
-                                    <input class="mcalc__input" id="savingsNow" type="text" inputmode="decimal" placeholder="наприклад: 200 000" />
-                            
-                                    <select id="baseCurrency" class="mcalc__select m-currency-inline">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
+                            <div class="pen__rows">
+                                <div class="pen__field">
+                                    <label class="pen__label" for="age">Вік <span class="pen__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pen__input" id="age" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 30">
                                 </div>
-                            
-                                <div class="mcalc__hint">
-                                    Розрахунки виконуються у вибраній валюті.
-                                </div>
-                            
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="monthlyContrib">Щомісячні внески</label>
-                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 3 000" />
-                                <div class="mcalc__hint">Додаються на початку кожного місяця.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="annualReturn">Очікувана дохідність, %</label>
-                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 10" />
-                                <div class="mcalc__hint">Середня річна дохідність (модель зі щомісячним нарахуванням).
+                                <div class="pen__field">
+                                    <label class="pen__label" for="retAge">Вік виходу на пенсію <span class="pen__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pen__input" id="retAge" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 60">
                                 </div>
                             </div>
+                            <div class="pen__qrow pen__mt12"><button type="button" class="pen__qchip" data-ret="60">60 років</button><button type="button" class="pen__qchip" data-ret="63">63 роки</button><button type="button" class="pen__qchip" data-ret="65">65 років</button></div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Дата старту</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Використовується для підписів років у графіку.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    
+                            <div id="saveWrap" hidden>
+                                <div class="pen__rows pen__mt12">
+                                    <div class="pen__field pen__field--full">
+                                    <label class="pen__label" for="sum">Накопичення зараз</label>
+                                    <input class="pen__input" id="sum" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 200 000">
                                 </div>
-
-                                <div class="mcalc__toast" id="mToast"></div>
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="contrib">Щомісячний внесок</label>
+                                    <input class="pen__input" id="contrib" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 3 000"><div class="pen__hint">Додається на початку кожного місяця.</div>
+                                </div>
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="ret">Дохідність, % на рік <span class="pen__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pen__input" id="ret" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 12"><div class="pen__hint">Середня річна, нарахування щомісяця.</div>
+                                </div>
+                                </div>
+                                <details class="pen__details pen__mt12" id="saveMore">
+                                    <summary>Інфляція, індексація й ціль <span class="pen__hint">(необовʼязково)</span></summary>
+                                    <div class="pen__rows">
+                                        <div class="pen__field pen__field--full">
+                                    <label class="pen__label" for="growth">Індексація внесків, % на рік</label>
+                                    <input class="pen__input" id="growth" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 5"><div class="pen__hint">Щороку внесок зростає на цей відсоток.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="infl">Інфляція, % на рік</label>
+                                    <input class="pen__input" id="infl" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 7"><div class="pen__hint">Для суми в сьогоднішніх грошах.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="payYears">Тривалість виплат, років</label>
+                                    <input class="pen__input" id="payYears" type="text" inputmode="decimal" autocomplete="off" placeholder="20 (за замовчуванням)"><div class="pen__hint">Скільки років ділити накопичення.</div>
+                                </div>
+                                        <div class="pen__field pen__field--full">
+                                    <label class="pen__label" for="goal">Бажаний дохід на місяць</label>
+                                    <input class="pen__input" id="goal" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 30 000"><div class="pen__hint">У сьогоднішніх грошах; покаже потрібний внесок.</div>
+                                </div>
+                                    </div>
+                                </details>
+                                <label class="pen__check pen__mt12"><input type="checkbox" id="incl"><span>Додати державну пенсію</span></label>
                             </div>
 
+                            <div id="stateWrap">
+                                <div class="pen__rows pen__mt12">
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="exp">Страховий стаж, років <span class="pen__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pen__input" id="exp" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 8"><div class="pen__hint">Вже набраний; до виходу рахується стаж без перерв.</div>
+                                </div>
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="salary">Зарплата зараз, на місяць <span class="pen__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pen__input" id="salary" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 35 000"><div class="pen__hint">Брутто. Рахується відносно середньої по країні.</div>
+                                </div>
+                                </div>
+                                <div class="pen__rows pen__mt12" id="fxWrap" hidden>
+                                    <div class="pen__field pen__field--full">
+                                        <label class="pen__label" for="fx"><span id="fxLabel"></span></label>
+                                        <div class="pen__inwrap"><input class="pen__input" id="fx" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 41"><button type="button" class="pen__qchip pen__qchip--tool" id="fxNbu">Підставити курс НБУ</button></div>
+                                        <div class="pen__hint">Пенсія й закон — у гривнях, тому потрібен курс.</div>
+                                    </div>
+                                </div>
+                                <details class="pen__details pen__mt12" id="lawMore">
+                                    <summary>Параметри закону <span class="pen__hint">(необовʼязково)</span></summary>
+                                    <div class="pen__rows">
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="wageNow">Середня зарплата по країні зараз</label>
+                                    <input class="pen__input" id="wageNow" type="text" inputmode="decimal" autocomplete="off" placeholder="32 243"><div class="pen__hint">Держстат, липень 2026.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawAvg">Середня зарплата для обчислення пенсій</label>
+                                    <input class="pen__input" id="lawAvg" type="text" inputmode="decimal" autocomplete="off" placeholder="17 482,87"><div class="pen__hint">Середня за 2023–2025 роки.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawPct">Оцінка року стажу, %</label>
+                                    <input class="pen__input" id="lawPct" type="text" inputmode="decimal" autocomplete="off" placeholder="1"><div class="pen__hint">Стандартно 1% за рік.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawReq">Потрібний стаж, років</label>
+                                    <input class="pen__input" id="lawReq" type="text" inputmode="decimal" autocomplete="off" placeholder="авто"><div class="pen__hint">Порожньо — за віком і роком виходу.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawMin">Мінімальна пенсія</label>
+                                    <input class="pen__input" id="lawMin" type="text" inputmode="decimal" autocomplete="off" placeholder="2 595"><div class="pen__hint">Дорівнює прожитковому мінімуму.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawMax">Максимальна пенсія</label>
+                                    <input class="pen__input" id="lawMax" type="text" inputmode="decimal" autocomplete="off" placeholder="25 950"><div class="pen__hint">10 прожиткових мінімумів.</div>
+                                </div>
+                                    </div>
+                                </details>
+                            </div>
                         </div>
+
+                        <div class="pen__actions pen__mt12">
+                            <button class="pen__btn pen__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="pen__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="pen__card">
+                        <div class="pen__sectionTitle">
+                            <h2 class="pen__h2">Результат</h2>
+                            <span class="pen__badge">%</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Введи вік, вік виходу на пенсію, суму та дохідність.
+                        <div class="pen__result" id="result">Заповніть поля — результат зʼявиться тут.</div>
+                        <div class="pen__actions pen__mt12">
+                            <button class="pen__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="pen__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="pen__btn" id="resetBtn" type="button">Скинути</button>
                         </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Графік росту накопичень</div>
-
-                                <label class="m-curr">
-                                    Валюта:
-                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                            </div>
-
-                            <canvas id="growthChart" width="900" height="280"
-                                aria-label="Графік пенсійних накопичень"></canvas>
-                            <div class="m-hintSmall">
-                                Лінія показує баланс наприкінці кожного року до пенсії.
-                            </div>
-                        </div>
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Таблиця по роках <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-                        
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Валюта:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                        
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Копіювати таблицю</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Завантажити CSV</button>
-                            </div>
-                        
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Таблиця пенсійних накопичень по роках">
-                                    <thead>
-                                        <tr>
-                                            <th>Рік</th>
-                                            <th>Вік</th>
-                                            <th>Дата</th>
-                                            <th>Внесли (₴)</th>
-                                            <th>Заробили (₴)</th>
-                                            <th>Баланс (₴)</th>
-                                            <th>Заробили, %</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
-                        </div>
-
-
+                        <div class="m-navlinks pen__mt12"><a class="pen__link" href="/finance/compound-interest">Складні відсотки →</a> <a class="pen__link" href="/finance/inflation-calculator">Калькулятор інфляції →</a></div>
                     </div>
+                </div>
 
+                <div class="pen__card pen__schedule" id="schedule" hidden>
+                    <div class="pen__schedHead">
+                        <h2 class="pen__h2">Таблиця</h2>
+                        <div class="pen__tools">
+                            <button type="button" class="pen__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="pen__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="pen__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-        
-        <section class="m-seo">
-            <h2>Як працює пенсійний калькулятор?</h2>
-            <p>
-                Пенсійний калькулятор CalcCore допомагає оцінити, скільки коштів можна накопичити до моменту виходу на пенсію.
-                Він моделює довгострокове зростання за принципом <b>складних відсотків</b>, де дохід нараховується
-                на всю суму — початкові накопичення, щомісячні внески та вже зароблені відсотки.
-            </p>
-            <p>
-                Ви вводите <b>поточний вік</b>, <b>вік виходу на пенсію</b>, <b>накопичення зараз</b>,
-                <b>щомісячні внески</b> та <b>очікувану дохідність</b>.
-                Калькулятор розраховує, як зростатиме капітал з року в рік і яку суму ви можете мати на момент пенсії.
-            </p>
-        
-            <h2>Складні відсотки і довгий горизонт</h2>
-            <p>
-                Основний фактор зростання — час. Чим раніше почати відкладати, тим більшу роль відіграють
-                складні відсотки: відсотки починають приносити відсотки.
-                Навіть невеликі регулярні внески можуть суттєво збільшити підсумкову суму через десятки років.
-            </p>
-        
-            <h2>Що показує графік і таблиця?</h2>
-            <p>
-                Графік показує зростання пенсійних заощаджень до обраного віку.
-                Таблиця по роках відображає баланс наприкінці кожного року, суму внесків і суму заробленого доходу.
-                Це допомагає зрозуміти, як змінюється структура накопичень з часом.
-            </p>
-        
-            <h2>Навіщо використовувати пенсійний калькулятор?</h2>
-            <p>
-                Такий розрахунок корисний для фінансового планування:
-                ви бачите, чи достатні поточні внески, щоб досягти бажаної суми,
-                і як зміна ставки доходності або розміру внесків вплине на майбутній результат.
-            </p>
-        </section>
-        
-        <section class="m-faq">
-            <h2>Часті запитання</h2>
-        
-            <div class="m-faq-item">
-                <h3>Чи гарантує калькулятор точну суму пенсії?</h3>
-                <p>
-                    Ні. Калькулятор дає математичну модель на основі заданої ставки доходності.
-                    У реальному житті доходність може змінюватися, а також можуть бути податки та комісії.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Що означає “очікувана дохідність”?</h3>
-                <p>
-                    Це середній річний відсоток зростання ваших інвестицій. Це прогнозне значення,
-                    яке використовується для моделювання довгострокового результату.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Як впливають щомісячні внески?</h3>
-                <p>
-                    Регулярні внески значно прискорюють зростання капіталу, бо збільшують базу,
-                    на яку нараховуються складні відсотки.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Чому важливо починати раніше?</h3>
-                <p>
-                    Час підсилює ефект компаундингу. Навіть невеликі суми, вкладені рано,
-                    можуть перевищити великі внески, зроблені пізніше.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Чи враховує калькулятор інфляцію?</h3>
-                <p>
-                    Базовий розрахунок показує номінальну суму. Для оцінки реальної купівельної спроможності
-                    варто додатково враховувати інфляцію окремо.
-                </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/finance/compound-interest"><b>Калькулятор складних відсотків</b><span>Ріст накопичень зі складними відсотками й ціль.</span></a>
+                <a class="cc-related-card" href="/finance/inflation-calculator"><b>Калькулятор інфляції</b><span>Реальна вартість грошей за даними Держстату й прогноз.</span></a>
+                <a class="cc-related-card" href="/finance/deposit-calculator"><b>Депозитний калькулятор</b><span>Дохід нетто, податок і ефективна дохідність вкладу.</span></a>
             </div>
         </section>
 
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Як рахується державна пенсія за віком</h2>
+            <p>Пенсія за віком обчислюється за формулою <b>П = Зп × Кс</b>. Зп — це середня зарплата для обчислення пенсій (для нових пенсій 2026 року — 17 482,87 грн за 2023–2025 роки), помножена на ваш коефіцієнт зарплати Кз, тобто на відношення вашої зарплати до середньої по країні. Кс — коефіцієнт стажу: 1% за кожен рік страхового стажу.</p>
+            <p>Для зарплати 30 000 грн (при середній по країні 32 243 грн) і 35 років стажу пенсія вийде приблизно <b>5 693 грн</b>, тобто 19% від зарплати. Для 20 років стажу — 3 253 грн. Пенсія не може бути нижчою за мінімум (2 595 грн) за наявності потрібного стажу й вищою за максимум — 25 950 грн (10 прожиткових мінімумів).</p>
+
+            <h2>Стаж і вік виходу на пенсію</h2>
+            <p>У 2026 році для виходу на пенсію у 60 років потрібно 33 роки страхового стажу (кожен рік вимога зростає на рік до 35 років у 2028-му), у 63 роки — 23 роки (до 25), у 65 років — 15 років. Калькулятор показує, чи вистачить вам стажу для кожного з цих віків у рік, коли ви їх досягнете, і що вам бракує.</p>
+            <p>Це спрощена модель: вона вважає, що ви працюєте без перерв і ваша зарплата лишається такою самою відносно середньої по країні. Реальний коефіцієнт Кз рахується за весь трудовий шлях, а правила можуть змінитися.</p>
+
+            <h2>Власні накопичення та дохід у пенсії</h2>
+            <p>Державна пенсія зазвичай суттєво менша за зарплату, тому потрібні власні накопичення. Якщо відкладати 3 000 грн на місяць зі стартом 200 000 грн, індексацією внесків 5% на рік і дохідністю 12%, то за 30 років набереться <b>23 010 146 грн</b>, але при інфляції 7% це лише <b>3 022 777 грн</b> у сьогоднішніх грошах — тобто 20 260 грн на місяць протягом 20 років пенсії.</p>
+            <p>Раніший старт сильно допомагає: 3 000 грн на місяць при 12% за 35 років дають 19 485 807 грн, а за 25 років — 5 692 905 грн (без інфляції).</p>
+            <p class="pen-mini">Параметри закону — станом на 2026 рік зі вторинних джерел (середня зарплата для пенсій 17 482,87 грн, мінімум 2 595 грн, максимум 25 950 грн); їх можна змінити в полях. Розрахунок орієнтовний.</p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>Часті запитання</h2>
+
+            <div class="cc-faq-item">
+                <h3>Як розрахувати пенсію в Україні?</h3>
+                <p>Оберіть «Державна пенсія», вкажіть вік, вік виходу (60, 63 або 65), стаж і зарплату. Калькулятор рахує П = Зп × Кс. Для зарплати 30 000 грн і 35 років стажу — близько 5 693 грн на місяць (19% від зарплати).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка формула пенсії за віком?</h3>
+                <p>П = Зп × Кс, де Зп = середня зарплата для обчислення пенсій × Кз, Кз — відношення вашої зарплати до середньої по країні, Кс = стаж у роках × 1%. Для нових пенсій 2026 року середня зарплата — 17 482,87 грн (2023–2025 роки).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки потрібно стажу для пенсії?</h3>
+                <p>У 2026 році: 33 роки для виходу у 60 років, 23 роки у 63 роки, 15 років у 65 років. Вимога для 60 років зростає на рік щороку до 35 років у 2028-му, для 63 років — до 25.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка мінімальна і максимальна пенсія?</h3>
+                <p>Мінімальна пенсія за віком — 2 595 грн (дорівнює прожитковому мінімуму для осіб, які втратили працездатність), максимальна — 25 950 грн (10 прожиткових мінімумів). Мінімум застосовується, якщо вистачає потрібного стажу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому пенсія менша за зарплату?</h3>
+                <p>Пенсія залежить від середньої зарплати за останні три роки перед пенсією, а не від вашої, і від стажу: 1% за рік. При зарплаті 30 000 грн і 35 роках стажу пенсія становить 19% від зарплати, тож решту доводиться покривати власними накопиченнями.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке Кз і Кс?</h3>
+                <p>Кз — індивідуальний коефіцієнт зарплати: відношення вашої зарплати до середньої по країні. Кс — коефіцієнт стажу: роки стажу, помножені на 1%. Пенсія — це середня зарплата для обчислення пенсій × Кз × Кс.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки відкладати самостійно?</h3>
+                <p>Режим «Власні накопичення» показує, скільки вийде на пенсії і скільки це на місяць. Наприклад, 3 000 грн на місяць із 12% за 30 років дають 10 589 741 грн (1 391 144 грн у сьогоднішніх грошах при інфляції 7%). Вкажіть бажаний дохід — калькулятор підкаже потрібний внесок.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки відкладати, щоб отримувати 30 000 грн на місяць?</h3>
+                <p>Без державної пенсії, при 12% дохідності й інфляції 7% за 30 років потрібно відкладати близько 9 652 грн на місяць (виплати протягом 20 років, у сьогоднішніх грошах). З державною пенсією потрібний внесок менший: додайте її прапорцем «Додати державну пенсію».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор інфляцію, податки й індексацію пенсій?</h3>
+                <p>Інфляцію так: сума й дохід показуються в сьогоднішніх грошах. Податки, комісії та майбутні зміни пенсійних правил — ні. Державна пенсія вважається в сьогоднішніх цінах, бо її індексують разом із зарплатами.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Наскільки точний калькулятор?</h3>
+                <p>Це орієнтовна оцінка. Реальний Кз рахується за весь трудовий шлях, а пенсійні правила й суми змінюються. Для точної суми скористайтеся калькулятором Пенсійного фонду, а накопичення вважайте прогнозом за вашими припущеннями.</p>
+            </div>
+        </section>
     </main>
 
     <div id="footer"></div>

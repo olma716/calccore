@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Retirement Calculator: savings, contributions, growth chart | CalcCore</title>
+    <title>Pension Calculator Ukraine 2026: State Pension & Savings | CalcCore</title>
     <meta name="description"
-        content="Retirement calculator: age, savings, monthly contributions and expected return. Retirement amount, contributed vs earned, growth chart. USD/EUR with NBU rates." />
+        content="Pension calculator: estimated state pension by experience and salary, minimum and maximum, plus your own savings, inflation, retirement income and the required contribution." />
 
-    <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/finance/pension-calculator" />
-
-    <!-- hreflang (ABSOLUTE + CLEAN URLs) -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/pension-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/pension-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,349 +28,418 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Retirement Calculator: savings, contributions, growth chart" />
-    <meta property="og:description" content="Retirement calculator: age, savings, monthly contributions and expected return. Retirement amount, contributed vs earned, growth chart. USD/EUR with NBU rates." />
+    <meta property="og:title" content="Pension Calculator Ukraine 2026: State Pension & Savings" />
+    <meta property="og:description" content="Pension calculator: estimated state pension by experience and salary, minimum and maximum, plus your own savings, inflation, retirement income and the required contribution." />
     <meta property="og:url" content="https://calccore.net/en/finance/pension-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Retirement Calculator: savings, contributions, growth chart" />
-    <meta name="twitter:description" content="Retirement calculator: age, savings, monthly contributions and expected return. Retirement amount, contributed vs earned, growth chart. USD/EUR with NBU rates." />
+    <meta name="twitter:title" content="Pension Calculator Ukraine 2026: State Pension & Savings" />
+    <meta name="twitter:description" content="Pension calculator: estimated state pension by experience and salary, minimum and maximum, plus your own savings, inflation, retirement income and the required contribution." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/pension-calculator.css" />
+    <link rel="stylesheet" href="/css/pension.css?v=20261022pen11" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/pension-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022pen11" defer></script>
+    <script src="/js/pension-calculator.js?v=20261022pen11" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How does the retirement calculator estimate savings?",
-        "acceptedAnswer":{"@type":"Answer","text":"It uses a compound growth model: returns are applied to the current balance, which includes your starting savings, ongoing contributions, and accumulated returns."}
-      },
-      {
-        "@type":"Question",
-        "name":"What does “expected return” mean?",
-        "acceptedAnswer":{"@type":"Answer","text":"It is an assumed average annual growth rate used for projection. Actual investment performance may differ."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do monthly contributions affect the outcome?",
-        "acceptedAnswer":{"@type":"Answer","text":"Regular contributions increase invested capital and the compounding base, which can significantly raise the final amount over long periods."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does the calculator include inflation, taxes, or fees?",
-        "acceptedAnswer":{"@type":"Answer","text":"The base projection shows nominal growth based on the entered return rate. Inflation, taxes, and fees can affect real results and may need to be considered separately."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is starting early important?",
-        "acceptedAnswer":{"@type":"Answer","text":"More time allows compounding to work longer. Early contributions have more years to grow, so even smaller amounts can become substantial."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/pension-calculator#app",
+  "name": "Pension Calculator",
+  "description": "Calculates the Ukrainian state old-age pension by the formula average wage × Kz × Ke with the minimum and the cap, checks the experience for 60, 63 and 65, and models your own savings with contributions, indexation, inflation, retirement income and the required contribution, with a chart and a table.",
+  "url": "https://calccore.net/en/finance/pension-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "An estimated state pension by experience and salary",
+    "Checks the required experience for retiring at 60, 63 and 65",
+    "Minimum and maximum pension with editable law parameters",
+    "Your own savings with contributions, indexation and return",
+    "The amount in today’s money after inflation",
+    "Retirement income from savings and total income with the state pension",
+    "The monthly contribution required for a desired income",
+    "Chart and table, copy and CSV for Excel; shareable link"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/pension-calculator#app",
-    "name":"Retirement Calculator",
-    "description":"Online retirement calculator: current age, retirement age, current savings, monthly contributions, and expected return. Shows projected savings, a growth chart, and a yearly table.",
-    "url":"https://calccore.net/en/finance/pension-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/finance/pension-calculator#webpage",
+      "url": "https://calccore.net/en/finance/pension-calculator",
+      "name": "Pension Calculator Ukraine 2026: State Pension & Savings | CalcCore",
+      "description": "Pension calculator: estimated state pension by experience and salary, minimum and maximum, plus your own savings, inflation, retirement income and the required contribution.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/pension-calculator#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "en"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/finance/pension-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate a pension in Ukraine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose “State pension”, enter your age, retirement age (60, 63 or 65), experience and salary. The calculator uses P = Wp × Ke. For a salary of 30,000 UAH and 35 years of experience it is about 5,693 UAH per month (19% of the salary)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the formula of the old-age pension?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "P = Wp × Ke, where Wp = the average wage for pensions × Kz, Kz is the ratio of your salary to the national average, and Ke = years of experience × 1%. For new pensions of 2026 the average wage is 17,482.87 UAH (2023–2025)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much experience is needed for a pension?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In 2026: 33 years to retire at 60, 23 years at 63, 15 years at 65. The requirement for 60 grows by a year every year up to 35 in 2028, for 63 up to 25."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the minimum and the maximum pension?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The minimum old-age pension is 2,595 UAH (equal to the subsistence minimum for those who lost working capacity), the maximum is 25,950 UAH (10 subsistence minimums). The minimum applies if the required experience is enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the pension lower than the salary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The pension depends on the average wage of the last three years before retirement, not on yours, and on experience: 1% a year. With a salary of 30,000 UAH and 35 years of experience the pension is 19% of the salary, so the rest has to be covered by your own savings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Kz and Ke?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kz is the individual salary coefficient: the ratio of your salary to the national average. Ke is the experience coefficient: years of experience multiplied by 1%. The pension is the average wage for pensions × Kz × Ke."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I save myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The “Your own savings” mode shows what you accumulate and how much that is per month. For example 3,000 UAH a month at 12% over 30 years gives 10,589,741 UAH (1,391,144 UAH in today’s money at 7% inflation). Enter a desired income — the calculator shows the required contribution."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I save to get 30,000 UAH a month?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Without the state pension, at a 12% return and 7% inflation over 30 years you need to save about 9,652 UAH a month (payouts over 20 years, in today’s money). With the state pension the required contribution is lower: add it with the “Add the state pension” checkbox."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for inflation, taxes and pension indexation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Inflation yes: the amount and income are shown in today’s money. Taxes, fees and future changes of pension rules — no. The state pension is counted in today’s prices because it is indexed together with wages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is an approximate estimate. The real Kz is calculated over the whole career, and the pension rules and amounts change. For an exact amount use the Pension Fund calculator, and treat savings as a forecast under your assumptions."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page cpension">
+<body class="pen-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc cpension" id="cpension">
-            <div class="mcalc__wrap">
+        <section class="pen" id="pen">
+            <div class="pen__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Retirement Calculator</h1>
-                    <p class="mcalc__p">
-                        Estimate how much you can build by retirement: current savings, monthly contributions,
-                        and expected return. Shows final amount, contributed vs earned, and a growth chart.
-                    </p>
+                <div class="pen__titlebar">
+                    <h1 class="pen__h1">Pension Calculator</h1>
+                    <p class="pen__p">Estimate the state pension from your experience and salary and how much to save yourself to get the income you want in retirement.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
-                            NBU rate: loading…
-                        </span>
-                    </div>
+                <div class="pen__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter details</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <div class="pen__card">
+                        <div class="pen__sectionTitle">
+                            <h2 class="pen__h2">Input data</h2>
+                            <div class="pen__dd" id="cur_dd"><button type="button" class="pen__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="pen__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="pen__caret" aria-hidden="true"></span></button><ul class="pen__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="pen__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="pen__ddCode">UAH</span><span class="pen__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="pen__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="pen__ddCode">USD</span><span class="pen__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="pen__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="pen__ddCode">EUR</span><span class="pen__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="ageNow">Current age</label>
-                                <input class="mcalc__input" id="ageNow" type="number" min="0" max="120" step="1"
-                                    placeholder="e.g., 30" />
+                        <div class="pen__block">
+                            <div class="pen__miniTitle">What to calculate</div>
+                            <div class="pen__modes" role="group" aria-label="What to calculate">
+                                <button class="pen__mode is-active" type="button" data-mode="state" aria-pressed="true"><b>State pension</b><span>By experience and your salary</span></button>
+                                <button class="pen__mode" type="button" data-mode="save" aria-pressed="false"><b>Your own savings</b><span>Contributions, return, inflation</span></button>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="ageRetire">Retirement age</label>
-                                <input class="mcalc__input" id="ageRetire" type="number" min="0" max="120" step="1"
-                                    placeholder="e.g., 60" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                            
-                                <label class="mcalc__label" for="savingsNow">
-                                    Current savings
-                                </label>
-                            
-                                <div class="m-invest-line">
-                                    <input class="mcalc__input" id="savingsNow" type="text" inputmode="decimal" placeholder="e.g.: 200 000" />
-                            
-                                    <select id="baseCurrency" class="mcalc__select m-currency-inline">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
+                            <div class="pen__rows">
+                                <div class="pen__field">
+                                    <label class="pen__label" for="age">Age <span class="pen__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pen__input" id="age" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
                                 </div>
-                            
-                                <div class="mcalc__hint">
-                                    Calculations are performed in the selected currency.
-                                </div>
-                            
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="monthlyContrib">Monthly contributions</label>
-                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
-                                    placeholder="e.g., 3 000" />
-                                <div class="mcalc__hint">Added at the beginning of each month.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="annualReturn">Expected return, %</label>
-                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
-                                    placeholder="e.g., 10" />
-                                <div class="mcalc__hint">Average annual return (smoothed monthly compounding model).
+                                <div class="pen__field">
+                                    <label class="pen__label" for="retAge">Retirement age <span class="pen__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pen__input" id="retAge" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 60">
                                 </div>
                             </div>
+                            <div class="pen__qrow pen__mt12"><button type="button" class="pen__qchip" data-ret="60">60 years</button><button type="button" class="pen__qchip" data-ret="63">63 years</button><button type="button" class="pen__qchip" data-ret="65">65 years</button></div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for year labels in the chart.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    
+                            <div id="saveWrap" hidden>
+                                <div class="pen__rows pen__mt12">
+                                    <div class="pen__field pen__field--full">
+                                    <label class="pen__label" for="sum">Savings now</label>
+                                    <input class="pen__input" id="sum" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 200,000">
                                 </div>
-
-                                <div class="mcalc__toast" id="mToast"></div>
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="contrib">Monthly contribution</label>
+                                    <input class="pen__input" id="contrib" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3,000"><div class="pen__hint">Added at the start of every month.</div>
+                                </div>
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="ret">Return, % per year <span class="pen__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pen__input" id="ret" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12"><div class="pen__hint">Average annual, compounded monthly.</div>
+                                </div>
+                                </div>
+                                <details class="pen__details pen__mt12" id="saveMore">
+                                    <summary>Inflation, indexation and a goal <span class="pen__hint">(optional)</span></summary>
+                                    <div class="pen__rows">
+                                        <div class="pen__field pen__field--full">
+                                    <label class="pen__label" for="growth">Contribution indexation, % per year</label>
+                                    <input class="pen__input" id="growth" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="pen__hint">Every year the contribution grows by this percent.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="infl">Inflation, % per year</label>
+                                    <input class="pen__input" id="infl" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 7"><div class="pen__hint">For the amount in today’s money.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="payYears">Payout period, years</label>
+                                    <input class="pen__input" id="payYears" type="text" inputmode="decimal" autocomplete="off" placeholder="20 (default)"><div class="pen__hint">Over how many years savings are spent.</div>
+                                </div>
+                                        <div class="pen__field pen__field--full">
+                                    <label class="pen__label" for="goal">Desired income per month</label>
+                                    <input class="pen__input" id="goal" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30,000"><div class="pen__hint">In today’s money; shows the required contribution.</div>
+                                </div>
+                                    </div>
+                                </details>
+                                <label class="pen__check pen__mt12"><input type="checkbox" id="incl"><span>Add the state pension</span></label>
                             </div>
 
+                            <div id="stateWrap">
+                                <div class="pen__rows pen__mt12">
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="exp">Insurance experience, years <span class="pen__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pen__input" id="exp" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8"><div class="pen__hint">Already earned; until retirement it is counted without gaps.</div>
+                                </div>
+                                    <div class="pen__field">
+                                    <label class="pen__label" for="salary">Salary now, per month <span class="pen__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pen__input" id="salary" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 35,000"><div class="pen__hint">Gross. Compared with the national average.</div>
+                                </div>
+                                </div>
+                                <div class="pen__rows pen__mt12" id="fxWrap" hidden>
+                                    <div class="pen__field pen__field--full">
+                                        <label class="pen__label" for="fx"><span id="fxLabel"></span></label>
+                                        <div class="pen__inwrap"><input class="pen__input" id="fx" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 41"><button type="button" class="pen__qchip pen__qchip--tool" id="fxNbu">Insert NBU rate</button></div>
+                                        <div class="pen__hint">The pension and the law are in hryvnias, so a rate is needed.</div>
+                                    </div>
+                                </div>
+                                <details class="pen__details pen__mt12" id="lawMore">
+                                    <summary>Law parameters <span class="pen__hint">(optional)</span></summary>
+                                    <div class="pen__rows">
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="wageNow">Average wage in the country now</label>
+                                    <input class="pen__input" id="wageNow" type="text" inputmode="decimal" autocomplete="off" placeholder="32,243"><div class="pen__hint">State Statistics Service, July 2026.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawAvg">Average wage for pensions</label>
+                                    <input class="pen__input" id="lawAvg" type="text" inputmode="decimal" autocomplete="off" placeholder="17,482.87"><div class="pen__hint">The 2023–2025 average.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawPct">Value of a year of experience, %</label>
+                                    <input class="pen__input" id="lawPct" type="text" inputmode="decimal" autocomplete="off" placeholder="1"><div class="pen__hint">Normally 1% per year.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawReq">Required experience, years</label>
+                                    <input class="pen__input" id="lawReq" type="text" inputmode="decimal" autocomplete="off" placeholder="auto"><div class="pen__hint">Empty — by age and year of retirement.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawMin">Minimum pension</label>
+                                    <input class="pen__input" id="lawMin" type="text" inputmode="decimal" autocomplete="off" placeholder="2,595"><div class="pen__hint">Equals the subsistence minimum.</div>
+                                </div>
+                                        <div class="pen__field">
+                                    <label class="pen__label" for="lawMax">Maximum pension</label>
+                                    <input class="pen__input" id="lawMax" type="text" inputmode="decimal" autocomplete="off" placeholder="25,950"><div class="pen__hint">10 subsistence minimums.</div>
+                                </div>
+                                    </div>
+                                </details>
+                            </div>
                         </div>
+
+                        <div class="pen__actions pen__mt12">
+                            <button class="pen__btn pen__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="pen__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="pen__card">
+                        <div class="pen__sectionTitle">
+                            <h2 class="pen__h2">Result</h2>
+                            <span class="pen__badge">%</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter ages, amount, and expected return.
+                        <div class="pen__result" id="result">Fill in the fields — the result will appear here.</div>
+                        <div class="pen__actions pen__mt12">
+                            <button class="pen__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="pen__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="pen__btn" id="resetBtn" type="button">Reset</button>
                         </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Retirement savings growth</div>
-
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                            </div>
-
-                            <canvas id="growthChart" width="900" height="280"
-                                aria-label="Retirement savings chart"></canvas>
-                            <div class="m-hintSmall">
-                                The line shows the end-of-year balance up to retirement.
-                            </div>
-                        </div>
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Yearly table <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-                        
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                        
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download CSV</button>
-                            </div>
-                        
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Retirement yearly table">
-                                    <thead>
-                                        <tr>
-                                            <th>Year</th>
-                                            <th>Age</th>
-                                            <th>Date</th>
-                                            <th>Contributed (₴)</th>
-                                            <th>Earned (₴)</th>
-                                            <th>Balance (₴)</th>
-                                            <th>Earned, %</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                        </div>
-
+                        <div class="m-navlinks pen__mt12"><a class="pen__link" href="/en/finance/compound-interest">Compound interest →</a> <a class="pen__link" href="/en/finance/inflation-calculator">Inflation calculator →</a></div>
                     </div>
+                </div>
 
+                <div class="pen__card pen__schedule" id="schedule" hidden>
+                    <div class="pen__schedHead">
+                        <h2 class="pen__h2">Table</h2>
+                        <div class="pen__tools">
+                            <button type="button" class="pen__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="pen__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="pen__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-    <div class="m-divider"></div>
-    
-    <section class="m-seo">
-        <h2>How does the retirement calculator work?</h2>
-        <p>
-            The CalcCore retirement calculator estimates how much you could accumulate by retirement age.
-            It uses a <b>compound growth model</b>, where returns are applied to your current savings,
-            monthly contributions, and previously earned returns.
-        </p>
-        <p>
-            You enter your <b>current age</b>, <b>retirement age</b>, <b>current savings</b>,
-            <b>monthly contributions</b>, and <b>expected return</b>.
-            The calculator projects how your balance may grow year by year until retirement.
-        </p>
-    
-        <h2>Compound interest and long-term growth</h2>
-        <p>
-            Time is the key factor. The earlier you start saving, the stronger the effect of compounding:
-            returns generate additional returns over time.
-            Even small regular contributions can grow significantly over decades.
-        </p>
-    
-        <h2>What do the chart and yearly table show?</h2>
-        <p>
-            The chart displays retirement savings growth over time.
-            The yearly table shows the end-of-year balance, total contributions, and total earnings,
-            helping you understand how savings evolve.
-        </p>
-    
-        <h2>Why use a retirement calculator?</h2>
-        <p>
-            It helps with financial planning: you can see whether your current savings strategy
-            is enough to reach your goal and how changes in contributions or return rate affect the future result.
-        </p>
-    </section>
-    
-    <section class="m-faq">
-        <h2>FAQ</h2>
-    
-        <div class="m-faq-item">
-            <h3>Does the calculator guarantee my retirement amount?</h3>
-            <p>
-                No. It provides a projection based on an assumed return rate.
-                Real investment performance may vary, and fees or taxes can apply.
-            </p>
-        </div>
-    
-        <div class="m-faq-item">
-            <h3>What does “expected return” mean?</h3>
-            <p>
-                It is the average annual growth rate used to model long-term performance.
-                It represents an estimate, not a guaranteed rate.
-            </p>
-        </div>
-    
-        <div class="m-faq-item">
-            <h3>How do monthly contributions affect results?</h3>
-            <p>
-                Regular contributions increase the principal over time,
-                which increases the base for compound growth.
-            </p>
-        </div>
-    
-        <div class="m-faq-item">
-            <h3>Why is starting early important?</h3>
-            <p>
-                More time means compounding has longer to work.
-                Early investments can outperform larger contributions made later.
-            </p>
-        </div>
-    
-        <div class="m-faq-item">
-            <h3>Does this include inflation?</h3>
-            <p>
-                The base calculation shows nominal values.
-                To estimate real purchasing power, inflation should be considered separately.
-            </p>
-        </div>
-    </section>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/compound-interest"><b>Compound interest calculator</b><span>Growth of savings with compound interest and a goal.</span></a>
+                <a class="cc-related-card" href="/en/finance/inflation-calculator"><b>Inflation calculator</b><span>The real value of money by official data and a forecast.</span></a>
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Net income, tax and effective yield of a deposit.</span></a>
+            </div>
+        </section>
 
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How the state old-age pension is calculated</h2>
+            <p>The old-age pension is calculated by the formula <b>P = Wp × Ke</b>. Wp is the average wage for pensions (17,482.87 UAH for new pensions of 2026, the 2023–2025 average) multiplied by your salary coefficient Kz, that is by the ratio of your salary to the national average. Ke is the experience coefficient: 1% for each year of insurance experience.</p>
+            <p>For a salary of 30,000 UAH (with a national average of 32,243 UAH) and 35 years of experience the pension comes to about <b>5,693 UAH</b>, which is 19% of the salary. For 20 years of experience it is 3,253 UAH. With the required experience the pension cannot be below the minimum (2,595 UAH) or above the maximum of 25,950 UAH (10 subsistence minimums).</p>
+
+            <h2>Experience and retirement age</h2>
+            <p>In 2026 retiring at 60 requires 33 years of insurance experience (the requirement grows by a year every year up to 35 in 2028), at 63 — 23 years (up to 25), at 65 — 15 years. The calculator shows whether your experience is enough for each of these ages in the year you reach them and what you are short of.</p>
+            <p>This is a simplified model: it assumes you work without breaks and your salary stays the same relative to the national average. The real coefficient Kz is calculated over the whole career, and the rules may change.</p>
+
+            <h2>Your own savings and retirement income</h2>
+            <p>The state pension is usually much lower than the salary, so own savings are needed. If you save 3,000 UAH a month with 200,000 UAH at the start, a 5% yearly indexation of contributions and a 12% return, in 30 years you accumulate <b>23,010,146 UAH</b>, but with 7% inflation that is only <b>3,022,777 UAH</b> in today’s money — about 20,260 UAH a month over 20 years of retirement.</p>
+            <p>An earlier start helps a lot: 3,000 UAH a month at 12% over 35 years gives 19,485,807 UAH, and over 25 years 5,692,905 UAH (without inflation).</p>
+            <p class="pen-mini">The law parameters are as of 2026 from secondary sources (average wage for pensions 17,482.87 UAH, minimum 2,595 UAH, maximum 25,950 UAH); you can change them in the fields. The calculation is approximate.</p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate a pension in Ukraine?</h3>
+                <p>Choose “State pension”, enter your age, retirement age (60, 63 or 65), experience and salary. The calculator uses P = Wp × Ke. For a salary of 30,000 UAH and 35 years of experience it is about 5,693 UAH per month (19% of the salary).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the formula of the old-age pension?</h3>
+                <p>P = Wp × Ke, where Wp = the average wage for pensions × Kz, Kz is the ratio of your salary to the national average, and Ke = years of experience × 1%. For new pensions of 2026 the average wage is 17,482.87 UAH (2023–2025).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much experience is needed for a pension?</h3>
+                <p>In 2026: 33 years to retire at 60, 23 years at 63, 15 years at 65. The requirement for 60 grows by a year every year up to 35 in 2028, for 63 up to 25.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are the minimum and the maximum pension?</h3>
+                <p>The minimum old-age pension is 2,595 UAH (equal to the subsistence minimum for those who lost working capacity), the maximum is 25,950 UAH (10 subsistence minimums). The minimum applies if the required experience is enough.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is the pension lower than the salary?</h3>
+                <p>The pension depends on the average wage of the last three years before retirement, not on yours, and on experience: 1% a year. With a salary of 30,000 UAH and 35 years of experience the pension is 19% of the salary, so the rest has to be covered by your own savings.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are Kz and Ke?</h3>
+                <p>Kz is the individual salary coefficient: the ratio of your salary to the national average. Ke is the experience coefficient: years of experience multiplied by 1%. The pension is the average wage for pensions × Kz × Ke.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much should I save myself?</h3>
+                <p>The “Your own savings” mode shows what you accumulate and how much that is per month. For example 3,000 UAH a month at 12% over 30 years gives 10,589,741 UAH (1,391,144 UAH in today’s money at 7% inflation). Enter a desired income — the calculator shows the required contribution.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much should I save to get 30,000 UAH a month?</h3>
+                <p>Without the state pension, at a 12% return and 7% inflation over 30 years you need to save about 9,652 UAH a month (payouts over 20 years, in today’s money). With the state pension the required contribution is lower: add it with the “Add the state pension” checkbox.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for inflation, taxes and pension indexation?</h3>
+                <p>Inflation yes: the amount and income are shown in today’s money. Taxes, fees and future changes of pension rules — no. The state pension is counted in today’s prices because it is indexed together with wages.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How accurate is the calculator?</h3>
+                <p>It is an approximate estimate. The real Kz is calculated over the whole career, and the pension rules and amounts change. For an exact amount use the Pension Fund calculator, and treat savings as a forecast under your assumptions.</p>
+            </div>
+        </section>
     </main>
 
     <div id="footer"></div>
