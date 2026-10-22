@@ -369,64 +369,6 @@
         },
       
 
-      roi: {
-          nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-          nbu_title: "Курс НБУ (USD/EUR)",
-          nbu_unavailable: "Курс НБУ: недоступно",
-
-          toast_enter_values: "Введи суму інвестиції та період.",
-          result_enter_values: "Введи суму інвестиції, дохідність та період.",
-          toast_reset: "Скинуто.",
-          toast_need_calc_first: "Спочатку зроби розрахунок.",
-          copied_result: "Скопійовано результат.",
-          copy_failed: "Не вдалося скопіювати.",
-          toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-
-          main: "ROI",
-          final: "Підсумкова сума",
-          kpi_roi: "ROI",
-          kpi_roi_hint: "Прибуток / внесли",
-          kpi_profit: "Чистий прибуток",
-          kpi_profit_pct: "У % до внесків",
-          kpi_contributed: "Внесли",
-          kpi_contributed_hint: "Початкова сума + внески",
-          kpi_final: "Підсумкова сума",
-          kpi_final_hint: "Баланс наприкінці періоду",
-          summary: "Внесли та заробили",
-          summary_hint: "Графік показує баланс наприкінці кожного року. Валюту можна перемкнути на USD/EUR (курс НБУ).",
-          chart_need_data: "Зроби розрахунок, щоб побачити графік.",
-          copied_table: "Скопійовано таблицю.",
-          copy_table_failed: "Не вдалося скопіювати таблицю.",
-          csv_downloaded: "CSV завантажено.",
-          main: "ROI",
-        final: "Підсумкова сума",
-        toast_enter_values: "Введи суму інвестиції та період.",
-        result_enter_values: "Введи суму інвестиції, дохідність і період.",
-        toast_reset: "Скинуто.",
-        toast_need_calc_first: "Спочатку зроби розрахунок.",
-        copy_failed: "Не вдалося скопіювати результат.",
-
-        chart_need_data: "Зроби розрахунок, щоб побачити графік.",
-
-        nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-        nbu_title: "Курс НБУ (USD/EUR)",
-        nbu_unavailable: "Курс НБУ: недоступно",
-        toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-
-        kpi_roi: "ROI",
-        kpi_roi_hint: "Прибуток / внески",
-
-        kpi_profit: "Чистий прибуток",
-        kpi_profit_pct: "% від внесків",
-
-        kpi_contributed: "Внесли",
-        kpi_contributed_hint: "Початкова сума + внески",
-
-        kpi_final: "Підсумкова сума",
-        kpi_final_hint: "Баланс наприкінці періоду",
-
-        summary: "Внесли та заробили",
-        },
 
 
       percent: {
@@ -1407,65 +1349,6 @@ steel: {
 
 
 
-      roi: {
-  nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "NBU rate (USD/EUR)",
-  nbu_unavailable: "NBU rate: unavailable",
-
-  toast_enter_values: "Enter investment amount and period.",
-  result_enter_values: "Enter investment amount, expected return, and period.",
-  toast_reset: "Reset.",
-  toast_need_calc_first: "Calculate first.",
-  copied_result: "Result copied.",
-  copy_failed: "Copy failed.",
-  toast_nbu_not_loaded_fallback: "NBU rate didn’t load — showing UAH.",
-
-  main: "ROI",
-  final: "Final amount",
-  kpi_roi: "ROI",
-  kpi_roi_hint: "Profit / contributed",
-  kpi_profit: "Net profit",
-  kpi_profit_pct: "% of contributed",
-  kpi_contributed: "Contributed",
-  kpi_contributed_hint: "Initial + contributions",
-  kpi_final: "Final amount",
-  kpi_final_hint: "End-of-period balance",
-  summary: "Contributed and earned",
-  summary_hint: "Chart shows end-of-year balance. Currency can be switched to USD/EUR (NBU rate).",
-  chart_need_data: "Run the calculation to see the chart.",
-  copied_table: "Table copied.",
-  copy_table_failed: "Failed to copy table.",
-  csv_downloaded: "CSV downloaded.",
-  main: "ROI",
-  final: "Final amount",
-
-    toast_enter_values: "Enter investment amount and period.",
-    result_enter_values: "Enter investment amount, expected return, and period.",
-    toast_reset: "Reset.",
-    toast_need_calc_first: "Calculate first.",
-    copy_failed: "Failed to copy result.",
-
-    chart_need_data: "Run the calculation to see the chart.",
-
-    nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-    nbu_title: "NBU rate (USD/EUR)",
-    nbu_unavailable: "NBU rate: unavailable",
-    toast_nbu_not_loaded_fallback: "NBU rate didn’t load — showing UAH.",
-
-    kpi_roi: "ROI",
-    kpi_roi_hint: "Profit / contributed",
-
-    kpi_profit: "Net profit",
-    kpi_profit_pct: "% of contributed",
-
-    kpi_contributed: "Contributed",
-    kpi_contributed_hint: "Initial + contributions",
-
-    kpi_final: "Final amount",
-    kpi_final_hint: "End-of-period balance",
-
-    summary: "Contributed and earned",
-},
 
 
 

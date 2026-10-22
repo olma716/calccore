@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>ROI Calculator: return, net profit and growth chart | CalcCore</title>
+    <title>ROI Calculator 2026: Investment Return & Annual Yield | CalcCore</title>
     <meta name="description"
-        content="CalcCore ROI calculator: investment amount, expected annual return, years, monthly contributions. Results: ROI%, net profit, final amount, growth chart. Explanations and FAQ." />
+        content="ROI calculator: investment return after fees, income and tax, annual return (CAGR), real return after inflation, the return needed for a goal and a comparison of investments." />
 
-    <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/finance/roi-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/roi-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/roi-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,327 +28,443 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="ROI Calculator: return, net profit and growth chart" />
-    <meta property="og:description" content="CalcCore ROI calculator: investment amount, expected annual return, years, monthly contributions. Results: ROI%, net profit, final amount, growth chart. Explanations and FAQ." />
+    <meta property="og:title" content="ROI Calculator 2026: Investment Return & Annual Yield" />
+    <meta property="og:description" content="ROI calculator: investment return after fees, income and tax, annual return (CAGR), real return after inflation, the return needed for a goal and a comparison of investments." />
     <meta property="og:url" content="https://calccore.net/en/finance/roi-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ROI Calculator: return, net profit and growth chart" />
-    <meta name="twitter:description" content="CalcCore ROI calculator: investment amount, expected annual return, years, monthly contributions. Results: ROI%, net profit, final amount, growth chart. Explanations and FAQ." />
+    <meta name="twitter:title" content="ROI Calculator 2026: Investment Return & Annual Yield" />
+    <meta name="twitter:description" content="ROI calculator: investment return after fees, income and tax, annual return (CAGR), real return after inflation, the return needed for a goal and a comparison of investments." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/roi-calculator.css" />
+    <link rel="stylesheet" href="/css/roi.css?v=20261022roi2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/roi-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022roi2" defer></script>
+    <script src="/js/roi-calculator.js?v=20261022roi2" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is ROI and how do you calculate it?",
-        "acceptedAnswer":{"@type":"Answer","text":"ROI (Return on Investment) measures investment profitability as a percentage. A common formula is (net profit / investment amount) × 100%."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is the difference between ROI and profit?",
-        "acceptedAnswer":{"@type":"Answer","text":"Profit is the money you gain. ROI expresses that gain as a percentage of the amount invested, which makes comparisons easier."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do additional contributions affect the result?",
-        "acceptedAnswer":{"@type":"Answer","text":"Additional contributions increase total invested capital and the growth base, so final value and profit may be higher. ROI depends on the relationship between total growth and total contributions."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why can results differ from real investing outcomes?",
-        "acceptedAnswer":{"@type":"Answer","text":"The calculator uses a simplified model with an assumed average return. Real investments may include fees, taxes, variable returns, and risk."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/roi-calculator#app",
+  "name": "ROI Calculator",
+  "description": "Calculates the ROI of an investment with income, costs, fee and tax, the annual return (CAGR) and the real return after inflation, the return needed for a goal with monthly contributions, and a comparison of 2–3 investments, with a chart and a table.",
+  "url": "https://calccore.net/en/finance/roi-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "ROI before and after costs, fee and tax",
+    "Annual return (CAGR) and real return after inflation",
+    "A chart from the sale to the net profit, break-even price",
+    "The annual return needed for a goal, including monthly contributions",
+    "A comparison of 2–3 investments by ROI and annual return",
+    "UAH, USD and EUR currencies; shareable link",
+    "Table, copy and CSV for Excel"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/roi-calculator#app",
-    "name":"Investment ROI Calculator",
-    "description":"Online ROI calculator: investment amount, expected return, time period, and additional contributions. Shows ROI %, net profit, and a growth chart.",
-    "url":"https://calccore.net/en/finance/roi-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/finance/roi-calculator#webpage",
+      "url": "https://calccore.net/en/finance/roi-calculator",
+      "name": "ROI Calculator 2026: Investment Return & Annual Yield | CalcCore",
+      "description": "ROI calculator: investment return after fees, income and tax, annual return (CAGR), real return after inflation, the return needed for a goal and a comparison of investments.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/roi-calculator#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "en"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/finance/roi-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the ROI of an investment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ROI = (value + income − invested) ÷ invested × 100%. For 100,000 UAH that became 150,000 UAH the ROI is 50%. The calculator also shows the net ROI after costs, fee and tax."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is ROI different from the annual return?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ROI shows the total result without time, while the annual return (CAGR) is the average yearly growth. 50% in 3 years is 14.5% a year, and 50% in 1 year is 50% a year."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I account for fees and tax?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the costs, the sale fee and the tax on profit. Example: 100,000 → 150,000 UAH in 3 years with income of 5,000, costs of 1,000, a 1% fee and 23% tax gives a net profit of 40,425 UAH and a net ROI of 40.0%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What tax applies to investment profit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For selling assets individuals usually pay 18% personal income tax and a 5% military levy, 23% in total; dividends and some other kinds of income have other rates. The calculator uses the rate you enter and does not charge tax on a loss."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What return do I need to double my money?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About 7.2% a year over 10 years, 14.9% over 5 years, 26.0% over 3 years. The “Required return” mode with a 100% ROI shows it for your term."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I compare several investments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the “Comparison” mode enter the invested amount, the final value and the term for each. The calculator shows the ROI and the annual return and highlights the best by annual return: in our example it is C (18.0%) against 14.0% and 8.4%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the real return?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the return after inflation: (1 + annual return) ÷ (1 + inflation) − 1. With a net annual 11.9% and 8% inflation the real return is 3.6%. A total ROI of 50% in 3 years with 8% inflation is only 19.1% in real money."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What return do I need to accumulate 1,000,000 UAH?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From 100,000 UAH with 3,000 UAH contributed a month over 10 years you need about 12.3% a year. Change the initial amount, the contributions and the term in the “Required return” mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is ROI not always a good measure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ROI ignores time, risk and the timing of income. A high ROI over a long time may be weak per year, and a risky investment may lose to a safe one. Compare the annual return and judge the risk separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a simple model: income is counted at the end of the period, so the annual return is approximate; an exact calculation by payment dates gives IRR. The result depends on your assumptions about costs and tax, so it is an estimate, not a guarantee."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page croi">
+<body class="roi-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc croi" id="croi">
-            <div class="mcalc__wrap">
+        <section class="roi" id="roi">
+            <div class="roi__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Investment ROI Calculator</h1>
-                    <p class="mcalc__p">
-                        Estimate your potential investment outcome: ROI %, net profit, final amount,
-                        and a growth chart with optional monthly contributions.
-                    </p>
+                <div class="roi__titlebar">
+                    <h1 class="roi__h1">ROI Calculator</h1>
+                    <p class="roi__p">Work out the ROI and the net profit after costs and tax, find the annual return needed for a goal, or compare several investments.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
-                            NBU rate: loading…
-                        </span>
-                    </div>
+                <div class="roi__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter details</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <div class="roi__card">
+                        <div class="roi__sectionTitle">
+                            <h2 class="roi__h2">Input data</h2>
+                            <div class="roi__dd" id="cur_dd"><button type="button" class="roi__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="roi__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="roi__caret" aria-hidden="true"></span></button><ul class="roi__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="roi__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="roi__ddCode">UAH</span><span class="roi__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="roi__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="roi__ddCode">USD</span><span class="roi__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="roi__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="roi__ddCode">EUR</span><span class="roi__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field"> <label class="mcalc__label" for="investAmount">Investment amount</label> <input
-                                    class="mcalc__input" id="investAmount" type="text" inputmode="decimal" placeholder="e.g.: 100 000" />
-                                <div class="mcalc__hint">Calculations are performed in the selected currency.</div>
-                            </div>
-                            <div class="mcalc__field"> <label class="mcalc__label" for="baseCurrency">Currency</label> <select
-                                    class="mcalc__select mcalc__select--half" id="baseCurrency">
-                                    <option value="UAH" selected>UAH ₴</option>
-                                    <option value="USD">USD $</option>
-                                    <option value="EUR">EUR €</option>
-                                </select> </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="annualReturn">Expected return, %</label>
-                                <input class="mcalc__input" id="annualReturn" type="text" inputmode="decimal"
-                                    placeholder="e.g., 12" />
-                                <div class="mcalc__hint">Average annual return (smoothed monthly growth model).</div>
+                        <div class="roi__block">
+                            <div class="roi__miniTitle">What to calculate</div>
+                            <div class="roi__modes" role="group" aria-label="What to calculate">
+                                <button class="roi__mode is-active" type="button" data-mode="roi" aria-pressed="true"><b>Investment ROI</b><span>Profit, costs, tax</span></button>
+                                <button class="roi__mode" type="button" data-mode="need" aria-pressed="false"><b>Required return</b><span>Which rate leads to a goal</span></button>
+                                <button class="roi__mode" type="button" data-mode="cmp" aria-pressed="false"><b>Comparison</b><span>2–3 investments</span></button>
                             </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="years">Period (years)</label>
-                                <input class="mcalc__input" id="years" type="number" min="1" step="1"
-                                    placeholder="e.g., 10" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="monthlyContrib">Additional contributions
-                                    (monthly)</label>
-                                <input class="mcalc__input" id="monthlyContrib" type="text" inputmode="decimal"
-                                    placeholder="e.g., 2 000" />
-                                <div class="mcalc__hint">Added at the beginning of each month (DCA-style).</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for year labels in the chart.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    
+                            <div id="roiWrap">
+                                <div class="roi__rows">
+                                    <div class="roi__field roi__field--full">
+                                    <label class="roi__label" for="invest">Invested <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="invest" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000"><div class="roi__hint">What you bought or put in.</div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                    <div class="roi__field roi__field--full">
+                                    <label class="roi__label" for="value">Current or final value <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="value" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 150,000"><div class="roi__hint">What it is worth now or what you sold it for.</div>
+                                </div>
+                                </div>
                             </div>
 
+                            <div id="needWrap" hidden>
+                                <div class="roi__rows">
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="ni">Initial amount <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="ni" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000">
+                                </div>
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="nc">Monthly contribution</label>
+                                    <input class="roi__input" id="nc" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3,000"><div class="roi__hint">At the start of every month.</div>
+                                </div>
+                                </div>
+                                <div class="roi__qrow roi__mt12"><button type="button" class="roi__qchip is-on" data-tgt="amount" aria-pressed="true">Goal — amount</button><button type="button" class="roi__qchip" data-tgt="roi" aria-pressed="false">Goal — ROI</button></div>
+                                <div class="roi__rows roi__mt12">
+                                    <div class="roi__field roi__field--full" id="ngField">
+                                    <label class="roi__label" for="ng">Target amount <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="ng" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,000,000"><div class="roi__hint">What you want to have in the end.</div>
+                                </div>
+                                    <div class="roi__field roi__field--full" id="nrField" hidden>
+                                    <label class="roi__label" for="nr">Target ROI, % <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="nr" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100"><div class="roi__hint">Profit to invested; 100% — doubling.</div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div id="perWrap">
+                                <div class="roi__rows roi__mt12">
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="years">Term, years <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="years" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3">
+                                </div>
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="months">and months</label>
+                                    <input class="roi__input" id="months" type="text" inputmode="decimal" autocomplete="off" placeholder="0–11">
+                                </div>
+                                </div>
+                            </div>
+
+                            <div id="moreWrap">
+                                <details class="roi__details roi__mt12" id="moreDet">
+                                    <summary>Income, costs, tax, inflation <span class="roi__hint">(optional)</span></summary>
+                                    <div class="roi__rows">
+                                        <div class="roi__field">
+                                    <label class="roi__label" for="income">Income over the period</label>
+                                    <input class="roi__input" id="income" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5,000"><div class="roi__hint">Dividends, interest, rent — in total.</div>
+                                </div>
+                                        <div class="roi__field">
+                                    <label class="roi__label" for="costs">Costs</label>
+                                    <input class="roi__input" id="costs" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,000"><div class="roi__hint">Purchase fees, maintenance, repairs.</div>
+                                </div>
+                                        <div class="roi__field">
+                                    <label class="roi__label" for="fee">Sale fee, %</label>
+                                    <input class="roi__input" id="fee" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1"><div class="roi__hint">Of the sale value.</div>
+                                </div>
+                                        <div class="roi__field">
+                                    <label class="roi__label" for="infl">Inflation, % per year</label>
+                                    <input class="roi__input" id="infl" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8"><div class="roi__hint">For the real return.</div>
+                                </div>
+                                        <div class="roi__field roi__field--full">
+                                    <label class="roi__label" for="tax">Tax on profit, %</label>
+                                    <input class="roi__input" id="tax" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 23"><div class="roi__hint">For selling assets usually 18% personal income tax + 5% military levy; check your own case.</div>
+                                </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div id="cmpWrap" hidden>
+                                <div class="roi__miniTitle roi__mt12">Investment A</div>
+                                <div class="roi__rows">
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="ciA">Invested <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="ciA" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000">
+                                </div>
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="cfA">Final value <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="cfA" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 150,000">
+                                </div>
+                                    <div class="roi__field roi__field--full">
+                                    <label class="roi__label" for="cyA">Term, years <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="cyA" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.5">
+                                </div>
+                                </div>
+                                <div class="roi__miniTitle roi__mt12">Investment B</div>
+                                <div class="roi__rows">
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="ciB">Invested <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="ciB" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000">
+                                </div>
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="cfB">Final value <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="cfB" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 150,000">
+                                </div>
+                                    <div class="roi__field roi__field--full">
+                                    <label class="roi__label" for="cyB">Term, years <span class="roi__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="roi__input" id="cyB" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.5">
+                                </div>
+                                </div>
+                                <div class="roi__miniTitle roi__mt12">Investment C</div>
+                                <div class="roi__rows">
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="ciC">Invested</label>
+                                    <input class="roi__input" id="ciC" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 100,000">
+                                </div>
+                                    <div class="roi__field">
+                                    <label class="roi__label" for="cfC">Final value</label>
+                                    <input class="roi__input" id="cfC" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 150,000">
+                                </div>
+                                    <div class="roi__field roi__field--full">
+                                    <label class="roi__label" for="cyC">Term, years</label>
+                                    <input class="roi__input" id="cyC" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.5">
+                                </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="roi__actions roi__mt12">
+                            <button class="roi__btn roi__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="roi__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="roi__card">
+                        <div class="roi__sectionTitle">
+                            <h2 class="roi__h2">Result</h2>
+                            <span class="roi__badge">%</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter investment amount, return, and period.
+                        <div class="roi__result" id="result">Fill in the fields — the result will appear here.</div>
+                        <div class="roi__actions roi__mt12">
+                            <button class="roi__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="roi__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="roi__btn" id="resetBtn" type="button">Reset</button>
                         </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Growth chart</div>
-
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="chartCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                            </div>
-
-                            <canvas id="growthChart" width="900" height="280"
-                                aria-label="Investment growth chart"></canvas>
-                            <div class="m-hintSmall">
-                                The line shows the end-of-year balance (monthly growth model).
-                            </div>
-                        </div>
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Yearly table <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-                        
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-                        
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download CSV</button>
-                            </div>
-                        
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="ROI yearly table">
-                                    <thead>
-                                        <tr>
-                                            <th>Year</th>
-                                            <th>Date</th>
-                                            <th>Contributed (₴)</th>
-                                            <th>Profit (₴)</th>
-                                            <th>Balance (₴)</th>
-                                            <th>ROI, %</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                        </div>
-
+                        <div class="m-navlinks roi__mt12"><a class="roi__link" href="/en/finance/compound-interest">Compound interest →</a> <a class="roi__link" href="/en/finance/inflation-calculator">Inflation calculator →</a></div>
                     </div>
+                </div>
 
+                <div class="roi__card roi__schedule" id="schedule" hidden>
+                    <div class="roi__schedHead">
+                        <h2 class="roi__h2">Table</h2>
+                        <div class="roi__tools">
+                            <button type="button" class="roi__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="roi__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="roi__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>What is ROI and how does this calculator work?</h2>
-            <p>
-                <b>ROI (Return on Investment)</b> shows how much profit you earn relative to the total amount you
-                invested.
-                It’s a quick way to compare scenarios: higher ROI means a larger return per invested unit.
-            </p>
-            <p>
-                This calculator estimates investment growth using a <b>smoothed monthly return model</b> (compound
-                growth),
-                with optional <b>monthly contributions</b> (DCA). Each month your balance increases by a fraction of the
-                annual
-                expected return, and contributions expand the base that compounds going forward.
-            </p>
-
-            <h2>What results do you get?</h2>
-            <ul>
-                <li><b>Final amount</b> — the estimated end balance after the selected period.</li>
-                <li><b>Net profit</b> — final amount minus total contributed (initial + contributions).</li>
-                <li><b>ROI %</b> — profit as a percentage of total contributed: <b>(profit / contributed) × 100%</b>.
-                </li>
-                <li><b>Growth chart</b> — yearly snapshots of the balance to visualize time + contributions impact.</li>
-            </ul>
-
-            <h2>Important limitations</h2>
-            <p>
-                Real investments do not grow smoothly: returns fluctuate, and fees/taxes may apply. This calculator is
-                an
-                educational planning estimate, not a guaranteed outcome.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/compound-interest"><b>Compound interest calculator</b><span>Money growth with compound interest, tax and a goal.</span></a>
+                <a class="cc-related-card" href="/en/finance/inflation-calculator"><b>Inflation calculator</b><span>The real value of money by official data and a forecast.</span></a>
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Net income, tax and effective yield of a deposit.</span></a>
+            </div>
         </section>
 
-        <!-- FAQ -->
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What ROI is and how to calculate it</h2>
+            <p><b>ROI (Return on Investment)</b> is the profit relative to the money invested: <b>ROI = (value + income − invested) ÷ invested × 100%</b>. If you bought for 100,000 UAH and it is now worth 150,000 UAH, the ROI is 50%.</p>
+            <p>The calculator also gives the <b>net ROI</b>: after the sale fee, costs and tax. For an example where 100,000 UAH became 150,000 UAH in 3 years with income of 5,000, costs of 1,000, a 1% fee and 23% tax, the ROI before costs is 55% and the net ROI is <b>40.0%</b> (a net profit of 40,425 UAH).</p>
+
+            <h2>Why the annual return matters</h2>
+            <p>ROI ignores time: 50% in a year and 50% in 5 years are very different results. So the calculator shows the <b>annual return (CAGR)</b>: 50% in 3 years is 14.5% a year, and in the example above the net annual return is 11.9%, and after 8% inflation 3.6%.</p>
+            <p>That is why compare investments by the annual return: A (100,000 → 130,000 in 2 years) has an ROI of 30% and 14.0% a year, B (100,000 → 150,000 in 5 years) an ROI of 50% but only 8.4% a year, and C (100,000 → 118,000 in a year) 18.0%.</p>
+
+            <h2>The return needed for a goal</h2>
+            <p>The “Required return” mode solves the reverse problem: which average annual rate you need to reach a goal in a given time. To turn 100,000 UAH with 3,000 UAH contributed a month into 1,000,000 UAH in 10 years you need about <b>12.3%</b> a year.</p>
+            <p>To double the money in 10 years you need 7.2% a year (the “rule of 72”: 72 ÷ 10 ≈ 7.2%).</p>
+            <p class="roi-mini">The calculator does not account for risk or the exact payment dates: income is counted at the end of the period. Tax and fee rates are set by you; for selling assets it is usually 18% personal income tax + 5% military levy, but check your own case.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Is ROI the same as annual return?</h3>
-                <p>
-                    No. Annual return is an assumed average yearly rate, while ROI is the total return across the whole
-                    period
-                    relative to the invested amount.
-                </p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the ROI of an investment?</h3>
+                <p>ROI = (value + income − invested) ÷ invested × 100%. For 100,000 UAH that became 150,000 UAH the ROI is 50%. The calculator also shows the net ROI after costs, fee and tax.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How are monthly contributions applied?</h3>
-                <p>
-                    Contributions are added at the beginning of each month. Then the updated balance grows according to
-                    the
-                    monthly portion of the expected annual return.
-                </p>
+            <div class="cc-faq-item">
+                <h3>How is ROI different from the annual return?</h3>
+                <p>ROI shows the total result without time, while the annual return (CAGR) is the average yearly growth. 50% in 3 years is 14.5% a year, and 50% in 1 year is 50% a year.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why does the chart show yearly values?</h3>
-                <p>
-                    Yearly snapshots are easier to read for long horizons. Internally, the model compounds monthly, but
-                    the chart
-                    displays end-of-year points for clarity.
-                </p>
+            <div class="cc-faq-item">
+                <h3>How do I account for fees and tax?</h3>
+                <p>Enter the costs, the sale fee and the tax on profit. Example: 100,000 → 150,000 UAH in 3 years with income of 5,000, costs of 1,000, a 1% fee and 23% tax gives a net profit of 40,425 UAH and a net ROI of 40.0%.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Does this include fees and taxes?</h3>
-                <p>
-                    No. This is a basic ROI estimate. Fees and taxes can materially reduce net returns, especially over
-                    long
-                    periods.
-                </p>
+            <div class="cc-faq-item">
+                <h3>What tax applies to investment profit?</h3>
+                <p>For selling assets individuals usually pay 18% personal income tax and a 5% military levy, 23% in total; dividends and some other kinds of income have other rates. The calculator uses the rate you enter and does not charge tax on a loss.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why might results differ from a broker or bank?</h3>
-                <p>
-                    Differences may come from real-world volatility, exact contribution dates, rounding, fees, taxes,
-                    and the
-                    specific product rules.
-                </p>
+            <div class="cc-faq-item">
+                <h3>What return do I need to double my money?</h3>
+                <p>About 7.2% a year over 10 years, 14.9% over 5 years, 26.0% over 3 years. The “Required return” mode with a 100% ROI shows it for your term.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I compare several investments?</h3>
+                <p>In the “Comparison” mode enter the invested amount, the final value and the term for each. The calculator shows the ROI and the annual return and highlights the best by annual return: in our example it is C (18.0%) against 14.0% and 8.4%.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the real return?</h3>
+                <p>It is the return after inflation: (1 + annual return) ÷ (1 + inflation) − 1. With a net annual 11.9% and 8% inflation the real return is 3.6%. A total ROI of 50% in 3 years with 8% inflation is only 19.1% in real money.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What return do I need to accumulate 1,000,000 UAH?</h3>
+                <p>From 100,000 UAH with 3,000 UAH contributed a month over 10 years you need about 12.3% a year. Change the initial amount, the contributions and the term in the “Required return” mode.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is ROI not always a good measure?</h3>
+                <p>ROI ignores time, risk and the timing of income. A high ROI over a long time may be weak per year, and a risky investment may lose to a safe one. Compare the annual return and judge the risk separately.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How accurate is the calculator?</h3>
+                <p>It is a simple model: income is counted at the end of the period, so the annual return is approximate; an exact calculation by payment dates gives IRR. The result depends on your assumptions about costs and tax, so it is an estimate, not a guarantee.</p>
             </div>
         </section>
     </main>
