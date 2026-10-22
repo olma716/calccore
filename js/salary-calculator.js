@@ -22,6 +22,7 @@
         errTaxes: "PIT and military levy together must be below 100%.",
         errDed: "Deductions are not below the net pay — reduce them.",
         errFx: "Enter a valid exchange rate (UAH per 1 {c}) or leave it empty.",
+        nbuLoading: "Loading…", nbuOk: "NBU rate on {d}: {r} UAH per 1 {c}", nbuFail: "Could not load the NBU rate — enter it manually.",
         lblBonus: "Monthly bonus", lblOne: "One-time bonus", lblDed: "Deductions", lblPit: "Income tax", lblVz: "Military levy", lblEsv: "ESV rate", lblMinw: "Minimum wage", lblMaxb: "ESV maximum base",
         cur: { UAH: "UAH", USD: "USD", EUR: "EUR" },
         amountGross: "Gross salary (before tax)", amountNet: "Desired net pay (in hand)",
@@ -51,6 +52,7 @@
         errTaxes: "ПДФО і військовий збір разом мають бути менше 100%.",
         errDed: "Утримання не менші за суму на руки — зменшіть їх.",
         errFx: "Вкажіть коректний курс (грн за 1 {c}) або залиште поле порожнім.",
+        nbuLoading: "Завантажую…", nbuOk: "Курс НБУ на {d}: {r} грн за 1 {c}", nbuFail: "Не вдалося завантажити курс НБУ — введіть курс вручну.",
         lblBonus: "Премія щомісяця", lblOne: "Одноразова премія", lblDed: "Утримання", lblPit: "ПДФО", lblVz: "Військовий збір", lblEsv: "Ставка ЄСВ", lblMinw: "Мінімальна зарплата", lblMaxb: "Верхня межа бази ЄСВ",
         cur: { UAH: "грн", USD: "USD", EUR: "EUR" },
         amountGross: "Заробітна плата брутто (до податків)", amountNet: "Бажана сума «на руки»",
@@ -385,6 +387,36 @@
     document.querySelectorAll("#cur_list li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.code === state.cur)));
   }
 
+  // ===== офіційний курс НБУ за натисненням кнопки (лише для мінімальної бази ЄСВ) =====
+  async function fillNbuRate() {
+    const code = state.cur;
+    const btn = el("fxNbu");
+    if (code === "UAH" || !btn || btn.disabled) return;
+    const label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = T.nbuLoading;
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 8000);
+    try {
+      const res = await fetch("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=" + code + "&json", { cache: "no-store", signal: ctl.signal });
+      if (!res.ok) throw new Error("NBU " + res.status);
+      const data = await res.json();
+      const row = Array.isArray(data) ? data.find((x) => String(x.cc || "").toUpperCase() === code) : null;
+      const rate = Number(row && row.rate);
+      if (!(rate > 0)) throw new Error("no rate");
+      const r4 = Math.round(rate * 10000) / 10000;
+      el("fx").value = IS_EN ? String(r4) : String(r4).replace(".", ",");
+      calc();
+      toast(fill(T.nbuOk, { d: (row && row.exchangedate) || "", r: nf(r4, 4), c: T.cur[code] }));
+    } catch {
+      toast(T.nbuFail);
+    } finally {
+      clearTimeout(timer);
+      btn.disabled = false;
+      btn.textContent = label;
+    }
+  }
+
   // ===== кнопки =====
   const IDS = ["amount", "bonus", "one", "oneMonth", "ded", "pit", "vz", "esv", "minw", "maxb", "fx", "start"];
 
@@ -482,6 +514,7 @@
         calc();
       })
     );
+    el("fxNbu").addEventListener("click", fillNbuRate);
     el("copyTbl").addEventListener("click", copyTable);
     el("csvBtn").addEventListener("click", downloadCsv);
 
