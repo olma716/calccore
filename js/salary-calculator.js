@@ -1,779 +1,534 @@
-/* =========================================================
-   salary-calculator.js — CalcCore (i18n-ready)
-   UPDATED:
-   - Base currency picker (UAH/USD/EUR) injected next to "Mode"
-   - Standard taxes: PIT 18% + Military levy 5% = 23%
-   - ESV checkbox default OFF
-   - Hide ESV rate field + hide ESV columns in table when unchecked
-   - Money inputs autoformat with spaces: 100 000 / 1 000 000
-========================================================= */
-
+/* salary-calculator.js — зарплатний калькулятор (UK/EN)
+   Брутто → на руки: ПДФО = брутто × ставка, військовий збір = брутто × ставка, на руки = брутто − ПДФО − ВЗ − утримання.
+   На руки → брутто: брутто = (на руки + утримання) / (1 − (ПДФО + ВЗ)/100).
+   ЄСВ сплачує роботодавець зверху: ставка × база; база не менша за мінімальну (мінімальна зарплата, для повної зайнятості)
+   і, якщо задано, не більша за верхню межу. Вартість роботодавця = брутто + ЄСВ.
+   Усі податки округлюються до копійок щомісяця. Параметри (ставки, мінімальна зарплата, межа бази) — редаговані:
+   їх встановлює закон і вони можуть змінитися. Для валюти не UAH курс потрібен лише для мінімальної бази ЄСВ. */
 (() => {
   const el = (id) => document.getElementById(id);
+  const IS_EN = String(document.documentElement.lang || "").toLowerCase().startsWith("en");
+  const LOCALE = IS_EN ? "en-US" : "uk-UA";
 
-  // ---------- i18n helpers ----------
-  const tt =
-    typeof window.t === "function"
-      ? window.t
-      : (k, vars) => {
-          let s = String(k || "");
-          if (vars && typeof vars === "object") {
-            for (const [kk, vv] of Object.entries(vars)) {
-              s = s.replaceAll(`{${kk}}`, String(vv));
-            }
-          }
-          return s;
-        };
+  const T = IS_EN
+    ? {
+        enter: "Enter the amount — the result will appear here.",
+        missing: "To calculate, fill in: {list}.",
+        lblAmount: "amount",
+        errAmount: "The amount must be greater than 0 and not above 1 000 000 000.",
+        errNum: "Check the value in the field “{f}”.",
+        errMonth: "The month of the one-time bonus must be a whole number from 1 to 12.",
+        errDate: "Enter a valid start date or leave the field empty.",
+        errTaxes: "PIT and military levy together must be below 100%.",
+        errDed: "Deductions are not below the net pay — reduce them.",
+        errFx: "Enter a valid exchange rate (UAH per 1 {c}) or leave it empty.",
+        lblBonus: "Monthly bonus", lblOne: "One-time bonus", lblDed: "Deductions", lblPit: "Income tax", lblVz: "Military levy", lblEsv: "ESV rate", lblMinw: "Minimum wage", lblMaxb: "ESV maximum base",
+        cur: { UAH: "UAH", USD: "USD", EUR: "EUR" },
+        amountGross: "Gross salary (before tax)", amountNet: "Desired net pay (in hand)",
+        net: "Net pay (in hand)", netMini: "regular month, gross {g}",
+        gross: "Gross salary", grossMini: "before taxes",
+        pit: "Income tax (PIT)", pitMini: "{p}% of gross", vz: "Military levy", vzMini: "{p}% of gross",
+        esv: "ESV (paid by the employer)", esvMini: "{p}% of the base {b}",
+        employer: "Employer cost", employerMini: "gross + ESV",
+        burden: "Tax burden", burdenMini: "PIT + levy + ESV of employer cost",
+        yNet: "Net pay for the year", yNetMini: "with bonuses, 12 months", yEmp: "Employer cost for the year", yEmpMini: "gross {g} + ESV",
+        warnMin: "Gross is below the minimum wage ({m}) — that is allowed only for part-time work.",
+        warnFx: "No exchange rate: the minimum ESV base is not applied.",
+        thMonth: "Month", thDate: "Date", thGross: "Gross", thPit: "PIT", thVz: "Levy", thDed: "Deductions", thNet: "Net", thEsv: "ESV", thEmp: "Employer cost", thTotal: "Total",
+        tableCopied: "Table copied ✅", csvDone: "CSV downloaded ✅",
+        chartTitle: "What the employer cost consists of", legNet: "Net pay", legDed: "Deductions", legPit: "Income tax", legVz: "Military levy", legEsv: "ESV", donutTotal: "in total",
+        modelNote: "Estimate: rates, the minimum wage and the ESV base are set by law and may change — check them in the “Law parameters” block. Real payroll depends on the contract, the worked time and the employer's rules.",
+        linkCopied: "Link copied ✅", copyFailed: "Could not copy 😕", reset: "Reset ✅", example: "Example filled in ✅"
+      }
+    : {
+        enter: "Вкажіть суму — результат зʼявиться тут.",
+        missing: "Щоб порахувати, заповніть: {list}.",
+        lblAmount: "суму",
+        errAmount: "Сума має бути більшою за 0 і не більшою за 1 000 000 000.",
+        errNum: "Перевірте значення в полі «{f}».",
+        errMonth: "Місяць одноразової премії — ціле число від 1 до 12.",
+        errDate: "Вкажіть коректну дату старту або залиште поле порожнім.",
+        errTaxes: "ПДФО і військовий збір разом мають бути менше 100%.",
+        errDed: "Утримання не менші за суму на руки — зменшіть їх.",
+        errFx: "Вкажіть коректний курс (грн за 1 {c}) або залиште поле порожнім.",
+        lblBonus: "Премія щомісяця", lblOne: "Одноразова премія", lblDed: "Утримання", lblPit: "ПДФО", lblVz: "Військовий збір", lblEsv: "Ставка ЄСВ", lblMinw: "Мінімальна зарплата", lblMaxb: "Верхня межа бази ЄСВ",
+        cur: { UAH: "грн", USD: "USD", EUR: "EUR" },
+        amountGross: "Заробітна плата брутто (до податків)", amountNet: "Бажана сума «на руки»",
+        net: "На руки", netMini: "звичайний місяць, брутто {g}",
+        gross: "Брутто", grossMini: "до сплати податків",
+        pit: "ПДФО", pitMini: "{p}% від брутто", vz: "Військовий збір", vzMini: "{p}% від брутто",
+        esv: "ЄСВ (сплачує роботодавець)", esvMini: "{p}% від бази {b}",
+        employer: "Вартість роботодавця", employerMini: "брутто + ЄСВ",
+        burden: "Податкове навантаження", burdenMini: "ПДФО + ВЗ + ЄСВ від витрат роботодавця",
+        yNet: "На руки за рік", yNetMini: "з преміями, 12 місяців", yEmp: "Витрати роботодавця за рік", yEmpMini: "брутто {g} + ЄСВ",
+        warnMin: "Брутто менше за мінімальну зарплату ({m}) — це допустимо лише при неповному робочому часі.",
+        warnFx: "Курс не вказано: мінімальна база ЄСВ не застосовується.",
+        thMonth: "Місяць", thDate: "Дата", thGross: "Брутто", thPit: "ПДФО", thVz: "ВЗ", thDed: "Утримання", thNet: "На руки", thEsv: "ЄСВ", thEmp: "Вартість роботодавця", thTotal: "Разом",
+        tableCopied: "Таблицю скопійовано ✅", csvDone: "CSV завантажено ✅",
+        chartTitle: "З чого складаються витрати роботодавця", legNet: "На руки", legDed: "Утримання", legPit: "ПДФО", legVz: "Військовий збір", legEsv: "ЄСВ", donutTotal: "усього",
+        modelNote: "Оцінка: ставки, мінімальну зарплату й базу ЄСВ встановлює закон, вони можуть змінитися — перевіряйте їх у блоці «Параметри законодавства». Реальна зарплата залежить від договору, відпрацьованого часу й правил роботодавця.",
+        linkCopied: "Посилання скопійовано ✅", copyFailed: "Не вдалось скопіювати 😕", reset: "Скинуто ✅", example: "Підставлено приклад ✅"
+      };
 
-  const getLocale =
-    typeof window.i18nLocale === "function"
-      ? window.i18nLocale
-      : () =>
-          String(document.documentElement.lang || "")
-            .toLowerCase()
-            .startsWith("en")
-            ? "en-US"
-            : "uk-UA";
-
-  const LOCALE = getLocale();
-  const isEn = () => String(document.documentElement.lang || "").toLowerCase().startsWith("en");
-
-  // ---------- Inputs ----------
-  const mode = el("mode"); // gross2net / net2gross
-  const salaryAmount = el("salaryAmount");
-  const period = el("period"); // monthly / yearly
-  const bonus = el("bonus");
-  const deductions = el("deductions");
-
-  const taxMode = el("taxMode"); // standard / none / custom
-  const taxRate = el("taxRate");
-
-  const showEsv = el("showEsv");
-  const esvRate = el("esvRate");
-
-  const months = el("months");
-  const startDate = el("startDate");
-
-  // Controls
-  const autoCalc = el("autoCalc");
-  const btnCalc = el("btnCalc");
-  const btnReset = el("btnReset");
-  const btnCopy = el("btnCopy");
-
-  // UI
-  const toast = el("mToast");
-  const resultEl = el("mResult");
-  const detailsEl = el("mDetails");
-
-  // NBU badge + schedule currency
-  const nbuBadge = el("nbuBadge");
-  const scheduleCurrency = el("scheduleCurrency");
-
-  // Schedule
-  const scheduleWrap = el("scheduleWrap");
-  const scheduleTable = el("scheduleTable");
-  const scheduleTbody = scheduleTable?.querySelector("tbody");
-  const btnCopySchedule = el("btnCopySchedule");
-  const btnDownloadCSV = el("btnDownloadCSV");
-
-  // ---------- state ----------
-  let rates = {
-    loaded: false,
-    date: "",
-    USD: null, // UAH per 1 USD
-    EUR: null, // UAH per 1 EUR
-  };
-
-  // Base currency for ALL inputs/outputs
-  let baseCur = "UAH";
-  let baseCurSelect = null;
-
-  // cache schedule values in UAH so we can re-render in selected currency
-  let scheduleRowsUAH = [];
-
-  // ---------- helpers ----------
-  function setToast(msg) {
-    if (!toast) return;
-    toast.textContent = msg || "";
-  }
-
-  function setResult(mainText, extraHtml = "") {
-    if (resultEl) resultEl.textContent = mainText || "";
-    if (detailsEl) detailsEl.innerHTML = extraHtml || "";
-  }
-
-  function parseMoney(val) {
-    if (val == null) return 0;
-    const s = String(val)
-      .replace(/\s+/g, "")
-      .replace(/,/g, ".")
-      .replace(/[^\d.]/g, "");
+  // ===== helpers =====
+  function num(v) {
+    const raw = String(v ?? "").replace(/[\s ]+/g, "").replace(/−/g, "-");
+    const s = IS_EN ? raw.replace(/,/g, "") : raw.replace(",", ".");
+    if (!/^[-+]?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
     const n = Number(s);
-    return Number.isFinite(n) ? n : 0;
+    return Number.isFinite(n) ? n : NaN;
   }
+  const blank = (id) => (el(id)?.value || "").trim() === "";
+  const fill = (s, vars) => String(s).replace(/\{(\w+)\}/g, (_, k) => (vars && vars[k] !== undefined ? vars[k] : ""));
+  const nf = (n, d) => n.toLocaleString(LOCALE, { minimumFractionDigits: d, maximumFractionDigits: d });
+  const f0 = (n) => nf(n, 0);
+  const f2 = (n) => nf(n, 2);
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const state = { mode: "g2n", period: "month", cur: "UAH", bonusU: "pct" };
+  const money = (n) => f0(n) + " " + T.cur[state.cur];
+  const money2 = (n) => f2(n) + " " + T.cur[state.cur];
+  const DEFAULTS = { pit: "18", vz: "5", esv: "22", minw: "8647", maxb: "" };
 
-  function formatNumber(n, maxFrac = 2) {
-    if (!Number.isFinite(n)) return "—";
-    return n.toLocaleString(LOCALE, { maximumFractionDigits: maxFrac });
-  }
-
-  function currencySymbol(code) {
-    if (code === "USD") return "$";
-    if (code === "EUR") return "€";
-    return "₴";
-  }
-
-  function hasRate(code) {
-    const c = String(code || "UAH").toUpperCase();
-    if (c === "UAH") return true;
-    const r = rates?.[c];
-    return Number.isFinite(r) && r > 0;
-  }
-
-  function toUAH(code, amount) {
-    const c = String(code || "UAH").toUpperCase();
-    if (!Number.isFinite(amount)) return amount;
-    if (c === "UAH") return amount;
-    if (!rates.loaded) return amount;
-    const r = rates[c];
-    if (!Number.isFinite(r) || r <= 0) return amount;
-    return amount * r;
-  }
-
-  function fromUAH(code, uahAmount) {
-    const c = String(code || "UAH").toUpperCase();
-    if (!Number.isFinite(uahAmount)) return uahAmount;
-    if (c === "UAH") return uahAmount;
-    if (!rates.loaded) return uahAmount;
-    const r = rates[c];
-    if (!Number.isFinite(r) || r <= 0) return uahAmount;
-    return uahAmount / r;
-  }
-
-  function formatMoney(amountInUAH, outCode) {
-    const code = String(outCode || "UAH").toUpperCase();
-    const v = fromUAH(code, amountInUAH);
-    if (!Number.isFinite(v)) return "—";
-    return `${formatNumber(v, 2)} ${currencySymbol(code)}`;
-  }
-
-  function formatDate(d) {
-    try {
-      return d.toLocaleDateString(LOCALE);
-    } catch {
-      return "";
-    }
-  }
-
-  function addMonths(date, m) {
-    const d = new Date(date);
-    const day = d.getDate();
-    d.setMonth(d.getMonth() + m);
-    if (d.getDate() < day) d.setDate(0);
-    return d;
-  }
-
-  // ---------- money input autoformat (spaces) ----------
-  function formatWithSpacesRaw(input) {
-    const s0 = String(input ?? "");
-    const s = s0.replace(/[^\d.,]/g, "").replace(/,/g, ".");
-    if (!s) return "";
-
-    const firstDot = s.indexOf(".");
-    let intPart = firstDot >= 0 ? s.slice(0, firstDot) : s;
-    let fracPart = firstDot >= 0 ? s.slice(firstDot + 1) : "";
-
-    fracPart = fracPart.replace(/\./g, "");
-    intPart = intPart.replace(/^0+(?=\d)/, "");
-
-    const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    return firstDot >= 0 ? `${grouped}.${fracPart}` : grouped;
-  }
-
-  function countDigitsLeft(str) {
-    return (str.match(/\d/g) || []).length;
-  }
-
-  function caretPosForDigits(str, digitsCount) {
-    if (digitsCount <= 0) return 0;
-    let digits = 0;
-    for (let i = 0; i < str.length; i++) {
-      if (/\d/.test(str[i])) digits++;
-      if (digits >= digitsCount) return i + 1;
-    }
-    return str.length;
-  }
-
-  function attachMoneyFormatter(inputEl) {
-    if (!inputEl) return;
-
-    inputEl.addEventListener("input", () => {
-      const oldVal = inputEl.value;
-      const caret = inputEl.selectionStart ?? oldVal.length;
-
-      const left = oldVal.slice(0, caret);
-      const digitsLeft = countDigitsLeft(left);
-
-      const formatted = formatWithSpacesRaw(oldVal);
-      inputEl.value = formatted;
-
-      const newPos = caretPosForDigits(formatted, digitsLeft);
-      try {
-        inputEl.setSelectionRange(newPos, newPos);
-      } catch {}
-
-      scheduleAuto();
-    });
-
-    inputEl.addEventListener("blur", () => {
-      inputEl.value = formatWithSpacesRaw(inputEl.value);
-    });
-  }
-
-  // ---------- taxes / esv ----------
-  function getEffectiveTaxRate() {
-    const m = taxMode?.value || "standard";
-    if (m === "none") return 0;
-    if (m === "custom") {
-      const r = parseMoney(taxRate?.value);
-      return Math.max(0, r) / 100;
-    }
-    // Standard: PIT 18% + Military levy 5% = 23%
-    return 0.23;
-  }
-
-  function updateTaxFieldState() {
-    const m = taxMode?.value || "standard";
-    if (!taxRate) return;
-
-    if (m === "custom") {
-      taxRate.disabled = false;
-      if (!taxRate.value) taxRate.value = "23";
+  // групування тисяч під час введення: 1000000 → 1 000 000 (EN: 1,000,000); курсор лишається біля тієї самої цифри
+  const GROUP_SEP = IS_EN ? "," : " ";
+  const MONEY_IDS = ["amount", "bonus", "one", "ded", "minw", "maxb"];
+  function groupInput(inp) {
+    const v = inp.value;
+    if (!/^[\d\s .,-]*$/.test(v)) return;
+    const pos = inp.selectionStart == null ? v.length : inp.selectionStart;
+    const digitsBefore = (v.slice(0, pos).match(/\d/g) || []).length;
+    let s = v.replace(/[\s ]/g, "");
+    const neg = s.startsWith("-");
+    if (neg) s = s.slice(1);
+    let intPart, dec = "";
+    if (IS_EN) {
+      s = s.replace(/,/g, "");
+      const i = s.indexOf(".");
+      intPart = i < 0 ? s : s.slice(0, i);
+      dec = i < 0 ? "" : "." + s.slice(i + 1).replace(/\./g, "");
     } else {
-      taxRate.disabled = true;
-      taxRate.value = m === "none" ? "0" : "23";
+      const i = s.search(/[.,]/);
+      intPart = i < 0 ? s : s.slice(0, i);
+      dec = i < 0 ? "" : "," + s.slice(i + 1).replace(/[.,]/g, "");
     }
-  }
-
-  function updateEsvFieldState() {
-    if (!esvRate) return;
-
-    const on = !!showEsv?.checked;
-
-    // disable + hide the field container when off
-    esvRate.disabled = !on;
-    const fieldWrap = esvRate.closest(".mcalc__field");
-    if (fieldWrap) fieldWrap.style.display = on ? "" : "none";
-
-    if (!esvRate.value) esvRate.value = "22";
-    if (!on) esvRate.value = "22";
-
-    // also hide / show columns in schedule table
-    updateEsvColumnsVisibility(on);
-  }
-
-  function updateEsvColumnsVisibility(on) {
-    if (!scheduleTable) return;
-
-    // 0 №, 1 Date, 2 Gross, 3 Taxes, 4 Deductions, 5 Net, 6 ESV, 7 Employer cost
-    const hideIdx = [6, 7];
-
-    const rows = scheduleTable.querySelectorAll("tr");
-    rows.forEach((tr) => {
-      const cells = tr.children;
-      hideIdx.forEach((idx) => {
-        const cell = cells?.[idx];
-        if (cell) cell.style.display = on ? "" : "none";
-      });
-    });
-  }
-
-  // ---------- NBU rates ----------
-  async function loadNbuRates() {
-    try {
-      const res = await fetch("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", {
-        cache: "no-store",
-      });
-      if (!res.ok) throw new Error("NBU fetch failed");
-      const data = await res.json();
-
-      const usd = data.find((x) => String(x.cc || "").toUpperCase() === "USD");
-      const eur = data.find((x) => String(x.cc || "").toUpperCase() === "EUR");
-
-      rates.USD = Number.isFinite(Number(usd?.rate)) ? Number(usd.rate) : null;
-      rates.EUR = Number.isFinite(Number(eur?.rate)) ? Number(eur.rate) : null;
-      rates.date = usd?.exchangedate || eur?.exchangedate || "";
-      rates.loaded = Number.isFinite(rates.USD) && Number.isFinite(rates.EUR);
-
-      if (nbuBadge) {
-        if (rates.loaded) {
-          const datePart = rates.date ? ` • ${rates.date}` : "";
-          nbuBadge.textContent =
-            tt("salary.nbu_badge", {
-              usd: formatNumber(rates.USD, 4),
-              eur: formatNumber(rates.EUR, 4),
-              datePart,
-            }) ||
-            `NBU: USD ${formatNumber(rates.USD, 4)} / EUR ${formatNumber(rates.EUR, 4)}${datePart}`;
-          nbuBadge.title = tt("salary.nbu_title") || "NBU rates (USD/EUR)";
-        } else {
-          nbuBadge.textContent = tt("salary.nbu_unavailable") || "NBU: unavailable";
-          nbuBadge.title = tt("salary.nbu_title") || "NBU rates (USD/EUR)";
+    intPart = intPart.replace(/^0+(?=\d)/, "").replace(/\B(?=(\d{3})+(?!\d))/g, GROUP_SEP);
+    const out = (neg ? "-" : "") + intPart + dec;
+    if (out === v) return;
+    inp.value = out;
+    let idx = out.length;
+    if (digitsBefore === 0) idx = neg ? 1 : 0;
+    else {
+      let c = 0;
+      for (let k = 0; k < out.length; k++) {
+        if (/\d/.test(out[k])) c++;
+        if (c === digitsBefore) {
+          idx = k + 1;
+          break;
         }
       }
+    }
+    try {
+      inp.setSelectionRange(idx, idx);
+    } catch {}
+  }
+  const groupAll = () => MONEY_IDS.forEach((id) => el(id) && groupInput(el(id)));
+  // у посиланні «Поділитись» суми без розділювачів груп; десятковий роздільник — крапка
+  const plain = (v) => (IS_EN ? v.replace(/,/g, "") : v.replace(/[\s ]/g, "").replace(",", "."));
 
-      // if user selected USD/EUR but rates not ready -> force UAH
-      if ((baseCur === "USD" || baseCur === "EUR") && !hasRate(baseCur)) {
-        baseCur = "UAH";
-        if (baseCurSelect) baseCurSelect.value = "UAH";
-      }
+  function toast(msg) {
+    const n = el("toast");
+    if (!n) return;
+    n.textContent = msg;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => (n.textContent = ""), 2400);
+  }
 
-      renderScheduleFromCache();
-    } catch {
-      rates.loaded = false;
-      if (nbuBadge) {
-        nbuBadge.textContent = tt("salary.nbu_unavailable") || "NBU: unavailable";
-        nbuBadge.title = tt("salary.nbu_title") || "NBU rates (USD/EUR)";
-      }
+  function opt(id, label, min, max) {
+    if (blank(id)) return { v: 0, given: false };
+    const v = num(el(id).value);
+    if (!(v >= min && v <= max)) return { err: fill(T.errNum, { f: label }) };
+    return { v, given: true };
+  }
 
-      // fallback base currency
-      if (baseCur !== "UAH") {
-        baseCur = "UAH";
-        if (baseCurSelect) baseCurSelect.value = "UAH";
+  function addMonths(d, m) {
+    const x = new Date(d.getFullYear(), d.getMonth() + m, 1);
+    x.setDate(Math.min(d.getDate(), new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate()));
+    return x;
+  }
+  const iso = (d) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+
+  // ===== розрахунок =====
+  function compute() {
+    if (blank("amount")) return { ok: false, none: ["bonus", "one", "ded"].every(blank), msg: ["bonus", "one", "ded"].every(blank) ? "" : fill(T.missing, { list: T.lblAmount }) };
+    let amt = num(el("amount").value);
+    if (!(amt > 0 && amt <= 1e9)) return { ok: false, msg: T.errAmount };
+    const monthlyBase = state.period === "year" ? r2(amt / 12) : amt;
+
+    const pit = opt("pit", T.lblPit, 0, 50), vz = opt("vz", T.lblVz, 0, 50), esvR = opt("esv", T.lblEsv, 0, 50);
+    const minw = opt("minw", T.lblMinw, 0, 1e7), maxb = opt("maxb", T.lblMaxb, 0, 1e10);
+    for (const x of [pit, vz, esvR, minw, maxb]) if (x.err) return { ok: false, msg: x.err };
+    const pitP = blank("pit") ? 18 : pit.v, vzP = blank("vz") ? 5 : vz.v, esvP = blank("esv") ? 22 : esvR.v;
+    if (!(pitP + vzP < 100)) return { ok: false, msg: T.errTaxes };
+
+    // мінімальна база ЄСВ у валюті розрахунку; для валюти не UAH потрібен курс
+    let fx = 1, warnFx = false;
+    if (state.cur !== "UAH") {
+      if (blank("fx")) {
+        fx = 0;
+        warnFx = !blank("minw") && minw.v > 0;
+      } else {
+        fx = num(el("fx").value);
+        if (!(fx > 0 && fx <= 1e6)) return { ok: false, msg: fill(T.errFx, { c: T.cur[state.cur] }) };
       }
     }
+    const minwUAH = blank("minw") ? 0 : minw.v;
+    const minBase = fx > 0 ? r2(minwUAH / fx) : 0;
+    const maxBase = blank("maxb") ? Infinity : fx > 0 ? maxb.v / fx : maxb.v;
+
+    const ded = opt("ded", T.lblDed, 0, 1e9);
+    let start = null;
+    if (!blank("start")) {
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(el("start").value.trim());
+      start = m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+      if (!start || start.getFullYear() < 1990 || start.getFullYear() > 2100) return { ok: false, msg: T.errDate };
+    }
+    if (ded.err) return { ok: false, msg: ded.err };
+
+    let bonusM = 0, oneAmt = 0, oneMonth = 1;
+    let gross;
+    const k = (pitP + vzP) / 100;
+    if (state.mode === "n2g") {
+      if (!(ded.v < monthlyBase)) return { ok: false, msg: T.errDed };
+      gross = r2((monthlyBase + ded.v) / (1 - k));
+      // податки округлюються до копійок, тому добираємо брутто так, щоб «на руки» збіглося точно
+      const netOf = (g) => r2(g - r2((g * pitP) / 100) - r2((g * vzP) / 100) - ded.v);
+      for (const dlt of [0, 0.01, -0.01, 0.02, -0.02]) {
+        const g2 = r2(gross + dlt);
+        if (Math.abs(netOf(g2) - monthlyBase) < 0.005) {
+          gross = g2;
+          break;
+        }
+      }
+    } else {
+      gross = monthlyBase;
+      const bo = opt("bonus", T.lblBonus, 0, state.bonusU === "pct" ? 1000 : 1e9), on = opt("one", T.lblOne, 0, 1e9);
+      for (const x of [bo, on]) if (x.err) return { ok: false, msg: x.err };
+      bonusM = state.bonusU === "pct" ? r2((gross * bo.v) / 100) : bo.v;
+      oneAmt = on.v;
+      if (oneAmt > 0 && !blank("oneMonth")) {
+        oneMonth = num(el("oneMonth").value);
+        if (!(Number.isInteger(oneMonth) && oneMonth >= 1 && oneMonth <= 12)) return { ok: false, msg: T.errMonth };
+      }
+    }
+
+    const rows = [];
+    for (let m = 1; m <= 12; m++) {
+      const taxable = r2(gross + bonusM + (m === oneMonth ? oneAmt : 0));
+      const pitA = r2((taxable * pitP) / 100), vzA = r2((taxable * vzP) / 100);
+      const dedA = ded.v;
+      const net = r2(taxable - pitA - vzA - dedA);
+      const base = Math.min(Math.max(taxable, minBase), maxBase);
+      const esvA = r2((base * esvP) / 100);
+      rows.push({ m, date: start ? addMonths(start, m - 1) : null, gross: taxable, pit: pitA, vz: vzA, ded: dedA, net, esv: esvA, employer: r2(taxable + esvA), base });
+    }
+    if (rows.some((x) => x.net < 0)) return { ok: false, msg: T.errDed };
+    const regular = rows.find((x) => x.m !== oneMonth) || rows[0];
+    const sum = (key) => r2(rows.reduce((s, x) => s + x[key], 0));
+    return {
+      ok: true, mode: state.mode, period: state.period, gross, bonusM, oneAmt, oneMonth, pitP, vzP, esvP, ded: ded.v, rows, regular, minBase, maxBase, fx, warnFx,
+      warnMin: fx > 0 && minBase > 0 && gross < minBase, start,
+      yGross: sum("gross"), yPit: sum("pit"), yVz: sum("vz"), yDed: sum("ded"), yNet: sum("net"), yEsv: sum("esv"), yEmployer: sum("employer"),
+      burden: ((sum("pit") + sum("vz") + sum("esv")) / sum("employer")) * 100
+    };
   }
 
-  // ---------- math ----------
-  function solveGrossFromNet(netTarget, taxR, deductionsValue) {
-    const denom = 1 - taxR;
-    if (denom <= 0) return 0;
-    return (netTarget + deductionsValue) / denom;
-  }
+  // ===== відображення =====
+  const tile = (title, value, mini, cls = "") =>
+    '<div class="sal__kpi ' + cls + '"><div class="sal__kpiT">' + title + '</div><div class="sal__kpiV">' + value + "</div>" + (mini ? '<div class="sal__kpiM">' + mini + "</div>" : "") + "</div>";
 
-  function buildResultUI(data) {
-    const {
-      grossUAH,
-      taxesUAH,
-      netUAH,
-      bonusUAH,
-      deductionsUAH,
-      taxPct,
-      esvUAH,
-      employerCostUAH,
-      periodLabel,
-      modeLabel,
-      esvOn,
-    } = data;
-
-    const main =
-      `${tt("salary.net_inhand") || (isEn() ? "Net (in hand)" : "На руки")}: ${formatMoney(netUAH, baseCur)} ` +
-      `(${tt("salary.period") || (isEn() ? "period" : "період")}: ${periodLabel})`;
-
-    const kpiEsvBlock = esvOn
-      ? `
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("salary.kpi_employer_cost") || (isEn() ? "Employer cost" : "Вартість роботодавця")}</div>
-          <div class="m-kpi__v">${formatMoney(employerCostUAH, baseCur)}</div>
-          <div class="m-kpi__s">${tt("salary.kpi_esv") || "ЄСВ"}: ${formatMoney(esvUAH, baseCur)}</div>
-        </div>
-      `
-      : `
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("salary.kpi_employer_cost") || (isEn() ? "Employer cost" : "Вартість роботодавця")}</div>
-          <div class="m-kpi__v">${formatMoney(employerCostUAH, baseCur)}</div>
-          <div class="m-kpi__s">${isEn() ? "ESV not included" : "ЄСВ не враховано"}</div>
-        </div>
-      `;
-
-    const extra = `
-      <div class="m-kpis">
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("salary.kpi_gross") || (isEn() ? "Gross (tax base)" : "Брутто (база)")}</div>
-          <div class="m-kpi__v">${formatMoney(grossUAH, baseCur)}</div>
-          <div class="m-kpi__s">${tt("salary.kpi_mode") || (isEn() ? "Mode" : "Режим")}: ${modeLabel}</div>
-        </div>
-
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("salary.kpi_taxes") || (isEn() ? "Taxes" : "Податки (ПДФО+ВЗ)")}</div>
-          <div class="m-kpi__v">${formatMoney(taxesUAH, baseCur)}</div>
-          <div class="m-kpi__s">${tt("salary.kpi_tax_rate") || (isEn() ? "Rate" : "Ставка")}: ${formatNumber(taxPct, 2)}%</div>
-        </div>
-
-        <div class="m-kpi">
-          <div class="m-kpi__k">${tt("salary.kpi_bonus") || (isEn() ? "Bonus" : "Бонус / премія")}</div>
-          <div class="m-kpi__v">${formatMoney(bonusUAH, baseCur)}</div>
-          <div class="m-kpi__s">${tt("salary.kpi_deductions") || (isEn() ? "Deductions" : "Утримання")}: ${formatMoney(deductionsUAH, baseCur)}</div>
-        </div>
-
-        ${kpiEsvBlock}
-      </div>
-
-      <div class="m-summary">
-        <div><b>${tt("salary.summary_net") || (isEn() ? "Net" : "На руки")}</b>: ${formatMoney(netUAH, baseCur)}</div>
-        <div class="m-hintSmall">
-          ${tt("salary.summary_hint") || (isEn()
-            ? "In the table: values can be shown in UAH/USD/EUR (USD/EUR use NBU rates)."
-            : "У таблиці: суми можуть відображатися в UAH/USD/EUR (USD/EUR — за курсом НБУ).")}
-        </div>
-      </div>
-    `;
-
-    return { main, extra };
-  }
-
-  // ---------- schedule render ----------
-  function renderScheduleFromCache() {
-    if (!scheduleTbody) return;
-    const code = String(scheduleCurrency?.value || "UAH").toUpperCase();
-
-    scheduleTbody.innerHTML = scheduleRowsUAH
-      .map(
-        (r) => `
-        <tr>
-          <td>${r.i}</td>
-          <td>${r.dateText}</td>
-          <td>${formatMoney(r.grossUAH, code)}</td>
-          <td>${formatMoney(r.taxUAH, code)}</td>
-          <td>${formatMoney(r.dedUAH, code)}</td>
-          <td>${formatMoney(r.netUAH, code)}</td>
-          <td>${formatMoney(r.esvUAH, code)}</td>
-          <td>${formatMoney(r.employerUAH, code)}</td>
-        </tr>
-      `
-      )
+  // кільце: з чого складаються витрати роботодавця за рік
+  function donut(r) {
+    const parts = [
+      [T.legNet, r.yNet, "#283b69"],
+      [T.legDed, r.yDed, "#9aa6c2"],
+      [T.legPit, r.yPit, "#0f8b8d"],
+      [T.legVz, r.yVz, "#7c93c9"],
+      [T.legEsv, r.yEsv, "#c4cde3"]
+    ].filter((p) => p[1] > 0.5);
+    const tot = parts.reduce((x, p) => x + p[1], 0);
+    const cx = 75, cy = 75, rad = 52, rw = 22;
+    let a0 = -Math.PI / 2;
+    let svg = '<svg class="sal__chart sal__donutSvg" viewBox="0 0 150 150" role="img" aria-label="' + T.chartTitle + '">';
+    parts.forEach((p) => {
+      const frac = p[1] / tot;
+      const a1 = a0 + Math.min(frac, 0.9999) * 2 * Math.PI;
+      const x0 = cx + rad * Math.cos(a0), y0 = cy + rad * Math.sin(a0);
+      const x1 = cx + rad * Math.cos(a1 - 0.015), y1 = cy + rad * Math.sin(a1 - 0.015);
+      svg += '<path d="M' + x0.toFixed(2) + " " + y0.toFixed(2) + " A" + rad + " " + rad + " 0 " + (a1 - a0 > Math.PI ? 1 : 0) + " 1 " + x1.toFixed(2) + " " + y1.toFixed(2) + '" fill="none" stroke="' + p[2] + '" stroke-width="' + rw + '"/>';
+      a0 = a1;
+    });
+    svg += '<text x="75" y="73" font-size="13" font-weight="800" fill="#1f2f55" text-anchor="middle">' + f0(tot) + "</text>";
+    svg += '<text x="75" y="90" font-size="11" fill="#6b7280" text-anchor="middle">' + T.cur[state.cur] + " " + T.donutTotal + "</text></svg>";
+    const list = parts
+      .map((p) => '<li><i style="background:' + p[2] + '"></i><span>' + p[0] + "</span><b>" + f0(p[1]) + " · " + nf((p[1] / tot) * 100, 1) + "%</b></li>")
       .join("");
-
-    // ensure columns visibility matches checkbox
-    updateEsvColumnsVisibility(!!showEsv?.checked);
+    return '<div class="sal__donut">' + svg + '<ul class="sal__dl">' + list + "</ul></div>";
   }
 
-  // ---------- base currency UI injection (next to Mode) ----------
-  function injectBaseCurrencyPickerNextToMode() {
-    if (!mode) return;
-
-    const modeField = mode.closest(".mcalc__field");
-    if (!modeField) return;
-
-    // Make mode NOT full width so it can sit next to currency
-    modeField.classList.remove("m-full");
-
-    // Create currency field
-    const curField = document.createElement("div");
-    curField.className = "mcalc__field";
-    curField.innerHTML = `
-      <label class="mcalc__label" for="calcCurrency">${isEn() ? "Currency" : "Валюта"}</label>
-      <select class="mcalc__select mcalc__select--mini" id="calcCurrency">
-        <option value="UAH">UAH ₴</option>
-        <option value="USD">USD $</option>
-        <option value="EUR">EUR €</option>
-      </select>
-      <div class="mcalc__hint">${isEn() ? "Used for all inputs & results." : "Застосовується до всіх вводів і результатів."}</div>
-    `;
-
-    // Insert right after mode field
-    modeField.parentElement?.insertBefore(curField, modeField.nextSibling);
-
-    baseCurSelect = curField.querySelector("#calcCurrency");
-    if (baseCurSelect) {
-      baseCurSelect.value = baseCur;
-
-      baseCurSelect.addEventListener("change", () => {
-        const next = String(baseCurSelect.value || "UAH").toUpperCase();
-
-        // If USD/EUR selected but rates not loaded yet -> revert to UAH
-        if ((next === "USD" || next === "EUR") && !hasRate(next)) {
-          setToast(isEn() ? "NBU rates not loaded yet. Using UAH." : "Курс НБУ ще не завантажено. Використовую UAH.");
-          baseCurSelect.value = "UAH";
-          baseCur = "UAH";
-          setTimeout(() => setToast(""), 1800);
-        } else {
-          baseCur = next;
-        }
-
-        // nice default: sync schedule currency to base
-        if (scheduleCurrency) scheduleCurrency.value = baseCur;
-
-        calc({ silent: true });
-      });
-    }
+  function scheduleHtml(r) {
+    const hasDate = !!r.start, hasDed = r.ded > 0;
+    const head =
+      "<thead><tr><th>" + T.thMonth + "</th>" + (hasDate ? "<th>" + T.thDate + "</th>" : "") + "<th>" + T.thGross + "</th><th>" + T.thPit + "</th><th>" + T.thVz + "</th>" + (hasDed ? "<th>" + T.thDed + "</th>" : "") + "<th>" + T.thNet + "</th><th>" + T.thEsv + "</th><th>" + T.thEmp + "</th></tr></thead>";
+    const cells = (get) => "<td>" + f2(get("gross")) + "</td><td>" + f2(get("pit")) + "</td><td>" + f2(get("vz")) + "</td>" + (hasDed ? "<td>" + f2(get("ded")) + "</td>" : "") + "<td>" + f2(get("net")) + "</td><td>" + f2(get("esv")) + "</td><td>" + f2(get("employer")) + "</td>";
+    const body = r.rows
+      .map((x) => "<tr" + (x.m === r.oneMonth && r.oneAmt > 0 ? ' class="sal__hl"' : "") + "><td>" + x.m + "</td>" + (hasDate ? '<td data-iso="' + iso(x.date) + '">' + x.date.toLocaleDateString(LOCALE) + "</td>" : "") + cells((k) => x[k]) + "</tr>")
+      .join("");
+    const tot = (k) => r.rows.reduce((a, x) => a + x[k], 0);
+    const totalRow = '<tr class="sal__total"><td>' + T.thTotal + "</td>" + (hasDate ? "<td>—</td>" : "") + cells(tot) + "</tr>";
+    return '<table class="sal__tbl sal__tbl--sch" id="scheduleTable">' + head + "<tbody>" + body + totalRow + "</tbody></table>";
   }
 
-  // ---------- calc ----------
-  function calc({ silent = false } = {}) {
-    // read inputs in BASE currency -> convert to UAH for math
-    const baseInputBase = parseMoney(salaryAmount?.value);
-    const p = period?.value || "monthly";
+  let last = null;
 
-    const bonusBase = Math.max(0, parseMoney(bonus?.value));
-    const deductionsBase = Math.max(0, parseMoney(deductions?.value));
-    const taxR = getEffectiveTaxRate();
-
-    const mCount = Math.max(1, Number(months?.value || 12));
-    const start = startDate?.value ? new Date(startDate.value) : new Date();
-
-    if (!(baseInputBase > 0)) {
-      if (!silent) setToast(tt("salary.toast_enter_values") || (isEn() ? "Enter amount." : "Введи суму для розрахунку."));
-      setResult(tt("salary.result_enter_values") || (isEn() ? "Enter amount to calculate." : "Введи суму для розрахунку."), "");
-      scheduleRowsUAH = [];
-      if (scheduleTbody) scheduleTbody.innerHTML = "";
-      if (scheduleWrap) scheduleWrap.open = false;
+  function render(r) {
+    const box = el("result");
+    const sch = el("schedule");
+    if (!r.ok) {
+      last = null;
+      box.innerHTML = r.none || !r.msg ? T.enter : '<div class="sal__hintbox">' + r.msg + "</div>";
+      sch.hidden = true;
       return;
     }
-
-    // If user picked USD/EUR but rates not loaded -> fallback to UAH
-    if ((baseCur === "USD" || baseCur === "EUR") && !hasRate(baseCur)) {
-      baseCur = "UAH";
-      if (baseCurSelect) baseCurSelect.value = "UAH";
-      setToast(isEn() ? "NBU rates not loaded yet. Using UAH." : "Курс НБУ ще не завантажено. Використовую UAH.");
-      setTimeout(() => setToast(""), 1800);
-    }
-
-    // Convert input values to UAH
-    const baseInputUAH = toUAH(baseCur, baseInputBase);
-    const bonusUAH = toUAH(baseCur, bonusBase);
-    const deductionsUAH = toUAH(baseCur, deductionsBase);
-
-    // normalize to monthly amount for schedule (UAH)
-    const baseMonthlyUAH = p === "yearly" ? baseInputUAH / 12 : baseInputUAH;
-    const bonusMonthlyUAH = p === "yearly" ? bonusUAH / 12 : bonusUAH;
-    const deductionsMonthlyUAH = p === "yearly" ? deductionsUAH / 12 : deductionsUAH;
-
-    const modeVal = mode?.value || "gross2net";
-
-    let grossMonthlyUAH = 0;
-    let netMonthlyUAH = 0;
-
-    if (modeVal === "net2gross") {
-      const taxableBase = solveGrossFromNet(baseMonthlyUAH, taxR, deductionsMonthlyUAH);
-      grossMonthlyUAH = Math.max(0, taxableBase - bonusMonthlyUAH);
-      netMonthlyUAH = baseMonthlyUAH;
-    } else {
-      grossMonthlyUAH = baseMonthlyUAH;
-      const taxableBase = grossMonthlyUAH + bonusMonthlyUAH;
-      const taxes = taxableBase * taxR;
-      netMonthlyUAH = taxableBase - taxes - deductionsMonthlyUAH;
-    }
-
-    const taxableBaseMonthlyUAH = grossMonthlyUAH + bonusMonthlyUAH;
-    const taxesMonthlyUAH = taxableBaseMonthlyUAH * taxR;
-    const netCalcMonthlyUAH = taxableBaseMonthlyUAH - taxesMonthlyUAH - deductionsMonthlyUAH;
-
-    // ESv (employer cost)
-    const esvOn = !!showEsv?.checked;
-    const esvR = esvOn ? Math.max(0, parseMoney(esvRate?.value) || 22) / 100 : 0;
-    const esvMonthlyUAH = esvOn ? taxableBaseMonthlyUAH * esvR : 0;
-    const employerCostMonthlyUAH = taxableBaseMonthlyUAH + esvMonthlyUAH;
-
-    // build schedule
-    scheduleRowsUAH = [];
-    for (let i = 1; i <= mCount; i++) {
-      const date = addMonths(start, i);
-      scheduleRowsUAH.push({
-        i,
-        dateText: formatDate(date),
-        grossUAH: taxableBaseMonthlyUAH,
-        taxUAH: taxesMonthlyUAH,
-        dedUAH: deductionsMonthlyUAH,
-        netUAH: netCalcMonthlyUAH,
-        esvUAH: esvMonthlyUAH,
-        employerUAH: employerCostMonthlyUAH,
-      });
-    }
-
-    const periodLabel = p === "yearly" ? (tt("salary.period_year") || (isEn() ? "year" : "рік")) : (tt("salary.period_month") || (isEn() ? "month" : "місяць"));
-    const modeLabel =
-      modeVal === "net2gross"
-        ? (tt("salary.mode_net2gross") || (isEn() ? "net → gross" : "від “на руки” → брутто"))
-        : (tt("salary.mode_gross2net") || (isEn() ? "gross → net" : "від брутто → “на руки”"));
-
-    const mult = p === "yearly" ? 12 : 1;
-
-    const ui = buildResultUI({
-      grossUAH: taxableBaseMonthlyUAH * mult,
-      taxesUAH: taxesMonthlyUAH * mult,
-      netUAH: netCalcMonthlyUAH * mult,
-      bonusUAH: bonusUAH, // show as entered (base period)
-      deductionsUAH: deductionsUAH,
-      taxPct: taxR * 100,
-      esvUAH: esvMonthlyUAH * mult,
-      employerCostUAH: employerCostMonthlyUAH * mult,
-      periodLabel,
-      modeLabel,
-      esvOn,
-    });
-
-    setToast("");
-    setResult(ui.main, ui.extra);
-
-    renderScheduleFromCache();
-    if (scheduleWrap) scheduleWrap.open = false;
+    last = r;
+    const g = r.regular;
+    const warns = [];
+    if (r.warnMin) warns.push(fill(T.warnMin, { m: money(r.minBase) }));
+    if (r.warnFx) warns.push(T.warnFx);
+    const tiles =
+      tile(T.net, money2(g.net), fill(T.netMini, { g: money(g.gross) }), "sal__kpi--main sal__kpi--wide") +
+      tile(T.gross, money2(g.gross), T.grossMini) +
+      tile(T.employer, money2(g.employer), T.employerMini) +
+      tile(T.pit, money2(g.pit), fill(T.pitMini, { p: nf(r.pitP, 1) })) +
+      tile(T.vz, money2(g.vz), fill(T.vzMini, { p: nf(r.vzP, 1) })) +
+      tile(T.esv, money2(g.esv), fill(T.esvMini, { p: nf(r.esvP, 1), b: money(g.base) })) +
+      tile(T.burden, nf(r.burden, 1) + "%", T.burdenMini) +
+      tile(T.yNet, money(r.yNet), T.yNetMini) +
+      tile(T.yEmp, money(r.yEmployer), fill(T.yEmpMini, { g: money(r.yGross) }));
+    const warnHtml = warns.map((w) => '<div class="sal__note sal__note--warn">' + w + "</div>").join("");
+    box.innerHTML = '<div class="sal__kpis">' + tiles + "</div>" + warnHtml + '<div class="sal__sub">' + T.chartTitle + "</div>" + donut(r) + '<div class="sal__note">' + T.modelNote + "</div>";
+    sch.hidden = false;
+    el("schedBody").innerHTML = scheduleHtml(r);
   }
 
-  // ---------- reset ----------
-  function reset() {
-    if (mode) mode.value = "gross2net";
-    if (salaryAmount) salaryAmount.value = "";
-    if (period) period.value = "monthly";
-    if (bonus) bonus.value = "";
-    if (deductions) deductions.value = "";
-
-    if (taxMode) taxMode.value = "standard";
-    if (taxRate) taxRate.value = "23"; // updated default
-
-    // ESV default OFF
-    if (showEsv) showEsv.checked = false;
-    if (esvRate) esvRate.value = "22";
-
-    if (months) months.value = "12";
-    if (scheduleCurrency) scheduleCurrency.value = baseCur;
-
-    if (startDate) {
-      const d = new Date();
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, "0");
-      const dd = String(d.getDate()).padStart(2, "0");
-      startDate.value = `${yyyy}-${mm}-${dd}`;
-    }
-
-    updateTaxFieldState();
-    updateEsvFieldState();
-
-    setToast(tt("salary.toast_reset") || (isEn() ? "Reset." : "Скинуто."));
-    setResult(tt("salary.result_enter_values") || (isEn() ? "Enter amount to calculate." : "Введи суму для розрахунку."), "");
-    scheduleRowsUAH = [];
-    if (scheduleTbody) scheduleTbody.innerHTML = "";
-    if (scheduleWrap) scheduleWrap.open = false;
-    setTimeout(() => setToast(""), 1200);
+  function calc() {
+    render(compute());
   }
 
-  // ---------- copy / CSV ----------
-  async function copyResult() {
-    const txt = (resultEl?.textContent || "").trim();
-    if (!txt || txt.includes(tt("salary.result_enter_values") || (isEn() ? "Enter" : "Введи"))) {
-      setToast(tt("salary.toast_need_calc_first") || (isEn() ? "Calculate first." : "Спочатку зроби розрахунок."));
-      return;
-    }
+  // ===== таблиця: копіювання й CSV =====
+  const tableMatrix = () => {
+    const t = el("scheduleTable");
+    if (!t) return [];
+    return Array.from(t.querySelectorAll("tr")).map((tr) => Array.from(tr.children).map((c) => (c.dataset.iso ? c.dataset.iso : c.textContent.trim())));
+  };
+  async function copyTable() {
+    const t = el("scheduleTable");
+    const m = (t ? Array.from(t.querySelectorAll("tr")).map((tr) => Array.from(tr.children).map((c) => c.textContent.trim()).join("\t")) : []).join("\n");
     try {
-      await navigator.clipboard.writeText(txt);
-      setToast(tt("salary.copied_result") || (isEn() ? "Result copied." : "Скопійовано результат."));
-      setTimeout(() => setToast(""), 1500);
+      await navigator.clipboard.writeText(m);
+      toast(T.tableCopied);
     } catch {
-      setToast(tt("salary.copy_failed") || (isEn() ? "Copy failed." : "Не вдалося скопіювати."));
+      toast(T.copyFailed);
     }
   }
-
-  async function copySchedule() {
-    if (!scheduleTable) return;
-    const rows = Array.from(scheduleTable.querySelectorAll("tr"));
-    const lines = rows.map((tr) =>
-      Array.from(tr.children)
-        .filter((td) => td.style.display !== "none") // respect hidden columns
-        .map((td) => td.innerText.replace(/\s+/g, " ").trim())
-        .join("\t")
-    );
-    const text = lines.join("\n");
-    try {
-      await navigator.clipboard.writeText(text.trim());
-      setToast(tt("salary.copied_table") || (isEn() ? "Table copied." : "Скопійовано таблицю."));
-      setTimeout(() => setToast(""), 1500);
-    } catch {
-      setToast(tt("salary.copy_table_failed") || (isEn() ? "Copy failed." : "Не вдалося скопіювати таблицю."));
-    }
-  }
-
-  function downloadCSV() {
-    if (!scheduleTable) return;
-
-    const rows = Array.from(scheduleTable.querySelectorAll("tr")).map((tr) =>
-      Array.from(tr.children)
-        .filter((td) => td.style.display !== "none") // respect hidden columns
-        .map((td) => `"${td.innerText.replace(/"/g, '""').trim()}"`)
-        .join(",")
-    );
-
-    const csv = rows.join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-
+  function downloadCsv() {
+    const t = el("scheduleTable");
+    if (!t || !last) return;
+    // числа без форматування (крапка, 2 знаки), роздільник «;» — Excel читає як числа
+    const clean = (s) => {
+      const x = s.replace(/[\s ]/g, "");
+      if (/^[\d,.\-]+$/.test(x)) return IS_EN ? x.replace(/,/g, "") : x.replace(",", ".");
+      return s;
+    };
+    const csv = "﻿" + tableMatrix().map((row) => row.map((c) => '"' + clean(c).replace(/"/g, '""') + '"').join(";")).join("\r\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
     const a = document.createElement("a");
     a.href = url;
     a.download = "salary-schedule.csv";
     document.body.appendChild(a);
     a.click();
     a.remove();
-
     URL.revokeObjectURL(url);
-    setToast(tt("salary.csv_downloaded") || (isEn() ? "CSV downloaded." : "CSV завантажено."));
-    setTimeout(() => setToast(""), 1500);
+    toast(T.csvDone);
   }
 
-  // ---------- Auto-calc debounce ----------
-  let autoTimer = null;
-  function scheduleAuto() {
-    if (!autoCalc || !autoCalc.checked) return;
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(() => calc({ silent: true }), 180);
+  // ===== режими =====
+  function applyState() {
+    document.querySelectorAll("[data-mode]").forEach((b) => {
+      const on = b.dataset.mode === state.mode;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-pressed", String(on));
+    });
+    document.querySelectorAll("[data-period]").forEach((b) => b.classList.toggle("is-on", b.dataset.period === state.period));
+    document.querySelectorAll("[data-fu]").forEach((b) => {
+      const on = b.dataset.u === state.bonusU;
+      b.classList.toggle("is-on", on);
+      b.setAttribute("aria-pressed", String(on));
+      if (b.dataset.u === "abs") b.textContent = T.cur[state.cur];
+    });
+    el("amountLabelText").textContent = state.mode === "n2g" ? T.amountNet : T.amountGross;
+    el("bonusBlock").hidden = state.mode === "n2g";
+    el("fxWrap").hidden = state.cur === "UAH";
+    if (state.cur !== "UAH") el("fxLabel").textContent = (IS_EN ? "UAH per 1 " : "Курс: грн за 1 ") + T.cur[state.cur];
+    const flag = { UAH: "ua", USD: "us", EUR: "eu" }[state.cur];
+    el("cur_flag").src = "/assets/flags/" + flag + ".png";
+    el("cur_code").textContent = state.cur;
+    document.querySelectorAll("#cur_list li").forEach((li) => li.setAttribute("aria-selected", String(li.dataset.code === state.cur)));
   }
 
-  // ---------- events ----------
-  // money inputs formatting
-  [salaryAmount, bonus, deductions].forEach(attachMoneyFormatter);
+  // ===== кнопки =====
+  const IDS = ["amount", "bonus", "one", "oneMonth", "ded", "pit", "vz", "esv", "minw", "maxb", "fx", "start"];
 
-  salaryAmount?.addEventListener("change", scheduleAuto);
-  mode?.addEventListener("change", scheduleAuto);
-  period?.addEventListener("change", scheduleAuto);
+  function setDefaults() {
+    el("pit").value = DEFAULTS.pit;
+    el("vz").value = DEFAULTS.vz;
+    el("esv").value = DEFAULTS.esv;
+    el("minw").value = DEFAULTS.minw;
+    el("maxb").value = DEFAULTS.maxb;
+    groupInput(el("minw"));
+  }
 
-  bonus?.addEventListener("change", scheduleAuto);
-  deductions?.addEventListener("change", scheduleAuto);
+  function resetAll() {
+    IDS.forEach((id) => (el(id).value = ""));
+    setDefaults();
+    Object.assign(state, { mode: "g2n", period: "month", cur: "UAH", bonusU: "pct" });
+    ["moreDetails", "legalDetails"].forEach((id) => (el(id).open = false));
+    applyState();
+    render({ ok: false, none: true });
+  }
 
-  taxMode?.addEventListener("change", () => {
-    updateTaxFieldState();
-    scheduleAuto();
-  });
-  taxRate?.addEventListener("input", scheduleAuto);
+  function fillExample() {
+    setDefaults();
+    const v = { amount: "50000", bonus: "", one: "25000", oneMonth: "12", ded: "", fx: "", start: "" };
+    Object.keys(v).forEach((id) => (el(id).value = v[id]));
+    Object.assign(state, { mode: "g2n", period: "month", cur: "UAH", bonusU: "pct" });
+    el("moreDetails").open = true;
+    applyState();
+    groupAll();
+    calc();
+    toast(T.example);
+  }
 
-  showEsv?.addEventListener("change", () => {
-    updateEsvFieldState();
-    scheduleAuto();
-  });
-  esvRate?.addEventListener("input", scheduleAuto);
+  function share() {
+    const p = new URLSearchParams();
+    IDS.forEach((id) => {
+      const v = plain((el(id).value || "").trim());
+      if (v) p.set(id, v);
+    });
+    p.set("mode", state.mode);
+    p.set("period", state.period);
+    p.set("cur", state.cur);
+    p.set("bonusU", state.bonusU);
+    const url = location.origin + location.pathname + "?" + p.toString();
+    navigator.clipboard?.writeText(url).then(() => toast(T.linkCopied)).catch(() => toast(T.copyFailed));
+  }
 
-  months?.addEventListener("input", scheduleAuto);
-  startDate?.addEventListener("change", scheduleAuto);
+  function applyFromUrl() {
+    const q = new URLSearchParams(location.search);
+    let any = false;
+    IDS.forEach((id) => {
+      if (q.has(id)) {
+        el(id).value = q.get(id);
+        any = true;
+      }
+    });
+    if (q.get("mode") === "n2g") state.mode = "n2g";
+    if (q.get("period") === "year") state.period = "year";
+    if (["USD", "EUR"].includes(q.get("cur"))) state.cur = q.get("cur");
+    if (q.get("bonusU") === "abs") state.bonusU = "abs";
+    if (["bonus", "one", "ded"].some((id) => !blank(id))) el("moreDetails").open = true;
+    if (["pit", "vz", "esv", "minw", "maxb", "start", "fx"].some((id) => q.has(id))) el("legalDetails").open = true;
+    return any || ["mode", "period", "cur"].some((k) => q.has(k));
+  }
 
-  btnCalc?.addEventListener("click", () => calc({ silent: false }));
-  btnReset?.addEventListener("click", reset);
-  btnCopy?.addEventListener("click", copyResult);
+  window.addEventListener("DOMContentLoaded", () => {
+    setDefaults();
+    IDS.forEach((id) => {
+      el(id).addEventListener("input", () => {
+        if (MONEY_IDS.includes(id)) groupInput(el(id));
+        calc();
+      });
+      el(id).addEventListener("keydown", (e) => {
+        if (e.key === "Enter") calc();
+      });
+    });
+    document.querySelectorAll("[data-mode]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.mode = b.dataset.mode;
+        applyState();
+        calc();
+      })
+    );
+    document.querySelectorAll("[data-period]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.period = b.dataset.period;
+        applyState();
+        calc();
+      })
+    );
+    document.querySelectorAll("[data-fu]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.bonusU = b.dataset.u;
+        applyState();
+        calc();
+      })
+    );
+    el("copyTbl").addEventListener("click", copyTable);
+    el("csvBtn").addEventListener("click", downloadCsv);
 
-  btnCopySchedule?.addEventListener("click", copySchedule);
-  btnDownloadCSV?.addEventListener("click", downloadCSV);
+    // валюта: випадний список із прапорцем
+    const curBtn = el("cur_btn");
+    const curList = el("cur_list");
+    const closeCur = () => {
+      curList.hidden = true;
+      curBtn.setAttribute("aria-expanded", "false");
+    };
+    curBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = curList.hidden;
+      curList.hidden = !open;
+      curBtn.setAttribute("aria-expanded", String(open));
+    });
+    curList.addEventListener("click", (e) => {
+      const li = e.target.closest("li[data-code]");
+      if (!li) return;
+      closeCur();
+      state.cur = li.dataset.code;
+      applyState();
+      calc();
+    });
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#cur_dd")) closeCur();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeCur();
+    });
 
-  scheduleCurrency?.addEventListener("change", () => {
-    const c = String(scheduleCurrency.value || "UAH").toUpperCase();
-    if ((c === "USD" || c === "EUR") && !rates.loaded) {
-      setToast(tt("salary.toast_nbu_not_loaded_fallback") || (isEn() ? "NBU not loaded — showing UAH." : "Курс НБУ не завантажився — показую UAH."));
-      scheduleCurrency.value = "UAH";
-      setTimeout(() => setToast(""), 2000);
-    }
-    renderScheduleFromCache();
-  });
+    el("calcBtn").addEventListener("click", () => {
+      const r = compute();
+      render(r);
+      if (!r.ok && r.msg) toast(r.msg);
+    });
+    el("exampleBtn").addEventListener("click", fillExample);
+    el("resetBtn").addEventListener("click", () => {
+      resetAll();
+      toast(T.reset);
+    });
+    el("shareBtn").addEventListener("click", share);
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter") return;
-    calc({ silent: false });
-  });
-
-  // ---------- init ----------
-  document.addEventListener("DOMContentLoaded", () => {
-    // Insert currency picker next to "Mode"
-    injectBaseCurrencyPickerNextToMode();
-
-    // Default base currency
-    baseCur = "UAH";
-    if (baseCurSelect) baseCurSelect.value = "UAH";
-
-    reset();
-    loadNbuRates();
+    const used = applyFromUrl();
+    groupAll();
+    applyState();
+    if (used) calc();
+    else render({ ok: false, none: true });
   });
 })();

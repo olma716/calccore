@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Salary Calculator (Net Pay): taxes, employer cost | CalcCore</title>
+    <title>Salary Calculator 2026: Net Pay, Taxes, ESV | CalcCore</title>
     <meta name="description"
-        content="CalcCore salary calculator: gross↔net, taxes, optional SSC (employer cost), bonuses, deductions, monthly schedule. Copy & export CSV." />
+        content="Salary calculator: gross to net and back, 18% income tax, 5% military levy, 22% ESV, employer cost, bonuses, deductions, monthly table and CSV export." />
 
-    <!-- Canonical (EN clean URL) -->
     <link rel="canonical" href="https://calccore.net/en/finance/salary-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/salary-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/salary-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,344 +28,385 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Salary Calculator (Net Pay): taxes, employer cost" />
-    <meta property="og:description" content="CalcCore salary calculator: gross↔net, taxes, optional SSC (employer cost), bonuses, deductions, monthly schedule. Copy & export CSV." />
+    <meta property="og:title" content="Salary Calculator 2026: Net Pay, Taxes, ESV" />
+    <meta property="og:description" content="Salary calculator: gross to net and back, 18% income tax, 5% military levy, 22% ESV, employer cost, bonuses, deductions, monthly table and CSV export." />
     <meta property="og:url" content="https://calccore.net/en/finance/salary-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Salary Calculator (Net Pay): taxes, employer cost" />
-    <meta name="twitter:description" content="CalcCore salary calculator: gross↔net, taxes, optional SSC (employer cost), bonuses, deductions, monthly schedule. Copy & export CSV." />
+    <meta name="twitter:title" content="Salary Calculator 2026: Net Pay, Taxes, ESV" />
+    <meta name="twitter:description" content="Salary calculator: gross to net and back, 18% income tax, 5% military levy, 22% ESV, employer cost, bonuses, deductions, monthly table and CSV export." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/salary-calculator.css" />
+    <link rel="stylesheet" href="/css/salary.css?v=20261022sal7" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/salary-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022sal7" defer></script>
+    <script src="/js/salary-calculator.js?v=20261022sal7" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is the difference between gross and net salary?",
-        "acceptedAnswer":{"@type":"Answer","text":"Gross salary is income before taxes. Net salary (take-home pay) is what you receive after all deductions."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is take-home pay lower than gross salary?",
-        "acceptedAnswer":{"@type":"Answer","text":"Because taxes and contributions are deducted from the gross amount. The calculator shows the deducted amount and your final net pay."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I change the tax rate?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. If a custom mode is available, you can enter a different tax rate and see how it affects take-home pay."}
-      },
-      {
-        "@type":"Question",
-        "name":"How does this help when comparing job offers?",
-        "acceptedAnswer":{"@type":"Answer","text":"Some companies present salaries as gross, others as net. This calculator converts everything to a consistent take-home number for a fair comparison."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/finance/salary-calculator#app",
+  "name": "Salary Calculator",
+  "description": "Calculates a salary in Ukraine: from gross to net pay and from a desired net pay to gross, income tax, military levy, employer ESV with a minimum base, employer cost, bonuses, deductions, tax burden, a chart and a monthly table.",
+  "url": "https://calccore.net/en/finance/salary-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Two modes: gross to net and a desired net pay to gross",
+    "Income tax, military levy and ESV on separate lines, rates can be changed",
+    "Employer ESV with a minimum base (the minimum wage) and an optional upper limit",
+    "Monthly and one-time bonuses, deductions, salary per month or per year",
+    "Employer cost and tax burden, totals for the year",
+    "Donut chart of the costs, monthly table, copy and CSV for Excel",
+    "UAH, USD and EUR currencies; shareable link"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/finance/salary-calculator#app",
-    "name":"Take-Home Salary Calculator",
-    "description":"Online salary calculator to estimate net take-home pay after taxes. Shows gross salary, total taxes, and net income.",
-    "url":"https://calccore.net/en/finance/salary-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/finance/salary-calculator#webpage",
+      "url": "https://calccore.net/en/finance/salary-calculator",
+      "name": "Salary Calculator 2026: Net Pay, Taxes, ESV | CalcCore",
+      "description": "Salary calculator: gross to net and back, 18% income tax, 5% military levy, 22% ESV, employer cost, bonuses, deductions, monthly table and CSV export.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/finance/salary-calculator#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "en"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/finance/salary-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I work out the net pay from the gross salary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Subtract the 18% income tax and the 5% military levy (23% in total). For a salary of 30,000 UAH: 5,400 UAH of income tax, 1,500 UAH of levy, net pay 23,100 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which taxes are withheld from a salary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Personal income tax of 18% and a military levy of 5%. For 30,000 UAH that is 5,400 and 1,500 UAH. The rates are set by law and may change, so you can change them in the calculator."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is ESV and who pays it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The single social contribution of 22% is paid by the employer on top of the accrued salary. It does not reduce the net pay. For 30,000 UAH it is 6,600 UAH and the full cost of the employee is 36,600 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum ESV base?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ESV is charged on at least the minimum wage (for full-time work). From 1 January 2026 it is 8,647 UAH, so the minimum ESV is 1,902.34 UAH. For a salary of 5,000 UAH the calculator takes 1,902.34 UAH, not 1,100 UAH. The value can be changed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there an upper limit of the ESV base?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The upper limit of the ESV base depends on the law in force, so the calculator does not apply it by default. If it applies in your case, enter it in the “Law parameters” block."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I work out the gross salary from a desired net pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose the “Net → gross” mode. Gross = net ÷ (1 − 0.23). To receive 30,000 UAH you need a gross of 38,961.04 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I include a bonus or a 13th salary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter a monthly bonus (as a percentage or an amount) or a one-time one in the right month. It is taxed like a salary. A one-time 25,000 UAH in December on top of 50,000 UAH gives 57,750 UAH net in December."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the tax burden?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The share of income tax, military levy and ESV in the employer's total cost. For a salary of 30,000 UAH it is 36.9%: out of 36,600 UAH of cost the employee gets 23,100 UAH."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate a salary in a foreign currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose USD or EUR. The taxes are calculated the same way, and the rate (UAH per 1 unit) is needed only for the minimum ESV base. Without a rate the minimum base is not applied, and the calculator warns you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator include the tax social benefit, holiday pay and sick pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The tax social benefit applies only to a small income (about 4,660 UAH per month in 2026 according to open sources), so it does not apply to ordinary salaries. Holiday pay, sick pay and worked time depend on the contract and the employer's rules: check with the payroll department."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page csalary">
+<body class="sal-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc csalary" id="csalary">
-            <div class="mcalc__wrap">
+        <section class="sal" id="sal">
+            <div class="sal__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Salary Calculator (Net Pay)</h1>
-                    <p class="mcalc__p">
-                        Calculate take-home pay: income tax, military levy, optional SSC (employer cost),
-                        bonuses, deductions, and a detailed monthly schedule. Supports gross→net and net→gross.
-                    </p>
+                <div class="sal__titlebar">
+                    <h1 class="sal__h1">Salary Calculator</h1>
+                    <p class="sal__p">Calculate the net pay from the gross salary, or the gross salary from a desired net pay, with income tax, military levy, ESV and the employee's cost to the employer.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calculate</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="NBU rate (USD/EUR)">
-                            NBU rate: loading…
-                        </span>
-                    </div>
+                <div class="sal__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter details</h2>
-                            <span class="mcalc__badge">Finance</span>
+                    <div class="sal__card">
+                        <div class="sal__sectionTitle">
+                            <h2 class="sal__h2">Input data</h2>
+                            <div class="sal__dd" id="cur_dd"><button type="button" class="sal__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="sal__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="sal__caret" aria-hidden="true"></span></button><ul class="sal__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="sal__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="sal__ddCode">UAH</span><span class="sal__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="sal__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="sal__ddCode">USD</span><span class="sal__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="sal__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="sal__ddCode">EUR</span><span class="sal__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="mode">Mode</label>
-                                <select class="mcalc__select" id="mode">
-                                    <option value="gross2net" selected>Gross → Net (take-home)</option>
-                                    <option value="net2gross">Net (take-home) → Gross</option>
-                                </select>
-                                <div class="mcalc__hint">Choose what you input: gross salary or take-home pay.</div>
+                        <div class="sal__block">
+                            <div class="sal__miniTitle">What to calculate</div>
+                            <div class="sal__modes" role="group" aria-label="Direction">
+                                <button class="sal__mode is-active" type="button" data-mode="g2n" aria-pressed="true"><b>Gross → net</b><span>I know the salary, show me the pay after taxes</span></button>
+                                <button class="sal__mode" type="button" data-mode="n2g" aria-pressed="false"><b>Net → gross</b><span>I know the net pay I need, show me the gross salary</span></button>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="salaryAmount">Amount</label>
-                                <input class="mcalc__input" id="salaryAmount" type="text" inputmode="decimal"
-                                    placeholder="e.g., 50 000" />
-                                <div class="mcalc__hint">Base currency: ₴. Schedule conversion uses NBU rates.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="period">Period</label>
-                                <select class="mcalc__select" id="period">
-                                    <option value="monthly" selected>Per month</option>
-                                    <option value="yearly">Per year</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="bonus">Bonus / extra (optional)</label>
-                                <input class="mcalc__input" id="bonus" type="text" inputmode="decimal"
-                                    placeholder="e.g., 5 000" />
-                                <div class="mcalc__hint">Added to the taxable base.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="deductions">Other deductions (optional)</label>
-                                <input class="mcalc__input" id="deductions" type="text" inputmode="decimal"
-                                    placeholder="e.g., 1 200" />
-                                <div class="mcalc__hint">Subtracted after taxes (e.g., penalties/fees).</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="taxMode">Taxes</label>
-                                <select class="mcalc__select" id="taxMode">
-                                    <option value="standard" selected>Standard (18% + 1.5% = 19.5%)</option>
-                                    <option value="none">Ignore</option>
-                                    <option value="custom">Custom</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="taxRate">Tax rate, % (if “Custom”)</label>
-                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
-                                    placeholder="e.g., 19.5" />
-                                <div class="mcalc__hint">Default: 19.5%.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="showEsv">
-                                    <span style="display:inline-flex;gap:10px;align-items:center;">
-                                        <input id="showEsv" type="checkbox" checked />
-                                        Show SSC (employer cost)
-                                    </span>
-                                </label>
-                                <div class="mcalc__hint">SSC typically does not reduce take-home pay. We show it as
-                                    employer cost.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="esvRate">SSC, % (if enabled)</label>
-                                <input class="mcalc__input" id="esvRate" type="text" inputmode="decimal"
-                                    placeholder="e.g., 22" />
-                                <div class="mcalc__hint">Default: 22%.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="months">Schedule horizon</label>
-                                <input class="mcalc__input" id="months" type="number" min="1" step="1"
-                                    placeholder="e.g., 12" />
-                                <div class="mcalc__hint">In months (for the table).</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Used for dates in the schedule.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                  
+                            <div class="sal__rows">
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="amount"><span id="amountLabelText">Gross salary (before tax)</span> <span class="sal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="sal__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30,000"><div class="sal__qrow"><button type="button" class="sal__qchip is-on" data-period="month">Per month</button><button type="button" class="sal__qchip" data-period="year">Per year</button></div>
                                 </div>
-
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
+                            <div class="sal__rows sal__mt12" id="fxWrap" hidden>
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="fx"><span id="fxLabel">Rate</span></label>
+                                    <input class="sal__input" id="fx" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 41"><div class="sal__hint">Needed only for the minimum ESV base in hryvnias (optional).</div>
+                                </div>
+                            </div>
                         </div>
+
+                        <details class="sal__details sal__mt12" id="moreDetails">
+                            <summary>Bonuses and deductions <span class="sal__hint">(optional)</span></summary>
+                            <div class="sal__rows" id="bonusBlock">
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="bonus">Monthly bonus</label>
+                                    <div class="sal__inwrap"><input class="sal__input" id="bonus" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10"><div class="sal__seg" role="group" aria-label="Unit"><button type="button" data-fu="bonus" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="bonus" data-u="abs" aria-pressed="false">UAH</button></div></div>
+                                    <div class="sal__hint">% of the salary or an amount per month.</div>
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="one">One-time bonus</label>
+                                    <input class="sal__input" id="one" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 25,000">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="oneMonth">In month no.</label>
+                                    <input class="sal__input" id="oneMonth" type="text" inputmode="decimal" autocomplete="off" placeholder="12">
+                                </div>
+                            </div>
+                            <div class="sal__rows sal__mt10">
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="ded">Deductions per month</label>
+                                    <input class="sal__input" id="ded" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,000"><div class="sal__hint">Alimony, union dues and so on: subtracted from the amount after tax.</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="sal__details sal__mt12" id="legalDetails">
+                            <summary>Law parameters <span class="sal__hint">(optional)</span></summary>
+                            <div class="sal__hint sal__mb10">Values as of 2026. The rates, the minimum wage and the ESV limit are set by law and may change — check the current ones.</div>
+                            <div class="sal__rows">
+                                <div class="sal__field">
+                                    <label class="sal__label" for="pit">Income tax (%)</label>
+                                    <input class="sal__input" id="pit" type="text" inputmode="decimal" autocomplete="off" placeholder="18">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="vz">Military levy (%)</label>
+                                    <input class="sal__input" id="vz" type="text" inputmode="decimal" autocomplete="off" placeholder="5">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="esv">Employer ESV (%)</label>
+                                    <input class="sal__input" id="esv" type="text" inputmode="decimal" autocomplete="off" placeholder="22">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="minw">Minimum wage (minimum ESV base)</label>
+                                    <input class="sal__input" id="minw" type="text" inputmode="decimal" autocomplete="off" placeholder="8 647"><div class="sal__hint">ESV is charged on at least this amount (full-time work). 0 — no minimum.</div>
+                                </div>
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="maxb">ESV upper base limit</label>
+                                    <input class="sal__input" id="maxb" type="text" inputmode="decimal" autocomplete="off" placeholder="no limit"><div class="sal__hint">Empty — no upper limit. Enter it if it applies to your case.</div>
+                                </div>
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="start">Start date</label>
+                                    <input class="sal__input" id="start" type="date" autocomplete="off" placeholder=""><div class="sal__hint">For dates in the monthly table.</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="sal__actions sal__mt12">
+                            <button class="sal__btn sal__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="sal__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="sal__card">
+                        <div class="sal__sectionTitle">
+                            <h2 class="sal__h2">Result</h2>
+                            <span class="sal__badge">₴</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Enter an amount to calculate.
-                        </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Table </Table> (monthly) <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Currency:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">Download
-                                    CSV</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Salary schedule">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Date</th>
-                                            <th>Gross (₴)</th>
-                                            <th>Taxes (₴)</th>
-                                            <th>Deductions (₴)</th>
-                                            <th>Take-home (₴)</th>
-                                            <th>SSC (₴)</th>
-                                            <th>Employer cost (₴)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="sal__result" id="result">Enter the amount — the result will appear here.</div>
+                        <div class="sal__actions sal__mt12">
+                            <button class="sal__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="sal__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="sal__btn" id="resetBtn" type="button">Reset</button>
                         </div>
                     </div>
+                </div>
 
+                <div class="sal__card sal__schedule" id="schedule" hidden>
+                    <div class="sal__schedHead">
+                        <h2 class="sal__h2">Monthly table (12 months)</h2>
+                        <div class="sal__tools">
+                            <button type="button" class="sal__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="sal__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="sal__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-        
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>How does the take-home salary calculator work?</h2>
-            <p>
-                The CalcCore salary calculator helps you estimate your <b>net (take-home) pay</b>
-                from your <b>gross salary</b>. Enter the salary amount and the calculator shows
-                how much you receive after taxes and deductions.
-            </p>
-            <p>
-                This is useful when comparing job offers, negotiating compensation, or planning a budget.
-                You can quickly see <b>net pay</b>, <b>total tax</b>, and the difference between
-                gross and net salary.
-            </p>
-        
-            <h2>What taxes are included?</h2>
-            <p>
-                Depending on your settings, the calculator can use standard tax rates or allow you to
-                enter a custom rate. This way you can see not only the take-home amount, but also how
-                much is deducted.
-            </p>
-        
-            <h2>Why calculate net salary?</h2>
-            <p>
-                Many job listings show salary <b>before tax</b>, but real financial planning requires
-                knowing your <b>actual income</b>. A net salary estimate helps you compare offers fairly
-                and understand the real difference between compensation packages.
-            </p>
-        </section>
-        
-        <!-- FAQ -->
-        <section class="m-faq">
-            <h2>FAQ</h2>
-        
-            <div class="m-faq-item">
-                <h3>What is the difference between gross and net salary?</h3>
-                <p>
-                    <b>Gross salary</b> is income before taxes. <b>Net salary</b> (take-home pay) is what you
-                    receive after all deductions.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Why is take-home pay lower than gross salary?</h3>
-                <p>
-                    Because taxes and contributions are deducted from the gross amount. The calculator shows
-                    the deducted amount and the final net pay.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>Can I change the tax rate?</h3>
-                <p>
-                    Yes. If a custom mode is available, you can enter a different tax rate to see how it affects
-                    net salary.
-                </p>
-            </div>
-        
-            <div class="m-faq-item">
-                <h3>How does this help when comparing job offers?</h3>
-                <p>
-                    Some companies present salaries as gross, others as net. This calculator converts everything
-                    to a consistent take-home number for a fair comparison.
-                </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/finance/credit-calculator"><b>Loan calculator</b><span>Payment, overpayment and APR of a consumer loan.</span></a>
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit calculator</b><span>Net income, tax and effective yield.</span></a>
+                <a class="cc-related-card" href="/en/finance/pension-calculator"><b>Retirement calculator</b><span>Retirement savings with contributions and return.</span></a>
             </div>
         </section>
 
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How net pay is calculated</h2>
+            <p>From the gross salary (before tax) a personal income tax of 18% and a military levy of 5% are withheld, 23% in total. What remains is the net pay. For a salary of 30,000 UAH: income tax <b>5,400 UAH</b>, military levy <b>1,500 UAH</b>, net pay <b>23,100 UAH</b>. For 100,000 UAH the net pay is 77,000 UAH.</p>
+            <p>In the reverse mode the calculator finds the gross salary that gives the desired net pay after tax: gross = net ÷ (1 − 0.23). To receive 30,000 UAH net you need a gross of <b>38,961.04 UAH</b>.</p>
+
+            <h2>ESV and the cost of an employee to the employer</h2>
+            <p>The 22% ESV (single social contribution) is paid by the employer on top and does not reduce the net pay. For a salary of 30,000 UAH it is 6,600 UAH, so the employee costs the employer <b>36,600 UAH</b> and the tax burden (income tax, military levy and ESV as a share of the employer cost) is 36.9%.</p>
+            <p>ESV cannot be charged on less than the minimum wage (for full-time work). From 1 January 2026 it is 8,647 UAH, and the minimum ESV is 1,902.34 UAH. So for a salary of 5,000 UAH the ESV is 1,902.34 UAH, not 1,100 UAH. By default the calculator does not apply an upper ESV base limit: enter it yourself if it applies.</p>
+
+            <h2>Bonuses, deductions and currency</h2>
+            <p>A bonus is taxed like a salary. A one-time bonus of 25,000 UAH in December on top of a salary of 50,000 UAH raises the net pay for the year to 481,250 UAH and the December net pay to 57,750 UAH. Deductions (alimony, union dues) are subtracted after tax: with a salary of 30,000 UAH and 3,000 UAH of deductions the net pay is 20,100 UAH.</p>
+            <p>For a salary in a foreign currency the taxes are calculated the same way, and the exchange rate is needed only to apply the minimum ESV base in hryvnias. The rates and the minimum wage in the “Law parameters” block can be changed.</p>
+            <p class="sal-mini">The calculation is an estimate. Tax rates, the minimum wage and the ESV limits are set by law and may change; the real pay depends on the contract, the worked time and the employer's rules.</p>
+        </section>
+
+        <section class="cc-faq">
+            <h2>FAQ</h2>
+
+            <div class="cc-faq-item">
+                <h3>How do I work out the net pay from the gross salary?</h3>
+                <p>Subtract the 18% income tax and the 5% military levy (23% in total). For a salary of 30,000 UAH: 5,400 UAH of income tax, 1,500 UAH of levy, net pay 23,100 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which taxes are withheld from a salary?</h3>
+                <p>Personal income tax of 18% and a military levy of 5%. For 30,000 UAH that is 5,400 and 1,500 UAH. The rates are set by law and may change, so you can change them in the calculator.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is ESV and who pays it?</h3>
+                <p>The single social contribution of 22% is paid by the employer on top of the accrued salary. It does not reduce the net pay. For 30,000 UAH it is 6,600 UAH and the full cost of the employee is 36,600 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the minimum ESV base?</h3>
+                <p>ESV is charged on at least the minimum wage (for full-time work). From 1 January 2026 it is 8,647 UAH, so the minimum ESV is 1,902.34 UAH. For a salary of 5,000 UAH the calculator takes 1,902.34 UAH, not 1,100 UAH. The value can be changed.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is there an upper limit of the ESV base?</h3>
+                <p>The upper limit of the ESV base depends on the law in force, so the calculator does not apply it by default. If it applies in your case, enter it in the “Law parameters” block.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I work out the gross salary from a desired net pay?</h3>
+                <p>Choose the “Net → gross” mode. Gross = net ÷ (1 − 0.23). To receive 30,000 UAH you need a gross of 38,961.04 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I include a bonus or a 13th salary?</h3>
+                <p>Enter a monthly bonus (as a percentage or an amount) or a one-time one in the right month. It is taxed like a salary. A one-time 25,000 UAH in December on top of 50,000 UAH gives 57,750 UAH net in December.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the tax burden?</h3>
+                <p>The share of income tax, military levy and ESV in the employer's total cost. For a salary of 30,000 UAH it is 36.9%: out of 36,600 UAH of cost the employee gets 23,100 UAH.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate a salary in a foreign currency?</h3>
+                <p>Choose USD or EUR. The taxes are calculated the same way, and the rate (UAH per 1 unit) is needed only for the minimum ESV base. Without a rate the minimum base is not applied, and the calculator warns you.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator include the tax social benefit, holiday pay and sick pay?</h3>
+                <p>No. The tax social benefit applies only to a small income (about 4,660 UAH per month in 2026 according to open sources), so it does not apply to ordinary salaries. Holiday pay, sick pay and worked time depend on the contract and the employer's rules: check with the payroll department.</p>
+            </div>
+        </section>
     </main>
 
     <div id="footer"></div>

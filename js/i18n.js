@@ -368,42 +368,6 @@
           car_not_found: "Нічого не знайдено",
         },
       
-        salary:{
-          nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
-          nbu_title: "Курс НБУ (USD/EUR)",
-          nbu_unavailable: "Курс НБУ: недоступно",
-
-          toast_enter_values: "Введи суму для розрахунку.",
-          result_enter_values: "Введи суму для розрахунку.",
-          toast_reset: "Скинуто.",
-          toast_need_calc_first: "Спочатку зроби розрахунок.",
-          copied_result: "Скопійовано результат.",
-          copy_failed: "Не вдалося скопіювати.",
-          copied_table: "Скопійовано таблицю.",
-          copy_table_failed: "Не вдалося скопіювати таблицю.",
-          csv_downloaded: "CSV завантажено.",
-          toast_nbu_not_loaded_fallback: "Курс НБУ не завантажився — показую UAH.",
-
-          net_inhand: "На руки",
-          period: "період",
-          period_month: "місяць",
-          period_year: "рік",
-
-          mode_gross2net: "від брутто → “на руки”",
-          mode_net2gross: "від “на руки” → брутто",
-
-          kpi_gross: "Брутто (база)",
-          kpi_taxes: "Податки (ПДФО+ВЗ)",
-          kpi_bonus: "Бонус / премія",
-          kpi_deductions: "Утримання",
-          kpi_employer_cost: "Вартість роботодавця",
-          kpi_esv: "ЄСВ",
-          kpi_tax_rate: "Ставка",
-          kpi_mode: "Режим",
-
-          summary_net: "На руки",
-          summary_hint: "У графіку: суми відображаються в ₴ та можуть бути конвертовані у USD/EUR за курсом НБУ."
-        },
 
       comp:{
           nbu_badge: "Курс НБУ: USD {usd} / EUR {eur}{datePart}",
@@ -1719,42 +1683,6 @@ csv_downloaded: "CSV downloaded.",
   chart_need_data: "Run the calculation to see the chart."
 },
 
-       salary:{
-  nbu_badge: "NBU rate: USD {usd} / EUR {eur}{datePart}",
-  nbu_title: "NBU rate (USD/EUR)",
-  nbu_unavailable: "NBU rate: unavailable",
-
-  toast_enter_values: "Enter an amount to calculate.",
-  result_enter_values: "Enter an amount to calculate.",
-  toast_reset: "Reset.",
-  toast_need_calc_first: "Calculate first.",
-  copied_result: "Result copied.",
-  copy_failed: "Copy failed.",
-  copied_table: "Table copied.",
-  copy_table_failed: "Failed to copy table.",
-  csv_downloaded: "CSV downloaded.",
-  toast_nbu_not_loaded_fallback: "NBU rate didn’t load — showing UAH.",
-
-  net_inhand: "Take-home",
-  period: "period",
-  period_month: "month",
-  period_year: "year",
-
-  mode_gross2net: "gross → take-home",
-  mode_net2gross: "take-home → gross",
-
-  kpi_gross: "Gross (base)",
-  kpi_taxes: "Taxes",
-  kpi_bonus: "Bonus",
-  kpi_deductions: "Deductions",
-  kpi_employer_cost: "Employer cost",
-  kpi_esv: "SSC",
-  kpi_tax_rate: "Rate",
-  kpi_mode: "Mode",
-
-  summary_net: "Take-home",
-  summary_hint: "In the schedule: values are shown in ₴ and can be converted to USD/EUR using NBU rates."
-},
 
       percent: {
   // hints

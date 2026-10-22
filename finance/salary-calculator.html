@@ -15,14 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Зарплатний калькулятор: зарплата “на руки”, податки, ЄСВ | CalcCore</title>
+    <title>Зарплатний калькулятор 2026: на руки, податки, ЄСВ | CalcCore</title>
     <meta name="description"
-        content="Зарплатний калькулятор CalcCore: брутто/нетто, ПДФО, військовий збір, ЄСВ (опц.), бонуси, утримання, помісячний графік. Експорт CSV і копіювання." />
+        content="Зарплатний калькулятор: з брутто на руки і навпаки, ПДФО 18%, військовий збір 5%, ЄСВ 22%, вартість роботодавця, премії, утримання, таблиця по місяцях і CSV." />
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://calccore.net/finance/salary-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/finance/salary-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/finance/salary-calculator" />
     <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
@@ -31,345 +28,383 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Зарплатний калькулятор: зарплата “на руки”, податки, ЄСВ" />
-    <meta property="og:description" content="Зарплатний калькулятор CalcCore: брутто/нетто, ПДФО, військовий збір, ЄСВ (опц.), бонуси, утримання, помісячний графік. Експорт CSV і копіювання." />
+    <meta property="og:title" content="Зарплатний калькулятор 2026: на руки, податки, ЄСВ" />
+    <meta property="og:description" content="Зарплатний калькулятор: з брутто на руки і навпаки, ПДФО 18%, військовий збір 5%, ЄСВ 22%, вартість роботодавця, премії, утримання, таблиця по місяцях і CSV." />
     <meta property="og:url" content="https://calccore.net/finance/salary-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Зарплатний калькулятор: зарплата “на руки”, податки, ЄСВ" />
-    <meta name="twitter:description" content="Зарплатний калькулятор CalcCore: брутто/нетто, ПДФО, військовий збір, ЄСВ (опц.), бонуси, утримання, помісячний графік. Експорт CSV і копіювання." />
+    <meta name="twitter:title" content="Зарплатний калькулятор 2026: на руки, податки, ЄСВ" />
+    <meta name="twitter:description" content="Зарплатний калькулятор: з брутто на руки і навпаки, ПДФО 18%, військовий збір 5%, ЄСВ 22%, вартість роботодавця, премії, утримання, таблиця по місяцях і CSV." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
-    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/salary-calculator.css" />
+    <link rel="stylesheet" href="/css/salary.css?v=20261022sal7" />
 
-    <!-- JS -->
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/salary-calculator.js?v=20260209" defer></script>
+    <script src="/js/i18n.js?v=20261022sal7" defer></script>
+    <script src="/js/salary-calculator.js?v=20261022sal7" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Чим відрізняється зарплата “брутто” і “нетто”?",
-        "acceptedAnswer":{"@type":"Answer","text":"Брутто — це зарплата до податків. Нетто — сума, яку ви отримуєте “на руки” після всіх утримань."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому “на руки” виходить менше, ніж у договорі або вакансії?",
-        "acceptedAnswer":{"@type":"Answer","text":"Тому що із зарплати утримуються податки та збори. Калькулятор показує суму відрахувань і чисту виплату."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна змінити ставку податків у калькуляторі?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так. Якщо доступний режим ручного введення, ви можете задати власну ставку та побачити, як вона впливає на зарплату “на руки”."}
-      },
-      {
-        "@type":"Question",
-        "name":"Для чого потрібен зарплатний калькулятор при порівнянні оферів?",
-        "acceptedAnswer":{"@type":"Answer","text":"Щоб порівнювати пропозиції коректно: одні компанії вказують суму до податків, інші — “на руки”. Калькулятор приводить все до одного формату."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/finance/salary-calculator#app",
+  "name": "Зарплатний калькулятор",
+  "description": "Розрахунок зарплати в Україні: з брутто на руки і з потрібної суми на руки в брутто, ПДФО, військовий збір, ЄСВ роботодавця з мінімальною базою, вартість роботодавця, премії, утримання, податкове навантаження, діаграма й таблиця по місяцях.",
+  "url": "https://calccore.net/finance/salary-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Два режими: з брутто на руки і з потрібної суми на руки в брутто",
+    "ПДФО, військовий збір і ЄСВ окремими рядками, ставки можна змінити",
+    "ЄСВ роботодавця з мінімальною базою (мінімальна зарплата) та необовʼязковою верхньою межею",
+    "Щомісячна й одноразова премії, утримання, заробітна плата за місяць або за рік",
+    "Вартість роботодавця й податкове навантаження, підсумки за рік",
+    "Кільцева діаграма витрат, таблиця по місяцях, копіювання й CSV для Excel",
+    "Валюти UAH, USD, EUR; посилання на розрахунок"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/finance/salary-calculator#app",
-    "name":"Зарплатний калькулятор",
-    "description":"Онлайн калькулятор зарплати після податків. Розрахунок чистої зарплати (нетто), податків та різниці між брутто і нетто.",
-    "url":"https://calccore.net/finance/salary-calculator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/finance/salary-calculator#webpage",
+      "url": "https://calccore.net/finance/salary-calculator",
+      "name": "Зарплатний калькулятор 2026: на руки, податки, ЄСВ | CalcCore",
+      "description": "Зарплатний калькулятор: з брутто на руки і навпаки, ПДФО 18%, військовий збір 5%, ЄСВ 22%, вартість роботодавця, премії, утримання, таблиця по місяцях і CSV.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/finance/salary-calculator#app"
+      },
+      "dateModified": "2026-10-22",
+      "inLanguage": "uk"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/finance/salary-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як із брутто порахувати зарплату «на руки»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відніміть ПДФО 18% і військовий збір 5% (разом 23%). Для заробітної плати 30 000 грн: 5 400 грн ПДФО, 1 500 грн збору, на руки 23 100 грн."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які податки утримують із зарплати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ПДФО 18% і військовий збір 5%. Для 30 000 грн це 5 400 і 1 500 грн. Ставки встановлює закон і вони можуть змінитися, тому в калькуляторі їх можна змінити."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке ЄСВ і хто його платить?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Єдиний соціальний внесок 22% сплачує роботодавець зверху від нарахованої зарплати. Він не зменшує суму «на руки». Для 30 000 грн це 6 600 грн, а повна вартість працівника — 36 600 грн."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке мінімальна база ЄСВ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ЄСВ рахується не менше ніж від мінімальної зарплати (для повної зайнятості). Із 1 січня 2026 року вона 8 647 грн, тож мінімальний ЄСВ становить 1 902,34 грн. Для заробітної плати 5 000 грн калькулятор бере 1 902,34 грн, а не 1 100 грн. Значення можна змінити."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є верхня межа бази ЄСВ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Верхня межа бази ЄСВ залежить від чинного закону, тому калькулятор за замовчуванням її не застосовує. Якщо вона діє для вашого випадку, вкажіть її в блоці «Параметри законодавства»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати брутто з потрібної суми «на руки»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть режим «На руки → брутто». Брутто = на руки ÷ (1 − 0,23). Щоб отримувати 30 000 грн, потрібне брутто 38 961,04 грн."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як врахувати премію чи 13-ту зарплату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вкажіть премію щомісяця (відсотком чи сумою) або одноразову в потрібному місяці. Вона оподатковується як заробітна плата. Одноразова 25 000 грн у грудні до заробітної плати 50 000 грн дає 57 750 грн на руки в грудні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке податкове навантаження?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Частка ПДФО, військового збору й ЄСВ у загальних витратах роботодавця. Для заробітної плати 30 000 грн це 36,9%: із 36 600 грн витрат до працівника доходить 23 100 грн."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати зарплату у валюті?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть USD або EUR. Податки рахуються так само, а курс (грн за 1 одиницю) потрібен лише для мінімальної бази ЄСВ. Без курсу мінімальна база не застосовується, про що калькулятор попередить."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор ПСП, відпускні й лікарняні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Податкова соціальна пільга діє лише при невеликому доході (у 2026 році близько 4 660 грн на місяць, за відкритими джерелами), тому до звичайних зарплат вона не застосовується. Відпускні, лікарняні й відпрацьований час залежать від договору та правил роботодавця: уточнюйте у бухгалтерії."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-
-<body class="credit-page csalary">
+<body class="sal-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc csalary" id="csalary">
-            <div class="mcalc__wrap">
+        <section class="sal" id="sal">
+            <div class="sal__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Зарплатний калькулятор (на руки)</h1>
-                    <p class="mcalc__p">
-                        Порахуй “на руки” із зарплати: ПДФО, військовий збір, опційно ЄСВ (як витрати роботодавця),
-                        бонуси, утримання та помісячний графік. Підтримує розрахунок від брутто або від нетто.
-                    </p>
+                <div class="sal__titlebar">
+                    <h1 class="sal__h1">Зарплатний калькулятор</h1>
+                    <p class="sal__p">Порахуйте зарплату «на руки» з брутто або брутто з потрібної суми «на руки», разом із ПДФО, військовим збором, ЄСВ і вартістю працівника для роботодавця.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Авто-розрахунок</span>
-                        </label>
-
-                        <span class="m-nbu" id="nbuBadge" title="Курс НБУ (USD/EUR)">
-                            Курс НБУ: завантаження…
-                        </span>
-                    </div>
+                <div class="sal__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Фінанси</span>
+                    <div class="sal__card">
+                        <div class="sal__sectionTitle">
+                            <h2 class="sal__h2">Дані для розрахунку</h2>
+                            <div class="sal__dd" id="cur_dd"><button type="button" class="sal__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="sal__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="sal__caret" aria-hidden="true"></span></button><ul class="sal__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="sal__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="sal__ddCode">UAH</span><span class="sal__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="sal__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="sal__ddCode">USD</span><span class="sal__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="sal__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="sal__ddCode">EUR</span><span class="sal__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="mode">Режим</label>
-                                <select class="mcalc__select" id="mode">
-                                    <option value="gross2net" selected>Від брутто → на руки</option>
-                                    <option value="net2gross">Від “на руки” → брутто</option>
-                                </select>
-                                <div class="mcalc__hint">Обери, що ти вводиш: зарплату до податків або “на руки”.</div>
+                        <div class="sal__block">
+                            <div class="sal__miniTitle">Що рахуємо</div>
+                            <div class="sal__modes" role="group" aria-label="Напрям розрахунку">
+                                <button class="sal__mode is-active" type="button" data-mode="g2n" aria-pressed="true"><b>Брутто → на руки</b><span>Знаю заробітну плату, хочу побачити суму після податків</span></button>
+                                <button class="sal__mode" type="button" data-mode="n2g" aria-pressed="false"><b>На руки → брутто</b><span>Знаю потрібну суму на руки, хочу дізнатись брутто</span></button>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="salaryAmount">Сума</label>
-                                <input class="mcalc__input" id="salaryAmount" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 50 000" />
-                                <div class="mcalc__hint">Валюта розрахунку: ₴. Конвертація в графіку — за курсом НБУ.
+                            <div class="sal__rows">
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="amount"><span id="amountLabelText">Заробітна плата брутто (до податків)</span> <span class="sal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="sal__input" id="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 30 000"><div class="sal__qrow"><button type="button" class="sal__qchip is-on" data-period="month">На місяць</button><button type="button" class="sal__qchip" data-period="year">На рік</button></div>
                                 </div>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="period">Період</label>
-                                <select class="mcalc__select" id="period">
-                                    <option value="monthly" selected>На місяць</option>
-                                    <option value="yearly">На рік</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="bonus">Бонус / премія (опц.)</label>
-                                <input class="mcalc__input" id="bonus" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 5 000" />
-                                <div class="mcalc__hint">Додається до бази оподаткування.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="deductions">Інші утримання (опц.)</label>
-                                <input class="mcalc__input" id="deductions" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 1 200" />
-                                <div class="mcalc__hint">Віднімається після податків (типово: аліменти/штрафи/комісії).
+                            <div class="sal__rows sal__mt12" id="fxWrap" hidden>
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="fx"><span id="fxLabel">Курс</span></label>
+                                    <input class="sal__input" id="fx" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 41"><div class="sal__hint">Потрібен лише для мінімальної бази ЄСВ у гривні (необовʼязково).</div>
                                 </div>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="taxMode">Податки (ПДФО+ВЗ)</label>
-                                <select class="mcalc__select" id="taxMode">
-                                    <option value="standard" selected>Стандарт (18% + 5% = 23%)</option>
-                                    <option value="none">Не враховувати</option>
-                                    <option value="custom">Вручну</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="taxRate">Ставка податків, % (якщо “Вручну”)</label>
-                                <input class="mcalc__input" id="taxRate" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 19.5" />
-                                <div class="mcalc__hint">За замовчуванням 23%.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="showEsv">
-                                    <span style="display:inline-flex;gap:10px;align-items:center;">
-                                        <input id="showEsv" type="checkbox" checked />
-                                        Показувати ЄСВ (витрати роботодавця)
-                                    </span>
-                                </label>
-                                <div class="mcalc__hint">ЄСВ зазвичай не зменшує “на руки”, але впливає на повну
-                                    вартість працівника.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="esvRate">ЄСВ, % (якщо показувати)</label>
-                                <input class="mcalc__input" id="esvRate" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 22" />
-                                <div class="mcalc__hint">За замовчуванням 22%.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="months">Горизонт графіка</label>
-                                <input class="mcalc__input" id="months" type="number" min="1" step="1"
-                                    placeholder="наприклад: 12" />
-                                <div class="mcalc__hint">У місяцях (для таблиці).</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Дата старту</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                                <div class="mcalc__hint">Використовується для дат у графіку.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    
-                                </div>
-
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
                         </div>
+
+                        <details class="sal__details sal__mt12" id="moreDetails">
+                            <summary>Премії й утримання <span class="sal__hint">(необовʼязково)</span></summary>
+                            <div class="sal__rows" id="bonusBlock">
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="bonus">Премія щомісяця</label>
+                                    <div class="sal__inwrap"><input class="sal__input" id="bonus" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 10"><div class="sal__seg" role="group" aria-label="Одиниця"><button type="button" data-fu="bonus" data-u="pct" class="is-on" aria-pressed="true">%</button><button type="button" data-fu="bonus" data-u="abs" aria-pressed="false">грн</button></div></div>
+                                    <div class="sal__hint">% від заробітної плати або сума щомісяця.</div>
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="one">Одноразова премія</label>
+                                    <input class="sal__input" id="one" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 25 000">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="oneMonth">У місяці №</label>
+                                    <input class="sal__input" id="oneMonth" type="text" inputmode="decimal" autocomplete="off" placeholder="12">
+                                </div>
+                            </div>
+                            <div class="sal__rows sal__mt10">
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="ded">Утримання на місяць</label>
+                                    <input class="sal__input" id="ded" type="text" inputmode="decimal" autocomplete="off" placeholder="наприклад: 1 000"><div class="sal__hint">Аліменти, профспілкові внески тощо: віднімаються від суми після податків.</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="sal__details sal__mt12" id="legalDetails">
+                            <summary>Параметри законодавства <span class="sal__hint">(необовʼязково)</span></summary>
+                            <div class="sal__hint sal__mb10">Значення станом на 2026 рік. Ставки, мінімальну зарплату й межу бази ЄСВ встановлює закон, вони можуть змінюватися — перевірте актуальні.</div>
+                            <div class="sal__rows">
+                                <div class="sal__field">
+                                    <label class="sal__label" for="pit">ПДФО (%)</label>
+                                    <input class="sal__input" id="pit" type="text" inputmode="decimal" autocomplete="off" placeholder="18">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="vz">Військовий збір (%)</label>
+                                    <input class="sal__input" id="vz" type="text" inputmode="decimal" autocomplete="off" placeholder="5">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="esv">ЄСВ роботодавця (%)</label>
+                                    <input class="sal__input" id="esv" type="text" inputmode="decimal" autocomplete="off" placeholder="22">
+                                </div>
+                                <div class="sal__field">
+                                    <label class="sal__label" for="minw">Мінімальна зарплата (мін. база ЄСВ)</label>
+                                    <input class="sal__input" id="minw" type="text" inputmode="decimal" autocomplete="off" placeholder="8 647"><div class="sal__hint">ЄСВ рахується не менше ніж від цієї суми (повна зайнятість). 0 — без мінімуму.</div>
+                                </div>
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="maxb">Верхня межа бази ЄСВ</label>
+                                    <input class="sal__input" id="maxb" type="text" inputmode="decimal" autocomplete="off" placeholder="без обмеження"><div class="sal__hint">Порожньо — без верхньої межі. Вкажіть, якщо вона діє для вашого випадку.</div>
+                                </div>
+                                <div class="sal__field sal__field--full">
+                                    <label class="sal__label" for="start">Дата початку</label>
+                                    <input class="sal__input" id="start" type="date" autocomplete="off" placeholder=""><div class="sal__hint">Для дат у таблиці по місяцях.</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="sal__actions sal__mt12">
+                            <button class="sal__btn sal__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="sal__toast" id="toast"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="sal__card">
+                        <div class="sal__sectionTitle">
+                            <h2 class="sal__h2">Результат</h2>
+                            <span class="sal__badge">₴</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">
-                            Введи суму для розрахунку.
-                        </div>
-
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Таблиця (помісячно) <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <label class="m-curr">
-                                    Валюта:
-                                    <select id="scheduleCurrency" class="mcalc__select mcalc__select--mini">
-                                        <option value="UAH" selected>UAH ₴</option>
-                                        <option value="USD">USD $</option>
-                                        <option value="EUR">EUR €</option>
-                                    </select>
-                                </label>
-
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
-                                    type="button">Копіювати таблицю</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV"
-                                    type="button">Завантажити CSV</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Графік зарплати">
-                                    <thead>
-                                        <tr>
-                                            <th>№</th>
-                                            <th>Дата</th>
-                                            <th>Брутто (₴)</th>
-                                            <th>Податки (₴)</th>
-                                            <th>Утримання (₴)</th>
-                                            <th>На руки (₴)</th>
-                                            <th>ЄСВ (₴)</th>
-                                            <th>Вартість роботодавця (₴)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <div class="mcalc__actions m-mt10">
-                            
-                            <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                            <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="sal__result" id="result">Вкажіть суму — результат зʼявиться тут.</div>
+                        <div class="sal__actions sal__mt12">
+                            <button class="sal__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="sal__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="sal__btn" id="resetBtn" type="button">Скинути</button>
                         </div>
                     </div>
+                </div>
 
+                <div class="sal__card sal__schedule" id="schedule" hidden>
+                    <div class="sal__schedHead">
+                        <h2 class="sal__h2">Таблиця по місяцях (12 місяців)</h2>
+                        <div class="sal__tools">
+                            <button type="button" class="sal__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="sal__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="sal__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-        
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>Як працює зарплатний калькулятор “на руки”?</h2>
-            <p>
-                Зарплатний калькулятор CalcCore допомагає швидко порахувати, скільки ви отримаєте
-                <b>зарплати “на руки” (нетто)</b> після відрахування податків із
-                <b>зарплати до оподаткування (брутто)</b>.
-            </p>
-            <p>
-                Це корисно, коли ви порівнюєте офери, ведете переговори про зарплату або плануєте бюджет.
-                Достатньо ввести суму зарплати, а калькулятор покаже
-                <b>чисту суму</b>, <b>суму податків</b> і <b>різницю між брутто та нетто</b>.
-            </p>
-        
-            <h2>Які податки враховує калькулятор?</h2>
-            <p>
-                Залежно від налаштувань, калькулятор може враховувати стандартні ставки податків
-                або дозволяє вказати їх вручну. У результаті ви бачите не лише чисту суму,
-                а й скільки саме було утримано податками.
-            </p>
-        
-            <h2>Чому важливо рахувати зарплату після податків?</h2>
-            <p>
-                У вакансіях часто вказують зарплату <b>до податків</b>, але для реального життя важливий
-                <b>фактичний дохід</b>. Розрахунок “на руки” допомагає правильно планувати витрати,
-                оцінювати вигідність пропозицій та розуміти реальну різницю між різними оферами.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/finance/credit-calculator"><b>Кредитний калькулятор</b><span>Платіж, переплата й ЕПС споживчого кредиту.</span></a>
+                <a class="cc-related-card" href="/finance/deposit-calculator"><b>Депозитний калькулятор</b><span>Дохід нетто, податок і ефективна дохідність.</span></a>
+                <a class="cc-related-card" href="/finance/pension-calculator"><b>Пенсійний калькулятор</b><span>Накопичення на пенсію з внесками й дохідністю.</span></a>
+            </div>
         </section>
-        
-        <!-- FAQ -->
-        <section class="m-faq">
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Як рахується зарплата «на руки»</h2>
+            <p>Із брутто (заробітної плати до податків) утримується ПДФО 18% і військовий збір 5%, разом 23%. Решта — це «на руки». Для заробітної плати 30 000 грн: ПДФО <b>5 400 грн</b>, військовий збір <b>1 500 грн</b>, на руки <b>23 100 грн</b>. Для 100 000 грн на руки буде 77 000 грн.</p>
+            <p>У зворотному режимі калькулятор шукає брутто, з якого після податків вийде потрібна сума: брутто = на руки ÷ (1 − 0,23). Щоб отримувати 30 000 грн «на руки», потрібне брутто <b>38 961,04 грн</b>.</p>
+
+            <h2>ЄСВ і вартість працівника для роботодавця</h2>
+            <p>ЄСВ у розмірі 22% сплачує роботодавець зверху, він не зменшує «на руки». Для заробітної плати 30 000 грн це 6 600 грн, тож працівник коштує роботодавцю <b>36 600 грн</b>, а податкове навантаження (ПДФО, військовий збір і ЄСВ від витрат роботодавця) становить 36,9%.</p>
+            <p>ЄСВ не може рахуватися від суми меншої за мінімальну зарплату (для повної зайнятості). Із 1 січня 2026 року вона 8 647 грн, мінімальний ЄСВ — 1 902,34 грн. Тому для заробітної плати 5 000 грн ЄСВ становить 1 902,34 грн, а не 1 100 грн. Верхню межу бази ЄСВ калькулятор за замовчуванням не застосовує: вкажіть її самі, якщо вона діє.</p>
+
+            <h2>Премії, утримання й валюта</h2>
+            <p>Премія оподатковується так само, як заробітна плата. Одноразова премія 25 000 грн у грудні до заробітної плати 50 000 грн збільшує «на руки» за рік до 481 250 грн, а на руки в грудні — 57 750 грн. Утримання (аліменти, профспілкові внески) віднімаються після податків: при заробітній платі 30 000 грн і утриманні 3 000 грн на руки буде 20 100 грн.</p>
+            <p>Для зарплати у валюті податки рахуються так само, а курс потрібен лише для застосування мінімальної бази ЄСВ у гривні. Ставки й мінімальну зарплату в блоці «Параметри законодавства» можна змінити.</p>
+            <p class="sal-mini">Розрахунок — оцінка. Ставки податків, мінімальну зарплату й межі бази ЄСВ встановлює закон і вони можуть змінюватися; реальна зарплата залежить від договору, відпрацьованого часу й правил роботодавця.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
-        
-            <div class="m-faq-item">
-                <h3>Чим відрізняється зарплата “брутто” і “нетто”?</h3>
-                <p>
-                    <b>Брутто</b> — це зарплата до податків. <b>Нетто</b> — сума, яку ви отримуєте “на руки”
-                    після всіх утримань.
-                </p>
+
+            <div class="cc-faq-item">
+                <h3>Як із брутто порахувати зарплату «на руки»?</h3>
+                <p>Відніміть ПДФО 18% і військовий збір 5% (разом 23%). Для заробітної плати 30 000 грн: 5 400 грн ПДФО, 1 500 грн збору, на руки 23 100 грн.</p>
             </div>
-        
-            <div class="m-faq-item">
-                <h3>Чому “на руки” виходить менше, ніж у договорі або вакансії?</h3>
-                <p>
-                    Тому що із зарплати утримуються податки та збори. Калькулятор показує,
-                    яку частину забирають відрахування і яка сума залишається.
-                </p>
+
+            <div class="cc-faq-item">
+                <h3>Які податки утримують із зарплати?</h3>
+                <p>ПДФО 18% і військовий збір 5%. Для 30 000 грн це 5 400 і 1 500 грн. Ставки встановлює закон і вони можуть змінитися, тому в калькуляторі їх можна змінити.</p>
             </div>
-        
-            <div class="m-faq-item">
-                <h3>Чи можна змінити ставку податків?</h3>
-                <p>
-                    Так. Якщо у калькуляторі доступний режим “вручну”, ви можете задати іншу ставку
-                    та побачити, як вона впливає на чисту зарплату.
-                </p>
+
+            <div class="cc-faq-item">
+                <h3>Що таке ЄСВ і хто його платить?</h3>
+                <p>Єдиний соціальний внесок 22% сплачує роботодавець зверху від нарахованої зарплати. Він не зменшує суму «на руки». Для 30 000 грн це 6 600 грн, а повна вартість працівника — 36 600 грн.</p>
             </div>
-        
-            <div class="m-faq-item">
-                <h3>Для чого потрібен зарплатний калькулятор при порівнянні оферів?</h3>
-                <p>
-                    Щоб порівнювати пропозиції коректно: одна компанія може вказувати суму “до податків”,
-                    інша — “на руки”. Калькулятор приводить все до однакового формату.
-                </p>
+
+            <div class="cc-faq-item">
+                <h3>Що таке мінімальна база ЄСВ?</h3>
+                <p>ЄСВ рахується не менше ніж від мінімальної зарплати (для повної зайнятості). Із 1 січня 2026 року вона 8 647 грн, тож мінімальний ЄСВ становить 1 902,34 грн. Для заробітної плати 5 000 грн калькулятор бере 1 902,34 грн, а не 1 100 грн. Значення можна змінити.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є верхня межа бази ЄСВ?</h3>
+                <p>Верхня межа бази ЄСВ залежить від чинного закону, тому калькулятор за замовчуванням її не застосовує. Якщо вона діє для вашого випадку, вкажіть її в блоці «Параметри законодавства».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати брутто з потрібної суми «на руки»?</h3>
+                <p>Оберіть режим «На руки → брутто». Брутто = на руки ÷ (1 − 0,23). Щоб отримувати 30 000 грн, потрібне брутто 38 961,04 грн.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як врахувати премію чи 13-ту зарплату?</h3>
+                <p>Вкажіть премію щомісяця (відсотком чи сумою) або одноразову в потрібному місяці. Вона оподатковується як заробітна плата. Одноразова 25 000 грн у грудні до заробітної плати 50 000 грн дає 57 750 грн на руки в грудні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке податкове навантаження?</h3>
+                <p>Частка ПДФО, військового збору й ЄСВ у загальних витратах роботодавця. Для заробітної плати 30 000 грн це 36,9%: із 36 600 грн витрат до працівника доходить 23 100 грн.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати зарплату у валюті?</h3>
+                <p>Оберіть USD або EUR. Податки рахуються так само, а курс (грн за 1 одиницю) потрібен лише для мінімальної бази ЄСВ. Без курсу мінімальна база не застосовується, про що калькулятор попередить.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор ПСП, відпускні й лікарняні?</h3>
+                <p>Ні. Податкова соціальна пільга діє лише при невеликому доході (у 2026 році близько 4 660 грн на місяць, за відкритими джерелами), тому до звичайних зарплат вона не застосовується. Відпускні, лікарняні й відпрацьований час залежать від договору та правил роботодавця: уточнюйте у бухгалтерії.</p>
             </div>
         </section>
     </main>
