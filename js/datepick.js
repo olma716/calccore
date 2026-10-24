@@ -176,6 +176,7 @@
       e.stopPropagation();
       const nav = e.target.closest("[data-nav]");
       if (nav) {
+        if (!view) return;
         const step = Number(nav.dataset.nav);
         const m = view.m + step;
         view = { y: view.y + Math.floor(m / 12), m: ((m % 12) + 12) % 12 };
