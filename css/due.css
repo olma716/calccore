@@ -1376,3 +1376,19 @@
     min-width: 0;
     white-space: nowrap;
 }
+
+/* підписи полів, що переносяться на 2 рядки: притиснуті до поля, зірочка не відривається */
+@supports (grid-template-rows: subgrid) {
+    .due__rows > .due__field > .due__label {
+        align-self: end;
+    }
+}
+
+.due__req {
+    white-space: nowrap;
+}
+
+/* перша колонка ширша: довгий підпис «Перший день останньої менструації» вміщується в один рядок */
+#lmpWrap > .due__rows {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
