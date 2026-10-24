@@ -178,6 +178,8 @@
 
         reset_done: "Скинуто ✅",
         hint_enter: "Введи суму та обери валюти.",
+        link_ok: "✅ Посилання скопійовано",
+        link_failed: "Не вдалось скопіювати посилання",
         loading: "Завантажую курси НБУ…",
 
         tab_fiat: "Валюти",
@@ -1633,6 +1635,8 @@ steel: {
 
         reset_done: "Reset ✅",
         hint_enter: "Enter an amount and choose currencies.",
+        link_ok: "✅ Link copied",
+        link_failed: "Could not copy the link",
         loading: "Loading NBU rates…",
 
         tab_fiat: "Currencies",

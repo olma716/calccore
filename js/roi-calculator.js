@@ -504,7 +504,7 @@
       note = T.modelCmp;
       el("schedBody").innerHTML = tableCmp(r);
     }
-    box.innerHTML = '<div class="roi__kpis">' + tiles + '</div><div class="roi__sub" id="chartTitle">' + title + "</div>" + chart + '<div class="roi__note">' + note + "</div>";
+    box.innerHTML = '<div class="roi__kpis">' + tiles + '</div><div class="roi__sub" id="chartTitle">' + title + "</div>" + '<div class="roi__chartScroll">' + chart + "</div>" + '<div class="roi__note">' + note + "</div>";
     sch.hidden = false;
   }
 

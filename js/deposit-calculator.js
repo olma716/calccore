@@ -373,7 +373,7 @@
       tile(T.kEff, nf(r.effNet, 2) + "%", fill(T.kEffMini, { g: nf(r.effGross, 2) })) +
       (r.real != null ? tile(T.kReal, nf(r.real, 2) + "%", fill(T.kRealMini, { i: nf(r.infl, 1) }), "dep__kpi--wide") : "") +
       (r.mode === "monthly" ? tile(T.kPaid, money(r.paidOut), T.kPaidMini) : "");
-    box.innerHTML = '<div class="dep__kpis">' + tiles + "</div>" + '<div class="dep__sub">' + T.chartTitle + "</div>" + chart(r) + '<div class="dep__note">' + T.modelNote + "</div>";
+    box.innerHTML = '<div class="dep__kpis">' + tiles + "</div>" + '<div class="dep__sub">' + T.chartTitle + "</div>" + '<div class="dep__chartScroll">' + chart(r) + "</div>" + '<div class="dep__note">' + T.modelNote + "</div>";
     sch.hidden = false;
     el("schedBody").innerHTML = scheduleHtml(r);
   }

@@ -515,7 +515,7 @@
       note = T.modelSave;
       el("schedBody").innerHTML = tableSave(r);
     }
-    box.innerHTML = '<div class="pen__kpis">' + tiles + "</div>" + extra + '<div class="pen__sub" id="chartTitle">' + (r.mode === "state" ? T.chartState : T.chartSave) + "</div>" + chart + '<div class="pen__note">' + note + "</div>";
+    box.innerHTML = '<div class="pen__kpis">' + tiles + "</div>" + extra + '<div class="pen__sub" id="chartTitle">' + (r.mode === "state" ? T.chartState : T.chartSave) + "</div>" + '<div class="pen__chartScroll">' + chart + "</div>" + '<div class="pen__note">' + note + "</div>";
     sch.hidden = false;
   }
 

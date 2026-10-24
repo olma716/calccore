@@ -627,8 +627,8 @@
     const toLabel = isBankLeg(to) ? t("currency.rate_sell") : t("currency.rate");
 
     let extra = `
-      <div><b>${fromLabel}</b> 1 ${from} = ${fmt(rateFrom, digits)} UAH</div>
-      <div><b>${toLabel}</b> 1 ${to} = ${fmt(rateTo, digits)} UAH</div>
+      ${from !== "UAH" ? `<div><b>${fromLabel}</b> 1 ${from} = ${fmt(rateFrom, digits)} UAH</div>` : ""}
+      ${to !== "UAH" ? `<div><b>${toLabel}</b> 1 ${to} = ${fmt(rateTo, digits)} UAH</div>` : ""}
       <div><b>${t("currency.formula")}</b> (${fmt(amount, digits)} × ${fmt(rateFrom, digits)}) / ${fmt(rateTo, digits)} = <b>${fmt(out, outDigits)}</b></div>
     `;
 
@@ -688,7 +688,7 @@
 
   // Enter to calculate
   document.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || e.target !== amountEl) return;
     convert({ silent: false });
   });
 
@@ -711,6 +711,36 @@
       setToast(t("currency.copy_failed"));
     }
   });
+
+  // Посилання на розрахунок: ?amount=100&from=USD&to=UAH&src=nbu (десятковий роздільник — крапка)
+  function shareLink() {
+    const p = new URLSearchParams();
+    const a = (amountEl?.value || "").trim().replace(/[\s\u00a0]/g, "").replace(",", ".");
+    if (a) p.set("amount", a);
+    if (fromEl?.value) p.set("from", fromEl.value);
+    if (toEl?.value) p.set("to", toEl.value);
+    p.set("src", source);
+    const url = location.origin + location.pathname + "?" + p.toString();
+    navigator.clipboard?.writeText(url).then(() => setToast(t("currency.link_ok"))).catch(() => setToast(t("currency.link_failed")));
+    setTimeout(() => setToast(""), 2000);
+  }
+  $("btnShare")?.addEventListener("click", shareLink);
+
+  async function applyFromUrl() {
+    const q = new URLSearchParams(location.search);
+    if (!["amount", "from", "to", "src"].some((k) => q.has(k))) return false;
+    const src = q.get("src");
+    if (BANK_SOURCES.includes(src) && src !== source) await setSource(src);
+    else if (src === "nbu" && source !== "nbu") await setSource("nbu");
+    const has = (el, v) => !!el && [...el.options].some((o) => o.value === v);
+    const from = (q.get("from") || "").toUpperCase(), to = (q.get("to") || "").toUpperCase();
+    if (has(fromEl, from)) fromEl.value = from;
+    if (has(toEl, to)) toEl.value = to;
+    const amt = (q.get("amount") || "").trim();
+    if (amt && /^\d+([.,]\d+)?$/.test(amt) && amountEl) amountEl.value = amt.replace(".", locale().startsWith("en") ? "." : ",");
+    syncPickers();
+    return true;
+  }
 
   // =====================================================
   // Перемикач джерела курсу (НБУ / monobank / ПриватБанк)
@@ -1221,6 +1251,7 @@
     fillSelects();
     setRateDateBadge();
     initBoard();
+    await applyFromUrl();
 
     if ((amountEl?.value || "").trim() && isAutoOn()) scheduleAuto();
     else setResult(t("currency.hint_enter"), "");

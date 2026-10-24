@@ -436,7 +436,7 @@
       (r.doubling ? tile(T.kDouble, nf(r.doubling, 1) + (IS_EN ? " yr" : " р."), r.rule72 ? fill(T.kDoubleMini, { r: nf(r.rule72, 1) }) : "") : "") +
       (r.real != null ? tile(T.kReal, money(r.real), fill(T.kRealMini, { i: nf(r.infl, 1) })) : "") +
       (r.taxPct > 0 ? tile(T.kTax, money(r.taxTotal), fill(T.kTaxMini, { p: nf(r.taxPct, 1) })) : "");
-    box.innerHTML = '<div class="cmp__kpis">' + tiles + '</div><div class="cmp__sub">' + T.chartTitle + "</div>" + chart(r) + '<div class="cmp__note">' + T.modelNote + "</div>";
+    box.innerHTML = '<div class="cmp__kpis">' + tiles + '</div><div class="cmp__sub">' + T.chartTitle + "</div>" + '<div class="cmp__chartScroll">' + chart(r) + "</div>" + '<div class="cmp__note">' + T.modelNote + "</div>";
     sch.hidden = false;
     el("schedBody").innerHTML = scheduleHtml(r);
   }

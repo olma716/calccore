@@ -434,7 +434,7 @@
       note = T.modelFc;
       el("schedBody").innerHTML = tableFc(r);
     }
-    box.innerHTML = '<div class="inf__kpis">' + tiles + '</div><div class="inf__sub" id="chartTitle">' + (r.mode === "hist" ? T.chartHist : T.chartFc) + "</div>" + chart + '<div class="inf__note">' + note + "</div>";
+    box.innerHTML = '<div class="inf__kpis">' + tiles + '</div><div class="inf__sub" id="chartTitle">' + (r.mode === "hist" ? T.chartHist : T.chartFc) + "</div>" + '<div class="inf__chartScroll">' + chart + "</div>" + '<div class="inf__note">' + note + "</div>";
     sch.hidden = false;
   }
 
