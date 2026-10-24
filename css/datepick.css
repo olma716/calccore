@@ -1,0 +1,191 @@
+/* datepick.css — власний календар для полів дати (js/datepick.js) */
+.dp-native {
+    display: none !important;
+}
+
+.dp {
+    position: relative;
+    min-width: 0;
+}
+
+.dp__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: box-shadow .15s ease;
+}
+
+.dp__btn:hover {
+    box-shadow: 0 0 0 1px #8fa8d6, 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.dp__btn:focus-visible,
+.dp__btn[aria-expanded="true"] {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .18), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.dp__val {
+    font-variant-numeric: tabular-nums;
+}
+
+.dp__val.is-empty {
+    color: #9ca3af;
+}
+
+.dp__ico {
+    flex: 0 0 auto;
+    color: #283b69;
+}
+
+.dp__pop {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 40;
+    width: 296px;
+    max-width: calc(100vw - 32px);
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.dp__pop[hidden] {
+    display: none;
+}
+
+.dp__hd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.dp__ttl {
+    color: #1f2f55;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.dp__nav {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 9px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.dp__nav:hover {
+    background: #dbe7fa;
+}
+
+.dp__wd,
+.dp__days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 3px;
+}
+
+.dp__wd span {
+    padding: 3px 0;
+    color: #6b7280;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.dp__d {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #1f2937;
+    font: inherit;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+}
+
+.dp__d:hover:not(:disabled) {
+    background: #eaf1fc;
+}
+
+.dp__d:focus-visible {
+    outline: 2px solid #283b69;
+    outline-offset: 1px;
+}
+
+.dp__d.is-out {
+    color: #aab3c8;
+}
+
+.dp__d.is-today {
+    box-shadow: inset 0 0 0 2px #0f8b8d;
+    font-weight: 800;
+}
+
+.dp__d.is-sel {
+    background: #283b69;
+    color: #fff;
+    font-weight: 800;
+}
+
+.dp__d.is-dis {
+    color: #c9cfdd;
+    cursor: not-allowed;
+}
+
+.dp__ft {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eef1f8;
+}
+
+.dp__ft button {
+    padding: 4px 6px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #283b69;
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.dp__ft button:hover:not(:disabled) {
+    background: #eaf1fc;
+}
+
+.dp__ft button:disabled {
+    color: #b3bbcd;
+    cursor: not-allowed;
+}

@@ -1303,3 +1303,72 @@
     min-height: 36px;
     font-family: inherit;
 }
+
+/* акцентний блок «додаткові параметри» */
+.due__details {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #8fa8d6;
+    background: #f6f9ff;
+}
+
+.due__details[open] {
+    padding-bottom: 14px;
+}
+
+.due__details > summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, #eef4ff, #dbe8fb);
+    color: #1f2f55;
+    font-size: 13.5px;
+    transition: background .15s ease;
+}
+
+.due__details > summary:hover {
+    background: linear-gradient(180deg, #e6efff, #d0e0fa);
+}
+
+.due__details > summary::before {
+    content: "+";
+    display: grid;
+    flex: 0 0 22px;
+    place-items: center;
+    height: 22px;
+    border-radius: 50%;
+    background: #283b69;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.due__details[open] > summary::before {
+    content: "−";
+}
+
+.due__details > summary::after {
+    float: none;
+    margin-left: auto;
+}
+
+.due__details > :not(summary) {
+    margin-right: 14px;
+    margin-left: 14px;
+}
+
+.due__details > .due__rows {
+    margin-top: 12px;
+}
+
+/* чотири кнопки під результатом: не стискаємо, а переносимо на новий рядок */
+#shareBtn,
+#exampleBtn,
+#resetBtn,
+#copyBtn {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+}
