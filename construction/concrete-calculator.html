@@ -10,466 +10,909 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор бетону онлайн — об’єм і матеріали | CalcCore</title>
+    <title>Калькулятор бетону: об'єм, цемент, пісок, щебінь | CalcCore</title>
     <meta name="description"
-        content="Калькулятор бетону: об’єм і кількість матеріалів (цемент, пісок, щебінь, вода) за формою, розмірами й пропорціями. Графік, таблиця, копіювання та експорт у Excel." />
+        content="Калькулятор бетону: об'єм плити, фундаменту, стін і колон, замовлення готового бетону із запасом і рейсами або цемент, пісок, щебінь і вода для замішування." />
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://calccore.net/construction/concrete-calculator" />
-
-    <!-- hreflang -->
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/concrete-calculator" />
     <link rel="alternate" hreflang="en" href="https://calccore.net/en/construction/concrete-calculator" />
-    <link rel="alternate" hreflang="x-default" href="https://calccore.net/" />
+    <link rel="alternate" hreflang="x-default" href="https://calccore.net/construction/concrete-calculator" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор бетону онлайн — об’єм і матеріали" />
-    <meta property="og:description" content="Калькулятор бетону: об’єм і кількість матеріалів (цемент, пісок, щебінь, вода) за формою, розмірами й пропорціями. Графік, таблиця, копіювання та експорт у Excel." />
+    <meta property="og:title" content="Калькулятор бетону: об'єм, цемент, пісок, щебінь" />
+    <meta property="og:description" content="Калькулятор бетону: об'єм плити, фундаменту, стін і колон, замовлення готового бетону із запасом і рейсами або цемент, пісок, щебінь і вода для замішування." />
     <meta property="og:url" content="https://calccore.net/construction/concrete-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор бетону онлайн — об’єм і матеріали" />
-    <meta name="twitter:description" content="Калькулятор бетону: об’єм і кількість матеріалів (цемент, пісок, щебінь, вода) за формою, розмірами й пропорціями. Графік, таблиця, копіювання та експорт у Excel." />
+    <meta name="twitter:title" content="Калькулятор бетону: об'єм, цемент, пісок, щебінь" />
+    <meta name="twitter:description" content="Калькулятор бетону: об'єм плити, фундаменту, стін і колон, замовлення готового бетону із запасом і рейсами або цемент, пісок, щебінь і вода для замішування." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
-    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/concrete-calculator.css" />
+    <link rel="stylesheet" href="/css/cnc.css?v=20261026cnc8" />
 
-    <!-- JS -->
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/concrete-calculator.js?v=20260211" defer></script>
+    <script src="/js/i18n.js?v=20261026cnc8" defer></script>
+    <script src="/js/concrete-calculator.js?v=20261026cnc8" defer></script>
 
-    <!-- FAQ Schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"У яких одиницях вводити розміри?",
-        "acceptedAnswer":{"@type":"Answer","text":"Вводьте всі розміри у метрах (м). Тоді об’єм бетону буде у кубічних метрах (м³)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що означає Д×Ш×В або Д×Ш×Т?",
-        "acceptedAnswer":{"@type":"Answer","text":"Д — довжина, Ш — ширина, В — висота, Т — товщина. Для плити зазвичай використовують Д×Ш×Т, для балки — Д×Ш×В."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що таке В/Ц і чи потрібно вводити літри води?",
-        "acceptedAnswer":{"@type":"Answer","text":"В/Ц — це співвідношення вода/цемент (коефіцієнт), а не літри. Калькулятор сам розраховує кількість води за цементом і обраним В/Ц."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому сухий об’єм більший за мокрий?",
-        "acceptedAnswer":{"@type":"Answer","text":"Сухий об’єм враховує пустоти та втрати при змішуванні. Тому застосовують коефіцієнт сухого об’єму (часто близько 1.54)."}
-      }
-    ]
-  }
-  </script>
-
-    <!-- WebApp Schema -->
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/concrete-calculator#app",
+  "name": "Калькулятор бетону",
+  "description": "Розрахунок об'єму бетону для плити, стрічкового фундаменту, стін, балок і колон до шести елементів: замовлення готового бетону із запасом, вартістю й кількістю рейсів міксера або матеріали для замішування (цемент у мішках, пісок, щебінь, вода) за складом і вашими цінами.",
+  "url": "https://calccore.net/construction/concrete-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Об'єм до шести елементів: плита, стрічка, стіна, балка, колона прямокутна й кругла",
+    "Режим «Готовий бетон»: замовлення із запасом, вартість, доставка, насос, рейси міксера",
+    "Режим «Замішування самому»: цемент у мішках, пісок, щебінь, вода за вашим складом",
+    "Ваші ціни без вбудованих; гривня, долар або євро",
+    "Таблиця, CSV для Excel, посилання на розрахунок"
+  ]
+}
+    </script>
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/concrete-calculator#app",
-    "name":"Калькулятор бетону",
-    "description":"Онлайн калькулятор бетону: об’єм бетону та кількість матеріалів (цемент, пісок, щебінь, вода), графік та таблиця, копіювання й завантаження таблиці.",
-    "url":"https://calccore.net/construction/concrete-calculator",
-    "applicationCategory":"ConstructionApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
-
-    <!-- OPTIONAL: if you need to enforce no-hover-jump specifically for this calculator
-  <style>
-    .cconcrete .mcalc__btn:hover { transform: none !important; }
-  </style>
-  -->
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/concrete-calculator#webpage",
+      "url": "https://calccore.net/construction/concrete-calculator",
+      "name": "Калькулятор бетону: об'єм, цемент, пісок, щебінь | CalcCore",
+      "description": "Калькулятор бетону: об'єм плити, фундаменту, стін і колон, замовлення готового бетону із запасом і рейсами або цемент, пісок, щебінь і вода для замішування.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/concrete-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/concrete-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-26",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/concrete-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор бетону",
+          "item": "https://calccore.net/construction/concrete-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/concrete-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати об'єм бетону для плити?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножте довжину на ширину й товщину в метрах. Для 6 × 4 м і товщини 0,2 м це 4,8 м³."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати бетон для стрічкового фундаменту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножте загальну довжину стрічки (периметр плюс внутрішні стіни) на ширину й висоту. Для 20 м стрічки 0,4 × 0,8 м це 6,4 м³."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати бетон для колони?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для круглої колони: π × (діаметр / 2)² × висота. Для діаметра 0,3 м і висоти 3 м це 0,21 м³. Для прямокутної: висота × сторона a × сторона b."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який запас бетону замовляти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запас задаєте ви: у калькуляторі за замовчуванням 5%. Для 11,2 м³ це 11,76 м³ замовлення."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки рейсів міксера потрібно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Об'єм замовлення діліть на місткість міксера й округлюйте вгору. Для 11,76 м³ і міксера 8 м³ це 2 рейси."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки цементу на 1 м³ бетону?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Залежить від складу. За об'ємом з коефіцієнтом 1,54 і густиною 1 440 кг/м³ для 1:2:4 це близько 316,8 кг (6,3 мішка по 50 кг), для 1:3:6 — 221,8 кг, для 1:1,5:3 — 403,2 кг."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки піску й щебеню на 1 м³ бетону?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для складу 1:2:4 і коефіцієнта 1,54 — близько 0,44 м³ піску й 0,88 м³ щебеню на 1 м³ бетону."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки води потрібно на 1 м³ бетону?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вода дорівнює кількості цементу в кг, помноженій на В/Ц. Для 1:2:4 і В/Ц 0,5 це близько 158 л на 1 м³."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна вказати різний склад для різних елементів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так: у режимі «Замішування самому» кожен елемент має свій склад. Для прикладу плита 4,8 м³ зі складом 1:2:4 (5,04 м³ із запасом) і стрічка 6,4 м³ зі складом 1:3:6 (6,72 м³) дають 1 597 кг і 1 490 кг цементу, разом 3 087 кг, тобто 62 мішки по 50 кг; піску 5,32 м³, щебеню 10,64 м³."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке коефіцієнт сухого об'єму?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це множник, який враховує пустоти між зернами: сухих матеріалів потрібно більше, ніж готового бетону. Зазвичай 1,52–1,57, у калькуляторі 1,54."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є в калькуляторі марки бетону М200, М300?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні: склад залежить від марки цементу й заповнювачів, а таблиці в джерелах розходяться. Введіть рецептуру від заводу як «Свій склад» або оберіть пропорцію за об'ємом."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Готовий бетон чи замішувати самому?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За умовними цінами з прикладу готовий бетон коштує 33 900 ₴, а замішування — 34 326 ₴. Введіть свої ціни: різниця залежить від регіону, доставки й вашої праці."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор арматуру?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, лише бетон. Арматуру порахуйте в калькуляторі арматури, а бюджет фундаменту — в калькуляторі вартості будівництва."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page cconcrete">
+<body class="cnc-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc cconcrete" id="cconcrete">
-            <div class="mcalc__wrap">
+        <section class="cnc" id="cnc">
+            <div class="cnc__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор бетону</h1>
-                    <p class="mcalc__p">
-                        Розрахуй об’єм бетону та кількість матеріалів: цемент, пісок, щебінь і вода.
-                        Є графік, таблиця, копіювання та завантаження таблиці (Excel).
-                    </p>
+                <div class="cnc__titlebar">
+                    <h1 class="cnc__h1">Калькулятор бетону</h1>
+                    <p class="cnc__p">Порахуйте об'єм бетону для елементів конструкції та оберіть: замовити готовий бетон або замісити самому.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Авто-розрахунок</span>
-                        </label>
-                    </div>
+                <div class="cnc__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Будівництво</span>
+                    <div class="cnc__card">
+                        <div class="cnc__sectionTitle">
+                            <h2 class="cnc__h2">Дані для розрахунку</h2>
+                            <div class="cnc__dd" id="cur_dd"><button type="button" class="cnc__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="cnc__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="cnc__caret" aria-hidden="true"></span></button><ul class="cnc__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="cnc__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="cnc__ddCode">UAH</span><span class="cnc__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="cnc__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="cnc__ddCode">USD</span><span class="cnc__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="cnc__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="cnc__ddCode">EUR</span><span class="cnc__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="shape">Форма</label>
-                                <select id="shape" class="mcalc__select">
-                                    <option value="slab" selected>Плита (Д×Ш×Т)</option>
-                                    <option value="footing">Подушка/фундамент (Д×Ш×Т)</option>
-                                    <option value="beam">Балка (Д×Ш×В)</option>
-                                    <option value="wall">Стіна (Д×В×Т)</option>
-                                    <option value="columnRect">Колона — прямокутна (Д×Ш×В)</option>
-                                    <option value="columnRound">Колона — кругла (D×В)</option>
-                                </select>
-                                <div class="mcalc__hint">Всі розміри вводяться в метрах (м).</div>
+                        <div class="cnc__block">
+                            <div class="cnc__mcards">
+                                <button type="button" class="cnc__mcard is-active" data-mode="ready" aria-pressed="true"><b>Готовий бетон</b><span>Замовлення: об'єм, ціна, доставка</span></button>
+                                <button type="button" class="cnc__mcard" data-mode="mix" aria-pressed="false"><b>Замішування самому</b><span>Цемент, пісок, щебінь, вода</span></button>
                             </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="length">Довжина (м)</label>
-                                <input class="mcalc__input" id="length" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 6" />
+                            <div class="cnc__miniTitle">Елементи</div>
+                            <div class="cnc__el" id="el1">
+                                <div class="cnc__elHead"><span>Елемент 1</span><span class="cnc__elVol" id="ev1">—</span><button type="button" class="cnc__elRm" id="el1rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="cnc__rows">
+                                    <div class="cnc__field">
+                                    <span class="cnc__label" id="e1tLbl">Форма</span>
+                                    <input type="hidden" id="e1_type" value="slab">
+                                    <div class="cnc__sel" id="e1t_dd">
+                                        <button type="button" class="cnc__selBtn" id="e1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e1tLbl e1t_val"><span id="e1t_val">Плита</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e1t_list" role="listbox" aria-labelledby="e1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита</li>
+                                            <li role="option" tabindex="-1" data-v="strip" aria-selected="false">Стрічковий фундамент</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="beam" aria-selected="false">Балка</li>
+                                            <li role="option" tabindex="-1" data-v="colRect" aria-selected="false">Колона прямокутна</li>
+                                            <li role="option" tabindex="-1" data-v="colRound" aria-selected="false">Колона кругла</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_n">Штук</label>
+                                    <input class="cnc__input" id="e1_n" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_p1"><span id="e1_p1_l">Довжина, м</span></label>
+                                    <input class="cnc__input" id="e1_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_p2"><span id="e1_p2_l">Ширина, м</span></label>
+                                    <input class="cnc__input" id="e1_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_p3"><span id="e1_p3_l">Товщина, м</span></label>
+                                    <input class="cnc__input" id="e1_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e1_ratioWrap" hidden>
+                                    <span class="cnc__label" id="e1rLbl">Склад (цемент:пісок:щебінь за об'ємом)</span>
+                                    <input type="hidden" id="e1_ratio" value="1:2:4">
+                                    <div class="cnc__sel" id="e1r_dd">
+                                        <button type="button" class="cnc__selBtn" id="e1r_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e1rLbl e1r_val"><span id="e1r_val">1:2:4</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e1r_list" role="listbox" aria-labelledby="e1rLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1:5:10" aria-selected="false">1:5:10</li>
+                                            <li role="option" tabindex="-1" data-v="1:4:8" aria-selected="false">1:4:8</li>
+                                            <li role="option" tabindex="-1" data-v="1:3:6" aria-selected="false">1:3:6</li>
+                                            <li role="option" tabindex="-1" data-v="1:2:4" aria-selected="true">1:2:4</li>
+                                            <li role="option" tabindex="-1" data-v="1:1.5:3" aria-selected="false">1:1.5:3</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій склад</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e1_custom" hidden>
+                                        <div class="cnc__rows cnc__rows--3">
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_rc">Цемент, частин</label>
+                                    <input class="cnc__input" id="e1_rc" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_rs">Пісок, частин</label>
+                                    <input class="cnc__input" id="e1_rs" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e1_rg">Щебінь, частин</label>
+                                    <input class="cnc__input" id="e1_rg" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mcalc__field" id="widthWrap">
-                                <label class="mcalc__label" for="width">Ширина (м)</label>
-                                <input class="mcalc__input" id="width" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 4" />
+                            <div class="cnc__el" id="el2" hidden>
+                                <div class="cnc__elHead"><span>Елемент 2</span><span class="cnc__elVol" id="ev2">—</span><button type="button" class="cnc__elRm" id="el2rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="cnc__rows">
+                                    <div class="cnc__field">
+                                    <span class="cnc__label" id="e2tLbl">Форма</span>
+                                    <input type="hidden" id="e2_type" value="slab">
+                                    <div class="cnc__sel" id="e2t_dd">
+                                        <button type="button" class="cnc__selBtn" id="e2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e2tLbl e2t_val"><span id="e2t_val">Плита</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e2t_list" role="listbox" aria-labelledby="e2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита</li>
+                                            <li role="option" tabindex="-1" data-v="strip" aria-selected="false">Стрічковий фундамент</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="beam" aria-selected="false">Балка</li>
+                                            <li role="option" tabindex="-1" data-v="colRect" aria-selected="false">Колона прямокутна</li>
+                                            <li role="option" tabindex="-1" data-v="colRound" aria-selected="false">Колона кругла</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_n">Штук</label>
+                                    <input class="cnc__input" id="e2_n" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_p1"><span id="e2_p1_l">Довжина, м</span></label>
+                                    <input class="cnc__input" id="e2_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_p2"><span id="e2_p2_l">Ширина, м</span></label>
+                                    <input class="cnc__input" id="e2_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_p3"><span id="e2_p3_l">Товщина, м</span></label>
+                                    <input class="cnc__input" id="e2_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e2_ratioWrap" hidden>
+                                    <span class="cnc__label" id="e2rLbl">Склад (цемент:пісок:щебінь за об'ємом)</span>
+                                    <input type="hidden" id="e2_ratio" value="1:2:4">
+                                    <div class="cnc__sel" id="e2r_dd">
+                                        <button type="button" class="cnc__selBtn" id="e2r_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e2rLbl e2r_val"><span id="e2r_val">1:2:4</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e2r_list" role="listbox" aria-labelledby="e2rLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1:5:10" aria-selected="false">1:5:10</li>
+                                            <li role="option" tabindex="-1" data-v="1:4:8" aria-selected="false">1:4:8</li>
+                                            <li role="option" tabindex="-1" data-v="1:3:6" aria-selected="false">1:3:6</li>
+                                            <li role="option" tabindex="-1" data-v="1:2:4" aria-selected="true">1:2:4</li>
+                                            <li role="option" tabindex="-1" data-v="1:1.5:3" aria-selected="false">1:1.5:3</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій склад</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e2_custom" hidden>
+                                        <div class="cnc__rows cnc__rows--3">
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_rc">Цемент, частин</label>
+                                    <input class="cnc__input" id="e2_rc" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_rs">Пісок, частин</label>
+                                    <input class="cnc__input" id="e2_rs" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e2_rg">Щебінь, частин</label>
+                                    <input class="cnc__input" id="e2_rg" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mcalc__field" id="heightWrap">
-                                <label class="mcalc__label" for="height">Висота / товщина (м)</label>
-                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 0.12" />
+                            <div class="cnc__el" id="el3" hidden>
+                                <div class="cnc__elHead"><span>Елемент 3</span><span class="cnc__elVol" id="ev3">—</span><button type="button" class="cnc__elRm" id="el3rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="cnc__rows">
+                                    <div class="cnc__field">
+                                    <span class="cnc__label" id="e3tLbl">Форма</span>
+                                    <input type="hidden" id="e3_type" value="slab">
+                                    <div class="cnc__sel" id="e3t_dd">
+                                        <button type="button" class="cnc__selBtn" id="e3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e3tLbl e3t_val"><span id="e3t_val">Плита</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e3t_list" role="listbox" aria-labelledby="e3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита</li>
+                                            <li role="option" tabindex="-1" data-v="strip" aria-selected="false">Стрічковий фундамент</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="beam" aria-selected="false">Балка</li>
+                                            <li role="option" tabindex="-1" data-v="colRect" aria-selected="false">Колона прямокутна</li>
+                                            <li role="option" tabindex="-1" data-v="colRound" aria-selected="false">Колона кругла</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_n">Штук</label>
+                                    <input class="cnc__input" id="e3_n" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_p1"><span id="e3_p1_l">Довжина, м</span></label>
+                                    <input class="cnc__input" id="e3_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_p2"><span id="e3_p2_l">Ширина, м</span></label>
+                                    <input class="cnc__input" id="e3_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_p3"><span id="e3_p3_l">Товщина, м</span></label>
+                                    <input class="cnc__input" id="e3_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e3_ratioWrap" hidden>
+                                    <span class="cnc__label" id="e3rLbl">Склад (цемент:пісок:щебінь за об'ємом)</span>
+                                    <input type="hidden" id="e3_ratio" value="1:2:4">
+                                    <div class="cnc__sel" id="e3r_dd">
+                                        <button type="button" class="cnc__selBtn" id="e3r_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e3rLbl e3r_val"><span id="e3r_val">1:2:4</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e3r_list" role="listbox" aria-labelledby="e3rLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1:5:10" aria-selected="false">1:5:10</li>
+                                            <li role="option" tabindex="-1" data-v="1:4:8" aria-selected="false">1:4:8</li>
+                                            <li role="option" tabindex="-1" data-v="1:3:6" aria-selected="false">1:3:6</li>
+                                            <li role="option" tabindex="-1" data-v="1:2:4" aria-selected="true">1:2:4</li>
+                                            <li role="option" tabindex="-1" data-v="1:1.5:3" aria-selected="false">1:1.5:3</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій склад</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e3_custom" hidden>
+                                        <div class="cnc__rows cnc__rows--3">
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_rc">Цемент, частин</label>
+                                    <input class="cnc__input" id="e3_rc" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_rs">Пісок, частин</label>
+                                    <input class="cnc__input" id="e3_rs" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e3_rg">Щебінь, частин</label>
+                                    <input class="cnc__input" id="e3_rg" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mcalc__field" id="diameterWrap" style="display:none;">
-                                <label class="mcalc__label" for="diameter">Діаметр (м)</label>
-                                <input class="mcalc__input" id="diameter" type="text" inputmode="decimal"
-                                    placeholder="наприклад: 0.3" />
+                            <div class="cnc__el" id="el4" hidden>
+                                <div class="cnc__elHead"><span>Елемент 4</span><span class="cnc__elVol" id="ev4">—</span><button type="button" class="cnc__elRm" id="el4rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="cnc__rows">
+                                    <div class="cnc__field">
+                                    <span class="cnc__label" id="e4tLbl">Форма</span>
+                                    <input type="hidden" id="e4_type" value="slab">
+                                    <div class="cnc__sel" id="e4t_dd">
+                                        <button type="button" class="cnc__selBtn" id="e4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e4tLbl e4t_val"><span id="e4t_val">Плита</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e4t_list" role="listbox" aria-labelledby="e4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита</li>
+                                            <li role="option" tabindex="-1" data-v="strip" aria-selected="false">Стрічковий фундамент</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="beam" aria-selected="false">Балка</li>
+                                            <li role="option" tabindex="-1" data-v="colRect" aria-selected="false">Колона прямокутна</li>
+                                            <li role="option" tabindex="-1" data-v="colRound" aria-selected="false">Колона кругла</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_n">Штук</label>
+                                    <input class="cnc__input" id="e4_n" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_p1"><span id="e4_p1_l">Довжина, м</span></label>
+                                    <input class="cnc__input" id="e4_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_p2"><span id="e4_p2_l">Ширина, м</span></label>
+                                    <input class="cnc__input" id="e4_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_p3"><span id="e4_p3_l">Товщина, м</span></label>
+                                    <input class="cnc__input" id="e4_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e4_ratioWrap" hidden>
+                                    <span class="cnc__label" id="e4rLbl">Склад (цемент:пісок:щебінь за об'ємом)</span>
+                                    <input type="hidden" id="e4_ratio" value="1:2:4">
+                                    <div class="cnc__sel" id="e4r_dd">
+                                        <button type="button" class="cnc__selBtn" id="e4r_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e4rLbl e4r_val"><span id="e4r_val">1:2:4</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e4r_list" role="listbox" aria-labelledby="e4rLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1:5:10" aria-selected="false">1:5:10</li>
+                                            <li role="option" tabindex="-1" data-v="1:4:8" aria-selected="false">1:4:8</li>
+                                            <li role="option" tabindex="-1" data-v="1:3:6" aria-selected="false">1:3:6</li>
+                                            <li role="option" tabindex="-1" data-v="1:2:4" aria-selected="true">1:2:4</li>
+                                            <li role="option" tabindex="-1" data-v="1:1.5:3" aria-selected="false">1:1.5:3</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій склад</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e4_custom" hidden>
+                                        <div class="cnc__rows cnc__rows--3">
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_rc">Цемент, частин</label>
+                                    <input class="cnc__input" id="e4_rc" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_rs">Пісок, частин</label>
+                                    <input class="cnc__input" id="e4_rs" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e4_rg">Щебінь, частин</label>
+                                    <input class="cnc__input" id="e4_rg" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="grade">Суміш (цемент:пісок:щебінь)</label>
-                                <select id="grade" class="mcalc__select">
-                                    <option value="1:5:10">M5 (1:5:10)</option>
-                                    <option value="1:4:8">M7.5 (1:4:8)</option>
-                                    <option value="1:3:6">M10 (1:3:6)</option>
-                                    <option value="1:2:4" selected>M15 (1:2:4)</option>
-                                    <option value="1:1.5:3">M20 (1:1.5:3)</option>
-                                </select>
+                            <div class="cnc__el" id="el5" hidden>
+                                <div class="cnc__elHead"><span>Елемент 5</span><span class="cnc__elVol" id="ev5">—</span><button type="button" class="cnc__elRm" id="el5rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="cnc__rows">
+                                    <div class="cnc__field">
+                                    <span class="cnc__label" id="e5tLbl">Форма</span>
+                                    <input type="hidden" id="e5_type" value="slab">
+                                    <div class="cnc__sel" id="e5t_dd">
+                                        <button type="button" class="cnc__selBtn" id="e5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e5tLbl e5t_val"><span id="e5t_val">Плита</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e5t_list" role="listbox" aria-labelledby="e5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита</li>
+                                            <li role="option" tabindex="-1" data-v="strip" aria-selected="false">Стрічковий фундамент</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="beam" aria-selected="false">Балка</li>
+                                            <li role="option" tabindex="-1" data-v="colRect" aria-selected="false">Колона прямокутна</li>
+                                            <li role="option" tabindex="-1" data-v="colRound" aria-selected="false">Колона кругла</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_n">Штук</label>
+                                    <input class="cnc__input" id="e5_n" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_p1"><span id="e5_p1_l">Довжина, м</span></label>
+                                    <input class="cnc__input" id="e5_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_p2"><span id="e5_p2_l">Ширина, м</span></label>
+                                    <input class="cnc__input" id="e5_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_p3"><span id="e5_p3_l">Товщина, м</span></label>
+                                    <input class="cnc__input" id="e5_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e5_ratioWrap" hidden>
+                                    <span class="cnc__label" id="e5rLbl">Склад (цемент:пісок:щебінь за об'ємом)</span>
+                                    <input type="hidden" id="e5_ratio" value="1:2:4">
+                                    <div class="cnc__sel" id="e5r_dd">
+                                        <button type="button" class="cnc__selBtn" id="e5r_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e5rLbl e5r_val"><span id="e5r_val">1:2:4</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e5r_list" role="listbox" aria-labelledby="e5rLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1:5:10" aria-selected="false">1:5:10</li>
+                                            <li role="option" tabindex="-1" data-v="1:4:8" aria-selected="false">1:4:8</li>
+                                            <li role="option" tabindex="-1" data-v="1:3:6" aria-selected="false">1:3:6</li>
+                                            <li role="option" tabindex="-1" data-v="1:2:4" aria-selected="true">1:2:4</li>
+                                            <li role="option" tabindex="-1" data-v="1:1.5:3" aria-selected="false">1:1.5:3</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій склад</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e5_custom" hidden>
+                                        <div class="cnc__rows cnc__rows--3">
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_rc">Цемент, частин</label>
+                                    <input class="cnc__input" id="e5_rc" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_rs">Пісок, частин</label>
+                                    <input class="cnc__input" id="e5_rs" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e5_rg">Щебінь, частин</label>
+                                    <input class="cnc__input" id="e5_rg" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dryFactor">Коефіцієнт сухого об’єму</label>
-                                <input class="mcalc__input" id="dryFactor" type="text" inputmode="decimal"
-                                    placeholder="1.54" />
-                                <div class="mcalc__hint">Зазвичай 1.52–1.57 (втрати + пустоти).</div>
+                            <div class="cnc__el" id="el6" hidden>
+                                <div class="cnc__elHead"><span>Елемент 6</span><span class="cnc__elVol" id="ev6">—</span><button type="button" class="cnc__elRm" id="el6rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="cnc__rows">
+                                    <div class="cnc__field">
+                                    <span class="cnc__label" id="e6tLbl">Форма</span>
+                                    <input type="hidden" id="e6_type" value="slab">
+                                    <div class="cnc__sel" id="e6t_dd">
+                                        <button type="button" class="cnc__selBtn" id="e6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e6tLbl e6t_val"><span id="e6t_val">Плита</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e6t_list" role="listbox" aria-labelledby="e6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита</li>
+                                            <li role="option" tabindex="-1" data-v="strip" aria-selected="false">Стрічковий фундамент</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="beam" aria-selected="false">Балка</li>
+                                            <li role="option" tabindex="-1" data-v="colRect" aria-selected="false">Колона прямокутна</li>
+                                            <li role="option" tabindex="-1" data-v="colRound" aria-selected="false">Колона кругла</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_n">Штук</label>
+                                    <input class="cnc__input" id="e6_n" type="text" inputmode="decimal" autocomplete="off" placeholder="1">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_p1"><span id="e6_p1_l">Довжина, м</span></label>
+                                    <input class="cnc__input" id="e6_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_p2"><span id="e6_p2_l">Ширина, м</span></label>
+                                    <input class="cnc__input" id="e6_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_p3"><span id="e6_p3_l">Товщина, м</span></label>
+                                    <input class="cnc__input" id="e6_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e6_ratioWrap" hidden>
+                                    <span class="cnc__label" id="e6rLbl">Склад (цемент:пісок:щебінь за об'ємом)</span>
+                                    <input type="hidden" id="e6_ratio" value="1:2:4">
+                                    <div class="cnc__sel" id="e6r_dd">
+                                        <button type="button" class="cnc__selBtn" id="e6r_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="e6rLbl e6r_val"><span id="e6r_val">1:2:4</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="e6r_list" role="listbox" aria-labelledby="e6rLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1:5:10" aria-selected="false">1:5:10</li>
+                                            <li role="option" tabindex="-1" data-v="1:4:8" aria-selected="false">1:4:8</li>
+                                            <li role="option" tabindex="-1" data-v="1:3:6" aria-selected="false">1:3:6</li>
+                                            <li role="option" tabindex="-1" data-v="1:2:4" aria-selected="true">1:2:4</li>
+                                            <li role="option" tabindex="-1" data-v="1:1.5:3" aria-selected="false">1:1.5:3</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій склад</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="cnc__field cnc__field--full" id="e6_custom" hidden>
+                                        <div class="cnc__rows cnc__rows--3">
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_rc">Цемент, частин</label>
+                                    <input class="cnc__input" id="e6_rc" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_rs">Пісок, частин</label>
+                                    <input class="cnc__input" id="e6_rs" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                            <div class="cnc__field">
+                                    <label class="cnc__label" for="e6_rg">Щебінь, частин</label>
+                                    <input class="cnc__input" id="e6_rg" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <button type="button" class="cnc__add" id="addEl">+ Додати елемент</button>
 
-                            <!-- W/C preset UX -->
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="wcrPreset">Пластичність бетону</label>
-                                <select id="wcrPreset" class="mcalc__select">
-                                    <option value="0.40">Густий (міцний бетон) — В/Ц 0.40</option>
-                                    <option value="0.50" selected>Стандартний — В/Ц 0.50</option>
-                                    <option value="0.60">Пластичний (легко укладати) — В/Ц 0.60</option>
-                                    <option value="custom">Ввести вручну</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field" id="wcrCustomWrap" style="display:none;">
-                                <label class="mcalc__label" for="wcr">В/Ц (вода/цемент)</label>
-                                <input class="mcalc__input" id="wcr" type="text" inputmode="decimal"
-                                    placeholder="0.5" />
-                                <div class="mcalc__hint">
-                                    Це НЕ літри. 0.5 означає 0.5 л води на 1 кг цементу. Кількість води калькулятор
-                                    порахує автоматично.
+                            <div class="cnc__rows cnc__mt12">
+                                <div class="cnc__field cnc__field--full">
+                                    <label class="cnc__label" for="reserve">Запас, %</label>
+                                    <input class="cnc__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="5" value="5"><div class="cnc__hint">На втрати й нерівності основи.</div>
                                 </div>
                             </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="bagSize">Мішок цементу (кг)</label>
-                                <input class="mcalc__input" id="bagSize" type="text" inputmode="decimal"
-                                    placeholder="50" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            <!-- Готовий бетон -->
+                            <div data-panel="ready">
+                                <details class="cnc__details cnc__mt12" id="readyDet">
+                                    <summary>Ціна, доставка, насос <span class="cnc__hint">(необовʼязково)</span></summary>
+                                    <div class="cnc__hint cnc__hint--mb">Порожні ціни не враховуються; рейси рахуються за місткістю.</div>
+                                    <div class="cnc__rows">
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="pPrice">Ціна за м³, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="pPrice" type="text" inputmode="decimal" autocomplete="off" placeholder="">
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="pCap">Місткість міксера, м³</label>
+                                    <input class="cnc__input" id="pCap" type="text" inputmode="decimal" autocomplete="off" placeholder="8">
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="pPump">Насос, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="pPump" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    </div>
+                                </details>
                             </div>
 
+                            <!-- Замішування самому -->
+                            <div data-panel="mix" hidden>
+                                <details class="cnc__details cnc__mt12" id="mixParDet">
+                                    <summary>Додаткові параметри <span class="cnc__hint">(необовʼязково)</span></summary>
+                                    <div class="cnc__rows">
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="dryK">Коефіцієнт сухого об'єму</label>
+                                    <input class="cnc__input" id="dryK" type="text" inputmode="decimal" autocomplete="off" placeholder="1.54" value="1.54"><div class="cnc__hint">Зазвичай 1,52–1,57.</div>
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="bag">Мішок цементу, кг</label>
+                                    <input class="cnc__input" id="bag" type="text" inputmode="decimal" autocomplete="off" placeholder="50" value="50">
+                                </div>
+                                        <div class="cnc__field">
+                                    <span class="cnc__label" id="wpLbl">Пластичність (В/Ц)</span>
+                                    <input type="hidden" id="wcp" value="0.5">
+                                    <div class="cnc__sel" id="wp_dd">
+                                        <button type="button" class="cnc__selBtn" id="wp_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wpLbl wp_val"><span id="wp_val">Стандартний — В/Ц 0,50</span><span class="cnc__caret" aria-hidden="true"></span></button>
+                                        <ul class="cnc__selList" id="wp_list" role="listbox" aria-labelledby="wpLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="0.4" aria-selected="false">Густий — В/Ц 0,40</li>
+                                            <li role="option" tabindex="-1" data-v="0.5" aria-selected="true">Стандартний — В/Ц 0,50</li>
+                                            <li role="option" tabindex="-1" data-v="0.6" aria-selected="false">Пластичний — В/Ц 0,60</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Ввести вручну</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                        <div class="cnc__field" id="wcrCustom" hidden>
+                                            <label class="cnc__label" for="wcr">В/Ц (вода/цемент)</label>
+                                            <input class="cnc__input" id="wcr" type="text" inputmode="decimal" autocomplete="off" placeholder="0.5">
+                                            <div class="cnc__hint">Це не літри: 0,5 означає 0,5 л води на 1 кг цементу.</div>
+                                        </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="dSand">Об'ємна маса піску, кг/м³</label>
+                                    <input class="cnc__input" id="dSand" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="cnc__hint">Якщо вказати, покажемо ваги в тоннах.</div>
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="dGravel">Об'ємна маса щебеню, кг/м³</label>
+                                    <input class="cnc__input" id="dGravel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    </div>
+                                </details>
+                                <details class="cnc__details cnc__mt12" id="mixPriceDet">
+                                    <summary>Ціни <span class="cnc__hint">(необовʼязково)</span></summary>
+                                    <div class="cnc__rows">
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="mCem">Цемент, за мішок, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="mCem" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="mSand">Пісок, за м³, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="mSand" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="mGravel">Щебінь, за м³, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="mGravel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="mWater">Вода, за м³, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="mWater" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                        <div class="cnc__field">
+                                    <label class="cnc__label" for="mDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="cnc__input" id="mDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    </div>
+                                </details>
+                            </div>
                         </div>
+
+                        <div class="cnc__actions cnc__mt12">
+                            <button class="cnc__btn cnc__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="cnc__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="cnc__card">
+                        <div class="cnc__sectionTitle">
+                            <h2 class="cnc__h2">Результат</h2>
+                            <span class="cnc__badge">🧱</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи розміри для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Графік: об’єм матеріалів (м³)</div>
-                            </div>
-
-                            <canvas id="growthChart" width="900" height="280"
-                                aria-label="Графік матеріалів бетону"></canvas>
-                            <div class="m-hintSmall">
-                                Візуалізація об’ємів цементу / піску / щебеню відповідно до суміші та сухого об’єму.
-                            </div>
+                        <div class="cnc__result" id="result">Вкажіть дані — результат зʼявиться тут.</div>
+                        <div class="cnc__actions cnc__mt12">
+                            <button class="cnc__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="cnc__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="cnc__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="cnc__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
-                        <details class="m-schedule" id="scheduleWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Таблиця матеріалів <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
-                                    type="button">Копіювати таблицю</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
-                                    Завантажити таблицю (Excel)</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Таблиця матеріалів бетону">
-                                    <thead>
-                                        <tr>
-                                            <th>Матеріал</th>
-                                            <th>Об’єм (м³)</th>
-                                            <th>Вага (кг)</th>
-                                            <th>Примітка</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-                        <details class="m-schedule" id="costWrap">
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Вартість матеріалів <span class="muted">(опціонально)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-                        
-                            <div class="m-tools" style="padding-bottom:0;">
-                                <div class="m-costgrid">
-                                    <div class="mcalc__field">
-                                        <label class="mcalc__label" for="priceCementBag">Цемент: ціна за мішок</label>
-                                        <input id="priceCementBag" class="mcalc__input" type="text" inputmode="decimal"
-                                            placeholder="наприклад: 210" />
-                                        <div class="mcalc__hint">Мішок = як у полі “Мішок цементу (кг)”.</div>
-                                    </div>
-                        
-                                    <div class="mcalc__field">
-                                        <label class="mcalc__label" for="priceSandM3">Пісок: ціна за м³</label>
-                                        <input id="priceSandM3" class="mcalc__input" type="text" inputmode="decimal"
-                                            placeholder="наприклад: 900" />
-                                    </div>
-                        
-                                    <div class="mcalc__field">
-                                        <label class="mcalc__label" for="priceGravelM3">Щебінь: ціна за м³</label>
-                                        <input id="priceGravelM3" class="mcalc__input" type="text" inputmode="decimal"
-                                            placeholder="наприклад: 1200" />
-                                    </div>
-                        
-                                    <div class="mcalc__field">
-                                        <label class="mcalc__label" for="priceWaterM3">Вода: ціна за м³ (опц.)</label>
-                                        <input id="priceWaterM3" class="mcalc__input" type="text" inputmode="decimal" placeholder="0" />
-                                        <div class="mcalc__hint">1 м³ = 1000 л.</div>
-                                    </div>
-                        
-                                    <div class="mcalc__field">
-                                        <label class="mcalc__label" for="delivery">Доставка (фіксовано)</label>
-                                        <input id="delivery" class="mcalc__input" type="text" inputmode="decimal" placeholder="0" />
-                                    </div>
-                        
-                                    <div class="mcalc__field">
-                                        <label class="mcalc__label" for="wastePct">Запас/втрати, %</label>
-                                        <input id="wastePct" class="mcalc__input" type="text" inputmode="decimal" placeholder="5" />
-                                    </div>
-                        
-                                    <div class="mcalc__field m-full">
-                                        <div class="mcalc__actions m-mt10" style="gap:10px;">
-                                            <button class="mcalc__btn mcalc__btn--small" id="btnSavePrices" type="button">Зберегти ціни</button>
-                                            <button class="mcalc__btn mcalc__btn--small" id="btnResetPrices" type="button">Скинути ціни</button>
-                                            <button class="mcalc__btn mcalc__btn--small" id="btnCopyCost" type="button">Копіювати
-                                                вартість</button>
-                                        </div>
-                                        <div class="mcalc__toast" id="costToast"></div>
-                                    </div>
-                        
-                                    <div class="mcalc__field m-full">
-                                        <div class="mcalc__bigNumber" id="costTotal">Введи ціни, щоб побачити вартість.</div>
-                                        <div class="m-details" id="costDetails"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
-                        <div class="m-navlinks">
-                            <a href="/construction/brick-calculator">Розрахуй кількість цегли</a>
-                            <a href="/construction/plaster-calculator">Розрахуй штукатурку</a>
-                        </div>
-
+                        <div class="m-navlinks cnc__mt12"><a class="cnc__link" href="/construction/cost-calculator?mode=found">Вартість фундаменту →</a> <a class="cnc__link" href="/construction/rebar-calculator">Калькулятор арматури →</a></div>
                     </div>
-                    
                 </div>
 
-                
-
+                <div class="cnc__card cnc__schedule" id="schedule" hidden>
+                    <div class="cnc__schedHead">
+                        <h2 class="cnc__h2">Підсумок</h2>
+                        <div class="cnc__tools">
+                            <button type="button" class="cnc__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="cnc__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="cnc__tableWrap" id="schedBody"></div>
+                </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <!-- SEO -->
-        <section class="m-seo">
-            <h2>Як користуватися калькулятором бетону</h2>
-            <p>
-                Цей калькулятор допомагає швидко оцінити <b>об’єм бетону (м³)</b> та кількість матеріалів для
-                замішування:
-                <b>цемент, пісок, щебінь і вода</b>. Він зручний для планування закупівель, попереднього бюджету та
-                перевірки
-                витрат матеріалів під різні типи елементів (плита, стіна, колона тощо).
-            </p>
-
-            <h2>Покрокова інструкція</h2>
-            <p><b>1) Обери “Форму”</b> — калькулятор застосує потрібну формулу об’єму.</p>
-            <p><b>2) Введи розміри в метрах</b> — довжина, ширина, висота/товщина або діаметр для круглої колони.</p>
-            <p><b>3) Обери суміш</b> (цемент:пісок:щебінь) — це розподіляє сухий об’єм між матеріалами.</p>
-            <p><b>4) Перевір “Коефіцієнт сухого об’єму”</b> (часто ~1.54) — він враховує пустоти та втрати при
-                змішуванні.</p>
-            <p><b>5) Вкажи пластичність</b> — це В/Ц (вода/цемент). Калькулятор сам порахує воду в літрах.</p>
-            <p><b>6) Натисни “Розрахувати”</b> — отримаєш об’єм бетону, KPI-результати, графік і таблицю матеріалів.</p>
-
-            <h2>Що означає Д×Ш×В / Т?</h2>
-            <p>
-                У підписах форм використовуються скорочення:
-            </p>
-            <ul>
-                <li><b>Д</b> — довжина (м): найбільший горизонтальний розмір.</li>
-                <li><b>Ш</b> — ширина (м): поперечний горизонтальний розмір.</li>
-                <li><b>В</b> — висота (м): вертикальний розмір (балки, стіни, колони).</li>
-                <li><b>Т</b> — товщина (м): коли елемент “плоский” (плита, подушка).</li>
-                <li><b>D</b> — діаметр (м): тільки для круглих колон.</li>
-            </ul>
-            <p>
-                Наприклад, <b>Д×Ш×Т</b> — це довжина × ширина × товщина,
-                а <b>Д×Ш×В</b> — довжина × ширина × висота.
-            </p>
-
-            <h2>Що означає “Форма” у калькуляторі</h2>
-            <p><b>Плита (Д×Ш×Т)</b> — горизонтальний елемент: підлоги, перекриття, доріжки, плити фундаменту.</p>
-            <p><b>Подушка/фундамент (Д×Ш×Т)</b> — основа під стіни/колони, ширша для розподілу навантаження на ґрунт.
-            </p>
-            <p><b>Балка (Д×Ш×В)</b> — горизонтальний несучий елемент між опорами.</p>
-            <p><b>Стіна (Д×В×Т)</b> — вертикальна конструкція (підвали, підпірні стіни).</p>
-            <p><b>Колона — прямокутна (Д×Ш×В)</b> — вертикальний елемент прямокутного перерізу.</p>
-            <p><b>Колона — кругла (D×В)</b> — циліндрична колона (об’єм = π × r² × висота).</p>
-
-            <h2>Як калькулятор рахує матеріали</h2>
-            <p>
-                Спочатку визначається <b>мокрий об’єм</b> за вашими розмірами. Потім він множиться на
-                <b>коефіцієнт сухого об’єму</b>, щоб оцінити реальну потребу сухих компонентів.
-                Далі сухий об’єм ділиться на цемент, пісок і щебінь за пропорцією суміші.
-            </p>
-            <p>
-                Вода визначається через <b>В/Ц</b> (вода/цемент):
-                вода (кг) ≈ цемент (кг) × В/Ц, а 1 кг води ≈ 1 літр.
-            </p>
-
-            <h2>Блок “Вартість матеріалів”</h2>
-            <p>
-                Якщо потрібно оцінити бюджет, відкрий блок <b>“Вартість матеріалів”</b> під калькулятором та введи ціни.
-                Найзрозуміліше для практики: цемент — ціна за мішок, пісок/щебінь — ціна за м³.
-                Калькулятор покаже загальну вартість і ціну за 1 м³ бетону.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+                <a class="cc-related-card" href="/construction/rebar-calculator"><b>Калькулятор арматури</b><span>Кількість і вага арматури для фундаменту та перекриттів.</span></a>
+                <a class="cc-related-card" href="/construction/excavation-calculator"><b>Калькулятор земляних робіт</b><span>Об'єм ґрунту для котловану й траншей.</span></a>
+            </div>
         </section>
 
-        <!-- FAQ -->
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор бетону</h2>
+            <p>Калькулятор визначає <b>об'єм бетону</b> для одного або кількох елементів конструкції (до шести): плита, стрічковий фундамент, стіна, балка, прямокутна й кругла колона. Далі є два режими. <b>«Готовий бетон»</b> показує, скільки замовити з урахуванням запасу, скільки це коштує з доставкою й насосом і скільки рейсів зробить міксер. <b>«Замішування самому»</b> рахує цемент у мішках, пісок, щебінь і воду за вашим складом суміші. Вбудованих цін немає: ви вводите ціни своїх постачальників.</p>
+
+            <h2>Формули об'єму елементів</h2>
+            <p>Об'єм дорівнює добутку розмірів у метрах і множиться на кількість однакових елементів. Плита: довжина × ширина × товщина, наприклад 6 × 4 × 0,2 = 4,8 м³. Стрічковий фундамент: довжина стрічки × ширина × висота, наприклад 20 × 0,4 × 0,8 = 6,4 м³. Стіна: довжина × висота × товщина (10 × 2,5 × 0,3 = 7,5 м³). Балка: довжина × ширина × висота (6 × 0,3 × 0,4 = 0,72 м³). Прямокутна колона: висота × сторона a × сторона b. Кругла колона: π × (діаметр / 2)² × висота, наприклад Ø0,3 м і висота 3 м дають 0,21 м³.</p>
+
+            <h2>Готовий бетон: запас, вартість і рейси</h2>
+            <p>Об'єм замовлення дорівнює сумі елементів плюс запас. Для прикладу з плитою й стрічкою (11,2 м³) із запасом 5% потрібно замовити 11,76 м³. За умовними цінами 2 500 ₴ за м³, доставка 1 500 ₴ і насос 3 000 ₴ це 33 900 ₴, тобто 2 883 ₴ за м³ із доставкою. Якщо вказати місткість міксера 8 м³, калькулятор покаже 2 рейси.</p>
+
+            <h2>Замішування самому: цемент, пісок, щебінь, вода</h2>
+            <p>Склад задається за об'ємом окремо для кожного елемента. Спочатку мокрий об'єм множиться на коефіцієнт сухого об'єму (за замовчуванням 1,54), далі ділиться між цементом, піском і щебенем за пропорцією. Цемент у кілограмах — це його об'єм, помножений на насипну густину 1 440 кг/м³, мішки округлюються вгору, вода в літрах дорівнює кількості цементу в кг × В/Ц. Для 11,76 м³ складу 1:2:4 виходить 75 мішків цементу по 50 кг, 5,17 м³ піску, 10,35 м³ щебеню й 1 863 л води при В/Ц 0,5.</p>
+
+            <h2>Склад і марки бетону</h2>
+            <p>Калькулятор не прив'язує склад до марок (М200, М300 тощо): склад залежить від марки цементу, вологості піску й фракції щебеню, а таблиці в різних джерелах відрізняються й часто не уточнюють, чи пропорції за масою, чи за об'ємом. Рецептуру потрібної марки візьміть у заводу або лабораторії й введіть її як «Свій склад».</p>
+            <p class="cnc-mini">Калькулятор дає орієнтовну оцінку, а не рецептуру. Склад бетону потрібної марки визначає завод або лабораторія за вашим цементом і заповнювачами.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>У яких одиницях вводити розміри?</h3>
-                <p>Вводьте розміри в метрах (м). Тоді результат буде у кубічних метрах (м³).</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати об'єм бетону для плити?</h3>
+                <p>Помножте довжину на ширину й товщину в метрах. Для 6 × 4 м і товщини 0,2 м це 4,8 м³.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи потрібно вводити літри води?</h3>
-                <p>
-                    Ні. Ви задаєте <b>В/Ц</b> (коефіцієнт), а калькулятор сам порахує воду в літрах за кількістю
-                    цементу.
-                    Для простоти використовуйте “Пластичність бетону” (густий/стандартний/пластичний).
-                </p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати бетон для стрічкового фундаменту?</h3>
+                <p>Помножте загальну довжину стрічки (периметр плюс внутрішні стіни) на ширину й висоту. Для 20 м стрічки 0,4 × 0,8 м це 6,4 м³.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому сухий об’єм більший за мокрий?</h3>
-                <p>
-                    Сухі матеріали мають пустоти і частина об’єму “зникає” при змішуванні/ущільненні.
-                    Тому застосовують коефіцієнт (часто близько 1.54).
-                </p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати бетон для колони?</h3>
+                <p>Для круглої колони: π × (діаметр / 2)² × висота. Для діаметра 0,3 м і висоти 3 м це 0,21 м³. Для прямокутної: висота × сторона a × сторона b.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Наскільки точний розрахунок?</h3>
-                <p>
-                    Це оцінка. Реальні витрати залежать від вологості піску, фракції щебеню, ущільнення, втрат на місці
-                    та конкретної технології замішування.
-                </p>
+            <div class="cc-faq-item">
+                <h3>Який запас бетону замовляти?</h3>
+                <p>Запас задаєте ви: у калькуляторі за замовчуванням 5%. Для 11,2 м³ це 11,76 м³ замовлення.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна порахувати кілька елементів?</h3>
-                <p>
-                    Так. Порахуйте кожен елемент окремо і підсумуйте. Або відкрийте таблицю й експортуйте її в Excel.
-                </p>
+            <div class="cc-faq-item">
+                <h3>Скільки рейсів міксера потрібно?</h3>
+                <p>Об'єм замовлення діліть на місткість міксера й округлюйте вгору. Для 11,76 м³ і міксера 8 м³ це 2 рейси.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки цементу на 1 м³ бетону?</h3>
+                <p>Залежить від складу. За об'ємом з коефіцієнтом 1,54 і густиною 1 440 кг/м³ для 1:2:4 це близько 316,8 кг (6,3 мішка по 50 кг), для 1:3:6 — 221,8 кг, для 1:1,5:3 — 403,2 кг.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки піску й щебеню на 1 м³ бетону?</h3>
+                <p>Для складу 1:2:4 і коефіцієнта 1,54 — близько 0,44 м³ піску й 0,88 м³ щебеню на 1 м³ бетону.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки води потрібно на 1 м³ бетону?</h3>
+                <p>Вода дорівнює кількості цементу в кг, помноженій на В/Ц. Для 1:2:4 і В/Ц 0,5 це близько 158 л на 1 м³.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вказати різний склад для різних елементів?</h3>
+                <p>Так: у режимі «Замішування самому» кожен елемент має свій склад. Для прикладу плита 4,8 м³ зі складом 1:2:4 (5,04 м³ із запасом) і стрічка 6,4 м³ зі складом 1:3:6 (6,72 м³) дають 1 597 кг і 1 490 кг цементу, разом 3 087 кг, тобто 62 мішки по 50 кг; піску 5,32 м³, щебеню 10,64 м³.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке коефіцієнт сухого об'єму?</h3>
+                <p>Це множник, який враховує пустоти між зернами: сухих матеріалів потрібно більше, ніж готового бетону. Зазвичай 1,52–1,57, у калькуляторі 1,54.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є в калькуляторі марки бетону М200, М300?</h3>
+                <p>Ні: склад залежить від марки цементу й заповнювачів, а таблиці в джерелах розходяться. Введіть рецептуру від заводу як «Свій склад» або оберіть пропорцію за об'ємом.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Готовий бетон чи замішувати самому?</h3>
+                <p>За умовними цінами з прикладу готовий бетон коштує 33 900 ₴, а замішування — 34 326 ₴. Введіть свої ціни: різниця залежить від регіону, доставки й вашої праці.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор арматуру?</h3>
+                <p>Ні, лише бетон. Арматуру порахуйте в калькуляторі арматури, а бюджет фундаменту — в калькуляторі вартості будівництва.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
