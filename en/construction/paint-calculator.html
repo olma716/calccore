@@ -2,20 +2,22 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-D8HZ7JS41R');
+        gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Paint Calculator Online — How Much Paint You Need | CalcCore</title>
+    <title>Paint Calculator: Litres, Cans, Primer and Cost | CalcCore</title>
     <meta name="description"
-        content="Calculate how much paint you need for walls and ceiling based on room area. Accounts for number of coats, doors and windows, and paint coverage per m²." />
+        content="Paint calculator for walls and ceilings: litres with a reserve and cans, coats, primer and the cost from your own prices, with a picture of the cans." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/paint-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/paint-calculator" />
@@ -26,235 +28,651 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Paint Calculator Online — How Much Paint You Need" />
-    <meta property="og:description" content="Calculate how much paint you need for walls and ceiling based on room area. Accounts for number of coats, doors and windows, and paint coverage per m²." />
+    <meta property="og:title" content="Paint Calculator: Litres, Cans, Primer and Cost" />
+    <meta property="og:description" content="Paint calculator for walls and ceilings: litres with a reserve and cans, coats, primer and the cost from your own prices, with a picture of the cans." />
     <meta property="og:url" content="https://calccore.net/en/construction/paint-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Paint Calculator Online — How Much Paint You Need" />
-    <meta name="twitter:description" content="Calculate how much paint you need for walls and ceiling based on room area. Accounts for number of coats, doors and windows, and paint coverage per m²." />
+    <meta name="twitter:title" content="Paint Calculator: Litres, Cans, Primer and Cost" />
+    <meta name="twitter:description" content="Paint calculator for walls and ceilings: litres with a reserve and cans, coats, primer and the cost from your own prices, with a picture of the cans." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/pnt.css?v=20261029pnt1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/paint-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How much paint do I need per square meter?",
-        "acceptedAnswer":{"@type":"Answer","text":"Typical coverage is 0.1-0.15 L/m² per coat, depending on paint type, surface, and application method. Exact figures are always listed on the specific paint's packaging."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is a second coat of paint needed?",
-        "acceptedAnswer":{"@type":"Answer","text":"A second coat ensures even color coverage, hides roller or brush marks from the first coat, and improves the durability of the finish."}
-      },
-      {
-        "@type":"Question",
-        "name":"Should I buy extra paint as a buffer?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, it's recommended to add about 10% extra for surface irregularities, touch-ups, or future minor repairs in the same color."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029pnt1" defer></script>
+    <script src="/js/paint-calculator.js?v=20261029pnt1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/paint-calculator#app",
-    "name":"Paint Calculator",
-    "description":"Calculate the amount of paint needed for walls and ceiling based on room area.",
-    "url":"https://calccore.net/en/construction/paint-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/paint-calculator#app",
+  "name": "Paint Calculator",
+  "description": "Calculates paint for several surfaces: room walls, a wall, a ceiling or an area with openings, coats, a reserve, litres and cans with a picture, optional primer and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/paint-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six surfaces: room walls, wall, ceiling, area, openings",
+    "Litres with a reserve and cans, a picture of the cans with the leftover",
+    "Number of coats and the coverage from the can, interior or facade paint",
+    "Primer (optional) and the cost per litre or per can; hryvnia, dollar or euro",
+    "A table by surface, CSV, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/paint-calculator#webpage",
+      "url": "https://calccore.net/en/construction/paint-calculator",
+      "name": "Paint Calculator: Litres, Cans, Primer and Cost | CalcCore",
+      "description": "Paint calculator for walls and ceilings: litres with a reserve and cans, coats, primer and the cost from your own prices, with a picture of the cans.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/paint-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/paint-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/paint-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Paint Calculator",
+          "item": "https://calccore.net/en/construction/paint-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/paint-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much paint per 1 m²?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the paint: for interior acrylic and water-based paints the sources give 8–12 m² per 1 L per coat, which is 0.08–0.125 L/m². For two coats the litres are doubled. The exact coverage is always printed on the label."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate the paint for a room?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply the perimeter of the walls by the height, subtract the windows and doors, add the ceiling if needed, multiply by the number of coats and divide by the coverage. For a 4 × 3 m room, 2.5 m high, with 5 m² of openings the area of the walls is 30.0 m²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many coats of paint are needed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For interior work usually two. Three or more are needed when going from a dark colour to a light one or to cover stains."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should the ceiling be counted with the walls?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add it as a separate surface “Ceiling (L × W)”. The paint and the number of coats are then shared. If the ceiling gets a different paint, count it in a separate run."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert L/m² to m²/L?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide 1 by the value: 0.1 L/m² is 10 m²/L, 0.125 L/m² is 8 m²/L. The calculator works in m² per 1 L, as printed on the cans."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many cans of paint should I buy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The litres with the reserve are divided by the can volume and rounded up. For 13.8 L and a 5 L can that is 3 cans (15 L), with 1.2 L left over."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What reserve of paint should I allow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You set the reserve (for example 10%); an empty field means 0%. The sources give 10–15% for an uneven base and touch-ups, and more for a porous base."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a primer needed and how much?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A primer reduces the amount of paint the base soaks up. Take its coverage from the label: enter the m² per 1 L and the number of coats, and the calculator counts the litres and cans for the same area."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does more paint go on site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A porous or rough surface (for example fresh plaster) soaks up more paint, and the way it is applied matters too. Then enter a smaller coverage per m² or a bigger reserve."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I account for windows and doors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the total openings area in m² for each surface: it is subtracted. Reveals, if they are painted, add as a separate “Area” surface."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much paint for a facade?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For facade paints the sources give 5–9 m² per 1 L per coat. Pick “Facade” or enter your own coverage from the can."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate the cost of paint?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the price per litre or per can (a can needs its volume). The cost = the quantity × the price + delivery. For the example 3 cans at 1,300 ₴ and 2 cans of primer at 600 ₴ give 5,100 ₴."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="pnt-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cpaint">
-            <div class="mcalc__wrap">
+        <section class="pnt" id="pnt">
+            <div class="pnt__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Paint Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate how much paint you need for your room's
-                        walls or ceiling.
-                    </p>
+                <div class="pnt__titlebar">
+                    <h1 class="pnt__h1">Paint Calculator</h1>
+                    <p class="pnt__p">Work out the paint for walls and ceilings: litres, cans and primer, with coats, openings and a reserve.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="pnt__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter room dimensions</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="pnt__card">
+                        <div class="pnt__sectionTitle">
+                            <h2 class="pnt__h2">Input data</h2>
+                            <div class="pnt__dd" id="cur_dd"><button type="button" class="pnt__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="pnt__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="pnt__caret" aria-hidden="true"></span></button><ul class="pnt__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="pnt__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="pnt__ddCode">UAH</span><span class="pnt__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="pnt__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="pnt__ddCode">USD</span><span class="pnt__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="pnt__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="pnt__ddCode">EUR</span><span class="pnt__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomLength">Room length (m)</label>
-                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomWidth">Room width (m)</label>
-                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 3.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomHeight">Ceiling height (m)</label>
-                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2.7" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="openings">Doors and windows area (m²)</label>
-                                <input class="mcalc__input" id="openings" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 4" />
-                                <div class="mcalc__hint">This area won't be painted and will be subtracted.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="coats">Number of coats</label>
-                                <select id="coats" class="mcalc__select">
-                                    <option value="1">1 coat</option>
-                                    <option value="2" selected>2 coats</option>
-                                    <option value="3">3 coats</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="coverage">Paint coverage (L/m² per coat)</label>
-                                <input class="mcalc__input" id="coverage" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 0.12" value="0.12" />
-                                <div class="mcalc__hint">Check the packaging of your specific paint.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="password-checkbox">
-                                    <input type="checkbox" id="includeCeiling" />
-                                    <span>Also paint the ceiling</span>
-                                </label>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="pnt__block">
+                            <div class="pnt__rows">
+                                <div class="pnt__field pnt__field--full">
+                                    <span class="pnt__label" id="ptLbl">Paint</span>
+                                    <input type="hidden" id="ptype" value="int">
+                                    <div class="pnt__sel" id="pt_dd">
+                                        <button type="button" class="pnt__selBtn" id="pt_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ptLbl pt_val"><span id="pt_val">Interior acrylic / water-based — 10 m²/L</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="pt_list" role="listbox" aria-labelledby="ptLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="int" aria-selected="true">Interior acrylic / water-based — 10 m²/L</li>
+                                            <li role="option" tabindex="-1" data-v="fac" aria-selected="false">Facade — 7 m²/L</li>
+                                            <li role="option" tabindex="-1" data-v="own" aria-selected="false">Own coverage from the can</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="cov">Coverage, m² per 1 L per coat&nbsp;<span class="pnt__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pnt__input" id="cov" type="text" inputmode="decimal" autocomplete="off" placeholder="10" value="10"><div class="pnt__hint">From the label of your paint.</div>
+                                </div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="coats">Coats&nbsp;<span class="pnt__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="pnt__input" id="coats" type="text" inputmode="decimal" autocomplete="off" placeholder="2" value="2">
+                                </div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="reserve">Reserve, %</label>
+                                    <input class="pnt__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10"><div class="pnt__hint">For touch-ups and an uneven base.</div>
+                                </div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="can">Can, L</label>
+                                    <input class="pnt__input" id="can" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="pnt__hint">Optional: otherwise litres only.</div>
+                                </div>
                             </div>
 
+                            <div class="pnt__miniTitle pnt__mt12">Surfaces</div>
+                            <div class="pnt__el" id="sl1">
+                                <div class="pnt__elHead"><span>Surface 1</span><span class="pnt__elVol" id="sv1">—</span><button type="button" class="pnt__elRm" id="sl1rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s1tLbl">Type</span>
+                                    <input type="hidden" id="s1_type" value="room">
+                                    <div class="pnt__sel" id="s1t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s1tLbl s1t_val"><span id="s1t_val">Room walls (L × W × H)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s1t_list" role="listbox" aria-labelledby="s1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room walls (L × W × H)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Ceiling (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s1_f1">
+                                    <label class="pnt__label" for="s1_p1"><span id="s1_l1">Length, m</span></label>
+                                    <input class="pnt__input" id="s1_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s1_f2">
+                                    <label class="pnt__label" for="s1_p2"><span id="s1_l2">Width, m</span></label>
+                                    <input class="pnt__input" id="s1_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s1_f3">
+                                    <label class="pnt__label" for="s1_p3"><span>Height, m</span></label>
+                                    <input class="pnt__input" id="s1_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s1_op">Openings, m² <span class="pnt__hint">(optional)</span></label>
+                                    <input class="pnt__input" id="s1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl2" hidden>
+                                <div class="pnt__elHead"><span>Surface 2</span><span class="pnt__elVol" id="sv2">—</span><button type="button" class="pnt__elRm" id="sl2rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s2tLbl">Type</span>
+                                    <input type="hidden" id="s2_type" value="room">
+                                    <div class="pnt__sel" id="s2t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s2tLbl s2t_val"><span id="s2t_val">Room walls (L × W × H)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s2t_list" role="listbox" aria-labelledby="s2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room walls (L × W × H)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Ceiling (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s2_f1">
+                                    <label class="pnt__label" for="s2_p1"><span id="s2_l1">Length, m</span></label>
+                                    <input class="pnt__input" id="s2_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s2_f2">
+                                    <label class="pnt__label" for="s2_p2"><span id="s2_l2">Width, m</span></label>
+                                    <input class="pnt__input" id="s2_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s2_f3">
+                                    <label class="pnt__label" for="s2_p3"><span>Height, m</span></label>
+                                    <input class="pnt__input" id="s2_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s2_op">Openings, m² <span class="pnt__hint">(optional)</span></label>
+                                    <input class="pnt__input" id="s2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl3" hidden>
+                                <div class="pnt__elHead"><span>Surface 3</span><span class="pnt__elVol" id="sv3">—</span><button type="button" class="pnt__elRm" id="sl3rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s3tLbl">Type</span>
+                                    <input type="hidden" id="s3_type" value="room">
+                                    <div class="pnt__sel" id="s3t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s3tLbl s3t_val"><span id="s3t_val">Room walls (L × W × H)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s3t_list" role="listbox" aria-labelledby="s3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room walls (L × W × H)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Ceiling (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s3_f1">
+                                    <label class="pnt__label" for="s3_p1"><span id="s3_l1">Length, m</span></label>
+                                    <input class="pnt__input" id="s3_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s3_f2">
+                                    <label class="pnt__label" for="s3_p2"><span id="s3_l2">Width, m</span></label>
+                                    <input class="pnt__input" id="s3_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s3_f3">
+                                    <label class="pnt__label" for="s3_p3"><span>Height, m</span></label>
+                                    <input class="pnt__input" id="s3_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s3_op">Openings, m² <span class="pnt__hint">(optional)</span></label>
+                                    <input class="pnt__input" id="s3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl4" hidden>
+                                <div class="pnt__elHead"><span>Surface 4</span><span class="pnt__elVol" id="sv4">—</span><button type="button" class="pnt__elRm" id="sl4rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s4tLbl">Type</span>
+                                    <input type="hidden" id="s4_type" value="room">
+                                    <div class="pnt__sel" id="s4t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s4tLbl s4t_val"><span id="s4t_val">Room walls (L × W × H)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s4t_list" role="listbox" aria-labelledby="s4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room walls (L × W × H)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Ceiling (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s4_f1">
+                                    <label class="pnt__label" for="s4_p1"><span id="s4_l1">Length, m</span></label>
+                                    <input class="pnt__input" id="s4_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s4_f2">
+                                    <label class="pnt__label" for="s4_p2"><span id="s4_l2">Width, m</span></label>
+                                    <input class="pnt__input" id="s4_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s4_f3">
+                                    <label class="pnt__label" for="s4_p3"><span>Height, m</span></label>
+                                    <input class="pnt__input" id="s4_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s4_op">Openings, m² <span class="pnt__hint">(optional)</span></label>
+                                    <input class="pnt__input" id="s4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl5" hidden>
+                                <div class="pnt__elHead"><span>Surface 5</span><span class="pnt__elVol" id="sv5">—</span><button type="button" class="pnt__elRm" id="sl5rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s5tLbl">Type</span>
+                                    <input type="hidden" id="s5_type" value="room">
+                                    <div class="pnt__sel" id="s5t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s5tLbl s5t_val"><span id="s5t_val">Room walls (L × W × H)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s5t_list" role="listbox" aria-labelledby="s5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room walls (L × W × H)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Ceiling (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s5_f1">
+                                    <label class="pnt__label" for="s5_p1"><span id="s5_l1">Length, m</span></label>
+                                    <input class="pnt__input" id="s5_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s5_f2">
+                                    <label class="pnt__label" for="s5_p2"><span id="s5_l2">Width, m</span></label>
+                                    <input class="pnt__input" id="s5_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s5_f3">
+                                    <label class="pnt__label" for="s5_p3"><span>Height, m</span></label>
+                                    <input class="pnt__input" id="s5_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s5_op">Openings, m² <span class="pnt__hint">(optional)</span></label>
+                                    <input class="pnt__input" id="s5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl6" hidden>
+                                <div class="pnt__elHead"><span>Surface 6</span><span class="pnt__elVol" id="sv6">—</span><button type="button" class="pnt__elRm" id="sl6rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s6tLbl">Type</span>
+                                    <input type="hidden" id="s6_type" value="room">
+                                    <div class="pnt__sel" id="s6t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s6tLbl s6t_val"><span id="s6t_val">Room walls (L × W × H)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s6t_list" role="listbox" aria-labelledby="s6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room walls (L × W × H)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Ceiling (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s6_f1">
+                                    <label class="pnt__label" for="s6_p1"><span id="s6_l1">Length, m</span></label>
+                                    <input class="pnt__input" id="s6_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s6_f2">
+                                    <label class="pnt__label" for="s6_p2"><span id="s6_l2">Width, m</span></label>
+                                    <input class="pnt__input" id="s6_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s6_f3">
+                                    <label class="pnt__label" for="s6_p3"><span>Height, m</span></label>
+                                    <input class="pnt__input" id="s6_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s6_op">Openings, m² <span class="pnt__hint">(optional)</span></label>
+                                    <input class="pnt__input" id="s6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="pnt__add" id="addSl">+ Add a surface</button>
+
+                            <details class="pnt__details pnt__mt12" id="primerDet">
+                                <summary>Primer <span class="pnt__hint">(optional)</span></summary>
+                                <div class="pnt__hint pnt__hint--mb">Counted for the area of the same surfaces. Take the coverage from the label of the primer.</div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pcov">Coverage, m² per 1 L per coat</label>
+                                    <input class="pnt__input" id="pcov" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pcoats">Primer coats</label>
+                                    <input class="pnt__input" id="pcoats" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="1">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pcan">Primer can, L</label>
+                                    <input class="pnt__input" id="pcan" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="pnt__details pnt__mt12" id="priceDet">
+                                <summary>Prices and delivery <span class="pnt__hint">(optional)</span></summary>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field pnt__field--full">
+                                    <span class="pnt__label" id="puLbl">Price per</span>
+                                    <input type="hidden" id="punit" value="l">
+                                    <div class="pnt__sel" id="pu_dd">
+                                        <button type="button" class="pnt__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">litre</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="l" aria-selected="true">litre</li>
+                                            <li role="option" tabindex="-1" data-v="can" aria-selected="false">can</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pPaint">Paint price, <span data-wu>₴</span></label>
+                                    <input class="pnt__input" id="pPaint" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pPrimer">Primer price, <span data-wu>₴</span></label>
+                                    <input class="pnt__input" id="pPrimer" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="pnt__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="pnt__actions pnt__mt12">
+                            <button class="pnt__btn pnt__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="pnt__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="pnt__card">
+                        <div class="pnt__sectionTitle">
+                            <h2 class="pnt__h2">Result</h2>
+                            <span class="pnt__badge">🎨</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/flooring-calculator">Laminate and Linoleum Calculator</a>
-                            <a href="/en/construction/plaster-calculator">Plaster Calculator</a>
+                        <div class="pnt__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="pnt__actions pnt__mt12">
+                            <button class="pnt__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="pnt__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="pnt__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="pnt__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks pnt__mt12"><a class="pnt__link" href="/en/construction/plaster-calculator">Plaster calculator →</a> <a class="pnt__link" href="/en/construction/wallpaper-calculator">Wallpaper calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="pnt__card pnt__schedule" id="schedule" hidden>
+                    <div class="pnt__schedHead">
+                        <h2 class="pnt__h2">Summary</h2>
+                        <div class="pnt__tools">
+                            <button type="button" class="pnt__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="pnt__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="pnt__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How to calculate the amount of paint</h2>
-            <p>
-                The calculation is based on the surface area to be painted (walls, minus doors and
-                windows, and optionally the ceiling), multiplied by the number of coats and paint
-                coverage per square meter. Formula: paint needed = area × number of coats × coverage
-                per m².
-            </p>
-
-            <h2>How much paint is used per m²</h2>
-            <p>
-                Typical coverage is <b>0.1-0.15 L/m²</b> per coat, but it depends significantly on:
-            </p>
-            <ul>
-                <li><b>Paint type:</b> water-based, latex, oil-based — different density and coverage properties.</li>
-                <li><b>Surface:</b> rough or porous surfaces (like plaster) absorb more paint than smooth ones.</li>
-                <li><b>Color:</b> going from dark to light color or vice versa often requires an extra coat.</li>
-                <li><b>Application method:</b> roller, brush, or sprayer have different paint usage efficiency.</li>
-            </ul>
-            <p>
-                Exact coverage figures are always listed on the specific paint's packaging — it's
-                best to use those for the most accurate calculation.
-            </p>
-
-            <h2>Why a second coat of paint is needed</h2>
-            <p>
-                A single coat of paint rarely provides even, saturated color coverage — especially
-                when switching to a contrasting color. A second coat evens out the tone, hides
-                streaks from the roller or brush in the first coat, and improves the finish's
-                durability against wear and washing.
-            </p>
-
-            <p class="m-hintSmall">
-                It's recommended to buy about 10% extra paint for surface irregularities, touch-ups,
-                or future minor repairs in the same shade.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/plaster-calculator"><b>Plaster calculator</b><span>Bags of a mix or cement and sand for several surfaces.</span></a>
+                <a class="cc-related-card" href="/en/construction/wallpaper-calculator"><b>Wallpaper calculator</b><span>The number of wallpaper rolls for a room.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your prices.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the paint calculator counts</h2>
+            <p>The calculator works out how much <b>paint</b> you need for walls and ceilings: litres with a reserve and the number of cans. You can add up to six surfaces: the walls of a room by dimensions, a single wall, a ceiling or a ready area, with openings. The paint, the number of coats and the reserve are shared by all the surfaces. If you wish, primer and the cost from your prices are added. There are no built-in prices.</p>
+
+            <h2>How the paint is counted</h2>
+            <p>Litres are the area multiplied by the number of coats and divided by the coverage (m² per 1 L per coat), and the reserve is added to the result. Cans are rounded up. The area of the walls of a room is the perimeter multiplied by the height, minus the openings; the ceiling is length × width.</p>
+            <p>The coverage is taken from the label. For interior acrylic and water-based paints the sources give 8–12 m² per 1 L per coat, for facade paints 5–9 m²/L. The calculator suggests the middle values of 10 and 7, which you can change. For 20 m² in one coat that is 2.50 L at 8 m²/L and 1.67 L at 12 m²/L.</p>
+
+            <h2>Cans and the leftover</h2>
+            <p>If you enter the can volume, the calculator shows the number of cans and draws them: the full ones and the last one filled by a fraction. The leftover is the difference between the litres bought and the litres needed. For the example of a room with 48.6 m² of walls (with the openings) and a ceiling that is 13.8 L, 3 cans of 5 L, the last one filled to 75%, with 1.2 L left over.</p>
+
+            <h2>Worked example</h2>
+            <p>A room of 5 × 4 m, 2.7 m high, openings of 6 m², and a ceiling of 5 × 4 m: walls 42.6 m², ceiling 20 m², 62.6 m² in total. In 2 coats at 10 m²/L that is 12.5 L, 13.8 L with a 10% reserve, which is 3 cans of 5 L. Primer in one coat at 10 m²/L: 6.9 L, 2 cans of 5 L. At 1,300 ₴ per can of paint and 600 ₴ per can of primer the cost is 5,100 ₴.</p>
+            <p class="pnt-mini">The calculator gives an approximate estimate. The real consumption depends on the paint, the base and the way it is applied.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How much paint do I need per square meter?</h3>
-                <p>Typical coverage is 0.1-0.15 L/m² per coat, depending on paint type, surface, and application method.
-                    Exact figures are always listed on the specific paint's packaging.</p>
+            <div class="cc-faq-item">
+                <h3>How much paint per 1 m²?</h3>
+                <p>It depends on the paint: for interior acrylic and water-based paints the sources give 8–12 m² per 1 L per coat, which is 0.08–0.125 L/m². For two coats the litres are doubled. The exact coverage is always printed on the label.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why is a second coat of paint needed?</h3>
-                <p>A second coat ensures even color coverage, hides roller or brush marks from the first coat, and
-                    improves the durability of the finish.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the paint for a room?</h3>
+                <p>Multiply the perimeter of the walls by the height, subtract the windows and doors, add the ceiling if needed, multiply by the number of coats and divide by the coverage. For a 4 × 3 m room, 2.5 m high, with 5 m² of openings the area of the walls is 30.0 m².</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Should I buy extra paint as a buffer?</h3>
-                <p>Yes, it's recommended to add about 10% extra for surface irregularities, touch-ups, or future minor
-                    repairs in the same color.</p>
+            <div class="cc-faq-item">
+                <h3>How many coats of paint are needed?</h3>
+                <p>For interior work usually two. Three or more are needed when going from a dark colour to a light one or to cover stains.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Should the ceiling be counted with the walls?</h3>
+                <p>Add it as a separate surface “Ceiling (L × W)”. The paint and the number of coats are then shared. If the ceiling gets a different paint, count it in a separate run.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I convert L/m² to m²/L?</h3>
+                <p>Divide 1 by the value: 0.1 L/m² is 10 m²/L, 0.125 L/m² is 8 m²/L. The calculator works in m² per 1 L, as printed on the cans.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many cans of paint should I buy?</h3>
+                <p>The litres with the reserve are divided by the can volume and rounded up. For 13.8 L and a 5 L can that is 3 cans (15 L), with 1.2 L left over.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What reserve of paint should I allow?</h3>
+                <p>You set the reserve (for example 10%); an empty field means 0%. The sources give 10–15% for an uneven base and touch-ups, and more for a porous base.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is a primer needed and how much?</h3>
+                <p>A primer reduces the amount of paint the base soaks up. Take its coverage from the label: enter the m² per 1 L and the number of coats, and the calculator counts the litres and cans for the same area.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does more paint go on site?</h3>
+                <p>A porous or rough surface (for example fresh plaster) soaks up more paint, and the way it is applied matters too. Then enter a smaller coverage per m² or a bigger reserve.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I account for windows and doors?</h3>
+                <p>Enter the total openings area in m² for each surface: it is subtracted. Reveals, if they are painted, add as a separate “Area” surface.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much paint for a facade?</h3>
+                <p>For facade paints the sources give 5–9 m² per 1 L per coat. Pick “Facade” or enter your own coverage from the can.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate the cost of paint?</h3>
+                <p>Enter the price per litre or per can (a can needs its volume). The cost = the quantity × the price + delivery. For the example 3 cans at 1,300 ₴ and 2 cans of primer at 600 ₴ give 5,100 ₴.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

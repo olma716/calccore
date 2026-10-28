@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор фарби онлайн — скільки літрів потрібно | CalcCore</title>
+    <title>Калькулятор фарби: літри, банки, ґрунтовка, вартість | CalcCore</title>
     <meta name="description"
-        content="Розрахунок кількості фарби для стін і стелі за площею приміщення. Врахування кількості шарів, дверей і вікон, витрати фарби на м²." />
+        content="Калькулятор фарби для стін і стелі: літри з запасом і банки, кількість шарів, ґрунтовка та вартість за вашими цінами. Кілька поверхонь і візуалізація банок." />
 
     <link rel="canonical" href="https://calccore.net/construction/paint-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/paint-calculator" />
@@ -26,237 +28,651 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор фарби онлайн — скільки літрів потрібно" />
-    <meta property="og:description" content="Розрахунок кількості фарби для стін і стелі за площею приміщення. Врахування кількості шарів, дверей і вікон, витрати фарби на м²." />
+    <meta property="og:title" content="Калькулятор фарби: літри, банки, ґрунтовка, вартість" />
+    <meta property="og:description" content="Калькулятор фарби для стін і стелі: літри з запасом і банки, кількість шарів, ґрунтовка та вартість за вашими цінами. Кілька поверхонь і візуалізація банок." />
     <meta property="og:url" content="https://calccore.net/construction/paint-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор фарби онлайн — скільки літрів потрібно" />
-    <meta name="twitter:description" content="Розрахунок кількості фарби для стін і стелі за площею приміщення. Врахування кількості шарів, дверей і вікон, витрати фарби на м²." />
+    <meta name="twitter:title" content="Калькулятор фарби: літри, банки, ґрунтовка, вартість" />
+    <meta name="twitter:description" content="Калькулятор фарби для стін і стелі: літри з запасом і банки, кількість шарів, ґрунтовка та вартість за вашими цінами. Кілька поверхонь і візуалізація банок." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/pnt.css?v=20261029pnt1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/paint-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Скільки фарби потрібно на квадратний метр?",
-        "acceptedAnswer":{"@type":"Answer","text":"Типова витрата — 0.1-0.15 л/м² на один шар, залежно від типу фарби, поверхні та методу нанесення. Точні дані завжди вказані на упаковці конкретної фарби."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому потрібно фарбувати в два шари?",
-        "acceptedAnswer":{"@type":"Answer","text":"Другий шар забезпечує рівномірне покриття кольору, приховує сліди від валика чи пензля з першого шару, і покращує довговічність фарбування."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи варто купувати фарбу із запасом?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, рекомендується додати 10% запасу на випадок нерівностей поверхні, підмальовування чи майбутнього ремонту дрібних пошкоджень тим самим кольором."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029pnt1" defer></script>
+    <script src="/js/paint-calculator.js?v=20261029pnt1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/paint-calculator#app",
-    "name":"Paint Calculator",
-    "description":"Розрахунок необхідної кількості фарби для стін і стелі за площею приміщення.",
-    "url":"https://calccore.net/construction/paint-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/paint-calculator#app",
+  "name": "Калькулятор фарби",
+  "description": "Розрахунок фарби для кількох поверхонь: стіни кімнати, стіна, стеля або площа з отворами, шари, запас, літри й банки з візуалізацією, необов'язкова ґрунтовка та вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/paint-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести поверхонь: стіни кімнати, стіна, стеля, площа, отвори",
+    "Літри з запасом і банки, візуалізація банок із залишком",
+    "Кількість шарів і витрата з банки, інтер'єрна чи фасадна фарба",
+    "Ґрунтовка (необов'язково) і вартість за літр або за банку; гривня, долар або євро",
+    "Таблиця по поверхнях, CSV, посилання на розрахунок"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/paint-calculator#webpage",
+      "url": "https://calccore.net/construction/paint-calculator",
+      "name": "Калькулятор фарби: літри, банки, ґрунтовка, вартість | CalcCore",
+      "description": "Калькулятор фарби для стін і стелі: літри з запасом і банки, кількість шарів, ґрунтовка та вартість за вашими цінами. Кілька поверхонь і візуалізація банок.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/paint-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/paint-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/paint-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор фарби",
+          "item": "https://calccore.net/construction/paint-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/paint-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скільки фарби потрібно на 1 м²?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Залежить від фарби: для інтер'єрних акрилових і водоемульсійних у джерелах 8–12 м² з 1 л на один шар, тобто 0,08–0,125 л/м². Для двох шарів літрів вдвічі більше. Точну витрату завжди вказують на етикетці."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розрахувати фарбу на кімнату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Периметр стін множать на висоту, віднімають площу вікон і дверей, додають стелю за потреби, множать на кількість шарів і ділять на витрату. Для кімнати 4 × 3 м з висотою 2,5 м і отворами 5 м² площа стін 30,0 м²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки шарів фарби потрібно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для внутрішніх робіт зазвичай два шари. Три й більше потрібні при переході з темного кольору на світлий або для перекриття плям."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи рахувати стелю разом зі стінами?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Додайте її окремою поверхнею «Стеля (Д × Ш)». Фарба й кількість шарів тоді спільні. Якщо стеля іншою фарбою, порахуйте її окремим запуском."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як перевести витрату з л/м² у м²/л?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поділіть 1 на значення: 0,1 л/м² це 10 м²/л, 0,125 л/м² це 8 м²/л. Калькулятор працює в м² з 1 л, як пишуть на банках."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки банок фарби купити?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Літри з запасом діляться на об'єм банки й округлюються вгору. Для 13,8 л і банки 5 л це 3 банки (15 л), залишок 1,2 л."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який запас фарби закласти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запас задаєте ви (наприклад, 10%); порожнє поле означає 0%. У джерелах називають 10–15% на нерівності й підмальовування, більше для пористої основи."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи потрібна ґрунтовка і скільки її?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ґрунтовка зменшує вбирання фарби основою. Її витрату беріть з етикетки: вкажіть м² з 1 л і кількість шарів, і калькулятор порахує літри та банки за тією ж площею."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому на практиці фарби йде більше?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Пориста або шорстка поверхня (наприклад, свіжа штукатурка) вбирає більше фарби, на витрату також впливає спосіб нанесення. Тоді задайте меншу витрату на м² або більший запас."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як врахувати вікна й двері?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вкажіть сумарну площу отворів у м² для кожної поверхні: вона віднімається. Відкоси, якщо їх фарбують, додайте окремою поверхнею «Площа»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки фарби на фасад?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для фасадних фарб у джерелах 5–9 м² з 1 л на один шар. Оберіть тип «Фасадна» або вкажіть свою витрату з банки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати вартість фарби?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вкажіть ціну за літр або за банку (для банки потрібен її об'єм). Вартість = кількість × ціна + доставка. Для прикладу 3 банки по 1 300 ₴ й 2 банки ґрунтовки по 600 ₴ дають 5 100 ₴."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="pnt-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cpaint">
-            <div class="mcalc__wrap">
+        <section class="pnt" id="pnt">
+            <div class="pnt__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор фарби</h1>
-                    <p class="mcalc__p">
-                        Розрахуй, скільки літрів фарби потрібно для стін чи
-                        стелі твого приміщення.
-                    </p>
+                <div class="pnt__titlebar">
+                    <h1 class="pnt__h1">Калькулятор фарби</h1>
+                    <p class="pnt__p">Порахуйте фарбу для стін і стелі: літри, банки й ґрунтовку з урахуванням шарів, отворів і запасу.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="pnt__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи розміри приміщення</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="pnt__card">
+                        <div class="pnt__sectionTitle">
+                            <h2 class="pnt__h2">Дані для розрахунку</h2>
+                            <div class="pnt__dd" id="cur_dd"><button type="button" class="pnt__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="pnt__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="pnt__caret" aria-hidden="true"></span></button><ul class="pnt__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="pnt__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="pnt__ddCode">UAH</span><span class="pnt__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="pnt__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="pnt__ddCode">USD</span><span class="pnt__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="pnt__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="pnt__ddCode">EUR</span><span class="pnt__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomLength">Довжина кімнати (м)</label>
-                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomWidth">Ширина кімнати (м)</label>
-                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 3.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomHeight">Висота стелі (м)</label>
-                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
-                                    placeholder="напр.: 2.7" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="openings">Площа дверей і вікон (м²)</label>
-                                <input class="mcalc__input" id="openings" type="text" inputmode="decimal"
-                                    placeholder="напр.: 4" />
-                                <div class="mcalc__hint">Ця площа не фарбується і буде відрахована.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="coats">Кількість шарів</label>
-                                <select id="coats" class="mcalc__select">
-                                    <option value="1">1 шар</option>
-                                    <option value="2" selected>2 шари</option>
-                                    <option value="3">3 шари</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="coverage">Витрата фарби (л/м² на шар)</label>
-                                <input class="mcalc__input" id="coverage" type="text" inputmode="decimal"
-                                    placeholder="напр.: 0.12" value="0.12" />
-                                <div class="mcalc__hint">Уточни на упаковці конкретної фарби.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="password-checkbox">
-                                    <input type="checkbox" id="includeCeiling" />
-                                    <span>Також фарбувати стелю</span>
-                                </label>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="pnt__block">
+                            <div class="pnt__rows">
+                                <div class="pnt__field pnt__field--full">
+                                    <span class="pnt__label" id="ptLbl">Фарба</span>
+                                    <input type="hidden" id="ptype" value="int">
+                                    <div class="pnt__sel" id="pt_dd">
+                                        <button type="button" class="pnt__selBtn" id="pt_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ptLbl pt_val"><span id="pt_val">Інтер'єрна акрилова / водоемульсійна — 10 м²/л</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="pt_list" role="listbox" aria-labelledby="ptLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="int" aria-selected="true">Інтер'єрна акрилова / водоемульсійна — 10 м²/л</li>
+                                            <li role="option" tabindex="-1" data-v="fac" aria-selected="false">Фасадна — 7 м²/л</li>
+                                            <li role="option" tabindex="-1" data-v="own" aria-selected="false">Своя витрата з банки</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="cov">Витрата, м² з 1 л на шар&nbsp;<span class="pnt__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pnt__input" id="cov" type="text" inputmode="decimal" autocomplete="off" placeholder="10" value="10"><div class="pnt__hint">З етикетки вашої фарби.</div>
+                                </div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="coats">Шарів&nbsp;<span class="pnt__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="pnt__input" id="coats" type="text" inputmode="decimal" autocomplete="off" placeholder="2" value="2">
+                                </div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="reserve">Запас, %</label>
+                                    <input class="pnt__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10"><div class="pnt__hint">Для підмальовування й нерівностей.</div>
+                                </div>
+                                <div class="pnt__field">
+                                    <label class="pnt__label" for="can">Банка, л</label>
+                                    <input class="pnt__input" id="can" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="pnt__hint">Не обовʼязково: тоді рахуємо в літрах.</div>
+                                </div>
                             </div>
 
+                            <div class="pnt__miniTitle pnt__mt12">Поверхні</div>
+                            <div class="pnt__el" id="sl1">
+                                <div class="pnt__elHead"><span>Поверхня 1</span><span class="pnt__elVol" id="sv1">—</span><button type="button" class="pnt__elRm" id="sl1rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s1tLbl">Тип</span>
+                                    <input type="hidden" id="s1_type" value="room">
+                                    <div class="pnt__sel" id="s1t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s1tLbl s1t_val"><span id="s1t_val">Стіни кімнати (Д × Ш × В)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s1t_list" role="listbox" aria-labelledby="s1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Стіни кімнати (Д × Ш × В)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Стеля (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s1_f1">
+                                    <label class="pnt__label" for="s1_p1"><span id="s1_l1">Довжина, м</span></label>
+                                    <input class="pnt__input" id="s1_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s1_f2">
+                                    <label class="pnt__label" for="s1_p2"><span id="s1_l2">Ширина, м</span></label>
+                                    <input class="pnt__input" id="s1_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s1_f3">
+                                    <label class="pnt__label" for="s1_p3"><span>Висота, м</span></label>
+                                    <input class="pnt__input" id="s1_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s1_op">Отвори, м² <span class="pnt__hint">(необовʼязково)</span></label>
+                                    <input class="pnt__input" id="s1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl2" hidden>
+                                <div class="pnt__elHead"><span>Поверхня 2</span><span class="pnt__elVol" id="sv2">—</span><button type="button" class="pnt__elRm" id="sl2rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s2tLbl">Тип</span>
+                                    <input type="hidden" id="s2_type" value="room">
+                                    <div class="pnt__sel" id="s2t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s2tLbl s2t_val"><span id="s2t_val">Стіни кімнати (Д × Ш × В)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s2t_list" role="listbox" aria-labelledby="s2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Стіни кімнати (Д × Ш × В)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Стеля (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s2_f1">
+                                    <label class="pnt__label" for="s2_p1"><span id="s2_l1">Довжина, м</span></label>
+                                    <input class="pnt__input" id="s2_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s2_f2">
+                                    <label class="pnt__label" for="s2_p2"><span id="s2_l2">Ширина, м</span></label>
+                                    <input class="pnt__input" id="s2_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s2_f3">
+                                    <label class="pnt__label" for="s2_p3"><span>Висота, м</span></label>
+                                    <input class="pnt__input" id="s2_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s2_op">Отвори, м² <span class="pnt__hint">(необовʼязково)</span></label>
+                                    <input class="pnt__input" id="s2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl3" hidden>
+                                <div class="pnt__elHead"><span>Поверхня 3</span><span class="pnt__elVol" id="sv3">—</span><button type="button" class="pnt__elRm" id="sl3rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s3tLbl">Тип</span>
+                                    <input type="hidden" id="s3_type" value="room">
+                                    <div class="pnt__sel" id="s3t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s3tLbl s3t_val"><span id="s3t_val">Стіни кімнати (Д × Ш × В)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s3t_list" role="listbox" aria-labelledby="s3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Стіни кімнати (Д × Ш × В)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Стеля (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s3_f1">
+                                    <label class="pnt__label" for="s3_p1"><span id="s3_l1">Довжина, м</span></label>
+                                    <input class="pnt__input" id="s3_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s3_f2">
+                                    <label class="pnt__label" for="s3_p2"><span id="s3_l2">Ширина, м</span></label>
+                                    <input class="pnt__input" id="s3_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s3_f3">
+                                    <label class="pnt__label" for="s3_p3"><span>Висота, м</span></label>
+                                    <input class="pnt__input" id="s3_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s3_op">Отвори, м² <span class="pnt__hint">(необовʼязково)</span></label>
+                                    <input class="pnt__input" id="s3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl4" hidden>
+                                <div class="pnt__elHead"><span>Поверхня 4</span><span class="pnt__elVol" id="sv4">—</span><button type="button" class="pnt__elRm" id="sl4rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s4tLbl">Тип</span>
+                                    <input type="hidden" id="s4_type" value="room">
+                                    <div class="pnt__sel" id="s4t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s4tLbl s4t_val"><span id="s4t_val">Стіни кімнати (Д × Ш × В)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s4t_list" role="listbox" aria-labelledby="s4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Стіни кімнати (Д × Ш × В)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Стеля (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s4_f1">
+                                    <label class="pnt__label" for="s4_p1"><span id="s4_l1">Довжина, м</span></label>
+                                    <input class="pnt__input" id="s4_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s4_f2">
+                                    <label class="pnt__label" for="s4_p2"><span id="s4_l2">Ширина, м</span></label>
+                                    <input class="pnt__input" id="s4_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s4_f3">
+                                    <label class="pnt__label" for="s4_p3"><span>Висота, м</span></label>
+                                    <input class="pnt__input" id="s4_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s4_op">Отвори, м² <span class="pnt__hint">(необовʼязково)</span></label>
+                                    <input class="pnt__input" id="s4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl5" hidden>
+                                <div class="pnt__elHead"><span>Поверхня 5</span><span class="pnt__elVol" id="sv5">—</span><button type="button" class="pnt__elRm" id="sl5rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s5tLbl">Тип</span>
+                                    <input type="hidden" id="s5_type" value="room">
+                                    <div class="pnt__sel" id="s5t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s5tLbl s5t_val"><span id="s5t_val">Стіни кімнати (Д × Ш × В)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s5t_list" role="listbox" aria-labelledby="s5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Стіни кімнати (Д × Ш × В)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Стеля (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s5_f1">
+                                    <label class="pnt__label" for="s5_p1"><span id="s5_l1">Довжина, м</span></label>
+                                    <input class="pnt__input" id="s5_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s5_f2">
+                                    <label class="pnt__label" for="s5_p2"><span id="s5_l2">Ширина, м</span></label>
+                                    <input class="pnt__input" id="s5_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s5_f3">
+                                    <label class="pnt__label" for="s5_p3"><span>Висота, м</span></label>
+                                    <input class="pnt__input" id="s5_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s5_op">Отвори, м² <span class="pnt__hint">(необовʼязково)</span></label>
+                                    <input class="pnt__input" id="s5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="pnt__el" id="sl6" hidden>
+                                <div class="pnt__elHead"><span>Поверхня 6</span><span class="pnt__elVol" id="sv6">—</span><button type="button" class="pnt__elRm" id="sl6rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <span class="pnt__label" id="s6tLbl">Тип</span>
+                                    <input type="hidden" id="s6_type" value="room">
+                                    <div class="pnt__sel" id="s6t_dd">
+                                        <button type="button" class="pnt__selBtn" id="s6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s6tLbl s6t_val"><span id="s6t_val">Стіни кімнати (Д × Ш × В)</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="s6t_list" role="listbox" aria-labelledby="s6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Стіни кімнати (Д × Ш × В)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="ceil" aria-selected="false">Стеля (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field" id="s6_f1">
+                                    <label class="pnt__label" for="s6_p1"><span id="s6_l1">Довжина, м</span></label>
+                                    <input class="pnt__input" id="s6_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s6_f2">
+                                    <label class="pnt__label" for="s6_p2"><span id="s6_l2">Ширина, м</span></label>
+                                    <input class="pnt__input" id="s6_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field" id="s6_f3">
+                                    <label class="pnt__label" for="s6_p3"><span>Висота, м</span></label>
+                                    <input class="pnt__input" id="s6_p3" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="s6_op">Отвори, м² <span class="pnt__hint">(необовʼязково)</span></label>
+                                    <input class="pnt__input" id="s6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="pnt__add" id="addSl">+ Додати поверхню</button>
+
+                            <details class="pnt__details pnt__mt12" id="primerDet">
+                                <summary>Ґрунтовка <span class="pnt__hint">(необовʼязково)</span></summary>
+                                <div class="pnt__hint pnt__hint--mb">Рахується за площею тих самих поверхонь. Витрату беріть з етикетки ґрунтовки.</div>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pcov">Витрата, м² з 1 л на шар</label>
+                                    <input class="pnt__input" id="pcov" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pcoats">Шарів ґрунтовки</label>
+                                    <input class="pnt__input" id="pcoats" type="text" inputmode="decimal" autocomplete="off" placeholder="1" value="1">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pcan">Банка ґрунтовки, л</label>
+                                    <input class="pnt__input" id="pcan" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="pnt__details pnt__mt12" id="priceDet">
+                                <summary>Ціни й доставка <span class="pnt__hint">(необовʼязково)</span></summary>
+                                <div class="pnt__rows">
+                                    <div class="pnt__field pnt__field--full">
+                                    <span class="pnt__label" id="puLbl">Ціна за</span>
+                                    <input type="hidden" id="punit" value="l">
+                                    <div class="pnt__sel" id="pu_dd">
+                                        <button type="button" class="pnt__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">літр</span><span class="pnt__caret" aria-hidden="true"></span></button>
+                                        <ul class="pnt__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="l" aria-selected="true">літр</li>
+                                            <li role="option" tabindex="-1" data-v="can" aria-selected="false">банку</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pPaint">Ціна фарби, <span data-wu>₴</span></label>
+                                    <input class="pnt__input" id="pPaint" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pPrimer">Ціна ґрунтовки, <span data-wu>₴</span></label>
+                                    <input class="pnt__input" id="pPrimer" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="pnt__field">
+                                    <label class="pnt__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="pnt__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="pnt__actions pnt__mt12">
+                            <button class="pnt__btn pnt__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="pnt__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="pnt__card">
+                        <div class="pnt__sectionTitle">
+                            <h2 class="pnt__h2">Результат</h2>
+                            <span class="pnt__badge">🎨</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/flooring-calculator">Калькулятор ламінату та лінолеуму</a>
-                            <a href="/construction/plaster-calculator">Калькулятор штукатурки</a>
+                        <div class="pnt__result" id="result">Вкажіть дані — результат зʼявиться тут.</div>
+                        <div class="pnt__actions pnt__mt12">
+                            <button class="pnt__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="pnt__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="pnt__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="pnt__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks pnt__mt12"><a class="pnt__link" href="/construction/plaster-calculator">Калькулятор штукатурки →</a> <a class="pnt__link" href="/construction/wallpaper-calculator">Калькулятор шпалер →</a></div>
                     </div>
+                </div>
+
+                <div class="pnt__card pnt__schedule" id="schedule" hidden>
+                    <div class="pnt__schedHead">
+                        <h2 class="pnt__h2">Підсумок</h2>
+                        <div class="pnt__tools">
+                            <button type="button" class="pnt__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="pnt__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="pnt__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як розрахувати кількість фарби</h2>
-            <p>
-                Розрахунок базується на площі поверхні для фарбування (стіни, за вирахуванням дверей
-                і вікон, і опційно стеля), помноженій на кількість шарів і витрату фарби на квадратний
-                метр. Формула: кількість фарби = площа × кількість шарів × витрата на м².
-            </p>
-
-            <h2>Скільки фарби витрачається на 1 м²</h2>
-            <p>
-                Типова витрата становить <b>0.1-0.15 л/м²</b> на один шар, але вона суттєво залежить
-                від:
-            </p>
-            <ul>
-                <li><b>Типу фарби:</b> водоемульсійна, латексна, олійна — різна густина і покривна здатність.</li>
-                <li><b>Поверхні:</b> шорстка чи пориста поверхня (наприклад, штукатурка) вбирає більше фарби, ніж
-                    гладка.</li>
-                <li><b>Кольору:</b> перехід від темного до світлого кольору чи навпаки часто вимагає додаткового шару.
-                </li>
-                <li><b>Методу нанесення:</b> валик, пензель чи розпилювач мають різну ефективність використання фарби.
-                </li>
-            </ul>
-            <p>
-                Точні дані про витрату завжди вказані на упаковці конкретної фарби — рекомендується
-                орієнтуватись саме на них для найточнішого розрахунку.
-            </p>
-
-            <h2>Навіщо потрібен другий шар фарби</h2>
-            <p>
-                Один шар фарби рідко забезпечує рівномірне, насичене покриття кольору — особливо
-                при переході на контрастний колір. Другий шар вирівнює тон, приховує розводи від
-                валика чи пензля з першого шару та підвищує стійкість покриття до стирання й миття.
-            </p>
-
-            <p class="m-hintSmall">
-                Рекомендується купувати фарбу із запасом приблизно 10% на випадок нерівностей поверхні,
-                підмальовування чи майбутнього дрібного ремонту тим самим відтінком.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/plaster-calculator"><b>Калькулятор штукатурки</b><span>Мішки суміші або цемент і пісок для кількох поверхонь.</span></a>
+                <a class="cc-related-card" href="/construction/wallpaper-calculator"><b>Калькулятор шпалер</b><span>Кількість рулонів шпалер для кімнати.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор фарби</h2>
+            <p>Калькулятор визначає, скільки <b>фарби</b> потрібно для стін і стелі: літри з запасом і кількість банок. Можна додати до шести поверхонь: стіни кімнати за розмірами, окрему стіну, стелю або готову площу, з урахуванням отворів. Фарба, кількість шарів і запас спільні для всіх поверхонь. За бажанням додається ґрунтовка та вартість за вашими цінами. Вбудованих цін немає.</p>
+
+            <h2>Як рахується фарба</h2>
+            <p>Літри дорівнюють площі, помноженій на кількість шарів і поділеній на витрату (м² з 1 л на один шар), до результату додається запас. Банки округлюються вгору. Площа стін кімнати це периметр, помножений на висоту, мінус отвори; стеля це довжина × ширина.</p>
+            <p>Витрата береться з етикетки. Для інтер'єрних акрилових і водоемульсійних фарб у джерелах називають 8–12 м² з 1 л на один шар, для фасадних 5–9 м²/л. Калькулятор підставляє середні значення 10 і 7, їх можна змінити. Для 20 м² в один шар це 2,50 л при 8 м²/л і 1,67 л при 12 м²/л.</p>
+
+            <h2>Банки й залишок</h2>
+            <p>Якщо вказати об'єм банки, калькулятор покаже кількість банок і намалює їх: повні й останню, заповнену на частку. Залишок це різниця між купленими й потрібними літрами. Для прикладу з кімнатою 48,6 м² стін (з отворами) і стелі це 13,8 л, 3 банки по 5 л, остання заповнена на 75%, залишок 1,2 л.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Кімната 5 × 4 м, висота 2,7 м, отвори 6 м², і стеля 5 × 4 м: стіни 42,6 м², стеля 20 м², разом 62,6 м². У 2 шари при 10 м²/л це 12,5 л, із запасом 10% 13,8 л, тобто 3 банки по 5 л. Ґрунтовка в один шар при 10 м²/л: 6,9 л, 2 банки по 5 л. За цінами 1 300 ₴ за банку фарби й 600 ₴ за банку ґрунтовки вартість 5 100 ₴.</p>
+            <p class="pnt-mini">Калькулятор дає орієнтовну оцінку. Реальна витрата залежить від фарби, основи й способу нанесення.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Скільки фарби потрібно на квадратний метр?</h3>
-                <p>Типова витрата — 0.1-0.15 л/м² на один шар, залежно від типу фарби, поверхні та методу нанесення.
-                    Точні дані завжди вказані на упаковці конкретної фарби.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки фарби потрібно на 1 м²?</h3>
+                <p>Залежить від фарби: для інтер'єрних акрилових і водоемульсійних у джерелах 8–12 м² з 1 л на один шар, тобто 0,08–0,125 л/м². Для двох шарів літрів вдвічі більше. Точну витрату завжди вказують на етикетці.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому потрібно фарбувати в два шари?</h3>
-                <p>Другий шар забезпечує рівномірне покриття кольору, приховує сліди від валика чи пензля з першого
-                    шару, і покращує довговічність фарбування.</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати фарбу на кімнату?</h3>
+                <p>Периметр стін множать на висоту, віднімають площу вікон і дверей, додають стелю за потреби, множать на кількість шарів і ділять на витрату. Для кімнати 4 × 3 м з висотою 2,5 м і отворами 5 м² площа стін 30,0 м².</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи варто купувати фарбу із запасом?</h3>
-                <p>Так, рекомендується додати 10% запасу на випадок нерівностей поверхні, підмальовування чи майбутнього
-                    ремонту дрібних пошкоджень тим самим кольором.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки шарів фарби потрібно?</h3>
+                <p>Для внутрішніх робіт зазвичай два шари. Три й більше потрібні при переході з темного кольору на світлий або для перекриття плям.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи рахувати стелю разом зі стінами?</h3>
+                <p>Додайте її окремою поверхнею «Стеля (Д × Ш)». Фарба й кількість шарів тоді спільні. Якщо стеля іншою фарбою, порахуйте її окремим запуском.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як перевести витрату з л/м² у м²/л?</h3>
+                <p>Поділіть 1 на значення: 0,1 л/м² це 10 м²/л, 0,125 л/м² це 8 м²/л. Калькулятор працює в м² з 1 л, як пишуть на банках.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки банок фарби купити?</h3>
+                <p>Літри з запасом діляться на об'єм банки й округлюються вгору. Для 13,8 л і банки 5 л це 3 банки (15 л), залишок 1,2 л.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який запас фарби закласти?</h3>
+                <p>Запас задаєте ви (наприклад, 10%); порожнє поле означає 0%. У джерелах називають 10–15% на нерівності й підмальовування, більше для пористої основи.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи потрібна ґрунтовка і скільки її?</h3>
+                <p>Ґрунтовка зменшує вбирання фарби основою. Її витрату беріть з етикетки: вкажіть м² з 1 л і кількість шарів, і калькулятор порахує літри та банки за тією ж площею.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому на практиці фарби йде більше?</h3>
+                <p>Пориста або шорстка поверхня (наприклад, свіжа штукатурка) вбирає більше фарби, на витрату також впливає спосіб нанесення. Тоді задайте меншу витрату на м² або більший запас.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як врахувати вікна й двері?</h3>
+                <p>Вкажіть сумарну площу отворів у м² для кожної поверхні: вона віднімається. Відкоси, якщо їх фарбують, додайте окремою поверхнею «Площа».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки фарби на фасад?</h3>
+                <p>Для фасадних фарб у джерелах 5–9 м² з 1 л на один шар. Оберіть тип «Фасадна» або вкажіть свою витрату з банки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати вартість фарби?</h3>
+                <p>Вкажіть ціну за літр або за банку (для банки потрібен її об'єм). Вартість = кількість × ціна + доставка. Для прикладу 3 банки по 1 300 ₴ й 2 банки ґрунтовки по 600 ₴ дають 5 100 ₴.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
