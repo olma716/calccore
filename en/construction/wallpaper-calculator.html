@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Wallpaper Calculator Online — How Many Rolls You Need | CalcCore</title>
+    <title>Wallpaper Calculator: Rolls, Pattern Repeat, Cost | CalcCore</title>
     <meta name="description"
-        content="Calculate how many wallpaper rolls you need based on room perimeter, ceiling height, and roll size. Accounts for pattern repeat and openings." />
+        content="Wallpaper calculator: how many rolls a room needs with openings, pattern repeat, a reserve, paste and the cost from your own prices." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/wallpaper-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/wallpaper-calculator" />
@@ -26,220 +28,638 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Wallpaper Calculator Online — How Many Rolls You Need" />
-    <meta property="og:description" content="Calculate how many wallpaper rolls you need based on room perimeter, ceiling height, and roll size. Accounts for pattern repeat and openings." />
+    <meta property="og:title" content="Wallpaper Calculator: Rolls, Pattern Repeat, Cost" />
+    <meta property="og:description" content="Wallpaper calculator: how many rolls a room needs with openings, pattern repeat, a reserve, paste and the cost from your own prices." />
     <meta property="og:url" content="https://calccore.net/en/construction/wallpaper-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Wallpaper Calculator Online — How Many Rolls You Need" />
-    <meta name="twitter:description" content="Calculate how many wallpaper rolls you need based on room perimeter, ceiling height, and roll size. Accounts for pattern repeat and openings." />
+    <meta name="twitter:title" content="Wallpaper Calculator: Rolls, Pattern Repeat, Cost" />
+    <meta name="twitter:description" content="Wallpaper calculator: how many rolls a room needs with openings, pattern repeat, a reserve, paste and the cost from your own prices." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/wal.css?v=20261029wal1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/wallpaper-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Why does pattern repeat (rapport) matter?",
-        "acceptedAnswer":{"@type":"Answer","text":"Wallpaper with a large pattern requires matching the design between strips, so part of each new piece becomes waste — this increases the total quantity needed."}
-      },
-      {
-        "@type":"Question",
-        "name":"Should I subtract the area of doors and windows?",
-        "acceptedAnswer":{"@type":"Answer","text":"For a more precise calculation — yes, especially in smaller rooms with large windows. However, many calculators recommend a small buffer for cases where openings aren't accounted for."}
-      },
-      {
-        "@type":"Question",
-        "name":"Should I buy wallpaper from a single production batch?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, always check the batch number on the label — rolls from different batches can have a slight color shade difference."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029wal1" defer></script>
+    <script src="/js/wallpaper-calculator.js?v=20261029wal1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/wallpaper-calculator#app",
-    "name":"Wallpaper Calculator",
-    "description":"Calculate how many wallpaper rolls are needed based on room perimeter and roll size.",
-    "url":"https://calccore.net/en/construction/wallpaper-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/wallpaper-calculator#app",
+  "name": "Wallpaper Calculator",
+  "description": "Calculates wallpaper for several rooms or walls: the strips along the perimeter without doors and windows, the roll size, the pattern match (none, straight, drop) with a real cutting of the rolls, a reserve, paste and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/wallpaper-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six rooms or walls with openings",
+    "A roll from a preset or your own size, trimming allowance, reserve",
+    "Pattern match: straight and drop, with the cutting of the rolls",
+    "Strips along the walls, waste, paste by the coverage of a pack",
+    "Your own prices, none built in; hryvnia, dollar or euro; table, CSV, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/wallpaper-calculator#webpage",
+      "url": "https://calccore.net/en/construction/wallpaper-calculator",
+      "name": "Wallpaper Calculator: Rolls, Pattern Repeat, Cost | CalcCore",
+      "description": "Wallpaper calculator: how many rolls a room needs with openings, pattern repeat, a reserve, paste and the cost from your own prices.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/wallpaper-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/wallpaper-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/wallpaper-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Wallpaper Calculator",
+          "item": "https://calccore.net/en/construction/wallpaper-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/wallpaper-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the number of rolls of wallpaper for a room?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The perimeter of the room minus the width of doors and windows is divided by the roll width (rounded up): that is the number of strips. Then see how many strips of the length of the ceiling height plus the allowance fit into a roll, and divide the strips by that number."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many rolls of wallpaper for a room of 4×3.5 m?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a 2.4 m ceiling, a 0.9 m door and a roll of 0.53×10.05 m that is 27 strips: 7 rolls with no pattern match, 9 with a straight match of a 32 cm repeat and 9 with a drop match. For another height and roll the result is different, so enter your own data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the pattern repeat and where do I find it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the distance at which the pattern repeats along the roll. It is printed on the label of the wallpaper in centimetres. The larger the repeat, the more waste for the match."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a straight and a drop match?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With a straight match the pattern of the neighbouring strips is at the same height; with a drop match every second strip is shifted by half the repeat (half-drop). A drop match usually gives a little more waste; the type is on the label."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I subtract doors and windows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator subtracts the sum of the widths of the openings from the perimeter, so no strips are counted there. The strips above doors and under windows are not counted separately: they are usually cut from the offcuts, which gives a small margin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What trimming allowance should I use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually a few centimetres at the top and the bottom for trimming at the ceiling and the skirting. The field is empty by default; enter the value your decorator uses, the total for the top and the bottom."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many extra rolls should I buy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The reserve is set as a percentage of the number of rolls and rounded up. It covers cutting mistakes and future repairs: rolls of another batch can differ in shade."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sizes of wallpaper rolls are there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common are 0.53×10.05 m, 0.70×10.05 m, 1.06×10.05 m and 1.06×25 m. Your size is on the label; you can enter it as your own."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a roll give fewer strips than its length divided by the height?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because with a patterned wallpaper a piece is cut off before every strip to the needed phase of the pattern, and at the end of the roll there is a piece shorter than a strip. The calculator cuts the roll one strip after another and counts these losses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much paste is needed for wallpaper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The area of the walls is divided by the coverage of one pack, printed on the pack of paste, and rounded up. The calculator takes the area of the walls as the perimeter without the openings times the ceiling height. The coverage depends on the maker and the type of the wallpaper, so there is no default value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for niches, projections and ceilings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The calculator counts vertical strips along the walls. For a niche or a projection you can add a separate wall; wallpaper for a ceiling is not counted here."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should the rolls be from one batch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rolls from different batches can differ slightly in shade, and it shows on the wall. The batch number is on the label, so take all the rolls from one."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="wal-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cwallpaper">
-            <div class="mcalc__wrap">
+        <section class="wal" id="wal">
+            <div class="wal__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Wallpaper Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate how many wallpaper rolls you need for
-                        your room.
-                    </p>
+                <div class="wal__titlebar">
+                    <h1 class="wal__h1">Wallpaper Calculator</h1>
+                    <p class="wal__p">Work out how many rolls of wallpaper the rooms need with the openings, the pattern match, a reserve, paste and the cost.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="wal__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter dimensions</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="wal__card">
+                        <div class="wal__sectionTitle">
+                            <h2 class="wal__h2">Input data</h2>
+                            <div class="wal__dd" id="cur_dd"><button type="button" class="wal__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="wal__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="wal__caret" aria-hidden="true"></span></button><ul class="wal__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="wal__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="wal__ddCode">UAH</span><span class="wal__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="wal__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="wal__ddCode">USD</span><span class="wal__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="wal__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="wal__ddCode">EUR</span><span class="wal__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomLength">Room length (m)</label>
-                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomWidth">Room width (m)</label>
-                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 3.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomHeight">Ceiling height (m)</label>
-                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2.7" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="rollWidth">Roll width (m)</label>
-                                <input class="mcalc__input" id="rollWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 0.53" value="0.53" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="rollLength">Roll length (m)</label>
-                                <input class="mcalc__input" id="rollLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 10.05" value="10.05" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="rapport">Pattern repeat (cm)</label>
-                                <input class="mcalc__input" id="rapport" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 0" value="0" />
-                                <div class="mcalc__hint">0 if there's no pattern matching needed (plain or small print).
+                        <div class="wal__block">
+                            <div class="wal__rows">
+                                <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="rpLbl">Roll size</span>
+                                    <input type="hidden" id="rollp" value="r053">
+                                    <div class="wal__sel" id="rp_dd">
+                                        <button type="button" class="wal__selBtn" id="rp_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="rpLbl rp_val"><span id="rp_val">0.53 × 10.05 m</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="rp_list" role="listbox" aria-labelledby="rpLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="r053" aria-selected="true">0.53 × 10.05 m</li>
+                                            <li role="option" tabindex="-1" data-v="r070" aria-selected="false">0.70 × 10.05 m</li>
+                                            <li role="option" tabindex="-1" data-v="r106" aria-selected="false">1.06 × 10.05 m</li>
+                                            <li role="option" tabindex="-1" data-v="r106l" aria-selected="false">1.06 × 25 m</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own size</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="rw">Roll width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="rw" type="text" inputmode="decimal" autocomplete="off" placeholder="0,53" value="0.53">
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="rl">Roll length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="rl" type="text" inputmode="decimal" autocomplete="off" placeholder="10,05" value="10.05">
+                                </div>
+                                <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="paLbl">Pattern</span>
+                                    <input type="hidden" id="pat" value="none">
+                                    <div class="wal__sel" id="pa_dd">
+                                        <button type="button" class="wal__selBtn" id="pa_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="paLbl pa_val"><span id="pa_val">No match (plain or small pattern)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="pa_list" role="listbox" aria-labelledby="paLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="none" aria-selected="true">No match (plain or small pattern)</li>
+                                            <li role="option" tabindex="-1" data-v="straight" aria-selected="false">Straight match</li>
+                                            <li role="option" tabindex="-1" data-v="drop" aria-selected="false">Drop match (half-drop)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="wal__field" id="rapW" hidden>
+                                    <label class="wal__label" for="rap">Pattern repeat, cm&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="rap" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 32"><div class="wal__hint">It is on the label.</div>
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="trim">Trimming allowance, cm</label>
+                                    <input class="wal__input" id="trim" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="wal__hint">Top and bottom together.</div>
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="reserve">Reserve, %</label>
+                                    <input class="wal__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="wal__hint">In rolls, rounded up.</div>
                                 </div>
                             </div>
 
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                            <div class="wal__miniTitle wal__mt12">Rooms</div>
+                            <div class="wal__el" id="nl1">
+                                <div class="wal__elHead"><span>Room 1</span><span class="wal__elVol" id="nv1">—</span><button type="button" class="wal__elRm" id="nl1rm" aria-label="Remove the room" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n1tLbl">Type</span>
+                                    <input type="hidden" id="n1_type" value="room">
+                                    <div class="wal__sel" id="n1t_dd">
+                                        <button type="button" class="wal__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Room (perimeter)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room (perimeter)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Single wall</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n1_len">Length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n1_len" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="wal__field" id="n1_widW">
+                                    <label class="wal__label" for="n1_wid">Width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n1_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n1_h">Ceiling height, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n1_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n1_op">Doors and windows, m <span class="wal__hint">(optional)</span></label>
+                                    <input class="wal__input" id="n1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.9"><div class="wal__hint">The sum of their widths.</div>
+                                </div>
+                                </div>
                             </div>
+                            <div class="wal__el" id="nl2" hidden>
+                                <div class="wal__elHead"><span>Room 2</span><span class="wal__elVol" id="nv2">—</span><button type="button" class="wal__elRm" id="nl2rm" aria-label="Remove the room" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n2tLbl">Type</span>
+                                    <input type="hidden" id="n2_type" value="room">
+                                    <div class="wal__sel" id="n2t_dd">
+                                        <button type="button" class="wal__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Room (perimeter)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room (perimeter)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Single wall</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n2_len">Length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n2_len" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="wal__field" id="n2_widW">
+                                    <label class="wal__label" for="n2_wid">Width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n2_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n2_h">Ceiling height, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n2_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n2_op">Doors and windows, m <span class="wal__hint">(optional)</span></label>
+                                    <input class="wal__input" id="n2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.9"><div class="wal__hint">The sum of their widths.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl3" hidden>
+                                <div class="wal__elHead"><span>Room 3</span><span class="wal__elVol" id="nv3">—</span><button type="button" class="wal__elRm" id="nl3rm" aria-label="Remove the room" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n3tLbl">Type</span>
+                                    <input type="hidden" id="n3_type" value="room">
+                                    <div class="wal__sel" id="n3t_dd">
+                                        <button type="button" class="wal__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Room (perimeter)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room (perimeter)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Single wall</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n3_len">Length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n3_len" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="wal__field" id="n3_widW">
+                                    <label class="wal__label" for="n3_wid">Width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n3_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n3_h">Ceiling height, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n3_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n3_op">Doors and windows, m <span class="wal__hint">(optional)</span></label>
+                                    <input class="wal__input" id="n3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.9"><div class="wal__hint">The sum of their widths.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl4" hidden>
+                                <div class="wal__elHead"><span>Room 4</span><span class="wal__elVol" id="nv4">—</span><button type="button" class="wal__elRm" id="nl4rm" aria-label="Remove the room" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n4tLbl">Type</span>
+                                    <input type="hidden" id="n4_type" value="room">
+                                    <div class="wal__sel" id="n4t_dd">
+                                        <button type="button" class="wal__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Room (perimeter)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room (perimeter)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Single wall</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n4_len">Length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n4_len" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="wal__field" id="n4_widW">
+                                    <label class="wal__label" for="n4_wid">Width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n4_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n4_h">Ceiling height, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n4_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n4_op">Doors and windows, m <span class="wal__hint">(optional)</span></label>
+                                    <input class="wal__input" id="n4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.9"><div class="wal__hint">The sum of their widths.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl5" hidden>
+                                <div class="wal__elHead"><span>Room 5</span><span class="wal__elVol" id="nv5">—</span><button type="button" class="wal__elRm" id="nl5rm" aria-label="Remove the room" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n5tLbl">Type</span>
+                                    <input type="hidden" id="n5_type" value="room">
+                                    <div class="wal__sel" id="n5t_dd">
+                                        <button type="button" class="wal__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Room (perimeter)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room (perimeter)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Single wall</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n5_len">Length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n5_len" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="wal__field" id="n5_widW">
+                                    <label class="wal__label" for="n5_wid">Width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n5_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n5_h">Ceiling height, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n5_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n5_op">Doors and windows, m <span class="wal__hint">(optional)</span></label>
+                                    <input class="wal__input" id="n5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.9"><div class="wal__hint">The sum of their widths.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl6" hidden>
+                                <div class="wal__elHead"><span>Room 6</span><span class="wal__elVol" id="nv6">—</span><button type="button" class="wal__elRm" id="nl6rm" aria-label="Remove the room" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n6tLbl">Type</span>
+                                    <input type="hidden" id="n6_type" value="room">
+                                    <div class="wal__sel" id="n6t_dd">
+                                        <button type="button" class="wal__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Room (perimeter)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Room (perimeter)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Single wall</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n6_len">Length, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n6_len" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="wal__field" id="n6_widW">
+                                    <label class="wal__label" for="n6_wid">Width, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n6_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n6_h">Ceiling height, m&nbsp;<span class="wal__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="wal__input" id="n6_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n6_op">Doors and windows, m <span class="wal__hint">(optional)</span></label>
+                                    <input class="wal__input" id="n6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.9"><div class="wal__hint">The sum of their widths.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="wal__add" id="addNl">+ Add a room</button>
 
+                            <details class="wal__details wal__mt12" id="glueDet">
+                                <summary>Paste <span class="wal__hint">(optional)</span></summary>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <label class="wal__label" for="gcov">Coverage of one pack, m²</label>
+                                    <input class="wal__input" id="gcov" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 25"><div class="wal__hint">From the pack of paste.</div>
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="wal__details wal__mt12" id="priceDet">
+                                <summary>Price and delivery <span class="wal__hint">(optional)</span></summary>
+                                <div class="wal__rows">
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="pRoll">Roll price, <span data-wu>₴</span></label>
+                                    <input class="wal__input" id="pRoll" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="pGlue">Paste pack price, <span data-wu>₴</span></label>
+                                    <input class="wal__input" id="pGlue" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="wal__field wal__field--full">
+                                    <label class="wal__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="wal__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="wal__actions wal__mt12">
+                            <button class="wal__btn wal__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="wal__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="wal__card">
+                        <div class="wal__sectionTitle">
+                            <h2 class="wal__h2">Result</h2>
+                            <span class="wal__badge">🖼️</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
-                            <a href="/en/construction/tile-calculator">Tile Calculator</a>
+                        <div class="wal__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="wal__actions wal__mt12">
+                            <button class="wal__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="wal__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="wal__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="wal__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks wal__mt12"><a class="wal__link" href="/en/construction/paint-calculator">Paint calculator →</a> <a class="wal__link" href="/en/construction/cost-calculator">Construction cost calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="wal__card wal__schedule" id="schedule" hidden>
+                    <div class="wal__schedHead">
+                        <h2 class="wal__h2">Summary</h2>
+                        <div class="wal__tools">
+                            <button type="button" class="wal__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="wal__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="wal__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How to calculate the number of wallpaper rolls</h2>
-            <p>
-                The calculation is based on the room's perimeter (to determine the number of vertical
-                strips) and ceiling height (to determine the length of each strip). Knowing the roll
-                dimensions, you can calculate how many strips come from one roll, and from there, the
-                total number of rolls needed.
-            </p>
-
-            <h2>Why pattern repeat (rapport) matters</h2>
-            <p>
-                If the wallpaper has a distinct repeating pattern, adjacent strips need to be hung
-                with the pattern matched. This means part of each new piece is "lost" aligning the
-                pattern with the previous strip, so the actual usable strip length is shorter than
-                the physical roll length. The larger the pattern repeat, the more waste.
-            </p>
-
-            <h2>Practical tips</h2>
-            <ul>
-                <li><b>Buy extra:</b> it's recommended to add 1-2 extra rolls beyond the calculation for cutting
-                    mistakes or future repairs.</li>
-                <li><b>Check the batch number:</b> all rolls should be from the same production batch (listed on the
-                    label), otherwise there may be a noticeable shade difference.</li>
-                <li><b>Account for pattern direction:</b> some wallpaper has a direction (up/down), which also affects
-                    cutting and waste amount.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                This calculation is an estimate. For complex rooms with alcoves, protrusions, or
-                irregular shapes, consulting a professional or wallpaper store advisor is recommended.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/paint-calculator"><b>Paint calculator</b><span>Litres and cans of paint, a primer and the cost from your own prices.</span></a>
+                <a class="cc-related-card" href="/en/construction/plaster-calculator"><b>Plaster calculator</b><span>Bags of a mix or cement and sand for several surfaces.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your own prices.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the wallpaper calculator counts</h2>
+            <p>The calculator works out how many <b>rolls of wallpaper</b> are needed for one or several rooms (up to six), as well as paste and the cost. For every room or a single wall you enter the dimensions and the width of the openings, and also the roll size, the type of the pattern match, the trimming allowance and the reserve. The result is the number of rolls, strips, the waste, the area of the wallpaper bought and, if you give the coverage of a pack, the amount of paste. There are no built-in prices: the cost is counted from your prices in hryvnia, dollars or euros.</p>
+
+            <h2>How strips and rolls are counted</h2>
+            <p>Wallpaper is hung in vertical strips, so the strips are counted first: the perimeter of the room without the width of doors and windows is divided by the roll width and rounded up. The length of a strip is the ceiling height plus the trimming allowance. A roll gives a whole number of strips, and the end that is too short for one more strip goes to waste.</p>
+            <p>Example: a room of 4×3.5 m, a ceiling of 2.4 m, a door of 0.9 m, a roll of 0.53×10.05 m, a 5 cm allowance. The perimeter without the door is 14.1 m, which is 27 strips of 2.45 m. With no pattern match a roll gives 4 strips, so 7 rolls are needed.</p>
+
+            <h2>Pattern match: straight and drop</h2>
+            <p>If the wallpaper has a pronounced pattern, the neighbouring strips have to be matched. The pattern repeats with a step (the repeat), and every strip has to start at the same point of the pattern. So before every strip a piece of the roll is cut off to the needed phase of the pattern. With a straight match all the strips start at one phase; with a drop match every second strip is shifted by half the repeat. The calculator cuts the rolls one after another and counts this waste instead of just rounding the height.</p>
+            <p>For the same room with a 2.4 m ceiling and a 32 cm repeat: with no match 4 strips per roll and 7 rolls, with a straight match 3 strips per roll and 9 rolls, with a drop match 3 and 9 rolls.</p>
+
+            <h2>Worked example</h2>
+            <p>Two rooms: 4×3.5 m and 3.2×2.8 m, a ceiling of 2.7 m, a door of 0.9 m in each. A roll of 0.53×10.05 m, a straight match of 32 cm, a 5 cm allowance, a 5% reserve. The strips are 27 and 21, 48 in total, the length of a strip is 2.75 m. A roll gives 3 strips, so 16 rolls are needed, 17 with the reserve. The waste is 19%. The area of the walls is 68.0 m², and at a pack coverage of 25 m² the paste is 3 packs. At 1,200 ₴ per roll and 180 ₴ per pack of paste the cost is 20,940 ₴.</p>
+            <p class="wal-mini">The calculator gives an approximate estimate. Always check the roll size and the pattern repeat on the label.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Why does pattern repeat (rapport) matter?</h3>
-                <p>Wallpaper with a large pattern requires matching the design between strips, so part of each new piece
-                    becomes waste — this increases the total quantity needed.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the number of rolls of wallpaper for a room?</h3>
+                <p>The perimeter of the room minus the width of doors and windows is divided by the roll width (rounded up): that is the number of strips. Then see how many strips of the length of the ceiling height plus the allowance fit into a roll, and divide the strips by that number.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Should I subtract the area of doors and windows?</h3>
-                <p>For a more precise calculation — yes, especially in smaller rooms with large windows. However, many
-                    calculators recommend a small buffer for cases where openings aren't accounted for.</p>
+            <div class="cc-faq-item">
+                <h3>How many rolls of wallpaper for a room of 4×3.5 m?</h3>
+                <p>For a 2.4 m ceiling, a 0.9 m door and a roll of 0.53×10.05 m that is 27 strips: 7 rolls with no pattern match, 9 with a straight match of a 32 cm repeat and 9 with a drop match. For another height and roll the result is different, so enter your own data.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Should I buy wallpaper from a single production batch?</h3>
-                <p>Yes, always check the batch number on the label — rolls from different batches can have a slight
-                    color shade difference.</p>
+            <div class="cc-faq-item">
+                <h3>What is the pattern repeat and where do I find it?</h3>
+                <p>It is the distance at which the pattern repeats along the roll. It is printed on the label of the wallpaper in centimetres. The larger the repeat, the more waste for the match.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the difference between a straight and a drop match?</h3>
+                <p>With a straight match the pattern of the neighbouring strips is at the same height; with a drop match every second strip is shifted by half the repeat (half-drop). A drop match usually gives a little more waste; the type is on the label.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Should I subtract doors and windows?</h3>
+                <p>The calculator subtracts the sum of the widths of the openings from the perimeter, so no strips are counted there. The strips above doors and under windows are not counted separately: they are usually cut from the offcuts, which gives a small margin.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What trimming allowance should I use?</h3>
+                <p>Usually a few centimetres at the top and the bottom for trimming at the ceiling and the skirting. The field is empty by default; enter the value your decorator uses, the total for the top and the bottom.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many extra rolls should I buy?</h3>
+                <p>The reserve is set as a percentage of the number of rolls and rounded up. It covers cutting mistakes and future repairs: rolls of another batch can differ in shade.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What sizes of wallpaper rolls are there?</h3>
+                <p>The most common are 0.53×10.05 m, 0.70×10.05 m, 1.06×10.05 m and 1.06×25 m. Your size is on the label; you can enter it as your own.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does a roll give fewer strips than its length divided by the height?</h3>
+                <p>Because with a patterned wallpaper a piece is cut off before every strip to the needed phase of the pattern, and at the end of the roll there is a piece shorter than a strip. The calculator cuts the roll one strip after another and counts these losses.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much paste is needed for wallpaper?</h3>
+                <p>The area of the walls is divided by the coverage of one pack, printed on the pack of paste, and rounded up. The calculator takes the area of the walls as the perimeter without the openings times the ceiling height. The coverage depends on the maker and the type of the wallpaper, so there is no default value.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for niches, projections and ceilings?</h3>
+                <p>No. The calculator counts vertical strips along the walls. For a niche or a projection you can add a separate wall; wallpaper for a ceiling is not counted here.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why should the rolls be from one batch?</h3>
+                <p>Rolls from different batches can differ slightly in shade, and it shows on the wall. The batch number is on the label, so take all the rolls from one.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

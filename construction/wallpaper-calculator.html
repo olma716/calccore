@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор шпалер онлайн — скільки рулонів потрібно | CalcCore</title>
+    <title>Калькулятор шпалер: рулони і підгонка малюнка | CalcCore</title>
     <meta name="description"
-        content="Розрахунок кількості рулонів шпалер за периметром кімнати, висотою стелі та розміром рулона. Врахування розкладки малюнка та отворів." />
+        content="Калькулятор шпалер: скільки рулонів потрібно на кімнату з отворами, підгонкою малюнка (rapport), запасом, клеєм і вартістю за вашими цінами." />
 
     <link rel="canonical" href="https://calccore.net/construction/wallpaper-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/wallpaper-calculator" />
@@ -26,219 +28,638 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор шпалер онлайн — скільки рулонів потрібно" />
-    <meta property="og:description" content="Розрахунок кількості рулонів шпалер за периметром кімнати, висотою стелі та розміром рулона. Врахування розкладки малюнка та отворів." />
+    <meta property="og:title" content="Калькулятор шпалер: рулони і підгонка малюнка" />
+    <meta property="og:description" content="Калькулятор шпалер: скільки рулонів потрібно на кімнату з отворами, підгонкою малюнка (rapport), запасом, клеєм і вартістю за вашими цінами." />
     <meta property="og:url" content="https://calccore.net/construction/wallpaper-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор шпалер онлайн — скільки рулонів потрібно" />
-    <meta name="twitter:description" content="Розрахунок кількості рулонів шпалер за периметром кімнати, висотою стелі та розміром рулона. Врахування розкладки малюнка та отворів." />
+    <meta name="twitter:title" content="Калькулятор шпалер: рулони і підгонка малюнка" />
+    <meta name="twitter:description" content="Калькулятор шпалер: скільки рулонів потрібно на кімнату з отворами, підгонкою малюнка (rapport), запасом, клеєм і вартістю за вашими цінами." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/wal.css?v=20261029wal1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/wallpaper-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Чому потрібно враховувати розкладку малюнка (rapport)?",
-        "acceptedAnswer":{"@type":"Answer","text":"Шпалери з великим малюнком потребують суміщення візерунка між смугами, через що частина рулону йде у відходи при кожному новому шматку — це збільшує загальну потрібну кількість."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи потрібно відраховувати площу дверей і вікон?",
-        "acceptedAnswer":{"@type":"Answer","text":"Для точнішого розрахунку — так, особливо у невеликих кімнатах з великими вікнами. Проте багато калькуляторів рекомендують невеликий запас саме на випадок, якщо отвори не враховані."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи варто купувати шпалери з одного виробничого номера партії?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, обов'язково перевіряй номер партії (batch number) на етикетці — рулони з різних партій можуть мати незначну різницю у відтінку кольору."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029wal1" defer></script>
+    <script src="/js/wallpaper-calculator.js?v=20261029wal1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/wallpaper-calculator#app",
-    "name":"Wallpaper Calculator",
-    "description":"Розрахунок кількості рулонів шпалер за периметром кімнати та розміром рулона.",
-    "url":"https://calccore.net/construction/wallpaper-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/wallpaper-calculator#app",
+  "name": "Калькулятор шпалер",
+  "description": "Розрахунок шпалер для кількох кімнат або стін: смуги за периметром без дверей і вікон, розмір рулона, підгонка малюнка (без підгонки, пряма стикування, зі зсувом) з реальним розкроєм рулонів, запас, клей і вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/wallpaper-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести кімнат або стін з отворами",
+    "Рулон за пресетом або свій розмір, припуск на підрізання, запас",
+    "Підгонка малюнка: пряма стикування й зі зсувом з розкроєм рулонів",
+    "Смуги вздовж стін, відходи, клей за покриттям пачки",
+    "Ваші ціни без вбудованих; гривня, долар або євро; таблиця, CSV, посилання"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/wallpaper-calculator#webpage",
+      "url": "https://calccore.net/construction/wallpaper-calculator",
+      "name": "Калькулятор шпалер: рулони і підгонка малюнка | CalcCore",
+      "description": "Калькулятор шпалер: скільки рулонів потрібно на кімнату з отворами, підгонкою малюнка (rapport), запасом, клеєм і вартістю за вашими цінами.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/wallpaper-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/wallpaper-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/wallpaper-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор шпалер",
+          "item": "https://calccore.net/construction/wallpaper-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/wallpaper-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати кількість рулонів шпалер на кімнату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Периметр кімнати мінус ширина дверей і вікон ділиться на ширину рулона (округлення вгору), це кількість смуг. Потім дивимося, скільки смуг довжиною з висоту стелі плюс припуск вміщається в рулон, і ділимо смуги на це число."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки рулонів шпалер на кімнату 4×3,5 м?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для стелі 2,4 м, дверей 0,9 м і рулона 0,53×10,05 м це 27 смуг: 7 рулонів без підгонки малюнка, 9 при прямій стикуванні з кроком 32 см і 9 при стикуванні зі зсувом. Для іншої висоти й рулона результат інший, тому вкажіть свої дані."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке крок малюнка (rapport) і де його взяти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це відстань, через яку візерунок повторюється по довжині рулона. Він вказаний на етикетці шпалер у сантиметрах. Чим більший крок, тим більше відходів на підгонку."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим відрізняється пряма стикування від стикування зі зсувом?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "При прямій стикуванні візерунок сусідніх смуг на одній висоті, при стикуванні зі зсувом кожна друга смуга зсунута на половину кроку (half-drop). Зсув зазвичай дає трохи більше відходів, тип вказаний на етикетці."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи віднімати двері й вікна?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Калькулятор віднімає від периметра суму ширини отворів, тому смуги там не рахуються. Смуги над дверима й під вікнами окремо не рахуються: їх зазвичай кроять із залишків, тож це дає невеликий запас."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який припуск на підрізання брати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зазвичай кілька сантиметрів зверху й знизу для підрізання по стелі й плінтусу. Поле порожнє за замовчуванням, вкажіть значення, яке використовує ваш майстер, у сумі за верх і низ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки рулонів купувати із запасом?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запас задається у відсотках від кількості рулонів і округлюється вгору. Він потрібен на помилки при розкрої й на майбутній ремонт: рулони іншої партії можуть відрізнятися відтінком."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які розміри рулонів шпалер бувають?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Найпоширеніші 0,53×10,05 м, 0,70×10,05 м, 1,06×10,05 м і 1,06×25 м. Ваш розмір вказаний на етикетці, його можна ввести як свій."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому з рулона виходить менше смуг, ніж довжина рулона ділена на висоту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бо при шпалерах із малюнком перед кожною смугою зрізається відхід до потрібної фази візерунка, а в кінці рулона лишається залишок, що коротший за смугу. Калькулятор розкроює рулон послідовно й рахує ці втрати."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки клею потрібно на шпалери?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа стін ділиться на покриття однієї пачки, яке вказане на упаковці клею, і округлюється вгору. Площу стін калькулятор бере як периметр без отворів на висоту стелі. Покриття залежить від виробника й типу шпалер, тому значення за замовчуванням немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор ніші, виступи й стелю?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Калькулятор рахує вертикальні смуги вздовж стін. Для ніші чи виступу можна додати окрему стіну, а шпалери на стелю тут не рахуються."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому важливо купувати рулони з однієї партії?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Рулони з різних партій можуть мати легку різницю у відтінку, яку видно на стіні. Номер партії вказаний на етикетці, тому беріть усі рулони з однієї."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="wal-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cwallpaper">
-            <div class="mcalc__wrap">
+        <section class="wal" id="wal">
+            <div class="wal__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор шпалер</h1>
-                    <p class="mcalc__p">
-                        Розрахуй, скільки рулонів шпалер потрібно для твоєї
-                        кімнати.
-                    </p>
+                <div class="wal__titlebar">
+                    <h1 class="wal__h1">Калькулятор шпалер</h1>
+                    <p class="wal__p">Порахуйте, скільки рулонів шпалер потрібно на кімнати з урахуванням отворів, підгонки малюнка, запасу, клею й вартості.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="wal__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи розміри</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="wal__card">
+                        <div class="wal__sectionTitle">
+                            <h2 class="wal__h2">Дані для розрахунку</h2>
+                            <div class="wal__dd" id="cur_dd"><button type="button" class="wal__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="wal__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="wal__caret" aria-hidden="true"></span></button><ul class="wal__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="wal__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="wal__ddCode">UAH</span><span class="wal__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="wal__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="wal__ddCode">USD</span><span class="wal__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="wal__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="wal__ddCode">EUR</span><span class="wal__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomLength">Довжина кімнати (м)</label>
-                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomWidth">Ширина кімнати (м)</label>
-                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 3.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomHeight">Висота стелі (м)</label>
-                                <input class="mcalc__input" id="roomHeight" type="text" inputmode="decimal"
-                                    placeholder="напр.: 2.7" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="rollWidth">Ширина рулона (м)</label>
-                                <input class="mcalc__input" id="rollWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 0.53" value="0.53" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="rollLength">Довжина рулона (м)</label>
-                                <input class="mcalc__input" id="rollLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 10.05" value="10.05" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="rapport">Розкладка малюнка, крок (см)</label>
-                                <input class="mcalc__input" id="rapport" type="text" inputmode="decimal"
-                                    placeholder="напр.: 0" value="0" />
-                                <div class="mcalc__hint">0, якщо малюнок без суміщення (однотонні чи дрібний візерунок).
+                        <div class="wal__block">
+                            <div class="wal__rows">
+                                <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="rpLbl">Розмір рулона</span>
+                                    <input type="hidden" id="rollp" value="r053">
+                                    <div class="wal__sel" id="rp_dd">
+                                        <button type="button" class="wal__selBtn" id="rp_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="rpLbl rp_val"><span id="rp_val">0,53 × 10,05 м</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="rp_list" role="listbox" aria-labelledby="rpLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="r053" aria-selected="true">0,53 × 10,05 м</li>
+                                            <li role="option" tabindex="-1" data-v="r070" aria-selected="false">0,70 × 10,05 м</li>
+                                            <li role="option" tabindex="-1" data-v="r106" aria-selected="false">1,06 × 10,05 м</li>
+                                            <li role="option" tabindex="-1" data-v="r106l" aria-selected="false">1,06 × 25 м</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій розмір</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="rw">Ширина рулона, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="rw" type="text" inputmode="decimal" autocomplete="off" placeholder="0,53" value="0.53">
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="rl">Довжина рулона, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="rl" type="text" inputmode="decimal" autocomplete="off" placeholder="10,05" value="10.05">
+                                </div>
+                                <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="paLbl">Малюнок</span>
+                                    <input type="hidden" id="pat" value="none">
+                                    <div class="wal__sel" id="pa_dd">
+                                        <button type="button" class="wal__selBtn" id="pa_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="paLbl pa_val"><span id="pa_val">Без підгонки (однотонні, дрібний візерунок)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="pa_list" role="listbox" aria-labelledby="paLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="none" aria-selected="true">Без підгонки (однотонні, дрібний візерунок)</li>
+                                            <li role="option" tabindex="-1" data-v="straight" aria-selected="false">Пряма стикування</li>
+                                            <li role="option" tabindex="-1" data-v="drop" aria-selected="false">Зі зсувом (half-drop)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="wal__field" id="rapW" hidden>
+                                    <label class="wal__label" for="rap">Крок малюнка (rapport), см&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="rap" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 32"><div class="wal__hint">Вказаний на етикетці.</div>
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="trim">Припуск на підрізання, см</label>
+                                    <input class="wal__input" id="trim" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="wal__hint">Зверху й знизу разом.</div>
+                                </div>
+                                <div class="wal__field">
+                                    <label class="wal__label" for="reserve">Запас, %</label>
+                                    <input class="wal__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="wal__hint">У рулонах, округлюється вгору.</div>
                                 </div>
                             </div>
 
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                            <div class="wal__miniTitle wal__mt12">Кімнати</div>
+                            <div class="wal__el" id="nl1">
+                                <div class="wal__elHead"><span>Кімната 1</span><span class="wal__elVol" id="nv1">—</span><button type="button" class="wal__elRm" id="nl1rm" aria-label="Видалити кімнату" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n1tLbl">Тип</span>
+                                    <input type="hidden" id="n1_type" value="room">
+                                    <div class="wal__sel" id="n1t_dd">
+                                        <button type="button" class="wal__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Кімната (периметр)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Кімната (периметр)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Одна стіна</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n1_len">Довжина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n1_len" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="wal__field" id="n1_widW">
+                                    <label class="wal__label" for="n1_wid">Ширина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n1_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3,5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n1_h">Висота стелі, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n1_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n1_op">Двері й вікна, м <span class="wal__hint">(необовʼязково)</span></label>
+                                    <input class="wal__input" id="n1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,9"><div class="wal__hint">Сума їх ширини.</div>
+                                </div>
+                                </div>
                             </div>
+                            <div class="wal__el" id="nl2" hidden>
+                                <div class="wal__elHead"><span>Кімната 2</span><span class="wal__elVol" id="nv2">—</span><button type="button" class="wal__elRm" id="nl2rm" aria-label="Видалити кімнату" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n2tLbl">Тип</span>
+                                    <input type="hidden" id="n2_type" value="room">
+                                    <div class="wal__sel" id="n2t_dd">
+                                        <button type="button" class="wal__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Кімната (периметр)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Кімната (периметр)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Одна стіна</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n2_len">Довжина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n2_len" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="wal__field" id="n2_widW">
+                                    <label class="wal__label" for="n2_wid">Ширина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n2_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3,5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n2_h">Висота стелі, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n2_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n2_op">Двері й вікна, м <span class="wal__hint">(необовʼязково)</span></label>
+                                    <input class="wal__input" id="n2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,9"><div class="wal__hint">Сума їх ширини.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl3" hidden>
+                                <div class="wal__elHead"><span>Кімната 3</span><span class="wal__elVol" id="nv3">—</span><button type="button" class="wal__elRm" id="nl3rm" aria-label="Видалити кімнату" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n3tLbl">Тип</span>
+                                    <input type="hidden" id="n3_type" value="room">
+                                    <div class="wal__sel" id="n3t_dd">
+                                        <button type="button" class="wal__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Кімната (периметр)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Кімната (периметр)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Одна стіна</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n3_len">Довжина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n3_len" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="wal__field" id="n3_widW">
+                                    <label class="wal__label" for="n3_wid">Ширина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n3_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3,5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n3_h">Висота стелі, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n3_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n3_op">Двері й вікна, м <span class="wal__hint">(необовʼязково)</span></label>
+                                    <input class="wal__input" id="n3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,9"><div class="wal__hint">Сума їх ширини.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl4" hidden>
+                                <div class="wal__elHead"><span>Кімната 4</span><span class="wal__elVol" id="nv4">—</span><button type="button" class="wal__elRm" id="nl4rm" aria-label="Видалити кімнату" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n4tLbl">Тип</span>
+                                    <input type="hidden" id="n4_type" value="room">
+                                    <div class="wal__sel" id="n4t_dd">
+                                        <button type="button" class="wal__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Кімната (периметр)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Кімната (периметр)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Одна стіна</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n4_len">Довжина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n4_len" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="wal__field" id="n4_widW">
+                                    <label class="wal__label" for="n4_wid">Ширина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n4_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3,5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n4_h">Висота стелі, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n4_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n4_op">Двері й вікна, м <span class="wal__hint">(необовʼязково)</span></label>
+                                    <input class="wal__input" id="n4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,9"><div class="wal__hint">Сума їх ширини.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl5" hidden>
+                                <div class="wal__elHead"><span>Кімната 5</span><span class="wal__elVol" id="nv5">—</span><button type="button" class="wal__elRm" id="nl5rm" aria-label="Видалити кімнату" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n5tLbl">Тип</span>
+                                    <input type="hidden" id="n5_type" value="room">
+                                    <div class="wal__sel" id="n5t_dd">
+                                        <button type="button" class="wal__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Кімната (периметр)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Кімната (периметр)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Одна стіна</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n5_len">Довжина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n5_len" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="wal__field" id="n5_widW">
+                                    <label class="wal__label" for="n5_wid">Ширина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n5_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3,5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n5_h">Висота стелі, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n5_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n5_op">Двері й вікна, м <span class="wal__hint">(необовʼязково)</span></label>
+                                    <input class="wal__input" id="n5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,9"><div class="wal__hint">Сума їх ширини.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="wal__el" id="nl6" hidden>
+                                <div class="wal__elHead"><span>Кімната 6</span><span class="wal__elVol" id="nv6">—</span><button type="button" class="wal__elRm" id="nl6rm" aria-label="Видалити кімнату" hidden>×</button></div>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <span class="wal__label" id="n6tLbl">Тип</span>
+                                    <input type="hidden" id="n6_type" value="room">
+                                    <div class="wal__sel" id="n6t_dd">
+                                        <button type="button" class="wal__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Кімната (периметр)</span><span class="wal__caret" aria-hidden="true"></span></button>
+                                        <ul class="wal__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="room" aria-selected="true">Кімната (периметр)</li>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="false">Одна стіна</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n6_len">Довжина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n6_len" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="wal__field" id="n6_widW">
+                                    <label class="wal__label" for="n6_wid">Ширина, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n6_wid" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3,5">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n6_h">Висота стелі, м&nbsp;<span class="wal__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="wal__input" id="n6_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="n6_op">Двері й вікна, м <span class="wal__hint">(необовʼязково)</span></label>
+                                    <input class="wal__input" id="n6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,9"><div class="wal__hint">Сума їх ширини.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="wal__add" id="addNl">+ Додати кімнату</button>
 
+                            <details class="wal__details wal__mt12" id="glueDet">
+                                <summary>Клей <span class="wal__hint">(необовʼязково)</span></summary>
+                                <div class="wal__rows">
+                                    <div class="wal__field wal__field--full">
+                                    <label class="wal__label" for="gcov">Покриття однієї пачки, м²</label>
+                                    <input class="wal__input" id="gcov" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 25"><div class="wal__hint">З упаковки клею.</div>
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="wal__details wal__mt12" id="priceDet">
+                                <summary>Ціна й доставка <span class="wal__hint">(необовʼязково)</span></summary>
+                                <div class="wal__rows">
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="pRoll">Ціна рулона, <span data-wu>₴</span></label>
+                                    <input class="wal__input" id="pRoll" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="wal__field">
+                                    <label class="wal__label" for="pGlue">Ціна пачки клею, <span data-wu>₴</span></label>
+                                    <input class="wal__input" id="pGlue" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="wal__field wal__field--full">
+                                    <label class="wal__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="wal__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="wal__actions wal__mt12">
+                            <button class="wal__btn wal__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="wal__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="wal__card">
+                        <div class="wal__sectionTitle">
+                            <h2 class="wal__h2">Результат</h2>
+                            <span class="wal__badge">🖼️</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/paint-calculator">Калькулятор фарби</a>
-                            <a href="/construction/tile-calculator">Калькулятор плитки</a>
+                        <div class="wal__result" id="result">Вкажіть дані — результат зʼявиться тут.</div>
+                        <div class="wal__actions wal__mt12">
+                            <button class="wal__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="wal__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="wal__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="wal__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks wal__mt12"><a class="wal__link" href="/construction/paint-calculator">Калькулятор фарби →</a> <a class="wal__link" href="/construction/cost-calculator">Калькулятор вартості будівництва →</a></div>
                     </div>
+                </div>
+
+                <div class="wal__card wal__schedule" id="schedule" hidden>
+                    <div class="wal__schedHead">
+                        <h2 class="wal__h2">Підсумок</h2>
+                        <div class="wal__tools">
+                            <button type="button" class="wal__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="wal__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="wal__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як розрахувати кількість рулонів шпалер</h2>
-            <p>
-                Розрахунок базується на периметрі кімнати (для визначення кількості вертикальних смуг)
-                та висоті стелі (для визначення довжини кожної смуги). Знаючи розміри рулона, можна
-                обчислити, скільки смуг вийде з одного рулону, а звідси — загальну кількість рулонів.
-            </p>
-
-            <h2>Навіщо враховувати розкладку малюнка (rapport)</h2>
-            <p>
-                Якщо шпалери мають виражений повторюваний візерунок, суміжні смуги потрібно клеїти
-                з суміщенням малюнка. Це означає, що частина кожного нового шматка "втрачається" на
-                вирівнювання візерунка з попередньою смугою, тому реальна корисна довжина смуги менша
-                за фізичну довжину рулону. Чим більший крок розкладки (rapport), тим більше відходів.
-            </p>
-
-            <h2>Практичні поради</h2>
-            <ul>
-                <li><b>Купуй із запасом:</b> рекомендується додати 1-2 додаткові рулони понад розрахунок на випадок
-                    помилок при різці чи майбутнього ремонту.</li>
-                <li><b>Перевіряй номер партії:</b> усі рулони мають бути з однієї виробничої партії (batch number на
-                    етикетці), інакше може бути помітна різниця у відтінку.</li>
-                <li><b>Враховуй напрямок малюнка:</b> деякі шпалери мають напрямок (верх/низ), що також впливає на
-                    розкрій і кількість відходів.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Розрахунок є орієнтовним. Для складних кімнат з нішами, виступами чи нестандартною
-                формою рекомендується консультація з майстром або продавцем-консультантом магазину шпалер.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/paint-calculator"><b>Калькулятор фарби</b><span>Літри й банки фарби, ґрунтовка та вартість за вашими цінами.</span></a>
+                <a class="cc-related-card" href="/construction/plaster-calculator"><b>Калькулятор штукатурки</b><span>Мішки суміші або цемент і пісок для кількох поверхонь.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор шпалер</h2>
+            <p>Калькулятор визначає, скільки <b>рулонів шпалер</b> потрібно для однієї або кількох кімнат (до шести), а також клей і вартість. Для кожної кімнати або окремої стіни ви вказуєте розміри й ширину отворів, а ще розмір рулона, тип підгонки малюнка, припуск на підрізання й запас. Результат це кількість рулонів, смуг, відходи, площа куплених шпалер і, якщо ви вказали покриття пачки, кількість клею. Вбудованих цін немає: вартість рахується за вашими цінами в гривнях, доларах або євро.</p>
+
+            <h2>Як рахується кількість смуг і рулонів</h2>
+            <p>Шпалери клеять вертикальними смугами, тому спершу рахується кількість смуг: периметр кімнати без ширини дверей і вікон ділиться на ширину рулона й округлюється вгору. Довжина смуги це висота стелі плюс припуск на підрізання. З рулона виходить ціла кількість смуг, і залишок, що не вмістив ще одну смугу, іде у відходи.</p>
+            <p>Приклад: кімната 4×3,5 м, стеля 2,4 м, двері 0,9 м, рулон 0,53×10,05 м, припуск 5 см. Периметр без дверей 14,1 м, це 27 смуг по 2,45 м. Без підгонки малюнка з рулона виходить 4 смуги, тож потрібно 7 рулонів.</p>
+
+            <h2>Підгонка малюнка: пряма стикування й зі зсувом</h2>
+            <p>Якщо на шпалерах виражений візерунок, сусідні смуги треба стикувати за малюнком. Він повторюється з кроком (rapport), і кожна смуга має починатися з тієї самої точки візерунка. Тому перед кожною смугою з рулона зрізається відхід до потрібної фази малюнка. При прямій стикуванні всі смуги починаються з однієї фази, при стикуванні зі зсувом кожна друга смуга зсунута на половину кроку. Калькулятор розкроює рулони послідовно й рахує ці відходи, а не просто округлює висоту.</p>
+            <p>Для тієї самої кімнати зі стелею 2,4 м і кроком 32 см: без підгонки по 4 смуги з рулона й 7 рулонів, при прямій стикуванні по 3 смуги й 9 рулонів, зі зсувом по 3 й 9 рулонів.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Дві кімнати: 4×3,5 м і 3,2×2,8 м, стеля 2,7 м, у кожній двері 0,9 м. Рулон 0,53×10,05 м, пряма стикування 32 см, припуск 5 см, запас 5%. Смуг 27 і 21, разом 48, довжина смуги 2,75 м. З рулона виходить по 3 смуги, тому потрібно 16 рулонів, із запасом 17. Відходи 19%. Площа стін 68,0 м², клею за покриття пачки 25 м² 3 пачки. За 1 200 ₴ за рулон і 180 ₴ за пачку клею вартість 20 940 ₴.</p>
+            <p class="wal-mini">Калькулятор дає орієнтовну оцінку. Розмір рулона й крок малюнка завжди перевіряйте на етикетці.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Чому потрібно враховувати розкладку малюнка (rapport)?</h3>
-                <p>Шпалери з великим малюнком потребують суміщення візерунка між смугами, через що частина рулону йде у
-                    відходи при кожному новому шматку — це збільшує загальну потрібну кількість.</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати кількість рулонів шпалер на кімнату?</h3>
+                <p>Периметр кімнати мінус ширина дверей і вікон ділиться на ширину рулона (округлення вгору), це кількість смуг. Потім дивимося, скільки смуг довжиною з висоту стелі плюс припуск вміщається в рулон, і ділимо смуги на це число.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи потрібно відраховувати площу дверей і вікон?</h3>
-                <p>Для точнішого розрахунку — так, особливо у невеликих кімнатах з великими вікнами. Проте багато
-                    калькуляторів рекомендують невеликий запас саме на випадок, якщо отвори не враховані.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки рулонів шпалер на кімнату 4×3,5 м?</h3>
+                <p>Для стелі 2,4 м, дверей 0,9 м і рулона 0,53×10,05 м це 27 смуг: 7 рулонів без підгонки малюнка, 9 при прямій стикуванні з кроком 32 см і 9 при стикуванні зі зсувом. Для іншої висоти й рулона результат інший, тому вкажіть свої дані.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи варто купувати шпалери з одного виробничого номера партії?</h3>
-                <p>Так, обов'язково перевіряй номер партії (batch number) на етикетці — рулони з різних партій можуть
-                    мати незначну різницю у відтінку кольору.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке крок малюнка (rapport) і де його взяти?</h3>
+                <p>Це відстань, через яку візерунок повторюється по довжині рулона. Він вказаний на етикетці шпалер у сантиметрах. Чим більший крок, тим більше відходів на підгонку.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим відрізняється пряма стикування від стикування зі зсувом?</h3>
+                <p>При прямій стикуванні візерунок сусідніх смуг на одній висоті, при стикуванні зі зсувом кожна друга смуга зсунута на половину кроку (half-drop). Зсув зазвичай дає трохи більше відходів, тип вказаний на етикетці.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи віднімати двері й вікна?</h3>
+                <p>Калькулятор віднімає від периметра суму ширини отворів, тому смуги там не рахуються. Смуги над дверима й під вікнами окремо не рахуються: їх зазвичай кроять із залишків, тож це дає невеликий запас.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який припуск на підрізання брати?</h3>
+                <p>Зазвичай кілька сантиметрів зверху й знизу для підрізання по стелі й плінтусу. Поле порожнє за замовчуванням, вкажіть значення, яке використовує ваш майстер, у сумі за верх і низ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки рулонів купувати із запасом?</h3>
+                <p>Запас задається у відсотках від кількості рулонів і округлюється вгору. Він потрібен на помилки при розкрої й на майбутній ремонт: рулони іншої партії можуть відрізнятися відтінком.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які розміри рулонів шпалер бувають?</h3>
+                <p>Найпоширеніші 0,53×10,05 м, 0,70×10,05 м, 1,06×10,05 м і 1,06×25 м. Ваш розмір вказаний на етикетці, його можна ввести як свій.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому з рулона виходить менше смуг, ніж довжина рулона ділена на висоту?</h3>
+                <p>Бо при шпалерах із малюнком перед кожною смугою зрізається відхід до потрібної фази візерунка, а в кінці рулона лишається залишок, що коротший за смугу. Калькулятор розкроює рулон послідовно й рахує ці втрати.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки клею потрібно на шпалери?</h3>
+                <p>Площа стін ділиться на покриття однієї пачки, яке вказане на упаковці клею, і округлюється вгору. Площу стін калькулятор бере як периметр без отворів на висоту стелі. Покриття залежить від виробника й типу шпалер, тому значення за замовчуванням немає.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор ніші, виступи й стелю?</h3>
+                <p>Ні. Калькулятор рахує вертикальні смуги вздовж стін. Для ніші чи виступу можна додати окрему стіну, а шпалери на стелю тут не рахуються.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому важливо купувати рулони з однієї партії?</h3>
+                <p>Рулони з різних партій можуть мати легку різницю у відтінку, яку видно на стіні. Номер партії вказаний на етикетці, тому беріть усі рулони з однієї.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
