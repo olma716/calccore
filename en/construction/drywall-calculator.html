@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Drywall Calculator Online — How Many Sheets You Need | CalcCore</title>
+    <title>Drywall Calculator: Sheets, Profiles, Screws | CalcCore</title>
     <meta name="description"
-        content="Calculate how many drywall sheets you need for walls or ceiling based on area. Accounts for cutting waste and multiple layers." />
+        content="Drywall calculator: how many sheets walls, ceilings and partitions need with a layout, CD and UD profiles, screws and the cost from your own prices." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/drywall-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/drywall-calculator" />
@@ -26,215 +28,722 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Drywall Calculator Online — How Many Sheets You Need" />
-    <meta property="og:description" content="Calculate how many drywall sheets you need for walls or ceiling based on area. Accounts for cutting waste and multiple layers." />
+    <meta property="og:title" content="Drywall Calculator: Sheets, Profiles, Screws" />
+    <meta property="og:description" content="Drywall calculator: how many sheets walls, ceilings and partitions need with a layout, CD and UD profiles, screws and the cost from your own prices." />
     <meta property="og:url" content="https://calccore.net/en/construction/drywall-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Drywall Calculator Online — How Many Sheets You Need" />
-    <meta name="twitter:description" content="Calculate how many drywall sheets you need for walls or ceiling based on area. Accounts for cutting waste and multiple layers." />
+    <meta name="twitter:title" content="Drywall Calculator: Sheets, Profiles, Screws" />
+    <meta name="twitter:description" content="Drywall calculator: how many sheets walls, ceilings and partitions need with a layout, CD and UD profiles, screws and the cost from your own prices." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/dry.css?v=20261029dry1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/drywall-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is the standard drywall sheet size?",
-        "acceptedAnswer":{"@type":"Answer","text":"The most common size is 1.2 × 2.5 m (3 m²), though other sizes exist, such as 1.2 × 3 m."}
-      },
-      {
-        "@type":"Question",
-        "name":"When is double-layer drywall needed?",
-        "acceptedAnswer":{"@type":"Answer","text":"Double layering is used to improve soundproofing, fire resistance, or structural strength — typical for interior partitions with elevated requirements."}
-      },
-      {
-        "@type":"Question",
-        "name":"How many fasteners are needed per sheet?",
-        "acceptedAnswer":{"@type":"Answer","text":"Roughly 40-50 screws per standard-size sheet, depending on the framing spacing (typically 40-60 cm)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029dry1" defer></script>
+    <script src="/js/drywall-calculator.js?v=20261029dry1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/drywall-calculator#app",
-    "name":"Drywall Calculator",
-    "description":"Calculate how many drywall sheets are needed for walls or ceiling based on area.",
-    "url":"https://calccore.net/en/construction/drywall-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/drywall-calculator#app",
+  "name": "Drywall Calculator",
+  "description": "Calculates drywall for several surfaces: walls, a ceiling, a partition with two sides, your own area. Sheets by layout or by area with a layout picture, layers, a reserve, the frame (CD and UD profiles), screws by geometry and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/drywall-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six surfaces: wall, ceiling, partition, own area, with openings and layers",
+    "Sheets by layout (no offcuts) or by area, a layout picture",
+    "A sheet from a preset or your own size, a reserve",
+    "CD and UD profiles and screws by the steps you enter",
+    "Your own prices, none built in; hryvnia, dollar or euro; table, CSV, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/drywall-calculator#webpage",
+      "url": "https://calccore.net/en/construction/drywall-calculator",
+      "name": "Drywall Calculator: Sheets, Profiles, Screws | CalcCore",
+      "description": "Drywall calculator: how many sheets walls, ceilings and partitions need with a layout, CD and UD profiles, screws and the cost from your own prices.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/drywall-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/drywall-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/drywall-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Drywall Calculator",
+          "item": "https://calccore.net/en/construction/drywall-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/drywall-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the number of drywall sheets for a wall?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The area of the wall without openings is divided by the area of a sheet and rounded up. For a more accurate result the calculator also counts the layout: how many sheets are needed to cover the wall with whole sheets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are there more sheets by layout than by area?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because by area the offcuts are assumed to be reused. For a wall of 2.7 m and a sheet of 2.5 m one more row is needed, and the strip that is left often cannot be used elsewhere. For a wall of 4×2.7 m that is 6 sheets against 4 by area."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which sheet should I choose: 2.5 or 3 m?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For walls higher than 2.5 m a 3 m sheet is often more convenient: one wall of 4×2.7 m needs 4 sheets against 6 with a 2.5 m sheet by layout. Compare both sizes in the calculator."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many layers of drywall should I use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually one. Two layers are used where higher strength, sound insulation or fire resistance are needed; it depends on the project. The number of layers is set for every surface."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a partition with two sides mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sheets on both sides of one frame. The area of the sheets doubles, and the frame is counted once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for doors and windows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By area the openings are subtracted. By layout they are not: the sheets over the openings are cut and the remainder is rarely usable, so the layout gives a safer upper estimate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What reserve of drywall should I take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The reserve is set as a percentage of the number of sheets and rounded up. It covers cutting, breakage and defects. The field is empty by default."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the step of the CD profiles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the system and the type of the surface, and is given by the maker. So the profile step is entered by you in the calculator, there is no default."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many screws are needed for drywall?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The area of the sheets is divided by the product of the profile step and the screw step, multiplied by the layers. For steps of 60 and 25 cm that is about 6.7 per m² of every layer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many CD and UD profiles are needed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The CD studs are set at your step along the length of the wall, the UD runs along the top and the bottom. For a ceiling the CD runs along the length with a step across the width, the UD around the perimeter. The number is rounded up to pieces of the given length."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator count primer and putty?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The calculator counts sheets, profiles and screws. Putty and primer for the walls can be counted separately by the area of the surface."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sizes of drywall sheets are there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common are 1.2×2.5 m, 1.2×3.0 m and 1.2×2.0 m. Your size is on the sheet; you can enter it as your own."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="dry-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdrywall">
-            <div class="mcalc__wrap">
+        <section class="dry" id="dry">
+            <div class="dry__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Drywall Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate the number of drywall sheets needed for
-                        walls or ceiling, including waste allowance.
-                    </p>
+                <div class="dry__titlebar">
+                    <h1 class="dry__h1">Drywall Calculator</h1>
+                    <p class="dry__p">Work out the sheets of drywall for walls, ceilings and partitions with a layout picture, as well as profiles, screws and the cost.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="dry__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="dry__card">
+                        <div class="dry__sectionTitle">
+                            <h2 class="dry__h2">Input data</h2>
+                            <div class="dry__dd" id="cur_dd"><button type="button" class="dry__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="dry__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="dry__caret" aria-hidden="true"></span></button><ul class="dry__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="dry__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="dry__ddCode">UAH</span><span class="dry__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="dry__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="dry__ddCode">USD</span><span class="dry__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="dry__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="dry__ddCode">EUR</span><span class="dry__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="area">Surface area (m²)</label>
-                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 40" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sheetLength">Sheet length (m)</label>
-                                <input class="mcalc__input" id="sheetLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2.5" value="2.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sheetWidth">Sheet width (m)</label>
-                                <input class="mcalc__input" id="sheetWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 1.2" value="1.2" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="layers">Number of layers</label>
-                                <select id="layers" class="mcalc__select">
-                                    <option value="1" selected>1 layer</option>
-                                    <option value="2">2 layers</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="wastage">Cutting waste allowance (%)</label>
-                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="dry__block">
+                            <div class="dry__rows">
+                                <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="spLbl">Sheet size</span>
+                                    <input type="hidden" id="sheetp" value="s1225">
+                                    <div class="dry__sel" id="sp_dd">
+                                        <button type="button" class="dry__selBtn" id="sp_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="spLbl sp_val"><span id="sp_val">1.2 × 2.5 m</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="sp_list" role="listbox" aria-labelledby="spLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="s1225" aria-selected="true">1.2 × 2.5 m</li>
+                                            <li role="option" tabindex="-1" data-v="s123" aria-selected="false">1.2 × 3.0 m</li>
+                                            <li role="option" tabindex="-1" data-v="s122" aria-selected="false">1.2 × 2.0 m</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own size</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="dry__field">
+                                    <label class="dry__label" for="sl">Sheet length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="sl" type="text" inputmode="decimal" autocomplete="off" placeholder="2.5" value="2.5">
+                                </div>
+                                <div class="dry__field">
+                                    <label class="dry__label" for="sw">Sheet width, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="sw" type="text" inputmode="decimal" autocomplete="off" placeholder="1.2" value="1.2">
+                                </div>
+                                <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="meLbl">How to count the sheets</span>
+                                    <input type="hidden" id="meth" value="layout">
+                                    <div class="dry__sel" id="me_dd">
+                                        <button type="button" class="dry__selBtn" id="me_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="meLbl me_val"><span id="me_val">By layout (no offcuts)</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="me_list" role="listbox" aria-labelledby="meLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="layout" aria-selected="true">By layout (no offcuts)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">By area (offcuts are reused)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="dry__field dry__field--full">
+                                    <label class="dry__label" for="reserve">Reserve, %</label>
+                                    <input class="dry__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="dry__hint">For cutting and damage, rounded up.</div>
+                                </div>
                             </div>
 
+                            <div class="dry__miniTitle dry__mt12">Surfaces</div>
+                            <div class="dry__el" id="nl1">
+                                <div class="dry__elHead"><span>Surface 1</span><span class="dry__elVol" id="nv1">—</span><button type="button" class="dry__elRm" id="nl1rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n1tLbl">Type</span>
+                                    <input type="hidden" id="n1_type" value="wall">
+                                    <div class="dry__sel" id="n1t_dd">
+                                        <button type="button" class="dry__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Wall</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Wall</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Partition (two sides)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Own area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n1_aW">
+                                    <label class="dry__label" for="n1_a">Length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n1_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="dry__field" id="n1_bW">
+                                    <label class="dry__label" id="n1_bL" for="n1_b">Height, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n1_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n1_arW" hidden>
+                                    <label class="dry__label" for="n1_ar">Area, m²&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n1_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n1yLbl">Layers</span>
+                                    <input type="hidden" id="n1_ly" value="1">
+                                    <div class="dry__sel" id="n1y_dd">
+                                        <button type="button" class="dry__selBtn" id="n1y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1yLbl n1y_val"><span id="n1y_val">1 layer</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n1y_list" role="listbox" aria-labelledby="n1yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n1_op">Openings, m² <span class="dry__hint">(optional)</span></label>
+                                    <input class="dry__input" id="n1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.9"><div class="dry__hint">Doors and windows, area.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl2" hidden>
+                                <div class="dry__elHead"><span>Surface 2</span><span class="dry__elVol" id="nv2">—</span><button type="button" class="dry__elRm" id="nl2rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n2tLbl">Type</span>
+                                    <input type="hidden" id="n2_type" value="wall">
+                                    <div class="dry__sel" id="n2t_dd">
+                                        <button type="button" class="dry__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Wall</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Wall</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Partition (two sides)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Own area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n2_aW">
+                                    <label class="dry__label" for="n2_a">Length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n2_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="dry__field" id="n2_bW">
+                                    <label class="dry__label" id="n2_bL" for="n2_b">Height, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n2_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n2_arW" hidden>
+                                    <label class="dry__label" for="n2_ar">Area, m²&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n2_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n2yLbl">Layers</span>
+                                    <input type="hidden" id="n2_ly" value="1">
+                                    <div class="dry__sel" id="n2y_dd">
+                                        <button type="button" class="dry__selBtn" id="n2y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2yLbl n2y_val"><span id="n2y_val">1 layer</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n2y_list" role="listbox" aria-labelledby="n2yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n2_op">Openings, m² <span class="dry__hint">(optional)</span></label>
+                                    <input class="dry__input" id="n2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.9"><div class="dry__hint">Doors and windows, area.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl3" hidden>
+                                <div class="dry__elHead"><span>Surface 3</span><span class="dry__elVol" id="nv3">—</span><button type="button" class="dry__elRm" id="nl3rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n3tLbl">Type</span>
+                                    <input type="hidden" id="n3_type" value="wall">
+                                    <div class="dry__sel" id="n3t_dd">
+                                        <button type="button" class="dry__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Wall</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Wall</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Partition (two sides)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Own area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n3_aW">
+                                    <label class="dry__label" for="n3_a">Length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n3_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="dry__field" id="n3_bW">
+                                    <label class="dry__label" id="n3_bL" for="n3_b">Height, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n3_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n3_arW" hidden>
+                                    <label class="dry__label" for="n3_ar">Area, m²&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n3_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n3yLbl">Layers</span>
+                                    <input type="hidden" id="n3_ly" value="1">
+                                    <div class="dry__sel" id="n3y_dd">
+                                        <button type="button" class="dry__selBtn" id="n3y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3yLbl n3y_val"><span id="n3y_val">1 layer</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n3y_list" role="listbox" aria-labelledby="n3yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n3_op">Openings, m² <span class="dry__hint">(optional)</span></label>
+                                    <input class="dry__input" id="n3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.9"><div class="dry__hint">Doors and windows, area.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl4" hidden>
+                                <div class="dry__elHead"><span>Surface 4</span><span class="dry__elVol" id="nv4">—</span><button type="button" class="dry__elRm" id="nl4rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n4tLbl">Type</span>
+                                    <input type="hidden" id="n4_type" value="wall">
+                                    <div class="dry__sel" id="n4t_dd">
+                                        <button type="button" class="dry__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Wall</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Wall</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Partition (two sides)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Own area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n4_aW">
+                                    <label class="dry__label" for="n4_a">Length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n4_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="dry__field" id="n4_bW">
+                                    <label class="dry__label" id="n4_bL" for="n4_b">Height, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n4_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n4_arW" hidden>
+                                    <label class="dry__label" for="n4_ar">Area, m²&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n4_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n4yLbl">Layers</span>
+                                    <input type="hidden" id="n4_ly" value="1">
+                                    <div class="dry__sel" id="n4y_dd">
+                                        <button type="button" class="dry__selBtn" id="n4y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4yLbl n4y_val"><span id="n4y_val">1 layer</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n4y_list" role="listbox" aria-labelledby="n4yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n4_op">Openings, m² <span class="dry__hint">(optional)</span></label>
+                                    <input class="dry__input" id="n4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.9"><div class="dry__hint">Doors and windows, area.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl5" hidden>
+                                <div class="dry__elHead"><span>Surface 5</span><span class="dry__elVol" id="nv5">—</span><button type="button" class="dry__elRm" id="nl5rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n5tLbl">Type</span>
+                                    <input type="hidden" id="n5_type" value="wall">
+                                    <div class="dry__sel" id="n5t_dd">
+                                        <button type="button" class="dry__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Wall</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Wall</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Partition (two sides)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Own area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n5_aW">
+                                    <label class="dry__label" for="n5_a">Length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n5_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="dry__field" id="n5_bW">
+                                    <label class="dry__label" id="n5_bL" for="n5_b">Height, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n5_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n5_arW" hidden>
+                                    <label class="dry__label" for="n5_ar">Area, m²&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n5_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n5yLbl">Layers</span>
+                                    <input type="hidden" id="n5_ly" value="1">
+                                    <div class="dry__sel" id="n5y_dd">
+                                        <button type="button" class="dry__selBtn" id="n5y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5yLbl n5y_val"><span id="n5y_val">1 layer</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n5y_list" role="listbox" aria-labelledby="n5yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n5_op">Openings, m² <span class="dry__hint">(optional)</span></label>
+                                    <input class="dry__input" id="n5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.9"><div class="dry__hint">Doors and windows, area.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl6" hidden>
+                                <div class="dry__elHead"><span>Surface 6</span><span class="dry__elVol" id="nv6">—</span><button type="button" class="dry__elRm" id="nl6rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n6tLbl">Type</span>
+                                    <input type="hidden" id="n6_type" value="wall">
+                                    <div class="dry__sel" id="n6t_dd">
+                                        <button type="button" class="dry__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Wall</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Wall</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Partition (two sides)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Own area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n6_aW">
+                                    <label class="dry__label" for="n6_a">Length, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n6_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="dry__field" id="n6_bW">
+                                    <label class="dry__label" id="n6_bL" for="n6_b">Height, m&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n6_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2.7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n6_arW" hidden>
+                                    <label class="dry__label" for="n6_ar">Area, m²&nbsp;<span class="dry__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="dry__input" id="n6_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n6yLbl">Layers</span>
+                                    <input type="hidden" id="n6_ly" value="1">
+                                    <div class="dry__sel" id="n6y_dd">
+                                        <button type="button" class="dry__selBtn" id="n6y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6yLbl n6y_val"><span id="n6y_val">1 layer</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n6y_list" role="listbox" aria-labelledby="n6yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n6_op">Openings, m² <span class="dry__hint">(optional)</span></label>
+                                    <input class="dry__input" id="n6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.9"><div class="dry__hint">Doors and windows, area.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="dry__add" id="addNl">+ Add a surface</button>
+
+                            <details class="dry__details dry__mt12" id="frameDet">
+                                <summary>Frame and screws <span class="dry__hint">(optional)</span></summary>
+                                <div class="dry__rows">
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="cd">Step of CD profiles, cm</label>
+                                    <input class="dry__input" id="cd" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 60"><div class="dry__hint">By your system.</div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="plen">Profile length, m</label>
+                                    <input class="dry__input" id="plen" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3">
+                                </div>
+                                    <div class="dry__field dry__field--full">
+                                    <label class="dry__label" for="scr">Screw step, cm</label>
+                                    <input class="dry__input" id="scr" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 25">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="dry__details dry__mt12" id="priceDet">
+                                <summary>Prices and delivery <span class="dry__hint">(optional)</span></summary>
+                                <div class="dry__rows">
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pSheet">Sheet price, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pSheet" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pCd">CD profile price, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pCd" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pUd">UD profile price, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pUd" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pScr">Price of 100 screws, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pScr" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field dry__field--full">
+                                    <label class="dry__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="dry__actions dry__mt12">
+                            <button class="dry__btn dry__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="dry__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="dry__card">
+                        <div class="dry__sectionTitle">
+                            <h2 class="dry__h2">Result</h2>
+                            <span class="dry__badge">🧱</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
-                            <a href="/en/construction/insulation-calculator">Insulation Calculator</a>
+                        <div class="dry__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="dry__actions dry__mt12">
+                            <button class="dry__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="dry__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="dry__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="dry__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks dry__mt12"><a class="dry__link" href="/en/construction/plaster-calculator">Plaster calculator →</a> <a class="dry__link" href="/en/construction/cost-calculator">Construction cost calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="dry__card dry__schedule" id="schedule" hidden>
+                    <div class="dry__schedHead">
+                        <h2 class="dry__h2">Summary</h2>
+                        <div class="dry__tools">
+                            <button type="button" class="dry__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="dry__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="dry__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How to calculate drywall quantity</h2>
-            <p>
-                The calculation is based on the surface area to cover, divided by the area of one
-                drywall sheet, accounting for the number of layers and a cutting waste allowance.
-                Formula: sheets needed = (area × layers × (1 + waste%)) / area of one sheet.
-            </p>
-
-            <h2>Standard drywall sheet sizes</h2>
-            <ul>
-                <li><b>1.2 × 2.5 m (3 m²):</b> the most common size for walls and ceilings in residential spaces.</li>
-                <li><b>1.2 × 3.0 m (3.6 m²):</b> used for rooms with higher ceilings, reducing horizontal joints.</li>
-                <li><b>1.2 × 2.0 m (2.4 m²):</b> convenient for small rooms or narrow spaces.</li>
-            </ul>
-
-            <h2>When double-layer is needed</h2>
-            <p>
-                Double-layer drywall is used when enhanced soundproofing is needed (e.g., a wall
-                between apartments or bedroom and living room), fire resistance (fire-rated
-                partitions), or added structural strength (mounting heavy items on the wall).
-            </p>
-
-            <h2>Additional materials for installation</h2>
-            <p>
-                Besides the sheets themselves, you'll need: a metal frame (UD and CD tracks), screws
-                to fasten the sheets to the frame (roughly 40-50 per sheet), joint compound and mesh
-                tape for seams, and primer for finishing.
-            </p>
-
-            <p class="m-hintSmall">
-                It's recommended to always buy sheets with a buffer for cutting mistakes or damage
-                during transport and installation.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/plaster-calculator"><b>Plaster calculator</b><span>Bags of a mix or cement and sand for several surfaces.</span></a>
+                <a class="cc-related-card" href="/en/construction/paint-calculator"><b>Paint calculator</b><span>Litres and cans of paint, a primer and the cost from your own prices.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your own prices.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the drywall calculator counts</h2>
+            <p>The calculator works out how many <b>sheets of drywall</b> are needed for several surfaces (up to six): walls, a ceiling, partitions with sheets on both sides, or a surface with your own area. For every surface you enter the dimensions, the area of the openings and the number of layers, and also the sheet size and the reserve. The result is the number of sheets with a reserve, a picture of their layout and, if you wish, the CD and UD profiles, screws and the cost from your prices. There are no built-in prices.</p>
+
+            <h2>How the sheets are counted: layout and area</h2>
+            <p>There are two ways. By area the net area (with the openings subtracted and the layers taken into account) is divided by the area of a sheet and rounded up: this is the lower bound, because the offcuts are assumed to be reused. By layout every surface is counted separately: the sheet is laid along or across and the number of sheets needed to cover the rectangle is taken. The offcuts are not reused in this way and the openings are not subtracted. The real number is between the two.</p>
+            <p>Example: a wall of 4×2.7 m and a sheet of 1.2×2.5 m. By area that is 10.8 m² : 3 m² = 4 sheets, by layout 6, because the height of 2.7 m is more than 2.5 m and one more row is needed. With a 3.0 m sheet the layout would give 4.</p>
+
+            <h2>Frame and screws</h2>
+            <p>If you enter the step of the CD profiles, the calculator also counts the frame. For a wall and a partition the CD studs are set along the height with this step, and the UD profile runs along the top and the bottom. For a ceiling the CD profiles run along the length with a step across the width, and the UD goes around the perimeter. The number of profiles is rounded up to pieces of the given length. The screws are counted by the area of the sheets: the area is divided by the product of the profile step and the screw step, multiplied by the number of layers and sides.</p>
+            <p>For a profile step of 60 cm and a screw step of 25 cm that is 6.7 screws per m² of every layer. The steps depend on your system and the maker, so the fields are empty by default.</p>
+
+            <h2>Worked example</h2>
+            <p>A wall of 4×2.7 m and a ceiling of 4×3.5 m, a sheet of 1.2×2.5 m, one layer, a 5% reserve. By layout 6 + 6 = 12 sheets, 13 with the reserve; by area it would be 9. 22 CD profiles and 8 UD profiles of 3 m at a 60 cm step, and 166 screws at a 25 cm step. At 600 ₴ per sheet, 110 ₴ per CD, 95 ₴ per UD and 120 ₴ per 100 screws the cost is 11,179 ₴.</p>
+            <p class="dry-mini">The calculator gives an approximate estimate. Take the steps of the profiles and screws from the instructions of your system.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is the standard drywall sheet size?</h3>
-                <p>The most common size is 1.2 × 2.5 m (3 m²), though other sizes exist, such as 1.2 × 3 m.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the number of drywall sheets for a wall?</h3>
+                <p>The area of the wall without openings is divided by the area of a sheet and rounded up. For a more accurate result the calculator also counts the layout: how many sheets are needed to cover the wall with whole sheets.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>When is double-layer drywall needed?</h3>
-                <p>Double layering is used to improve soundproofing, fire resistance, or structural strength — typical
-                    for interior partitions with elevated requirements.</p>
+            <div class="cc-faq-item">
+                <h3>Why are there more sheets by layout than by area?</h3>
+                <p>Because by area the offcuts are assumed to be reused. For a wall of 2.7 m and a sheet of 2.5 m one more row is needed, and the strip that is left often cannot be used elsewhere. For a wall of 4×2.7 m that is 6 sheets against 4 by area.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How many fasteners are needed per sheet?</h3>
-                <p>Roughly 40-50 screws per standard-size sheet, depending on the framing spacing (typically 40-60 cm).
-                </p>
+            <div class="cc-faq-item">
+                <h3>Which sheet should I choose: 2.5 or 3 m?</h3>
+                <p>For walls higher than 2.5 m a 3 m sheet is often more convenient: one wall of 4×2.7 m needs 4 sheets against 6 with a 2.5 m sheet by layout. Compare both sizes in the calculator.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many layers of drywall should I use?</h3>
+                <p>Usually one. Two layers are used where higher strength, sound insulation or fire resistance are needed; it depends on the project. The number of layers is set for every surface.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does a partition with two sides mean?</h3>
+                <p>Sheets on both sides of one frame. The area of the sheets doubles, and the frame is counted once.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for doors and windows?</h3>
+                <p>By area the openings are subtracted. By layout they are not: the sheets over the openings are cut and the remainder is rarely usable, so the layout gives a safer upper estimate.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What reserve of drywall should I take?</h3>
+                <p>The reserve is set as a percentage of the number of sheets and rounded up. It covers cutting, breakage and defects. The field is empty by default.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the step of the CD profiles?</h3>
+                <p>It depends on the system and the type of the surface, and is given by the maker. So the profile step is entered by you in the calculator, there is no default.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many screws are needed for drywall?</h3>
+                <p>The area of the sheets is divided by the product of the profile step and the screw step, multiplied by the layers. For steps of 60 and 25 cm that is about 6.7 per m² of every layer.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many CD and UD profiles are needed?</h3>
+                <p>The CD studs are set at your step along the length of the wall, the UD runs along the top and the bottom. For a ceiling the CD runs along the length with a step across the width, the UD around the perimeter. The number is rounded up to pieces of the given length.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator count primer and putty?</h3>
+                <p>No. The calculator counts sheets, profiles and screws. Putty and primer for the walls can be counted separately by the area of the surface.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What sizes of drywall sheets are there?</h3>
+                <p>The most common are 1.2×2.5 m, 1.2×3.0 m and 1.2×2.0 m. Your size is on the sheet; you can enter it as your own.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

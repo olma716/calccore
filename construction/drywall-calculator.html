@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор гіпсокартону онлайн — кількість аркушів | CalcCore</title>
+    <title>Калькулятор гіпсокартону: листи, профілі, саморізи | CalcCore</title>
     <meta name="description"
-        content="Розрахунок кількості листів гіпсокартону для стін чи стелі за площею. Врахування запасу на підрізку та кількості шарів." />
+        content="Калькулятор гіпсокартону: скільки листів потрібно на стіни, стелю й перегородки з розкладкою, профілі CD і UD, саморізи та вартість за вашими цінами." />
 
     <link rel="canonical" href="https://calccore.net/construction/drywall-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/drywall-calculator" />
@@ -26,217 +28,722 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор гіпсокартону онлайн — кількість аркушів" />
-    <meta property="og:description" content="Розрахунок кількості листів гіпсокартону для стін чи стелі за площею. Врахування запасу на підрізку та кількості шарів." />
+    <meta property="og:title" content="Калькулятор гіпсокартону: листи, профілі, саморізи" />
+    <meta property="og:description" content="Калькулятор гіпсокартону: скільки листів потрібно на стіни, стелю й перегородки з розкладкою, профілі CD і UD, саморізи та вартість за вашими цінами." />
     <meta property="og:url" content="https://calccore.net/construction/drywall-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор гіпсокартону онлайн — кількість аркушів" />
-    <meta name="twitter:description" content="Розрахунок кількості листів гіпсокартону для стін чи стелі за площею. Врахування запасу на підрізку та кількості шарів." />
+    <meta name="twitter:title" content="Калькулятор гіпсокартону: листи, профілі, саморізи" />
+    <meta name="twitter:description" content="Калькулятор гіпсокартону: скільки листів потрібно на стіни, стелю й перегородки з розкладкою, профілі CD і UD, саморізи та вартість за вашими цінами." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/dry.css?v=20261029dry1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/drywall-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Який стандартний розмір листа гіпсокартону?",
-        "acceptedAnswer":{"@type":"Answer","text":"Найпоширеніший розмір — 1.2 × 2.5 м (3 м²), хоча зустрічаються й інші розміри, наприклад 1.2 × 3 м."}
-      },
-      {
-        "@type":"Question",
-        "name":"Коли потрібно два шари гіпсокартону?",
-        "acceptedAnswer":{"@type":"Answer","text":"Подвійна обшивка застосовується для підвищення звукоізоляції, вогнестійкості чи міцності конструкції — типово для міжкімнатних перегородок з підвищеними вимогами."}
-      },
-      {
-        "@type":"Question",
-        "name":"Скільки кріплень потрібно на один лист?",
-        "acceptedAnswer":{"@type":"Answer","text":"Орієнтовно 40-50 саморізів на лист стандартного розміру, залежно від кроку профілів каркасу (типово 40-60 см)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029dry1" defer></script>
+    <script src="/js/drywall-calculator.js?v=20261029dry1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/drywall-calculator#app",
-    "name":"Drywall Calculator",
-    "description":"Розрахунок кількості листів гіпсокартону для стін чи стелі за площею.",
-    "url":"https://calccore.net/construction/drywall-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/drywall-calculator#app",
+  "name": "Калькулятор гіпсокартону",
+  "description": "Розрахунок гіпсокартону для кількох поверхонь: стіни, стеля, перегородка з двох боків, своя площа. Листи за розкладкою або за площею зі схемою розкладки, шари, запас, каркас (профілі CD і UD), саморізи за геометрією й вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/drywall-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести поверхонь: стіна, стеля, перегородка, своя площа, з отворами й шарами",
+    "Листи за розкладкою (без обрізків) або за площею, схема розкладки",
+    "Лист за пресетом або свій розмір, запас",
+    "Профілі CD і UD та саморізи за кроками, які ви вказуєте",
+    "Ваші ціни без вбудованих; гривня, долар або євро; таблиця, CSV, посилання"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/drywall-calculator#webpage",
+      "url": "https://calccore.net/construction/drywall-calculator",
+      "name": "Калькулятор гіпсокартону: листи, профілі, саморізи | CalcCore",
+      "description": "Калькулятор гіпсокартону: скільки листів потрібно на стіни, стелю й перегородки з розкладкою, профілі CD і UD, саморізи та вартість за вашими цінами.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/drywall-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/drywall-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/drywall-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор гіпсокартону",
+          "item": "https://calccore.net/construction/drywall-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/drywall-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати кількість листів гіпсокартону на стіну?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа стіни без отворів ділиться на площу листа й округлюється вгору. Для точнішого результату калькулятор рахує ще й розкладку: скільки листів потрібно, щоб закрити стіну цілими листами."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому за розкладкою листів більше, ніж за площею?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бо за площею обрізки вважаються використаними. Для стіни 2,7 м і листа 2,5 м потрібен ще ряд, і смуга, що лишається, часто не годиться деінде. Для стіни 4×2,7 м це 6 листів проти 4 за площею."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який лист вибрати: 2,5 чи 3 м?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для стін вищих за 2,5 м лист 3 м часто зручніший: одна стіна 4×2,7 м потребує 4 листи проти 6 при листі 2,5 м за розкладкою. Порівняйте обидва розміри в калькуляторі."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки шарів гіпсокартону робити?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зазвичай один. Два шари застосовують там, де потрібні вища міцність, звукоізоляція чи вогнестійкість, це залежить від проєкту. Кількість шарів задається для кожної поверхні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що означає перегородка з двох боків?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Обшивка листами з обох боків одного каркаса. Площа листів подвоюється, а каркас рахується один раз."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор двері й вікна?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За площею отвори віднімаються. За розкладкою ні: листи над отворами розрізають, а залишок рідко вдається використати, тому розкладка дає безпечнішу верхню оцінку."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який запас гіпсокартону взяти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запас задається у відсотках від кількості листів і округлюється вгору. Він потрібен на підрізку, злами й брак. Поле порожнє за замовчуванням."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який крок профілів CD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Він залежить від системи й типу поверхні, його вказує виробник. Тому крок профілю в калькуляторі вводиться вами, значення за замовчуванням немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки саморізів потрібно на гіпсокартон?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа листів ділиться на добуток кроку профілю й кроку саморізів, помножена на шари. Для кроків 60 і 25 см це близько 6,7 шт на м² кожного шару."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки профілів CD і UD потрібно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Стійки CD ставляться з вашим кроком по довжині стіни, UD іде зверху й знизу. Для стелі CD вздовж довжини з кроком по ширині, UD по периметру. Кількість округлюється до штук заданої довжини."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи рахує калькулятор ґрунтовку й шпаклівку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Калькулятор рахує листи, профілі й саморізи. Шпаклівку й ґрунтовку для стін можна порахувати окремо за площею поверхні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які розміри листів гіпсокартону бувають?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Найпоширеніші 1,2×2,5 м, 1,2×3,0 м і 1,2×2,0 м. Ваш розмір вказаний на листі, його можна ввести як свій."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="dry-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdrywall">
-            <div class="mcalc__wrap">
+        <section class="dry" id="dry">
+            <div class="dry__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор гіпсокартону</h1>
-                    <p class="mcalc__p">
-                        Розрахуй кількість листів ГКЛ для стін чи стелі
-                        з урахуванням запасу.
-                    </p>
+                <div class="dry__titlebar">
+                    <h1 class="dry__h1">Калькулятор гіпсокартону</h1>
+                    <p class="dry__p">Порахуйте листи гіпсокартону для стін, стелі й перегородок зі схемою розкладки, а також профілі, саморізи та вартість.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="dry__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="dry__card">
+                        <div class="dry__sectionTitle">
+                            <h2 class="dry__h2">Дані для розрахунку</h2>
+                            <div class="dry__dd" id="cur_dd"><button type="button" class="dry__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="dry__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="dry__caret" aria-hidden="true"></span></button><ul class="dry__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="dry__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="dry__ddCode">UAH</span><span class="dry__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="dry__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="dry__ddCode">USD</span><span class="dry__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="dry__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="dry__ddCode">EUR</span><span class="dry__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="area">Площа поверхні (м²)</label>
-                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
-                                    placeholder="напр.: 40" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sheetLength">Довжина листа (м)</label>
-                                <input class="mcalc__input" id="sheetLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 2.5" value="2.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sheetWidth">Ширина листа (м)</label>
-                                <input class="mcalc__input" id="sheetWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 1.2" value="1.2" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="layers">Кількість шарів</label>
-                                <select id="layers" class="mcalc__select">
-                                    <option value="1" selected>1 шар</option>
-                                    <option value="2">2 шари</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="wastage">Запас на підрізку (%)</label>
-                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
-                                    placeholder="напр.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="dry__block">
+                            <div class="dry__rows">
+                                <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="spLbl">Розмір листа</span>
+                                    <input type="hidden" id="sheetp" value="s1225">
+                                    <div class="dry__sel" id="sp_dd">
+                                        <button type="button" class="dry__selBtn" id="sp_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="spLbl sp_val"><span id="sp_val">1,2 × 2,5 м</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="sp_list" role="listbox" aria-labelledby="spLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="s1225" aria-selected="true">1,2 × 2,5 м</li>
+                                            <li role="option" tabindex="-1" data-v="s123" aria-selected="false">1,2 × 3,0 м</li>
+                                            <li role="option" tabindex="-1" data-v="s122" aria-selected="false">1,2 × 2,0 м</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Свій розмір</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="dry__field">
+                                    <label class="dry__label" for="sl">Довжина листа, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="sl" type="text" inputmode="decimal" autocomplete="off" placeholder="2,5" value="2.5">
+                                </div>
+                                <div class="dry__field">
+                                    <label class="dry__label" for="sw">Ширина листа, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="sw" type="text" inputmode="decimal" autocomplete="off" placeholder="1,2" value="1.2">
+                                </div>
+                                <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="meLbl">Спосіб підрахунку листів</span>
+                                    <input type="hidden" id="meth" value="layout">
+                                    <div class="dry__sel" id="me_dd">
+                                        <button type="button" class="dry__selBtn" id="me_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="meLbl me_val"><span id="me_val">За розкладкою (без обрізків)</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="me_list" role="listbox" aria-labelledby="meLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="layout" aria-selected="true">За розкладкою (без обрізків)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">За площею (обрізки використовуються)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="dry__field dry__field--full">
+                                    <label class="dry__label" for="reserve">Запас, %</label>
+                                    <input class="dry__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="dry__hint">На підрізку й брак, округлюється вгору.</div>
+                                </div>
                             </div>
 
+                            <div class="dry__miniTitle dry__mt12">Поверхні</div>
+                            <div class="dry__el" id="nl1">
+                                <div class="dry__elHead"><span>Поверхня 1</span><span class="dry__elVol" id="nv1">—</span><button type="button" class="dry__elRm" id="nl1rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n1tLbl">Тип</span>
+                                    <input type="hidden" id="n1_type" value="wall">
+                                    <div class="dry__sel" id="n1t_dd">
+                                        <button type="button" class="dry__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Стіна</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Стеля</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Перегородка (2 сторони)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Своя площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n1_aW">
+                                    <label class="dry__label" for="n1_a">Довжина, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n1_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="dry__field" id="n1_bW">
+                                    <label class="dry__label" id="n1_bL" for="n1_b">Висота, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n1_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n1_arW" hidden>
+                                    <label class="dry__label" for="n1_ar">Площа, м²&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n1_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n1yLbl">Шарів</span>
+                                    <input type="hidden" id="n1_ly" value="1">
+                                    <div class="dry__sel" id="n1y_dd">
+                                        <button type="button" class="dry__selBtn" id="n1y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1yLbl n1y_val"><span id="n1y_val">1 шар</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n1y_list" role="listbox" aria-labelledby="n1yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n1_op">Отвори, м² <span class="dry__hint">(необовʼязково)</span></label>
+                                    <input class="dry__input" id="n1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,9"><div class="dry__hint">Двері й вікна, площа.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl2" hidden>
+                                <div class="dry__elHead"><span>Поверхня 2</span><span class="dry__elVol" id="nv2">—</span><button type="button" class="dry__elRm" id="nl2rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n2tLbl">Тип</span>
+                                    <input type="hidden" id="n2_type" value="wall">
+                                    <div class="dry__sel" id="n2t_dd">
+                                        <button type="button" class="dry__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Стіна</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Стеля</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Перегородка (2 сторони)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Своя площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n2_aW">
+                                    <label class="dry__label" for="n2_a">Довжина, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n2_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="dry__field" id="n2_bW">
+                                    <label class="dry__label" id="n2_bL" for="n2_b">Висота, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n2_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n2_arW" hidden>
+                                    <label class="dry__label" for="n2_ar">Площа, м²&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n2_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n2yLbl">Шарів</span>
+                                    <input type="hidden" id="n2_ly" value="1">
+                                    <div class="dry__sel" id="n2y_dd">
+                                        <button type="button" class="dry__selBtn" id="n2y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2yLbl n2y_val"><span id="n2y_val">1 шар</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n2y_list" role="listbox" aria-labelledby="n2yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n2_op">Отвори, м² <span class="dry__hint">(необовʼязково)</span></label>
+                                    <input class="dry__input" id="n2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,9"><div class="dry__hint">Двері й вікна, площа.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl3" hidden>
+                                <div class="dry__elHead"><span>Поверхня 3</span><span class="dry__elVol" id="nv3">—</span><button type="button" class="dry__elRm" id="nl3rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n3tLbl">Тип</span>
+                                    <input type="hidden" id="n3_type" value="wall">
+                                    <div class="dry__sel" id="n3t_dd">
+                                        <button type="button" class="dry__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Стіна</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Стеля</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Перегородка (2 сторони)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Своя площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n3_aW">
+                                    <label class="dry__label" for="n3_a">Довжина, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n3_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="dry__field" id="n3_bW">
+                                    <label class="dry__label" id="n3_bL" for="n3_b">Висота, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n3_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n3_arW" hidden>
+                                    <label class="dry__label" for="n3_ar">Площа, м²&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n3_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n3yLbl">Шарів</span>
+                                    <input type="hidden" id="n3_ly" value="1">
+                                    <div class="dry__sel" id="n3y_dd">
+                                        <button type="button" class="dry__selBtn" id="n3y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3yLbl n3y_val"><span id="n3y_val">1 шар</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n3y_list" role="listbox" aria-labelledby="n3yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n3_op">Отвори, м² <span class="dry__hint">(необовʼязково)</span></label>
+                                    <input class="dry__input" id="n3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,9"><div class="dry__hint">Двері й вікна, площа.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl4" hidden>
+                                <div class="dry__elHead"><span>Поверхня 4</span><span class="dry__elVol" id="nv4">—</span><button type="button" class="dry__elRm" id="nl4rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n4tLbl">Тип</span>
+                                    <input type="hidden" id="n4_type" value="wall">
+                                    <div class="dry__sel" id="n4t_dd">
+                                        <button type="button" class="dry__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Стіна</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Стеля</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Перегородка (2 сторони)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Своя площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n4_aW">
+                                    <label class="dry__label" for="n4_a">Довжина, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n4_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="dry__field" id="n4_bW">
+                                    <label class="dry__label" id="n4_bL" for="n4_b">Висота, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n4_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n4_arW" hidden>
+                                    <label class="dry__label" for="n4_ar">Площа, м²&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n4_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n4yLbl">Шарів</span>
+                                    <input type="hidden" id="n4_ly" value="1">
+                                    <div class="dry__sel" id="n4y_dd">
+                                        <button type="button" class="dry__selBtn" id="n4y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4yLbl n4y_val"><span id="n4y_val">1 шар</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n4y_list" role="listbox" aria-labelledby="n4yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n4_op">Отвори, м² <span class="dry__hint">(необовʼязково)</span></label>
+                                    <input class="dry__input" id="n4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,9"><div class="dry__hint">Двері й вікна, площа.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl5" hidden>
+                                <div class="dry__elHead"><span>Поверхня 5</span><span class="dry__elVol" id="nv5">—</span><button type="button" class="dry__elRm" id="nl5rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n5tLbl">Тип</span>
+                                    <input type="hidden" id="n5_type" value="wall">
+                                    <div class="dry__sel" id="n5t_dd">
+                                        <button type="button" class="dry__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Стіна</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Стеля</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Перегородка (2 сторони)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Своя площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n5_aW">
+                                    <label class="dry__label" for="n5_a">Довжина, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n5_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="dry__field" id="n5_bW">
+                                    <label class="dry__label" id="n5_bL" for="n5_b">Висота, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n5_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n5_arW" hidden>
+                                    <label class="dry__label" for="n5_ar">Площа, м²&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n5_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n5yLbl">Шарів</span>
+                                    <input type="hidden" id="n5_ly" value="1">
+                                    <div class="dry__sel" id="n5y_dd">
+                                        <button type="button" class="dry__selBtn" id="n5y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5yLbl n5y_val"><span id="n5y_val">1 шар</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n5y_list" role="listbox" aria-labelledby="n5yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n5_op">Отвори, м² <span class="dry__hint">(необовʼязково)</span></label>
+                                    <input class="dry__input" id="n5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,9"><div class="dry__hint">Двері й вікна, площа.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="dry__el" id="nl6" hidden>
+                                <div class="dry__elHead"><span>Поверхня 6</span><span class="dry__elVol" id="nv6">—</span><button type="button" class="dry__elRm" id="nl6rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="dry__rows">
+                                    <div class="dry__field dry__field--full">
+                                    <span class="dry__label" id="n6tLbl">Тип</span>
+                                    <input type="hidden" id="n6_type" value="wall">
+                                    <div class="dry__sel" id="n6t_dd">
+                                        <button type="button" class="dry__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Стіна</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Стіна</li>
+                                            <li role="option" tabindex="-1" data-v="ceiling" aria-selected="false">Стеля</li>
+                                            <li role="option" tabindex="-1" data-v="partition" aria-selected="false">Перегородка (2 сторони)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Своя площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field" id="n6_aW">
+                                    <label class="dry__label" for="n6_a">Довжина, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n6_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="dry__field" id="n6_bW">
+                                    <label class="dry__label" id="n6_bL" for="n6_b">Висота, м&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n6_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2,7">
+                                </div>
+                                    <div class="dry__field dry__field--full" id="n6_arW" hidden>
+                                    <label class="dry__label" for="n6_ar">Площа, м²&nbsp;<span class="dry__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="dry__input" id="n6_ar" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="dry__field">
+                                    <span class="dry__label" id="n6yLbl">Шарів</span>
+                                    <input type="hidden" id="n6_ly" value="1">
+                                    <div class="dry__sel" id="n6y_dd">
+                                        <button type="button" class="dry__selBtn" id="n6y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6yLbl n6y_val"><span id="n6y_val">1 шар</span><span class="dry__caret" aria-hidden="true"></span></button>
+                                        <ul class="dry__selList" id="n6y_list" role="listbox" aria-labelledby="n6yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="n6_op">Отвори, м² <span class="dry__hint">(необовʼязково)</span></label>
+                                    <input class="dry__input" id="n6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,9"><div class="dry__hint">Двері й вікна, площа.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="dry__add" id="addNl">+ Додати поверхню</button>
+
+                            <details class="dry__details dry__mt12" id="frameDet">
+                                <summary>Каркас і саморізи <span class="dry__hint">(необовʼязково)</span></summary>
+                                <div class="dry__rows">
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="cd">Крок профілів CD, см</label>
+                                    <input class="dry__input" id="cd" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 60"><div class="dry__hint">За вашою системою.</div>
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="plen">Довжина профілю, м</label>
+                                    <input class="dry__input" id="plen" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3">
+                                </div>
+                                    <div class="dry__field dry__field--full">
+                                    <label class="dry__label" for="scr">Крок саморізів, см</label>
+                                    <input class="dry__input" id="scr" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 25">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="dry__details dry__mt12" id="priceDet">
+                                <summary>Ціни й доставка <span class="dry__hint">(необовʼязково)</span></summary>
+                                <div class="dry__rows">
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pSheet">Ціна листа, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pSheet" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pCd">Ціна профілю CD, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pCd" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pUd">Ціна профілю UD, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pUd" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field">
+                                    <label class="dry__label" for="pScr">Ціна 100 саморізів, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pScr" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="dry__field dry__field--full">
+                                    <label class="dry__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="dry__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="dry__actions dry__mt12">
+                            <button class="dry__btn dry__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="dry__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="dry__card">
+                        <div class="dry__sectionTitle">
+                            <h2 class="dry__h2">Результат</h2>
+                            <span class="dry__badge">🧱</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/paint-calculator">Калькулятор фарби</a>
-                            <a href="/construction/insulation-calculator">Калькулятор теплоізоляції</a>
+                        <div class="dry__result" id="result">Вкажіть дані — результат зʼявиться тут.</div>
+                        <div class="dry__actions dry__mt12">
+                            <button class="dry__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="dry__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="dry__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="dry__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks dry__mt12"><a class="dry__link" href="/construction/plaster-calculator">Калькулятор штукатурки →</a> <a class="dry__link" href="/construction/cost-calculator">Калькулятор вартості будівництва →</a></div>
                     </div>
+                </div>
+
+                <div class="dry__card dry__schedule" id="schedule" hidden>
+                    <div class="dry__schedHead">
+                        <h2 class="dry__h2">Підсумок</h2>
+                        <div class="dry__tools">
+                            <button type="button" class="dry__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="dry__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="dry__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як розрахувати кількість гіпсокартону</h2>
-            <p>
-                Розрахунок базується на площі поверхні для обшивки, поділеній на площу одного листа
-                гіпсокартону, з урахуванням кількості шарів та запасу на підрізку. Формула: кількість
-                листів = (площа × кількість шарів × (1 + запас%)) / площа одного листа.
-            </p>
-
-            <h2>Стандартні розміри листів ГКЛ</h2>
-            <ul>
-                <li><b>1.2 × 2.5 м (3 м²):</b> найпоширеніший розмір для стін та стель у житлових приміщеннях.</li>
-                <li><b>1.2 × 3.0 м (3.6 м²):</b> застосовується для приміщень з вищими стелями, зменшує кількість
-                    горизонтальних стиків.</li>
-                <li><b>1.2 × 2.0 м (2.4 м²):</b> зручний для невеликих приміщень чи вузьких просторів.</li>
-            </ul>
-
-            <h2>Коли потрібен подвійний шар</h2>
-            <p>
-                Подвійна обшивка гіпсокартоном застосовується, коли потрібна підвищена звукоізоляція
-                (наприклад, стіна між квартирами чи спальнею і вітальнею), вогнестійкість (протипожежні
-                перегородки) або додаткова міцність конструкції (кріплення важких предметів на стіну).
-            </p>
-
-            <h2>Додаткові матеріали для монтажу</h2>
-            <p>
-                Крім самих листів, для обшивки знадобляться: металевий каркас (профілі UD і CD),
-                саморізи для кріплення листів до каркасу (орієнтовно 40-50 шт на лист), шпаклівка та
-                серпянка для швів, а також ґрунтовка для подальшого оздоблення.
-            </p>
-
-            <p class="m-hintSmall">
-                Рекомендується завжди купувати листи із запасом на випадок помилок при різці чи
-                пошкодження під час транспортування та монтажу.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/plaster-calculator"><b>Калькулятор штукатурки</b><span>Мішки суміші або цемент і пісок для кількох поверхонь.</span></a>
+                <a class="cc-related-card" href="/construction/paint-calculator"><b>Калькулятор фарби</b><span>Літри й банки фарби, ґрунтовка та вартість за вашими цінами.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор гіпсокартону</h2>
+            <p>Калькулятор визначає, скільки <b>листів гіпсокартону</b> потрібно для кількох поверхонь (до шести): стін, стелі, перегородок з обшивкою з двох боків або поверхні з вашою площею. Для кожної поверхні ви вказуєте розміри, площу отворів і кількість шарів, а ще розмір листа й запас. Результат це кількість листів із запасом, схема їх розкладки, а за бажанням профілі CD і UD, саморізи й вартість за вашими цінами. Вбудованих цін немає.</p>
+
+            <h2>Як рахується кількість листів: розкладка й площа</h2>
+            <p>Є два способи. За площею чиста площа (з відрахуванням отворів, з урахуванням шарів) ділиться на площу листа й округлюється вгору: це нижня межа, бо обрізки вважаються використаними. За розкладкою кожна поверхня рахується окремо: лист кладуть уздовж або впоперек і беруть кількість листів, потрібну, щоб закрити прямокутник. Обрізки в цьому способі не використовуються, а отвори не віднімаються. Реальна кількість лежить між двома числами.</p>
+            <p>Приклад: стіна 4×2,7 м і лист 1,2×2,5 м. За площею це 10,8 м² : 3 м² = 4 листи, за розкладкою 6, бо висота 2,7 м перевищує 2,5 м і потрібен ще ряд. З листом 3,0 м за розкладкою вийшло б 4.</p>
+
+            <h2>Каркас і саморізи</h2>
+            <p>Якщо вказати крок профілів CD, калькулятор додатково рахує каркас. Для стіни й перегородки стійки CD ставляться по висоті з цим кроком, а профіль UD іде зверху й знизу. Для стелі профілі CD йдуть уздовж довжини з кроком по ширині, а UD по периметру. Кількість профілів округлюється до штук заданої довжини. Саморізи рахуються за площею листів: площа ділиться на добуток кроку профілю й кроку саморізів, помножена на кількість шарів і сторін.</p>
+            <p>Для кроку профілю 60 см і кроку саморізів 25 см це 6,7 саморіза на м² кожного шару. Кроки залежать від вашої системи й виробника, тому за замовчуванням поля порожні.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Стіна 4×2,7 м і стеля 4×3,5 м, лист 1,2×2,5 м, один шар, запас 5%. За розкладкою 6 + 6 = 12 листів, із запасом 13; за площею було б 9. Профілів CD 22, UD 8, при 3-метрових профілях, кроці 60 см і саморізів з кроком 25 см 166 шт. За 600 ₴ за лист, 110 ₴ за CD, 95 ₴ за UD і 120 ₴ за 100 саморізів вартість 11 179 ₴.</p>
+            <p class="dry-mini">Калькулятор дає орієнтовну оцінку. Кроки профілів і саморізів беріть з інструкції вашої системи.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Який стандартний розмір листа гіпсокартону?</h3>
-                <p>Найпоширеніший розмір — 1.2 × 2.5 м (3 м²), хоча зустрічаються й інші розміри, наприклад 1.2 × 3 м.
-                </p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати кількість листів гіпсокартону на стіну?</h3>
+                <p>Площа стіни без отворів ділиться на площу листа й округлюється вгору. Для точнішого результату калькулятор рахує ще й розкладку: скільки листів потрібно, щоб закрити стіну цілими листами.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Коли потрібно два шари гіпсокартону?</h3>
-                <p>Подвійна обшивка застосовується для підвищення звукоізоляції, вогнестійкості чи міцності конструкції
-                    — типово для міжкімнатних перегородок з підвищеними вимогами.</p>
+            <div class="cc-faq-item">
+                <h3>Чому за розкладкою листів більше, ніж за площею?</h3>
+                <p>Бо за площею обрізки вважаються використаними. Для стіни 2,7 м і листа 2,5 м потрібен ще ряд, і смуга, що лишається, часто не годиться деінде. Для стіни 4×2,7 м це 6 листів проти 4 за площею.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Скільки кріплень потрібно на один лист?</h3>
-                <p>Орієнтовно 40-50 саморізів на лист стандартного розміру, залежно від кроку профілів каркасу (типово
-                    40-60 см).</p>
+            <div class="cc-faq-item">
+                <h3>Який лист вибрати: 2,5 чи 3 м?</h3>
+                <p>Для стін вищих за 2,5 м лист 3 м часто зручніший: одна стіна 4×2,7 м потребує 4 листи проти 6 при листі 2,5 м за розкладкою. Порівняйте обидва розміри в калькуляторі.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки шарів гіпсокартону робити?</h3>
+                <p>Зазвичай один. Два шари застосовують там, де потрібні вища міцність, звукоізоляція чи вогнестійкість, це залежить від проєкту. Кількість шарів задається для кожної поверхні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що означає перегородка з двох боків?</h3>
+                <p>Обшивка листами з обох боків одного каркаса. Площа листів подвоюється, а каркас рахується один раз.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор двері й вікна?</h3>
+                <p>За площею отвори віднімаються. За розкладкою ні: листи над отворами розрізають, а залишок рідко вдається використати, тому розкладка дає безпечнішу верхню оцінку.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який запас гіпсокартону взяти?</h3>
+                <p>Запас задається у відсотках від кількості листів і округлюється вгору. Він потрібен на підрізку, злами й брак. Поле порожнє за замовчуванням.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який крок профілів CD?</h3>
+                <p>Він залежить від системи й типу поверхні, його вказує виробник. Тому крок профілю в калькуляторі вводиться вами, значення за замовчуванням немає.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки саморізів потрібно на гіпсокартон?</h3>
+                <p>Площа листів ділиться на добуток кроку профілю й кроку саморізів, помножена на шари. Для кроків 60 і 25 см це близько 6,7 шт на м² кожного шару.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки профілів CD і UD потрібно?</h3>
+                <p>Стійки CD ставляться з вашим кроком по довжині стіни, UD іде зверху й знизу. Для стелі CD вздовж довжини з кроком по ширині, UD по периметру. Кількість округлюється до штук заданої довжини.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи рахує калькулятор ґрунтовку й шпаклівку?</h3>
+                <p>Ні. Калькулятор рахує листи, профілі й саморізи. Шпаклівку й ґрунтовку для стін можна порахувати окремо за площею поверхні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які розміри листів гіпсокартону бувають?</h3>
+                <p>Найпоширеніші 1,2×2,5 м, 1,2×3,0 м і 1,2×2,0 м. Ваш розмір вказаний на листі, його можна ввести як свій.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
