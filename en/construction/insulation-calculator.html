@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Insulation Calculator Online — Insulation Thickness | CalcCore</title>
+    <title>Insulation Calculator: Thickness, Plates, Cost | CalcCore</title>
     <meta name="description"
-        content="Calculate the recommended insulation thickness for walls, roof, or floor by material. Also calculates material quantity by area." />
+        content="Insulation calculator by DBN V.2.6-31:2021: the required insulation thickness, plate layers, packs and cost for walls, roofs and attics." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/insulation-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/insulation-calculator" />
@@ -26,214 +28,656 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Insulation Calculator Online — Insulation Thickness" />
-    <meta property="og:description" content="Calculate the recommended insulation thickness for walls, roof, or floor by material. Also calculates material quantity by area." />
+    <meta property="og:title" content="Insulation Calculator: Thickness, Plates, Cost" />
+    <meta property="og:description" content="Insulation calculator by DBN V.2.6-31:2021: the required insulation thickness, plate layers, packs and cost for walls, roofs and attics." />
     <meta property="og:url" content="https://calccore.net/en/construction/insulation-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Insulation Calculator Online — Insulation Thickness" />
-    <meta name="twitter:description" content="Calculate the recommended insulation thickness for walls, roof, or floor by material. Also calculates material quantity by area." />
+    <meta name="twitter:title" content="Insulation Calculator: Thickness, Plates, Cost" />
+    <meta name="twitter:description" content="Insulation calculator by DBN V.2.6-31:2021: the required insulation thickness, plate layers, packs and cost for walls, roofs and attics." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ins.css?v=20261029ins1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/insulation-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is thermal conductivity?",
-        "acceptedAnswer":{"@type":"Answer","text":"It's a value (λ, lambda) that indicates how well a material conducts heat. The lower the coefficient, the better the material's insulating properties."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why do different parts of a building need different insulation thickness?",
-        "acceptedAnswer":{"@type":"Answer","text":"The roof loses the most heat (warm air rises), so it needs the thickest insulation layer. Walls and floors have lower requirements."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can you insulate too much?",
-        "acceptedAnswer":{"@type":"Answer","text":"Excessive insulation thickness gives diminishing returns in efficiency while increasing cost, so there's an optimal thickness beyond which extra spending doesn't pay off in heating savings."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029ins1" defer></script>
+    <script src="/js/insulation-calculator.js?v=20261029ins1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/insulation-calculator#app",
-    "name":"Insulation Calculator",
-    "description":"Calculate recommended insulation thickness and material quantity.",
-    "url":"https://calccore.net/en/construction/insulation-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/insulation-calculator#app",
+  "name": "Insulation Calculator",
+  "description": "Calculates insulation for several items: the required thickness of the insulation by the thermal resistance (the DBN V.2.6-31:2021 requirement for your zone), layers of plates, the number of plates and packs with a picture of the resistance, and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/insulation-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six items: walls, roof, attic, floor, own requirement",
+    "R requirement by DBN V.2.6-31:2021 for temperature zones I and II, editable",
+    "The required thickness by the λ of the insulation with the existing structure, layers of plates",
+    "Plates and packs with a reserve, a picture of the resistance R and the requirement",
+    "Your own prices, none built in; hryvnia, dollar or euro; table, CSV, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/insulation-calculator#webpage",
+      "url": "https://calccore.net/en/construction/insulation-calculator",
+      "name": "Insulation Calculator: Thickness, Plates, Cost | CalcCore",
+      "description": "Insulation calculator by DBN V.2.6-31:2021: the required insulation thickness, plate layers, packs and cost for walls, roofs and attics.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/insulation-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/insulation-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/insulation-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Insulation Calculator",
+          "item": "https://calccore.net/en/construction/insulation-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/insulation-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the thickness of insulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The thickness = (R required − R of the existing structure) × λ of the insulation. For a wall with a requirement of 3.5, an existing 0.6 and mineral wool of λ 0.040 that is 116 mm."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is thermal resistance R?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the ability of a structure to resist the flow of heat, in m²·K/W. For a layer R = thickness (m) / λ, for a structure R is the sum of the layers. The higher the R, the warmer the structure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What thermal resistance of walls is required by DBN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By DBN V.2.6-31:2021 the minimum for the external walls of residential and public buildings is 4.0 m²·K/W in temperature zone I and 3.5 in zone II. That is more than 3.3 and 2.8 in the 2016 edition."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which temperature zone should I pick?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The zone depends on the location of the building according to DBN. The calculator suggests the requirement for the chosen zone; if you are not sure, check the zone of your city in the text of the standard."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a roof need a thicker insulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the standards require a higher thermal resistance for roofs than for walls: a combined roof 7.0 / 6.0 against 4.0 / 3.5 for walls (the roof values are from secondary sources)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the existing R and where do I get it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The resistance of the structure without insulation: the sum of d/λ of its layers. For example, a 0.38 m layer with λ 0.7 gives R = 0.54. If you do not know it, leave it empty: the insulation then covers the whole requirement, which gives a margin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the actual thickness larger than the required one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The plates are sold in a fixed thickness. The calculator rounds the number of layers up: for the required 116 mm with 50 mm plates that is 3 layers, 150 mm."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What λ should I use for the insulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The one from the data sheet of your product. The sources give 0.035–0.045 for mineral wool, 0.032–0.040 for EPS, 0.028–0.035 for XPS, 0.022–0.028 for PIR, in W/(m·K). The calculator suggests the middle values. The design λ in the standards is a little higher than the declared one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much insulation for 100 m² of wall?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At a requirement of 3.5 with no existing resistance and mineral wool of λ 0.040 the thickness is 14 cm, which is 14.0 m³ per 100 m²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I count packs of insulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The number of plates (area × layers / plate area) with the reserve is divided by the plates per pack and rounded up. For the example 1,236 plates and 12 per pack is 103 packs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for thermal bridges?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The calculator counts in a simplified way with one layer of insulation. Thermal bridges, fixings and moisture affect the real resistance, so a project needs a thermal engineering calculation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I lower the requirement for new construction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For new construction the standard allows lowering the reduced resistance to 80% of the minimum if the other energy efficiency indicators are met. In the calculator change the “Required R” field by hand."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ins-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cinsul">
-            <div class="mcalc__wrap">
+        <section class="ins" id="ins">
+            <div class="ins__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Insulation Calculator</h1>
-                    <p class="mcalc__p">
-                        Find the recommended insulation thickness and
-                        material quantity for your project.
-                    </p>
+                <div class="ins__titlebar">
+                    <h1 class="ins__h1">Insulation Calculator</h1>
+                    <p class="ins__p">Work out the required insulation thickness for the thermal resistance requirement, the layers of plates, packs and the cost.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ins__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="ins__card">
+                        <div class="ins__sectionTitle">
+                            <h2 class="ins__h2">Input data</h2>
+                            <div class="ins__dd" id="cur_dd"><button type="button" class="ins__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="ins__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="ins__caret" aria-hidden="true"></span></button><ul class="ins__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="ins__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="ins__ddCode">UAH</span><span class="ins__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="ins__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="ins__ddCode">USD</span><span class="ins__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="ins__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="ins__ddCode">EUR</span><span class="ins__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="surfaceType">Surface type</label>
-                                <select id="surfaceType" class="mcalc__select">
-                                    <option value="wall" selected>Wall</option>
-                                    <option value="roof">Roof</option>
-                                    <option value="floor">Floor</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="material">Insulation material</label>
-                                <select id="material" class="mcalc__select">
-                                    <option value="mineralWool" selected>Mineral wool (λ=0.040)</option>
-                                    <option value="eps">EPS foam (λ=0.037)</option>
-                                    <option value="xps">Extruded polystyrene XPS (λ=0.030)</option>
-                                    <option value="pur">PUR/PIR boards (λ=0.022)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="area">Surface area (m²)</label>
-                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 80" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="ins__block">
+                            <div class="ins__rows">
+                                <div class="ins__field">
+                                    <span class="ins__label" id="znLbl">Temperature zone</span>
+                                    <input type="hidden" id="zone" value="II">
+                                    <div class="ins__sel" id="zn_dd">
+                                        <button type="button" class="ins__selBtn" id="zn_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="znLbl zn_val"><span id="zn_val">Temperature zone II</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="zn_list" role="listbox" aria-labelledby="znLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="I" aria-selected="false">Temperature zone I</li>
+                                            <li role="option" tabindex="-1" data-v="II" aria-selected="true">Temperature zone II</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="ins__field">
+                                    <span class="ins__label" id="mtLbl">Insulation</span>
+                                    <input type="hidden" id="matl" value="wool">
+                                    <div class="ins__sel" id="mt_dd">
+                                        <button type="button" class="ins__selBtn" id="mt_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="mtLbl mt_val"><span id="mt_val">Mineral wool — λ 0.040</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="mt_list" role="listbox" aria-labelledby="mtLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wool" aria-selected="true">Mineral wool — λ 0.040</li>
+                                            <li role="option" tabindex="-1" data-v="eps" aria-selected="false">EPS foam — λ 0.036</li>
+                                            <li role="option" tabindex="-1" data-v="xps" aria-selected="false">XPS — λ 0.032</li>
+                                            <li role="option" tabindex="-1" data-v="pir" aria-selected="false">PIR / PUR boards — λ 0.025</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Custom λ</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="lam">Thermal conductivity λ, W/(m·K)&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="lam" type="text" inputmode="decimal" autocomplete="off" placeholder="0,04" value="0.040"><div class="ins__hint">From the data sheet of your product.</div>
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="pt">Plate thickness, mm&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="pt" type="text" inputmode="decimal" autocomplete="off" placeholder="50" value="50">
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="pl">Plate length, mm&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="pl" type="text" inputmode="decimal" autocomplete="off" placeholder="1000" value="1000">
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="pw">Plate width, mm&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="pw" type="text" inputmode="decimal" autocomplete="off" placeholder="600" value="600">
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="ppk">Plates per pack</label>
+                                    <input class="ins__input" id="ppk" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12"><div class="ins__hint">Optional: otherwise counted in plates.</div>
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="reserve">Reserve, %</label>
+                                    <input class="ins__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="ins__hint">For cutting and losses.</div>
+                                </div>
                             </div>
 
+                            <div class="ins__miniTitle ins__mt12">Items</div>
+                            <div class="ins__el" id="nl1">
+                                <div class="ins__elHead"><span>Item 1</span><span class="ins__elVol" id="nv1">—</span><button type="button" class="ins__elRm" id="nl1rm" aria-label="Remove the item" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n1tLbl">Type</span>
+                                    <input type="hidden" id="n1_type" value="wall">
+                                    <div class="ins__sel" id="n1t_dd">
+                                        <button type="button" class="ins__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">External walls</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">External walls</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Combined roof</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Attic or mansard roof</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Floor or ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own requirement</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n1_area">Area, m²&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n1_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n1_op">Openings, m² <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n1_rq">Required R, m²·K/W&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n1_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">By the type and zone, change if needed.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n1_re">Existing R, m²·K/W <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n1_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">The resistance of the wall without insulation, if known.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl2" hidden>
+                                <div class="ins__elHead"><span>Item 2</span><span class="ins__elVol" id="nv2">—</span><button type="button" class="ins__elRm" id="nl2rm" aria-label="Remove the item" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n2tLbl">Type</span>
+                                    <input type="hidden" id="n2_type" value="wall">
+                                    <div class="ins__sel" id="n2t_dd">
+                                        <button type="button" class="ins__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">External walls</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">External walls</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Combined roof</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Attic or mansard roof</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Floor or ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own requirement</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n2_area">Area, m²&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n2_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n2_op">Openings, m² <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n2_rq">Required R, m²·K/W&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n2_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">By the type and zone, change if needed.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n2_re">Existing R, m²·K/W <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n2_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">The resistance of the wall without insulation, if known.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl3" hidden>
+                                <div class="ins__elHead"><span>Item 3</span><span class="ins__elVol" id="nv3">—</span><button type="button" class="ins__elRm" id="nl3rm" aria-label="Remove the item" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n3tLbl">Type</span>
+                                    <input type="hidden" id="n3_type" value="wall">
+                                    <div class="ins__sel" id="n3t_dd">
+                                        <button type="button" class="ins__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">External walls</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">External walls</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Combined roof</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Attic or mansard roof</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Floor or ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own requirement</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n3_area">Area, m²&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n3_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n3_op">Openings, m² <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n3_rq">Required R, m²·K/W&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n3_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">By the type and zone, change if needed.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n3_re">Existing R, m²·K/W <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n3_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">The resistance of the wall without insulation, if known.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl4" hidden>
+                                <div class="ins__elHead"><span>Item 4</span><span class="ins__elVol" id="nv4">—</span><button type="button" class="ins__elRm" id="nl4rm" aria-label="Remove the item" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n4tLbl">Type</span>
+                                    <input type="hidden" id="n4_type" value="wall">
+                                    <div class="ins__sel" id="n4t_dd">
+                                        <button type="button" class="ins__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">External walls</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">External walls</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Combined roof</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Attic or mansard roof</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Floor or ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own requirement</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n4_area">Area, m²&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n4_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n4_op">Openings, m² <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n4_rq">Required R, m²·K/W&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n4_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">By the type and zone, change if needed.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n4_re">Existing R, m²·K/W <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n4_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">The resistance of the wall without insulation, if known.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl5" hidden>
+                                <div class="ins__elHead"><span>Item 5</span><span class="ins__elVol" id="nv5">—</span><button type="button" class="ins__elRm" id="nl5rm" aria-label="Remove the item" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n5tLbl">Type</span>
+                                    <input type="hidden" id="n5_type" value="wall">
+                                    <div class="ins__sel" id="n5t_dd">
+                                        <button type="button" class="ins__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">External walls</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">External walls</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Combined roof</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Attic or mansard roof</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Floor or ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own requirement</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n5_area">Area, m²&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n5_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n5_op">Openings, m² <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n5_rq">Required R, m²·K/W&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n5_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">By the type and zone, change if needed.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n5_re">Existing R, m²·K/W <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n5_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">The resistance of the wall without insulation, if known.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl6" hidden>
+                                <div class="ins__elHead"><span>Item 6</span><span class="ins__elVol" id="nv6">—</span><button type="button" class="ins__elRm" id="nl6rm" aria-label="Remove the item" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n6tLbl">Type</span>
+                                    <input type="hidden" id="n6_type" value="wall">
+                                    <div class="ins__sel" id="n6t_dd">
+                                        <button type="button" class="ins__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">External walls</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">External walls</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Combined roof</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Attic or mansard roof</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Floor or ceiling</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Own requirement</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n6_area">Area, m²&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n6_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n6_op">Openings, m² <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n6_rq">Required R, m²·K/W&nbsp;<span class="ins__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="ins__input" id="n6_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">By the type and zone, change if needed.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n6_re">Existing R, m²·K/W <span class="ins__hint">(optional)</span></label>
+                                    <input class="ins__input" id="n6_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">The resistance of the wall without insulation, if known.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="ins__add" id="addNl">+ Add an item</button>
+
+                            <details class="ins__details ins__mt12" id="priceDet">
+                                <summary>Price and delivery <span class="ins__hint">(optional)</span></summary>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="puLbl">Price per</span>
+                                    <input type="hidden" id="punit" value="pack">
+                                    <div class="ins__sel" id="pu_dd">
+                                        <button type="button" class="ins__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">pack</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="pack" aria-selected="true">pack</li>
+                                            <li role="option" tabindex="-1" data-v="plate" aria-selected="false">plate</li>
+                                            <li role="option" tabindex="-1" data-v="m3" aria-selected="false">m³</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="pMat">Insulation price, <span data-wu>₴</span></label>
+                                    <input class="ins__input" id="pMat" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="ins__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="ins__actions ins__mt12">
+                            <button class="ins__btn ins__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="ins__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ins__card">
+                        <div class="ins__sectionTitle">
+                            <h2 class="ins__h2">Result</h2>
+                            <span class="ins__badge">🌡️</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
-                            <a href="/en/construction/flooring-calculator">Laminate and Linoleum Calculator</a>
+                        <div class="ins__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="ins__actions ins__mt12">
+                            <button class="ins__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="ins__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="ins__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="ins__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks ins__mt12"><a class="ins__link" href="/en/construction/roofing-calculator">Roofing calculator →</a> <a class="ins__link" href="/en/construction/cost-calculator">Construction cost calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="ins__card ins__schedule" id="schedule" hidden>
+                    <div class="ins__schedHead">
+                        <h2 class="ins__h2">Summary</h2>
+                        <div class="ins__tools">
+                            <button type="button" class="ins__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="ins__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="ins__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is thermal insulation and why it matters</h2>
-            <p>
-                Thermal insulation reduces heat loss in winter and overheating in summer, lowering
-                heating and cooling costs, improving living comfort, and reducing a building's
-                environmental footprint.
-            </p>
-
-            <h2>Thermal conductivity (λ, lambda)</h2>
-            <p>
-                Every insulation material has a thermal conductivity coefficient — a value indicating
-                how well it conducts heat (measured in W/(m·K)). The <b>lower</b> the coefficient, the
-                <b>better</b> the insulating properties, and the thinner the insulation layer needed
-                for the same effect.
-            </p>
-
-            <h2>Recommended thickness by surface type</h2>
-            <ul>
-                <li><b>Roof:</b> requires the thickest insulation layer, since warm air naturally rises and the roof is
-                    where the most heat is lost.</li>
-                <li><b>Walls:</b> moderate thickness, balancing efficiency with preserving usable room space.</li>
-                <li><b>Floor:</b> usually the least thickness among the three, especially for upper floors.</li>
-            </ul>
-
-            <h2>Material comparison</h2>
-            <ul>
-                <li><b>Mineral wool:</b> affordable, good fire resistance, breathable.</li>
-                <li><b>EPS foam:</b> lightweight, inexpensive, easy to install, but flammable.</li>
-                <li><b>Extruded polystyrene (XPS):</b> higher density and moisture resistance, suitable for foundations.
-                </li>
-                <li><b>PUR/PIR boards:</b> best insulating properties (lowest λ), allow the thinnest layer, but more
-                    expensive.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                The calculation provides an estimated thickness based on a simplified model. For
-                precise insulation design of a specific building, consulting a thermal engineer who
-                accounts for climate zone, building codes, and structural details is recommended.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/roofing-calculator"><b>Roofing calculator</b><span>Roofing materials for a pitched roof.</span></a>
+                <a class="cc-related-card" href="/en/construction/plaster-calculator"><b>Plaster calculator</b><span>Bags of a mix or cement and sand for several surfaces.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your own prices.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the insulation calculator counts</h2>
+            <p>The calculator works out how much <b>insulation</b> is needed for a structure to meet the requirement for the thermal resistance R. For every item (walls, roof, attic, floor or your own requirement, up to six) it shows the required and the actual thickness, the layers of plates, the achieved R, and the total number of plates and packs with a reserve and the cost from your prices. There are no built-in prices.</p>
+
+            <h2>How the thickness is counted</h2>
+            <p>The thermal resistance of a layer is its thickness divided by the thermal conductivity λ. The insulation has to add to the existing structure what is missing to the requirement: R of the insulation = R required − R existing, thickness = R of the insulation × λ. The number of layers of plates is taken to reach the thickness, so the actual thickness is a multiple of the plate thickness and the achieved R is a little above the requirement. The resistance of the existing structure is the sum of d/λ of its layers (for a 0.38 m layer with λ 0.7 it is 0.54); if it is unknown, leave the field empty.</p>
+            <p>An example for a wall with no existing resistance and mineral wool of λ 0.040: for a requirement of 3.3 (the old edition) 13.2 cm are needed, for 3.5 (zone II) 14 cm, for 4.0 (zone I) 16 cm.</p>
+
+            <h2>Requirements of DBN V.2.6-31:2021</h2>
+            <p>Since 1 September 2022 DBN V.2.6-31:2021 “Thermal insulation and energy efficiency of buildings” has been in force. The minimum thermal resistance of the external walls of residential and public buildings is 4.0 m²·K/W for temperature zone I and 3.5 for zone II (it was 3.3 and 2.8 in the 2016 edition). The values for roofs (combined 7.0 / 6.0, attic 6.0 / 5.5) are from secondary sources, and for floors you have to enter them yourself. The requirements can be edited, and for new construction the standard allows a reduction to 80% if the other energy efficiency indicators are met. Check against the current text of the standard.</p>
+
+            <h2>Worked example</h2>
+            <p>Walls of 120 m² with 18 m² of openings (102 m² of insulation), a requirement of 3.5, an existing structure of 0.6: the insulation needs 2.9, which is 116 mm, and with 50 mm plates that is 3 layers, 150 mm, R = 4.35. A roof of 80 m², a requirement of 6.0, an existing 0.3: 228 mm, 5 layers, 250 mm, R = 6.55. The volume is 35.3 m³, 1,177 plates (1000×600 mm), 1,236 plates with a 5% reserve, which at 12 plates per pack is 103 packs. At 650 ₴ per pack the cost is 66,950 ₴.</p>
+            <p class="ins-mini">The calculator gives an approximate estimate by a simplified model. A project needs a thermal engineering calculation.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is thermal conductivity?</h3>
-                <p>It's a value (λ, lambda) that indicates how well a material conducts heat. The lower the coefficient,
-                    the better the material's insulating properties.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the thickness of insulation?</h3>
+                <p>The thickness = (R required − R of the existing structure) × λ of the insulation. For a wall with a requirement of 3.5, an existing 0.6 and mineral wool of λ 0.040 that is 116 mm.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why do different parts of a building need different insulation thickness?</h3>
-                <p>The roof loses the most heat (warm air rises), so it needs the thickest insulation layer. Walls and
-                    floors have lower requirements.</p>
+            <div class="cc-faq-item">
+                <h3>What is thermal resistance R?</h3>
+                <p>It is the ability of a structure to resist the flow of heat, in m²·K/W. For a layer R = thickness (m) / λ, for a structure R is the sum of the layers. The higher the R, the warmer the structure.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can you insulate too much?</h3>
-                <p>Excessive insulation thickness gives diminishing returns in efficiency while increasing cost, so
-                    there's an optimal thickness beyond which extra spending doesn't pay off in heating savings.</p>
+            <div class="cc-faq-item">
+                <h3>What thermal resistance of walls is required by DBN?</h3>
+                <p>By DBN V.2.6-31:2021 the minimum for the external walls of residential and public buildings is 4.0 m²·K/W in temperature zone I and 3.5 in zone II. That is more than 3.3 and 2.8 in the 2016 edition.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which temperature zone should I pick?</h3>
+                <p>The zone depends on the location of the building according to DBN. The calculator suggests the requirement for the chosen zone; if you are not sure, check the zone of your city in the text of the standard.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does a roof need a thicker insulation?</h3>
+                <p>Because the standards require a higher thermal resistance for roofs than for walls: a combined roof 7.0 / 6.0 against 4.0 / 3.5 for walls (the roof values are from secondary sources).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the existing R and where do I get it?</h3>
+                <p>The resistance of the structure without insulation: the sum of d/λ of its layers. For example, a 0.38 m layer with λ 0.7 gives R = 0.54. If you do not know it, leave it empty: the insulation then covers the whole requirement, which gives a margin.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is the actual thickness larger than the required one?</h3>
+                <p>The plates are sold in a fixed thickness. The calculator rounds the number of layers up: for the required 116 mm with 50 mm plates that is 3 layers, 150 mm.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What λ should I use for the insulation?</h3>
+                <p>The one from the data sheet of your product. The sources give 0.035–0.045 for mineral wool, 0.032–0.040 for EPS, 0.028–0.035 for XPS, 0.022–0.028 for PIR, in W/(m·K). The calculator suggests the middle values. The design λ in the standards is a little higher than the declared one.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much insulation for 100 m² of wall?</h3>
+                <p>At a requirement of 3.5 with no existing resistance and mineral wool of λ 0.040 the thickness is 14 cm, which is 14.0 m³ per 100 m².</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I count packs of insulation?</h3>
+                <p>The number of plates (area × layers / plate area) with the reserve is divided by the plates per pack and rounded up. For the example 1,236 plates and 12 per pack is 103 packs.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for thermal bridges?</h3>
+                <p>No. The calculator counts in a simplified way with one layer of insulation. Thermal bridges, fixings and moisture affect the real resistance, so a project needs a thermal engineering calculation.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I lower the requirement for new construction?</h3>
+                <p>For new construction the standard allows lowering the reduced resistance to 80% of the minimum if the other energy efficiency indicators are met. In the calculator change the “Required R” field by hand.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

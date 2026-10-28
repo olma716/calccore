@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор теплоізоляції онлайн — товщина утеплення | CalcCore</title>
+    <title>Калькулятор теплоізоляції: товщина, плити, вартість | CalcCore</title>
     <meta name="description"
-        content="Розрахунок необхідної товщини утеплювача для стін, даху чи підлоги за матеріалом та кліматичною зоною. Також кількість матеріалу за площею." />
+        content="Калькулятор теплоізоляції за ДБН В.2.6-31:2021: потрібна товщина утеплювача, шари плит, упаковки та вартість для стін, покриття й горища за вашими цінами." />
 
     <link rel="canonical" href="https://calccore.net/construction/insulation-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/insulation-calculator" />
@@ -26,215 +28,656 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор теплоізоляції онлайн — товщина утеплення" />
-    <meta property="og:description" content="Розрахунок необхідної товщини утеплювача для стін, даху чи підлоги за матеріалом та кліматичною зоною. Також кількість матеріалу за площею." />
+    <meta property="og:title" content="Калькулятор теплоізоляції: товщина, плити, вартість" />
+    <meta property="og:description" content="Калькулятор теплоізоляції за ДБН В.2.6-31:2021: потрібна товщина утеплювача, шари плит, упаковки та вартість для стін, покриття й горища за вашими цінами." />
     <meta property="og:url" content="https://calccore.net/construction/insulation-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор теплоізоляції онлайн — товщина утеплення" />
-    <meta name="twitter:description" content="Розрахунок необхідної товщини утеплювача для стін, даху чи підлоги за матеріалом та кліматичною зоною. Також кількість матеріалу за площею." />
+    <meta name="twitter:title" content="Калькулятор теплоізоляції: товщина, плити, вартість" />
+    <meta name="twitter:description" content="Калькулятор теплоізоляції за ДБН В.2.6-31:2021: потрібна товщина утеплювача, шари плит, упаковки та вартість для стін, покриття й горища за вашими цінами." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ins.css?v=20261029ins1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/insulation-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Що таке коефіцієнт теплопровідності?",
-        "acceptedAnswer":{"@type":"Answer","text":"Це показник (λ, лямбда), що вказує, наскільки добре матеріал проводить тепло. Чим нижчий коефіцієнт, тим кращі теплоізоляційні властивості матеріалу."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому різні частини будинку потребують різної товщини утеплення?",
-        "acceptedAnswer":{"@type":"Answer","text":"Дах втрачає найбільше тепла (гаряче повітря піднімається вгору), тому потребує найтовщого шару утеплення. Стіни і підлога мають нижчі вимоги."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна утеплити занадто сильно?",
-        "acceptedAnswer":{"@type":"Answer","text":"Надмірна товщина утеплення дає дедалі менший приріст ефективності при збільшенні вартості, тому існує оптимальна товщина, після якої додаткові витрати не окупаються економією на опаленні."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029ins1" defer></script>
+    <script src="/js/insulation-calculator.js?v=20261029ins1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/insulation-calculator#app",
-    "name":"Insulation Calculator",
-    "description":"Розрахунок рекомендованої товщини утеплення та кількості матеріалу.",
-    "url":"https://calccore.net/construction/insulation-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/insulation-calculator#app",
+  "name": "Калькулятор теплоізоляції",
+  "description": "Розрахунок теплоізоляції для кількох позицій: потрібна товщина утеплювача за опором теплопередачі (вимога ДБН В.2.6-31:2021 для вашої зони), шари плит, кількість плит і упаковок з візуалізацією опору та вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/insulation-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести позицій: стіни, покриття, горище, підлога, своя вимога",
+    "Вимога R за ДБН В.2.6-31:2021 для I і II температурної зони, редагується",
+    "Потрібна товщина за λ утеплювача з урахуванням існуючої конструкції, шари плит",
+    "Плити й упаковки з запасом, візуалізація опору R і вимоги",
+    "Ваші ціни без вбудованих; гривня, долар або євро; таблиця, CSV, посилання"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/insulation-calculator#webpage",
+      "url": "https://calccore.net/construction/insulation-calculator",
+      "name": "Калькулятор теплоізоляції: товщина, плити, вартість | CalcCore",
+      "description": "Калькулятор теплоізоляції за ДБН В.2.6-31:2021: потрібна товщина утеплювача, шари плит, упаковки та вартість для стін, покриття й горища за вашими цінами.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/insulation-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/insulation-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/insulation-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор теплоізоляції",
+          "item": "https://calccore.net/construction/insulation-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/insulation-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як розрахувати товщину утеплювача?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Товщина = (R вимоги − R існуючої конструкції) × λ утеплювача. Для стіни з вимогою 3,5, існуючою 0,6 і мінеральною ватою λ 0,040 це 116 мм."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке опір теплопередачі R?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це здатність конструкції опиратися проходженню тепла в м²·К/Вт. Для шару R = товщина (м) / λ, для конструкції R це сума шарів. Чим більше R, тим тепліша конструкція."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який опір теплопередачі стін потрібен за ДБН?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За ДБН В.2.6-31:2021 для зовнішніх стін житлових і громадських будівель мінімум 4,0 м²·К/Вт у I температурній зоні й 3,5 у II. Це більше за 3,3 і 2,8 за редакцією 2016 року."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яку температурну зону обрати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зона залежить від району будівництва за ДБН. Калькулятор підставляє вимогу залежно від вибраної зони; якщо не впевнені, перевірте зону вашого міста в тексті норм."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому потрібний утеплювач більшої товщини для даху?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бо норми вимагають для покриттів вищий опір теплопередачі, ніж для стін: суміщене покриття 7,0 / 6,0 проти 4,0 / 3,5 для стін (значення покриттів із вторинних джерел)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке існуюча R і де її взяти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Опір конструкції без утеплювача: сума d/λ її шарів. Наприклад, шар 0,38 м із λ 0,7 дає R = 0,54. Якщо не знаєте, залиште порожнім: утеплювач тоді покриває всю вимогу, що дає запас."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому фактична товщина більша за потрібну?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Плити продаються з фіксованою товщиною. Калькулятор округлює кількість шарів угору: для потрібних 116 мм плитами по 50 мм це 3 шари, 150 мм."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яку λ брати для утеплювача?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "З паспорта вашого продукту. У джерелах для мінвати 0,035–0,045, EPS 0,032–0,040, XPS 0,028–0,035, PIR 0,022–0,028 Вт/(м·К). Калькулятор підставляє середні значення. Розрахункова λ у нормативах трохи вища за декларовану."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки утеплювача потрібно на 100 м² стіни?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "При вимозі 3,5 без існуючого опору й мінвати λ 0,040 товщина 14 см, тобто 14,0 м³ на 100 м²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати упаковки утеплювача?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Кількість плит (площа × шари / площа плити) із запасом ділиться на плит в упаковці й округлюється вгору. Для прикладу 1 236 плит і 12 в упаковці це 103 упаковки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор містки холоду?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Калькулятор рахує спрощено одним шаром утеплювача. Містки холоду, кріплення й вологість впливають на реальний опір, тому для проєкту потрібен теплотехнічний розрахунок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна зменшити вимогу для нового будівництва?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За нормами для нового будівництва допускається зниження приведеного опору до 80% від мінімального за умови виконання інших показників енергоефективності. У калькуляторі змініть поле «Вимога R» вручну."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ins-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cinsul">
-            <div class="mcalc__wrap">
+        <section class="ins" id="ins">
+            <div class="ins__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор теплоізоляції</h1>
-                    <p class="mcalc__p">
-                        Дізнайся рекомендовану товщину утеплювача та кількість
-                        матеріалу для твого проєкту.
-                    </p>
+                <div class="ins__titlebar">
+                    <h1 class="ins__h1">Калькулятор теплоізоляції</h1>
+                    <p class="ins__p">Порахуйте потрібну товщину утеплювача за вимогою до опору теплопередачі, шари плит, упаковки й вартість.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ins__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="ins__card">
+                        <div class="ins__sectionTitle">
+                            <h2 class="ins__h2">Дані для розрахунку</h2>
+                            <div class="ins__dd" id="cur_dd"><button type="button" class="ins__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="ins__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="ins__caret" aria-hidden="true"></span></button><ul class="ins__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="ins__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="ins__ddCode">UAH</span><span class="ins__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="ins__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="ins__ddCode">USD</span><span class="ins__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="ins__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="ins__ddCode">EUR</span><span class="ins__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="surfaceType">Тип поверхні</label>
-                                <select id="surfaceType" class="mcalc__select">
-                                    <option value="wall" selected>Стіна</option>
-                                    <option value="roof">Дах</option>
-                                    <option value="floor">Підлога</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="material">Матеріал утеплювача</label>
-                                <select id="material" class="mcalc__select">
-                                    <option value="mineralWool" selected>Мінеральна вата (λ=0.040)</option>
-                                    <option value="eps">Пінопласт EPS (λ=0.037)</option>
-                                    <option value="xps">Екструдований пінополістирол XPS (λ=0.030)</option>
-                                    <option value="pur">ППУ / PIR плити (λ=0.022)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="area">Площа поверхні (м²)</label>
-                                <input class="mcalc__input" id="area" type="text" inputmode="decimal"
-                                    placeholder="напр.: 80" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="ins__block">
+                            <div class="ins__rows">
+                                <div class="ins__field">
+                                    <span class="ins__label" id="znLbl">Температурна зона</span>
+                                    <input type="hidden" id="zone" value="II">
+                                    <div class="ins__sel" id="zn_dd">
+                                        <button type="button" class="ins__selBtn" id="zn_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="znLbl zn_val"><span id="zn_val">II температурна зона</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="zn_list" role="listbox" aria-labelledby="znLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="I" aria-selected="false">I температурна зона</li>
+                                            <li role="option" tabindex="-1" data-v="II" aria-selected="true">II температурна зона</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="ins__field">
+                                    <span class="ins__label" id="mtLbl">Утеплювач</span>
+                                    <input type="hidden" id="matl" value="wool">
+                                    <div class="ins__sel" id="mt_dd">
+                                        <button type="button" class="ins__selBtn" id="mt_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="mtLbl mt_val"><span id="mt_val">Мінеральна вата — λ 0,040</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="mt_list" role="listbox" aria-labelledby="mtLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wool" aria-selected="true">Мінеральна вата — λ 0,040</li>
+                                            <li role="option" tabindex="-1" data-v="eps" aria-selected="false">Пінопласт EPS — λ 0,036</li>
+                                            <li role="option" tabindex="-1" data-v="xps" aria-selected="false">XPS — λ 0,032</li>
+                                            <li role="option" tabindex="-1" data-v="pir" aria-selected="false">PIR / ППУ плити — λ 0,025</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя λ</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="lam">Теплопровідність λ, Вт/(м·К)&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="lam" type="text" inputmode="decimal" autocomplete="off" placeholder="0,04" value="0.040"><div class="ins__hint">З паспорта вашого продукту.</div>
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="pt">Товщина плити, мм&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="pt" type="text" inputmode="decimal" autocomplete="off" placeholder="50" value="50">
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="pl">Довжина плити, мм&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="pl" type="text" inputmode="decimal" autocomplete="off" placeholder="1000" value="1000">
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="pw">Ширина плити, мм&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="pw" type="text" inputmode="decimal" autocomplete="off" placeholder="600" value="600">
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="ppk">Плит в упаковці</label>
+                                    <input class="ins__input" id="ppk" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 12"><div class="ins__hint">Не обовʼязково: тоді рахуємо плитами.</div>
+                                </div>
+                                <div class="ins__field">
+                                    <label class="ins__label" for="reserve">Запас, %</label>
+                                    <input class="ins__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="ins__hint">На підрізку й втрати.</div>
+                                </div>
                             </div>
 
+                            <div class="ins__miniTitle ins__mt12">Позиції</div>
+                            <div class="ins__el" id="nl1">
+                                <div class="ins__elHead"><span>Позиція 1</span><span class="ins__elVol" id="nv1">—</span><button type="button" class="ins__elRm" id="nl1rm" aria-label="Видалити позицію" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n1tLbl">Тип</span>
+                                    <input type="hidden" id="n1_type" value="wall">
+                                    <div class="ins__sel" id="n1t_dd">
+                                        <button type="button" class="ins__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Зовнішні стіни</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Зовнішні стіни</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Суміщене покриття</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Горище або мансарда</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Підлога, перекриття</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя вимога</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n1_area">Площа, м²&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n1_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n1_op">Отвори, м² <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n1_rq">Вимога R, м²·К/Вт&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n1_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">За типом і зоною, змініть за потреби.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n1_re">Існуюча R, м²·К/Вт <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n1_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">Опір стіни без утеплення, якщо знаєте.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl2" hidden>
+                                <div class="ins__elHead"><span>Позиція 2</span><span class="ins__elVol" id="nv2">—</span><button type="button" class="ins__elRm" id="nl2rm" aria-label="Видалити позицію" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n2tLbl">Тип</span>
+                                    <input type="hidden" id="n2_type" value="wall">
+                                    <div class="ins__sel" id="n2t_dd">
+                                        <button type="button" class="ins__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Зовнішні стіни</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Зовнішні стіни</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Суміщене покриття</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Горище або мансарда</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Підлога, перекриття</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя вимога</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n2_area">Площа, м²&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n2_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n2_op">Отвори, м² <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n2_rq">Вимога R, м²·К/Вт&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n2_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">За типом і зоною, змініть за потреби.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n2_re">Існуюча R, м²·К/Вт <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n2_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">Опір стіни без утеплення, якщо знаєте.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl3" hidden>
+                                <div class="ins__elHead"><span>Позиція 3</span><span class="ins__elVol" id="nv3">—</span><button type="button" class="ins__elRm" id="nl3rm" aria-label="Видалити позицію" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n3tLbl">Тип</span>
+                                    <input type="hidden" id="n3_type" value="wall">
+                                    <div class="ins__sel" id="n3t_dd">
+                                        <button type="button" class="ins__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Зовнішні стіни</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Зовнішні стіни</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Суміщене покриття</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Горище або мансарда</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Підлога, перекриття</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя вимога</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n3_area">Площа, м²&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n3_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n3_op">Отвори, м² <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n3_rq">Вимога R, м²·К/Вт&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n3_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">За типом і зоною, змініть за потреби.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n3_re">Існуюча R, м²·К/Вт <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n3_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">Опір стіни без утеплення, якщо знаєте.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl4" hidden>
+                                <div class="ins__elHead"><span>Позиція 4</span><span class="ins__elVol" id="nv4">—</span><button type="button" class="ins__elRm" id="nl4rm" aria-label="Видалити позицію" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n4tLbl">Тип</span>
+                                    <input type="hidden" id="n4_type" value="wall">
+                                    <div class="ins__sel" id="n4t_dd">
+                                        <button type="button" class="ins__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Зовнішні стіни</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Зовнішні стіни</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Суміщене покриття</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Горище або мансарда</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Підлога, перекриття</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя вимога</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n4_area">Площа, м²&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n4_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n4_op">Отвори, м² <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n4_rq">Вимога R, м²·К/Вт&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n4_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">За типом і зоною, змініть за потреби.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n4_re">Існуюча R, м²·К/Вт <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n4_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">Опір стіни без утеплення, якщо знаєте.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl5" hidden>
+                                <div class="ins__elHead"><span>Позиція 5</span><span class="ins__elVol" id="nv5">—</span><button type="button" class="ins__elRm" id="nl5rm" aria-label="Видалити позицію" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n5tLbl">Тип</span>
+                                    <input type="hidden" id="n5_type" value="wall">
+                                    <div class="ins__sel" id="n5t_dd">
+                                        <button type="button" class="ins__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Зовнішні стіни</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Зовнішні стіни</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Суміщене покриття</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Горище або мансарда</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Підлога, перекриття</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя вимога</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n5_area">Площа, м²&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n5_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n5_op">Отвори, м² <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n5_rq">Вимога R, м²·К/Вт&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n5_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">За типом і зоною, змініть за потреби.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n5_re">Існуюча R, м²·К/Вт <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n5_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">Опір стіни без утеплення, якщо знаєте.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ins__el" id="nl6" hidden>
+                                <div class="ins__elHead"><span>Позиція 6</span><span class="ins__elVol" id="nv6">—</span><button type="button" class="ins__elRm" id="nl6rm" aria-label="Видалити позицію" hidden>×</button></div>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="n6tLbl">Тип</span>
+                                    <input type="hidden" id="n6_type" value="wall">
+                                    <div class="ins__sel" id="n6t_dd">
+                                        <button type="button" class="ins__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Зовнішні стіни</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="wall" aria-selected="true">Зовнішні стіни</li>
+                                            <li role="option" tabindex="-1" data-v="roof" aria-selected="false">Суміщене покриття</li>
+                                            <li role="option" tabindex="-1" data-v="attic" aria-selected="false">Горище або мансарда</li>
+                                            <li role="option" tabindex="-1" data-v="floor" aria-selected="false">Підлога, перекриття</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя вимога</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n6_area">Площа, м²&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n6_area" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n6_op">Отвори, м² <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="n6_rq">Вимога R, м²·К/Вт&nbsp;<span class="ins__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="ins__input" id="n6_rq" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">За типом і зоною, змініть за потреби.</div>
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="n6_re">Існуюча R, м²·К/Вт <span class="ins__hint">(необовʼязково)</span></label>
+                                    <input class="ins__input" id="n6_re" type="text" inputmode="decimal" autocomplete="off" placeholder=""><div class="ins__hint">Опір стіни без утеплення, якщо знаєте.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="ins__add" id="addNl">+ Додати позицію</button>
+
+                            <details class="ins__details ins__mt12" id="priceDet">
+                                <summary>Ціна й доставка <span class="ins__hint">(необовʼязково)</span></summary>
+                                <div class="ins__rows">
+                                    <div class="ins__field">
+                                    <span class="ins__label" id="puLbl">Ціна за</span>
+                                    <input type="hidden" id="punit" value="pack">
+                                    <div class="ins__sel" id="pu_dd">
+                                        <button type="button" class="ins__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">упаковку</span><span class="ins__caret" aria-hidden="true"></span></button>
+                                        <ul class="ins__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="pack" aria-selected="true">упаковку</li>
+                                            <li role="option" tabindex="-1" data-v="plate" aria-selected="false">плиту</li>
+                                            <li role="option" tabindex="-1" data-v="m3" aria-selected="false">м³</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="ins__field">
+                                    <label class="ins__label" for="pMat">Ціна утеплювача, <span data-wu>₴</span></label>
+                                    <input class="ins__input" id="pMat" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="ins__field ins__field--full">
+                                    <label class="ins__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="ins__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="ins__actions ins__mt12">
+                            <button class="ins__btn ins__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="ins__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ins__card">
+                        <div class="ins__sectionTitle">
+                            <h2 class="ins__h2">Результат</h2>
+                            <span class="ins__badge">🌡️</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/paint-calculator">Калькулятор фарби</a>
-                            <a href="/construction/flooring-calculator">Калькулятор ламінату та лінолеуму</a>
+                        <div class="ins__result" id="result">Вкажіть дані — результат зʼявиться тут.</div>
+                        <div class="ins__actions ins__mt12">
+                            <button class="ins__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="ins__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="ins__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="ins__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks ins__mt12"><a class="ins__link" href="/construction/roofing-calculator">Калькулятор даху →</a> <a class="ins__link" href="/construction/cost-calculator">Калькулятор вартості будівництва →</a></div>
                     </div>
+                </div>
+
+                <div class="ins__card ins__schedule" id="schedule" hidden>
+                    <div class="ins__schedHead">
+                        <h2 class="ins__h2">Підсумок</h2>
+                        <div class="ins__tools">
+                            <button type="button" class="ins__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="ins__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="ins__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке теплоізоляція і навіщо вона потрібна</h2>
-            <p>
-                Теплоізоляція зменшує втрати тепла взимку та перегрів влітку, знижуючи витрати
-                на опалення й кондиціювання, покращуючи комфорт проживання та зменшуючи екологічний
-                слід будівлі.
-            </p>
-
-            <h2>Коефіцієнт теплопровідності (λ, лямбда)</h2>
-            <p>
-                Кожен теплоізоляційний матеріал має коефіцієнт теплопровідності — показник того,
-                наскільки добре він проводить тепло (вимірюється у Вт/(м·К)). Чим <b>нижчий</b>
-                коефіцієнт, тим <b>кращі</b> ізоляційні властивості, і тим тоншим може бути шар
-                утеплювача для досягнення того самого ефекту.
-            </p>
-
-            <h2>Рекомендована товщина за типом поверхні</h2>
-            <ul>
-                <li><b>Дах:</b> потребує найтовщого шару утеплення, оскільки тепле повітря природно піднімається вгору,
-                    і саме через дах втрачається найбільше тепла.</li>
-                <li><b>Стіни:</b> помірна товщина, баланс між ефективністю та збереженням корисної площі приміщення.
-                </li>
-                <li><b>Підлога:</b> зазвичай найменша товщина серед трьох, особливо для поверхів вище першого.</li>
-            </ul>
-
-            <h2>Порівняння матеріалів</h2>
-            <ul>
-                <li><b>Мінеральна вата:</b> доступна ціна, добра пожежобезпека, паропроникність.</li>
-                <li><b>Пінопласт (EPS):</b> легкий, недорогий, простий у монтажі, але горючий.</li>
-                <li><b>Екструдований пінополістирол (XPS):</b> вища щільність і вологостійкість, підходить для
-                    фундаментів.</li>
-                <li><b>ППУ/PIR плити:</b> найкращі теплоізоляційні властивості (найнижча λ), дозволяють найтонший шар,
-                    але дорожчі.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Розрахунок надає орієнтовну товщину на основі спрощеної моделі. Для точного проєктування
-                теплоізоляції конкретної будівлі рекомендується консультація з інженером-теплотехніком,
-                який врахує кліматичну зону, будівельні норми та конструктивні особливості.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/roofing-calculator"><b>Калькулятор даху</b><span>Покрівельні матеріали для скатного даху.</span></a>
+                <a class="cc-related-card" href="/construction/plaster-calculator"><b>Калькулятор штукатурки</b><span>Мішки суміші або цемент і пісок для кількох поверхонь.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор теплоізоляції</h2>
+            <p>Калькулятор визначає, скільки <b>утеплювача</b> потрібно, щоб конструкція досягла вимоги до опору теплопередачі R. Для кожної позиції (стіни, покриття, горище, підлога або своя вимога, до шести) він показує потрібну й фактичну товщину, шари плит, досягнутий R, а також загальну кількість плит і упаковок з запасом і вартість за вашими цінами. Вбудованих цін немає.</p>
+
+            <h2>Як рахується товщина</h2>
+            <p>Опір теплопередачі шару дорівнює товщині, поділеній на теплопровідність λ. Утеплювач має додати до існуючої конструкції те, чого бракує до вимоги: R утеплювача = R вимоги − R існуючої, товщина = R утеплювача × λ. Шарів плит береться стільки, щоб досягти товщини, тому фактична товщина кратна товщині плити, а досягнутий R трохи більший за вимогу. Опір існуючої конструкції це сума d/λ її шарів (для шару 0,38 м з λ 0,7 це 0,54), якщо він невідомий, залиште поле порожнім.</p>
+            <p>Приклад для стіни без існуючого опору й мінеральної вати λ 0,040: за вимоги 3,3 (стара редакція) потрібно 13,2 см, за 3,5 (II зона) 14 см, за 4,0 (I зона) 16 см.</p>
+
+            <h2>Вимоги ДБН В.2.6-31:2021</h2>
+            <p>З 1 вересня 2022 року діє ДБН В.2.6-31:2021 «Теплова ізоляція та енергоефективність будівель». Мінімальний опір теплопередачі зовнішніх стін житлових і громадських будівель 4,0 м²·К/Вт для I температурної зони й 3,5 для II (у редакції 2016 року було 3,3 і 2,8). Значення для покриттів (суміщене 7,0 / 6,0, горище 6,0 / 5,5) наведені за вторинними джерелами, для підлог і перекриттів їх потрібно вказати самому. Вимоги можна змінювати, а для нового будівництва норма допускає зниження до 80% за умови виконання інших показників енергоефективності. Звіряйте з чинним текстом норм.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Стіни 120 м² з отворами 18 м² (102 м² утеплення), вимога 3,5, існуюча конструкція 0,6: утеплювачу потрібно 2,9, тобто 116 мм, плитами по 50 мм це 3 шари, 150 мм, R = 4,35. Покриття 80 м², вимога 6,0, існуюча 0,3: 228 мм, 5 шарів, 250 мм, R = 6,55. Обʼєм 35,3 м³, плит 1 177 (1000×600 мм), із запасом 5% 1 236 плит, при 12 плитах в упаковці це 103 упаковки. За 650 ₴ за упаковку вартість 66 950 ₴.</p>
+            <p class="ins-mini">Калькулятор дає орієнтовну оцінку за спрощеною моделлю. Для проєкту потрібен теплотехнічний розрахунок.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Що таке коефіцієнт теплопровідності?</h3>
-                <p>Це показник (λ, лямбда), що вказує, наскільки добре матеріал проводить тепло. Чим нижчий коефіцієнт,
-                    тим кращі теплоізоляційні властивості матеріалу.</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати товщину утеплювача?</h3>
+                <p>Товщина = (R вимоги − R існуючої конструкції) × λ утеплювача. Для стіни з вимогою 3,5, існуючою 0,6 і мінеральною ватою λ 0,040 це 116 мм.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому різні частини будинку потребують різної товщини утеплення?</h3>
-                <p>Дах втрачає найбільше тепла (гаряче повітря піднімається вгору), тому потребує найтовщого шару
-                    утеплення. Стіни і підлога мають нижчі вимоги.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке опір теплопередачі R?</h3>
+                <p>Це здатність конструкції опиратися проходженню тепла в м²·К/Вт. Для шару R = товщина (м) / λ, для конструкції R це сума шарів. Чим більше R, тим тепліша конструкція.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна утеплити занадто сильно?</h3>
-                <p>Надмірна товщина утеплення дає дедалі менший приріст ефективності при збільшенні вартості, тому існує
-                    оптимальна товщина, після якої додаткові витрати не окупаються економією на опаленні.</p>
+            <div class="cc-faq-item">
+                <h3>Який опір теплопередачі стін потрібен за ДБН?</h3>
+                <p>За ДБН В.2.6-31:2021 для зовнішніх стін житлових і громадських будівель мінімум 4,0 м²·К/Вт у I температурній зоні й 3,5 у II. Це більше за 3,3 і 2,8 за редакцією 2016 року.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яку температурну зону обрати?</h3>
+                <p>Зона залежить від району будівництва за ДБН. Калькулятор підставляє вимогу залежно від вибраної зони; якщо не впевнені, перевірте зону вашого міста в тексті норм.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому потрібний утеплювач більшої товщини для даху?</h3>
+                <p>Бо норми вимагають для покриттів вищий опір теплопередачі, ніж для стін: суміщене покриття 7,0 / 6,0 проти 4,0 / 3,5 для стін (значення покриттів із вторинних джерел).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке існуюча R і де її взяти?</h3>
+                <p>Опір конструкції без утеплювача: сума d/λ її шарів. Наприклад, шар 0,38 м із λ 0,7 дає R = 0,54. Якщо не знаєте, залиште порожнім: утеплювач тоді покриває всю вимогу, що дає запас.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому фактична товщина більша за потрібну?</h3>
+                <p>Плити продаються з фіксованою товщиною. Калькулятор округлює кількість шарів угору: для потрібних 116 мм плитами по 50 мм це 3 шари, 150 мм.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яку λ брати для утеплювача?</h3>
+                <p>З паспорта вашого продукту. У джерелах для мінвати 0,035–0,045, EPS 0,032–0,040, XPS 0,028–0,035, PIR 0,022–0,028 Вт/(м·К). Калькулятор підставляє середні значення. Розрахункова λ у нормативах трохи вища за декларовану.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки утеплювача потрібно на 100 м² стіни?</h3>
+                <p>При вимозі 3,5 без існуючого опору й мінвати λ 0,040 товщина 14 см, тобто 14,0 м³ на 100 м².</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати упаковки утеплювача?</h3>
+                <p>Кількість плит (площа × шари / площа плити) із запасом ділиться на плит в упаковці й округлюється вгору. Для прикладу 1 236 плит і 12 в упаковці це 103 упаковки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор містки холоду?</h3>
+                <p>Ні. Калькулятор рахує спрощено одним шаром утеплювача. Містки холоду, кріплення й вологість впливають на реальний опір, тому для проєкту потрібен теплотехнічний розрахунок.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна зменшити вимогу для нового будівництва?</h3>
+                <p>За нормами для нового будівництва допускається зниження приведеного опору до 80% від мінімального за умови виконання інших показників енергоефективності. У калькуляторі змініть поле «Вимога R» вручну.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
