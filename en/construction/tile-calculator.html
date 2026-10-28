@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Tile Calculator Online — How Many Tiles You Need | CalcCore</title>
+    <title>Tile Calculator: Quantity, Adhesive and Grout | CalcCore</title>
     <meta name="description"
-        content="Calculate how many tiles you need for flooring or walls based on room area and tile size. Accounts for cutting waste and boxes." />
+        content="Tile calculator for floors and walls: the quantity with the joint and a reserve, packs, adhesive and grout, and the cost from your own prices." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/tile-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/tile-calculator" />
@@ -26,218 +28,662 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Tile Calculator Online — How Many Tiles You Need" />
-    <meta property="og:description" content="Calculate how many tiles you need for flooring or walls based on room area and tile size. Accounts for cutting waste and boxes." />
+    <meta property="og:title" content="Tile Calculator: Quantity, Adhesive and Grout" />
+    <meta property="og:description" content="Tile calculator for floors and walls: the quantity with the joint and a reserve, packs, adhesive and grout, and the cost from your own prices." />
     <meta property="og:url" content="https://calccore.net/en/construction/tile-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tile Calculator Online — How Many Tiles You Need" />
-    <meta name="twitter:description" content="Calculate how many tiles you need for flooring or walls based on room area and tile size. Accounts for cutting waste and boxes." />
+    <meta name="twitter:title" content="Tile Calculator: Quantity, Adhesive and Grout" />
+    <meta name="twitter:description" content="Tile calculator for floors and walls: the quantity with the joint and a reserve, packs, adhesive and grout, and the cost from your own prices." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/til.css?v=20261028til2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/tile-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How much extra tile should I allow for cutting waste?",
-        "acceptedAnswer":{"@type":"Answer","text":"Typically 10% extra is recommended for straight layouts and 15-20% for diagonal or complex patterns with more cut pieces."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why does grout line width matter?",
-        "acceptedAnswer":{"@type":"Answer","text":"Grout lines between tiles take up additional space, so for precise calculations it helps to add a few millimeters to each tile's size for a more realistic count."}
-      },
-      {
-        "@type":"Question",
-        "name":"Should I buy tile from a single production batch?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, tile from different production batches can have slight color shade differences, so it's better to buy the full amount needed from a single batch."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261028til2" defer></script>
+    <script src="/js/tile-calculator.js?v=20261028til2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/tile-calculator#app",
-    "name":"Tile Calculator",
-    "description":"Calculate how many tiles are needed for flooring or wall covering.",
-    "url":"https://calccore.net/en/construction/tile-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/tile-calculator#app",
+  "name": "Tile Calculator",
+  "description": "Calculates tiles for floors and walls: the quantity with the joint and a reserve, packs by pieces or m², adhesive by the trowel notch, grout by a formula and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/tile-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six surfaces: floor, wall or area, openings",
+    "The tile count with the joint and a reserve, packs by pieces or m²",
+    "Adhesive by the trowel notch and grout by a formula (optional)",
+    "Your own prices, none built in; hryvnia, dollar or euro",
+    "A table by surface, CSV for Excel, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/tile-calculator#webpage",
+      "url": "https://calccore.net/en/construction/tile-calculator",
+      "name": "Tile Calculator: Quantity, Adhesive and Grout | CalcCore",
+      "description": "Tile calculator for floors and walls: the quantity with the joint and a reserve, packs, adhesive and grout, and the cost from your own prices.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/tile-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/tile-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-28",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/tile-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Tile Calculator",
+          "item": "https://calccore.net/en/construction/tile-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/tile-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many tiles per 1 m²?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the size and the joint. For a 300×300 mm tile it is 11.11 pcs without a joint and 10.89 pcs with a 3 mm joint, for 600×300 mm 5.56 and 5.47 pcs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate the number of tiles for a room?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The surface area is divided by the area of the tile with the joint, the reserve is added and the number is rounded up. For a 7.68 m² room and a 600×300 mm tile with a 3 mm joint and a 10% reserve that is 47 pcs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why account for the joint width?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The joints increase the area one tile takes. For a 300×300 mm tile with a 3 mm joint, ignoring the joint would overstate the count by 2.0%, and by more for smaller tiles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What reserve of tiles should I allow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You set the reserve (for example 10%); an empty field means 0%. Various sources give about 10% for a straight layout, 15% for a diagonal one and 20% or more for a complex pattern."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the reserve depend on the layout?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A diagonal layout and complex patterns (herringbone) leave more waste because the tiles are cut at the edges more often. Various sources give about 10% for a straight layout, 15% for a diagonal one and 20% or more for a complex pattern. The “Layout” list fills these values into the reserve field, and you set the exact percentage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I count packs of tiles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter how many tiles are in a pack, or how many m². By pieces the tiles are divided by the pieces per pack, by m² the tile area is divided by the m² per pack, both rounded up. For 47 pcs and 8 pcs per pack that is 6 packs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much adhesive per 1 m² of tiles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "According to the Ceresit CM 11 Pro data sheet a 6 mm notch gives about 2.7 kg/m², 8 mm about 3.6 kg/m², 10 mm about 4.2 kg/m². Shops quote higher values, so you can enter your own consumption."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I choose the trowel notch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the Ceresit CM 11 Pro data sheet a 6 mm notch is for tiles up to 15 cm, 8 mm up to 25 cm, 10 mm up to 30 cm. Bigger tiles and an uneven base need a bigger notch, and the bag of your adhesive has the final say."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much grout per 1 m²?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By the formula (L + W) / (L × W) × thickness × joint × density. For a 300×300 mm tile, 8 mm thick, a 2 mm joint that is 0.17 kg/m²; for the example 600×300 mm, 9 mm, a 3 mm joint it is 0.216 kg/m²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I account for windows and doors on walls?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick the type “Wall (L × H)” and enter the openings area in m²: it is subtracted from the wall area."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I count tiles for a floor and walls together?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add every surface separately: the floor, the walls, the backsplash. The calculator sums the tiles, adhesive and grout of all the surfaces for the shared tile size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I buy tiles from one batch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, it is better to buy the whole amount at once: tiles of different batches can differ a little in shade, and the size (calibre) may not match."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a calculator for laminate and linoleum?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, a separate one: the laminate and linoleum calculator."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="til-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ctile">
-            <div class="mcalc__wrap">
+        <section class="til" id="til">
+            <div class="til__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Tile Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate how many tiles you need for flooring or
-                        walls with a waste allowance.
-                    </p>
+                <div class="til__titlebar">
+                    <h1 class="til__h1">Tile Calculator</h1>
+                    <p class="til__p">Work out the tiles for floors and walls with the joint, a reserve and packs, plus adhesive, grout and the cost.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="til__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter dimensions</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="til__card">
+                        <div class="til__sectionTitle">
+                            <h2 class="til__h2">Input data</h2>
+                            <div class="til__dd" id="cur_dd"><button type="button" class="til__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="til__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="til__caret" aria-hidden="true"></span></button><ul class="til__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="til__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="til__ddCode">UAH</span><span class="til__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="til__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="til__ddCode">USD</span><span class="til__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="til__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="til__ddCode">EUR</span><span class="til__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomLength">Room length (m)</label>
-                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 3" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomWidth">Room width (m)</label>
-                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="tileLength">Tile length (cm)</label>
-                                <input class="mcalc__input" id="tileLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 60" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="tileWidth">Tile width (cm)</label>
-                                <input class="mcalc__input" id="tileWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 60" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="wastage">Cutting waste allowance (%)</label>
-                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="tilesPerBox">Tiles per box</label>
-                                <input class="mcalc__input" id="tilesPerBox" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 4" />
-                                <div class="mcalc__hint">Optional, listed on the tile packaging.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="til__block">
+                            <div class="til__miniTitle">Tile</div>
+                            <div class="til__rows">
+                                <div class="til__field">
+                                    <label class="til__label" for="tl">Tile length, mm&nbsp;<span class="til__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="til__input" id="tl" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 600">
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="til__field">
+                                    <label class="til__label" for="tw">Tile width, mm&nbsp;<span class="til__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="til__input" id="tw" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 300">
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="pcs">Pieces per pack <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="pcs" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="pm2">or m² per pack <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="pm2" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,44">
+                                </div>
+                                <div class="til__field til__field--full">
+                                    <span class="til__label" id="lyLbl">Layout</span>
+                                    <input type="hidden" id="layout" value="none">
+                                    <div class="til__sel" id="ly_dd">
+                                        <button type="button" class="til__selBtn" id="ly_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="lyLbl ly_val"><span id="ly_val">Not chosen</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="ly_list" role="listbox" aria-labelledby="lyLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="none" aria-selected="true">Not chosen</li>
+                                            <li role="option" tabindex="-1" data-v="straight" aria-selected="false">Straight — 10% reserve</li>
+                                            <li role="option" tabindex="-1" data-v="offset" aria-selected="false">Offset (running bond) — 10% reserve</li>
+                                            <li role="option" tabindex="-1" data-v="diag" aria-selected="false">Diagonal — 15% reserve</li>
+                                            <li role="option" tabindex="-1" data-v="complex" aria-selected="false">Herringbone, complex pattern — 20% reserve</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="joint">Joint, mm</label>
+                                    <input class="til__input" id="joint" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="til__hint">Leave empty for no joint.</div>
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="reserve">Reserve, %</label>
+                                    <input class="til__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10"><div class="til__hint">For trimming and breakage.</div>
+                                </div>
                             </div>
 
+                            <div class="til__miniTitle til__mt12">Surfaces</div>
+                            <div class="til__el" id="sl1">
+                                <div class="til__elHead"><span>Surface 1</span><span class="til__elVol" id="sv1">—</span><button type="button" class="til__elRm" id="sl1rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s1tLbl">Type</span>
+                                    <input type="hidden" id="s1_type" value="fl">
+                                    <div class="til__sel" id="s1t_dd">
+                                        <button type="button" class="til__selBtn" id="s1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s1tLbl s1t_val"><span id="s1t_val">Floor (L × W)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s1t_list" role="listbox" aria-labelledby="s1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Floor (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s1_p1"><span id="s1_p1_l">Length, m</span></label>
+                                    <input class="til__input" id="s1_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s1_p2"><span id="s1_p2_l">Width, m</span></label>
+                                    <input class="til__input" id="s1_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s1_op">Openings, m² <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="s1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl2" hidden>
+                                <div class="til__elHead"><span>Surface 2</span><span class="til__elVol" id="sv2">—</span><button type="button" class="til__elRm" id="sl2rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s2tLbl">Type</span>
+                                    <input type="hidden" id="s2_type" value="fl">
+                                    <div class="til__sel" id="s2t_dd">
+                                        <button type="button" class="til__selBtn" id="s2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s2tLbl s2t_val"><span id="s2t_val">Floor (L × W)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s2t_list" role="listbox" aria-labelledby="s2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Floor (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s2_p1"><span id="s2_p1_l">Length, m</span></label>
+                                    <input class="til__input" id="s2_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s2_p2"><span id="s2_p2_l">Width, m</span></label>
+                                    <input class="til__input" id="s2_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s2_op">Openings, m² <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="s2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl3" hidden>
+                                <div class="til__elHead"><span>Surface 3</span><span class="til__elVol" id="sv3">—</span><button type="button" class="til__elRm" id="sl3rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s3tLbl">Type</span>
+                                    <input type="hidden" id="s3_type" value="fl">
+                                    <div class="til__sel" id="s3t_dd">
+                                        <button type="button" class="til__selBtn" id="s3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s3tLbl s3t_val"><span id="s3t_val">Floor (L × W)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s3t_list" role="listbox" aria-labelledby="s3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Floor (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s3_p1"><span id="s3_p1_l">Length, m</span></label>
+                                    <input class="til__input" id="s3_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s3_p2"><span id="s3_p2_l">Width, m</span></label>
+                                    <input class="til__input" id="s3_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s3_op">Openings, m² <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="s3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl4" hidden>
+                                <div class="til__elHead"><span>Surface 4</span><span class="til__elVol" id="sv4">—</span><button type="button" class="til__elRm" id="sl4rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s4tLbl">Type</span>
+                                    <input type="hidden" id="s4_type" value="fl">
+                                    <div class="til__sel" id="s4t_dd">
+                                        <button type="button" class="til__selBtn" id="s4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s4tLbl s4t_val"><span id="s4t_val">Floor (L × W)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s4t_list" role="listbox" aria-labelledby="s4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Floor (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s4_p1"><span id="s4_p1_l">Length, m</span></label>
+                                    <input class="til__input" id="s4_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s4_p2"><span id="s4_p2_l">Width, m</span></label>
+                                    <input class="til__input" id="s4_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s4_op">Openings, m² <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="s4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl5" hidden>
+                                <div class="til__elHead"><span>Surface 5</span><span class="til__elVol" id="sv5">—</span><button type="button" class="til__elRm" id="sl5rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s5tLbl">Type</span>
+                                    <input type="hidden" id="s5_type" value="fl">
+                                    <div class="til__sel" id="s5t_dd">
+                                        <button type="button" class="til__selBtn" id="s5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s5tLbl s5t_val"><span id="s5t_val">Floor (L × W)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s5t_list" role="listbox" aria-labelledby="s5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Floor (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s5_p1"><span id="s5_p1_l">Length, m</span></label>
+                                    <input class="til__input" id="s5_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s5_p2"><span id="s5_p2_l">Width, m</span></label>
+                                    <input class="til__input" id="s5_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s5_op">Openings, m² <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="s5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl6" hidden>
+                                <div class="til__elHead"><span>Surface 6</span><span class="til__elVol" id="sv6">—</span><button type="button" class="til__elRm" id="sl6rm" aria-label="Remove the surface" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s6tLbl">Type</span>
+                                    <input type="hidden" id="s6_type" value="fl">
+                                    <div class="til__sel" id="s6t_dd">
+                                        <button type="button" class="til__selBtn" id="s6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s6tLbl s6t_val"><span id="s6t_val">Floor (L × W)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s6t_list" role="listbox" aria-labelledby="s6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Floor (L × W)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Wall (L × H)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Area</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s6_p1"><span id="s6_p1_l">Length, m</span></label>
+                                    <input class="til__input" id="s6_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s6_p2"><span id="s6_p2_l">Width, m</span></label>
+                                    <input class="til__input" id="s6_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s6_op">Openings, m² <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="s6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="til__add" id="addSl">+ Add a surface</button>
+
+                            <details class="til__details til__mt12" id="extraDet">
+                                <summary>Adhesive and grout <span class="til__hint">(optional)</span></summary>
+                                <div class="til__hint til__hint--mb">Counted for the net area. The adhesive consumption by trowel notch is from the Ceresit CM 11 Pro data sheet, other brands differ.</div>
+                                <div class="til__rows">
+                                    <div class="til__field til__field--full">
+                                    <span class="til__label" id="anLbl">Notched trowel</span>
+                                    <input type="hidden" id="anotch" value="8">
+                                    <div class="til__sel" id="an_dd">
+                                        <button type="button" class="til__selBtn" id="an_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="anLbl an_val"><span id="an_val">8 mm — 3.6 kg/m² (up to 25 cm)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="an_list" role="listbox" aria-labelledby="anLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">6 mm — 2.7 kg/m² (tiles up to 15 cm)</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">8 mm — 3.6 kg/m² (up to 25 cm)</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 mm — 4.2 kg/m² (up to 30 cm)</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Custom consumption</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field til__field--full" id="acCustom" hidden>
+                                        <div class="til__field til__field--full">
+                                    <label class="til__label" for="acons">Adhesive consumption, kg/m²&nbsp;<span class="til__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="til__input" id="acons" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="abag">Adhesive bag, kg</label>
+                                    <input class="til__input" id="abag" type="text" inputmode="decimal" autocomplete="off" placeholder="25" value="25">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="th">Tile thickness, mm <span class="til__hint">(optional)</span></label>
+                                    <input class="til__input" id="th" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 9"><div class="til__hint">For the grout; leave empty to skip the grout.</div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="gd">Grout density, kg/dm³</label>
+                                    <input class="til__input" id="gd" type="text" inputmode="decimal" autocomplete="off" placeholder="1,6" value="1.6">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="gbag">Grout bag, kg</label>
+                                    <input class="til__input" id="gbag" type="text" inputmode="decimal" autocomplete="off" placeholder="2" value="2">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="til__details til__mt12" id="priceDet">
+                                <summary>Prices and delivery <span class="til__hint">(optional)</span></summary>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <label class="til__label" for="pTile">Tile price, per m², <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pTile" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="pAd">Adhesive bag price, <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pAd" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="pGr">Grout bag price, <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pGr" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="til__actions til__mt12">
+                            <button class="til__btn til__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="til__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="til__card">
+                        <div class="til__sectionTitle">
+                            <h2 class="til__h2">Result</h2>
+                            <span class="til__badge">🔲</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/flooring-calculator">Laminate and Linoleum Calculator</a>
-                            <a href="/en/construction/paint-calculator">Paint Calculator</a>
+                        <div class="til__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="til__actions til__mt12">
+                            <button class="til__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="til__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="til__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="til__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks til__mt12"><a class="til__link" href="/en/construction/flooring-calculator">Laminate and linoleum calculator →</a> <a class="til__link" href="/en/construction/cost-calculator">Construction cost calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="til__card til__schedule" id="schedule" hidden>
+                    <div class="til__schedHead">
+                        <h2 class="til__h2">Summary</h2>
+                        <div class="til__tools">
+                            <button type="button" class="til__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="til__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="til__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How to calculate the number of tiles</h2>
-            <p>
-                Basic formula: room area divided by the area of a single tile gives the theoretical
-                tile count. A waste allowance is added to this number since tiles need cutting at
-                room edges or around obstacles (pipes, door openings), and part of the material
-                becomes waste.
-            </p>
-
-            <h2>How much extra to allow</h2>
-            <ul>
-                <li><b>Straight layout (10%):</b> standard allowance for a simple straight pattern along walls.</li>
-                <li><b>Diagonal layout (15%):</b> more waste due to angled cuts.</li>
-                <li><b>Complex pattern or mosaic (20%+):</b> the most waste due to non-standard shapes and cuts.</li>
-                <li><b>Irregularly shaped rooms:</b> alcoves, protrusions, or many corners also increase the needed
-                    allowance.</li>
-            </ul>
-
-            <h2>Why box count matters</h2>
-            <p>
-                Tiles are usually sold in boxes with a fixed number of pieces (e.g., 4 or 8 tiles per
-                box). Rounding the calculated tile count up to full boxes helps plan the purchase
-                precisely, without needing to buy more mid-project.
-            </p>
-
-            <p class="m-hintSmall">
-                It's recommended to buy all the tile you need from a single production batch, since
-                different batches can have slight color shade differences that become noticeable when
-                laid side by side.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/flooring-calculator"><b>Laminate and linoleum calculator</b><span>Packs, roll, underlay and skirting for several rooms.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your prices.</span></a>
+                <a class="cc-related-card" href="/en/construction/plaster-calculator"><b>Plaster calculator</b><span>Bags of a mix or cement and sand for several surfaces.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the tile calculator counts</h2>
+            <p>The calculator works out the <b>number of tiles</b> for floors and walls (up to six surfaces): each has a length and a width or height, or a ready area, plus the openings area. The tile size, the joint and the reserve are shared. The result is the tiles with a reserve, packs, the area bought and what is left over and, if you wish, adhesive, grout and the cost from your prices. There are no built-in prices.</p>
+
+            <h2>How the number of tiles is counted</h2>
+            <p>The area is divided by the area of one tile together with the joint: (length + joint) × (width + joint), all in metres. The reserve is added and the number is rounded up. For a 300×300 mm tile that is 11.11 pcs per 1 m² without a joint and 10.89 pcs with a 3 mm joint, 2.0% less, so it is worth entering the joint. For a 600×300 mm tile it is 5.56 pcs per 1 m² without a joint and 5.47 pcs with a 3 mm joint.</p>
+            <p>Packs are counted by pieces (the tiles divided by the pieces per pack, rounded up) or by m² (the tile area divided by the m² per pack). The reserve for cutting depends on the layout: you set it (for example 10%), and a diagonal or complex layout needs more than a straight one. The “Layout” list only fills a suggestion into the reserve field (straight and offset 10%, diagonal 15%, herringbone 20%), which you can change.</p>
+
+            <h2>Adhesive and grout</h2>
+            <p>The adhesive consumption depends on the notch of the trowel. According to the Ceresit CM 11 Pro data sheet: a 6 mm notch ≈ 2.7 kg/m² (tiles up to 15 cm), 8 mm ≈ 3.6 kg/m² (up to 25 cm), 10 mm ≈ 4.2 kg/m² (up to 30 cm). The real consumption depends on the evenness of the base and the brand, so you can enter your own. The adhesive is counted for the net area and the bags are rounded up.</p>
+            <p>The grout is counted by the formula: (length + width) / (length × width) × tile thickness × joint width × density (dimensions in mm, density in kg/dm³, the result in kg/m²). For a 300×300 mm tile, 8 mm thick, a 2 mm joint and a density of 1.6 that is 0.17 kg/m². The density of a cement grout is 1.6–1.72 in the sources and can be changed.</p>
+
+            <h2>Worked example</h2>
+            <p>A floor of 3.2 × 2.4 m (7.68 m²), a 600×300 mm tile, a 3 mm joint and a 10% reserve: 42.0 tiles without the reserve, 47 pcs with it. At 8 pcs per pack that is 6 packs (48 pcs, 8.64 m²), 1 pc left over. Adhesive with an 8 mm notch: 27.6 kg, which is 2 bags of 25 kg. Grout for a 9 mm tile: 1.66 kg, 1 bag of 2 kg. At 650 ₴ per m², 380 ₴ per bag of adhesive, 150 ₴ per bag of grout and 300 ₴ delivery the cost is 6,826 ₴.</p>
+            <p class="til-mini">The calculator gives an approximate estimate. The real consumption depends on the layout, the cutting and the evenness of the base.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How much extra tile should I allow for cutting waste?</h3>
-                <p>Typically 10% extra is recommended for straight layouts and 15-20% for diagonal or complex patterns
-                    with more cut pieces.</p>
+            <div class="cc-faq-item">
+                <h3>How many tiles per 1 m²?</h3>
+                <p>It depends on the size and the joint. For a 300×300 mm tile it is 11.11 pcs without a joint and 10.89 pcs with a 3 mm joint, for 600×300 mm 5.56 and 5.47 pcs.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why does grout line width matter?</h3>
-                <p>Grout lines between tiles take up additional space, so for precise calculations it helps to add a few
-                    millimeters to each tile's size for a more realistic count.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the number of tiles for a room?</h3>
+                <p>The surface area is divided by the area of the tile with the joint, the reserve is added and the number is rounded up. For a 7.68 m² room and a 600×300 mm tile with a 3 mm joint and a 10% reserve that is 47 pcs.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Should I buy tile from a single production batch?</h3>
-                <p>Yes, tile from different production batches can have slight color shade differences, so it's better
-                    to buy the full amount needed from a single batch.</p>
+            <div class="cc-faq-item">
+                <h3>Why account for the joint width?</h3>
+                <p>The joints increase the area one tile takes. For a 300×300 mm tile with a 3 mm joint, ignoring the joint would overstate the count by 2.0%, and by more for smaller tiles.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What reserve of tiles should I allow?</h3>
+                <p>You set the reserve (for example 10%); an empty field means 0%. Various sources give about 10% for a straight layout, 15% for a diagonal one and 20% or more for a complex pattern.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does the reserve depend on the layout?</h3>
+                <p>A diagonal layout and complex patterns (herringbone) leave more waste because the tiles are cut at the edges more often. Various sources give about 10% for a straight layout, 15% for a diagonal one and 20% or more for a complex pattern. The “Layout” list fills these values into the reserve field, and you set the exact percentage.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I count packs of tiles?</h3>
+                <p>Enter how many tiles are in a pack, or how many m². By pieces the tiles are divided by the pieces per pack, by m² the tile area is divided by the m² per pack, both rounded up. For 47 pcs and 8 pcs per pack that is 6 packs.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much adhesive per 1 m² of tiles?</h3>
+                <p>According to the Ceresit CM 11 Pro data sheet a 6 mm notch gives about 2.7 kg/m², 8 mm about 3.6 kg/m², 10 mm about 4.2 kg/m². Shops quote higher values, so you can enter your own consumption.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I choose the trowel notch?</h3>
+                <p>In the Ceresit CM 11 Pro data sheet a 6 mm notch is for tiles up to 15 cm, 8 mm up to 25 cm, 10 mm up to 30 cm. Bigger tiles and an uneven base need a bigger notch, and the bag of your adhesive has the final say.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much grout per 1 m²?</h3>
+                <p>By the formula (L + W) / (L × W) × thickness × joint × density. For a 300×300 mm tile, 8 mm thick, a 2 mm joint that is 0.17 kg/m²; for the example 600×300 mm, 9 mm, a 3 mm joint it is 0.216 kg/m².</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I account for windows and doors on walls?</h3>
+                <p>Pick the type “Wall (L × H)” and enter the openings area in m²: it is subtracted from the wall area.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I count tiles for a floor and walls together?</h3>
+                <p>Add every surface separately: the floor, the walls, the backsplash. The calculator sums the tiles, adhesive and grout of all the surfaces for the shared tile size.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Should I buy tiles from one batch?</h3>
+                <p>Yes, it is better to buy the whole amount at once: tiles of different batches can differ a little in shade, and the size (calibre) may not match.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is there a calculator for laminate and linoleum?</h3>
+                <p>Yes, a separate one: the <a href="/en/construction/flooring-calculator">laminate and linoleum calculator</a>.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

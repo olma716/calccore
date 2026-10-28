@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор плитки: скільки потрібно для облицювання | CalcCore</title>
+    <title>Калькулятор плитки: кількість, клей і затирка | CalcCore</title>
     <meta name="description"
-        content="Розрахунок кількості плитки для підлоги чи стін за площею приміщення та розміром плитки. Врахування запасу на підрізку та упаковок." />
+        content="Калькулятор плитки для підлоги й стін: кількість із урахуванням шва та запасу, упаковки, клей і затирка, вартість за вашими цінами." />
 
     <link rel="canonical" href="https://calccore.net/construction/tile-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/tile-calculator" />
@@ -26,219 +28,662 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор плитки: скільки потрібно для облицювання" />
-    <meta property="og:description" content="Розрахунок кількості плитки для підлоги чи стін за площею приміщення та розміром плитки. Врахування запасу на підрізку та упаковок." />
+    <meta property="og:title" content="Калькулятор плитки: кількість, клей і затирка" />
+    <meta property="og:description" content="Калькулятор плитки для підлоги й стін: кількість із урахуванням шва та запасу, упаковки, клей і затирка, вартість за вашими цінами." />
     <meta property="og:url" content="https://calccore.net/construction/tile-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор плитки: скільки потрібно для облицювання" />
-    <meta name="twitter:description" content="Розрахунок кількості плитки для підлоги чи стін за площею приміщення та розміром плитки. Врахування запасу на підрізку та упаковок." />
+    <meta name="twitter:title" content="Калькулятор плитки: кількість, клей і затирка" />
+    <meta name="twitter:description" content="Калькулятор плитки для підлоги й стін: кількість із урахуванням шва та запасу, упаковки, клей і затирка, вартість за вашими цінами." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/til.css?v=20261028til2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/tile-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Скільки запасу плитки потрібно закладати на підрізку?",
-        "acceptedAnswer":{"@type":"Answer","text":"Зазвичай рекомендується 10% запасу для прямого укладання і 15-20% для діагонального чи складного малюнка, де більше обрізків."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому потрібно враховувати ширину швів?",
-        "acceptedAnswer":{"@type":"Answer","text":"Шви між плитками займають додаткову площу, тому при точних розрахунках варто додавати кілька міліметрів до розміру кожної плитки для реалістичнішого підрахунку."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи варто купувати плитку з одної партії?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, плитка з різних партій виробництва може мати незначні відмінності у відтінку кольору, тому краще купувати весь потрібний обсяг одразу з однієї партії."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261028til2" defer></script>
+    <script src="/js/tile-calculator.js?v=20261028til2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/tile-calculator#app",
-    "name":"Tile Calculator",
-    "description":"Розрахунок кількості плитки для облицювання підлоги чи стін.",
-    "url":"https://calccore.net/construction/tile-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/tile-calculator#app",
+  "name": "Калькулятор плитки",
+  "description": "Розрахунок плитки для підлоги й стін: кількість з урахуванням шва та запасу, упаковки за штуками чи м², клей за розміром зубця, затирка за формулою та вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/tile-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести поверхонь: підлога, стіна чи площа, отвори",
+    "Кількість плиток з урахуванням шва й запасу, упаковки за штуками або м²",
+    "Клей за розміром зубця шпателя й затирка за формулою (необов'язково)",
+    "Ваші ціни без вбудованих; гривня, долар або євро",
+    "Таблиця по поверхнях, CSV для Excel, посилання на розрахунок"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/tile-calculator#webpage",
+      "url": "https://calccore.net/construction/tile-calculator",
+      "name": "Калькулятор плитки: кількість, клей і затирка | CalcCore",
+      "description": "Калькулятор плитки для підлоги й стін: кількість із урахуванням шва та запасу, упаковки, клей і затирка, вартість за вашими цінами.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/tile-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/tile-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-28",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/tile-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор плитки",
+          "item": "https://calccore.net/construction/tile-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/tile-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скільки плитки потрібно на 1 м²?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Залежить від розміру й шва. Для плитки 300×300 мм це 11,11 шт без шва і 10,89 шт зі швом 3 мм, для 600×300 мм 5,56 і 5,47 шт."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розрахувати кількість плитки на кімнату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа поверхні ділиться на площу плитки разом зі швом, додається запас і число округлюється вгору. Для кімнати 7,68 м² і плитки 600×300 мм зі швом 3 мм із запасом 10% це 47 шт."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому треба враховувати ширину шва?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Шви збільшують площу, яку займає одна плитка. Для плитки 300×300 мм зі швом 3 мм без урахування шва кількість була б завищена на 2,0%, а для менших плиток різниця більша."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який запас плитки закласти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запас задаєте ви (наприклад, 10%); порожнє поле означає 0%. У різних джерелах для прямої розкладки називають близько 10%, для діагональної 15%, для складного малюнка 20% і більше."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як залежить запас від способу укладання?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "При діагональній укладці й складних малюнках (ялинка) відходів більше, бо плитку частіше підрізають по краях. У різних джерелах для прямої укладки називають близько 10%, для діагональної 15%, для складного малюнка 20% і більше. Список «Укладання» підставляє ці значення в поле запасу, а точний відсоток задаєте ви."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати упаковки плитки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вкажіть, скільки плиток в упаковці, або скільки м² в ній. За штуками кількість плиток ділиться на штуки в упаковці, за м² площа плиток ділиться на м² в упаковці, обидва рази вгору. Для 47 шт і 8 шт в упаковці це 6 упаковок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки клею потрібно на 1 м² плитки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За технічним описом Ceresit CM 11 Pro, зубець 6 мм дає близько 2,7 кг/м², 8 мм близько 3,6 кг/м², 10 мм близько 4,2 кг/м². Магазини називають вищі значення, тому витрату можна задати свою."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як вибрати зубець шпателя?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У технічному описі Ceresit CM 11 Pro зубець 6 мм вказано для плитки до 15 см, 8 мм до 25 см, 10 мм до 30 см. Для більших плиток і нерівної основи потрібен більший зубець, остаточно орієнтуйтеся на мішок вашого клею."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки затирки потрібно на 1 м²?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За формулою (L + W) / (L × W) × товщина × шов × густина. Для плитки 300×300 мм, товщини 8 мм, шва 2 мм це 0,17 кг/м²; для прикладу 600×300 мм, 9 мм, шов 3 мм це 0,216 кг/м²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як врахувати вікна й двері на стінах?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть тип «Стіна (Д × В)» і вкажіть площу отворів у м²: вона віднімається від площі стіни."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати плитку на підлогу й стіни разом?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Додайте кожну поверхню окремо: підлогу, стіни, фартух. Калькулятор підсумує плитки, клей і затирку всіх поверхонь за спільним розміром плитки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи потрібно купувати плитку з однієї партії?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, краще купувати весь обсяг одразу: плитка різних партій може трохи відрізнятися відтінком, а розмір (калібр) може не збігатися."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є калькулятор для ламінату й лінолеуму?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, окремий: калькулятор ламінату та лінолеуму."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="til-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ctile">
-            <div class="mcalc__wrap">
+        <section class="til" id="til">
+            <div class="til__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор плитки</h1>
-                    <p class="mcalc__p">
-                        Розрахуй, скільки плитки потрібно для облицювання
-                        підлоги чи стін з урахуванням запасу.
-                    </p>
+                <div class="til__titlebar">
+                    <h1 class="til__h1">Калькулятор плитки</h1>
+                    <p class="til__p">Порахуйте плитку для підлоги й стін з урахуванням шва, запасу й упаковок, а також клей, затирку та вартість.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="til__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи розміри</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="til__card">
+                        <div class="til__sectionTitle">
+                            <h2 class="til__h2">Дані для розрахунку</h2>
+                            <div class="til__dd" id="cur_dd"><button type="button" class="til__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="til__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="til__caret" aria-hidden="true"></span></button><ul class="til__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="til__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="til__ddCode">UAH</span><span class="til__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="til__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="til__ddCode">USD</span><span class="til__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="til__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="til__ddCode">EUR</span><span class="til__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomLength">Довжина приміщення (м)</label>
-                                <input class="mcalc__input" id="roomLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 3" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="roomWidth">Ширина приміщення (м)</label>
-                                <input class="mcalc__input" id="roomWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 2.5" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="tileLength">Довжина плитки (см)</label>
-                                <input class="mcalc__input" id="tileLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 60" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="tileWidth">Ширина плитки (см)</label>
-                                <input class="mcalc__input" id="tileWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 60" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="wastage">Запас на підрізку (%)</label>
-                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
-                                    placeholder="напр.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="tilesPerBox">Плиток в упаковці</label>
-                                <input class="mcalc__input" id="tilesPerBox" type="text" inputmode="numeric"
-                                    placeholder="напр.: 4" />
-                                <div class="mcalc__hint">Опційно, вказано на упаковці плитки.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="til__block">
+                            <div class="til__miniTitle">Плитка</div>
+                            <div class="til__rows">
+                                <div class="til__field">
+                                    <label class="til__label" for="tl">Довжина плитки, мм&nbsp;<span class="til__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="til__input" id="tl" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 600">
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="til__field">
+                                    <label class="til__label" for="tw">Ширина плитки, мм&nbsp;<span class="til__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="til__input" id="tw" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 300">
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="pcs">Штук в упаковці <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="pcs" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="pm2">або м² в упаковці <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="pm2" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,44">
+                                </div>
+                                <div class="til__field til__field--full">
+                                    <span class="til__label" id="lyLbl">Укладання</span>
+                                    <input type="hidden" id="layout" value="none">
+                                    <div class="til__sel" id="ly_dd">
+                                        <button type="button" class="til__selBtn" id="ly_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="lyLbl ly_val"><span id="ly_val">Не обрано</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="ly_list" role="listbox" aria-labelledby="lyLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="none" aria-selected="true">Не обрано</li>
+                                            <li role="option" tabindex="-1" data-v="straight" aria-selected="false">Пряма — запас 10%</li>
+                                            <li role="option" tabindex="-1" data-v="offset" aria-selected="false">Зі зсувом (цеглою) — запас 10%</li>
+                                            <li role="option" tabindex="-1" data-v="diag" aria-selected="false">Діагональна — запас 15%</li>
+                                            <li role="option" tabindex="-1" data-v="complex" aria-selected="false">Ялинка, складний малюнок — запас 20%</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="joint">Шов, мм</label>
+                                    <input class="til__input" id="joint" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="til__hint">Порожнє поле — без шва.</div>
+                                </div>
+                                <div class="til__field">
+                                    <label class="til__label" for="reserve">Запас, %</label>
+                                    <input class="til__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10"><div class="til__hint">Для підрізки й бою.</div>
+                                </div>
                             </div>
 
+                            <div class="til__miniTitle til__mt12">Поверхні</div>
+                            <div class="til__el" id="sl1">
+                                <div class="til__elHead"><span>Поверхня 1</span><span class="til__elVol" id="sv1">—</span><button type="button" class="til__elRm" id="sl1rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s1tLbl">Тип</span>
+                                    <input type="hidden" id="s1_type" value="fl">
+                                    <div class="til__sel" id="s1t_dd">
+                                        <button type="button" class="til__selBtn" id="s1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s1tLbl s1t_val"><span id="s1t_val">Підлога (Д × Ш)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s1t_list" role="listbox" aria-labelledby="s1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Підлога (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s1_p1"><span id="s1_p1_l">Довжина, м</span></label>
+                                    <input class="til__input" id="s1_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s1_p2"><span id="s1_p2_l">Ширина, м</span></label>
+                                    <input class="til__input" id="s1_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s1_op">Отвори, м² <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="s1_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl2" hidden>
+                                <div class="til__elHead"><span>Поверхня 2</span><span class="til__elVol" id="sv2">—</span><button type="button" class="til__elRm" id="sl2rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s2tLbl">Тип</span>
+                                    <input type="hidden" id="s2_type" value="fl">
+                                    <div class="til__sel" id="s2t_dd">
+                                        <button type="button" class="til__selBtn" id="s2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s2tLbl s2t_val"><span id="s2t_val">Підлога (Д × Ш)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s2t_list" role="listbox" aria-labelledby="s2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Підлога (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s2_p1"><span id="s2_p1_l">Довжина, м</span></label>
+                                    <input class="til__input" id="s2_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s2_p2"><span id="s2_p2_l">Ширина, м</span></label>
+                                    <input class="til__input" id="s2_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s2_op">Отвори, м² <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="s2_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl3" hidden>
+                                <div class="til__elHead"><span>Поверхня 3</span><span class="til__elVol" id="sv3">—</span><button type="button" class="til__elRm" id="sl3rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s3tLbl">Тип</span>
+                                    <input type="hidden" id="s3_type" value="fl">
+                                    <div class="til__sel" id="s3t_dd">
+                                        <button type="button" class="til__selBtn" id="s3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s3tLbl s3t_val"><span id="s3t_val">Підлога (Д × Ш)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s3t_list" role="listbox" aria-labelledby="s3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Підлога (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s3_p1"><span id="s3_p1_l">Довжина, м</span></label>
+                                    <input class="til__input" id="s3_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s3_p2"><span id="s3_p2_l">Ширина, м</span></label>
+                                    <input class="til__input" id="s3_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s3_op">Отвори, м² <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="s3_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl4" hidden>
+                                <div class="til__elHead"><span>Поверхня 4</span><span class="til__elVol" id="sv4">—</span><button type="button" class="til__elRm" id="sl4rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s4tLbl">Тип</span>
+                                    <input type="hidden" id="s4_type" value="fl">
+                                    <div class="til__sel" id="s4t_dd">
+                                        <button type="button" class="til__selBtn" id="s4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s4tLbl s4t_val"><span id="s4t_val">Підлога (Д × Ш)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s4t_list" role="listbox" aria-labelledby="s4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Підлога (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s4_p1"><span id="s4_p1_l">Довжина, м</span></label>
+                                    <input class="til__input" id="s4_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s4_p2"><span id="s4_p2_l">Ширина, м</span></label>
+                                    <input class="til__input" id="s4_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s4_op">Отвори, м² <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="s4_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl5" hidden>
+                                <div class="til__elHead"><span>Поверхня 5</span><span class="til__elVol" id="sv5">—</span><button type="button" class="til__elRm" id="sl5rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s5tLbl">Тип</span>
+                                    <input type="hidden" id="s5_type" value="fl">
+                                    <div class="til__sel" id="s5t_dd">
+                                        <button type="button" class="til__selBtn" id="s5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s5tLbl s5t_val"><span id="s5t_val">Підлога (Д × Ш)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s5t_list" role="listbox" aria-labelledby="s5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Підлога (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s5_p1"><span id="s5_p1_l">Довжина, м</span></label>
+                                    <input class="til__input" id="s5_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s5_p2"><span id="s5_p2_l">Ширина, м</span></label>
+                                    <input class="til__input" id="s5_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s5_op">Отвори, м² <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="s5_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="til__el" id="sl6" hidden>
+                                <div class="til__elHead"><span>Поверхня 6</span><span class="til__elVol" id="sv6">—</span><button type="button" class="til__elRm" id="sl6rm" aria-label="Видалити поверхню" hidden>×</button></div>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <span class="til__label" id="s6tLbl">Тип</span>
+                                    <input type="hidden" id="s6_type" value="fl">
+                                    <div class="til__sel" id="s6t_dd">
+                                        <button type="button" class="til__selBtn" id="s6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="s6tLbl s6t_val"><span id="s6t_val">Підлога (Д × Ш)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="s6t_list" role="listbox" aria-labelledby="s6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fl" aria-selected="true">Підлога (Д × Ш)</li>
+                                            <li role="option" tabindex="-1" data-v="wl" aria-selected="false">Стіна (Д × В)</li>
+                                            <li role="option" tabindex="-1" data-v="area" aria-selected="false">Площа</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s6_p1"><span id="s6_p1_l">Довжина, м</span></label>
+                                    <input class="til__input" id="s6_p1" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s6_p2"><span id="s6_p2_l">Ширина, м</span></label>
+                                    <input class="til__input" id="s6_p2" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="s6_op">Отвори, м² <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="s6_op" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="til__add" id="addSl">+ Додати поверхню</button>
+
+                            <details class="til__details til__mt12" id="extraDet">
+                                <summary>Клей і затирка <span class="til__hint">(необовʼязково)</span></summary>
+                                <div class="til__hint til__hint--mb">Рахуються за чистою площею. Витрата клею за розміром зубця з технічного опису Ceresit CM 11 Pro, інші марки відрізняються.</div>
+                                <div class="til__rows">
+                                    <div class="til__field til__field--full">
+                                    <span class="til__label" id="anLbl">Зубчастий шпатель</span>
+                                    <input type="hidden" id="anotch" value="8">
+                                    <div class="til__sel" id="an_dd">
+                                        <button type="button" class="til__selBtn" id="an_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="anLbl an_val"><span id="an_val">8 мм — 3,6 кг/м² (до 25 см)</span><span class="til__caret" aria-hidden="true"></span></button>
+                                        <ul class="til__selList" id="an_list" role="listbox" aria-labelledby="anLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">6 мм — 2,7 кг/м² (плитка до 15 см)</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">8 мм — 3,6 кг/м² (до 25 см)</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 мм — 4,2 кг/м² (до 30 см)</li>
+                                            <li role="option" tabindex="-1" data-v="custom" aria-selected="false">Своя витрата</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="til__field til__field--full" id="acCustom" hidden>
+                                        <div class="til__field til__field--full">
+                                    <label class="til__label" for="acons">Витрата клею, кг/м²&nbsp;<span class="til__req" title="Обовʼязкове поле" aria-label="Обовʼязкове поле">*</span></label>
+                                    <input class="til__input" id="acons" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="abag">Мішок клею, кг</label>
+                                    <input class="til__input" id="abag" type="text" inputmode="decimal" autocomplete="off" placeholder="25" value="25">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="th">Товщина плитки, мм <span class="til__hint">(необовʼязково)</span></label>
+                                    <input class="til__input" id="th" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 9"><div class="til__hint">Для затирки; порожнє поле — затирку не рахуємо.</div>
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="gd">Густина затирки, кг/дм³</label>
+                                    <input class="til__input" id="gd" type="text" inputmode="decimal" autocomplete="off" placeholder="1,6" value="1.6">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="gbag">Мішок затирки, кг</label>
+                                    <input class="til__input" id="gbag" type="text" inputmode="decimal" autocomplete="off" placeholder="2" value="2">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="til__details til__mt12" id="priceDet">
+                                <summary>Ціни й доставка <span class="til__hint">(необовʼязково)</span></summary>
+                                <div class="til__rows">
+                                    <div class="til__field">
+                                    <label class="til__label" for="pTile">Ціна плитки, за м², <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pTile" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="pAd">Ціна мішка клею, <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pAd" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="pGr">Ціна мішка затирки, <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pGr" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="til__field">
+                                    <label class="til__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="til__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="til__actions til__mt12">
+                            <button class="til__btn til__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="til__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="til__card">
+                        <div class="til__sectionTitle">
+                            <h2 class="til__h2">Результат</h2>
+                            <span class="til__badge">🔲</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/flooring-calculator">Калькулятор ламінату та лінолеуму</a>
-                            <a href="/construction/paint-calculator">Калькулятор фарби</a>
+                        <div class="til__result" id="result">Вкажіть дані — результат зʼявиться тут.</div>
+                        <div class="til__actions til__mt12">
+                            <button class="til__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="til__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="til__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="til__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks til__mt12"><a class="til__link" href="/construction/flooring-calculator">Калькулятор ламінату та лінолеуму →</a> <a class="til__link" href="/construction/cost-calculator">Калькулятор вартості будівництва →</a></div>
                     </div>
+                </div>
+
+                <div class="til__card til__schedule" id="schedule" hidden>
+                    <div class="til__schedHead">
+                        <h2 class="til__h2">Підсумок</h2>
+                        <div class="til__tools">
+                            <button type="button" class="til__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="til__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="til__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як розрахувати кількість плитки</h2>
-            <p>
-                Базова формула: площа приміщення поділена на площу однієї плитки дає теоретичну
-                кількість плиток. До цього числа додається запас на підрізку, оскільки на краях
-                приміщення чи навколо перешкод (труби, дверні прорізи) плитку доводиться різати,
-                і частина матеріалу йде у відходи.
-            </p>
-
-            <h2>Скільки запасу закладати</h2>
-            <ul>
-                <li><b>Пряме укладання (10%):</b> стандартний запас для простого прямого малюнка вздовж стін.</li>
-                <li><b>Діагональне укладання (15%):</b> більше обрізків через кутові з'єднання.</li>
-                <li><b>Складний малюнок чи мозаїка (20%+):</b> найбільше відходів через нестандартні форми та підрізки.
-                </li>
-                <li><b>Приміщення складної форми:</b> ніші, виступи чи багато кутів також збільшують потрібний запас.
-                </li>
-            </ul>
-
-            <h2>Навіщо враховувати упаковки</h2>
-            <p>
-                Плитка зазвичай продається упаковками з фіксованою кількістю штук (наприклад, 4 чи 8
-                плиток на упаковку). Округлення розрахованої кількості плиток до цілих упаковок
-                допомагає точно спланувати покупку, не докуповуючи додатково під час ремонту.
-            </p>
-
-            <p class="m-hintSmall">
-                Рекомендується купувати всю потрібну плитку з однієї партії виробництва, оскільки
-                різні партії можуть мати незначні відмінності у відтінку кольору, які стають помітними
-                при укладанні поруч.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/flooring-calculator"><b>Калькулятор ламінату та лінолеуму</b><span>Упаковки, рулон, підкладка й плінтус для кількох кімнат.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+                <a class="cc-related-card" href="/construction/plaster-calculator"><b>Калькулятор штукатурки</b><span>Мішки суміші або цемент і пісок для кількох поверхонь.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор плитки</h2>
+            <p>Калькулятор визначає <b>кількість плиток</b> для підлоги й стін (до шести поверхонь): кожна має довжину та ширину або висоту, або готову площу, а також площу отворів. Розмір плитки, шов і запас спільні. Результат: плитки з запасом, упаковки, куплена площа й залишок, а за бажанням клей і затирка та вартість за вашими цінами. Вбудованих цін немає.</p>
+
+            <h2>Як рахується кількість плиток</h2>
+            <p>Площа ділиться на площу однієї плитки разом зі швом: (довжина + шов) × (ширина + шов), усе в метрах. Запас додається до результату, а число округлюється вгору. Для плитки 300×300 мм це 11,11 шт на 1 м² без шва і 10,89 шт зі швом 3 мм, на 2,0% менше, тому шов краще вказувати. Для плитки 600×300 мм це 5,56 шт на 1 м² без шва і 5,47 шт зі швом 3 мм.</p>
+            <p>Упаковки рахуються за штуками (кількість плиток ділиться на штуки в упаковці, вгору) або за м² (площа плиток ділиться на м² в упаковці). Запас на підрізку залежить від розкладки: його задаєте ви (наприклад, 10%), для діагональної й складної розкладки потрібно більше, ніж для прямої. Список «Укладання» лише підставляє підказку в поле запасу (пряма й зі зсувом 10%, діагональна 15%, ялинка 20%), її можна змінити.</p>
+
+            <h2>Клей і затирка</h2>
+            <p>Витрата клею залежить від розміру зубця шпателя. За технічним описом Ceresit CM 11 Pro: зубець 6 мм ≈ 2,7 кг/м² (плитка до 15 см), 8 мм ≈ 3,6 кг/м² (до 25 см), 10 мм ≈ 4,2 кг/м² (до 30 см). Реальна витрата залежить від рівності основи й марки клею, тому її можна задати вручну. Клей рахується за чистою площею, мішки округлюються вгору.</p>
+            <p>Затирка рахується за формулою: (довжина + ширина) / (довжина × ширина) × товщина плитки × ширина шва × густина (розміри в мм, густина в кг/дм³, результат у кг/м²). Для плитки 300×300 мм, товщини 8 мм, шва 2 мм і густини 1,6 це 0,17 кг/м². Густина цементної затирки в джерелах 1,6–1,72, її можна змінити.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Підлога 3,2 × 2,4 м (7,68 м²), плитка 600×300 мм, шов 3 мм, запас 10%: 42,0 плитки без запасу, із запасом 47 шт. При 8 шт в упаковці це 6 упаковок (48 шт, 8,64 м²), залишок 1 шт. Клей із зубцем 8 мм: 27,6 кг, тобто 2 мішки по 25 кг. Затирка при товщині плитки 9 мм: 1,66 кг, 1 мішок по 2 кг. За цінами 650 ₴ за м², 380 ₴ за мішок клею, 150 ₴ за мішок затирки і доставки 300 ₴ вартість 6 826 ₴.</p>
+            <p class="til-mini">Калькулятор дає орієнтовну оцінку. Реальна витрата залежить від розкладки, підрізки й рівності основи.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Скільки запасу плитки потрібно закладати на підрізку?</h3>
-                <p>Зазвичай рекомендується 10% запасу для прямого укладання і 15-20% для діагонального чи складного
-                    малюнка, де більше обрізків.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки плитки потрібно на 1 м²?</h3>
+                <p>Залежить від розміру й шва. Для плитки 300×300 мм це 11,11 шт без шва і 10,89 шт зі швом 3 мм, для 600×300 мм 5,56 і 5,47 шт.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому потрібно враховувати ширину швів?</h3>
-                <p>Шви між плитками займають додаткову площу, тому при точних розрахунках варто додавати кілька
-                    міліметрів до розміру кожної плитки для реалістичнішого підрахунку.</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати кількість плитки на кімнату?</h3>
+                <p>Площа поверхні ділиться на площу плитки разом зі швом, додається запас і число округлюється вгору. Для кімнати 7,68 м² і плитки 600×300 мм зі швом 3 мм із запасом 10% це 47 шт.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи варто купувати плитку з одної партії?</h3>
-                <p>Так, плитка з різних партій виробництва може мати незначні відмінності у відтінку кольору, тому краще
-                    купувати весь потрібний обсяг одразу з однієї партії.</p>
+            <div class="cc-faq-item">
+                <h3>Чому треба враховувати ширину шва?</h3>
+                <p>Шви збільшують площу, яку займає одна плитка. Для плитки 300×300 мм зі швом 3 мм без урахування шва кількість була б завищена на 2,0%, а для менших плиток різниця більша.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який запас плитки закласти?</h3>
+                <p>Запас задаєте ви (наприклад, 10%); порожнє поле означає 0%. У різних джерелах для прямої розкладки називають близько 10%, для діагональної 15%, для складного малюнка 20% і більше.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як залежить запас від способу укладання?</h3>
+                <p>При діагональній укладці й складних малюнках (ялинка) відходів більше, бо плитку частіше підрізають по краях. У різних джерелах для прямої укладки називають близько 10%, для діагональної 15%, для складного малюнка 20% і більше. Список «Укладання» підставляє ці значення в поле запасу, а точний відсоток задаєте ви.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати упаковки плитки?</h3>
+                <p>Вкажіть, скільки плиток в упаковці, або скільки м² в ній. За штуками кількість плиток ділиться на штуки в упаковці, за м² площа плиток ділиться на м² в упаковці, обидва рази вгору. Для 47 шт і 8 шт в упаковці це 6 упаковок.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки клею потрібно на 1 м² плитки?</h3>
+                <p>За технічним описом Ceresit CM 11 Pro, зубець 6 мм дає близько 2,7 кг/м², 8 мм близько 3,6 кг/м², 10 мм близько 4,2 кг/м². Магазини називають вищі значення, тому витрату можна задати свою.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як вибрати зубець шпателя?</h3>
+                <p>У технічному описі Ceresit CM 11 Pro зубець 6 мм вказано для плитки до 15 см, 8 мм до 25 см, 10 мм до 30 см. Для більших плиток і нерівної основи потрібен більший зубець, остаточно орієнтуйтеся на мішок вашого клею.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки затирки потрібно на 1 м²?</h3>
+                <p>За формулою (L + W) / (L × W) × товщина × шов × густина. Для плитки 300×300 мм, товщини 8 мм, шва 2 мм це 0,17 кг/м²; для прикладу 600×300 мм, 9 мм, шов 3 мм це 0,216 кг/м².</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як врахувати вікна й двері на стінах?</h3>
+                <p>Оберіть тип «Стіна (Д × В)» і вкажіть площу отворів у м²: вона віднімається від площі стіни.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати плитку на підлогу й стіни разом?</h3>
+                <p>Додайте кожну поверхню окремо: підлогу, стіни, фартух. Калькулятор підсумує плитки, клей і затирку всіх поверхонь за спільним розміром плитки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи потрібно купувати плитку з однієї партії?</h3>
+                <p>Так, краще купувати весь обсяг одразу: плитка різних партій може трохи відрізнятися відтінком, а розмір (калібр) може не збігатися.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є калькулятор для ламінату й лінолеуму?</h3>
+                <p>Так, окремий: <a href="/construction/flooring-calculator">калькулятор ламінату та лінолеуму</a>.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
