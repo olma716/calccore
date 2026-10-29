@@ -1699,8 +1699,29 @@ main,
     }
 }
 
+/* закриття: та сама анімація навпаки */
+@keyframes navSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-110%);
+    }
+}
+
+@media (max-width: 900px) {
+    .site-header.nav-open.nav-closing .nav-panel {
+        animation: navSlideOut 0.85s cubic-bezier(0.4, 0, 0.2, 1) both;
+        pointer-events: none;
+    }
+}
+
 @media (max-width: 900px) and (prefers-reduced-motion: reduce) {
-    .site-header.nav-open .nav-panel {
+    .site-header.nav-open .nav-panel,
+    .site-header.nav-open.nav-closing .nav-panel {
         animation: none;
     }
 }

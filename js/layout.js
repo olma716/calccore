@@ -68,9 +68,34 @@ function initHeaderUI() {
 
   // burger
   if (toggle && header) {
+    const panel = header.querySelector('.nav-panel');
+    let closeTimer = 0;
+    const finishClose = () => {
+      clearTimeout(closeTimer);
+      header.classList.remove('nav-open', 'nav-closing');
+    };
     toggle.addEventListener('click', () => {
-      const open = header.classList.toggle('nav-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // повторний клик під час закриття — відкриваємо знову
+      if (header.classList.contains('nav-closing')) {
+        clearTimeout(closeTimer);
+        header.classList.remove('nav-closing');
+        toggle.setAttribute('aria-expanded', 'true');
+        return;
+      }
+      if (!header.classList.contains('nav-open')) {
+        header.classList.add('nav-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        return;
+      }
+      toggle.setAttribute('aria-expanded', 'false');
+      // закриття так само плавно, як відкриття: панель виїжджає назад ліворуч, потім ховається
+      const animated = panel && getComputedStyle(panel).animationName !== 'none';
+      if (!animated) { finishClose(); return; }
+      header.classList.add('nav-closing');
+      closeTimer = setTimeout(finishClose, 950);
+    });
+    if (panel) panel.addEventListener('animationend', (e) => {
+      if (e.target === panel && header.classList.contains('nav-closing')) finishClose();
     });
   }
 
