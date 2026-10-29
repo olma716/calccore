@@ -445,6 +445,7 @@
         </div>
         <div class="divider-bar"></div>
         <h2 class="section-subtitle">Освіта</h2>
+        <h3 class="hub-groupTitle">Математика</h3>
         <div class="hub-grid">
             <article class="hub-card glass" data-cat="education" data-title="калькулятор дробів fraction calculator">
                 <div class="hub-card-top">
@@ -541,6 +542,9 @@
                 </div>
                 <a href="education/matrix-calculator" class="btn">Перейти</a>
             </article>
+        </div>
+        <h3 class="hub-groupTitle">Організаційні та студентські</h3>
+        <div class="hub-grid">
             <article class="hub-card glass" data-cat="education" data-title="калькулятор gpa середній бал успішності">
                 <div class="hub-card-top">
                     <span class="hub-pill">Освіта</span>
@@ -549,6 +553,9 @@
                 </div>
                 <a href="education/gpa-calculator" class="btn">Перейти</a>
             </article>
+        </div>
+        <h3 class="hub-groupTitle">Статистика та гуманітарні</h3>
+        <div class="hub-grid">
             <article class="hub-card glass" data-cat="education" data-title="статистичний калькулятор середнє медіана відхилення">
                 <div class="hub-card-top">
                     <span class="hub-pill">Освіта</span>
@@ -962,7 +969,17 @@
                     const hide = searching && !hasVisible;
                     grid.style.display = hide ? 'none' : '';
                     const heading = grid.previousElementSibling;
-                    if (heading && heading.classList.contains('section-subtitle')) heading.style.display = hide ? 'none' : '';
+                    if (heading && (heading.classList.contains('section-subtitle') || heading.classList.contains('hub-groupTitle'))) heading.style.display = hide ? 'none' : '';
+                });
+                // розділ із підгрупами (Освіта): заголовок розділу ховаємо, коли немає жодної видимої підгрупи
+                document.querySelectorAll('.section-subtitle').forEach(h2 => {
+                    const first = h2.nextElementSibling;
+                    if (!first || !first.classList.contains('hub-groupTitle')) return;
+                    let any = false;
+                    for (let n = first; n && !n.classList.contains('divider-bar') && !n.classList.contains('section-subtitle'); n = n.nextElementSibling) {
+                        if (n.classList.contains('hub-grid') && n.style.display !== 'none') any = true;
+                    }
+                    h2.style.display = searching && !any ? 'none' : '';
                 });
                 document.querySelectorAll('.divider').forEach(d => { d.style.display = searching ? 'none' : ''; });
 

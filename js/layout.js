@@ -45,6 +45,16 @@ function initHeaderUI() {
       const sub = li.querySelector('.submenu');
       if (!sub) return;
       li.classList.remove('submenu-flip');
+      // широка панель (меню «Освіта»): зсуваємо так, щоб вона повністю вміщалась у вікно
+      if (li.classList.contains('has-mega')) {
+        sub.style.left = '';
+        if (!desktop) return;
+        const r = li.getBoundingClientRect();
+        const w = sub.offsetWidth;
+        const shift = Math.max(16 - r.left, Math.min(0, vw - 16 - (r.left + w)));
+        sub.style.left = Math.round(shift) + 'px';
+        return;
+      }
       if (!desktop) return;
       const r = li.getBoundingClientRect();
       const w = sub.offsetWidth;
@@ -63,6 +73,53 @@ function initHeaderUI() {
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
+
+  // мобільне меню «Освіта»: теми й підтеми — акордеон (відкрите лише одне на рівні);
+  // клас mega-js вмикає згортання в CSS, без JS усе лишається розкритим
+  if (header) header.classList.add('mega-js');
+  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+  const megaToggle = (head) => {
+    if (!isMobile()) return;
+    const item = head.parentElement;
+    if (!item || item.classList.contains('is-empty')) return;
+    const open = !item.classList.contains('is-open');
+    Array.from(item.parentElement.children).forEach((sib) => {
+      if (sib !== item) {
+        sib.classList.remove('is-open');
+        const h = sib.querySelector(':scope > .mega-title, :scope > .mega-subtitle');
+        if (h) h.setAttribute('aria-expanded', 'false');
+      }
+    });
+    item.classList.toggle('is-open', open);
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  // role/tabindex лише на телефоні: на ПК заголовки колонок це звичайний текст
+  const syncMegaA11y = () => {
+    document.querySelectorAll('.mega-title, .mega-subtitle').forEach((head) => {
+      const empty = head.parentElement && head.parentElement.classList.contains('is-empty');
+      if (empty) return;
+      if (isMobile()) {
+        head.setAttribute('role', 'button');
+        head.setAttribute('tabindex', '0');
+        if (!head.hasAttribute('aria-expanded')) head.setAttribute('aria-expanded', 'false');
+      } else {
+        head.removeAttribute('role');
+        head.removeAttribute('tabindex');
+        head.removeAttribute('aria-expanded');
+      }
+    });
+  };
+  syncMegaA11y();
+  window.addEventListener('resize', syncMegaA11y, { passive: true });
+  document.querySelectorAll('.mega-title, .mega-subtitle').forEach((head) => {
+    head.addEventListener('click', () => megaToggle(head));
+    head.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && isMobile()) {
+        e.preventDefault();
+        megaToggle(head);
+      }
+    });
+  });
 
   // mobile submenu
   submenuToggles.forEach(a => {
