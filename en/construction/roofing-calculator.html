@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Roofing Calculator Online — Area and Material Quantity | CalcCore</title>
+    <title>Roofing Calculator: Roof Area, Sheets, Ridge | CalcCore</title>
     <meta name="description"
-        content="Calculate roof area based on house dimensions and roof pitch. Roofing material quantity accounting for overlap allowance." />
+        content="Roofing calculator: the slope area of a gable, hip or shed roof, ridge height, sheets or units of covering, trims, battens and the cost." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/roofing-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/roofing-calculator" />
@@ -26,221 +28,698 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Roofing Calculator Online — Area and Material Quantity" />
-    <meta property="og:description" content="Calculate roof area based on house dimensions and roof pitch. Roofing material quantity accounting for overlap allowance." />
+    <meta property="og:title" content="Roofing Calculator: Roof Area, Sheets, Ridge" />
+    <meta property="og:description" content="Roofing calculator: the slope area of a gable, hip or shed roof, ridge height, sheets or units of covering, trims, battens and the cost." />
     <meta property="og:url" content="https://calccore.net/en/construction/roofing-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Roofing Calculator Online — Area and Material Quantity" />
-    <meta name="twitter:description" content="Calculate roof area based on house dimensions and roof pitch. Roofing material quantity accounting for overlap allowance." />
+    <meta name="twitter:title" content="Roofing Calculator: Roof Area, Sheets, Ridge" />
+    <meta name="twitter:description" content="Roofing calculator: the slope area of a gable, hip or shed roof, ridge height, sheets or units of covering, trims, battens and the cost." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/rof.css?v=20261029rof1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/roofing-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Why is roof area larger than the house's footprint?",
-        "acceptedAnswer":{"@type":"Answer","text":"Due to the slope, the actual roof surface area is always larger than the horizontal projection (the house footprint) — the steeper the pitch, the greater the difference."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is the optimal roof pitch?",
-        "acceptedAnswer":{"@type":"Answer","text":"This depends on climate and roofing material type: in snowy regions, steeper pitches (35-45°) are preferred for better snow shedding, while metal roofing typically uses a 20-35° range."}
-      },
-      {
-        "@type":"Question",
-        "name":"How much extra material is needed for overlap?",
-        "acceptedAnswer":{"@type":"Answer","text":"Usually 10-15% extra beyond the calculated area — roofing materials are installed with overlap for waterproofing, and part of each sheet's area is covered by the adjacent one."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029rof1" defer></script>
+    <script src="/js/roofing-calculator.js?v=20261029rof1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/roofing-calculator#app",
-    "name":"Roofing Calculator",
-    "description":"Calculate roof area and material quantity based on house dimensions and roof pitch.",
-    "url":"https://calccore.net/en/construction/roofing-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/roofing-calculator#app",
+  "name": "Roofing Calculator",
+  "description": "Calculates roofs for several buildings: gable, hip with an equal pitch, shed. The exact area of the slopes with eaves and gable overhangs, the ridge height, the lengths of the ridge, eaves, edges and hips, sheet or unit covering with a reserve, trims, battens, membrane and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/roofing-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six roofs: gable, hip, shed",
+    "Slope area, ridge height, ridge, eaves, edges and hips",
+    "Sheets or unit covering with a reserve, trims, battens, membrane",
+    "A plan and a section of the roof, the area by slopes",
+    "Your own prices, none built in; hryvnia, dollar or euro; table, CSV, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/roofing-calculator#webpage",
+      "url": "https://calccore.net/en/construction/roofing-calculator",
+      "name": "Roofing Calculator: Roof Area, Sheets, Ridge | CalcCore",
+      "description": "Roofing calculator: the slope area of a gable, hip or shed roof, ridge height, sheets or units of covering, trims, battens and the cost.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/roofing-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/roofing-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/roofing-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Roofing Calculator",
+          "item": "https://calccore.net/en/construction/roofing-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/roofing-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the area of a roof?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The roof area is the plan area with overhangs divided by the cosine of the pitch. For a gable roof of 10×8 m with no overhangs at 30° that is 92.4 m²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the roof area larger than the area of the house?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the slopes are inclined, and the area of an inclined surface is larger than its plan projection by a factor of 1/cos(pitch). The eaves and gable overhangs are added to that."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate the ridge height?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The ridge height above the eaves line is the tangent of the pitch times half the width of the house (the whole width for a shed roof). For a house 8 m wide at 30° that is 2.31 m."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator count a hip roof?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for a hip roof with an equal pitch on all slopes. The ridge is the difference between the length and the width, and the hips are counted separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many sheets of metal tile or profiled sheet are needed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The number of columns is the number of useful widths of a sheet that fit into the base of a slope, and the number of rows is how many sheets are needed along the slope with an overlap. You can also choose sheets cut to the slope."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the useful width of a sheet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The width of a sheet after the overlap of the neighbouring sheets, given in the data of the maker. It is less than the full width of the sheet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What reserve of covering should I take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The reserve is set as a percentage and rounded up. It covers cutting, especially for hip roofs. The field is empty by default."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are battens counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The rows of battens run at the given step from the eaves to the ridge, and the length of every row is the width of the slope at that height. The lengths are added and divided by the length of a board."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much membrane is needed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The roof area with an overlap in percent is divided by the area of a roll and rounded up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What trims do I need for the ridge, eaves and edges?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator counts the lengths of the ridge, eaves, gable edges and hips, and the number of trims is the length divided by the length of one trim, separately for each element."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for valleys, windows and chimneys?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A building of a complex shape can be split into several roofs, and openings and waste covered by the reserve."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which pitch should I choose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the covering, the climate and the project, so you enter it in degrees. The calculator shows the ridge height for the chosen pitch."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="rof-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="croofing">
-            <div class="mcalc__wrap">
+        <section class="rof" id="rof">
+            <div class="rof__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Roofing Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate roof area and the amount of material needed
-                        based on house dimensions and roof pitch.
-                    </p>
+                <div class="rof__titlebar">
+                    <h1 class="rof__h1">Roofing Calculator</h1>
+                    <p class="rof__p">Work out the slope area, the ridge height, sheets or units of covering, trims, battens and the cost for a gable, hip or shed roof.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="rof__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="rof__card">
+                        <div class="rof__sectionTitle">
+                            <h2 class="rof__h2">Input data</h2>
+                            <div class="rof__dd" id="cur_dd"><button type="button" class="rof__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="rof__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="rof__caret" aria-hidden="true"></span></button><ul class="rof__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="rof__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="rof__ddCode">UAH</span><span class="rof__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="rof__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="rof__ddCode">USD</span><span class="rof__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="rof__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="rof__ddCode">EUR</span><span class="rof__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="houseLength">House length (m)</label>
-                                <input class="mcalc__input" id="houseLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 10" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="houseWidth">House width (m)</label>
-                                <input class="mcalc__input" id="houseWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 8" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="pitch">Roof pitch angle (degrees)</label>
-                                <input class="mcalc__input" id="pitch" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 30" value="30" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="overhang">Roof overhang each side (m)</label>
-                                <input class="mcalc__input" id="overhang" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 0.5" value="0.5" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="wastage">Overlap allowance (%)</label>
-                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="rof__block">
+                            <div class="rof__rows">
+                                <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="cvLbl">Covering</span>
+                                    <input type="hidden" id="covm" value="sheet">
+                                    <div class="rof__sel" id="cv_dd">
+                                        <button type="button" class="rof__selBtn" id="cv_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cvLbl cv_val"><span id="cv_val">Sheets (profiled sheet, metal tile)</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="cv_list" role="listbox" aria-labelledby="cvLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="sheet" aria-selected="true">Sheets (profiled sheet, metal tile)</li>
+                                            <li role="option" tabindex="-1" data-v="unit" aria-selected="false">Units (tile, bitumen, slate)</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="rof__field" id="swW">
+                                    <label class="rof__label" for="sw">Useful width of a sheet, m</label>
+                                    <input class="rof__input" id="sw" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.1">
+                                </div>
+                                <div class="rof__field" id="slW">
+                                    <label class="rof__label" for="sl">Sheet length, m</label>
+                                    <input class="rof__input" id="sl" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3">
+                                </div>
+                                <div class="rof__field" id="ovW">
+                                    <label class="rof__label" for="ov">Overlap along the slope, m</label>
+                                    <input class="rof__input" id="ov" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.15"><div class="rof__hint">Empty: no overlap.</div>
+                                </div>
+                                <div class="rof__field" id="cutW">
+                                    <span class="rof__label" id="ctLbl">Sheet length</span>
+                                    <input type="hidden" id="cutm" value="fixed">
+                                    <div class="rof__sel" id="ct_dd">
+                                        <button type="button" class="rof__selBtn" id="ct_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ctLbl ct_val"><span id="ct_val">Fixed, sheets are joined</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="ct_list" role="listbox" aria-labelledby="ctLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fixed" aria-selected="true">Fixed, sheets are joined</li>
+                                            <li role="option" tabindex="-1" data-v="cut" aria-selected="false">Cut to the slope</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="rof__field rof__field--full" id="uaW" hidden>
+                                    <label class="rof__label" for="ua">Useful area of one unit, m²</label>
+                                    <input class="rof__input" id="ua" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3"><div class="rof__hint">A pack of bitumen shingles, a tile or a sheet.</div>
+                                </div>
+                                <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="reserve">Reserve, %</label>
+                                    <input class="rof__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="rof__hint">For cutting, rounded up.</div>
+                                </div>
                             </div>
 
+                            <div class="rof__miniTitle rof__mt12">Roofs</div>
+                            <div class="rof__el" id="nl1">
+                                <div class="rof__elHead"><span>Roof 1</span><span class="rof__elVol" id="nv1">—</span><button type="button" class="rof__elRm" id="nl1rm" aria-label="Remove the roof" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n1tLbl">Type</span>
+                                    <input type="hidden" id="n1_type" value="gable">
+                                    <div class="rof__sel" id="n1t_dd">
+                                        <button type="button" class="rof__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Gable</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Gable</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Hip (equal pitch)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Shed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n1_a">House length, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n1_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n1_b">House width, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n1_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n1_p">Pitch, °&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n1_p" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n1_oe">Eaves overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n1_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5">
+                                </div>
+                                    <div class="rof__field" id="n1_ogW">
+                                    <label class="rof__label" for="n1_og">Gable overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n1_og" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl2" hidden>
+                                <div class="rof__elHead"><span>Roof 2</span><span class="rof__elVol" id="nv2">—</span><button type="button" class="rof__elRm" id="nl2rm" aria-label="Remove the roof" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n2tLbl">Type</span>
+                                    <input type="hidden" id="n2_type" value="gable">
+                                    <div class="rof__sel" id="n2t_dd">
+                                        <button type="button" class="rof__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Gable</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Gable</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Hip (equal pitch)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Shed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n2_a">House length, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n2_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n2_b">House width, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n2_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n2_p">Pitch, °&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n2_p" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n2_oe">Eaves overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n2_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5">
+                                </div>
+                                    <div class="rof__field" id="n2_ogW">
+                                    <label class="rof__label" for="n2_og">Gable overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n2_og" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl3" hidden>
+                                <div class="rof__elHead"><span>Roof 3</span><span class="rof__elVol" id="nv3">—</span><button type="button" class="rof__elRm" id="nl3rm" aria-label="Remove the roof" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n3tLbl">Type</span>
+                                    <input type="hidden" id="n3_type" value="gable">
+                                    <div class="rof__sel" id="n3t_dd">
+                                        <button type="button" class="rof__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Gable</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Gable</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Hip (equal pitch)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Shed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n3_a">House length, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n3_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n3_b">House width, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n3_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n3_p">Pitch, °&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n3_p" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n3_oe">Eaves overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n3_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5">
+                                </div>
+                                    <div class="rof__field" id="n3_ogW">
+                                    <label class="rof__label" for="n3_og">Gable overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n3_og" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl4" hidden>
+                                <div class="rof__elHead"><span>Roof 4</span><span class="rof__elVol" id="nv4">—</span><button type="button" class="rof__elRm" id="nl4rm" aria-label="Remove the roof" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n4tLbl">Type</span>
+                                    <input type="hidden" id="n4_type" value="gable">
+                                    <div class="rof__sel" id="n4t_dd">
+                                        <button type="button" class="rof__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Gable</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Gable</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Hip (equal pitch)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Shed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n4_a">House length, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n4_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n4_b">House width, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n4_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n4_p">Pitch, °&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n4_p" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n4_oe">Eaves overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n4_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5">
+                                </div>
+                                    <div class="rof__field" id="n4_ogW">
+                                    <label class="rof__label" for="n4_og">Gable overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n4_og" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl5" hidden>
+                                <div class="rof__elHead"><span>Roof 5</span><span class="rof__elVol" id="nv5">—</span><button type="button" class="rof__elRm" id="nl5rm" aria-label="Remove the roof" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n5tLbl">Type</span>
+                                    <input type="hidden" id="n5_type" value="gable">
+                                    <div class="rof__sel" id="n5t_dd">
+                                        <button type="button" class="rof__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Gable</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Gable</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Hip (equal pitch)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Shed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n5_a">House length, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n5_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n5_b">House width, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n5_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n5_p">Pitch, °&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n5_p" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n5_oe">Eaves overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n5_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5">
+                                </div>
+                                    <div class="rof__field" id="n5_ogW">
+                                    <label class="rof__label" for="n5_og">Gable overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n5_og" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl6" hidden>
+                                <div class="rof__elHead"><span>Roof 6</span><span class="rof__elVol" id="nv6">—</span><button type="button" class="rof__elRm" id="nl6rm" aria-label="Remove the roof" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n6tLbl">Type</span>
+                                    <input type="hidden" id="n6_type" value="gable">
+                                    <div class="rof__sel" id="n6t_dd">
+                                        <button type="button" class="rof__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Gable</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Gable</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Hip (equal pitch)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Shed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n6_a">House length, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n6_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n6_b">House width, m&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n6_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n6_p">Pitch, °&nbsp;<span class="rof__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="rof__input" id="n6_p" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n6_oe">Eaves overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n6_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.5">
+                                </div>
+                                    <div class="rof__field" id="n6_ogW">
+                                    <label class="rof__label" for="n6_og">Gable overhang, m <span class="rof__hint">(optional)</span></label>
+                                    <input class="rof__input" id="n6_og" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.3">
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="rof__add" id="addNl">+ Add a roof</button>
+
+                            <details class="rof__details rof__mt12" id="accDet">
+                                <summary>Trims, battens, membrane <span class="rof__hint">(optional)</span></summary>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="plen">Trim length, m</label>
+                                    <input class="rof__input" id="plen" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2"><div class="rof__hint">Ridge, eaves, edges, hips.</div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="bst">Batten step, cm</label>
+                                    <input class="rof__input" id="bst" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 35">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="blen">Board length, m</label>
+                                    <input class="rof__input" id="blen" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="mroll">Area of a membrane roll, m²</label>
+                                    <input class="rof__input" id="mroll" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 75">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="mov">Membrane overlap, %</label>
+                                    <input class="rof__input" id="mov" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="rof__details rof__mt12" id="priceDet">
+                                <summary>Prices and delivery <span class="rof__hint">(optional)</span></summary>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="puLbl">Covering price per</span>
+                                    <input type="hidden" id="punit" value="piece">
+                                    <div class="rof__sel" id="pu_dd">
+                                        <button type="button" class="rof__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">sheet or unit</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="piece" aria-selected="true">sheet or unit</li>
+                                            <li role="option" tabindex="-1" data-v="m2" aria-selected="false">m²</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pCover">Covering price, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pCover" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pTrim">Trim price, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pTrim" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pBat">Board price, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pBat" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pMem">Membrane roll price, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pMem" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="rof__actions rof__mt12">
+                            <button class="rof__btn rof__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="rof__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="rof__card">
+                        <div class="rof__sectionTitle">
+                            <h2 class="rof__h2">Result</h2>
+                            <span class="rof__badge">🏠</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/insulation-calculator">Insulation Calculator</a>
-                            <a href="/en/construction/rebar-calculator">Rebar Calculator</a>
+                        <div class="rof__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="rof__actions rof__mt12">
+                            <button class="rof__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="rof__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="rof__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="rof__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks rof__mt12"><a class="rof__link" href="/en/construction/insulation-calculator">Insulation calculator →</a> <a class="rof__link" href="/en/construction/cost-calculator">Construction cost calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="rof__card rof__schedule" id="schedule" hidden>
+                    <div class="rof__schedHead">
+                        <h2 class="rof__h2">Summary</h2>
+                        <div class="rof__tools">
+                            <button type="button" class="rof__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="rof__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="rof__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How roof area is calculated</h2>
-            <p>
-                The calculation is based on the horizontal footprint area of the house (length ×
-                width, plus roof overhangs), divided by the cosine of the pitch angle. This accounts
-                for the geometric fact that a sloped surface has a larger area than its horizontal
-                projection.
-            </p>
-
-            <h2>Why roof area is always larger than the house footprint</h2>
-            <p>
-                Imagine the roof as an inclined plane stretched over the horizontal rectangle of the
-                house. The steeper the pitch, the "longer" this sloped surface becomes relative to
-                its horizontal projection. For example, at a 30° pitch the roof area exceeds the
-                footprint by about 15%, and at 45° — already by 41%.
-            </p>
-
-            <h2>How to choose a roof pitch</h2>
-            <ul>
-                <li><b>Low slope (5-20°):</b> suitable for regions with little precipitation, requires more reliable
-                    waterproofing.</li>
-                <li><b>Moderate pitch (20-35°):</b> the most common range, suitable for most roofing materials,
-                    including metal tile.</li>
-                <li><b>Steep roof (35-50°+):</b> better for snowy regions (snow sheds faster), also traditional for
-                    certain architectural styles.</li>
-            </ul>
-
-            <h2>Why an overlap allowance is needed</h2>
-            <p>
-                Roofing materials (tiles, metal roofing, slate) are installed overlapping each other
-                to ensure watertight joints. This means part of each sheet or element's area is
-                "covered" by the adjacent one, so more material is actually needed than the calculated
-                net roof area.
-            </p>
-
-            <p class="m-hintSmall">
-                This calculation is a simplified model for a rectangular gable or hip roof of simple
-                shape. For roofs with complex configurations (dormers, multiple levels, complex
-                geometry), a detailed design from an architect or roofer is recommended.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/insulation-calculator"><b>Insulation calculator</b><span>The thickness of insulation by thermal resistance, plates and the cost.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your own prices.</span></a>
+                <a class="cc-related-card" href="/en/construction/steel-weight-calculator"><b>Steel weight calculator</b><span>The weight of bars, pipes, channels and beams by dimensions.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the roofing calculator counts</h2>
+            <p>The calculator works out the <b>slope area</b> of a gable, hip (with an equal pitch) and shed roof, the ridge height, the lengths of the ridge, eaves, gable edges and hips for several buildings (up to six). The eaves overhang and the gable overhang are counted separately. Then, if you set the covering, the calculator finds the number of sheets or unit pieces with a reserve and, if you wish, trims, battens, membrane and the cost from your prices in hryvnia, dollars or euros.</p>
+
+            <h2>How the slope area is counted</h2>
+            <p>A slope has a length along the incline equal to the horizontal run to the ridge divided by the cosine of the pitch. A gable roof is two rectangles: the length with the gable overhangs by the length along the incline. A hip roof is two trapezoids and two triangles, and a shed roof is one rectangle. The sum of the slope areas is always the plan area with overhangs divided by the cosine of the pitch.</p>
+            <p>Example: a gable roof of a 10×8 m house with no overhangs at 30° gives two slopes of 4.62 m along the incline and an area of 92.4 m². A hip roof of 10×8 m with a 0.5 m overhang gives 114.3 m², a ridge of 2.0 m and hips of 6.87 m each. A shed roof of 6×4 m at 20° gives 25.5 m².</p>
+
+            <h2>Sheets, unit covering and the reserve</h2>
+            <p>For sheet covering the calculator counts columns of sheets by the base of every slope divided by the useful width of a sheet. If the length along the incline is more than the sheet length, the sheets are joined with an overlap in several rows. You can also choose sheets cut to the slope, then the number equals the number of columns. For unit covering the slope area with the reserve is divided by the useful area of one unit. The sheets over trapezoids and triangles are counted by the base, so this is a safe upper estimate.</p>
+
+            <h2>Worked example</h2>
+            <p>A hip roof of 10×8 m at 30° with a 0.5 m overhang and a gable roof of 6×5 m at 35° with an eaves overhang of 0.4 m and a gable overhang of 0.3 m. The area is 161.0 m². Sheets of 1.1×3 m with a 0.15 m overlap: 100 sheets, 105 with a 5% reserve. Trims of 2 m: 54 pieces, battens at a 35 cm step: 82 boards of 6 m, membrane with a 10% overlap: 3 rolls of 75 m². At 950 ₴ per sheet, 250 ₴ per trim, 180 ₴ per board and 1,900 ₴ per roll the cost is 133,710 ₴.</p>
+            <p class="rof-mini">The calculator gives an approximate estimate. Take the parameters of sheets, units and materials from your maker.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Why is roof area larger than the house's footprint?</h3>
-                <p>Due to the slope, the actual roof surface area is always larger than the horizontal projection (the
-                    house footprint) — the steeper the pitch, the greater the difference.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the area of a roof?</h3>
+                <p>The roof area is the plan area with overhangs divided by the cosine of the pitch. For a gable roof of 10×8 m with no overhangs at 30° that is 92.4 m².</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What is the optimal roof pitch?</h3>
-                <p>This depends on climate and roofing material type: in snowy regions, steeper pitches (35-45°) are
-                    preferred for better snow shedding, while metal roofing typically uses a 20-35° range.</p>
+            <div class="cc-faq-item">
+                <h3>Why is the roof area larger than the area of the house?</h3>
+                <p>Because the slopes are inclined, and the area of an inclined surface is larger than its plan projection by a factor of 1/cos(pitch). The eaves and gable overhangs are added to that.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How much extra material is needed for overlap?</h3>
-                <p>Usually 10-15% extra beyond the calculated area — roofing materials are installed with overlap for
-                    waterproofing, and part of each sheet's area is covered by the adjacent one.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the ridge height?</h3>
+                <p>The ridge height above the eaves line is the tangent of the pitch times half the width of the house (the whole width for a shed roof). For a house 8 m wide at 30° that is 2.31 m.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator count a hip roof?</h3>
+                <p>Yes, for a hip roof with an equal pitch on all slopes. The ridge is the difference between the length and the width, and the hips are counted separately.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many sheets of metal tile or profiled sheet are needed?</h3>
+                <p>The number of columns is the number of useful widths of a sheet that fit into the base of a slope, and the number of rows is how many sheets are needed along the slope with an overlap. You can also choose sheets cut to the slope.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the useful width of a sheet?</h3>
+                <p>The width of a sheet after the overlap of the neighbouring sheets, given in the data of the maker. It is less than the full width of the sheet.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What reserve of covering should I take?</h3>
+                <p>The reserve is set as a percentage and rounded up. It covers cutting, especially for hip roofs. The field is empty by default.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How are battens counted?</h3>
+                <p>The rows of battens run at the given step from the eaves to the ridge, and the length of every row is the width of the slope at that height. The lengths are added and divided by the length of a board.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much membrane is needed?</h3>
+                <p>The roof area with an overlap in percent is divided by the area of a roll and rounded up.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What trims do I need for the ridge, eaves and edges?</h3>
+                <p>The calculator counts the lengths of the ridge, eaves, gable edges and hips, and the number of trims is the length divided by the length of one trim, separately for each element.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for valleys, windows and chimneys?</h3>
+                <p>No. A building of a complex shape can be split into several roofs, and openings and waste covered by the reserve.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which pitch should I choose?</h3>
+                <p>It depends on the covering, the climate and the project, so you enter it in degrees. The calculator shows the ridge height for the chosen pitch.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

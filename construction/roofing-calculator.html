@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор даху онлайн — площа та кількість матеріалу | CalcCore</title>
+    <title>Калькулятор даху: площа скатів, листи, коник | CalcCore</title>
     <meta name="description"
-        content="Розрахунок площі покрівлі за розмірами будинку та кутом нахилу даху. Кількість покрівельного матеріалу з урахуванням запасу на нахлест." />
+        content="Калькулятор даху: площа скатів двосхилого, чотирисхилого й односхилого даху, висота коника, листи чи одиниці покриття, планки, обрешітка та вартість." />
 
     <link rel="canonical" href="https://calccore.net/construction/roofing-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/roofing-calculator" />
@@ -26,221 +28,698 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор даху онлайн — площа та кількість матеріалу" />
-    <meta property="og:description" content="Розрахунок площі покрівлі за розмірами будинку та кутом нахилу даху. Кількість покрівельного матеріалу з урахуванням запасу на нахлест." />
+    <meta property="og:title" content="Калькулятор даху: площа скатів, листи, коник" />
+    <meta property="og:description" content="Калькулятор даху: площа скатів двосхилого, чотирисхилого й односхилого даху, висота коника, листи чи одиниці покриття, планки, обрешітка та вартість." />
     <meta property="og:url" content="https://calccore.net/construction/roofing-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор даху онлайн — площа та кількість матеріалу" />
-    <meta name="twitter:description" content="Розрахунок площі покрівлі за розмірами будинку та кутом нахилу даху. Кількість покрівельного матеріалу з урахуванням запасу на нахлест." />
+    <meta name="twitter:title" content="Калькулятор даху: площа скатів, листи, коник" />
+    <meta name="twitter:description" content="Калькулятор даху: площа скатів двосхилого, чотирисхилого й односхилого даху, висота коника, листи чи одиниці покриття, планки, обрешітка та вартість." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/rof.css?v=20261029rof1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/roofing-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Чому площа даху більша за площу будинку?",
-        "acceptedAnswer":{"@type":"Answer","text":"Через нахил схилів фактична площа покрівлі завжди більша за горизонтальну проєкцію (площу основи будинку) — чим більший кут нахилу, тим суттєвіша різниця."}
-      },
-      {
-        "@type":"Question",
-        "name":"Який кут нахилу даху оптимальний?",
-        "acceptedAnswer":{"@type":"Answer","text":"Це залежить від клімату та типу покрівельного матеріалу: у сніжних регіонах перевагу надають крутішим схилам (35-45°) для кращого сходження снігу, тоді як для металочерепиці типовий діапазон 20-35°."}
-      },
-      {
-        "@type":"Question",
-        "name":"Скільки запасу матеріалу потрібно на нахлест?",
-        "acceptedAnswer":{"@type":"Answer","text":"Зазвичай 10-15% додатково до розрахованої площі — покрівельні матеріали укладаються внахлест для водонепроникності, і частина площі кожного листа перекривається сусіднім."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029rof1" defer></script>
+    <script src="/js/roofing-calculator.js?v=20261029rof1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/roofing-calculator#app",
-    "name":"Roofing Calculator",
-    "description":"Розрахунок площі покрівлі та кількості матеріалу за розмірами будинку і кутом нахилу.",
-    "url":"https://calccore.net/construction/roofing-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/roofing-calculator#app",
+  "name": "Калькулятор даху",
+  "description": "Розрахунок даху для кількох будівель: двосхилий, чотирисхилий з однаковим кутом, односхилий. Точна площа скатів із звисом карниза й фронтону, висота коника, довжини коника, карнизів, кромок і ребер, листове або штучне покриття із запасом, планки, обрешітка, мембрана й вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/roofing-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести дахів: двосхилий, чотирисхилий, односхилий",
+    "Площа скатів, висота коника, коник, карнизи, кромки й ребра вальми",
+    "Листи або штучне покриття із запасом, планки, обрешітка, мембрана",
+    "План і переріз даху, площа за скатами",
+    "Ваші ціни без вбудованих; гривня, долар або євро; таблиця, CSV, посилання"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/roofing-calculator#webpage",
+      "url": "https://calccore.net/construction/roofing-calculator",
+      "name": "Калькулятор даху: площа скатів, листи, коник | CalcCore",
+      "description": "Калькулятор даху: площа скатів двосхилого, чотирисхилого й односхилого даху, висота коника, листи чи одиниці покриття, планки, обрешітка та вартість.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/roofing-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/roofing-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/roofing-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор даху",
+          "item": "https://calccore.net/construction/roofing-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/roofing-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати площу даху?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа даху дорівнює площі в плані зі звисами, поділеній на косинус кута нахилу. Для двосхилого даху 10×8 м без звисів під кутом 30° це 92,4 м²."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому площа даху більша за площу будинку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бо скати нахилені, а площа похилої поверхні більша за площу її проєкції в плані на множник 1/cos(кута). До цього додаються звиси карниза й фронтону."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати висоту коника?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Висота коника над лінією карниза дорівнює тангенсу кута, помноженому на половину ширини будинку (для односхилого на всю ширину). Для будинку шириною 8 м під кутом 30° це 2,31 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи рахує калькулятор чотирисхилий дах?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, для чотирисхилого даху з однаковим кутом на всіх скатах. Коник дорівнює різниці довжини й ширини, а ребра вальми рахуються окремо."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки листів металочерепиці чи профнастилу потрібно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Колонок листів стільки, скільки корисних ширин листа вкладається в основу скату, а рядів стільки, скільки листів потрібно по довжині скату з нахльостом. Також можна обрати листи під довжину скату."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке корисна ширина листа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ширина листа після нахльосту сусідніх листів, вказується у даних виробника. Вона менша за повну ширину листа."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який запас покриття взяти?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Запас задається у відсотках і округлюється вгору. Він потрібен на підрізку, особливо для вальмових дахів. Поле порожнє за замовчуванням."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати обрешітку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ряди обрешітки йдуть через заданий крок від карниза до коника, а довжина кожного ряду дорівнює ширині скату на цій висоті. Довжини складаються й діляться на довжину дошки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки потрібно мембрани?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Площа даху з нахльостом у відсотках ділиться на площу рулона й округлюється вгору."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яку планку брати на коник, карниз і кромки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Калькулятор рахує довжини коника, карнизів, фронтонних кромок і ребер вальми, а кількість планок це довжина, поділена на довжину однієї планки, окремо для кожного елемента."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор розжолобки, вікна й димарі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Будівлі зі складною формою можна розбити на кілька дахів, а отвори й відходи покрити запасом."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який кут нахилу вибрати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Він залежить від покриття, клімату й проєкту, тому вводиться вами в градусах. Калькулятор показує висоту коника для вибраного кута."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="rof-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="croofing">
-            <div class="mcalc__wrap">
+        <section class="rof" id="rof">
+            <div class="rof__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор даху</h1>
-                    <p class="mcalc__p">
-                        Розрахуй площу покрівлі та потрібну кількість матеріалу
-                        за розмірами будинку і кутом нахилу.
-                    </p>
+                <div class="rof__titlebar">
+                    <h1 class="rof__h1">Калькулятор даху</h1>
+                    <p class="rof__p">Порахуйте площу скатів, висоту коника, листи чи одиниці покриття, планки, обрешітку й вартість для двосхилого, чотирисхилого та односхилого даху.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="rof__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="rof__card">
+                        <div class="rof__sectionTitle">
+                            <h2 class="rof__h2">Дані для розрахунку</h2>
+                            <div class="rof__dd" id="cur_dd"><button type="button" class="rof__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="rof__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="rof__caret" aria-hidden="true"></span></button><ul class="rof__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="rof__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="rof__ddCode">UAH</span><span class="rof__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="rof__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="rof__ddCode">USD</span><span class="rof__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="rof__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="rof__ddCode">EUR</span><span class="rof__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="houseLength">Довжина будинку (м)</label>
-                                <input class="mcalc__input" id="houseLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 10" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="houseWidth">Ширина будинку (м)</label>
-                                <input class="mcalc__input" id="houseWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 8" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="pitch">Кут нахилу даху (градуси)</label>
-                                <input class="mcalc__input" id="pitch" type="text" inputmode="numeric"
-                                    placeholder="напр.: 30" value="30" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="overhang">Звис даху з кожного боку (м)</label>
-                                <input class="mcalc__input" id="overhang" type="text" inputmode="decimal"
-                                    placeholder="напр.: 0.5" value="0.5" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="wastage">Запас на нахлест (%)</label>
-                                <input class="mcalc__input" id="wastage" type="text" inputmode="numeric"
-                                    placeholder="напр.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="rof__block">
+                            <div class="rof__rows">
+                                <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="cvLbl">Покриття</span>
+                                    <input type="hidden" id="covm" value="sheet">
+                                    <div class="rof__sel" id="cv_dd">
+                                        <button type="button" class="rof__selBtn" id="cv_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cvLbl cv_val"><span id="cv_val">Листове (профнастил, металочерепиця)</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="cv_list" role="listbox" aria-labelledby="cvLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="sheet" aria-selected="true">Листове (профнастил, металочерепиця)</li>
+                                            <li role="option" tabindex="-1" data-v="unit" aria-selected="false">Штучне (черепиця, бітумна, шифер)</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="rof__field" id="swW">
+                                    <label class="rof__label" for="sw">Корисна ширина листа, м</label>
+                                    <input class="rof__input" id="sw" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 1,1">
+                                </div>
+                                <div class="rof__field" id="slW">
+                                    <label class="rof__label" for="sl">Довжина листа, м</label>
+                                    <input class="rof__input" id="sl" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3">
+                                </div>
+                                <div class="rof__field" id="ovW">
+                                    <label class="rof__label" for="ov">Нахльост уздовж скату, м</label>
+                                    <input class="rof__input" id="ov" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,15"><div class="rof__hint">Порожньо: без нахльосту.</div>
+                                </div>
+                                <div class="rof__field" id="cutW">
+                                    <span class="rof__label" id="ctLbl">Довжина листів</span>
+                                    <input type="hidden" id="cutm" value="fixed">
+                                    <div class="rof__sel" id="ct_dd">
+                                        <button type="button" class="rof__selBtn" id="ct_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ctLbl ct_val"><span id="ct_val">Фіксована, листи нарощуються</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="ct_list" role="listbox" aria-labelledby="ctLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="fixed" aria-selected="true">Фіксована, листи нарощуються</li>
+                                            <li role="option" tabindex="-1" data-v="cut" aria-selected="false">Під довжину скату</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="rof__field rof__field--full" id="uaW" hidden>
+                                    <label class="rof__label" for="ua">Корисна площа однієї одиниці, м²</label>
+                                    <input class="rof__input" id="ua" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3"><div class="rof__hint">Упаковка бітумної, штука черепиці чи листа.</div>
+                                </div>
+                                <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="reserve">Запас, %</label>
+                                    <input class="rof__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="rof__hint">На підрізку, округлюється вгору.</div>
+                                </div>
                             </div>
 
+                            <div class="rof__miniTitle rof__mt12">Дахи</div>
+                            <div class="rof__el" id="nl1">
+                                <div class="rof__elHead"><span>Дах 1</span><span class="rof__elVol" id="nv1">—</span><button type="button" class="rof__elRm" id="nl1rm" aria-label="Видалити дах" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n1tLbl">Тип</span>
+                                    <input type="hidden" id="n1_type" value="gable">
+                                    <div class="rof__sel" id="n1t_dd">
+                                        <button type="button" class="rof__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Двосхилий</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Двосхилий</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Чотирисхилий (однаковий кут)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Односхилий</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n1_a">Довжина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n1_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n1_b">Ширина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n1_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n1_p">Кут нахилу, °&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n1_p" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n1_oe">Звис карниза, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n1_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,5">
+                                </div>
+                                    <div class="rof__field" id="n1_ogW">
+                                    <label class="rof__label" for="n1_og">Звис фронтону, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n1_og" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl2" hidden>
+                                <div class="rof__elHead"><span>Дах 2</span><span class="rof__elVol" id="nv2">—</span><button type="button" class="rof__elRm" id="nl2rm" aria-label="Видалити дах" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n2tLbl">Тип</span>
+                                    <input type="hidden" id="n2_type" value="gable">
+                                    <div class="rof__sel" id="n2t_dd">
+                                        <button type="button" class="rof__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Двосхилий</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Двосхилий</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Чотирисхилий (однаковий кут)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Односхилий</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n2_a">Довжина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n2_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n2_b">Ширина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n2_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n2_p">Кут нахилу, °&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n2_p" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n2_oe">Звис карниза, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n2_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,5">
+                                </div>
+                                    <div class="rof__field" id="n2_ogW">
+                                    <label class="rof__label" for="n2_og">Звис фронтону, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n2_og" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl3" hidden>
+                                <div class="rof__elHead"><span>Дах 3</span><span class="rof__elVol" id="nv3">—</span><button type="button" class="rof__elRm" id="nl3rm" aria-label="Видалити дах" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n3tLbl">Тип</span>
+                                    <input type="hidden" id="n3_type" value="gable">
+                                    <div class="rof__sel" id="n3t_dd">
+                                        <button type="button" class="rof__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Двосхилий</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Двосхилий</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Чотирисхилий (однаковий кут)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Односхилий</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n3_a">Довжина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n3_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n3_b">Ширина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n3_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n3_p">Кут нахилу, °&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n3_p" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n3_oe">Звис карниза, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n3_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,5">
+                                </div>
+                                    <div class="rof__field" id="n3_ogW">
+                                    <label class="rof__label" for="n3_og">Звис фронтону, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n3_og" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl4" hidden>
+                                <div class="rof__elHead"><span>Дах 4</span><span class="rof__elVol" id="nv4">—</span><button type="button" class="rof__elRm" id="nl4rm" aria-label="Видалити дах" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n4tLbl">Тип</span>
+                                    <input type="hidden" id="n4_type" value="gable">
+                                    <div class="rof__sel" id="n4t_dd">
+                                        <button type="button" class="rof__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Двосхилий</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Двосхилий</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Чотирисхилий (однаковий кут)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Односхилий</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n4_a">Довжина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n4_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n4_b">Ширина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n4_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n4_p">Кут нахилу, °&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n4_p" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n4_oe">Звис карниза, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n4_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,5">
+                                </div>
+                                    <div class="rof__field" id="n4_ogW">
+                                    <label class="rof__label" for="n4_og">Звис фронтону, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n4_og" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl5" hidden>
+                                <div class="rof__elHead"><span>Дах 5</span><span class="rof__elVol" id="nv5">—</span><button type="button" class="rof__elRm" id="nl5rm" aria-label="Видалити дах" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n5tLbl">Тип</span>
+                                    <input type="hidden" id="n5_type" value="gable">
+                                    <div class="rof__sel" id="n5t_dd">
+                                        <button type="button" class="rof__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Двосхилий</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Двосхилий</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Чотирисхилий (однаковий кут)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Односхилий</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n5_a">Довжина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n5_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n5_b">Ширина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n5_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n5_p">Кут нахилу, °&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n5_p" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n5_oe">Звис карниза, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n5_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,5">
+                                </div>
+                                    <div class="rof__field" id="n5_ogW">
+                                    <label class="rof__label" for="n5_og">Звис фронтону, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n5_og" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="rof__el" id="nl6" hidden>
+                                <div class="rof__elHead"><span>Дах 6</span><span class="rof__elVol" id="nv6">—</span><button type="button" class="rof__elRm" id="nl6rm" aria-label="Видалити дах" hidden>×</button></div>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="n6tLbl">Тип</span>
+                                    <input type="hidden" id="n6_type" value="gable">
+                                    <div class="rof__sel" id="n6t_dd">
+                                        <button type="button" class="rof__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Двосхилий</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="gable" aria-selected="true">Двосхилий</li>
+                                            <li role="option" tabindex="-1" data-v="hip" aria-selected="false">Чотирисхилий (однаковий кут)</li>
+                                            <li role="option" tabindex="-1" data-v="shed" aria-selected="false">Односхилий</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n6_a">Довжина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n6_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n6_b">Ширина будинку, м&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n6_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 8">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="n6_p">Кут нахилу, °&nbsp;<span class="rof__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="rof__input" id="n6_p" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 30">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="n6_oe">Звис карниза, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n6_oe" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,5">
+                                </div>
+                                    <div class="rof__field" id="n6_ogW">
+                                    <label class="rof__label" for="n6_og">Звис фронтону, м <span class="rof__hint">(необов'язково)</span></label>
+                                    <input class="rof__input" id="n6_og" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 0,3">
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="rof__add" id="addNl">+ Додати дах</button>
+
+                            <details class="rof__details rof__mt12" id="accDet">
+                                <summary>Планки, обрешітка, мембрана <span class="rof__hint">(необов'язково)</span></summary>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="plen">Довжина планки, м</label>
+                                    <input class="rof__input" id="plen" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2"><div class="rof__hint">Коник, карниз, кромки, ребра.</div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="bst">Крок обрешітки, см</label>
+                                    <input class="rof__input" id="bst" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 35">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="blen">Довжина дошки, м</label>
+                                    <input class="rof__input" id="blen" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="mroll">Площа рулона мембрани, м²</label>
+                                    <input class="rof__input" id="mroll" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 75">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="mov">Нахльост мембрани, %</label>
+                                    <input class="rof__input" id="mov" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 10">
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="rof__details rof__mt12" id="priceDet">
+                                <summary>Ціни й доставка <span class="rof__hint">(необов'язково)</span></summary>
+                                <div class="rof__rows">
+                                    <div class="rof__field rof__field--full">
+                                    <span class="rof__label" id="puLbl">Ціна покриття за</span>
+                                    <input type="hidden" id="punit" value="piece">
+                                    <div class="rof__sel" id="pu_dd">
+                                        <button type="button" class="rof__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">лист або одиницю</span><span class="rof__caret" aria-hidden="true"></span></button>
+                                        <ul class="rof__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="piece" aria-selected="true">лист або одиницю</li>
+                                            <li role="option" tabindex="-1" data-v="m2" aria-selected="false">м²</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pCover">Ціна покриття, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pCover" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pTrim">Ціна планки, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pTrim" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pBat">Ціна дошки, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pBat" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field">
+                                    <label class="rof__label" for="pMem">Ціна рулона мембрани, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pMem" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="rof__field rof__field--full">
+                                    <label class="rof__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="rof__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="rof__actions rof__mt12">
+                            <button class="rof__btn rof__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="rof__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="rof__card">
+                        <div class="rof__sectionTitle">
+                            <h2 class="rof__h2">Результат</h2>
+                            <span class="rof__badge">🏠</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/insulation-calculator">Калькулятор теплоізоляції</a>
-                            <a href="/construction/rebar-calculator">Калькулятор арматури</a>
+                        <div class="rof__result" id="result">Вкажіть дані — результат з'явиться тут.</div>
+                        <div class="rof__actions rof__mt12">
+                            <button class="rof__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="rof__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="rof__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="rof__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks rof__mt12"><a class="rof__link" href="/construction/insulation-calculator">Калькулятор теплоізоляції →</a> <a class="rof__link" href="/construction/cost-calculator">Калькулятор вартості будівництва →</a></div>
                     </div>
+                </div>
+
+                <div class="rof__card rof__schedule" id="schedule" hidden>
+                    <div class="rof__schedHead">
+                        <h2 class="rof__h2">Підсумок</h2>
+                        <div class="rof__tools">
+                            <button type="button" class="rof__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="rof__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="rof__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як розраховується площа даху</h2>
-            <p>
-                Розрахунок базується на площі горизонтальної проєкції будинку (довжина × ширина, плюс
-                звиси даху), поділеній на косинус кута нахилу. Це враховує геометричний факт, що
-                похилий схил має більшу площу, ніж його горизонтальна проєкція.
-            </p>
-
-            <h2>Чому площа даху завжди більша за площу будинку</h2>
-            <p>
-                Уяви, що дах — це нахилена площина, натягнута над горизонтальним прямокутником
-                будинку. Чим більший кут нахилу, тим "довшою" стає ця похила поверхня відносно своєї
-                горизонтальної проєкції. Наприклад, при куті 30° площа даху перевищує площу основи
-                приблизно на 15%, а при 45° — вже на 41%.
-            </p>
-
-            <h2>Як обрати кут нахилу даху</h2>
-            <ul>
-                <li><b>Пологий дах (5-20°):</b> підходить для регіонів з малою кількістю опадів, вимагає надійнішої
-                    гідроізоляції.</li>
-                <li><b>Помірний нахил (20-35°):</b> найпоширеніший діапазон, підходить для більшості типів покрівельних
-                    матеріалів, включно з металочерепицею.</li>
-                <li><b>Крутий дах (35-50°+):</b> кращий для снігових регіонів (сніг швидше сходить), також традиційний
-                    для деяких архітектурних стилів.</li>
-            </ul>
-
-            <h2>Навіщо потрібен запас на нахлест</h2>
-            <p>
-                Покрівельні матеріали (черепиця, металочерепиця, шифер) укладаються з нахлестом одне
-                на одного для забезпечення водонепроникності стиків. Це означає, що частина площі
-                кожного листа чи елемента "перекривається" сусіднім, тому фактично потрібно більше
-                матеріалу, ніж чиста розрахована площа даху.
-            </p>
-
-            <p class="m-hintSmall">
-                Цей розрахунок є спрощеною моделлю для прямокутного двосхилого чи чотирисхилого даху
-                простої форми. Для дахів складної конфігурації (з мансардними вікнами, кількома
-                рівнями, складною геометрією) рекомендується детальний проєкт від архітектора чи
-                покрівельника.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/insulation-calculator"><b>Калькулятор теплоізоляції</b><span>Товщина утеплювача за опором теплопередачі, плити й вартість.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+                <a class="cc-related-card" href="/construction/steel-weight-calculator"><b>Калькулятор ваги металу</b><span>Вага прутків, труб, швелерів і балок за розмірами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор даху</h2>
+            <p>Калькулятор визначає <b>площу скатів</b> двосхилого, чотирисхилого (з однаковим кутом) та односхилого даху, висоту коника, довжини коника, карнизів, фронтонних кромок і ребер вальми для кількох будівель (до шести). Окремо рахуються звис карниза й звис фронтону. Далі, якщо ви вказали покриття, калькулятор знаходить кількість листів чи штучних одиниць із запасом, а за бажанням планки, обрешітку, мембрану й вартість за вашими цінами в гривнях, доларах або євро.</p>
+
+            <h2>Як рахується площа скатів</h2>
+            <p>Скат має довжину по схилу, яка дорівнює горизонтальному прольоту до коника, поділеному на косинус кута. Для двосхилого даху це два прямокутники: довжина з урахуванням звисів фронтону на довжину по схилу. Чотирисхилий дах складається з двох трапецій і двох трикутників, а односхилий з одного прямокутника. Сума площ скатів завжди дорівнює площі даху в плані зі звисами, поділеній на косинус кута.</p>
+            <p>Приклад: двосхилий дах будинку 10×8 м без звисів під кутом 30° дає два скати довжиною по схилу 4,62 м і площу 92,4 м². Для чотирисхилого даху 10×8 м із звисом 0,5 м виходить 114,3 м², коник 2,0 м, ребра вальми по 6,87 м. Односхилий 6×4 м під кутом 20° дає 25,5 м².</p>
+
+            <h2>Листи, штучне покриття й запас</h2>
+            <p>Для листового покриття калькулятор рахує колонки листів по основі кожного скату, поділеній на корисну ширину листа. Якщо довжина по схилу більша за довжину листа, листи нарощуються з нахльостом у кілька рядів. Можна також обрати листи під довжину скату, тоді кількість дорівнює кількості колонок. Для штучного покриття площа скатів із запасом ділиться на корисну площу однієї одиниці. Листи над трапеціями й трикутниками рахуються по основі, тому це безпечна верхня оцінка.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Чотирисхилий дах 10×8 м під кутом 30° зі звисом 0,5 м і двосхилий 6×5 м під кутом 35° зі звисом карниза 0,4 м і фронтону 0,3 м. Площа 161,0 м². Листи 1,1×3 м із нахльостом 0,15 м: 100 листів, із запасом 5% 105. Планки по 2 м: 54 шт, обрешітка з кроком 35 см: 82 дощок по 6 м, мембрана з нахльостом 10%: 3 рулони по 75 м². За 950 ₴ за лист, 250 ₴ за планку, 180 ₴ за дошку й 1 900 ₴ за рулон вартість 133 710 ₴.</p>
+            <p class="rof-mini">Калькулятор дає орієнтовну оцінку. Параметри листів, одиниць і матеріалів беріть з даних вашого виробника.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Як порахувати площу даху?</h3>
+                <p>Площа даху дорівнює площі в плані зі звисами, поділеній на косинус кута нахилу. Для двосхилого даху 10×8 м без звисів під кутом 30° це 92,4 м².</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Чому площа даху більша за площу будинку?</h3>
-                <p>Через нахил схилів фактична площа покрівлі завжди більша за горизонтальну проєкцію (площу основи
-                    будинку) — чим більший кут нахилу, тим суттєвіша різниця.</p>
+                <p>Бо скати нахилені, а площа похилої поверхні більша за площу її проєкції в плані на множник 1/cos(кута). До цього додаються звиси карниза й фронтону.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Який кут нахилу даху оптимальний?</h3>
-                <p>Це залежить від клімату та типу покрівельного матеріалу: у сніжних регіонах перевагу надають крутішим
-                    схилам (35-45°) для кращого сходження снігу, тоді як для металочерепиці типовий діапазон 20-35°.</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати висоту коника?</h3>
+                <p>Висота коника над лінією карниза дорівнює тангенсу кута, помноженому на половину ширини будинку (для односхилого на всю ширину). Для будинку шириною 8 м під кутом 30° це 2,31 м.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Скільки запасу матеріалу потрібно на нахлест?</h3>
-                <p>Зазвичай 10-15% додатково до розрахованої площі — покрівельні матеріали укладаються внахлест для
-                    водонепроникності, і частина площі кожного листа перекривається сусіднім.</p>
+            <div class="cc-faq-item">
+                <h3>Чи рахує калькулятор чотирисхилий дах?</h3>
+                <p>Так, для чотирисхилого даху з однаковим кутом на всіх скатах. Коник дорівнює різниці довжини й ширини, а ребра вальми рахуються окремо.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки листів металочерепиці чи профнастилу потрібно?</h3>
+                <p>Колонок листів стільки, скільки корисних ширин листа вкладається в основу скату, а рядів стільки, скільки листів потрібно по довжині скату з нахльостом. Також можна обрати листи під довжину скату.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке корисна ширина листа?</h3>
+                <p>Ширина листа після нахльосту сусідніх листів, вказується у даних виробника. Вона менша за повну ширину листа.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який запас покриття взяти?</h3>
+                <p>Запас задається у відсотках і округлюється вгору. Він потрібен на підрізку, особливо для вальмових дахів. Поле порожнє за замовчуванням.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати обрешітку?</h3>
+                <p>Ряди обрешітки йдуть через заданий крок від карниза до коника, а довжина кожного ряду дорівнює ширині скату на цій висоті. Довжини складаються й діляться на довжину дошки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки потрібно мембрани?</h3>
+                <p>Площа даху з нахльостом у відсотках ділиться на площу рулона й округлюється вгору.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яку планку брати на коник, карниз і кромки?</h3>
+                <p>Калькулятор рахує довжини коника, карнизів, фронтонних кромок і ребер вальми, а кількість планок це довжина, поділена на довжину однієї планки, окремо для кожного елемента.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор розжолобки, вікна й димарі?</h3>
+                <p>Ні. Будівлі зі складною формою можна розбити на кілька дахів, а отвори й відходи покрити запасом.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який кут нахилу вибрати?</h3>
+                <p>Він залежить від покриття, клімату й проєкту, тому вводиться вами в градусах. Калькулятор показує висоту коника для вибраного кута.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
