@@ -13,6 +13,32 @@ async function loadPartial(selector, url) {
 
 /* ================= INIT FUNCTIONS (те, що раніше було в <script> хедера) ================= */
 
+// плавне розкриття / згортання списків у мобільному меню (висота, відступи, прозорість).
+// Викликається ПІСЛЯ зміни класу-стану: при відкритті клас уже додано, при закритті вже знято
+// (тимчасовий slide-closing тримає список видимим, поки грає анімація).
+const SLIDE_PROPS = ['height', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom', 'borderTopWidth', 'borderBottomWidth'];
+function slideList(el, open) {
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  clearTimeout(el._slideTimer);
+  const clear = () => {
+    SLIDE_PROPS.concat(['overflow', 'opacity', 'transition']).forEach((p) => { el.style[p] = ''; });
+    el.classList.remove('slide-closing');
+  };
+  clear();
+  if (!open) el.classList.add('slide-closing');
+  const cs = getComputedStyle(el), natural = {};
+  SLIDE_PROPS.forEach((p) => { natural[p] = cs[p]; });
+  const apply = (v) => SLIDE_PROPS.forEach((p) => { el.style[p] = v ? v[p] : '0px'; });
+  el.style.overflow = 'hidden';
+  apply(open ? null : natural);
+  el.style.opacity = open ? '0' : '1';
+  void el.offsetHeight;
+  el.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+  apply(open ? natural : null);
+  el.style.opacity = open ? '1' : '0';
+  el._slideTimer = setTimeout(clear, 460);
+}
+
 function initHeaderUI() {
   const header = document.getElementById('siteHeader');
   const toggle = document.getElementById('navToggle');
@@ -110,6 +136,7 @@ function initHeaderUI() {
     const open = !item.classList.contains('is-open');
     Array.from(item.parentElement.children).forEach((sib) => {
       if (sib !== item) {
+        if (sib.classList.contains('is-open')) slideList(sib.querySelector(':scope > .mega-sub, :scope > .mega-links'), false);
         sib.classList.remove('is-open');
         const h = sib.querySelector(':scope > .mega-title, :scope > .mega-subtitle');
         if (h) h.setAttribute('aria-expanded', 'false');
@@ -117,6 +144,7 @@ function initHeaderUI() {
     });
     item.classList.toggle('is-open', open);
     head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    slideList(item.querySelector(':scope > .mega-sub, :scope > .mega-links'), open);
   };
   // role/tabindex лише на телефоні: на ПК заголовки колонок це звичайний текст
   const syncMegaA11y = () => {
@@ -153,7 +181,7 @@ function initHeaderUI() {
       e.preventDefault();
       const li = a.closest('.has-submenu');
       if (!li) return;
-      li.classList.toggle('submenu-open');
+      slideList(li.querySelector(':scope > .submenu'), li.classList.toggle('submenu-open'));
     });
   });
 }
