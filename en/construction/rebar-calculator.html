@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Rebar Calculator Online — Quantity and Weight | CalcCore</title>
+    <title>Rebar Calculator: Weight, Bars, Lap, Cost | CalcCore</title>
     <meta name="description"
-        content="Calculate the quantity and weight of rebar for reinforcing a slab, foundation, or screed. Accounts for grid spacing and bar diameter." />
+        content="Rebar calculator for slabs, strips, beams and columns: length, weight, 11.7 m bars with laps and a reserve, tie wire and the cost from your own prices." />
 
     <link rel="canonical" href="https://calccore.net/en/construction/rebar-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/rebar-calculator" />
@@ -26,259 +28,993 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Rebar Calculator Online — Quantity and Weight" />
-    <meta property="og:description" content="Calculate the quantity and weight of rebar for reinforcing a slab, foundation, or screed. Accounts for grid spacing and bar diameter." />
+    <meta property="og:title" content="Rebar Calculator: Weight, Bars, Lap, Cost" />
+    <meta property="og:description" content="Rebar calculator for slabs, strips, beams and columns: length, weight, 11.7 m bars with laps and a reserve, tie wire and the cost from your own prices." />
     <meta property="og:url" content="https://calccore.net/en/construction/rebar-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rebar Calculator Online — Quantity and Weight" />
-    <meta name="twitter:description" content="Calculate the quantity and weight of rebar for reinforcing a slab, foundation, or screed. Accounts for grid spacing and bar diameter." />
+    <meta name="twitter:title" content="Rebar Calculator: Weight, Bars, Lap, Cost" />
+    <meta name="twitter:description" content="Rebar calculator for slabs, strips, beams and columns: length, weight, 11.7 m bars with laps and a reserve, tie wire and the cost from your own prices." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/reb.css?v=20261029reb1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/rebar-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Why is rebar mesh needed in concrete?",
-        "acceptedAnswer":{"@type":"Answer","text":"Concrete withstands compression well but is weak under tension. Rebar compensates for this weakness, significantly increasing the strength and durability of the structure."}
-      },
-      {
-        "@type":"Question",
-        "name":"What grid spacing is most commonly used?",
-        "acceptedAnswer":{"@type":"Answer","text":"For floor screeds, typically 15-20 cm; for foundation slabs, 20-25 cm, depending on load and structural thickness."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I calculate rebar weight knowing only the length?",
-        "acceptedAnswer":{"@type":"Answer","text":"Weight depends on bar diameter — reference tables give the weight per linear meter for each standard diameter (e.g., 8mm ≈ 0.395 kg/m, 10mm ≈ 0.617 kg/m)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029reb1" defer></script>
+    <script src="/js/rebar-calculator.js?v=20261029reb1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/construction/rebar-calculator#app",
-    "name":"Rebar Calculator",
-    "description":"Calculate rebar quantity and weight for reinforcing a slab or foundation.",
-    "url":"https://calccore.net/en/construction/rebar-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/construction/rebar-calculator#app",
+  "name": "Rebar Calculator",
+  "description": "Calculates rebar for several elements: a slab with a one or two layer mesh, the frame of a strip, a beam or a column with stirrups. Diameters 6–32 mm, a cover, bars of a standard length with laps, a reserve, weight, tie wire and the cost from your own prices in hryvnia, dollars or euros.",
+  "url": "https://calccore.net/en/construction/rebar-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Up to six elements: a slab with a mesh or a frame (strip, beam, column)",
+    "Diameters 6–32 mm, a cover, stirrups, layers of the mesh",
+    "Bars of a standard length with laps and a reserve, weight in kg and tonnes",
+    "A picture of the reinforcement of every element, tables by diameter",
+    "Your own prices, none built in; hryvnia, dollar or euro; table, CSV, shareable link"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/construction/rebar-calculator#webpage",
+      "url": "https://calccore.net/en/construction/rebar-calculator",
+      "name": "Rebar Calculator: Weight, Bars, Lap, Cost | CalcCore",
+      "description": "Rebar calculator for slabs, strips, beams and columns: length, weight, 11.7 m bars with laps and a reserve, tie wire and the cost from your own prices.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/construction/rebar-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/construction/rebar-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/construction/rebar-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Construction",
+          "item": "https://calccore.net/en/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Rebar Calculator",
+          "item": "https://calccore.net/en/construction/rebar-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/construction/rebar-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate rebar for a slab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The length of the bars is the size of the slab minus the covers, the number in each direction is the size across divided by the step, plus one. For a slab of 6×4 m with a 20 cm step and Ø12 in one layer that is 250 m and 222 kg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much rebar does a strip foundation need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The main bars are the length of the strip times their number, the stirrups are counted by the step. For a 20 m strip of a 40×80 cm section, 4 bars of Ø14 and Ø8 stirrups at 20 cm with a 5 cm cover that is 101 stirrups and 282.0 m of rebar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the lap and how is it counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The lap is the length by which two bars overlap when joined in one line. It is set in bar diameters and taken from the project. If the field is empty, the lap is not counted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are there more bars than the length divided by the bar length?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the segments are cut from whole bars, and the end that is shorter than a segment goes to offcuts. Also, pieces longer than a bar are made of several bars with a lap."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which rebar diameter and step should I choose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is set by the design of the structure for its loads. The calculator does not choose the diameter and the step, it counts by the values you enter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a metre of rebar weigh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The weight of a metre is 0.00617 × d² kg, where d is the diameter in mm: Ø6 0.222, Ø8 0.395, Ø10 0.617, Ø12 0.888, Ø14 1.209, Ø16 1.580 kg/m."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The layer of concrete between the rebar and the surface of the element. The calculator shortens the bars of a slab by two covers and reduces the perimeter of a stirrup. The value comes from the project, the field is empty by default."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are stirrups counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The length of the element is divided by the stirrup step and one is added. The perimeter of a stirrup is two section dimensions minus the covers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for the hooks of stirrups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Hooks make a real stirrup longer, so for accuracy add a reserve or increase the length of the element."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much tie wire is needed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The rate depends on the way of tying and the density of the mesh, so you enter it in kg per tonne of rebar. There is no default value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate the cost of rebar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Per tonne it is the weight bought times the price, per bar the number of bars with the reserve, per metre the length of the bars bought. Wire and delivery are added separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What length are rebar bars?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common is 11.7 m, but suppliers have other lengths too, so the field “Bar length” can be changed."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="reb-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="crebar">
-            <div class="mcalc__wrap">
+        <section class="reb" id="reb">
+            <div class="reb__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Rebar Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate the quantity and weight of rebar for
-                        reinforcing a slab, foundation, or screed.
-                    </p>
+                <div class="reb__titlebar">
+                    <h1 class="reb__h1">Rebar Calculator</h1>
+                    <p class="reb__p">Work out the length, weight and number of bars of rebar for a slab, strip, beam or column with pictures of the reinforcement and the cost.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="reb__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter dimensions</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="reb__card">
+                        <div class="reb__sectionTitle">
+                            <h2 class="reb__h2">Input data</h2>
+                            <div class="reb__dd" id="cur_dd"><button type="button" class="reb__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"><img class="reb__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="reb__caret" aria-hidden="true"></span></button><ul class="reb__ddList" id="cur_list" role="listbox" aria-label="Currency" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="reb__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="reb__ddCode">UAH</span><span class="reb__ddName">Ukrainian hryvnia</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="reb__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="reb__ddCode">USD</span><span class="reb__ddName">US dollar</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="reb__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="reb__ddCode">EUR</span><span class="reb__ddName">Euro</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="areaLength">Area length (m)</label>
-                                <input class="mcalc__input" id="areaLength" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 6" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="areaWidth">Area width (m)</label>
-                                <input class="mcalc__input" id="areaWidth" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="spacing">Grid spacing (cm)</label>
-                                <input class="mcalc__input" id="spacing" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 20" value="20" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="diameter">Rebar diameter (mm)</label>
-                                <select id="diameter" class="mcalc__select">
-                                    <option value="6">6 mm</option>
-                                    <option value="8" selected>8 mm</option>
-                                    <option value="10">10 mm</option>
-                                    <option value="12">12 mm</option>
-                                    <option value="14">14 mm</option>
-                                    <option value="16">16 mm</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="layers">Number of mesh layers</label>
-                                <select id="layers" class="mcalc__select">
-                                    <option value="1" selected>1 layer (single mesh)</option>
-                                    <option value="2">2 layers (double mesh)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="reb__block">
+                            <div class="reb__rows">
+                                <div class="reb__field">
+                                    <label class="reb__label" for="bl">Bar length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="bl" type="text" inputmode="decimal" autocomplete="off" placeholder="11.7" value="11.7"><div class="reb__hint">The standard length at your supplier.</div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="reb__field">
+                                    <label class="reb__label" for="lap">Lap, diameters</label>
+                                    <input class="reb__input" id="lap" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40"><div class="reb__hint">From the project. Empty: no lap.</div>
+                                </div>
+                                <div class="reb__field reb__field--full">
+                                    <label class="reb__label" for="reserve">Reserve, %</label>
+                                    <input class="reb__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5"><div class="reb__hint">In bars, rounded up.</div>
+                                </div>
                             </div>
 
+                            <div class="reb__miniTitle reb__mt12">Elements</div>
+                            <div class="reb__el" id="nl1">
+                                <div class="reb__elHead"><span>Element 1</span><span class="reb__elVol" id="nv1">—</span><button type="button" class="reb__elRm" id="nl1rm" aria-label="Remove the element" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n1tLbl">Type</span>
+                                    <input type="hidden" id="n1_type" value="slab">
+                                    <div class="reb__sel" id="n1t_dd">
+                                        <button type="button" class="reb__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Slab (mesh)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Slab (mesh)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Frame (strip, beam, column)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n1_aL" for="n1_a">Length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="reb__field" id="n1_bW">
+                                    <label class="reb__label" for="n1_b">Width, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n1_sW">
+                                    <label class="reb__label" for="n1_s">Mesh step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_s" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field" id="n1_lyW">
+                                    <span class="reb__label" id="n1yLbl">Mesh layers</span>
+                                    <input type="hidden" id="n1_ly" value="1">
+                                    <div class="reb__sel" id="n1y_dd">
+                                        <button type="button" class="reb__selBtn" id="n1y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1yLbl n1y_val"><span id="n1y_val">1 layer</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1y_list" role="listbox" aria-labelledby="n1yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n1_wW" hidden>
+                                    <label class="reb__label" for="n1_w">Section width, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_w" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40">
+                                </div>
+                                    <div class="reb__field" id="n1_hW" hidden>
+                                    <label class="reb__label" for="n1_h">Section height, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 80">
+                                </div>
+                                    <div class="reb__field" id="n1_nbW" hidden>
+                                    <label class="reb__label" for="n1_nb">Main bars&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n1_ssW" hidden>
+                                    <label class="reb__label" for="n1_ss">Stirrup step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n1_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n1dLbl">Main bars</span>
+                                    <input type="hidden" id="n1_d" value="12">
+                                    <div class="reb__sel" id="n1d_dd">
+                                        <button type="button" class="reb__selBtn" id="n1d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1dLbl n1d_val"><span id="n1d_val">Ø12 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1d_list" role="listbox" aria-labelledby="n1dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 mm</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 mm</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 mm</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 mm</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 mm</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n1_dsW" hidden>
+                                    <span class="reb__label" id="n1sLbl">Stirrup diameter</span>
+                                    <input type="hidden" id="n1_ds" value="8">
+                                    <div class="reb__sel" id="n1s_dd">
+                                        <button type="button" class="reb__selBtn" id="n1s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1sLbl n1s_val"><span id="n1s_val">Ø8 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1s_list" role="listbox" aria-labelledby="n1sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n1_c">Cover, cm <span class="reb__hint">(optional)</span></label>
+                                    <input class="reb__input" id="n1_c" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="reb__hint">From the project.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl2" hidden>
+                                <div class="reb__elHead"><span>Element 2</span><span class="reb__elVol" id="nv2">—</span><button type="button" class="reb__elRm" id="nl2rm" aria-label="Remove the element" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n2tLbl">Type</span>
+                                    <input type="hidden" id="n2_type" value="slab">
+                                    <div class="reb__sel" id="n2t_dd">
+                                        <button type="button" class="reb__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Slab (mesh)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Slab (mesh)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Frame (strip, beam, column)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n2_aL" for="n2_a">Length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="reb__field" id="n2_bW">
+                                    <label class="reb__label" for="n2_b">Width, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n2_sW">
+                                    <label class="reb__label" for="n2_s">Mesh step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_s" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field" id="n2_lyW">
+                                    <span class="reb__label" id="n2yLbl">Mesh layers</span>
+                                    <input type="hidden" id="n2_ly" value="1">
+                                    <div class="reb__sel" id="n2y_dd">
+                                        <button type="button" class="reb__selBtn" id="n2y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2yLbl n2y_val"><span id="n2y_val">1 layer</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2y_list" role="listbox" aria-labelledby="n2yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n2_wW" hidden>
+                                    <label class="reb__label" for="n2_w">Section width, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_w" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40">
+                                </div>
+                                    <div class="reb__field" id="n2_hW" hidden>
+                                    <label class="reb__label" for="n2_h">Section height, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 80">
+                                </div>
+                                    <div class="reb__field" id="n2_nbW" hidden>
+                                    <label class="reb__label" for="n2_nb">Main bars&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n2_ssW" hidden>
+                                    <label class="reb__label" for="n2_ss">Stirrup step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n2_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n2dLbl">Main bars</span>
+                                    <input type="hidden" id="n2_d" value="12">
+                                    <div class="reb__sel" id="n2d_dd">
+                                        <button type="button" class="reb__selBtn" id="n2d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2dLbl n2d_val"><span id="n2d_val">Ø12 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2d_list" role="listbox" aria-labelledby="n2dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 mm</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 mm</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 mm</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 mm</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 mm</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n2_dsW" hidden>
+                                    <span class="reb__label" id="n2sLbl">Stirrup diameter</span>
+                                    <input type="hidden" id="n2_ds" value="8">
+                                    <div class="reb__sel" id="n2s_dd">
+                                        <button type="button" class="reb__selBtn" id="n2s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2sLbl n2s_val"><span id="n2s_val">Ø8 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2s_list" role="listbox" aria-labelledby="n2sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n2_c">Cover, cm <span class="reb__hint">(optional)</span></label>
+                                    <input class="reb__input" id="n2_c" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="reb__hint">From the project.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl3" hidden>
+                                <div class="reb__elHead"><span>Element 3</span><span class="reb__elVol" id="nv3">—</span><button type="button" class="reb__elRm" id="nl3rm" aria-label="Remove the element" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n3tLbl">Type</span>
+                                    <input type="hidden" id="n3_type" value="slab">
+                                    <div class="reb__sel" id="n3t_dd">
+                                        <button type="button" class="reb__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Slab (mesh)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Slab (mesh)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Frame (strip, beam, column)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n3_aL" for="n3_a">Length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="reb__field" id="n3_bW">
+                                    <label class="reb__label" for="n3_b">Width, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n3_sW">
+                                    <label class="reb__label" for="n3_s">Mesh step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_s" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field" id="n3_lyW">
+                                    <span class="reb__label" id="n3yLbl">Mesh layers</span>
+                                    <input type="hidden" id="n3_ly" value="1">
+                                    <div class="reb__sel" id="n3y_dd">
+                                        <button type="button" class="reb__selBtn" id="n3y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3yLbl n3y_val"><span id="n3y_val">1 layer</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3y_list" role="listbox" aria-labelledby="n3yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n3_wW" hidden>
+                                    <label class="reb__label" for="n3_w">Section width, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_w" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40">
+                                </div>
+                                    <div class="reb__field" id="n3_hW" hidden>
+                                    <label class="reb__label" for="n3_h">Section height, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 80">
+                                </div>
+                                    <div class="reb__field" id="n3_nbW" hidden>
+                                    <label class="reb__label" for="n3_nb">Main bars&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n3_ssW" hidden>
+                                    <label class="reb__label" for="n3_ss">Stirrup step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n3_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n3dLbl">Main bars</span>
+                                    <input type="hidden" id="n3_d" value="12">
+                                    <div class="reb__sel" id="n3d_dd">
+                                        <button type="button" class="reb__selBtn" id="n3d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3dLbl n3d_val"><span id="n3d_val">Ø12 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3d_list" role="listbox" aria-labelledby="n3dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 mm</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 mm</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 mm</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 mm</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 mm</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n3_dsW" hidden>
+                                    <span class="reb__label" id="n3sLbl">Stirrup diameter</span>
+                                    <input type="hidden" id="n3_ds" value="8">
+                                    <div class="reb__sel" id="n3s_dd">
+                                        <button type="button" class="reb__selBtn" id="n3s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3sLbl n3s_val"><span id="n3s_val">Ø8 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3s_list" role="listbox" aria-labelledby="n3sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n3_c">Cover, cm <span class="reb__hint">(optional)</span></label>
+                                    <input class="reb__input" id="n3_c" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="reb__hint">From the project.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl4" hidden>
+                                <div class="reb__elHead"><span>Element 4</span><span class="reb__elVol" id="nv4">—</span><button type="button" class="reb__elRm" id="nl4rm" aria-label="Remove the element" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n4tLbl">Type</span>
+                                    <input type="hidden" id="n4_type" value="slab">
+                                    <div class="reb__sel" id="n4t_dd">
+                                        <button type="button" class="reb__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Slab (mesh)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Slab (mesh)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Frame (strip, beam, column)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n4_aL" for="n4_a">Length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="reb__field" id="n4_bW">
+                                    <label class="reb__label" for="n4_b">Width, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n4_sW">
+                                    <label class="reb__label" for="n4_s">Mesh step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_s" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field" id="n4_lyW">
+                                    <span class="reb__label" id="n4yLbl">Mesh layers</span>
+                                    <input type="hidden" id="n4_ly" value="1">
+                                    <div class="reb__sel" id="n4y_dd">
+                                        <button type="button" class="reb__selBtn" id="n4y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4yLbl n4y_val"><span id="n4y_val">1 layer</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4y_list" role="listbox" aria-labelledby="n4yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n4_wW" hidden>
+                                    <label class="reb__label" for="n4_w">Section width, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_w" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40">
+                                </div>
+                                    <div class="reb__field" id="n4_hW" hidden>
+                                    <label class="reb__label" for="n4_h">Section height, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 80">
+                                </div>
+                                    <div class="reb__field" id="n4_nbW" hidden>
+                                    <label class="reb__label" for="n4_nb">Main bars&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n4_ssW" hidden>
+                                    <label class="reb__label" for="n4_ss">Stirrup step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n4_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n4dLbl">Main bars</span>
+                                    <input type="hidden" id="n4_d" value="12">
+                                    <div class="reb__sel" id="n4d_dd">
+                                        <button type="button" class="reb__selBtn" id="n4d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4dLbl n4d_val"><span id="n4d_val">Ø12 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4d_list" role="listbox" aria-labelledby="n4dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 mm</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 mm</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 mm</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 mm</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 mm</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n4_dsW" hidden>
+                                    <span class="reb__label" id="n4sLbl">Stirrup diameter</span>
+                                    <input type="hidden" id="n4_ds" value="8">
+                                    <div class="reb__sel" id="n4s_dd">
+                                        <button type="button" class="reb__selBtn" id="n4s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4sLbl n4s_val"><span id="n4s_val">Ø8 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4s_list" role="listbox" aria-labelledby="n4sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n4_c">Cover, cm <span class="reb__hint">(optional)</span></label>
+                                    <input class="reb__input" id="n4_c" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="reb__hint">From the project.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl5" hidden>
+                                <div class="reb__elHead"><span>Element 5</span><span class="reb__elVol" id="nv5">—</span><button type="button" class="reb__elRm" id="nl5rm" aria-label="Remove the element" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n5tLbl">Type</span>
+                                    <input type="hidden" id="n5_type" value="slab">
+                                    <div class="reb__sel" id="n5t_dd">
+                                        <button type="button" class="reb__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Slab (mesh)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Slab (mesh)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Frame (strip, beam, column)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n5_aL" for="n5_a">Length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="reb__field" id="n5_bW">
+                                    <label class="reb__label" for="n5_b">Width, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n5_sW">
+                                    <label class="reb__label" for="n5_s">Mesh step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_s" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field" id="n5_lyW">
+                                    <span class="reb__label" id="n5yLbl">Mesh layers</span>
+                                    <input type="hidden" id="n5_ly" value="1">
+                                    <div class="reb__sel" id="n5y_dd">
+                                        <button type="button" class="reb__selBtn" id="n5y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5yLbl n5y_val"><span id="n5y_val">1 layer</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5y_list" role="listbox" aria-labelledby="n5yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n5_wW" hidden>
+                                    <label class="reb__label" for="n5_w">Section width, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_w" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40">
+                                </div>
+                                    <div class="reb__field" id="n5_hW" hidden>
+                                    <label class="reb__label" for="n5_h">Section height, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 80">
+                                </div>
+                                    <div class="reb__field" id="n5_nbW" hidden>
+                                    <label class="reb__label" for="n5_nb">Main bars&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n5_ssW" hidden>
+                                    <label class="reb__label" for="n5_ss">Stirrup step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n5_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n5dLbl">Main bars</span>
+                                    <input type="hidden" id="n5_d" value="12">
+                                    <div class="reb__sel" id="n5d_dd">
+                                        <button type="button" class="reb__selBtn" id="n5d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5dLbl n5d_val"><span id="n5d_val">Ø12 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5d_list" role="listbox" aria-labelledby="n5dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 mm</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 mm</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 mm</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 mm</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 mm</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n5_dsW" hidden>
+                                    <span class="reb__label" id="n5sLbl">Stirrup diameter</span>
+                                    <input type="hidden" id="n5_ds" value="8">
+                                    <div class="reb__sel" id="n5s_dd">
+                                        <button type="button" class="reb__selBtn" id="n5s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5sLbl n5s_val"><span id="n5s_val">Ø8 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5s_list" role="listbox" aria-labelledby="n5sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n5_c">Cover, cm <span class="reb__hint">(optional)</span></label>
+                                    <input class="reb__input" id="n5_c" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="reb__hint">From the project.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl6" hidden>
+                                <div class="reb__elHead"><span>Element 6</span><span class="reb__elVol" id="nv6">—</span><button type="button" class="reb__elRm" id="nl6rm" aria-label="Remove the element" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n6tLbl">Type</span>
+                                    <input type="hidden" id="n6_type" value="slab">
+                                    <div class="reb__sel" id="n6t_dd">
+                                        <button type="button" class="reb__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Slab (mesh)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Slab (mesh)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Frame (strip, beam, column)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n6_aL" for="n6_a">Length, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_a" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 6">
+                                </div>
+                                    <div class="reb__field" id="n6_bW">
+                                    <label class="reb__label" for="n6_b">Width, m&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_b" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n6_sW">
+                                    <label class="reb__label" for="n6_s">Mesh step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_s" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field" id="n6_lyW">
+                                    <span class="reb__label" id="n6yLbl">Mesh layers</span>
+                                    <input type="hidden" id="n6_ly" value="1">
+                                    <div class="reb__sel" id="n6y_dd">
+                                        <button type="button" class="reb__selBtn" id="n6y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6yLbl n6y_val"><span id="n6y_val">1 layer</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6y_list" role="listbox" aria-labelledby="n6yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 layer</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 layers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n6_wW" hidden>
+                                    <label class="reb__label" for="n6_w">Section width, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_w" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 40">
+                                </div>
+                                    <div class="reb__field" id="n6_hW" hidden>
+                                    <label class="reb__label" for="n6_h">Section height, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_h" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 80">
+                                </div>
+                                    <div class="reb__field" id="n6_nbW" hidden>
+                                    <label class="reb__label" for="n6_nb">Main bars&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 4">
+                                </div>
+                                    <div class="reb__field" id="n6_ssW" hidden>
+                                    <label class="reb__label" for="n6_ss">Stirrup step, cm&nbsp;<span class="reb__req" title="Required field" aria-label="Required field">*</span></label>
+                                    <input class="reb__input" id="n6_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n6dLbl">Main bars</span>
+                                    <input type="hidden" id="n6_d" value="12">
+                                    <div class="reb__sel" id="n6d_dd">
+                                        <button type="button" class="reb__selBtn" id="n6d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6dLbl n6d_val"><span id="n6d_val">Ø12 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6d_list" role="listbox" aria-labelledby="n6dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 mm</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 mm</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 mm</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 mm</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 mm</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n6_dsW" hidden>
+                                    <span class="reb__label" id="n6sLbl">Stirrup diameter</span>
+                                    <input type="hidden" id="n6_ds" value="8">
+                                    <div class="reb__sel" id="n6s_dd">
+                                        <button type="button" class="reb__selBtn" id="n6s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6sLbl n6s_val"><span id="n6s_val">Ø8 mm</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6s_list" role="listbox" aria-labelledby="n6sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 mm</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 mm</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 mm</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 mm</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 mm</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 mm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n6_c">Cover, cm <span class="reb__hint">(optional)</span></label>
+                                    <input class="reb__input" id="n6_c" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3"><div class="reb__hint">From the project.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="reb__add" id="addNl">+ Add an element</button>
+
+                            <details class="reb__details reb__mt12" id="wireDet">
+                                <summary>Tie wire <span class="reb__hint">(optional)</span></summary>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <label class="reb__label" for="wire">Rate, kg per tonne of rebar</label>
+                                    <input class="reb__input" id="wire" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 2"><div class="reb__hint">From your experience or the project.</div>
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="reb__details reb__mt12" id="priceDet">
+                                <summary>Price and delivery <span class="reb__hint">(optional)</span></summary>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="puLbl">Rebar price per</span>
+                                    <input type="hidden" id="punit" value="ton">
+                                    <div class="reb__sel" id="pu_dd">
+                                        <button type="button" class="reb__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">tonne</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="ton" aria-selected="true">tonne</li>
+                                            <li role="option" tabindex="-1" data-v="bar" aria-selected="false">bar</li>
+                                            <li role="option" tabindex="-1" data-v="m" aria-selected="false">metre</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="pBar">Rebar price, <span data-wu>₴</span></label>
+                                    <input class="reb__input" id="pBar" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="pWire">Wire price per kg, <span data-wu>₴</span></label>
+                                    <input class="reb__input" id="pWire" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="reb__field reb__field--full">
+                                    <label class="reb__label" for="pDel">Delivery, <span data-wu>₴</span></label>
+                                    <input class="reb__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="reb__actions reb__mt12">
+                            <button class="reb__btn reb__btn--wide" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="reb__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="reb__card">
+                        <div class="reb__sectionTitle">
+                            <h2 class="reb__h2">Result</h2>
+                            <span class="reb__badge">🏗️</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/construction/concrete-calculator">Concrete Calculator</a>
-                            <a href="/en/construction/steel-weight-calculator">Steel Weight</a>
+                        <div class="reb__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="reb__actions reb__mt12">
+                            <button class="reb__btn" id="shareBtn" type="button">Share link</button>
+                            <button class="reb__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="reb__btn" id="resetBtn" type="button">Reset</button>
+                            <button class="reb__btn" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
+                        <div class="m-navlinks reb__mt12"><a class="reb__link" href="/en/construction/concrete-calculator">Concrete calculator →</a> <a class="reb__link" href="/en/construction/cost-calculator">Construction cost calculator →</a></div>
                     </div>
+                </div>
+
+                <div class="reb__card reb__schedule" id="schedule" hidden>
+                    <div class="reb__schedHead">
+                        <h2 class="reb__h2">Summary</h2>
+                        <div class="reb__tools">
+                            <button type="button" class="reb__qchip" id="copyTbl">Copy the table</button>
+                            <button type="button" class="reb__qchip" id="csvBtn">Download CSV</button>
+                        </div>
+                    </div>
+                    <div class="reb__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why rebar is needed in concrete</h2>
-            <p>
-                Concrete has excellent compressive strength but is very weak in tension and bending.
-                Steel rebar compensates for this weakness — reinforced concrete combines concrete's
-                compressive strength with steel's tensile strength, making the structure significantly
-                stronger and more durable.
-            </p>
-        
-            <h2>Rebar steel grades</h2>
-            <p>
-                Rebar is classified by strength grades that determine its mechanical properties:
-            </p>
-            <ul>
-                <li><b>Grade 40 (smooth):</b> mainly used for transverse reinforcement (stirrups), has no ribs, and bonds less
-                    effectively with concrete.</li>
-                <li><b>Grade 60 (deformed/ribbed):</b> the most common grade for residential construction — has ribs for better
-                    concrete bonding.</li>
-                <li><b>Grade 75, Grade 80:</b> higher strength, used in critical structures with elevated load requirements.
-                </li>
-            </ul>
-        
-            <h2>How rebar quantity is calculated</h2>
-            <p>
-                A rebar mesh consists of bars placed in two perpendicular directions at a set spacing
-                (distance between adjacent bars). The number of bars in each direction is calculated
-                as the area's length divided by the grid spacing, plus one extra bar at the edge.
-            </p>
-        
-            <h2>Typical grid spacing by structure type</h2>
-            <ul>
-                <li><b>Floor screed:</b> 15-20 cm, lower load, thinner concrete layer.</li>
-                <li><b>Foundation slab:</b> 20-25 cm, depending on building load and soil type.</li>
-                <li><b>Road surfacing:</b> 10-15 cm due to high traffic loads.</li>
-                <li><b>Monolithic slabs:</b> usually 15-20 cm, with double reinforcement (top and bottom layer) to resist
-                    bending in both directions.</li>
-            </ul>
-        
-            <h2>Concrete cover over rebar</h2>
-            <p>
-                Rebar must be fully embedded in concrete with a set distance from the surface (concrete
-                cover), which protects the steel from corrosion caused by contact with moisture and air.
-                Typical cover is 20-30 mm for interior structures and 40-50 mm for foundations and exterior
-                elements in contact with soil or weather. Plastic or concrete spacers (chairs) are used to
-                maintain the correct rebar position.
-            </p>
-        
-            <h2>How to calculate rebar weight</h2>
-            <p>
-                Knowing the total rebar length and diameter, weight can be determined using reference
-                tables of weight per linear meter. Approximate weight per meter: 6mm ≈ 0.222 kg,
-                8mm ≈ 0.395 kg, 10mm ≈ 0.617 kg, 12mm ≈ 0.888 kg, 14mm ≈ 1.21 kg, 16mm ≈ 1.58 kg. Weight
-                is calculated as: weight = length × cross-sectional area × steel density (7850 kg/m³).
-            </p>
-        
-            <h2>Practical tips for tying rebar</h2>
-            <ul>
-                <li><b>Tie wire instead of welding:</b> for most structures, rebar is joined with tie wire rather than welding,
-                    since welding can weaken the metal's structure at the joint.</li>
-                <li><b>Bar lap length:</b> when joining two bars into one line, a lap of roughly 30-50 bar diameters is needed
-                    to transfer load.</li>
-                <li><b>Avoid contact with soil:</b> rebar should never directly touch the ground or formwork — always use
-                    spacers to maintain the concrete cover.</li>
-            </ul>
-        
-            <p class="m-hintSmall">
-                This calculation is an estimate for basic reinforcement. For critical structures
-                (residential foundations, load-bearing elements), a design from a qualified structural
-                engineer accounting for loads and safety codes is required.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/construction/concrete-calculator"><b>Concrete calculator</b><span>The volume of concrete, ordering mixers, cement, sand and gravel.</span></a>
+                <a class="cc-related-card" href="/en/construction/steel-weight-calculator"><b>Steel weight calculator</b><span>The weight of bars, pipes, channels and beams by dimensions.</span></a>
+                <a class="cc-related-card" href="/en/construction/cost-calculator"><b>Construction cost calculator</b><span>The budget of a house, renovation, foundation, fence or garage from your own prices.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the rebar calculator counts</h2>
+            <p>The calculator works out how much <b>rebar</b> is needed for several elements (up to six): a slab with a one or two layer mesh and the frame of a strip, a beam or a column with main bars and stirrups. For every element you enter the dimensions, the diameters, the steps and the cover, and also the length of the bars on sale, the lap and the reserve. The result is the length, the weight, the number of bars with laps and offcuts and, if you wish, tie wire and the cost from your prices in hryvnia, dollars or euros.</p>
+
+            <h2>How rebar is counted for a slab and a frame</h2>
+            <p>Slab: the length of the bars is the size of the slab minus two covers, and the number of bars in each direction is the size across divided by the step, plus one. For a slab of 6×4 m with a 20 cm step and no cover that is 21 bars of 6 m and 31 of 4 m, 250 m in total, 222 kg at Ø12 (9.3 kg per m²).</p>
+            <p>Frame: the main bars have the length of the element, and the stirrups are set at your step, their number is the length divided by the step, plus one. The perimeter of a stirrup is two section dimensions minus the covers, with no hooks. For a 20 m strip of a 40×80 cm section, 4 bars of Ø14 and Ø8 stirrups at 20 cm with a 5 cm cover that is 101 stirrups of 2.00 m.</p>
+
+            <h2>Bars, lap and offcuts</h2>
+            <p>Rebar is sold in bars of a standard length, most often 11.7 m. If a piece is longer, it is made of several bars with a lap. The lap is set in diameters and taken from the project. For a 20 m piece of Ø12 and a lap of 40 diameters (0.48 m) 2 bars are needed, the second segment is 8.78 m. The calculator cuts the segments from the longest to the shortest: each goes into the bar with the smallest leftover where it fits, otherwise a new bar is taken. So the number of bars is a little more than the length divided by the length of a bar.</p>
+
+            <h2>Worked example</h2>
+            <p>A slab of 6×4 m, Ø12 at a 20 cm step in two layers with a 3 cm cover, and a 20 m strip of a 40×80 cm section, 4 bars of Ø14, Ø8 stirrups at 20 cm, a 5 cm cover. A bar of 11.7 m, a lap of 40 diameters, a 5% reserve. The length with laps is 758.2 m, the weight by the calculation 0.600 t, 79 bars, 85 with the reserve, the weight bought 0.785 t. Wire at 2 kg per tonne gives 1.2 kg. At 50,400 ₴ per tonne and 80 ₴ per kg of wire the cost is 39,637 ₴.</p>
+            <p class="reb-mini">The calculator gives an approximate estimate. The diameters, steps, lap and cover are set by the design of the structure.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Why is rebar mesh needed in concrete?</h3>
-                <p>Concrete withstands compression well but is weak under tension. Rebar compensates for this weakness,
-                    significantly increasing the strength and durability of the structure.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate rebar for a slab?</h3>
+                <p>The length of the bars is the size of the slab minus the covers, the number in each direction is the size across divided by the step, plus one. For a slab of 6×4 m with a 20 cm step and Ø12 in one layer that is 250 m and 222 kg.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What grid spacing is most commonly used?</h3>
-                <p>For floor screeds, typically 15-20 cm; for foundation slabs, 20-25 cm, depending on load and
-                    structural thickness.</p>
+            <div class="cc-faq-item">
+                <h3>How much rebar does a strip foundation need?</h3>
+                <p>The main bars are the length of the strip times their number, the stirrups are counted by the step. For a 20 m strip of a 40×80 cm section, 4 bars of Ø14 and Ø8 stirrups at 20 cm with a 5 cm cover that is 101 stirrups and 282.0 m of rebar.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I calculate rebar weight knowing only the length?</h3>
-                <p>Weight depends on bar diameter — reference tables give the weight per linear meter for each standard
-                    diameter (e.g., 8mm ≈ 0.395 kg/m, 10mm ≈ 0.617 kg/m).</p>
+            <div class="cc-faq-item">
+                <h3>What is the lap and how is it counted?</h3>
+                <p>The lap is the length by which two bars overlap when joined in one line. It is set in bar diameters and taken from the project. If the field is empty, the lap is not counted.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why are there more bars than the length divided by the bar length?</h3>
+                <p>Because the segments are cut from whole bars, and the end that is shorter than a segment goes to offcuts. Also, pieces longer than a bar are made of several bars with a lap.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which rebar diameter and step should I choose?</h3>
+                <p>It is set by the design of the structure for its loads. The calculator does not choose the diameter and the step, it counts by the values you enter.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much does a metre of rebar weigh?</h3>
+                <p>The weight of a metre is 0.00617 × d² kg, where d is the diameter in mm: Ø6 0.222, Ø8 0.395, Ø10 0.617, Ø12 0.888, Ø14 1.209, Ø16 1.580 kg/m.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the cover?</h3>
+                <p>The layer of concrete between the rebar and the surface of the element. The calculator shortens the bars of a slab by two covers and reduces the perimeter of a stirrup. The value comes from the project, the field is empty by default.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How are stirrups counted?</h3>
+                <p>The length of the element is divided by the stirrup step and one is added. The perimeter of a stirrup is two section dimensions minus the covers.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for the hooks of stirrups?</h3>
+                <p>No. Hooks make a real stirrup longer, so for accuracy add a reserve or increase the length of the element.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much tie wire is needed?</h3>
+                <p>The rate depends on the way of tying and the density of the mesh, so you enter it in kg per tonne of rebar. There is no default value.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate the cost of rebar?</h3>
+                <p>Per tonne it is the weight bought times the price, per bar the number of bars with the reserve, per metre the length of the bars bought. Wire and delivery are added separately.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What length are rebar bars?</h3>
+                <p>The most common is 11.7 m, but suppliers have other lengths too, so the field “Bar length” can be changed.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

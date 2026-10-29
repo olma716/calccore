@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор арматури онлайн — кількість та вага | CalcCore</title>
+    <title>Калькулятор арматури: вага, прутки, перепуск | CalcCore</title>
     <meta name="description"
-        content="Розрахунок кількості та ваги арматури для армування плити, фундаменту чи стяжки. Врахування кроку сітки та діаметра прутків." />
+        content="Калькулятор арматури для плити, стрічки, балки й колони: довжина, вага, прутки 11,7 м з перепуском і запасом, в'язальний дріт та вартість за вашими цінами." />
 
     <link rel="canonical" href="https://calccore.net/construction/rebar-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/construction/rebar-calculator" />
@@ -26,260 +28,993 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор арматури онлайн — кількість та вага" />
-    <meta property="og:description" content="Розрахунок кількості та ваги арматури для армування плити, фундаменту чи стяжки. Врахування кроку сітки та діаметра прутків." />
+    <meta property="og:title" content="Калькулятор арматури: вага, прутки, перепуск" />
+    <meta property="og:description" content="Калькулятор арматури для плити, стрічки, балки й колони: довжина, вага, прутки 11,7 м з перепуском і запасом, в'язальний дріт та вартість за вашими цінами." />
     <meta property="og:url" content="https://calccore.net/construction/rebar-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор арматури онлайн — кількість та вага" />
-    <meta name="twitter:description" content="Розрахунок кількості та ваги арматури для армування плити, фундаменту чи стяжки. Врахування кроку сітки та діаметра прутків." />
+    <meta name="twitter:title" content="Калькулятор арматури: вага, прутки, перепуск" />
+    <meta name="twitter:description" content="Калькулятор арматури для плити, стрічки, балки й колони: довжина, вага, прутки 11,7 м з перепуском і запасом, в'язальний дріт та вартість за вашими цінами." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/reb.css?v=20261029reb1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/rebar-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Навіщо потрібна арматурна сітка в бетоні?",
-        "acceptedAnswer":{"@type":"Answer","text":"Бетон добре витримує стискання, але слабкий на розтягування. Арматура компенсує цю слабкість, суттєво підвищуючи міцність та довговічність конструкції."}
-      },
-      {
-        "@type":"Question",
-        "name":"Який крок сітки використовують найчастіше?",
-        "acceptedAnswer":{"@type":"Answer","text":"Для стяжки підлоги типово 15-20 см, для фундаментних плит 20-25 см, залежно від навантаження та товщини конструкції."}
-      },
-      {
-        "@type":"Question",
-        "name":"Як розрахувати вагу арматури, знаючи лише довжину?",
-        "acceptedAnswer":{"@type":"Answer","text":"Вага залежить від діаметра прутка — довідкові таблиці вказують вагу одного погонного метра для кожного стандартного діаметра (наприклад, 8мм ≈ 0.395 кг/м, 10мм ≈ 0.617 кг/м)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261029reb1" defer></script>
+    <script src="/js/rebar-calculator.js?v=20261029reb1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/construction/rebar-calculator#app",
-    "name":"Rebar Calculator",
-    "description":"Розрахунок кількості та ваги арматури для армування плити чи фундаменту.",
-    "url":"https://calccore.net/construction/rebar-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/construction/rebar-calculator#app",
+  "name": "Калькулятор арматури",
+  "description": "Розрахунок арматури для кількох елементів: плита з сіткою в один або два шари, каркас стрічки, балки чи колони з хомутами. Діаметри 6–32 мм, захисний шар, прутки стандартної довжини з перепуском, запас, вага, в'язальний дріт і вартість за вашими цінами у гривнях, доларах або євро.",
+  "url": "https://calccore.net/construction/rebar-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "До шести елементів: плита з сіткою або каркас (стрічка, балка, колона)",
+    "Діаметри 6–32 мм, захисний шар, хомути, шари сітки",
+    "Прутки стандартної довжини з перепуском і запасом, вага в кг і тоннах",
+    "Схеми армування кожного елемента, таблиці за діаметрами",
+    "Ваші ціни без вбудованих; гривня, долар або євро; таблиця, CSV, посилання"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/construction/rebar-calculator#webpage",
+      "url": "https://calccore.net/construction/rebar-calculator",
+      "name": "Калькулятор арматури: вага, прутки, перепуск | CalcCore",
+      "description": "Калькулятор арматури для плити, стрічки, балки й колони: довжина, вага, прутки 11,7 м з перепуском і запасом, в'язальний дріт та вартість за вашими цінами.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/construction/rebar-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/construction/rebar-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-29",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/construction/rebar-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Будівництво",
+          "item": "https://calccore.net/construction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор арматури",
+          "item": "https://calccore.net/construction/rebar-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/construction/rebar-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати арматуру на плиту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Довжина прутків це розмір плити мінус захисні шари, кількість у кожному напрямку це розмір поперек, поділений на крок, плюс один. Для плити 6×4 м із кроком 20 см і Ø12 в один шар це 250 м і 222 кг."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки арматури потрібно на стрічковий фундамент?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поздовжні стрижні дорівнюють довжині стрічки помножити на їх кількість, хомути рахуються за кроком. Для стрічки 20 м перерізом 40×80 см, 4 стрижнів Ø14 і хомутів Ø8 через 20 см із захисним шаром 5 см це 101 хомутів і 282,0 м арматури."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке перепуск і як він рахується?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Перепуск це довжина, на яку два прутки накладаються при з'єднанні в одну лінію. Він задається у діаметрах прутка і береться з проєкту. Якщо поле порожнє, перепуск не враховується."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому прутків більше, ніж довжина, поділена на довжину прутка?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бо відрізки розкроюються з цілих прутків, і залишок, коротший за відрізок, іде в обрізки. Крім того, деталі довші за пруток складаються з кількох прутків із перепуском."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який діаметр арматури й крок вибрати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це визначає проєкт конструкції за навантаженнями. Калькулятор не підбирає діаметр і крок, а рахує за значеннями, які ви вводите."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки важить метр арматури?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вага метра дорівнює 0,00617 × d² кг, де d діаметр у мм: Ø6 0,222, Ø8 0,395, Ø10 0,617, Ø12 0,888, Ø14 1,209, Ø16 1,580 кг/м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке захисний шар?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Шар бетону між арматурою й поверхнею елемента. Калькулятор скорочує прутки плити на два захисні шари й зменшує периметр хомута. Значення береться з проєкту, за замовчуванням поле порожнє."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як рахується кількість хомутів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Довжина елемента ділиться на крок хомутів і до результату додається один. Периметр хомута це два розміри перерізу мінус захисні шари."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор гаки хомутів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Гаки роблять реальний хомут довшим, тому для точності додайте запас або збільште довжину елемента."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки в'язального дроту потрібно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Норма залежить від способу в'язання й густоти сітки, тому вона вводиться вами в кг на тонну арматури. Значення за замовчуванням немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати вартість арматури?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За тонну це куплена вага помножити на ціну, за пруток це кількість прутків із запасом, за метр це довжина куплених прутків. Дріт і доставка додаються окремо."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка довжина прутка арматури?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Найпоширеніша 11,7 м, але у постачальників бувають й інші довжини, тому поле «Довжина прутка» можна змінити."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="reb-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="crebar">
-            <div class="mcalc__wrap">
+        <section class="reb" id="reb">
+            <div class="reb__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор арматури</h1>
-                    <p class="mcalc__p">
-                        Розрахуй кількість та вагу арматури для армування
-                        плити, фундаменту чи стяжки.
-                    </p>
+                <div class="reb__titlebar">
+                    <h1 class="reb__h1">Калькулятор арматури</h1>
+                    <p class="reb__p">Порахуйте довжину, вагу й кількість прутків арматури для плити, стрічки, балки чи колони зі схемами армування й вартістю.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="reb__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи розміри</h2>
-                            <span class="mcalc__badge">Construction</span>
+                    <div class="reb__card">
+                        <div class="reb__sectionTitle">
+                            <h2 class="reb__h2">Дані для розрахунку</h2>
+                            <div class="reb__dd" id="cur_dd"><button type="button" class="reb__ddBtn" id="cur_btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта"><img class="reb__ddFlag" id="cur_flag" src="/assets/flags/ua.png" width="20" height="14" alt=""><span id="cur_code">UAH</span><span class="reb__caret" aria-hidden="true"></span></button><ul class="reb__ddList" id="cur_list" role="listbox" aria-label="Валюта" hidden><li role="option" tabindex="-1" data-code="UAH" aria-selected="true"><img class="reb__ddFlag" src="/assets/flags/ua.png" width="20" height="14" alt="" loading="lazy"><span class="reb__ddCode">UAH</span><span class="reb__ddName">Українська гривня</span></li><li role="option" tabindex="-1" data-code="USD" aria-selected="false"><img class="reb__ddFlag" src="/assets/flags/us.png" width="20" height="14" alt="" loading="lazy"><span class="reb__ddCode">USD</span><span class="reb__ddName">Долар США</span></li><li role="option" tabindex="-1" data-code="EUR" aria-selected="false"><img class="reb__ddFlag" src="/assets/flags/eu.png" width="20" height="14" alt="" loading="lazy"><span class="reb__ddCode">EUR</span><span class="reb__ddName">Євро</span></li></ul></div>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="areaLength">Довжина ділянки (м)</label>
-                                <input class="mcalc__input" id="areaLength" type="text" inputmode="decimal"
-                                    placeholder="напр.: 6" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="areaWidth">Ширина ділянки (м)</label>
-                                <input class="mcalc__input" id="areaWidth" type="text" inputmode="decimal"
-                                    placeholder="напр.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="spacing">Крок сітки (см)</label>
-                                <input class="mcalc__input" id="spacing" type="text" inputmode="decimal"
-                                    placeholder="напр.: 20" value="20" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="diameter">Діаметр арматури (мм)</label>
-                                <select id="diameter" class="mcalc__select">
-                                    <option value="6">6 мм</option>
-                                    <option value="8" selected>8 мм</option>
-                                    <option value="10">10 мм</option>
-                                    <option value="12">12 мм</option>
-                                    <option value="14">14 мм</option>
-                                    <option value="16">16 мм</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="layers">Кількість шарів сітки</label>
-                                <select id="layers" class="mcalc__select">
-                                    <option value="1" selected>1 шар (однорядна сітка)</option>
-                                    <option value="2">2 шари (двошарова сітка)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="reb__block">
+                            <div class="reb__rows">
+                                <div class="reb__field">
+                                    <label class="reb__label" for="bl">Довжина прутка, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="bl" type="text" inputmode="decimal" autocomplete="off" placeholder="11,7" value="11.7"><div class="reb__hint">Стандартна довжина у вашого постачальника.</div>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
+                                <div class="reb__field">
+                                    <label class="reb__label" for="lap">Перепуск, діаметрів</label>
+                                    <input class="reb__input" id="lap" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40"><div class="reb__hint">З проєкту. Порожньо: без перепуску.</div>
+                                </div>
+                                <div class="reb__field reb__field--full">
+                                    <label class="reb__label" for="reserve">Запас, %</label>
+                                    <input class="reb__input" id="reserve" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 5"><div class="reb__hint">У прутках, округлюється вгору.</div>
+                                </div>
                             </div>
 
+                            <div class="reb__miniTitle reb__mt12">Елементи</div>
+                            <div class="reb__el" id="nl1">
+                                <div class="reb__elHead"><span>Елемент 1</span><span class="reb__elVol" id="nv1">—</span><button type="button" class="reb__elRm" id="nl1rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n1tLbl">Тип</span>
+                                    <input type="hidden" id="n1_type" value="slab">
+                                    <div class="reb__sel" id="n1t_dd">
+                                        <button type="button" class="reb__selBtn" id="n1t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1tLbl n1t_val"><span id="n1t_val">Плита (сітка)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1t_list" role="listbox" aria-labelledby="n1tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита (сітка)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Каркас (стрічка, балка, колона)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n1_aL" for="n1_a">Довжина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="reb__field" id="n1_bW">
+                                    <label class="reb__label" for="n1_b">Ширина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n1_sW">
+                                    <label class="reb__label" for="n1_s">Крок сітки, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_s" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field" id="n1_lyW">
+                                    <span class="reb__label" id="n1yLbl">Шарів сітки</span>
+                                    <input type="hidden" id="n1_ly" value="1">
+                                    <div class="reb__sel" id="n1y_dd">
+                                        <button type="button" class="reb__selBtn" id="n1y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1yLbl n1y_val"><span id="n1y_val">1 шар</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1y_list" role="listbox" aria-labelledby="n1yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n1_wW" hidden>
+                                    <label class="reb__label" for="n1_w">Ширина перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_w" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40">
+                                </div>
+                                    <div class="reb__field" id="n1_hW" hidden>
+                                    <label class="reb__label" for="n1_h">Висота перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 80">
+                                </div>
+                                    <div class="reb__field" id="n1_nbW" hidden>
+                                    <label class="reb__label" for="n1_nb">Основних стрижнів&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n1_ssW" hidden>
+                                    <label class="reb__label" for="n1_ss">Крок хомутів, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n1_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n1dLbl">Основна арматура</span>
+                                    <input type="hidden" id="n1_d" value="12">
+                                    <div class="reb__sel" id="n1d_dd">
+                                        <button type="button" class="reb__selBtn" id="n1d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1dLbl n1d_val"><span id="n1d_val">Ø12 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1d_list" role="listbox" aria-labelledby="n1dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 мм</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 мм</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 мм</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 мм</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 мм</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n1_dsW" hidden>
+                                    <span class="reb__label" id="n1sLbl">Діаметр хомутів</span>
+                                    <input type="hidden" id="n1_ds" value="8">
+                                    <div class="reb__sel" id="n1s_dd">
+                                        <button type="button" class="reb__selBtn" id="n1s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n1sLbl n1s_val"><span id="n1s_val">Ø8 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n1s_list" role="listbox" aria-labelledby="n1sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n1_c">Захисний шар, см <span class="reb__hint">(необов'язково)</span></label>
+                                    <input class="reb__input" id="n1_c" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="reb__hint">З проєкту.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl2" hidden>
+                                <div class="reb__elHead"><span>Елемент 2</span><span class="reb__elVol" id="nv2">—</span><button type="button" class="reb__elRm" id="nl2rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n2tLbl">Тип</span>
+                                    <input type="hidden" id="n2_type" value="slab">
+                                    <div class="reb__sel" id="n2t_dd">
+                                        <button type="button" class="reb__selBtn" id="n2t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2tLbl n2t_val"><span id="n2t_val">Плита (сітка)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2t_list" role="listbox" aria-labelledby="n2tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита (сітка)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Каркас (стрічка, балка, колона)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n2_aL" for="n2_a">Довжина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="reb__field" id="n2_bW">
+                                    <label class="reb__label" for="n2_b">Ширина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n2_sW">
+                                    <label class="reb__label" for="n2_s">Крок сітки, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_s" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field" id="n2_lyW">
+                                    <span class="reb__label" id="n2yLbl">Шарів сітки</span>
+                                    <input type="hidden" id="n2_ly" value="1">
+                                    <div class="reb__sel" id="n2y_dd">
+                                        <button type="button" class="reb__selBtn" id="n2y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2yLbl n2y_val"><span id="n2y_val">1 шар</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2y_list" role="listbox" aria-labelledby="n2yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n2_wW" hidden>
+                                    <label class="reb__label" for="n2_w">Ширина перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_w" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40">
+                                </div>
+                                    <div class="reb__field" id="n2_hW" hidden>
+                                    <label class="reb__label" for="n2_h">Висота перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 80">
+                                </div>
+                                    <div class="reb__field" id="n2_nbW" hidden>
+                                    <label class="reb__label" for="n2_nb">Основних стрижнів&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n2_ssW" hidden>
+                                    <label class="reb__label" for="n2_ss">Крок хомутів, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n2_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n2dLbl">Основна арматура</span>
+                                    <input type="hidden" id="n2_d" value="12">
+                                    <div class="reb__sel" id="n2d_dd">
+                                        <button type="button" class="reb__selBtn" id="n2d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2dLbl n2d_val"><span id="n2d_val">Ø12 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2d_list" role="listbox" aria-labelledby="n2dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 мм</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 мм</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 мм</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 мм</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 мм</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n2_dsW" hidden>
+                                    <span class="reb__label" id="n2sLbl">Діаметр хомутів</span>
+                                    <input type="hidden" id="n2_ds" value="8">
+                                    <div class="reb__sel" id="n2s_dd">
+                                        <button type="button" class="reb__selBtn" id="n2s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n2sLbl n2s_val"><span id="n2s_val">Ø8 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n2s_list" role="listbox" aria-labelledby="n2sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n2_c">Захисний шар, см <span class="reb__hint">(необов'язково)</span></label>
+                                    <input class="reb__input" id="n2_c" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="reb__hint">З проєкту.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl3" hidden>
+                                <div class="reb__elHead"><span>Елемент 3</span><span class="reb__elVol" id="nv3">—</span><button type="button" class="reb__elRm" id="nl3rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n3tLbl">Тип</span>
+                                    <input type="hidden" id="n3_type" value="slab">
+                                    <div class="reb__sel" id="n3t_dd">
+                                        <button type="button" class="reb__selBtn" id="n3t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3tLbl n3t_val"><span id="n3t_val">Плита (сітка)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3t_list" role="listbox" aria-labelledby="n3tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита (сітка)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Каркас (стрічка, балка, колона)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n3_aL" for="n3_a">Довжина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="reb__field" id="n3_bW">
+                                    <label class="reb__label" for="n3_b">Ширина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n3_sW">
+                                    <label class="reb__label" for="n3_s">Крок сітки, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_s" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field" id="n3_lyW">
+                                    <span class="reb__label" id="n3yLbl">Шарів сітки</span>
+                                    <input type="hidden" id="n3_ly" value="1">
+                                    <div class="reb__sel" id="n3y_dd">
+                                        <button type="button" class="reb__selBtn" id="n3y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3yLbl n3y_val"><span id="n3y_val">1 шар</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3y_list" role="listbox" aria-labelledby="n3yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n3_wW" hidden>
+                                    <label class="reb__label" for="n3_w">Ширина перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_w" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40">
+                                </div>
+                                    <div class="reb__field" id="n3_hW" hidden>
+                                    <label class="reb__label" for="n3_h">Висота перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 80">
+                                </div>
+                                    <div class="reb__field" id="n3_nbW" hidden>
+                                    <label class="reb__label" for="n3_nb">Основних стрижнів&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n3_ssW" hidden>
+                                    <label class="reb__label" for="n3_ss">Крок хомутів, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n3_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n3dLbl">Основна арматура</span>
+                                    <input type="hidden" id="n3_d" value="12">
+                                    <div class="reb__sel" id="n3d_dd">
+                                        <button type="button" class="reb__selBtn" id="n3d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3dLbl n3d_val"><span id="n3d_val">Ø12 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3d_list" role="listbox" aria-labelledby="n3dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 мм</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 мм</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 мм</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 мм</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 мм</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n3_dsW" hidden>
+                                    <span class="reb__label" id="n3sLbl">Діаметр хомутів</span>
+                                    <input type="hidden" id="n3_ds" value="8">
+                                    <div class="reb__sel" id="n3s_dd">
+                                        <button type="button" class="reb__selBtn" id="n3s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n3sLbl n3s_val"><span id="n3s_val">Ø8 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n3s_list" role="listbox" aria-labelledby="n3sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n3_c">Захисний шар, см <span class="reb__hint">(необов'язково)</span></label>
+                                    <input class="reb__input" id="n3_c" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="reb__hint">З проєкту.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl4" hidden>
+                                <div class="reb__elHead"><span>Елемент 4</span><span class="reb__elVol" id="nv4">—</span><button type="button" class="reb__elRm" id="nl4rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n4tLbl">Тип</span>
+                                    <input type="hidden" id="n4_type" value="slab">
+                                    <div class="reb__sel" id="n4t_dd">
+                                        <button type="button" class="reb__selBtn" id="n4t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4tLbl n4t_val"><span id="n4t_val">Плита (сітка)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4t_list" role="listbox" aria-labelledby="n4tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита (сітка)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Каркас (стрічка, балка, колона)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n4_aL" for="n4_a">Довжина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="reb__field" id="n4_bW">
+                                    <label class="reb__label" for="n4_b">Ширина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n4_sW">
+                                    <label class="reb__label" for="n4_s">Крок сітки, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_s" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field" id="n4_lyW">
+                                    <span class="reb__label" id="n4yLbl">Шарів сітки</span>
+                                    <input type="hidden" id="n4_ly" value="1">
+                                    <div class="reb__sel" id="n4y_dd">
+                                        <button type="button" class="reb__selBtn" id="n4y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4yLbl n4y_val"><span id="n4y_val">1 шар</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4y_list" role="listbox" aria-labelledby="n4yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n4_wW" hidden>
+                                    <label class="reb__label" for="n4_w">Ширина перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_w" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40">
+                                </div>
+                                    <div class="reb__field" id="n4_hW" hidden>
+                                    <label class="reb__label" for="n4_h">Висота перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 80">
+                                </div>
+                                    <div class="reb__field" id="n4_nbW" hidden>
+                                    <label class="reb__label" for="n4_nb">Основних стрижнів&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n4_ssW" hidden>
+                                    <label class="reb__label" for="n4_ss">Крок хомутів, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n4_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n4dLbl">Основна арматура</span>
+                                    <input type="hidden" id="n4_d" value="12">
+                                    <div class="reb__sel" id="n4d_dd">
+                                        <button type="button" class="reb__selBtn" id="n4d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4dLbl n4d_val"><span id="n4d_val">Ø12 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4d_list" role="listbox" aria-labelledby="n4dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 мм</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 мм</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 мм</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 мм</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 мм</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n4_dsW" hidden>
+                                    <span class="reb__label" id="n4sLbl">Діаметр хомутів</span>
+                                    <input type="hidden" id="n4_ds" value="8">
+                                    <div class="reb__sel" id="n4s_dd">
+                                        <button type="button" class="reb__selBtn" id="n4s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n4sLbl n4s_val"><span id="n4s_val">Ø8 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n4s_list" role="listbox" aria-labelledby="n4sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n4_c">Захисний шар, см <span class="reb__hint">(необов'язково)</span></label>
+                                    <input class="reb__input" id="n4_c" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="reb__hint">З проєкту.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl5" hidden>
+                                <div class="reb__elHead"><span>Елемент 5</span><span class="reb__elVol" id="nv5">—</span><button type="button" class="reb__elRm" id="nl5rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n5tLbl">Тип</span>
+                                    <input type="hidden" id="n5_type" value="slab">
+                                    <div class="reb__sel" id="n5t_dd">
+                                        <button type="button" class="reb__selBtn" id="n5t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5tLbl n5t_val"><span id="n5t_val">Плита (сітка)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5t_list" role="listbox" aria-labelledby="n5tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита (сітка)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Каркас (стрічка, балка, колона)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n5_aL" for="n5_a">Довжина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="reb__field" id="n5_bW">
+                                    <label class="reb__label" for="n5_b">Ширина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n5_sW">
+                                    <label class="reb__label" for="n5_s">Крок сітки, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_s" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field" id="n5_lyW">
+                                    <span class="reb__label" id="n5yLbl">Шарів сітки</span>
+                                    <input type="hidden" id="n5_ly" value="1">
+                                    <div class="reb__sel" id="n5y_dd">
+                                        <button type="button" class="reb__selBtn" id="n5y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5yLbl n5y_val"><span id="n5y_val">1 шар</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5y_list" role="listbox" aria-labelledby="n5yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n5_wW" hidden>
+                                    <label class="reb__label" for="n5_w">Ширина перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_w" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40">
+                                </div>
+                                    <div class="reb__field" id="n5_hW" hidden>
+                                    <label class="reb__label" for="n5_h">Висота перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 80">
+                                </div>
+                                    <div class="reb__field" id="n5_nbW" hidden>
+                                    <label class="reb__label" for="n5_nb">Основних стрижнів&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n5_ssW" hidden>
+                                    <label class="reb__label" for="n5_ss">Крок хомутів, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n5_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n5dLbl">Основна арматура</span>
+                                    <input type="hidden" id="n5_d" value="12">
+                                    <div class="reb__sel" id="n5d_dd">
+                                        <button type="button" class="reb__selBtn" id="n5d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5dLbl n5d_val"><span id="n5d_val">Ø12 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5d_list" role="listbox" aria-labelledby="n5dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 мм</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 мм</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 мм</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 мм</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 мм</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n5_dsW" hidden>
+                                    <span class="reb__label" id="n5sLbl">Діаметр хомутів</span>
+                                    <input type="hidden" id="n5_ds" value="8">
+                                    <div class="reb__sel" id="n5s_dd">
+                                        <button type="button" class="reb__selBtn" id="n5s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n5sLbl n5s_val"><span id="n5s_val">Ø8 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n5s_list" role="listbox" aria-labelledby="n5sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n5_c">Захисний шар, см <span class="reb__hint">(необов'язково)</span></label>
+                                    <input class="reb__input" id="n5_c" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="reb__hint">З проєкту.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reb__el" id="nl6" hidden>
+                                <div class="reb__elHead"><span>Елемент 6</span><span class="reb__elVol" id="nv6">—</span><button type="button" class="reb__elRm" id="nl6rm" aria-label="Видалити елемент" hidden>×</button></div>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="n6tLbl">Тип</span>
+                                    <input type="hidden" id="n6_type" value="slab">
+                                    <div class="reb__sel" id="n6t_dd">
+                                        <button type="button" class="reb__selBtn" id="n6t_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6tLbl n6t_val"><span id="n6t_val">Плита (сітка)</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6t_list" role="listbox" aria-labelledby="n6tLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="slab" aria-selected="true">Плита (сітка)</li>
+                                            <li role="option" tabindex="-1" data-v="frame" aria-selected="false">Каркас (стрічка, балка, колона)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" id="n6_aL" for="n6_a">Довжина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_a" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 6">
+                                </div>
+                                    <div class="reb__field" id="n6_bW">
+                                    <label class="reb__label" for="n6_b">Ширина, м&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_b" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n6_sW">
+                                    <label class="reb__label" for="n6_s">Крок сітки, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_s" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field" id="n6_lyW">
+                                    <span class="reb__label" id="n6yLbl">Шарів сітки</span>
+                                    <input type="hidden" id="n6_ly" value="1">
+                                    <div class="reb__sel" id="n6y_dd">
+                                        <button type="button" class="reb__selBtn" id="n6y_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6yLbl n6y_val"><span id="n6y_val">1 шар</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6y_list" role="listbox" aria-labelledby="n6yLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="1" aria-selected="true">1 шар</li>
+                                            <li role="option" tabindex="-1" data-v="2" aria-selected="false">2 шари</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n6_wW" hidden>
+                                    <label class="reb__label" for="n6_w">Ширина перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_w" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 40">
+                                </div>
+                                    <div class="reb__field" id="n6_hW" hidden>
+                                    <label class="reb__label" for="n6_h">Висота перерізу, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_h" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 80">
+                                </div>
+                                    <div class="reb__field" id="n6_nbW" hidden>
+                                    <label class="reb__label" for="n6_nb">Основних стрижнів&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_nb" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 4">
+                                </div>
+                                    <div class="reb__field" id="n6_ssW" hidden>
+                                    <label class="reb__label" for="n6_ss">Крок хомутів, см&nbsp;<span class="reb__req" title="Обов'язкове поле" aria-label="Обов'язкове поле">*</span></label>
+                                    <input class="reb__input" id="n6_ss" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 20">
+                                </div>
+                                    <div class="reb__field">
+                                    <span class="reb__label" id="n6dLbl">Основна арматура</span>
+                                    <input type="hidden" id="n6_d" value="12">
+                                    <div class="reb__sel" id="n6d_dd">
+                                        <button type="button" class="reb__selBtn" id="n6d_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6dLbl n6d_val"><span id="n6d_val">Ø12 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6d_list" role="listbox" aria-labelledby="n6dLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="false">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="true">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                            <li role="option" tabindex="-1" data-v="18" aria-selected="false">Ø18 мм</li>
+                                            <li role="option" tabindex="-1" data-v="20" aria-selected="false">Ø20 мм</li>
+                                            <li role="option" tabindex="-1" data-v="22" aria-selected="false">Ø22 мм</li>
+                                            <li role="option" tabindex="-1" data-v="25" aria-selected="false">Ø25 мм</li>
+                                            <li role="option" tabindex="-1" data-v="28" aria-selected="false">Ø28 мм</li>
+                                            <li role="option" tabindex="-1" data-v="32" aria-selected="false">Ø32 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field" id="n6_dsW" hidden>
+                                    <span class="reb__label" id="n6sLbl">Діаметр хомутів</span>
+                                    <input type="hidden" id="n6_ds" value="8">
+                                    <div class="reb__sel" id="n6s_dd">
+                                        <button type="button" class="reb__selBtn" id="n6s_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="n6sLbl n6s_val"><span id="n6s_val">Ø8 мм</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="n6s_list" role="listbox" aria-labelledby="n6sLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="6" aria-selected="false">Ø6 мм</li>
+                                            <li role="option" tabindex="-1" data-v="8" aria-selected="true">Ø8 мм</li>
+                                            <li role="option" tabindex="-1" data-v="10" aria-selected="false">Ø10 мм</li>
+                                            <li role="option" tabindex="-1" data-v="12" aria-selected="false">Ø12 мм</li>
+                                            <li role="option" tabindex="-1" data-v="14" aria-selected="false">Ø14 мм</li>
+                                            <li role="option" tabindex="-1" data-v="16" aria-selected="false">Ø16 мм</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="n6_c">Захисний шар, см <span class="reb__hint">(необов'язково)</span></label>
+                                    <input class="reb__input" id="n6_c" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 3"><div class="reb__hint">З проєкту.</div>
+                                </div>
+                                </div>
+                            </div>
+                            <button type="button" class="reb__add" id="addNl">+ Додати елемент</button>
+
+                            <details class="reb__details reb__mt12" id="wireDet">
+                                <summary>В'язальний дріт <span class="reb__hint">(необов'язково)</span></summary>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <label class="reb__label" for="wire">Норма, кг на тонну арматури</label>
+                                    <input class="reb__input" id="wire" type="text" inputmode="decimal" autocomplete="off" placeholder="напр. 2"><div class="reb__hint">З вашого досвіду або проєкту.</div>
+                                </div>
+                                </div>
+                            </details>
+
+                            <details class="reb__details reb__mt12" id="priceDet">
+                                <summary>Ціна й доставка <span class="reb__hint">(необов'язково)</span></summary>
+                                <div class="reb__rows">
+                                    <div class="reb__field reb__field--full">
+                                    <span class="reb__label" id="puLbl">Ціна арматури за</span>
+                                    <input type="hidden" id="punit" value="ton">
+                                    <div class="reb__sel" id="pu_dd">
+                                        <button type="button" class="reb__selBtn" id="pu_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="puLbl pu_val"><span id="pu_val">тонну</span><span class="reb__caret" aria-hidden="true"></span></button>
+                                        <ul class="reb__selList" id="pu_list" role="listbox" aria-labelledby="puLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="ton" aria-selected="true">тонну</li>
+                                            <li role="option" tabindex="-1" data-v="bar" aria-selected="false">пруток</li>
+                                            <li role="option" tabindex="-1" data-v="m" aria-selected="false">метр</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="pBar">Ціна арматури, <span data-wu>₴</span></label>
+                                    <input class="reb__input" id="pBar" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="reb__field">
+                                    <label class="reb__label" for="pWire">Ціна дроту за кг, <span data-wu>₴</span></label>
+                                    <input class="reb__input" id="pWire" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                    <div class="reb__field reb__field--full">
+                                    <label class="reb__label" for="pDel">Доставка, <span data-wu>₴</span></label>
+                                    <input class="reb__input" id="pDel" type="text" inputmode="decimal" autocomplete="off" placeholder="">
+                                </div>
+                                </div>
+                            </details>
                         </div>
+
+                        <div class="reb__actions reb__mt12">
+                            <button class="reb__btn reb__btn--wide" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="reb__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="reb__card">
+                        <div class="reb__sectionTitle">
+                            <h2 class="reb__h2">Результат</h2>
+                            <span class="reb__badge">🏗️</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/construction/concrete-calculator">Калькулятор бетону</a>
-                            <a href="/construction/steel-weight-calculator">Вага металу</a>
+                        <div class="reb__result" id="result">Вкажіть дані — результат з'явиться тут.</div>
+                        <div class="reb__actions reb__mt12">
+                            <button class="reb__btn" id="shareBtn" type="button">Поділитись</button>
+                            <button class="reb__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="reb__btn" id="resetBtn" type="button">Скинути</button>
+                            <button class="reb__btn" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
-
+                        <div class="m-navlinks reb__mt12"><a class="reb__link" href="/construction/concrete-calculator">Калькулятор бетону →</a> <a class="reb__link" href="/construction/cost-calculator">Калькулятор вартості будівництва →</a></div>
                     </div>
+                </div>
+
+                <div class="reb__card reb__schedule" id="schedule" hidden>
+                    <div class="reb__schedHead">
+                        <h2 class="reb__h2">Підсумок</h2>
+                        <div class="reb__tools">
+                            <button type="button" class="reb__qchip" id="copyTbl">Копіювати таблицю</button>
+                            <button type="button" class="reb__qchip" id="csvBtn">Завантажити CSV</button>
+                        </div>
+                    </div>
+                    <div class="reb__tableWrap" id="schedBody"></div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Навіщо потрібна арматура в бетоні</h2>
-            <p>
-                Бетон має чудову міцність на стискання, але дуже слабкий на розтягування та згин.
-                Сталева арматура компенсує цю слабкість — залізобетон (бетон з арматурою) поєднує
-                стискаючу міцність бетону з розтягуючою міцністю сталі, що робить конструкцію значно
-                надійнішою та довговічнішою.
-            </p>
-        
-            <h2>Класи арматурної сталі</h2>
-            <p>
-                Арматура класифікується за класами міцності, які визначають її механічні властивості:
-            </p>
-            <ul>
-                <li><b>А240 (гладка):</b> застосовується переважно для поперечного армування (хомутів), не має ребер, гірше
-                    зчеплюється з бетоном.</li>
-                <li><b>А400 (періодичного профілю):</b> найпоширеніший клас для житлового будівництва — має ребра для кращого
-                    зчеплення з бетоном.</li>
-                <li><b>А500, А600:</b> вища міцність, застосовується у відповідальних конструкціях з підвищеними навантаженнями.
-                </li>
-            </ul>
-        
-            <h2>Як розраховується кількість арматури</h2>
-            <p>
-                Арматурна сітка складається з прутків, розміщених у двох перпендикулярних напрямках
-                з певним кроком (відстанню між сусідніми прутками). Кількість прутків у кожному
-                напрямку розраховується як довжина ділянки поділена на крок сітки, плюс один додатковий
-                пруток на край.
-            </p>
-        
-            <h2>Типовий крок сітки залежно від конструкції</h2>
-            <ul>
-                <li><b>Стяжка підлоги:</b> 15-20 см, менше навантаження, тонший шар бетону.</li>
-                <li><b>Фундаментна плита:</b> 20-25 см, залежно від навантаження будівлі та типу ґрунту.</li>
-                <li><b>Дорожнє покриття:</b> 10-15 см через високі навантаження від транспорту.</li>
-                <li><b>Монолітні перекриття:</b> зазвичай 15-20 см, з подвійним армуванням (верхній і нижній шар) для роботи на
-                    згин в обох напрямках.</li>
-            </ul>
-        
-            <h2>Захисний шар бетону над арматурою</h2>
-            <p>
-                Арматура повинна бути повністю занурена в бетон з відступом від поверхні (захисний шар),
-                який захищає сталь від корозії через контакт з вологою та повітрям. Типовий захисний шар
-                становить 20-30 мм для внутрішніх конструкцій та 40-50 мм для фундаментів і зовнішніх
-                елементів, що контактують із ґрунтом чи атмосферними опадами. Для утримання правильного
-                положення арматури використовують спеціальні пластикові чи бетонні фіксатори (стільчики).
-            </p>
-        
-            <h2>Як розрахувати вагу арматури</h2>
-            <p>
-                Знаючи загальну довжину арматури та її діаметр, вагу можна визначити за довідковими
-                таблицями погонної ваги. Орієнтовна вага одного метра: 6мм ≈ 0.222 кг, 8мм ≈ 0.395 кг,
-                10мм ≈ 0.617 кг, 12мм ≈ 0.888 кг, 14мм ≈ 1.21 кг, 16мм ≈ 1.58 кг. Вага розраховується
-                за формулою: вага = довжина × площа перерізу × густина сталі (7850 кг/м³).
-            </p>
-        
-            <h2>Практичні поради з в'язання арматури</h2>
-            <ul>
-                <li><b>В'язальний дріт замість зварювання:</b> для більшості конструкцій арматуру з'єднують в'язальним дротом, а
-                    не зварюванням, оскільки зварювання може послабити структуру металу в точці з'єднання.</li>
-                <li><b>Перепуск (нахлест) прутків:</b> при з'єднанні двох прутків в одну лінію потрібен перепуск довжиною
-                    приблизно 30-50 діаметрів прутка для передачі навантаження.</li>
-                <li><b>Уникай контакту з ґрунтом:</b> арматура ніколи не повинна безпосередньо торкатись землі чи опалубки —
-                    завжди використовуй фіксатори для підтримання захисного шару бетону.</li>
-            </ul>
-        
-            <p class="m-hintSmall">
-                Розрахунок є орієнтовним для базового армування. Для відповідальних конструкцій
-                (фундаменти житлових будинків, несучі елементи) обов'язково потрібен проєкт від
-                кваліфікованого інженера-конструктора з урахуванням навантажень та норм безпеки.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/construction/concrete-calculator"><b>Калькулятор бетону</b><span>Об'єм бетону, замовлення міксерів, цемент, пісок і щебінь.</span></a>
+                <a class="cc-related-card" href="/construction/steel-weight-calculator"><b>Калькулятор ваги металу</b><span>Вага прутків, труб, швелерів і балок за розмірами.</span></a>
+                <a class="cc-related-card" href="/construction/cost-calculator"><b>Калькулятор вартості будівництва</b><span>Бюджет будинку, ремонту, фундаменту, паркану чи гаража за вашими цінами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор арматури</h2>
+            <p>Калькулятор визначає, скільки <b>арматури</b> потрібно для кількох елементів (до шести): плити з арматурною сіткою в один або два шари та каркаса стрічки, балки чи колони з поздовжніми стрижнями й хомутами. Для кожного елемента ви вказуєте розміри, діаметри, кроки й захисний шар, а ще довжину прутка в продажу, перепуск і запас. Результат це довжина, вага, кількість прутків з перепуском і обрізками, а за бажанням в'язальний дріт і вартість за вашими цінами в гривнях, доларах або євро.</p>
+
+            <h2>Як рахується арматура для плити й каркаса</h2>
+            <p>Плита: довжина прутків дорівнює розміру плити мінус два захисні шари, а кількість прутків у кожному напрямку дорівнює розміру поперек, поділеному на крок, плюс один. Для плити 6×4 м із кроком 20 см без захисного шару це 21 прутків по 6 м і 31 по 4 м, разом 250 м, 222 кг при Ø12 (9,3 кг на м²).</p>
+            <p>Каркас: поздовжні стрижні мають довжину елемента, а хомути ставляться з вашим кроком, їх кількість дорівнює довжині, поділеній на крок, плюс один. Периметр хомута це два розміри перерізу мінус захисні шари, без гаків. Для стрічки 20 м перерізом 40×80 см, 4 стрижнів Ø14 і хомутів Ø8 через 20 см із захисним шаром 5 см це 101 хомутів по 2,00 м.</p>
+
+            <h2>Прутки, перепуск і обрізки</h2>
+            <p>Арматуру продають прутками стандартної довжини, найчастіше 11,7 м. Якщо деталь довша, її складають з кількох прутків із перепуском. Перепуск задається у діаметрах і береться з проєкту. Для прутка 20 м, Ø12 і перепуску 40 діаметрів (0,48 м) потрібно 2 прутки, другий відрізок 8,78 м. Відрізки калькулятор розкроює від найдовшого до найкоротшого: кожен іде в пруток із найменшим залишком, у який він вміщується, інакше береться новий пруток. Тому кількість прутків трохи більша за довжину, поділену на довжину прутка.</p>
+
+            <h2>Приклад розрахунку</h2>
+            <p>Плита 6×4 м, Ø12 з кроком 20 см у два шари із захисним шаром 3 см, і стрічка 20 м перерізом 40×80 см, 4 стрижні Ø14, хомути Ø8 через 20 см, захисний шар 5 см. Пруток 11,7 м, перепуск 40 діаметрів, запас 5%. Довжина з перепуском 758,2 м, вага за розрахунком 0,600 т, прутків 79, із запасом 85, куплена вага 0,785 т. Дріт 2 кг на тонну дає 1,2 кг. За 50 400 ₴ за тонну й 80 ₴ за кг дроту вартість 39 637 ₴.</p>
+            <p class="reb-mini">Калькулятор дає орієнтовну оцінку. Діаметри, кроки, перепуск і захисний шар визначає проєкт конструкції.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Навіщо потрібна арматурна сітка в бетоні?</h3>
-                <p>Бетон добре витримує стискання, але слабкий на розтягування. Арматура компенсує цю слабкість, суттєво
-                    підвищуючи міцність та довговічність конструкції.</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати арматуру на плиту?</h3>
+                <p>Довжина прутків це розмір плити мінус захисні шари, кількість у кожному напрямку це розмір поперек, поділений на крок, плюс один. Для плити 6×4 м із кроком 20 см і Ø12 в один шар це 250 м і 222 кг.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Який крок сітки використовують найчастіше?</h3>
-                <p>Для стяжки підлоги типово 15-20 см, для фундаментних плит 20-25 см, залежно від навантаження та
-                    товщини конструкції.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки арматури потрібно на стрічковий фундамент?</h3>
+                <p>Поздовжні стрижні дорівнюють довжині стрічки помножити на їх кількість, хомути рахуються за кроком. Для стрічки 20 м перерізом 40×80 см, 4 стрижнів Ø14 і хомутів Ø8 через 20 см із захисним шаром 5 см це 101 хомутів і 282,0 м арматури.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Як розрахувати вагу арматури, знаючи лише довжину?</h3>
-                <p>Вага залежить від діаметра прутка — довідкові таблиці вказують вагу одного погонного метра для
-                    кожного стандартного діаметра (наприклад, 8мм ≈ 0.395 кг/м, 10мм ≈ 0.617 кг/м).</p>
+            <div class="cc-faq-item">
+                <h3>Що таке перепуск і як він рахується?</h3>
+                <p>Перепуск це довжина, на яку два прутки накладаються при з'єднанні в одну лінію. Він задається у діаметрах прутка і береться з проєкту. Якщо поле порожнє, перепуск не враховується.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому прутків більше, ніж довжина, поділена на довжину прутка?</h3>
+                <p>Бо відрізки розкроюються з цілих прутків, і залишок, коротший за відрізок, іде в обрізки. Крім того, деталі довші за пруток складаються з кількох прутків із перепуском.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який діаметр арматури й крок вибрати?</h3>
+                <p>Це визначає проєкт конструкції за навантаженнями. Калькулятор не підбирає діаметр і крок, а рахує за значеннями, які ви вводите.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки важить метр арматури?</h3>
+                <p>Вага метра дорівнює 0,00617 × d² кг, де d діаметр у мм: Ø6 0,222, Ø8 0,395, Ø10 0,617, Ø12 0,888, Ø14 1,209, Ø16 1,580 кг/м.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке захисний шар?</h3>
+                <p>Шар бетону між арматурою й поверхнею елемента. Калькулятор скорочує прутки плити на два захисні шари й зменшує периметр хомута. Значення береться з проєкту, за замовчуванням поле порожнє.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як рахується кількість хомутів?</h3>
+                <p>Довжина елемента ділиться на крок хомутів і до результату додається один. Периметр хомута це два розміри перерізу мінус захисні шари.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор гаки хомутів?</h3>
+                <p>Ні. Гаки роблять реальний хомут довшим, тому для точності додайте запас або збільште довжину елемента.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки в'язального дроту потрібно?</h3>
+                <p>Норма залежить від способу в'язання й густоти сітки, тому вона вводиться вами в кг на тонну арматури. Значення за замовчуванням немає.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати вартість арматури?</h3>
+                <p>За тонну це куплена вага помножити на ціну, за пруток це кількість прутків із запасом, за метр це довжина куплених прутків. Дріт і доставка додаються окремо.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка довжина прутка арматури?</h3>
+                <p>Найпоширеніша 11,7 м, але у постачальників бувають й інші довжини, тому поле «Довжина прутка» можна змінити.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
