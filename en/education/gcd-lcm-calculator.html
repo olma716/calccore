@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>GCD and LCM Calculator Online — Find GCD and LCM | CalcCore</title>
+    <title>GCD and LCM Calculator Online with Steps | CalcCore</title>
     <meta name="description"
-        content="Online GCD and LCM calculator: greatest common divisor and least common multiple of several numbers with prime factorization and Euclidean algorithm steps." />
+        content="GCD and LCM calculator: the Euclidean algorithm, prime factors, divisors and multiples, plus factorization of a number and all its divisors with steps." />
 
     <link rel="canonical" href="https://calccore.net/en/education/gcd-lcm-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/education/gcd-lcm-calculator" />
@@ -26,220 +28,403 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="GCD and LCM Calculator Online — Find GCD and LCM" />
-    <meta property="og:description" content="Online GCD and LCM calculator: greatest common divisor and least common multiple of several numbers with prime factorization and Euclidean algorithm steps." />
+    <meta property="og:title" content="GCD and LCM Calculator Online with Steps" />
+    <meta property="og:description" content="GCD and LCM calculator: the Euclidean algorithm, prime factors, divisors and multiples, plus factorization of a number and all its divisors with steps." />
     <meta property="og:url" content="https://calccore.net/en/education/gcd-lcm-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GCD and LCM Calculator Online — Find GCD and LCM" />
-    <meta name="twitter:description" content="Online GCD and LCM calculator: greatest common divisor and least common multiple of several numbers with prime factorization and Euclidean algorithm steps." />
+    <meta name="twitter:title" content="GCD and LCM Calculator Online with Steps" />
+    <meta name="twitter:description" content="GCD and LCM calculator: the Euclidean algorithm, prime factors, divisors and multiples, plus factorization of a number and all its divisors with steps." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/gcd.css?v=20261030gcd1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/gcd-lcm-calculator.js?v=20261014" defer></script>
+    <script src="/js/i18n.js?v=20261030gcd1" defer></script>
+    <script src="/js/gcd.js?v=20261030gcd1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is the GCD?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The GCD (greatest common divisor) is the largest natural number that divides several numbers without a remainder. For example, GCD(12, 18) = 6."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the LCM?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The LCM (least common multiple) is the smallest natural number that is divisible by each of the given numbers without a remainder. For example, LCM(12, 18) = 36."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How are the GCD and LCM related?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "For two numbers, the product of the GCD and LCM equals the product of the numbers: GCD(a, b) · LCM(a, b) = a · b. So LCM = a · b / GCD."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I find the GCD of three or more numbers?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Find it step by step: GCD(a, b, c) = GCD(GCD(a, b), c). The calculator does this automatically for several numbers (up to 20)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which numbers are called coprime?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Numbers whose GCD equals 1, meaning they share no divisors other than one. For example, 8 and 15."
-        }
-      }
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/education/gcd-lcm-calculator#app",
+  "name": "GCD and LCM Calculator",
+  "description": "A calculator for the greatest common divisor (GCD) and the least common multiple (LCM) of several numbers with step-by-step solutions: the Euclidean algorithm, prime factorization, divisors and multiples. A separate mode factors a number into primes and lists all its divisors with their count and sum. Numbers up to 18 digits, exact arithmetic.",
+  "url": "https://calccore.net/en/education/gcd-lcm-calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "GCD and LCM of 2 to 20 numbers up to 18 digits",
+    "Three methods: the Euclidean algorithm, prime factors, divisors and multiples",
+    "Prime factorization and the list of all divisors",
+    "Number and sum of divisors, a primality check",
+    "Step-by-step solutions with explanations",
+    "A share link and copying of the whole solution"
+  ]
+}
     </script>
-
     <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "@id": "https://calccore.net/en/education/gcd-lcm-calculator#app",
-    "name": "GCD and LCM Calculator",
-    "description": "Greatest common divisor and least common multiple of several numbers with prime factorization and Euclidean algorithm steps.",
-    "url": "https://calccore.net/en/education/gcd-lcm-calculator",
-    "applicationCategory": "EducationApplication",
-    "operatingSystem": "Any",
-    "isAccessibleForFree": true,
-    "inLanguage": "en",
-    "publisher": {
-      "@id": "https://calccore.net/#org"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/education/gcd-lcm-calculator#webpage",
+      "url": "https://calccore.net/en/education/gcd-lcm-calculator",
+      "name": "GCD and LCM Calculator Online with Steps | CalcCore",
+      "description": "GCD and LCM calculator: the Euclidean algorithm, prime factors, divisors and multiples, plus factorization of a number and all its divisors with steps.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/education/gcd-lcm-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/education/gcd-lcm-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-30",
+      "inLanguage": "en"
     },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "UAH"
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/education/gcd-lcm-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Education",
+          "item": "https://calccore.net/en/education"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "GCD and LCM Calculator",
+          "item": "https://calccore.net/en/education/gcd-lcm-calculator"
+        }
+      ]
     }
-  }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/education/gcd-lcm-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the GCD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The greatest common divisor is the largest natural number that divides all the given numbers without a remainder. For example, GCD(12, 18) = 6."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the LCM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The least common multiple is the smallest natural number divisible by each of the given numbers. For example, LCM(12, 18) = 36."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are GCD and LCM related?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For two numbers GCD(a, b) · LCM(a, b) = a · b. So LCM = a · b / GCD. The calculator shows this check."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the GCD of two numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest way is the Euclidean algorithm: divide the larger number by the smaller one, then the smaller by the remainder, until the remainder is zero. The last nonzero remainder is the GCD. For 48 and 18 it is 6."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the GCD and LCM of three or more numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Step by step: GCD(a, b, c) = GCD(GCD(a, b), c), LCM(a, b, c) = LCM(LCM(a, b), c). For 12, 18 and 30 we get GCD = 6, LCM = 180."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which numbers are called coprime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Numbers whose GCD is 1: they have no common divisors except one. For example, 8 and 15. For such numbers the LCM equals the product."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the LCM through prime factors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Factor the numbers into primes and take every prime with its largest exponent. For 12 = 2² · 3 and 18 = 2 · 3² the LCM is 2² · 3² = 36."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many numbers can I enter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From two to twenty natural numbers, each up to 18 digits. Separate them with a space, a semicolon or a comma and a space."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is “12,5” not accepted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a comma without a space looks like a decimal number, and GCD and LCM are only defined for natural numbers. Write “12 5” or “12; 5”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I factor a number into primes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide the number by the smallest primes until 1 remains. For 360 = 2³ · 3² · 5. In the “Factors and divisors” mode the calculator shows these divisions and all the divisors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many divisors does a number have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If n = p₁^e₁ · p₂^e₂ · …, the number of divisors is (e₁ + 1)(e₂ + 1)… For 360 it is 4 · 3 · 2 = 24."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator work with very large numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, up to 18 digits. GCD and LCM are computed exactly, and large numbers are factored with a fast algorithm that includes a primality test."
+          }
+        }
+      ]
+    }
     </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="gcd-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cgcd">
-            <div class="mcalc__wrap">
+        <section class="gcd" id="gcd">
+            <div class="gcd__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">GCD and LCM Calculator</h1>
-                    <p class="mcalc__p">
-                        Enter two or more natural numbers — get the greatest common divisor and the least common multiple with the working.
-                    </p>
+                <div class="gcd__titlebar">
+                    <h1 class="gcd__h1">GCD and LCM Calculator</h1>
+                    <p class="gcd__p">Find the greatest common divisor and the least common multiple of two or more numbers, or factor a number into primes. Every result comes with a step-by-step solution.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter details</h2>
-                        <span class="mcalc__badge">Education</span>
-                    </div>
+                <div class="gcd__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="numbersInput">Numbers (separated by comma or space)</label>
-                            <textarea class="mcalc__input" id="numbersInput" rows="3"
-                                style="height:auto; padding:10px 12px; font-family:inherit;"
-                                placeholder="e.g.: 12, 18, 30"></textarea>
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="gcd__card">
+                        <div class="gcd__sectionTitle">
+                            <h2 class="gcd__h2">Enter data</h2>
+                            <span class="gcd__badge">Education</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Calculate</button>
-                                <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="gcd__tabs" role="tablist">
+                            <button type="button" class="gcd__tab is-active" data-m="gl" role="tab" aria-selected="true"><b class="gcd__tabT">GCD and LCM</b><span class="gcd__ex">12, 18, 30 → 6 and 180</span></button>
+                            <button type="button" class="gcd__tab" data-m="fx" role="tab" aria-selected="false"><b class="gcd__tabT">Factors and divisors</b><span class="gcd__ex">360 = 2³ · 3² · 5</span></button>
+                        </div>
+
+                        <div class="gcd__eqPrev" id="eqPreview" aria-live="polite"></div>
+
+                        <div class="gcd__panel" id="panelGl">
+                            <div class="gcd__field gcd__field--full">
+                                <label class="gcd__label" for="nums">Numbers</label>
+                                <textarea class="gcd__input" id="nums" rows="3" autocomplete="off" spellcheck="false" maxlength="600" placeholder="e.g.: 12, 18, 30"></textarea>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
+                            <div class="gcd__field gcd__field--full">
+                                <span class="gcd__label" id="mdLbl">Method</span>
+                                <input type="hidden" id="method" value="euclid">
+                                <div class="gcd__sel" id="md_dd">
+                                    <button type="button" class="gcd__selBtn" id="md_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="mdLbl md_val"><span id="md_val">Euclidean algorithm</span><span class="gcd__caret" aria-hidden="true"></span></button>
+                                    <ul class="gcd__selList" id="md_list" role="listbox" aria-labelledby="mdLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="euclid" aria-selected="true">Euclidean algorithm</li>
+                                        <li role="option" tabindex="-1" data-v="primes" aria-selected="false">Prime factors</li>
+                                        <li role="option" tabindex="-1" data-v="divs" aria-selected="false">Divisors and multiples</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="gcd__hint gcd__mt12">From 2 to 20 natural numbers, each up to 18 digits. Separate with a space, “;” or “, ”. Ctrl + Enter — calculate.</div>
                         </div>
+
+                        <div class="gcd__panel" id="panelFx" hidden>
+                            <div class="gcd__field gcd__field--full">
+                                <label class="gcd__label" for="num1">Number</label>
+                                <input class="gcd__input" id="num1" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="40" placeholder="e.g.: 360">
+                            </div>
+                            <div class="gcd__hint gcd__mt12">A single natural number up to 18 digits.</div>
+                        </div>
+
+                        <div class="gcd__actions gcd__mt12">
+                            <button class="gcd__btn gcd__btn--primary" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="gcd__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter two or more natural numbers.
+                    <!-- RIGHT -->
+                    <div class="gcd__card">
+                        <div class="gcd__sectionTitle">
+                            <h2 class="gcd__h2">Result</h2>
+                            <span class="gcd__badge">CalcCore</span>
+                        </div>
+                        <div class="gcd__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="gcd__actions gcd__mt12">
+                            <button class="gcd__btn gcd__btn--primary" id="shareBtn" type="button">Share link</button>
+                            <button class="gcd__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="gcd__btn gcd__btn--primary" id="resetBtn" type="button">Reset</button>
+                            <button class="gcd__btn gcd__btn--primary" id="copyBtn" type="button">Copy the result</button>
+                        </div>
+                        <div class="m-navlinks gcd__mt12"><a class="gcd__link" href="/en/education/fraction-calculator">Fraction calculator →</a> <a class="gcd__link" href="/en/education/linear-equation-calculator">Linear equation →</a></div>
                     </div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/en/education/fraction-calculator">Fraction Calculator</a>
-                    <a href="/en/calculator">Scientific Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/education/fraction-calculator"><b>Fraction Calculator</b><span>Reducing fractions and common denominators.</span></a>
+                <a class="cc-related-card" href="/en/education/linear-equation-calculator"><b>Linear Equation Calculator</b><span>Equations with brackets and fractions, inequalities.</span></a>
+                <a class="cc-related-card" href="/en/education/percent-calculator"><b>Percentage Calculator</b><span>Percentages, percent change, proportions.</span></a>
+            </div>
+        </section>
 
-        <section class="m-seo">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the GCD and LCM calculator does</h2>
+            <p>The calculator finds the <b>GCD</b> (greatest common divisor) and the <b>LCM</b> (least common multiple) of two or more natural numbers (up to 20 numbers, each up to 18 digits) and shows the solution by one of three methods: the <b>Euclidean algorithm</b>, <b>prime factors</b> or going through <b>divisors and multiples</b>. A separate mode factors a number into primes and shows all its divisors with their count and sum.</p>
+
             <h2>What are GCD and LCM</h2>
-            <p>
-                The <b>GCD (greatest common divisor)</b> is the largest natural number that divides all the given numbers
-                without a remainder. The <b>LCM (least common multiple)</b> is the smallest natural number that is
-                divisible by each of them. For 12 and 18: GCD = 6, LCM = 36.
-            </p>
+            <p>The <b>GCD</b> is the largest natural number that divides all the given numbers without a remainder. The <b>LCM</b> is the smallest natural number divisible by each of the given numbers. For 12 and 18: GCD = 6, LCM = 36. For two numbers GCD · LCM = a · b always, that is 6 · 36 = 216 = 12 · 18.</p>
 
-            <h2>How to find the GCD: the Euclidean algorithm</h2>
-            <p>
-                Divide the larger number by the smaller one, then the smaller one by the remainder, and repeat until the
-                remainder is zero. The last non-zero remainder is the GCD. For 48 and 18:
-            </p>
-            <ul>
-                <li>48 = 2 · 18 + 12</li>
-                <li>18 = 1 · 12 + 6</li>
-                <li>12 = 2 · 6 + 0 — so <b>GCD(48, 18) = 6</b></li>
-            </ul>
+            <h2>The Euclidean algorithm</h2>
+            <p>Divide the larger number by the smaller one, then the smaller by the remainder, and so on until the remainder is zero. The last nonzero remainder is the GCD. For 48 and 18: 48 = 2 · 18 + 12, 18 = 1 · 12 + 6, 12 = 2 · 6 + 0, so GCD = 6 and LCM = 48 · 18 / 6 = 144.</p>
+            <p>For several numbers GCD and LCM are computed step by step: GCD(a, b, c) = GCD(GCD(a, b), c) and LCM(a, b, c) = LCM(LCM(a, b), c). For example, for 12, 18 and 30: GCD = 6, LCM = 180.</p>
 
-            <h2>How to find the LCM</h2>
-            <p>
-                For two numbers <b>LCM(a, b) = a · b / GCD(a, b)</b>. Another way is prime factorization: take every prime
-                with its largest exponent. For 12 = 2² · 3 and 18 = 2 · 3² we get LCM = 2² · 3² = 36. The calculator shows
-                both methods for every set of numbers.
-            </p>
+            <h2>Prime factors</h2>
+            <p>Factor every number into primes and build a table of exponents. For the GCD take the common primes with the smallest exponents, for the LCM all primes with the largest ones. For 12 = 2² · 3, 18 = 2 · 3² and 30 = 2 · 3 · 5 we get GCD = 2 · 3 = 6 and LCM = 2² · 3² · 5 = 180.</p>
+
+            <h2>Divisors and multiples</h2>
+            <p>This is the school method for small numbers. The divisors of 12 are 1, 2, 3, 4, 6, 12, of 18 — 1, 2, 3, 6, 9, 18; the common divisors are 1, 2, 3, 6 and the largest is 6. The multiples of 18 are 18, 36; the number 36 is divisible by 12, so LCM = 36.</p>
+
+            <h2>Factorization and divisors</h2>
+            <p>In the “Factors and divisors” mode the number is factored into primes, and from the factorization the number of divisors τ = (e₁ + 1)(e₂ + 1)… and the sum of divisors σ = Π (p^(e+1) − 1)/(p − 1) are computed. For 360 = 2³ · 3² · 5 we get τ = 4 · 3 · 2 = 24 and σ = 15 · 13 · 6 = 1170. Large numbers (up to 18 digits) are factored by a fast algorithm, so the answer appears at once.</p>
 
             <h2>Where GCD and LCM are used</h2>
-            <ul>
-                <li><b>Simplifying fractions:</b> divide the numerator and denominator by their GCD.</li>
-                <li><b>Common denominator:</b> when adding fractions, use the LCM of the denominators.</li>
-                <li><b>Repeating events:</b> the moment two periodic processes coincide again is the LCM of their periods.</li>
-                <li><b>Splitting into equal groups:</b> the largest group size that fits every quantity is the GCD.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                The calculator accepts up to 20 natural numbers of up to 18 digits. Prime factorization is shown for
-                numbers up to 10<sup>12</sup>.
-            </p>
+            <p>The GCD is needed to reduce a fraction (numerator and denominator are divided by their GCD) and to split several quantities into equal groups of the largest size. The LCM is needed for a common denominator when adding fractions and in repeating-event problems: if one event repeats every 12 days and another every 18, they coincide every 36 days.</p>
+            <p class="gcd-mini">All calculations are exact: numbers are handled as integers, and the LCM is never rounded, even for long numbers.</p>
         </section>
 
-        <section class="m-faq">
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>What is the GCD?</h3>
-                <p>The GCD (greatest common divisor) is the largest natural number that divides several numbers without a remainder. For example, GCD(12, 18) = 6.</p>
+                <p>The greatest common divisor is the largest natural number that divides all the given numbers without a remainder. For example, GCD(12, 18) = 6.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>What is the LCM?</h3>
-                <p>The LCM (least common multiple) is the smallest natural number that is divisible by each of the given numbers without a remainder. For example, LCM(12, 18) = 36.</p>
+                <p>The least common multiple is the smallest natural number divisible by each of the given numbers. For example, LCM(12, 18) = 36.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How are the GCD and LCM related?</h3>
-                <p>For two numbers, the product of the GCD and LCM equals the product of the numbers: GCD(a, b) · LCM(a, b) = a · b. So LCM = a · b / GCD.</p>
+            <div class="cc-faq-item">
+                <h3>How are GCD and LCM related?</h3>
+                <p>For two numbers GCD(a, b) · LCM(a, b) = a · b. So LCM = a · b / GCD. The calculator shows this check.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I find the GCD of three or more numbers?</h3>
-                <p>Find it step by step: GCD(a, b, c) = GCD(GCD(a, b), c). The calculator does this automatically for several numbers (up to 20).</p>
+            <div class="cc-faq-item">
+                <h3>How do I find the GCD of two numbers?</h3>
+                <p>The fastest way is the Euclidean algorithm: divide the larger number by the smaller one, then the smaller by the remainder, until the remainder is zero. The last nonzero remainder is the GCD. For 48 and 18 it is 6.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>How do I find the GCD and LCM of three or more numbers?</h3>
+                <p>Step by step: GCD(a, b, c) = GCD(GCD(a, b), c), LCM(a, b, c) = LCM(LCM(a, b), c). For 12, 18 and 30 we get GCD = 6, LCM = 180.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Which numbers are called coprime?</h3>
-                <p>Numbers whose GCD equals 1, meaning they share no divisors other than one. For example, 8 and 15.</p>
+                <p>Numbers whose GCD is 1: they have no common divisors except one. For example, 8 and 15. For such numbers the LCM equals the product.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the LCM through prime factors?</h3>
+                <p>Factor the numbers into primes and take every prime with its largest exponent. For 12 = 2² · 3 and 18 = 2 · 3² the LCM is 2² · 3² = 36.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many numbers can I enter?</h3>
+                <p>From two to twenty natural numbers, each up to 18 digits. Separate them with a space, a semicolon or a comma and a space.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is “12,5” not accepted?</h3>
+                <p>Because a comma without a space looks like a decimal number, and GCD and LCM are only defined for natural numbers. Write “12 5” or “12; 5”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I factor a number into primes?</h3>
+                <p>Divide the number by the smallest primes until 1 remains. For 360 = 2³ · 3² · 5. In the “Factors and divisors” mode the calculator shows these divisions and all the divisors.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many divisors does a number have?</h3>
+                <p>If n = p₁^e₁ · p₂^e₂ · …, the number of divisors is (e₁ + 1)(e₂ + 1)… For 360 it is 4 · 3 · 2 = 24.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator work with very large numbers?</h3>
+                <p>Yes, up to 18 digits. GCD and LCM are computed exactly, and large numbers are factored with a fast algorithm that includes a primality test.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
