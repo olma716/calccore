@@ -1879,6 +1879,177 @@ main,
     }
 }
 
+/* ТЕЛЕФОН: меню розділів «плитками» — сітка 3 × 3 із круглими іконками (Tabler Icons, MIT);
+   відкритий розділ підсвічується білим, а його список розкривається під рядком плиток на всю ширину */
+@media (max-width: 900px) {
+    .site-header .main-menu {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-flow: dense;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .site-header .main-menu > li {
+        display: contents;
+    }
+
+    .site-header .main-menu > li > a {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 88px;
+        padding: 54px 4px 8px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.10);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.15;
+        text-align: center;
+        overflow-wrap: anywhere;
+        transition: background .2s ease, color .2s ease;
+    }
+
+    .site-header .main-menu > li > a:hover {
+        background: rgba(255, 255, 255, 0.18);
+    }
+
+    .site-header .main-menu > li > a::before,
+    .site-header .main-menu > li > a::after {
+        content: "" !important;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        width: 36px;
+        height: 36px;
+        margin-left: -18px;
+    }
+
+    .site-header .main-menu > li > a::before {
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.18);
+        transition: background .2s ease;
+    }
+
+    .site-header .main-menu > li > a::after {
+        background: #fff;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: 20px 20px;
+        mask-size: 20px 20px;
+        transition: background .2s ease;
+    }
+
+    .site-header .main-menu .caret {
+        display: none;
+    }
+
+    /* вузькі екрани: довші підписи («Construction») не мають переноситись посеред слова */
+    @media (max-width: 360px) {
+        .site-header .main-menu > li > a {
+            padding-left: 2px;
+            padding-right: 2px;
+            font-size: 11px;
+            letter-spacing: -0.1px;
+        }
+    }
+
+    /* «Головна» — широка кнопка зверху */
+    .site-header .main-menu > li[data-ico="home"] > a {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: center;
+        min-height: 48px;
+        padding: 10px 14px 10px 56px;
+        font-size: 14px;
+    }
+
+    .site-header .main-menu > li[data-ico="home"] > a::before,
+    .site-header .main-menu > li[data-ico="home"] > a::after {
+        top: 50%;
+        left: 12px;
+        margin: -18px 0 0;
+    }
+
+    /* відкритий розділ */
+    .site-header .main-menu > li.submenu-open > a,
+    .site-header .main-menu > li.submenu-open > a:hover {
+        border-color: #fff;
+        background: #fff;
+        color: #1f2f55;
+    }
+
+    .site-header .main-menu > li.submenu-open > a::before {
+        background: #e3ebff;
+    }
+
+    .site-header .main-menu > li.submenu-open > a::after {
+        background: #2f5fb8;
+    }
+
+    /* список розділу — на всю ширину під рядком плиток */
+    .site-header .main-menu > li > .submenu {
+        grid-column: 1 / -1;
+        margin-top: 0;
+    }
+
+    .site-header .main-menu > li[data-ico="home"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l-2 0l9 -9l9 9l-2 0' /%3E%3Cpath d='M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7' /%3E%3Cpath d='M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l-2 0l9 -9l9 9l-2 0' /%3E%3Cpath d='M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7' /%3E%3Cpath d='M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="auto"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="finance"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' /%3E%3Cpath d='M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1' /%3E%3Cpath d='M12 7v10' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' /%3E%3Cpath d='M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1' /%3E%3Cpath d='M12 7v10' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="construction"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21l18 0' /%3E%3Cpath d='M9 8l1 0' /%3E%3Cpath d='M9 12l1 0' /%3E%3Cpath d='M9 16l1 0' /%3E%3Cpath d='M14 8l1 0' /%3E%3Cpath d='M14 12l1 0' /%3E%3Cpath d='M14 16l1 0' /%3E%3Cpath d='M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21l18 0' /%3E%3Cpath d='M9 8l1 0' /%3E%3Cpath d='M9 12l1 0' /%3E%3Cpath d='M9 16l1 0' /%3E%3Cpath d='M14 8l1 0' /%3E%3Cpath d='M14 12l1 0' /%3E%3Cpath d='M14 16l1 0' /%3E%3Cpath d='M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="education"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 9l-10 -4l-10 4l10 4l10 -4v6' /%3E%3Cpath d='M6 10.6v5.4a6 3 0 0 0 12 0v-5.4' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 9l-10 -4l-10 4l10 4l10 -4v6' /%3E%3Cpath d='M6 10.6v5.4a6 3 0 0 0 12 0v-5.4' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="sport"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' /%3E%3Cpath d='M12 7l4.76 3.45l-1.76 5.55h-6l-1.76 -5.55z' /%3E%3Cpath d='M12 7v-4m3 13l2.5 3m-.74 -8.55l3.74 -1.45m-11.44 7.05l-2.56 2.95m.74 -8.55l-3.74 -1.45' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' /%3E%3Cpath d='M12 7l4.76 3.45l-1.76 5.55h-6l-1.76 -5.55z' /%3E%3Cpath d='M12 7v-4m3 13l2.5 3m-.74 -8.55l3.74 -1.45m-11.44 7.05l-2.56 2.95m.74 -8.55l-3.74 -1.45' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="datetime"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z' /%3E%3Cpath d='M16 3v4' /%3E%3Cpath d='M8 3v4' /%3E%3Cpath d='M4 11h16' /%3E%3Cpath d='M11 15h1' /%3E%3Cpath d='M12 15v3' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z' /%3E%3Cpath d='M16 3v4' /%3E%3Cpath d='M8 3v4' /%3E%3Cpath d='M4 11h16' /%3E%3Cpath d='M11 15h1' /%3E%3Cpath d='M12 15v3' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="kitchen"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3c1.918 0 3.52 1.35 3.91 3.151a4 4 0 0 1 2.09 7.723l0 7.126h-12v-7.126a4 4 0 1 1 2.092 -7.723a4 4 0 0 1 3.908 -3.151z' /%3E%3Cpath d='M6.161 17.009l11.839 -.009' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3c1.918 0 3.52 1.35 3.91 3.151a4 4 0 0 1 2.09 7.723l0 7.126h-12v-7.126a4 4 0 1 1 2.092 -7.723a4 4 0 0 1 3.908 -3.151z' /%3E%3Cpath d='M6.161 17.009l11.839 -.009' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="pregnancy"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M18 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M2 5h2.5l1.632 4.897a6 6 0 0 0 5.693 4.103h2.675a5.5 5.5 0 0 0 0 -11h-.5v6' /%3E%3Cpath d='M6 9h14' /%3E%3Cpath d='M9 17l1 -3' /%3E%3Cpath d='M16 14l1 3' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M18 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' /%3E%3Cpath d='M2 5h2.5l1.632 4.897a6 6 0 0 0 5.693 4.103h2.675a5.5 5.5 0 0 0 0 -11h-.5v6' /%3E%3Cpath d='M6 9h14' /%3E%3Cpath d='M9 17l1 -3' /%3E%3Cpath d='M16 14l1 3' /%3E%3C/svg%3E");
+    }
+
+    .site-header .main-menu > li[data-ico="misc"] > a::after {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' /%3E%3Cpath d='M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' /%3E%3Cpath d='M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' /%3E%3Cpath d='M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' /%3E%3Cpath d='M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' /%3E%3C/svg%3E");
+    }
+}
+
 /* телефон: поки список згортається (анімація), він лишається видимим */
 @media (max-width: 900px) {
     .submenu.slide-closing,

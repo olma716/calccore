@@ -207,7 +207,26 @@ function initHeaderUI() {
       e.preventDefault();
       const li = a.closest('.has-submenu');
       if (!li) return;
-      slideList(li.querySelector(':scope > .submenu'), li.classList.toggle('submenu-open'));
+      const sub = li.querySelector(':scope > .submenu');
+      const willOpen = !li.classList.contains('submenu-open');
+      // плитки: відкритий лише один розділ, решта згортаються
+      if (willOpen) {
+        document.querySelectorAll('.main-menu > .has-submenu.submenu-open').forEach((o) => {
+          if (o === li) return;
+          o.classList.remove('submenu-open');
+          slideList(o.querySelector(':scope > .submenu'), false);
+        });
+      }
+      slideList(sub, li.classList.toggle('submenu-open'));
+      if (willOpen && sub) {
+        // якщо список виходить за видиму частину панелі — трохи прокручуємо її
+        setTimeout(() => {
+          const panel = document.getElementById('navPanel');
+          if (!panel) return;
+          const r = sub.getBoundingClientRect(), pr = panel.getBoundingClientRect();
+          if (r.bottom > pr.bottom) panel.scrollBy({ top: Math.min(r.bottom - pr.bottom + 8, r.top - pr.top - 8), behavior: 'smooth' });
+        }, 450);
+      }
     });
   });
 }
