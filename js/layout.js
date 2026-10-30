@@ -39,6 +39,32 @@ function slideList(el, open) {
   el._slideTimer = setTimeout(clear, 460);
 }
 
+// шапка випадного списку на ПК: назва розділу й кількість калькуляторів
+function addSubmenuCaps() {
+  const isEn = location.pathname.startsWith('/en/');
+  const plural = (n) => {
+    if (isEn) return n + (n === 1 ? ' calculator' : ' calculators');
+    const m10 = n % 10, m100 = n % 100;
+    const w = m10 === 1 && m100 !== 11 ? 'калькулятор' : (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? 'калькулятори' : 'калькуляторів');
+    return n + ' ' + w;
+  };
+  document.querySelectorAll('.main-menu > .has-submenu > .submenu:not(.submenu--mega)').forEach((ul) => {
+    if (ul.querySelector(':scope > .submenu-cap')) return;
+    const toggle = ul.parentElement.querySelector(':scope > .submenu-toggle');
+    const count = ul.querySelectorAll(':scope > li > a').length;
+    if (!toggle || !count) return;
+    const cap = document.createElement('li');
+    cap.className = 'submenu-cap';
+    cap.setAttribute('aria-hidden', 'true');
+    const name = document.createElement('b');
+    name.textContent = toggle.textContent.replace('▾', '').trim();
+    const num = document.createElement('span');
+    num.textContent = plural(count);
+    cap.append(name, num);
+    ul.insertBefore(cap, ul.firstChild);
+  });
+}
+
 function initHeaderUI() {
   const header = document.getElementById('siteHeader');
   const toggle = document.getElementById('navToggle');
@@ -252,6 +278,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadPartial("#header", isEn ? "/partials/en/header.html" : "/partials/header.html");
   await loadPartial("#footer", isEn ? "/partials/en/footer.html" : "/partials/footer.html");
 
+  addSubmenuCaps();
   initHeaderUI();
   initHeaderSearch();
   // Notify other scripts that header is now loaded and ready

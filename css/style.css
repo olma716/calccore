@@ -1680,6 +1680,205 @@ main,
     }
 }
 
+/* ПК: випадні списки меню — «каскад»: панель швидко проявляється, пункти виїжджають по черзі.
+   Закриття швидке й без затримки, щоб при переході між пунктами списки не накладалися. */
+@media (min-width: 901px) {
+    .submenu {
+        transition: opacity .14s ease, visibility 0s linear .14s;
+    }
+
+    .main-menu>li.has-submenu:hover .submenu,
+    .main-menu>li.has-submenu:focus-within .submenu {
+        transition: opacity .26s ease, visibility 0s;
+    }
+
+    .submenu > li {
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity .12s ease, transform .12s ease;
+    }
+
+    .main-menu>li.has-submenu:hover .submenu > li,
+    .main-menu>li.has-submenu:focus-within .submenu > li {
+        opacity: 1;
+        transform: none;
+        transition: opacity .4s ease var(--d, 0ms), transform .5s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0ms);
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(1) {
+        --d: 0ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(2) {
+        --d: 50ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(3) {
+        --d: 100ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(4) {
+        --d: 150ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(5) {
+        --d: 200ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(6) {
+        --d: 250ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(7) {
+        --d: 300ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(8) {
+        --d: 350ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(9) {
+        --d: 400ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(10) {
+        --d: 450ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(11) {
+        --d: 450ms;
+    }
+
+    .submenu:not(.submenu--mega) > li:nth-child(12) {
+        --d: 450ms;
+    }
+
+    .submenu--mega > li:nth-child(1) {
+        --d: 0ms;
+    }
+
+    .submenu--mega > li:nth-child(2) {
+        --d: 120ms;
+    }
+
+    .submenu--mega > li:nth-child(3) {
+        --d: 240ms;
+    }
+
+    .submenu--mega > li:nth-child(4) {
+        --d: 360ms;
+    }
+
+    .submenu--mega > li:nth-child(5) {
+        --d: 480ms;
+    }
+
+    .submenu--mega > li:nth-child(6) {
+        --d: 600ms;
+    }
+
+    .main-menu>li>a {
+        transition: transform .25s ease, background .25s ease, box-shadow .25s ease, color .25s ease;
+    }
+
+    .main-menu>li>a:not(.is-active):hover,
+    .main-menu>li.has-submenu:hover>a:not(.is-active) {
+        background: rgba(255, 255, 255, 0.10);
+    }
+
+    .submenu li a {
+        transition: background .25s ease, padding-left .25s cubic-bezier(0.2, 0.8, 0.2, 1), color .25s ease;
+    }
+}
+
+/* ПК: темна панель меню з шапкою (назва розділу й кількість калькуляторів, js/layout.js),
+   тонкими лініями між пунктами та стрілкою при наведенні — варіант В */
+@media (min-width: 901px) {
+    .submenu {
+        padding: 0 0 6px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 14px;
+        background: var(--header-grad-solid);
+        box-shadow: 0 16px 40px rgba(31, 47, 85, 0.34);
+    }
+
+    .submenu:not(.submenu--mega) {
+        min-width: 290px;
+        overflow: hidden;
+    }
+
+    .submenu--mega {
+        padding: 18px 22px 12px;
+    }
+
+    .submenu-cap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 4px;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+    }
+
+    .submenu-cap span {
+        color: #c9d6f5;
+        font-weight: 500;
+    }
+
+    .submenu:not(.submenu--mega) li:not(.submenu-cap) a {
+        position: relative;
+        padding: 9px 42px 9px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: #e8edf8;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.35;
+    }
+
+    .submenu:not(.submenu--mega) li:last-child a {
+        border-bottom: none;
+    }
+
+    .submenu:not(.submenu--mega) li:not(.submenu-cap) a::after {
+        content: "";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        width: 16px;
+        height: 16px;
+        margin-top: -8px;
+        background: #a9c3ff;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l14 0' /%3E%3Cpath d='M13 18l6 -6' /%3E%3Cpath d='M13 6l6 6' /%3E%3C/svg%3E") center / 16px 16px no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l14 0' /%3E%3Cpath d='M13 18l6 -6' /%3E%3Cpath d='M13 6l6 6' /%3E%3C/svg%3E") center / 16px 16px no-repeat;
+        opacity: 0;
+        transform: translateX(-6px);
+        transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .submenu:not(.submenu--mega) li:not(.submenu-cap) a:hover {
+        padding-left: 14px;
+        background: rgba(255, 255, 255, 0.10);
+        color: #fff;
+    }
+
+    .submenu:not(.submenu--mega) li:not(.submenu-cap) a:hover::after {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* шапка списку лише для ПК: на телефоні список і так підписаний кнопкою розділу */
+@media (max-width: 900px) {
+    .submenu-cap {
+        display: none;
+    }
+}
+
 /* телефон: поки список згортається (анімація), він лишається видимим */
 @media (max-width: 900px) {
     .submenu.slide-closing,
