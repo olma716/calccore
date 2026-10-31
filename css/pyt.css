@@ -1,0 +1,2752 @@
+/* =========================
+   Калькулятор теореми Піфагора
+   у єдиному стилі з калькулятором відсотків (все всередині .pyt)
+========================= */
+
+.pyt,
+.pyt * {
+    box-sizing: border-box;
+}
+
+.pyt {
+    --e-card: #fff;
+    --e-text: #222;
+    --e-muted: #6b7280;
+    --e-brand: #283b69;
+    --e-brand2: #1f2f55;
+    --e-border: #e6e8ef;
+    --e-shadow: 0 1px 3px rgba(31, 47, 85, .06), 0 10px 30px rgba(40, 59, 105, .14);
+    --e-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--e-text);
+}
+
+.pyt__wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 0 20px;
+}
+
+.pyt__titlebar {
+    background: var(--header-grad-solid, linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%));
+    color: #fff;
+    border-radius: var(--e-radius);
+    padding: 16px;
+    box-shadow: var(--e-shadow);
+    margin-bottom: 14px;
+}
+
+.pyt__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.pyt__p {
+    margin: 6px 0 0;
+    color: rgba(255, 255, 255, .92);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.pyt__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: 14px;
+    align-items: start;
+}
+
+@media (max-width: 980px) {
+    .pyt__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pyt__card {
+    background: var(--e-card);
+    border: 1px solid var(--e-border);
+    border-radius: var(--e-radius);
+    box-shadow: var(--e-shadow);
+    padding: 14px;
+    min-width: 0;
+    scroll-margin-top: 90px;
+}
+
+.pyt__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--e-border);
+}
+
+.pyt__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--e-brand2);
+}
+
+.pyt__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, .9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.pyt__auto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #2b3a55;
+    cursor: pointer;
+}
+
+.pyt__auto input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+}
+
+.pyt__mt12 {
+    margin-top: 12px;
+}
+
+/* ===== Поля ===== */
+.pyt__rows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .pyt__rows {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.pyt__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.pyt__label {
+    font-weight: 900;
+    font-size: 13px;
+    color: #2b3a55;
+}
+
+.pyt__hint {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--e-muted);
+    line-height: 1.4;
+}
+
+.pyt__req {
+    margin-left: 2px;
+    font-weight: 900;
+    color: #d64545;
+    cursor: help;
+}
+
+.pyt input.pyt__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.pyt input.pyt__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.pyt select.pyt__input {
+    height: 36px;
+    width: 100%;
+    padding: 0 10px;
+    border: .8px solid #b9cdee;
+    border-radius: 10px;
+    background-color: #eaf1fc;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+
+.pyt input.pyt__input:focus {
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.pyt select.pyt__input:focus {
+    border-color: #8fa8d6;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+/* вибір валюти: кнопка з прапорцем і випадний список (як у калькуляторах пального та TCO) */
+.pyt__dd {
+    position: relative;
+    align-self: flex-start;
+}
+
+.pyt__ddBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.pyt__ddBtn:hover {
+    background: #e0eafa;
+    border-color: #8fa8d6;
+}
+
+.pyt__ddBtn:focus-visible {
+    outline: none;
+    border-color: #283b69;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.pyt__ddFlag {
+    display: block;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(31, 47, 85, .15);
+}
+
+.pyt__caret {
+    width: 7px;
+    height: 7px;
+    margin: 0 2px 3px 2px;
+    border-right: 2px solid #1f2f55;
+    border-bottom: 2px solid #1f2f55;
+    transform: rotate(45deg);
+    transition: transform .15s ease;
+}
+
+.pyt__ddBtn[aria-expanded="true"] .pyt__caret {
+    transform: rotate(-135deg);
+    margin-bottom: 0;
+}
+
+.pyt__ddList {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 30;
+    min-width: 250px;
+    max-height: 320px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.pyt__ddList[hidden] {
+    display: none;
+}
+
+.pyt__ddList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.pyt__ddList li:hover,
+.pyt__ddList li:focus {
+    background: #eaf1fc;
+    outline: none;
+}
+
+.pyt__ddList li[aria-selected="true"] {
+    background: #dfeafb;
+    font-weight: 700;
+}
+
+.pyt__ddCode {
+    flex: 0 0 38px;
+    font-weight: 700;
+    color: #1f2f55;
+}
+
+.pyt__ddName {
+    color: #5b6b8c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 520px) {
+    .pyt__ddList {
+        min-width: 230px;
+    }
+}
+
+/* блоки всередині картки */
+.pyt__block {
+    background: #f6f7fb;
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.pyt__miniTitle {
+    font-weight: 800;
+    color: var(--e-brand2);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.pyt__block .pyt__rows {
+    margin-top: 0;
+}
+
+/* згорнутий блок */
+.pyt__details {
+    border: 1px solid var(--e-border);
+    border-radius: 14px;
+    background: #f6f7fb;
+    padding: 0 14px;
+}
+
+.pyt__details[open] {
+    padding-bottom: 14px;
+}
+
+.pyt__details > summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 900;
+    font-size: 13px;
+    color: #1f2f55;
+    padding: 12px 0;
+}
+
+.pyt__details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.pyt__details > summary::after {
+    content: "▾";
+    float: right;
+    transition: transform .15s ease;
+}
+
+.pyt__details[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+/* ===== Режим: чіпи зі значками ===== */
+.pyt__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pyt__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid #dfe5f2;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 4px 10px rgba(40, 59, 105, .08);
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.pyt__chip .pyt__ico {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: #5b78b8;
+}
+
+.pyt__chip:hover {
+    transform: translateY(-1px);
+    border-color: #b9cdee;
+    background: #f6f9ff;
+    box-shadow: 0 2px 4px rgba(31, 47, 85, .08), 0 8px 16px rgba(40, 59, 105, .14);
+}
+
+.pyt__chip.is-active {
+    border-color: #8fa8d6;
+    background: #eaf1fc;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(60, 99, 196, .22);
+}
+
+.pyt__chip.is-active .pyt__ico {
+    color: #283b69;
+}
+
+
+/* ===== Кнопки ===== */
+.pyt__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pyt__btn {
+    height: 38px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1f2f55 0%, #2c4070 55%, #3c538f 100%);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(40, 59, 105, .35);
+    transition: filter .15s ease, transform .15s ease;
+}
+
+.pyt__btn:hover {
+    filter: brightness(1.12);
+}
+
+.pyt__btn:active {
+    transform: translateY(1px);
+}
+
+#exampleBtn {
+    background: #eaf1fc;
+    color: #1f2f55;
+    box-shadow: inset 0 0 0 1px #b9cdee;
+}
+
+#exampleBtn:hover {
+    background: #dfe9fa;
+    filter: none;
+}
+
+.pyt__btn--wide {
+    min-width: 150px;
+    padding: 0 22px;
+}
+
+.pyt__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    min-height: 16px;
+}
+
+/* ===== Результат ===== */
+.pyt__result {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.pyt__hintbox {
+    background: #fff4d6;
+    border: 1px solid #f0d48a;
+    color: #8a5a00;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.pyt__head {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+    margin-bottom: 10px;
+}
+
+.pyt__kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.pyt__kpi {
+    background: #fff;
+    border: 1px solid #dfe5f2;
+    border-radius: 14px;
+    padding: 11px 12px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 6px 14px rgba(40, 59, 105, .09);
+    min-width: 0;
+}
+
+.pyt__kpi--main {
+    background: linear-gradient(135deg, #eef4fd 0%, #dfe9fa 100%);
+    border-color: #c5d6f1;
+}
+
+.pyt__kpiT {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.pyt__kpiV {
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #1f2f55;
+    line-height: 1.2;
+}
+
+.pyt__kpiM {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.35;
+}
+
+.pyt__sub {
+    margin: 14px 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1f2f55;
+}
+
+.pyt__note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.45;
+}
+
+/* порівняння: дешевший — м'яко-зелений, дорожчий — м'яко-червоний */
+.pyt__kpi.is-win {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.pyt__kpi.is-lose {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+.pyt__verdict {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1f2f55;
+    background: #eaf1fc;
+    border: 1px solid #c5d6f1;
+}
+
+.pyt__verdict.is-home,
+.pyt__verdict.is-station {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.pyt__colHead {
+    grid-column: 1 / -1;
+    margin: 6px 0 -2px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #283b69;
+}
+
+.pyt-mini {
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+@media (max-width: 420px) {
+    .pyt__kpiV {
+        font-size: 18px;
+    }
+}
+
+/* ===== Споріднені калькулятори ===== */
+.cc-related {
+    max-width: 900px;
+    margin: 28px auto 0;
+    padding: 0 16px;
+}
+
+.cc-related h2 {
+    color: #283b69;
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.cc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cc-related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #fff;
+    text-decoration: none;
+    color: #444;
+    box-shadow: 0 6px 20px rgba(40, 59, 105, .12);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.cc-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(40, 59, 105, .2);
+}
+
+.cc-related-card b {
+    color: #283b69;
+    font-size: 15px;
+}
+
+.cc-related-card span {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+    .cc-related-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== SEO / FAQ ===== */
+.cc-divider {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-top: 2px dashed rgba(40, 59, 105, .35);
+}
+
+.cc-seo,
+.cc-faq {
+    max-width: 900px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+}
+
+.cc-seo h2,
+.cc-faq h2 {
+    font-size: 22px;
+    color: #283b69;
+    margin-bottom: 14px;
+}
+
+.cc-seo p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.cc-seo a {
+    color: #283b69;
+    font-weight: 700;
+}
+
+.cc-faq-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
+}
+
+.cc-faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #283b69;
+}
+
+.cc-faq-item p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.55;
+}
+
+/* довгі списки (розетка, потужність станції) — на всю ширину рядка */
+.pyt__field--full {
+    grid-column: 1 / -1;
+}
+
+/* ===== запас ходу: додаткові елементи ===== */
+.pyt__kpi--wide {
+    grid-column: 1 / -1;
+}
+
+.pyt__kpi--main .pyt__kpiV {
+    font-size: 26px;
+}
+
+.pyt__link {
+    color: #283b69;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.pyt__verdict.is-ok {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.pyt__verdict.is-bad {
+    background: #fdeeee;
+    border-color: #f1c4c4;
+}
+
+/* кнопки результату — однакової ширини на всю ширину блоку */
+#shareBtn,
+#exampleBtn,
+#resetBtn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 8px;
+}
+
+/* ===== власне авто чи таксі: додаткові елементи ===== */
+.pyt__mt10 {
+    margin-top: 10px;
+}
+
+.pyt__block + .pyt__block {
+    margin-top: 12px;
+}
+
+.pyt__rows[hidden] {
+    display: none;
+}
+
+.pyt__rows--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pyt__chips + .pyt__rows {
+    margin-top: 12px;
+}
+
+.pyt__details .pyt__rows {
+    margin-top: 0;
+}
+
+.pyt__verdict.is-ok {
+    background: #eaf6ee;
+    border-color: #bfe3cb;
+}
+
+.pyt__verdict.is-warn {
+    background: #eaf6f6;
+    border-color: #b9dfe0;
+}
+
+.pyt__tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.pyt__tbl th,
+.pyt__tbl td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--e-border);
+    color: #1f2f55;
+}
+
+.pyt__tbl th {
+    text-align: left;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.pyt__tbl td {
+    text-align: right;
+}
+
+.pyt__tbl thead th {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.pyt__tbl thead th:last-child {
+    text-align: right;
+}
+
+.pyt__tbl tr.pyt__total th,
+.pyt__tbl tr.pyt__total td {
+    border-bottom: 0;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.pyt__chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 6px;
+}
+
+.pyt__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--e-muted);
+}
+
+.pyt__legend i {
+    display: inline-block;
+    width: 18px;
+    height: 4px;
+    margin-right: 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+/* вирівнювання полів: підписи різної довжини не зсувають поля, рядки підсітки спільні для обох колонок */
+@supports (grid-template-rows: subgrid) {
+    .pyt__rows > .pyt__field {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+        align-content: start;
+    }
+
+    .pyt__rows > .pyt__field > :nth-child(2),
+    .pyt__rows > .pyt__field > :nth-child(3) {
+        margin-top: 6px;
+    }
+}
+
+.pyt__tbl--cmp thead th:not(:first-child) {
+    text-align: right;
+}
+
+.pyt__qrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pyt__qchip {
+    height: 30px;
+    padding: 0 12px;
+    border: 1px solid #b9cdee;
+    border-radius: 999px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.pyt__qchip:hover {
+    background: #dfe9fa;
+    border-color: #8fa8d6;
+}
+
+.pyt__qchip.is-on {
+    background: #283b69;
+    border-color: #283b69;
+    color: #fff;
+}
+
+.pyt__chips {
+    margin-bottom: 12px;
+}
+
+.pyt__chip {
+    padding: 8px 12px;
+}
+
+@media (max-width: 520px) {
+    .pyt__chips .pyt__chip {
+        flex: 1 1 100%;
+    }
+}
+
+.pyt__cur {
+    display: flex;
+    gap: 6px;
+}
+
+.pyt__cur .pyt__chip {
+    padding: 6px 12px;
+}
+
+.pyt__titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pyt__donut {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.pyt__donutSvg {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 150px;
+}
+
+.pyt__dl {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pyt__dl li {
+    display: grid;
+    grid-template-columns: 10px 1fr;
+    column-gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--e-muted);
+    line-height: 1.3;
+}
+
+.pyt__dl li i {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.pyt__dl li b {
+    grid-column: 2;
+    font-size: 13px;
+    color: #1f2f55;
+}
+
+.pyt__sectionTitle .pyt__ddList {
+    min-width: 250px;
+}
+
+.pyt__link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #283b69;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+.pyt__chipsRow {
+    grid-column: 1 / -1;
+}
+
+.pyt__schedule {
+    margin-top: 14px;
+}
+
+.pyt__schedHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.pyt__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pyt__tableWrap {
+    max-height: 460px;
+    overflow: auto;
+    border: 1px solid var(--e-border);
+    border-radius: 12px;
+}
+
+.pyt__tbl--sch {
+    margin-top: 0;
+    min-width: 440px;
+}
+
+.pyt__tbl--sch th,
+.pyt__tbl--sch td {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.pyt__tbl--sch thead th {
+    position: sticky;
+    top: 0;
+    background: #eaf1fc;
+    z-index: 1;
+}
+
+.pyt__tbl--sch th:first-child,
+.pyt__tbl--sch td:first-child {
+    text-align: left;
+    font-weight: 700;
+    color: #5b6b8c;
+}
+
+.pyt__tbl--sch tbody tr:nth-child(even) td {
+    background: #f6f7fb;
+}
+
+.pyt__tbl--sch tr.pyt__total td {
+    position: sticky;
+    bottom: 0;
+    background: #eaf1fc;
+    font-weight: 900;
+    color: #1f2f55;
+    border-bottom: 0;
+}
+
+.pyt__qchip--tool {
+    height: 32px;
+}
+
+/* таблиця в SEO-тексті */
+.cc-seo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 14px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .09);
+}
+
+.cc-seo th,
+.cc-seo td {
+    padding: 9px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e6e8ef;
+}
+
+.cc-seo th {
+    background: #eaf1fc;
+    color: #1f2f55;
+}
+
+.cc-seo tr:last-child td {
+    border-bottom: 0;
+}
+
+.cc-seo .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 520px) {
+    .cc-seo th,
+    .cc-seo td {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cc-seo table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+.pyt__inwrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pyt__inwrap .pyt__input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.pyt__seg {
+    flex: 0 0 auto;
+    display: inline-flex;
+    border: 1px solid #b9cdee;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eaf1fc;
+}
+
+.pyt__seg button {
+    height: 34px;
+    min-width: 44px;
+    padding: 0 10px;
+    border: 0;
+    background: transparent;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.pyt__seg button.is-on {
+    background: #283b69;
+    color: #fff;
+}
+
+.pyt .pyt__input[type="date"] {
+    min-height: 36px;
+    font-family: inherit;
+}
+
+/* сценарій: власний випадний список */
+.pyt__sel {
+    position: relative;
+}
+
+.pyt__selBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 36px;
+    padding: 0 12px 0 10px;
+    border: .8px solid #b9cdee;
+    border-radius: 10px;
+    background: #eaf1fc;
+    color: #1f2f55;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.pyt__selBtn:hover {
+    background: #e0eafa;
+    border-color: #8fa8d6;
+}
+
+.pyt__selBtn:focus-visible,
+.pyt__selBtn[aria-expanded="true"] {
+    outline: none;
+    border-color: #283b69;
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .14);
+}
+
+.pyt__selBtn[aria-expanded="true"] .pyt__caret {
+    transform: rotate(-135deg);
+    margin-bottom: 0;
+}
+
+.pyt__selList {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    left: 0;
+    z-index: 30;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 47, 85, .08), 0 14px 32px rgba(40, 59, 105, .20);
+}
+
+.pyt__selList[hidden] {
+    display: none;
+}
+
+.pyt__selList li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: #1f2937;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pyt__selList li:hover,
+.pyt__selList li:focus {
+    background: #eaf1fc;
+    outline: none;
+}
+
+.pyt__selList li[aria-selected="true"] {
+    background: #dfeafb;
+    color: #1f2f55;
+    font-weight: 800;
+}
+
+.pyt__selList li[aria-selected="true"]::after {
+    content: "";
+    flex: 0 0 auto;
+    width: 6px;
+    height: 11px;
+    margin: 0 4px 3px 0;
+    border-right: 2px solid #283b69;
+    border-bottom: 2px solid #283b69;
+    transform: rotate(45deg);
+}
+
+
+.pyt__field[hidden] {
+    display: none;
+}
+
+.pyt__block .pyt__mt12 {
+    margin-top: 12px;
+}
+
+.pyt__link {
+    margin-right: 14px;
+}
+
+.pyt__hint .pyt__link {
+    margin-right: 0;
+    display: inline;
+    font-size: inherit;
+}
+
+.pyt__miniTitle {
+    margin: 4px 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1f2f55;
+}
+
+.pyt__stages {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #8fa8d6;
+    border-radius: 14px;
+    background: #f6f9ff;
+}
+
+.pyt__stages[hidden] {
+    display: none;
+}
+
+.pyt__wsum {
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 800;
+}
+
+.pyt__wsum.is-ok {
+    color: #0f7a3a;
+}
+
+.pyt__wsum.is-bad {
+    color: #b45309;
+}
+
+/* результат */
+.pyt__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid #c5d6f1;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eef4fd 0%, #dfe9fa 100%);
+}
+
+.pyt__big {
+    margin-top: 2px;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #1f2f55;
+    overflow-wrap: anywhere;
+}
+
+.pyt__eq {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #5b6b8c;
+}
+
+.pyt__per {
+    text-align: right;
+}
+
+.pyt__perV {
+    margin-top: 2px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #1f2f55;
+}
+
+.pyt__bar {
+    display: flex;
+    height: 22px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e6e8ef;
+}
+
+.pyt__bar > div {
+    min-width: 2px;
+}
+
+.pyt__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #5b6b8c;
+}
+
+.pyt__legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    vertical-align: -1px;
+}
+
+.pyt__kpis--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 12px;
+}
+
+.pyt__result {
+    container-type: inline-size;
+}
+
+.pyt__kpis--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 12px;
+}
+
+@container (min-width: 500px) {
+    .pyt__kpis--4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.pyt__kpiV {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 420px) {
+    .pyt__block .pyt__rows {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pyt__kpis--3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pyt__kpi .pyt__kpiV--s {
+        font-size: 14px;
+    }
+}
+
+.pyt__tbl--sch {
+    min-width: 520px;
+}
+
+.pyt__tbl--sch th,
+.pyt__tbl--sch td {
+    text-align: right;
+}
+
+.pyt__tbl--sch th:first-child,
+.pyt__tbl--sch td:first-child {
+    text-align: left;
+}
+
+/* підписи полів, що переносяться на 2 рядки: притиснуті до поля, зірочка не відривається */
+@supports (grid-template-rows: subgrid) {
+    .pyt__rows > .pyt__field > .pyt__label {
+        align-self: end;
+    }
+}
+
+.pyt__req {
+    white-space: nowrap;
+}
+
+/* вибір режиму: картки з підписом */
+.pyt__mcards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.pyt__mcard {
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #c5d6f1;
+    border-radius: 14px;
+    background: #fff;
+    color: #1f2f55;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.pyt__mcard b {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.pyt__mcard span {
+    display: block;
+    margin-top: 4px;
+    color: #5b6b8c;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.pyt__mcard:hover {
+    border-color: #8fa8d6;
+}
+
+.pyt__mcard.is-active {
+    border-color: #283b69;
+    background: #eaf1fc;
+    box-shadow: 0 0 0 1px #283b69;
+}
+
+@media (max-width: 560px) {
+    .pyt__mcards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 340px) {
+    .pyt__mcards {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ціни етапів: акцентний блок */
+.pyt__rates {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #8fa8d6;
+    border-radius: 14px;
+    background: #f6f9ff;
+}
+
+.pyt__rates[hidden],
+[data-panel][hidden] {
+    display: none;
+}
+
+.pyt__hint--mb {
+    margin-bottom: 8px;
+}
+
+.pyt__lists {
+    margin-top: 10px;
+    color: #3d4d73;
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+
+.pyt__perV--s {
+    font-size: 15px;
+}
+
+.pyt__mt6 {
+    margin-top: 6px;
+}
+
+/* підказка з орієнтиром ціни: на всю ширину, без підсітки */
+.pyt__rows > .pyt__field--hintrow {
+    display: block;
+    grid-row: auto;
+    grid-column: 1 / -1;
+    margin-top: -4px;
+}
+
+.pyt__hint--tip {
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: #eef4ff;
+    color: #3d4d73;
+}
+
+/* чотири кнопки під результатом: не стискаємо, а переносимо на новий рядок */
+#shareBtn,
+#exampleBtn,
+#resetBtn,
+#copyBtn {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+/* акцентний блок «додаткові параметри» */
+.pyt__details {
+    padding: 0;
+    border: 1px solid #8fa8d6;
+    background: #f6f9ff;
+}
+
+.pyt__details[open] {
+    padding-bottom: 14px;
+}
+
+.pyt__details > summary {
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, #eef4ff, #dbe8fb);
+    color: #1f2f55;
+    font-size: 13.5px;
+    transition: background .15s ease;
+}
+
+.pyt__details[open] > summary {
+    border-radius: 13px 13px 0 0;
+}
+
+.pyt__details > summary:hover {
+    background: linear-gradient(180deg, #e6efff, #d0e0fa);
+}
+
+.pyt__details > summary::before {
+    content: "+";
+    display: grid;
+    flex: 0 0 22px;
+    place-items: center;
+    height: 22px;
+    border-radius: 50%;
+    background: #283b69;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.pyt__details[open] > summary::before {
+    content: "−";
+}
+
+.pyt__details > summary::after {
+    float: none;
+    margin-left: auto;
+}
+
+.pyt__details > :not(summary) {
+    margin-right: 14px;
+    margin-left: 14px;
+}
+
+.pyt__details > .pyt__rows {
+    margin-top: 12px;
+}
+
+
+/* елементи конструкції */
+.pyt__el {
+    margin-bottom: 8px;
+    padding: 10px 12px 12px;
+    border: 1px solid #c5d6f1;
+    border-radius: 14px;
+    background: #f6f9ff;
+}
+
+.pyt__el[hidden] {
+    display: none;
+}
+
+.pyt__elHead {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.pyt__elVol {
+    margin-left: auto;
+    color: #0f7a3a;
+    font-size: 12.5px;
+    font-weight: 800;
+}
+
+.pyt__elRm {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #c5d6f1;
+    border-radius: 8px;
+    background: #fff;
+    color: #5b6b8c;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.pyt__elRm:hover {
+    border-color: #8fa8d6;
+    color: #283b69;
+}
+
+.pyt__elRm[hidden] {
+    display: none;
+}
+
+.pyt__add {
+    margin: 0 0 4px;
+    padding: 9px 14px;
+    border: 1px dashed #8fa8d6;
+    border-radius: 12px;
+    background: transparent;
+    color: #283b69;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.pyt__add:hover {
+    background: #eaf1fc;
+}
+
+.pyt__add[hidden] {
+    display: none;
+}
+
+.pyt__mt2 {
+    margin-top: 2px;
+}
+
+.pyt__rows .pyt__rows {
+    margin: 0;
+}
+
+.pyt__field[hidden] {
+    display: none;
+}
+
+/* цегла на 1 м²: позначка біля головного числа */
+.pyt__chipWrap {
+    margin-top: 6px;
+}
+
+.pyt__chip {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #e8f7ee;
+    color: #0f7a3a;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* шапка результату: вартість справа, зліва текст переноситься; на вузьких екранах вартість під текстом */
+.pyt__head > div:first-child {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.pyt__per {
+    flex: none;
+}
+
+@media (max-width: 480px) {
+    .pyt__head > div:first-child {
+        flex: 1 1 100%;
+    }
+
+    .pyt__per {
+        text-align: left;
+    }
+}
+
+/* схема розкрою рулону */
+.pyt__diag {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 6px;
+    padding: 8px;
+    border: 1px solid #dbe3f2;
+    border-radius: 12px;
+    background: #fff;
+}
+
+/* вага по позиціях: таблиця в результаті, кольорові точки */
+.pyt__dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 6px;
+    border-radius: 50%;
+}
+
+.pyt__prof {
+    display: flex;
+    justify-content: center;
+    margin: 2px 0 8px;
+}
+
+.pyt__profSvg {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+}
+
+.pyt__tbl--res {
+    margin-top: 0;
+}
+
+.pyt__tbl--res th,
+.pyt__tbl--res td {
+    text-align: right;
+}
+
+.pyt__tbl--res th:first-child,
+.pyt__tbl--res td:first-child,
+.pyt__tbl--sch th:first-child,
+.pyt__tbl--sch td:first-child {
+    text-align: left;
+}
+
+.pyt__tbl--res td:first-child {
+    line-height: 1.25;
+}
+
+.pyt__sz {
+    display: block;
+    margin-left: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5b6b8c;
+}
+
+.pyt__tbl--res td:nth-child(2) {
+    white-space: nowrap;
+}
+
+/* ===== стиль калькулятора відсотків ===== */
+/* =========================
+   Percent Calculator (scoped)
+   only inside .pyt / .ccalc
+========================= */
+
+.pyt,
+.pyt * {
+    box-sizing: border-box;
+}
+
+.pyt {
+    --cc-card: #fff;
+    --cc-text: #222;
+    --cc-muted: #6b7280;
+    --cc-brand: #283b69;
+    --cc-brand2: #1f2f55;
+    --cc-border: #e6e8ef;
+    --cc-shadow: 0 1px 3px rgba(31, 47, 85, .06), 0 10px 30px rgba(40, 59, 105, .14);
+    --cc-radius: 20px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cc-text);
+}
+
+/* Wrap */
+.pyt .pyt__wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+
+/* Titlebar */
+.pyt .pyt__titlebar {
+    background: var(--header-grad-solid, linear-gradient(180deg, #2c3b5f 0%, #40527e 55%, #566a9e 100%));
+    color: #fff;
+    border-radius: var(--cc-radius);
+    padding: 16px;
+    box-shadow: var(--cc-shadow);
+    margin-bottom: 14px;
+}
+
+.pyt .pyt__h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.pyt .pyt__p {
+    margin: 6px 0 0;
+    opacity: .92;
+    font-size: 13px;
+}
+
+/* ===== Layout fix: Введи дані зліва, Результат справа ===== */
+
+/* grid layout */
+.pyt .pyt__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+/* Topline (checkbox) - зліва зверху */
+.pyt .pyt__grid>.evc-topline {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    /* прибираємо зайві відступи */
+    padding: 0 2px 6px;
+}
+
+/* Card "Введи дані" - зліва під чекбоксом */
+.pyt .pyt__grid>.pyt__card:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/* Card "Результат" - справа, по висоті займає 2 рядки */
+.pyt .pyt__grid>.pyt__card:last-of-type {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+/* Трошки “симетрії” по висоті і відчуття балансу */
+.pyt .pyt__grid>.pyt__card {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Mobile: все в одну колонку */
+@media (max-width: 980px) {
+    .pyt .pyt__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pyt .pyt__grid>.evc-topline,
+    .pyt .pyt__grid>.pyt__card:first-of-type,
+    .pyt .pyt__grid>.pyt__card:last-of-type {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
+/* Card */
+.pyt .pyt__card {
+    background: var(--cc-card);
+    border: 1px solid var(--cc-border);
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow);
+    padding: 14px;
+    min-width: 0;
+}
+
+/* Section title */
+.pyt .pyt__sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.pyt .pyt__h2 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--cc-brand2);
+}
+
+.pyt .pyt__badge {
+    font-size: 12px;
+    color: #fff;
+    background: rgba(40, 59, 105, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Tabs */
+.pyt__tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 720px) {
+    .pyt__tabs {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.pyt__tab {
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: #f2f4fa;
+    font-weight: 900;
+    font-size: 12px;
+    color: #2b3a55;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.pyt__tab:hover {
+    transform: translateY(-1px);
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
+}
+
+.pyt__tab.is-active {
+    background: rgba(40, 59, 105, .12);
+    color: var(--cc-brand2);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .2);
+}
+
+/* Panels */
+
+
+/* Fields */
+.pyt .pyt__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 680px) {
+    .pyt .pyt__rows {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pyt .pyt__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.pyt__field--full {
+    grid-column: 1 / -1;
+}
+
+.pyt .pyt__label {
+    font-weight: 900;
+    color: #2b3a55;
+    font-size: 13px;
+}
+
+.pyt .pyt__input {
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: 12px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: box-shadow .15s ease;
+}
+
+.pyt .pyt__input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.pyt .pyt__input:focus {
+    box-shadow: 0 0 0 3px rgba(40, 59, 105, .18), 0 3px 8px rgba(40, 59, 105, .08);
+    color: #111827;
+}
+
+/* Radio */
+.pyt__radio {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.pyt__radio label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 900;
+    color: #1f2f55;
+    font-size: 13px;
+    user-select: none;
+}
+
+.pyt__radio input {
+    accent-color: #283b69;
+}
+
+/* Actions */
+.pyt .pyt__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pyt .pyt__btn {
+    height: 44px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 12px;
+    background: #f2f4fa;
+    cursor: pointer;
+    font-weight: 900;
+    color: #1f2f55;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease, filter .15s ease;
+}
+
+.pyt .pyt__btn:hover {
+    background: #eaeef8;
+    box-shadow: 0 2px 5px rgba(31, 47, 85, .06), 0 6px 14px rgba(40, 59, 105, .12);
+    transform: translateY(-1px);
+}
+
+.pyt .pyt__btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 2px 6px rgba(40, 59, 105, .1);
+}
+
+/* "Розрахувати" — та сама синя кнопка, що "=" на науковому калькуляторі */
+.pyt .pyt__btn--primary {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    color: #fff;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 4px 14px rgba(40, 59, 105, .35);
+}
+
+/* .pyt__btn:hover задає свій background (#eaeef8) з такою самою специфічністю —
+   без повторення тут градієнт кнопки ставав би білим (і текст невидимим) при наведенні */
+.pyt .pyt__btn--primary:hover {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: brightness(1.08);
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 6px 18px rgba(40, 59, 105, .42);
+}
+
+.pyt .pyt__btn--primary:active {
+    background: var(--brand-grad, linear-gradient(180deg, #1f2f55, #3c538f));
+    filter: none;
+    box-shadow: var(--btn-inset, inset 0 1px 0 rgba(255, 255, 255, .14)), 0 2px 8px rgba(40, 59, 105, .3);
+}
+
+/* Utilities */
+.pyt .pyt__mt10 {
+    margin-top: 10px;
+}
+
+/* Result box */
+
+.pyt__details {
+    margin-top: 12px;
+    border: 1px solid var(--cc-border);
+    border-radius: 14px;
+    padding: 12px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+}
+
+.pyt__details:empty {
+    display: none;
+}
+
+/* Toast */
+.pyt .pyt__toast {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cc-muted);
+    min-height: 16px;
+}
+/* ===== Auto-calc checkbox (як на скріні) ===== */
+.evc-topline {
+    margin: 10px 0 10px;
+}
+
+.evc-autocalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    color: #111827;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.evc-autocalc input {
+    width: 16px;
+    height: 16px;
+    accent-color: #283b69;
+    /* твій brand */
+}
+/* Вирівнюємо "Результат" по горизонталі з блоком "Введи дані" */
+
+/* Блок результату — той самий нейтральний стиль дисплея, що й на науковому калькуляторі */
+
+/* Коли результат з'являється — легкий "живий" ефект */
+
+@keyframes resultGlow {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* рядки сітки: чекбокс завжди по контенту, весь запас висоти іде під картку «Введи дані» */
+@media (min-width: 981px) {
+    .pyt .pyt__grid {
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+}
+
+/* підписи полів завжди ліворуч */
+.pyt .pyt__field > .pyt__label {
+    align-self: flex-start;
+}
+
+/* вирівнюємо «Результат» по горизонталі з карткою «Введи дані» (висота чекбокса) */
+.pyt .pyt__grid>.pyt__card:last-of-type {
+    margin-top: 46px;
+}
+
+@media (max-width: 980px) {
+    .pyt .pyt__grid>.pyt__card:last-of-type {
+        margin-top: 0;
+    }
+}
+
+/* блок із полями без окремої підкладки, як у калькуляторі відсотків */
+.pyt__block {
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+/* режими: сітка м'яких кнопок із прикладом (вигляд як у калькуляторі відсотків) */
+.pyt__tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 720px) {
+    .pyt__tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.pyt__tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+    height: auto;
+    min-height: 58px;
+    padding: 9px 10px;
+    text-align: left;
+}
+
+.pyt__tabT {
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+.pyt__ex {
+    max-width: 100%;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: #fff;
+    color: #4a64a5;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06);
+    overflow-wrap: anywhere;
+}
+
+.pyt__panel[hidden] {
+    display: none;
+}
+
+/* випадні списки у стилі полів вводу */
+.pyt .pyt__selBtn {
+    height: 44px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.pyt .pyt__selList {
+    border: 1px solid #e6e8ef;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(40, 59, 105, .16);
+}
+
+
+/* поля коефіцієнтів і попередній перегляд рівняння */
+.pyt__rows3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .pyt__rows3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pyt__eqPrev {
+    min-height: 22px;
+    margin: 4px 0 10px;
+    color: #1f2f55;
+    font-size: 17px;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.pyt__eqPrev:empty {
+    display: none;
+}
+
+.pyt__panel[hidden],
+.pyt__rowsX[hidden] {
+    display: none;
+}
+
+.pyt__rowsX {
+    margin-top: 10px;
+}
+
+/* корені й плитки */
+.pyt__rt {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    max-width: 100%;
+}
+
+.pyt__rt .pyt__fn {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .pyt .pyt__forms {
+        font-size: 20px;
+    }
+
+    .pyt .pyt__dec {
+        font-size: 16px;
+    }
+}
+
+.pyt__rt small {
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.pyt__nm {
+    color: #6b7280;
+}
+
+.pyt__line {
+    color: #1f2f55;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.pyt__tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+
+@media (max-width: 520px) {
+    .pyt__tiles {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pyt__tile {
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.pyt__tile small {
+    display: block;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.pyt__tile b {
+    display: block;
+    color: #1f2f55;
+    font-size: 15px;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.pyt__tile span {
+    display: block;
+    margin-top: 2px;
+    color: #6b7280;
+    font-size: 12.5px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* графік */
+.pyt__graph {
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.pyt__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.pyt__leg {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    padding: 8px 6px 2px;
+    color: #4b5563;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.pyt__legI {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pyt__legD {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #dfe3ec;
+}
+
+.pyt__legD--root {
+    background: #283b69;
+}
+
+.pyt__legD--vert {
+    background: #d85a30;
+}
+
+.pyt__legD--y {
+    background: #6b7280;
+}
+
+.pyt__legL {
+    display: inline-block;
+    width: 20px;
+    height: 0;
+    border-top: 2px dashed rgba(216, 90, 48, .6);
+}
+
+/* результат: м'яка панель «дисплея» і білі картки розв'язання */
+.pyt__rhead {
+    padding: 14px 16px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #f6f7fb, #eef0f7);
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .05), 0 4px 12px rgba(40, 59, 105, .1);
+    animation: resultGlow .35s ease;
+}
+
+.pyt__expr {
+    margin-bottom: 8px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.pyt__forms {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    color: #1f2f55;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.pyt__f {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    line-height: 1.1;
+}
+
+.pyt__fn {
+    padding: 0 4px 3px;
+    border-bottom: 2px solid currentColor;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+.pyt__fd {
+    padding: 3px 4px 0;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+.pyt__int {
+    overflow-wrap: anywhere;
+}
+
+.pyt__mx {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pyt__eq {
+    color: #8a96b0;
+    font-weight: 700;
+}
+
+.pyt__dec {
+    font-size: 22px;
+    overflow-wrap: anywhere;
+}
+
+.pyt__forms--chain {
+    font-size: 20px;
+}
+
+.pyt__ci {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08);
+}
+
+.pyt__ci b {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.pyt__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.pyt__stepN {
+    display: flex;
+    flex: 0 0 24px;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: #283b69;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.pyt__stepT {
+    display: block;
+    color: #1f2f55;
+    font-size: 13px;
+}
+
+.pyt__math {
+    margin: 3px 0 0;
+    color: #374151;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.pyt__stepNote {
+    margin: 3px 0 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* панелі режимів */
+.pyt__panel {
+    margin-top: 12px;
+}
+
+.pyt .pyt__panel > .pyt__rows2 + .pyt__rows2,
+.pyt .pyt__panel > .pyt__field + .pyt__field,
+.pyt .pyt__panel > .pyt__field + .pyt__rows2,
+.pyt .pyt__panel > .pyt__rows2 + .pyt__field {
+    margin-top: 12px;
+}
+
+.pyt__rows2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 420px) {
+    .pyt__rows3,
+    .pyt__rows2--keep3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pyt__pt {
+    margin: 12px 0 6px;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.pyt__pt:first-child {
+    margin-top: 0;
+}
+
+.pyt__row[hidden] {
+    display: none;
+}
+
+/* блок «Налаштування»: одиниця й знаки після коми */
+.pyt__setbox {
+    margin-top: 12px;
+    padding: 10px 12px 12px;
+    border: 1px solid #cfd9ee;
+    border-radius: 14px;
+    background: #eef2fb;
+}
+
+.pyt__cap {
+    margin: 0 0 8px;
+    color: #6b7a99;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.pyt__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.pyt .pyt__cols .pyt__field--full {
+    grid-column: auto;
+    min-width: 0;
+}
+
+@media (max-width: 480px) {
+    .pyt__cols {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* результат: велике значення площі */
+.pyt__big {
+    color: #1f2f55;
+    font-size: 28px;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.pyt__forms .pyt__rt {
+    gap: 2px 10px;
+}
+
+.pyt__sub2 {
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* таблиця списку трійок */
+.pyt__tblWrap {
+    margin-top: 8px;
+    max-height: 340px;
+    overflow: auto;
+    border: 1px solid var(--e-border, #e3e8f4);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.pyt__tbl--list {
+    margin-top: 0;
+}
+
+.pyt__tbl--list thead th {
+    position: sticky;
+    top: 0;
+    background: #eef2fb;
+    text-align: right;
+    z-index: 1;
+}
+
+.pyt__tbl--list th:last-child,
+.pyt__tbl--list td.pyt__tdL {
+    text-align: left;
+}
+
+.pyt__tbl--list td {
+    font-weight: 700;
+}
+
+.pyt__tbl--list td.pyt__tdL {
+    color: #4a64a5;
+    font-weight: 600;
+}
+
+.pyt__cols--one {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.pyt__field[hidden] {
+    display: none;
+}
+
+/* вікно вибору «Що знайти» виділене м'яким кольором */
+.pyt .pyt__selBtn#fd_btn,
+.pyt .pyt__selBtn#dm_btn,
+.pyt .pyt__selBtn#tk_btn {
+    background: #eef3fd;
+    color: #1f2f55;
+    font-weight: 800;
+    box-shadow: inset 0 0 0 1.5px #d9e4f8, 0 3px 8px rgba(40, 59, 105, .08);
+}
