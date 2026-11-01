@@ -10,7 +10,7 @@ PhysCalc.start(({ L, UN, X }) => {
     vars: [V("v", "v", "Швидкість", "Speed", SIv, UN.vel, "напр.: 5"), V("s", "s", "Шлях", "Distance", SIm, UN.len, "напр.: 100"), V("t", "t", "Час", "Time", SIs, UN.time, "напр.: 20")],
     formulas: [F("v", "s,t", "v = s / t", (a, x) => x.div(a.s, a.t)), F("s", "v,t", "s = v · t", (a, x) => x.mul(a.v, a.t)), F("t", "s,v", "t = s / v", (a, x) => x.div(a.s, a.v))],
     hint: ["Рівномірний рух: заповніть дві величини, калькулятор знайде третю. Для швидкості доступні км/год, миль/год, вузли тощо.", "Uniform motion: fill in two quantities and the calculator finds the third. Speed can be in km/h, mph, knots and so on."],
-    example: { find: "v", vals: { s: "150|1", t: "2|2" } }
+    example: { find: "v", vals: { s: "150|1", t: "2|2", v: "|1" } }
   };
 
   const acc = {

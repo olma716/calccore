@@ -47,7 +47,7 @@ PhysCalc.start(({ L, UN, X }) => {
     vars: [V("p", "p", "Гідростатичний тиск", "Hydrostatic pressure", ["Па", "Pa"], UN.press, ""), V("rho", "ρ", "Густина рідини", "Density of the fluid", ["кг/м³", "kg/m³"], UN.dens, "напр.: 1000"), V("h", "h", "Глибина", "Depth", SIm, UN.len, "напр.: 10"), V("FA", "Fₐ", "Сила Архімеда", "Buoyant force", SIn, UN.force, ""), V("V", "V", "Об'єм зануреної частини", "Submerged volume", ["м³", "m³"], UN.vol, "напр.: 0,5")],
     formulas: [F("p", "rho,h", "p = ρ · g · h", (a, x, c) => x.mul(x.mul(a.rho, c.g), a.h), G), F("h", "p,rho", "h = p / (ρ · g)", (a, x, c) => x.div(a.p, x.mul(a.rho, c.g)), G), F("rho", "p,h", "ρ = p / (g · h)", (a, x, c) => x.div(a.p, x.mul(c.g, a.h)), G), F("FA", "rho,V", "Fₐ = ρ · g · V", (a, x, c) => x.mul(x.mul(a.rho, c.g), a.V), G), F("V", "FA,rho", "V = Fₐ / (ρ · g)", (a, x, c) => x.div(a.FA, x.mul(a.rho, c.g)), G), F("rho", "FA,V", "ρ = Fₐ / (g · V)", (a, x, c) => x.div(a.FA, x.mul(c.g, a.V)), G)],
     hint: ["Тиск рідини на глибині h і виштовхувальна сила Архімеда. Густина води близько 1000 кг/м³.", "The pressure of a fluid at depth h and the buoyant force of Archimedes. The density of water is about 1000 kg/m³."],
-    example: { find: "p", vals: { rho: "1000", h: "10" } }
+    example: { find: "p", vals: { rho: "1000", h: "10", p: "|1" } }
   };
   return { modes: [newton, fric, hooke, grav, dens, fluid] };
 });

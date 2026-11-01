@@ -293,17 +293,18 @@
 
   // ===== відображення =====
   const step = (t, l, note) => ({ t, l, note });
-  function stepsHtml(steps) { return '<div class="ph__sub">' + L("Розв'язання", "Solution") + "</div>" + steps.map((s, i) => '<div class="ph__step"><span class="ph__stepN">' + (i + 1) + '</span><div class="ph__stepB"><b class="ph__stepT">' + esc(s.t) + "</b>" + s.l.map((x) => '<p class="ph__math">' + esc(x) + "</p>").join("") + (s.html || "") + (s.note ? '<p class="ph__stepNote">' + esc(s.note) + "</p>" : "") + "</div></div>").join(""); }
+  const tidy = (s) => String(s).replace(/= ≈ /g, "≈ ");
+  function stepsHtml(steps) { return '<div class="ph__sub">' + L("Розв'язання", "Solution") + "</div>" + steps.map((s, i) => '<div class="ph__step"><span class="ph__stepN">' + (i + 1) + '</span><div class="ph__stepB"><b class="ph__stepT">' + esc(s.t) + "</b>" + s.l.map((x) => '<p class="ph__math">' + esc(tidy(x)) + "</p>").join("") + (s.html || "") + (s.note ? '<p class="ph__stepNote">' + esc(s.note) + "</p>" : "") + "</div></div>").join(""); }
   const lc1 = (s) => s.charAt(0).toLowerCase() + s.slice(1);
   const clean = (s) => s.replace(/ /g, "");
   let last = null;
-  function textOf(m) { return clean([m.expr + "  →  " + m.resText, ""].concat(m.steps.map((s, i) => (i + 1) + ". " + s.t + "\n   " + s.l.join("\n   "))).join("\n")); }
+  function textOf(m) { return tidy(clean([m.expr + "  →  " + m.resText, ""].concat(m.steps.map((s, i) => (i + 1) + ". " + s.t + "\n   " + s.l.join("\n   "))).join("\n"))); }
   function render(m, strict) {
     const box = el("result");
     if (!m.ok) { last = null; if (m.incomplete && !strict) { box.innerHTML = T.enter; return; } box.innerHTML = '<div class="ph__hintbox">' + esc(m.msg || T.enter) + "</div>"; return; }
     last = m;
     const tiles = m.tiles && m.tiles.length ? '<div class="ph__tiles">' + m.tiles.map((t) => '<div class="ph__tile"><small>' + esc(t.k) + "</small><b>" + esc(t.v) + "</b></div>").join("") + "</div>" : "";
-    box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + (m.subRaw ? "" : "= ") + esc(m.headSub) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>";
+    box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + esc(tidy((m.subRaw ? "" : "= ") + m.headSub)) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>";
   }
   const autoOn = () => !el("autoCalc") || el("autoCalc").checked;
   function calc(strict) {

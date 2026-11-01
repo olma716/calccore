@@ -140,12 +140,12 @@ PhysCalc.start(({ L, DErr, X }) => {
 
   // ----- цільовий GPA -----
   const F = (out, ins, txt, f) => ({ out, ins: ins ? ins.split(",") : [], txt, f });
-  const V = (id, sym, uk, en, ph, sign, def) => ({ id, sym, uk, en, si: ["(число)", "(number)"], units: [{ uk: "(число)", en: "(number)", f: q(1n) }], ph, sign: sign || "pos", def });
+  const V = (id, sym, uk, en, ph, sign, def, unit) => { const un = unit || ["бал", "pts"]; return { id, sym, uk, en, si: un, units: [{ uk: un[0], en: un[1], f: q(1n) }], ph, sign: sign || "pos", def }; };
   const num = (v) => Number(v.c.n) / Number(v.c.d);
   const fmt2 = (x) => x.toFixed(2).replace(".", L(",", "."));
   const tg = {
     key: "tg", type: "chain", nameUk: "Цільовий GPA", nameEn: "Target GPA", find: "gr",
-    vars: [V("g1", "G₁", "Поточний GPA", "Current GPA", "напр.: 3,2", "nn"), V("c1", "C₁", "Кредитів уже набрано", "Credits already earned", "напр.: 60", "nn"), V("c2", "C₂", "Кредитів залишилось", "Credits remaining", "напр.: 30"), V("gt", "Gₜ", "Цільовий GPA", "Target GPA", "напр.: 3,4", "nn"), V("gr", "Gᵣ", "Потрібний середній бал за решту", "Required average for the rest", ""), V("gm", "Gₘ", "Максимум шкали", "Maximum of the scale", "", "pos", "4"), V("gx", "Gₓ", "Найкращий можливий GPA", "Best possible GPA", "")],
+    vars: [V("g1", "G₁", "Поточний GPA", "Current GPA", "напр.: 3,2", "nn"), V("c1", "C₁", "Кредитів уже набрано", "Credits already earned", "напр.: 60", "nn", undefined, ["кредитів", "credits"]), V("c2", "C₂", "Кредитів залишилось", "Credits remaining", "напр.: 30", undefined, undefined, ["кредитів", "credits"]), V("gt", "Gₜ", "Цільовий GPA", "Target GPA", "напр.: 3,4", "nn"), V("gr", "Gᵣ", "Потрібний середній бал за решту", "Required average for the rest", ""), V("gm", "Gₘ", "Максимум шкали", "Maximum of the scale", "", "pos", "4"), V("gx", "Gₓ", "Найкращий можливий GPA", "Best possible GPA", "")],
     formulas: [
       F("gr", "g1,c1,c2,gt,gm", "Gᵣ = (Gₜ · (C₁ + C₂) − G₁ · C₁) / C₂", (a) => {
         const r = X.div(X.sub(X.mul(a.gt, X.add(a.c1, a.c2)), X.mul(a.g1, a.c1)), a.c2), v = num(r);
