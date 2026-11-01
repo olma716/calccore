@@ -210,7 +210,7 @@
     const mode = MODE, body = el("phBody");
     document.querySelectorAll(".ph__tab").forEach((b) => { const on = b.dataset.m === mode.key; b.classList.toggle("is-active", on); b.setAttribute("aria-selected", String(on)); });
     el("findFld").hidden = mode.type !== "chain";
-    const needG = mode.type === "chain" && mode.formulas.some((f) => (f.consts || []).includes("g"));
+    const needG = !!CFG.keepSet || (mode.type === "chain" && mode.formulas.some((f) => (f.consts || []).includes("g")));
     el("gFld").hidden = !needG; el("gHint").hidden = !needG;
     if (mode.type === "chain") el("resUnit").onchange = () => { el("u_" + find).value = el("resUnit").value; maybeCalc(); };
     if (mode.type === "chain") {
@@ -232,16 +232,23 @@
   const helpers = () => ({ el, L, esc, selOpts, parseNum, maybeCalc, calc, vstr, vsub, decNum, ND, X, q, R, qadd, qmul, qdiv, qz, vnum, DErr, VR, VA, ctx: CFG.ctx, roundStr });
 
   function modeChain(mode) {
-    const VD = varDefs(mode), nd = ND(), given = {}, errs = [], si = {};
+    const VD = varDefs(mode), nd = ND(), given = {}, errs = [], si = {}, chemInfo = {};
     for (const v of mode.vars) {
       if (v.id === find) continue;
-      const inp = el("v_" + v.id), r = parseNum(inp.value);
+      const inp = el("v_" + v.id);
+      let r = parseNum(inp.value);
+      if (v.chem && r.err && window.Chem) {
+        const mm = window.Chem.molar(inp.value);
+        if (!mm.ok) { errs.push(v.sym + ": " + window.Chem.errText(mm)); continue; }
+        chemInfo[v.id] = mm; r = { v: mm.M };
+      }
       const uidx = Number(el("u_" + v.id).value) || 0, f = v.units[uidx].f;
       if (r.err) { errs.push(v.sym + ": «" + String(inp.value).slice(0, 14) + "» " + (r.err === 2 ? L("— знаменник нуль", "— zero denominator") : L("не підходить: потрібне число (2,5 або 3/4 чи 1,5e3)", "is not valid: a number is needed (2.5, 3/4 or 1.5e3)"))); continue; }
       if (r.empty) { if (v.def !== undefined) { const dv = parseF(v.def); given[v.id] = VR(dv); } continue; }
       const val = qmul(r.v, f);
       if (v.sign === "pos" && val.n <= Z) { errs.push(v.sym + ": " + L("значення має бути більше нуля", "the value must be greater than zero")); continue; }
       if (v.sign === "nn" && val.n < Z) { errs.push(v.sym + ": " + L("значення не може бути від'ємним", "the value cannot be negative")); continue; }
+      if (v.max !== undefined) { const mx = parseF(String(v.max)); if (val.n * mx.d > mx.n * val.d) { errs.push(v.sym + ": " + L("значення не може перевищувати 100 %", "the value cannot exceed 100 %")); continue; } }
       given[v.id] = VR(val); si[v.id] = { raw: r.v, f, uidx };
     }
     if (errs.length) return { ok: false, msg: errs.slice(0, 4).join("; ") };
@@ -255,10 +262,11 @@
     // кроки
     const steps = [];
     const conv = reallyGiven.filter((id) => !qz(si[id].raw) && si[id].f.n !== si[id].f.d).map((id) => { const v = VD[id], un = v.units[si[id].uidx]; return v.sym + " = " + decNum(si[id].raw, 8) + " " + L(un.uk, un.en) + " = " + vstr(given[id], null, 8, true) + " " + L(v.si[0], v.si[1]); });
+    Object.keys(chemInfo).forEach((id) => { const mm = chemInfo[id], un = L(VD[id].si[0], VD[id].si[1]), terms = mm.rows.map((r) => (r.count > 1 ? r.count + " · " : "") + vstr(VR(r.ar), null, 12, true)).join(" + "); steps.push({ t: L("Молярна маса ", "Molar mass of ") + mm.pretty, l: [VD[id].sym + " = " + terms, VD[id].sym + " = " + vstr(VR(mm.M), null, nd, true) + " " + un], note: L("Атомні маси беруться з обраного в налаштуваннях набору.", "Atomic masses come from the set chosen in the settings.") }); });
     if (conv.length) steps.push({ t: L("Переводимо в одиниці СІ", "Converting to SI units"), l: conv, note: L("Усі розрахунки йдуть в СІ, щоб одиниці узгоджувались.", "All calculations use SI so the units agree.") });
     const ctx = CFG.ctx(), usesG = res.log.some((x) => (x.f.consts || []).includes("g"));
     if (usesG) steps.push({ t: L("Прискорення вільного падіння", "Gravitational acceleration"), l: ["g = " + vsub(ctx.g) + " " + L("м/с²", "m/s²")], note: L("Значення g можна змінити в налаштуваннях.", "The value of g can be changed in the settings.") });
-    res.log.forEach((x) => { const v = VD[x.f.out]; steps.push({ t: L("Знаходимо ", "Finding ") + v.sym + " (" + L(v.uk, v.en).toLowerCase() + ")", l: [x.f.txt, v.sym + " = " + x.text + " = " + vstr(x.v, null, nd, true) + " " + L(v.si[0], v.si[1])], note: x.f.note ? L(x.f.note[0], x.f.note[1]) : "" }); });
+    res.log.forEach((x) => { const v = VD[x.f.out]; steps.push({ t: L("Знаходимо ", "Finding ") + v.sym + " (" + L(v.uk, v.en).toLowerCase() + ")", l: [x.f.txt, v.sym + " = " + x.text + " = " + vstr(x.v, null, nd, true) + " " + L(v.si[0], v.si[1])], note: typeof x.f.note === "function" ? x.f.note() : x.f.note ? L(x.f.note[0], x.f.note[1]) : "" }); });
     const tv = VD[find], tidx = Number(el("u_" + find).value) || 0, tu = tv.units[tidx];
     const showIn = (id) => { const v = VD[id], idx = Number(el("u_" + id).value) || 0, un = v.units[idx]; return vstr(res.known[id], un.f, nd, false) + " " + L(un.uk, un.en); };
     const siStr = (id) => vstr(res.known[id], null, nd, false) + " " + L(VD[id].si[0], VD[id].si[1]);
@@ -280,7 +288,7 @@
     if (!m.ok) { last = null; if (m.incomplete && !strict) { box.innerHTML = T.enter; return; } box.innerHTML = '<div class="ph__hintbox">' + esc(m.msg || T.enter) + "</div>"; return; }
     last = m;
     const tiles = m.tiles && m.tiles.length ? '<div class="ph__tiles">' + m.tiles.map((t) => '<div class="ph__tile"><small>' + esc(t.k) + "</small><b>" + esc(t.v) + "</b></div>").join("") + "</div>" : "";
-    box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">= ' + esc(m.headSub) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>";
+    box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + (m.subRaw ? "" : "= ") + esc(m.headSub) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>";
   }
   const autoOn = () => !el("autoCalc") || el("autoCalc").checked;
   function calc(strict) {
@@ -329,7 +337,8 @@
   function ctxNow() { return { g: VR(parseF(el("gval").value || "9.8")) }; }
   function setMode(key) { MODE = modeOf(key); buildMode(); render({ ok: false, incomplete: true }, false); maybeCalc(); }
   function clearFields() { if (MODE.type === "chain") MODE.vars.forEach((v) => { el("v_" + v.id).value = ""; el("u_" + v.id).value = "0"; }); else if (MODE.reset) MODE.reset(helpers()); }
-  function resetAll() { setDd("decs", "4"); setDd("gval", "9.8"); el("setBox").open = false; setMode(CFG.modes[0].key); render({ ok: false, incomplete: true }, false); last = null; }
+  const G0 = () => { const li = document.querySelector("#gg_list li"); return li ? li.dataset.v : "9.8"; };
+  function resetAll() { setDd("decs", "4"); setDd("gval", G0()); el("setBox").open = false; setMode(CFG.modes[0].key); render({ ok: false, incomplete: true }, false); last = null; }
   function fillExample() {
     const ex = MODE.example;
     if (MODE.type === "chain") { clearFields(); setDd("find", ex.find); syncFind(); Object.keys(ex.vals).forEach((id) => { const [val, un] = String(ex.vals[id]).split("|"); if (id !== ex.find) el("v_" + id).value = val; if (un !== undefined) el("u_" + id).value = un; }); syncFind(); }
@@ -347,7 +356,7 @@
     if (![...qs.keys()].length) return false;
     const key = qs.get("m"); if (CFG.modes.some((m) => m.key === key)) MODE = modeOf(key);
     if (qs.has("dc")) setDd("decs", qs.get("dc")); if (qs.has("gg")) setDd("gval", qs.get("gg"));
-    if (el("decs").value !== "4" || el("gval").value !== "9.8") el("setBox").open = true;
+    if (el("decs").value !== "4" || el("gval").value !== G0()) el("setBox").open = true;
     buildMode();
     if (MODE.type === "chain") { if (qs.has("fd") && MODE.vars.some((v) => v.id === qs.get("fd"))) { setDd("find", qs.get("fd")); syncFind(); } MODE.vars.forEach((v) => { if (qs.has("v_" + v.id)) el("v_" + v.id).value = qs.get("v_" + v.id).slice(0, 40); if (qs.has("u_" + v.id)) { const ui = Number(qs.get("u_" + v.id)); if (ui >= 0 && ui < v.units.length) el("u_" + v.id).value = String(ui); } }); if (qs.has("ru")) { const tv = MODE.vars.find((v) => v.id === find), ui = Number(qs.get("ru")); if (tv && ui >= 0 && ui < tv.units.length) { el("u_" + find).value = String(ui); syncFind(); } } }
     else MODE.apply(qs, helpers());
@@ -408,7 +417,7 @@
 
   window.PhysCalc = {
     start(cfgFn) {
-      CFG = cfgFn({ L, u, X, UN, parseF });
+      CFG = cfgFn({ L, u, X, UN, parseF, DErr });
       CFG.ctx = ctxNow;
       window.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".ph__tab").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.m)));
