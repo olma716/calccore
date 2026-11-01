@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор матриць онлайн — додавання, множення, визначник | CalcCore</title>
+    <title>Калькулятор матриць онлайн: визначник, обернена | CalcCore</title>
     <meta name="description"
-        content="Онлайн калькулятор матриць: додавання, віднімання, множення, транспонування та визначник. Розміри від 1×1 до 4×4 з покроковим результатом." />
+        content="Калькулятор матриць до 6×6: додавання, множення, степінь, визначник, обернена матриця, ранг, розв'язання AX = B. Точні дроби й кроки Гаусса." />
 
     <link rel="canonical" href="https://calccore.net/education/matrix-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/education/matrix-calculator" />
@@ -26,214 +28,582 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор матриць онлайн — додавання, множення, визначник" />
-    <meta property="og:description" content="Онлайн калькулятор матриць: додавання, віднімання, множення, транспонування та визначник. Розміри від 1×1 до 4×4 з покроковим результатом." />
+    <meta property="og:title" content="Калькулятор матриць онлайн: визначник, обернена" />
+    <meta property="og:description" content="Калькулятор матриць до 6×6: додавання, множення, степінь, визначник, обернена матриця, ранг, розв'язання AX = B. Точні дроби й кроки Гаусса." />
     <meta property="og:url" content="https://calccore.net/education/matrix-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор матриць онлайн — додавання, множення, визначник" />
-    <meta name="twitter:description" content="Онлайн калькулятор матриць: додавання, віднімання, множення, транспонування та визначник. Розміри від 1×1 до 4×4 з покроковим результатом." />
+    <meta name="twitter:title" content="Калькулятор матриць онлайн: визначник, обернена" />
+    <meta name="twitter:description" content="Калькулятор матриць до 6×6: додавання, множення, степінь, визначник, обернена матриця, ранг, розв'язання AX = B. Точні дроби й кроки Гаусса." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/matrix-calculator.css" />
+    <link rel="stylesheet" href="/css/mx.css?v=20261031mx8" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/matrix-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Чому не можна множити будь-які дві матриці?",
-        "acceptedAnswer":{"@type":"Answer","text":"Множення A×B можливе лише якщо кількість стовпців матриці A дорівнює кількості рядків матриці B. Це фундаментальне правило множення матриць."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що таке визначник матриці?",
-        "acceptedAnswer":{"@type":"Answer","text":"Визначник — це число, обчислене з квадратної матриці, яке показує, чи має матриця обернену (визначник ≠ 0), та використовується в багатьох застосуваннях лінійної алгебри."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що таке транспонування матриці?",
-        "acceptedAnswer":{"@type":"Answer","text":"Транспонування — це операція, яка перетворює рядки матриці на стовпці і навпаки. Елемент на позиції (i,j) переходить у позицію (j,i)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261031mx8" defer></script>
+    <script src="/js/matrix-calculator.js?v=20261031mx8" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/education/matrix-calculator#app",
-    "name":"Matrix Calculator",
-    "description":"Калькулятор матриць: додавання, віднімання, множення, транспонування, визначник.",
-    "url":"https://calccore.net/education/matrix-calculator",
-    "applicationCategory":"EducationApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/education/matrix-calculator#app",
+  "name": "Калькулятор матриць",
+  "description": "Калькулятор матриць з розв'язанням по кроках: додавання, віднімання, множення, множення на число, степінь, транспонування, визначник (розклад, метод Гаусса, правило Саррюса), обернена матриця (Гаусса–Жордана чи через алгебраїчні доповнення), ранг і ступінчастий вигляд, розв'язання матричного рівняння AX = B. Розміри до 6×6, точні дроби без округлень.",
+  "url": "https://calccore.net/education/matrix-calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Матриці до 6×6 з точними дробами без округлень",
+    "A + B, A − B, A × B, B × A, k·M, Mⁿ, Mᵀ",
+    "Визначник: розклад за рядком чи стовпцем, метод Гаусса, правило Саррюса",
+    "Обернена матриця: Гаусса–Жордана або через алгебраїчні доповнення, перевірка A·A⁻¹ = E",
+    "Ранг, ступінчастий вигляд, слід, тип матриці",
+    "Розв'язання AX = B із аналізом за Руше–Капеллі й загальним розв'язком",
+    "Покрокове розв'язання зі станами матриці й виділенням ведучих елементів",
+    "Посилання «поділитись», копіювання, результат у A чи B"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/education/matrix-calculator#webpage",
+      "url": "https://calccore.net/education/matrix-calculator",
+      "name": "Калькулятор матриць онлайн: визначник, обернена | CalcCore",
+      "description": "Калькулятор матриць до 6×6: додавання, множення, степінь, визначник, обернена матриця, ранг, розв'язання AX = B. Точні дроби й кроки Гаусса.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/education/matrix-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/education/matrix-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-31",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/education/matrix-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Освіта",
+          "item": "https://calccore.net/education"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор матриць",
+          "item": "https://calccore.net/education/matrix-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/education/matrix-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як перемножити дві матриці?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Кожен елемент добутку cᵢⱼ — сума добутків елементів i-го рядка першої матриці на j-й стовпець другої. Кількість стовпців першої має дорівнювати кількості рядків другої."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому A × B не дорівнює B × A?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Множення матриць не комутативне: порядок множників змінює результат, а іноді один із добутків навіть не існує через розміри."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як знайти визначник матриці 3×3?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За правилом Саррюса, розкладом за рядком чи методом Гаусса. Для [[2,1,3],[0,−1,4],[1,2,1]] визначник −11."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як знайти обернену матрицю?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Методом Гаусса–Жордана: [A | E] → [E | A⁻¹], або за формулою A⁻¹ = adj A / det A. Для [[1,2],[3,4]] це [[−2, 1], [3/2, −1/2]]."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Коли обернена матриця не існує?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Коли визначник дорівнює нулю (матриця вироджена) або матриця не квадратна. Тоді ранг менший за розмір."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке ранг матриці?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Максимальна кількість лінійно незалежних рядків (стовпців). Його знаходять зведенням до ступінчастого вигляду: це кількість ненульових рядків."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розв'язати матричне рівняння AX = B?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Якщо A невироджена, X = A⁻¹B; калькулятор виконує [A | B] → [E | X]. Для вироджених A аналізується сумісність за Руше–Капеллі."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке транспонована матриця?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Матриця Aᵀ, у якої рядки й стовпці міняються місцями: елемент (i, j) стає елементом (j, i)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна вводити дроби й десяткові числа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так: 2, -1,5, 3/4. Числа обробляються точно, тому 1/3 лишається дробом, а не 0,333."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як піднести матрицю до степеня?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножити матрицю саму на себе n разів. Для від'ємного n спершу береться обернена. Для [[1,1],[1,0]]¹⁰ виходить [[89,55],[55,34]]."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке слід матриці?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сума елементів головної діагоналі квадратної матриці. Він показується на вкладці «Ранг»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки матриці до 6×6 це багато?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для навчальних задач цього достатньо. Для великих матриць проміжні кроки показуються скорочено: по одному стану на кожен ведучий стовпець."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="mx-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cmatrix">
-            <div class="mcalc__wrap">
+        <section class="mx" id="mx">
+            <div class="mx__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор матриць</h1>
-                    <p class="mcalc__p">
-                        Додавання, віднімання, множення, транспонування та
-                        визначник матриць розміром до 4×4.
-                    </p>
+                <div class="mx__titlebar">
+                    <h1 class="mx__h1">Калькулятор матриць онлайн</h1>
+                    <p class="mx__p">Введіть матриці A і B (до 6×6) і виберіть дію: додавання, множення, степінь, визначник, обернена матриця, ранг або розв'язання AX = B. Усі елементи точні, відповіді записуються дробами, а кожна дія супроводжується розв'язанням по кроках.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Введи матриці</h2>
-                        <span class="mcalc__badge">Education</span>
-                    </div>
+                <div class="mx__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="sizeA">Розмір матриці A</label>
-                            <select id="sizeA" class="mcalc__select">
-                                <option value="1x1">1×1</option>
-                                <option value="2x2" selected>2×2</option>
-                                <option value="3x3">3×3</option>
-                                <option value="4x4">4×4</option>
-                                <option value="2x3">2×3</option>
-                                <option value="3x2">3×2</option>
-                            </select>
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="mx__card">
+                        <div class="mx__sectionTitle">
+                            <h2 class="mx__h2">Введи матриці</h2>
+                            <span class="mx__badge">Освіта</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="sizeB">Розмір матриці B</label>
-                            <select id="sizeB" class="mcalc__select">
-                                <option value="1x1">1×1</option>
-                                <option value="2x2" selected>2×2</option>
-                                <option value="3x3">3×3</option>
-                                <option value="4x4">4×4</option>
-                                <option value="2x3">2×3</option>
-                                <option value="3x2">3×2</option>
-                            </select>
+                        <div class="mx__tabs" role="tablist">
+                            <button type="button" class="mx__tab is-active" data-m="op" role="tab" aria-selected="true"><b class="mx__tabT">Дії з матрицями</b><span class="mx__ex">A × B, Aⁿ, k·A, Aᵀ</span></button>
+                            <button type="button" class="mx__tab" data-m="dt" role="tab" aria-selected="false"><b class="mx__tabT">Визначник</b><span class="mx__ex">det [[1,2],[3,4]] = −2</span></button>
+                            <button type="button" class="mx__tab" data-m="iv" role="tab" aria-selected="false"><b class="mx__tabT">Обернена матриця</b><span class="mx__ex">A⁻¹ методом Гаусса</span></button>
+                            <button type="button" class="mx__tab" data-m="rk" role="tab" aria-selected="false"><b class="mx__tabT">Ранг</b><span class="mx__ex">[[1,2,3],[4,5,6],[7,8,9]] → 2</span></button>
+                            <button type="button" class="mx__tab" data-m="sx" role="tab" aria-selected="false"><b class="mx__tabT">Розв'язання AX = B</b><span class="mx__ex">x = 1, y = 3</span></button>
                         </div>
+
+                        <div class="mx__panel" id="panelOp">
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="okLbl">Дія</span>
+                                <input type="hidden" id="opk" value="add">
+                                <div class="mx__sel" id="ok_dd">
+                                    <button type="button" class="mx__selBtn" id="ok_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="okLbl ok_val"><span id="ok_val">A + B</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="ok_list" role="listbox" aria-labelledby="okLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="add" aria-selected="true">A + B</li>
+                                        <li role="option" tabindex="-1" data-v="sub" aria-selected="false">A − B</li>
+                                        <li role="option" tabindex="-1" data-v="mul" aria-selected="false">A × B</li>
+                                        <li role="option" tabindex="-1" data-v="mulBA" aria-selected="false">B × A</li>
+                                        <li role="option" tabindex="-1" data-v="scal" aria-selected="false">k·M (множення на число)</li>
+                                        <li role="option" tabindex="-1" data-v="pow" aria-selected="false">Mⁿ (степінь)</li>
+                                        <li role="option" tabindex="-1" data-v="tr" aria-selected="false">Mᵀ (транспонування)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__field" id="kFld" hidden>
+                                    <label class="mx__label" for="kv">Число k</label>
+                                    <input class="mx__input" id="kv" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="напр.: 2, -1,5, 3/4">
+                                </div>
+                            <div class="mx__field" id="nFld" hidden>
+                                    <label class="mx__label" for="nv">Показник n</label>
+                                    <input class="mx__input" id="nv" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="напр.: 10 або -2">
+                                </div>
+                            <div class="mx__hint mx__mt12">A + B, A − B потребують однакових розмірів; A × B — щоб стовпців у A було стільки, скільки рядків у B. Для k·M, Mⁿ і Mᵀ береться матриця, обрана нижче (A чи B).</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelDt" hidden>
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="dkLbl">Метод</span>
+                                <input type="hidden" id="dmk" value="row">
+                                <div class="mx__sel" id="dk_dd">
+                                    <button type="button" class="mx__selBtn" id="dk_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dkLbl dk_val"><span id="dk_val">Розклад за рядком</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="dk_list" role="listbox" aria-labelledby="dkLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="row" aria-selected="true">Розклад за рядком</li>
+                                        <li role="option" tabindex="-1" data-v="col" aria-selected="false">Розклад за стовпцем</li>
+                                        <li role="option" tabindex="-1" data-v="gauss" aria-selected="false">Метод Гаусса</li>
+                                        <li role="option" tabindex="-1" data-v="sar" aria-selected="false">Правило Саррюса (3×3) і трикутника (2×2)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__field" id="ixFld" hidden>
+                                    <label class="mx__label" id="ixLab" for="ixv">Номер рядка</label>
+                                    <input class="mx__input" id="ixv" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="1">
+                                </div>
+                            <div class="mx__hint mx__mt12">Визначник існує лише для квадратних матриць. Розклад показується до 4×4, метод Гаусса — до 6×6. Розкладати зручно за рядком чи стовпцем з нулями.</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelIv" hidden>
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="imLbl">Метод</span>
+                                <input type="hidden" id="ivm" value="gj">
+                                <div class="mx__sel" id="im_dd">
+                                    <button type="button" class="mx__selBtn" id="im_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="imLbl im_val"><span id="im_val">Гаусса–Жордана [A | E]</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="im_list" role="listbox" aria-labelledby="imLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="gj" aria-selected="true">Гаусса–Жордана [A | E]</li>
+                                        <li role="option" tabindex="-1" data-v="adj" aria-selected="false">Через алгебраїчні доповнення (до 4×4)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__hint mx__mt12">Обернена існує, лише якщо det ≠ 0. Для вироджених матриць калькулятор покаже, де виникає нуль, і поясне висновок.</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelRk" hidden>
+                            <div class="mx__hint">Ранг — кількість ненульових рядків після зведення до ступінчастого вигляду. Для квадратної матриці також показуються слід, визначник і тип (симетрична, діагональна, ортогональна тощо).</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelSx" hidden>
+                            <div class="mx__hint">Матриця A (коефіцієнти) і B (праві частини) мають мати однакову кількість рядків. Для невиродженої квадратної A можна вказувати кілька стовпців B; для виродженої чи неквадратної A — один стовпець, тоді буде аналіз і загальний розв'язок.</div>
+                        </div>
+
+                        <div class="mx__field mx__field--full" id="tgtFld">
+                                <span class="mx__label" id="tgLbl">Для дії з однією матрицею</span>
+                                <input type="hidden" id="tgt" value="A">
+                                <div class="mx__sel" id="tg_dd">
+                                    <button type="button" class="mx__selBtn" id="tg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="tgLbl tg_val"><span id="tg_val">Матриця A</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="tg_list" role="listbox" aria-labelledby="tgLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="A" aria-selected="true">Матриця A</li>
+                                        <li role="option" tabindex="-1" data-v="B" aria-selected="false">Матриця B</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        <div class="mx__mats" id="mats">
+                            <div class="mx__mbox" id="boxA">
+                                <div class="mx__mhead"><h3 class="mx__mtitle">Матриця A</h3><span class="mx__mdim" id="dimA">2×2</span></div>
+                                <div class="mx__msize">
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="raLbl">Рядків</span>
+                                <input type="hidden" id="rA" value="1">
+                                <div class="mx__sel" id="ra_dd">
+                                    <button type="button" class="mx__selBtn" id="ra_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="raLbl ra_val"><span id="ra_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="ra_list" role="listbox" aria-labelledby="raLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                    <span class="mx__times" aria-hidden="true">×</span>
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="caLbl">Стовпців</span>
+                                <input type="hidden" id="cA" value="1">
+                                <div class="mx__sel" id="ca_dd">
+                                    <button type="button" class="mx__selBtn" id="ca_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="caLbl ca_val"><span id="ca_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="ca_list" role="listbox" aria-labelledby="caLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                </div>
+                                <div class="mx__matWrap"><div class="mx__mgrid" id="matA"></div></div>
+                                <div class="mx__mtools">
+                                    <button type="button" class="mx__tl" data-k="A" data-fill="id">Одинична</button>
+                                    <button type="button" class="mx__tl" data-k="A" data-fill="zero">Нульова</button>
+                                    <button type="button" class="mx__tl" data-k="A" data-fill="rand">Випадкова</button>
+                                </div>
+                            </div>
+                            <div class="mx__mbox" id="boxB">
+                                <div class="mx__mhead"><h3 class="mx__mtitle">Матриця B</h3><span class="mx__mdim" id="dimB">2×2</span></div>
+                                <div class="mx__msize">
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="rbLbl">Рядків</span>
+                                <input type="hidden" id="rB" value="1">
+                                <div class="mx__sel" id="rb_dd">
+                                    <button type="button" class="mx__selBtn" id="rb_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="rbLbl rb_val"><span id="rb_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="rb_list" role="listbox" aria-labelledby="rbLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                    <span class="mx__times" aria-hidden="true">×</span>
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="cbLbl">Стовпців</span>
+                                <input type="hidden" id="cB" value="1">
+                                <div class="mx__sel" id="cb_dd">
+                                    <button type="button" class="mx__selBtn" id="cb_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cbLbl cb_val"><span id="cb_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="cb_list" role="listbox" aria-labelledby="cbLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                </div>
+                                <div class="mx__matWrap"><div class="mx__mgrid" id="matB"></div></div>
+                                <div class="mx__mtools">
+                                    <button type="button" class="mx__tl" data-k="B" data-fill="id">Одинична</button>
+                                    <button type="button" class="mx__tl" data-k="B" data-fill="zero">Нульова</button>
+                                    <button type="button" class="mx__tl" data-k="B" data-fill="rand">Випадкова</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mx__swapRow"><button type="button" class="mx__tl" id="swapBtn">⇄ Поміняти A і B</button></div>
+
+                        <div class="mx__setbox">
+                            <p class="mx__cap">Налаштування</p>
+                            <div class="mx__cols">
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="fmLbl">Вигляд відповіді</span>
+                                <input type="hidden" id="fmt" value="frac">
+                                <div class="mx__sel" id="fm_dd">
+                                    <button type="button" class="mx__selBtn" id="fm_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fmLbl fm_val"><span id="fm_val">Дроби</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="fm_list" role="listbox" aria-labelledby="fmLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="frac" aria-selected="true">Дроби</li>
+                                        <li role="option" tabindex="-1" data-v="dec" aria-selected="false">Десяткові</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="mx__sel" id="dc_dd">
+                                    <button type="button" class="mx__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="mx__actions mx__mt12">
+                            <button class="mx__btn mx__btn--primary" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="mx__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="matrix-inputs-wrap">
-                        <div class="matrix-block">
-                            <div class="matrix-block__label">Матриця A</div>
-                            <div class="matrix-grid" id="matrixA"></div>
+                    <!-- RIGHT -->
+                    <div class="mx__card">
+                        <div class="mx__sectionTitle">
+                            <h2 class="mx__h2">Результат</h2>
+                            <span class="mx__badge">CalcCore</span>
                         </div>
-                        <div class="matrix-block">
-                            <div class="matrix-block__label">Матриця B</div>
-                            <div class="matrix-grid" id="matrixB"></div>
+                        <div class="mx__result" id="result">Вкажіть дані — результат з'явиться тут.</div>
+                        <div class="mx__actions mx__mt12">
+                            <button class="mx__btn mx__btn--primary" id="shareBtn" type="button">Поділитись</button>
+                            <button class="mx__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="mx__btn mx__btn--primary" id="resetBtn" type="button">Скинути</button>
+                            <button class="mx__btn mx__btn--primary" id="copyBtn" type="button">Копіювати результат</button>
+                            <button class="mx__btn" id="toA" type="button" hidden>Результат → у A</button>
+                            <button class="mx__btn" id="toB" type="button" hidden>Результат → у B</button>
                         </div>
-                    </div>
-
-                    <div class="matrix-ops">
-                        <button class="mcalc__btn mcalc__btn--primary" data-op="add" type="button">A + B</button>
-                        <button class="mcalc__btn mcalc__btn--primary" data-op="sub" type="button">A − B</button>
-                        <button class="mcalc__btn mcalc__btn--primary" data-op="mul" type="button">A × B</button>
-                        <button class="mcalc__btn" data-op="transposeA" type="button">Aᵀ</button>
-                        <button class="mcalc__btn" data-op="detA" type="button">det(A)</button>
-                    </div>
-
-                    <div class="mcalc__toast" id="mToast"></div>
-
-                    <div class="matrix-result-wrap" id="matrixResultWrap" style="display:none;">
-                        <div class="matrix-block__label" id="resultLabel">Результат</div>
-                        <div class="matrix-grid matrix-grid--result" id="matrixResult"></div>
+                        <div class="m-navlinks mx__mt12"><a class="mx__link" href="/education/system-of-equations-calculator">Система рівнянь →</a> <a class="mx__link" href="/education/function-graph-calculator">Графік функції →</a></div>
                     </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/education/system-of-equations-calculator">Система рівнянь</a>
-                    <a href="/calculator">Науковий калькулятор</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке матриця</h2>
-            <p>
-                Матриця — це прямокутна таблиця чисел, впорядкована в рядки і стовпці. Матриці широко
-                використовуються в математиці, фізиці, комп'ютерній графіці, машинному навчанні та
-                економіці для компактного представлення систем рівнянь, перетворень та даних.
-            </p>
-
-            <h2>Основні операції з матрицями</h2>
-            <ul>
-                <li><b>Додавання/віднімання:</b> можливе лише для матриць однакового розміру — відповідні елементи
-                    просто додаються чи віднімаються.</li>
-                <li><b>Множення:</b> кількість стовпців першої матриці має дорівнювати кількості рядків другої.
-                    Результат — нова матриця з рядками першої та стовпцями другої.</li>
-                <li><b>Транспонування:</b> перетворює рядки на стовпці — елемент (i,j) переходить у позицію (j,i).</li>
-                <li><b>Визначник:</b> число, яке можна обчислити лише для квадратних матриць, показує масштабуючий
-                    фактор перетворення та наявність оберненої матриці.</li>
-            </ul>
-
-            <h2>Правило множення матриць</h2>
-            <p>
-                На відміну від звичайних чисел, множення матриць <b>не є комутативним</b> — тобто
-                A×B зазвичай не дорівнює B×A. Крім того, множення можливе лише якщо розміри матриць
-                сумісні: кількість стовпців A повинна точно дорівнювати кількості рядків B.
-            </p>
-
-            <h2>Де застосовуються матриці</h2>
-            <ul>
-                <li><b>Комп'ютерна графіка:</b> обертання, масштабування та переміщення 3D-об'єктів.</li>
-                <li><b>Машинне навчання:</b> нейронні мережі оперують даними у вигляді матриць і тензорів.</li>
-                <li><b>Системи рівнянь:</b> компактний запис і розв'язання систем лінійних рівнянь.</li>
-                <li><b>Економіка:</b> моделі "витрати-випуск", аналіз ринкової рівноваги.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Цей калькулятор підтримує матриці розміром до 4×4. Для більших матриць чи складніших
-                операцій (обернена матриця, власні значення) рекомендується використовувати спеціалізоване
-                програмне забезпечення (MATLAB, Python NumPy).
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/education/system-of-equations-calculator"><b>Система рівнянь</b><span>Підстановка, додавання, Крамер і Гаусс для систем 2×2 і 3×3.</span></a>
+                <a class="cc-related-card" href="/education/fraction-calculator"><b>Калькулятор дробів</b><span>Дії з дробами та мішаними числами по кроках.</span></a>
+                <a class="cc-related-card" href="/education/function-graph-calculator"><b>Графік функції</b><span>Побудова графіків, нулі, екстремуми, дотична.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що вміє калькулятор матриць</h2>
+            <p>Калькулятор виконує всі основні дії з матрицями до 6×6: <b>додавання, віднімання, множення</b>, множення на число, <b>піднесення до степеня</b> (також від'ємного) і транспонування. Він знаходить <b>визначник</b> трьома способами, <b>обернену матрицю</b>, <b>ранг</b>, <b>слід</b> і розв'язує матричне рівняння <b>AX = B</b>. Елементи вводяться цілими, десятковими чи дробами, а відповіді записуються точно, наприклад −7/120. Кожна дія супроводжується покроковим розв'язанням.</p>
+
+            <h2>Додавання й множення матриць</h2>
+            <p>Додавати й віднімати можна матриці <b>однакового розміру</b>: cᵢⱼ = aᵢⱼ ± bᵢⱼ. Добуток A × B існує, коли <b>стовпців у A стільки ж, скільки рядків у B</b>: cᵢⱼ = aᵢ₁b₁ⱼ + aᵢ₂b₂ⱼ + … Множення матриць не комутативне: A × B, як правило, не дорівнює B × A. Для A = [[1,2],[3,4]] і B = [[0,1],[1,0]] маємо A × B = [[2,1],[4,3]]. Степінь Aⁿ — n-кратний добуток: для [[1,1],[1,0]]¹⁰ виходить [[89,55],[55,34]] (числа Фібоначчі).</p>
+
+            <h2>Визначник матриці</h2>
+            <p>Визначник є лише в квадратних матриць. Для 2×2: <b>det = ad − bc</b>, наприклад для [[1,2],[3,4]] це 1·4 − 2·3 = −2. Для 3×3 є правило Саррюса (три добутки з плюсом і три з мінусом) та <b>розклад за рядком</b>: det = Σ aᵢⱼ·(−1)^(i+j)·Mᵢⱼ. Для більших матриць зручний <b>метод Гаусса</b>: зводимо до трикутного вигляду, і det дорівнює добутку діагоналі (зі знаком від обмінів рядків). Для [[2,1,3],[0,−1,4],[1,2,1]] визначник −11.</p>
+
+            <h2>Обернена матриця</h2>
+            <p>Обернена матриця A⁻¹ задовольняє A·A⁻¹ = E й існує лише при <b>det A ≠ 0</b>. Калькулятор знаходить її методом <b>Гаусса–Жордана</b>: записує [A | E] і зводить ліву частину до одиничної, права стає оберненою. Другий спосіб — формула A⁻¹ = adj A / det A через алгебраїчні доповнення. Для [[1,2],[3,4]] обернена [[−2, 1], [3/2, −1/2]]. Якщо det = 0, матриця вироджена, і калькулятор покаже, у якому стовпці немає ведучого елемента.</p>
+
+            <h2>Ранг матриці</h2>
+            <p>Ранг — максимальна кількість лінійно незалежних рядків (чи стовпців); його знаходять, зводячи матрицю до ступінчастого вигляду й рахуючи ненульові рядки. Для [[1,2,3],[4,5,6],[7,8,9]] ранг 2, бо третій рядок дорівнює 2·(другий) − (перший), а визначник нуль. Ранг квадратної n×n матриці дорівнює n тоді й лише тоді, коли вона невироджена.</p>
+
+            <h2>Розв'язання AX = B</h2>
+            <p>Для невиродженої квадратної A розв'язок єдиний: X = A⁻¹B. Калькулятор виконує [A | B] → [E | X] методом Гаусса–Жордана та перевіряє A·X = B. Для [[2,1],[1,3]]·X = [[5],[10]] виходить x = 1, y = 3. Якщо A вироджена чи неквадратна, застосовується теорема Руше–Капеллі: розв'язків немає, якщо rank A < rank [A | B]; безліч, якщо ранги рівні, але менші за кількість невідомих, тоді виводиться загальний розв'язок з вільними змінними.</p>
+
+            <h2>Де застосовують матриці</h2>
+            <p>Матриці описують системи лінійних рівнянь, перетворення в комп'ютерній графіці (обертання, масштаб, зсув), ланцюги Маркова, моделі «витрати–випуск» в економіці, нейронні мережі, а також зображення й таблиці даних. Поняття визначника й оберненої матриці лежать в основі лінійної алгебри.</p>
+            <p class="mx-mini">Усі елементи обробляються як точні раціональні числа: 1/3 залишається дробом, а не 0,333. Для великих матриць показуються ключові стани, а не кожне перетворення окремо.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Чому не можна множити будь-які дві матриці?</h3>
-                <p>Множення A×B можливе лише якщо кількість стовпців матриці A дорівнює кількості рядків матриці B. Це
-                    фундаментальне правило множення матриць.</p>
+            <div class="cc-faq-item">
+                <h3>Як перемножити дві матриці?</h3>
+                <p>Кожен елемент добутку cᵢⱼ — сума добутків елементів i-го рядка першої матриці на j-й стовпець другої. Кількість стовпців першої має дорівнювати кількості рядків другої.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Що таке визначник матриці?</h3>
-                <p>Визначник — це число, обчислене з квадратної матриці, яке показує, чи має матриця обернену (визначник
-                    ≠ 0), та використовується в багатьох застосуваннях лінійної алгебри.</p>
+            <div class="cc-faq-item">
+                <h3>Чому A × B не дорівнює B × A?</h3>
+                <p>Множення матриць не комутативне: порядок множників змінює результат, а іноді один із добутків навіть не існує через розміри.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Що таке транспонування матриці?</h3>
-                <p>Транспонування — це операція, яка перетворює рядки матриці на стовпці і навпаки. Елемент на позиції
-                    (i,j) переходить у позицію (j,i).</p>
+            <div class="cc-faq-item">
+                <h3>Як знайти визначник матриці 3×3?</h3>
+                <p>За правилом Саррюса, розкладом за рядком чи методом Гаусса. Для [[2,1,3],[0,−1,4],[1,2,1]] визначник −11.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти обернену матрицю?</h3>
+                <p>Методом Гаусса–Жордана: [A | E] → [E | A⁻¹], або за формулою A⁻¹ = adj A / det A. Для [[1,2],[3,4]] це [[−2, 1], [3/2, −1/2]].</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Коли обернена матриця не існує?</h3>
+                <p>Коли визначник дорівнює нулю (матриця вироджена) або матриця не квадратна. Тоді ранг менший за розмір.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке ранг матриці?</h3>
+                <p>Максимальна кількість лінійно незалежних рядків (стовпців). Його знаходять зведенням до ступінчастого вигляду: це кількість ненульових рядків.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як розв'язати матричне рівняння AX = B?</h3>
+                <p>Якщо A невироджена, X = A⁻¹B; калькулятор виконує [A | B] → [E | X]. Для вироджених A аналізується сумісність за Руше–Капеллі.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке транспонована матриця?</h3>
+                <p>Матриця Aᵀ, у якої рядки й стовпці міняються місцями: елемент (i, j) стає елементом (j, i).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вводити дроби й десяткові числа?</h3>
+                <p>Так: 2, -1,5, 3/4. Числа обробляються точно, тому 1/3 лишається дробом, а не 0,333.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як піднести матрицю до степеня?</h3>
+                <p>Помножити матрицю саму на себе n разів. Для від'ємного n спершу береться обернена. Для [[1,1],[1,0]]¹⁰ виходить [[89,55],[55,34]].</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке слід матриці?</h3>
+                <p>Сума елементів головної діагоналі квадратної матриці. Він показується на вкладці «Ранг».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки матриці до 6×6 це багато?</h3>
+                <p>Для навчальних задач цього достатньо. Для великих матриць проміжні кроки показуються скорочено: по одному стану на кожен ведучий стовпець.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

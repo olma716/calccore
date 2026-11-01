@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Matrix Calculator: Addition, Multiplication, Determinant | CalcCore</title>
+    <title>Matrix Calculator Online: Determinant, Inverse | CalcCore</title>
     <meta name="description"
-        content="Online matrix calculator: addition, subtraction, multiplication, transpose, and determinant. Sizes from 1×1 to 4×4 with step-by-step results." />
+        content="Matrix calculator up to 6×6: addition, multiplication, power, determinant, inverse, rank, solving AX = B. Exact fractions and Gauss steps." />
 
     <link rel="canonical" href="https://calccore.net/en/education/matrix-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/education/matrix-calculator" />
@@ -26,215 +28,582 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Matrix Calculator: Addition, Multiplication, Determinant" />
-    <meta property="og:description" content="Online matrix calculator: addition, subtraction, multiplication, transpose, and determinant. Sizes from 1×1 to 4×4 with step-by-step results." />
+    <meta property="og:title" content="Matrix Calculator Online: Determinant, Inverse" />
+    <meta property="og:description" content="Matrix calculator up to 6×6: addition, multiplication, power, determinant, inverse, rank, solving AX = B. Exact fractions and Gauss steps." />
     <meta property="og:url" content="https://calccore.net/en/education/matrix-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Matrix Calculator: Addition, Multiplication, Determinant" />
-    <meta name="twitter:description" content="Online matrix calculator: addition, subtraction, multiplication, transpose, and determinant. Sizes from 1×1 to 4×4 with step-by-step results." />
+    <meta name="twitter:title" content="Matrix Calculator Online: Determinant, Inverse" />
+    <meta name="twitter:description" content="Matrix calculator up to 6×6: addition, multiplication, power, determinant, inverse, rank, solving AX = B. Exact fractions and Gauss steps." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/matrix-calculator.css" />
+    <link rel="stylesheet" href="/css/mx.css?v=20261031mx8" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/matrix-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Why can't you multiply any two matrices?",
-        "acceptedAnswer":{"@type":"Answer","text":"Multiplying A×B is only possible if the number of columns in matrix A equals the number of rows in matrix B. This is a fundamental rule of matrix multiplication."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is a matrix determinant?",
-        "acceptedAnswer":{"@type":"Answer","text":"The determinant is a number computed from a square matrix that indicates whether the matrix has an inverse (determinant ≠ 0), and is used in many linear algebra applications."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is matrix transpose?",
-        "acceptedAnswer":{"@type":"Answer","text":"Transpose is an operation that turns a matrix's rows into columns and vice versa. The element at position (i,j) moves to position (j,i)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261031mx8" defer></script>
+    <script src="/js/matrix-calculator.js?v=20261031mx8" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/education/matrix-calculator#app",
-    "name":"Matrix Calculator",
-    "description":"Matrix calculator: addition, subtraction, multiplication, transpose, determinant.",
-    "url":"https://calccore.net/en/education/matrix-calculator",
-    "applicationCategory":"EducationApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/education/matrix-calculator#app",
+  "name": "Matrix Calculator",
+  "description": "A matrix calculator with step-by-step solutions: addition, subtraction, multiplication, scalar multiplication, powers, transposition, the determinant (expansion, Gauss elimination, the Sarrus rule), the inverse (Gauss–Jordan or the adjugate), rank and echelon form, and solving the matrix equation AX = B. Up to 6×6 with exact fractions and no rounding.",
+  "url": "https://calccore.net/en/education/matrix-calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Matrices up to 6×6 with exact fractions and no rounding",
+    "A + B, A − B, A × B, B × A, k·M, Mⁿ, Mᵀ",
+    "The determinant: cofactor expansion, Gauss elimination, the Sarrus rule",
+    "The inverse: Gauss–Jordan or the adjugate, with the check A·A⁻¹ = E",
+    "Rank, echelon form, trace, the type of the matrix",
+    "Solving AX = B with a Rouché–Capelli analysis and the general solution",
+    "Step-by-step solutions with matrix states and highlighted pivots",
+    "A share link, copying, and the result into A or B"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/education/matrix-calculator#webpage",
+      "url": "https://calccore.net/en/education/matrix-calculator",
+      "name": "Matrix Calculator Online: Determinant, Inverse | CalcCore",
+      "description": "Matrix calculator up to 6×6: addition, multiplication, power, determinant, inverse, rank, solving AX = B. Exact fractions and Gauss steps.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/education/matrix-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/education/matrix-calculator#breadcrumb"
+      },
+      "dateModified": "2026-10-31",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/education/matrix-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Education",
+          "item": "https://calccore.net/en/education"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Matrix Calculator",
+          "item": "https://calccore.net/en/education/matrix-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/education/matrix-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I multiply two matrices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each element of the product cᵢⱼ is the sum of the products of the elements of row i of the first matrix and column j of the second. The number of columns of the first must equal the number of rows of the second."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is A × B not equal to B × A?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Matrix multiplication is not commutative: the order of the factors changes the result, and sometimes one of the products does not exist because of the sizes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the determinant of a 3×3 matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With the Sarrus rule, expansion along a row or Gauss elimination. For [[2,1,3],[0,−1,4],[1,2,1]] the determinant is −11."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the inverse matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By Gauss–Jordan elimination: [A | E] → [E | A⁻¹], or by the formula A⁻¹ = adj A / det A. For [[1,2],[3,4]] it is [[−2, 1], [3/2, −1/2]]."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When does the inverse not exist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When the determinant is zero (the matrix is singular) or the matrix is not square. Then the rank is less than the size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the rank of a matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The maximum number of linearly independent rows (columns). It is found by reducing to echelon form: it is the number of non-zero rows."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I solve the matrix equation AX = B?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If A is non-singular, X = A⁻¹B; the calculator performs [A | B] → [E | X]. For singular A the consistency is analysed by Rouché–Capelli."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the transpose of a matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The matrix Aᵀ in which rows and columns are swapped: the element (i, j) becomes the element (j, i)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I enter fractions and decimals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes: 2, -1.5, 3/4. The numbers are handled exactly, so 1/3 stays a fraction, not 0.333."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I raise a matrix to a power?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply the matrix by itself n times. For a negative n the inverse is taken first. For [[1,1],[1,0]]¹⁰ the result is [[89,55],[55,34]]."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the trace of a matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The sum of the main diagonal elements of a square matrix. It is shown in the «Rank» tab."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is 6×6 enough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For study problems, yes. For large matrices the intermediate steps are shortened: one state per pivot column."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="mx-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cmatrix">
-            <div class="mcalc__wrap">
+        <section class="mx" id="mx">
+            <div class="mx__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Matrix Calculator</h1>
-                    <p class="mcalc__p">
-                        Addition, subtraction, multiplication, transpose,
-                        and determinant for matrices up to 4×4.
-                    </p>
+                <div class="mx__titlebar">
+                    <h1 class="mx__h1">Matrix Calculator Online</h1>
+                    <p class="mx__p">Enter the matrices A and B (up to 6×6) and choose an operation: addition, multiplication, a power, the determinant, the inverse, rank or solving AX = B. All elements are exact, answers are written as fractions, and every operation comes with a step-by-step solution.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter matrices</h2>
-                        <span class="mcalc__badge">Education</span>
-                    </div>
+                <div class="mx__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="sizeA">Matrix A size</label>
-                            <select id="sizeA" class="mcalc__select">
-                                <option value="1x1">1×1</option>
-                                <option value="2x2" selected>2×2</option>
-                                <option value="3x3">3×3</option>
-                                <option value="4x4">4×4</option>
-                                <option value="2x3">2×3</option>
-                                <option value="3x2">3×2</option>
-                            </select>
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="mx__card">
+                        <div class="mx__sectionTitle">
+                            <h2 class="mx__h2">Enter matrices</h2>
+                            <span class="mx__badge">Education</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="sizeB">Matrix B size</label>
-                            <select id="sizeB" class="mcalc__select">
-                                <option value="1x1">1×1</option>
-                                <option value="2x2" selected>2×2</option>
-                                <option value="3x3">3×3</option>
-                                <option value="4x4">4×4</option>
-                                <option value="2x3">2×3</option>
-                                <option value="3x2">3×2</option>
-                            </select>
+                        <div class="mx__tabs" role="tablist">
+                            <button type="button" class="mx__tab is-active" data-m="op" role="tab" aria-selected="true"><b class="mx__tabT">Operations</b><span class="mx__ex">A × B, Aⁿ, k·A, Aᵀ</span></button>
+                            <button type="button" class="mx__tab" data-m="dt" role="tab" aria-selected="false"><b class="mx__tabT">Determinant</b><span class="mx__ex">det [[1,2],[3,4]] = −2</span></button>
+                            <button type="button" class="mx__tab" data-m="iv" role="tab" aria-selected="false"><b class="mx__tabT">Inverse matrix</b><span class="mx__ex">A⁻¹ by Gauss</span></button>
+                            <button type="button" class="mx__tab" data-m="rk" role="tab" aria-selected="false"><b class="mx__tabT">Rank</b><span class="mx__ex">[[1,2,3],[4,5,6],[7,8,9]] → 2</span></button>
+                            <button type="button" class="mx__tab" data-m="sx" role="tab" aria-selected="false"><b class="mx__tabT">Solving AX = B</b><span class="mx__ex">x = 1, y = 3</span></button>
                         </div>
+
+                        <div class="mx__panel" id="panelOp">
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="okLbl">Operation</span>
+                                <input type="hidden" id="opk" value="add">
+                                <div class="mx__sel" id="ok_dd">
+                                    <button type="button" class="mx__selBtn" id="ok_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="okLbl ok_val"><span id="ok_val">A + B</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="ok_list" role="listbox" aria-labelledby="okLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="add" aria-selected="true">A + B</li>
+                                        <li role="option" tabindex="-1" data-v="sub" aria-selected="false">A − B</li>
+                                        <li role="option" tabindex="-1" data-v="mul" aria-selected="false">A × B</li>
+                                        <li role="option" tabindex="-1" data-v="mulBA" aria-selected="false">B × A</li>
+                                        <li role="option" tabindex="-1" data-v="scal" aria-selected="false">k·M (scalar multiple)</li>
+                                        <li role="option" tabindex="-1" data-v="pow" aria-selected="false">Mⁿ (a power)</li>
+                                        <li role="option" tabindex="-1" data-v="tr" aria-selected="false">Mᵀ (transpose)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__field" id="kFld" hidden>
+                                    <label class="mx__label" for="kv">Number k</label>
+                                    <input class="mx__input" id="kv" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="e.g.: 2, -1.5, 3/4">
+                                </div>
+                            <div class="mx__field" id="nFld" hidden>
+                                    <label class="mx__label" for="nv">Exponent n</label>
+                                    <input class="mx__input" id="nv" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="e.g.: 10 or -2">
+                                </div>
+                            <div class="mx__hint mx__mt12">A + B and A − B need the same size; A × B needs as many columns in A as rows in B. For k·M, Mⁿ and Mᵀ the matrix chosen below (A or B) is used.</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelDt" hidden>
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="dkLbl">Method</span>
+                                <input type="hidden" id="dmk" value="row">
+                                <div class="mx__sel" id="dk_dd">
+                                    <button type="button" class="mx__selBtn" id="dk_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dkLbl dk_val"><span id="dk_val">Expansion along a row</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="dk_list" role="listbox" aria-labelledby="dkLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="row" aria-selected="true">Expansion along a row</li>
+                                        <li role="option" tabindex="-1" data-v="col" aria-selected="false">Expansion along a column</li>
+                                        <li role="option" tabindex="-1" data-v="gauss" aria-selected="false">Gauss elimination</li>
+                                        <li role="option" tabindex="-1" data-v="sar" aria-selected="false">Sarrus rule (3×3) and the triangle rule (2×2)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__field" id="ixFld" hidden>
+                                    <label class="mx__label" id="ixLab" for="ixv">Row number</label>
+                                    <input class="mx__input" id="ixv" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="1">
+                                </div>
+                            <div class="mx__hint mx__mt12">The determinant exists only for square matrices. Expansion is shown up to 4×4, Gauss elimination up to 6×6. It is convenient to expand along a row or column with zeros.</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelIv" hidden>
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="imLbl">Method</span>
+                                <input type="hidden" id="ivm" value="gj">
+                                <div class="mx__sel" id="im_dd">
+                                    <button type="button" class="mx__selBtn" id="im_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="imLbl im_val"><span id="im_val">Gauss–Jordan [A | E]</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="im_list" role="listbox" aria-labelledby="imLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="gj" aria-selected="true">Gauss–Jordan [A | E]</li>
+                                        <li role="option" tabindex="-1" data-v="adj" aria-selected="false">Via the adjugate (up to 4×4)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__hint mx__mt12">The inverse exists only if det ≠ 0. For singular matrices the calculator shows where the zero appears and explains the conclusion.</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelRk" hidden>
+                            <div class="mx__hint">The rank is the number of non-zero rows after reduction to echelon form. For a square matrix the trace, the determinant and the type (symmetric, diagonal, orthogonal, etc.) are shown too.</div>
+                        </div>
+
+                        <div class="mx__panel" id="panelSx" hidden>
+                            <div class="mx__hint">The matrices A (coefficients) and B (right-hand sides) must have the same number of rows. For a non-singular square A you may give several columns of B; for a singular or non-square A use one column, then an analysis and the general solution are given.</div>
+                        </div>
+
+                        <div class="mx__field mx__field--full" id="tgtFld">
+                                <span class="mx__label" id="tgLbl">For a single-matrix operation</span>
+                                <input type="hidden" id="tgt" value="A">
+                                <div class="mx__sel" id="tg_dd">
+                                    <button type="button" class="mx__selBtn" id="tg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="tgLbl tg_val"><span id="tg_val">Matrix A</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="tg_list" role="listbox" aria-labelledby="tgLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="A" aria-selected="true">Matrix A</li>
+                                        <li role="option" tabindex="-1" data-v="B" aria-selected="false">Matrix B</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        <div class="mx__mats" id="mats">
+                            <div class="mx__mbox" id="boxA">
+                                <div class="mx__mhead"><h3 class="mx__mtitle">Matrix A</h3><span class="mx__mdim" id="dimA">2×2</span></div>
+                                <div class="mx__msize">
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="raLbl">Rows</span>
+                                <input type="hidden" id="rA" value="1">
+                                <div class="mx__sel" id="ra_dd">
+                                    <button type="button" class="mx__selBtn" id="ra_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="raLbl ra_val"><span id="ra_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="ra_list" role="listbox" aria-labelledby="raLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                    <span class="mx__times" aria-hidden="true">×</span>
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="caLbl">Columns</span>
+                                <input type="hidden" id="cA" value="1">
+                                <div class="mx__sel" id="ca_dd">
+                                    <button type="button" class="mx__selBtn" id="ca_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="caLbl ca_val"><span id="ca_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="ca_list" role="listbox" aria-labelledby="caLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                </div>
+                                <div class="mx__matWrap"><div class="mx__mgrid" id="matA"></div></div>
+                                <div class="mx__mtools">
+                                    <button type="button" class="mx__tl" data-k="A" data-fill="id">Identity</button>
+                                    <button type="button" class="mx__tl" data-k="A" data-fill="zero">Zero</button>
+                                    <button type="button" class="mx__tl" data-k="A" data-fill="rand">Random</button>
+                                </div>
+                            </div>
+                            <div class="mx__mbox" id="boxB">
+                                <div class="mx__mhead"><h3 class="mx__mtitle">Matrix B</h3><span class="mx__mdim" id="dimB">2×2</span></div>
+                                <div class="mx__msize">
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="rbLbl">Rows</span>
+                                <input type="hidden" id="rB" value="1">
+                                <div class="mx__sel" id="rb_dd">
+                                    <button type="button" class="mx__selBtn" id="rb_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="rbLbl rb_val"><span id="rb_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="rb_list" role="listbox" aria-labelledby="rbLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                    <span class="mx__times" aria-hidden="true">×</span>
+                                    <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="cbLbl">Columns</span>
+                                <input type="hidden" id="cB" value="1">
+                                <div class="mx__sel" id="cb_dd">
+                                    <button type="button" class="mx__selBtn" id="cb_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cbLbl cb_val"><span id="cb_val">1</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="cb_list" role="listbox" aria-labelledby="cbLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="1" aria-selected="true">1</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="3" aria-selected="false">3</li>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="false">4</li>
+                                        <li role="option" tabindex="-1" data-v="5" aria-selected="false">5</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                </div>
+                                <div class="mx__matWrap"><div class="mx__mgrid" id="matB"></div></div>
+                                <div class="mx__mtools">
+                                    <button type="button" class="mx__tl" data-k="B" data-fill="id">Identity</button>
+                                    <button type="button" class="mx__tl" data-k="B" data-fill="zero">Zero</button>
+                                    <button type="button" class="mx__tl" data-k="B" data-fill="rand">Random</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mx__swapRow"><button type="button" class="mx__tl" id="swapBtn">⇄ Swap A and B</button></div>
+
+                        <div class="mx__setbox">
+                            <p class="mx__cap">Settings</p>
+                            <div class="mx__cols">
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="fmLbl">Answer format</span>
+                                <input type="hidden" id="fmt" value="frac">
+                                <div class="mx__sel" id="fm_dd">
+                                    <button type="button" class="mx__selBtn" id="fm_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fmLbl fm_val"><span id="fm_val">Fractions</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="fm_list" role="listbox" aria-labelledby="fmLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="frac" aria-selected="true">Fractions</li>
+                                        <li role="option" tabindex="-1" data-v="dec" aria-selected="false">Decimals</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mx__field mx__field--full">
+                                <span class="mx__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="mx__sel" id="dc_dd">
+                                    <button type="button" class="mx__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="mx__caret" aria-hidden="true"></span></button>
+                                    <ul class="mx__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="mx__actions mx__mt12">
+                            <button class="mx__btn mx__btn--primary" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="mx__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="matrix-inputs-wrap">
-                        <div class="matrix-block">
-                            <div class="matrix-block__label">Matrix A</div>
-                            <div class="matrix-grid" id="matrixA"></div>
+                    <!-- RIGHT -->
+                    <div class="mx__card">
+                        <div class="mx__sectionTitle">
+                            <h2 class="mx__h2">Result</h2>
+                            <span class="mx__badge">CalcCore</span>
                         </div>
-                        <div class="matrix-block">
-                            <div class="matrix-block__label">Matrix B</div>
-                            <div class="matrix-grid" id="matrixB"></div>
+                        <div class="mx__result" id="result">Enter your data — the result will appear here.</div>
+                        <div class="mx__actions mx__mt12">
+                            <button class="mx__btn mx__btn--primary" id="shareBtn" type="button">Share link</button>
+                            <button class="mx__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="mx__btn mx__btn--primary" id="resetBtn" type="button">Reset</button>
+                            <button class="mx__btn mx__btn--primary" id="copyBtn" type="button">Copy the result</button>
+                            <button class="mx__btn" id="toA" type="button" hidden>Result → into A</button>
+                            <button class="mx__btn" id="toB" type="button" hidden>Result → into B</button>
                         </div>
-                    </div>
-
-                    <div class="matrix-ops">
-                        <button class="mcalc__btn mcalc__btn--primary" data-op="add" type="button">A + B</button>
-                        <button class="mcalc__btn mcalc__btn--primary" data-op="sub" type="button">A − B</button>
-                        <button class="mcalc__btn mcalc__btn--primary" data-op="mul" type="button">A × B</button>
-                        <button class="mcalc__btn" data-op="transposeA" type="button">Aᵀ</button>
-                        <button class="mcalc__btn" data-op="detA" type="button">det(A)</button>
-                    </div>
-
-                    <div class="mcalc__toast" id="mToast"></div>
-
-                    <div class="matrix-result-wrap" id="matrixResultWrap" style="display:none;">
-                        <div class="matrix-block__label" id="resultLabel">Result</div>
-                        <div class="matrix-grid matrix-grid--result" id="matrixResult"></div>
+                        <div class="m-navlinks mx__mt12"><a class="mx__link" href="/en/education/system-of-equations-calculator">System of equations →</a> <a class="mx__link" href="/en/education/function-graph-calculator">Function graph →</a></div>
                     </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/en/education/system-of-equations-calculator">System of Equations</a>
-                    <a href="/en/calculator">Scientific Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/education/system-of-equations-calculator"><b>System of Equations</b><span>Substitution, addition, Cramer and Gauss for 2×2 and 3×3 systems.</span></a>
+                <a class="cc-related-card" href="/en/education/fraction-calculator"><b>Fraction Calculator</b><span>Fractions and mixed numbers step by step.</span></a>
+                <a class="cc-related-card" href="/en/education/function-graph-calculator"><b>Function Graph</b><span>Plot graphs, zeros, extrema, tangent.</span></a>
+            </div>
+        </section>
 
-        <section class="m-seo">
-            <h2>What is a matrix</h2>
-            <p>
-                A matrix is a rectangular array of numbers arranged in rows and columns. Matrices are
-                widely used in mathematics, physics, computer graphics, machine learning, and economics
-                to compactly represent systems of equations, transformations, and data.
-            </p>
+        <div class="cc-divider"></div>
 
-            <h2>Basic matrix operations</h2>
-            <ul>
-                <li><b>Addition/subtraction:</b> only possible for matrices of the same size — corresponding elements
-                    are simply added or subtracted.</li>
-                <li><b>Multiplication:</b> the number of columns in the first matrix must equal the number of rows in
-                    the second. The result is a new matrix with the rows of the first and columns of the second.</li>
-                <li><b>Transpose:</b> turns rows into columns — the element at (i,j) moves to position (j,i).</li>
-                <li><b>Determinant:</b> a number that can only be computed for square matrices, showing the scaling
-                    factor of the transformation and whether an inverse matrix exists.</li>
-            </ul>
+        <section class="cc-seo">
+            <h2>What the matrix calculator does</h2>
+            <p>The calculator performs all the main operations with matrices up to 6×6: <b>addition, subtraction, multiplication</b>, scalar multiplication, <b>powers</b> (also negative) and transposition. It finds the <b>determinant</b> in three ways, the <b>inverse matrix</b>, the <b>rank</b>, the <b>trace</b>, and solves the matrix equation <b>AX = B</b>. Elements may be integers, decimals or fractions, and answers are exact, for example −7/120. Every operation comes with a step-by-step solution.</p>
 
-            <h2>The matrix multiplication rule</h2>
-            <p>
-                Unlike ordinary numbers, matrix multiplication <b>is not commutative</b> — meaning
-                A×B usually doesn't equal B×A. Additionally, multiplication is only possible if the
-                matrix dimensions are compatible: the number of columns in A must exactly match the
-                number of rows in B.
-            </p>
+            <h2>Adding and multiplying matrices</h2>
+            <p>Only matrices of the <b>same size</b> can be added or subtracted: cᵢⱼ = aᵢⱼ ± bᵢⱼ. The product A × B exists when <b>A has as many columns as B has rows</b>: cᵢⱼ = aᵢ₁b₁ⱼ + aᵢ₂b₂ⱼ + … Matrix multiplication is not commutative: A × B is generally not equal to B × A. For A = [[1,2],[3,4]] and B = [[0,1],[1,0]] we get A × B = [[2,1],[4,3]]. The power Aⁿ is an n-fold product: for [[1,1],[1,0]]¹⁰ the result is [[89,55],[55,34]] (Fibonacci numbers).</p>
+
+            <h2>The determinant</h2>
+            <p>Only square matrices have a determinant. For 2×2: <b>det = ad − bc</b>, for example for [[1,2],[3,4]] it is 1·4 − 2·3 = −2. For 3×3 there is the Sarrus rule (three products with a plus and three with a minus) and <b>expansion along a row</b>: det = Σ aᵢⱼ·(−1)^(i+j)·Mᵢⱼ. For larger matrices <b>Gauss elimination</b> is handy: reduce to triangular form, and det equals the product of the diagonal (with a sign from row swaps). For [[2,1,3],[0,−1,4],[1,2,1]] the determinant is −11.</p>
+
+            <h2>The inverse matrix</h2>
+            <p>The inverse A⁻¹ satisfies A·A⁻¹ = E and exists only when <b>det A ≠ 0</b>. The calculator finds it by <b>Gauss–Jordan elimination</b>: it writes [A | E] and reduces the left part to the identity, and the right part becomes the inverse. The second way is the formula A⁻¹ = adj A / det A via cofactors. For [[1,2],[3,4]] the inverse is [[−2, 1], [3/2, −1/2]]. If det = 0 the matrix is singular, and the calculator shows in which column there is no pivot.</p>
+
+            <h2>The rank</h2>
+            <p>The rank is the maximum number of linearly independent rows (or columns); it is found by reducing to echelon form and counting the non-zero rows. For [[1,2,3],[4,5,6],[7,8,9]] the rank is 2, because the third row equals 2·(second) − (first), and the determinant is zero. The rank of an n×n matrix equals n if and only if it is non-singular.</p>
+
+            <h2>Solving AX = B</h2>
+            <p>For a non-singular square A the solution is unique: X = A⁻¹B. The calculator performs [A | B] → [E | X] by Gauss–Jordan elimination and checks A·X = B. For [[2,1],[1,3]]·X = [[5],[10]] we get x = 1, y = 3. If A is singular or non-square, the Rouché–Capelli theorem is used: there are no solutions when rank A < rank [A | B]; there are infinitely many when the ranks are equal but less than the number of unknowns, and then the general solution with free variables is shown.</p>
 
             <h2>Where matrices are used</h2>
-            <ul>
-                <li><b>Computer graphics:</b> rotating, scaling, and translating 3D objects.</li>
-                <li><b>Machine learning:</b> neural networks operate on data as matrices and tensors.</li>
-                <li><b>Systems of equations:</b> a compact way to write and solve systems of linear equations.</li>
-                <li><b>Economics:</b> input-output models, market equilibrium analysis.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                This calculator supports matrices up to 4×4. For larger matrices or more complex
-                operations (matrix inverse, eigenvalues), specialized software (MATLAB, Python NumPy)
-                is recommended.
-            </p>
+            <p>Matrices describe systems of linear equations, transformations in computer graphics (rotation, scaling, translation), Markov chains, input–output models in economics, neural networks, images and data tables. The determinant and the inverse matrix are at the core of linear algebra.</p>
+            <p class="mx-mini">All elements are handled as exact rational numbers: 1/3 stays a fraction, not 0.333. For large matrices the key states are shown rather than every single operation.</p>
         </section>
 
-        <section class="m-faq">
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Why can't you multiply any two matrices?</h3>
-                <p>Multiplying A×B is only possible if the number of columns in matrix A equals the number of rows in
-                    matrix B. This is a fundamental rule of matrix multiplication.</p>
+            <div class="cc-faq-item">
+                <h3>How do I multiply two matrices?</h3>
+                <p>Each element of the product cᵢⱼ is the sum of the products of the elements of row i of the first matrix and column j of the second. The number of columns of the first must equal the number of rows of the second.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What is a matrix determinant?</h3>
-                <p>The determinant is a number computed from a square matrix that indicates whether the matrix has an
-                    inverse (determinant ≠ 0), and is used in many linear algebra applications.</p>
+            <div class="cc-faq-item">
+                <h3>Why is A × B not equal to B × A?</h3>
+                <p>Matrix multiplication is not commutative: the order of the factors changes the result, and sometimes one of the products does not exist because of the sizes.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What is matrix transpose?</h3>
-                <p>Transpose is an operation that turns a matrix's rows into columns and vice versa. The element at
-                    position (i,j) moves to position (j,i).</p>
+            <div class="cc-faq-item">
+                <h3>How do I find the determinant of a 3×3 matrix?</h3>
+                <p>With the Sarrus rule, expansion along a row or Gauss elimination. For [[2,1,3],[0,−1,4],[1,2,1]] the determinant is −11.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the inverse matrix?</h3>
+                <p>By Gauss–Jordan elimination: [A | E] → [E | A⁻¹], or by the formula A⁻¹ = adj A / det A. For [[1,2],[3,4]] it is [[−2, 1], [3/2, −1/2]].</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When does the inverse not exist?</h3>
+                <p>When the determinant is zero (the matrix is singular) or the matrix is not square. Then the rank is less than the size.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the rank of a matrix?</h3>
+                <p>The maximum number of linearly independent rows (columns). It is found by reducing to echelon form: it is the number of non-zero rows.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I solve the matrix equation AX = B?</h3>
+                <p>If A is non-singular, X = A⁻¹B; the calculator performs [A | B] → [E | X]. For singular A the consistency is analysed by Rouché–Capelli.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the transpose of a matrix?</h3>
+                <p>The matrix Aᵀ in which rows and columns are swapped: the element (i, j) becomes the element (j, i).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter fractions and decimals?</h3>
+                <p>Yes: 2, -1.5, 3/4. The numbers are handled exactly, so 1/3 stays a fraction, not 0.333.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I raise a matrix to a power?</h3>
+                <p>Multiply the matrix by itself n times. For a negative n the inverse is taken first. For [[1,1],[1,0]]¹⁰ the result is [[89,55],[55,34]].</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the trace of a matrix?</h3>
+                <p>The sum of the main diagonal elements of a square matrix. It is shown in the «Rank» tab.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is 6×6 enough?</h3>
+                <p>For study problems, yes. For large matrices the intermediate steps are shortened: one state per pivot column.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
