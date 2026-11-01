@@ -91,6 +91,8 @@
     return { k, m: rem === Z ? O : rem };
   }
   function sqrtRat(Qv) { if (qz(Qv)) return { c: R(0), m: O }; const { k, m } = simplifyRadical(Qv.n * Qv.d); return { c: q(k, Qv.d), m }; }
+  const PI_Q = q(314159265358979323846n, 100000000000000000000n);
+  const fromDbl = (d) => { const r = parseNum(Number(d).toPrecision(15)); return r.v || R(0); };
   const VR = (r) => ({ c: r, m: O, apx: false });
   const VA = (r) => ({ c: r, m: O, apx: true });
   const vnum = (v) => (v.m === O ? v.c : qmul(v.c, sqrtApprox(R(v.m))));
@@ -113,6 +115,16 @@
       if (!a.apx && a.m === O) { const t = sqrtRat(a.c); return { c: t.c, m: t.m, apx: false }; }
       return VA(sqrtApprox(vnum(a)));
     },
+    VA: (r) => VA(r),
+    apx: (a) => (a.apx ? a : VA(vnum(a))),
+    pi: () => VA(PI_Q),
+    cbrt(a) {
+      const v = vnum(a), nn = v.n < Z ? -v.n : v.n, ic = (n) => { if (n < 2n) return n; let lo = 0n, hi = 1n; while (hi * hi * hi < n) hi <<= 1n; lo = hi >> 1n; while (lo < hi) { const mid = (lo + hi) >> 1n; if (mid * mid * mid < n) lo = mid + 1n; else hi = mid; } return lo; };
+      if (!a.apx && a.m === O) { const rn = ic(nn), rd = ic(v.d); if (rn * rn * rn === nn && rd * rd * rd === v.d) return VR(q(v.n < Z ? -rn : rn, rd)); }
+      return VA(fromDbl(Math.cbrt(toDbl(v))));
+    },
+    log10(a) { const v0 = vnum(a); if (v0.n > Z) { const p = (s) => /^10*$/.test(s); if (v0.d === O && p(String(v0.n))) return VR(R(String(v0.n).length - 1)); if (v0.n === O && p(String(v0.d))) return VR(R(-(String(v0.d).length - 1))); } const d = toDbl(vnum(a)); if (!(d > 0)) throw new DErr(L("логарифм визначений лише для додатних чисел", "the logarithm is defined only for positive numbers")); return VA(fromDbl(Math.log10(d))); },
+    pow10(a) { const v = vnum(a); if (v.d === O && babs(v.n) <= 300n) { const k = Number(v.n); return VR(k >= 0 ? q(10n ** BigInt(k)) : q(O, 10n ** BigInt(-k))); } return VA(fromDbl(Math.pow(10, toDbl(v)))); },
     cos(deg) { // deg — значення (градуси)
       if (deg.apx || deg.m !== O) { return VA(q(BigInt(Math.round(Math.cos((toDbl(vnum(deg)) * Math.PI) / 180) * 1e30)), 10n ** 30n)); }
       const d = toDbl(deg.c);
@@ -133,13 +145,14 @@
     if (v.m !== O) { const t = c.n < Z ? "−" : ""; return t + radTxt({ n: babs(c.n), d: c.d }, v.m) + (brief ? "" : " ≈ " + decNum(vnum(val), nd)); }
     if (exactDec(c, 12) && Math.abs(toDbl(c)) < 1e12 && Math.abs(toDbl(c)) >= 1e-4 || qz(c)) return decNum(c, 12);
     if (c.d === O) return decNum(c, nd);
-    return (brief ? "≈ " : c.n + "/" + c.d + " ≈ ") + decNum(c, nd);
+    return (brief || String(c.n).length + String(c.d).length > 12 ? "≈ " : c.n + "/" + c.d + " ≈ ") + decNum(c, nd);
   }
   // для підстановки в формулу: коротко
   function vsub(v) {
     if (v.apx) return decNum(vnum(v), 4);
     if (v.m !== O) return (v.c.n < Z ? "−" : "") + radTxt({ n: babs(v.c.n), d: v.c.d }, v.m);
     if (exactDec(v.c, 6)) return decNum(v.c, 6);
+    if (String(v.c.n).length + String(v.c.d).length > 12) return decNum(v.c, 6);
     return v.c.n < Z ? "−" + babs(v.c.n) + "/" + v.c.d : v.c.n + "/" + v.c.d;
   }
   const wrap = (s) => (/^[−-]/.test(s) || /[\/ ]/.test(s) || /√/.test(s) ? "(" + s + ")" : s);
@@ -216,7 +229,8 @@
     if (mode.type === "chain") {
       setOptions(mode.vars.map((v) => [v.id, v.sym + " — " + v.uk, v.sym + " — " + v.en]));
       find = mode.find || mode.vars[0].id; setDd("find", find);
-      body.innerHTML = '<div class="ph__vars">' + mode.vars.map(fieldRow).join("") + "</div>" + (mode.hint ? '<div class="ph__hint ph__mt12">' + esc(L(mode.hint[0], mode.hint[1])) + "</div>" : "");
+      body.innerHTML = '<div class="ph__vars">' + mode.vars.map(fieldRow).join("") + "</div>" + (mode.chips ? '<div class="ph__fnActions" id="chipsRow">' + mode.chips.map((ch, i) => '<button type="button" class="ph__mini" data-i="' + i + '">' + esc(L(ch.uk, ch.en)) + "</button>").join("") + "</div>" : "") + (mode.hint ? '<div class="ph__hint ph__mt12">' + esc(L(mode.hint[0], mode.hint[1])) + "</div>" : "");
+      if (mode.chips) el("chipsRow").addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) applyChip(mode.chips[Number(b.dataset.i)]); });
       mode.vars.forEach((v) => { el("v_" + v.id).addEventListener("input", maybeCalc); el("u_" + v.id).addEventListener("change", maybeCalc); el("v_" + v.id).addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); calc(true); } }); });
       syncFind();
     } else mode.build(body, X, helpers());
@@ -272,7 +286,7 @@
     const siStr = (id) => vstr(res.known[id], null, nd, false) + " " + L(VD[id].si[0], VD[id].si[1]);
     const headVal = showIn(find), siHead = tu.f.n === tu.f.d && tu.f.d === O ? null : siStr(find);
     const rest = mode.vars.filter((v) => v.id !== find && res.known[v.id] && !(v.def !== undefined && qz(res.known[v.id].c) && !si[v.id]));
-    const tiles = rest.slice(0, 6).map((v) => ({ k: v.sym + " — " + L(v.uk, v.en).toLowerCase(), v: showIn(v.id) + (si[v.id] ? "" : "") }));
+    const tiles = rest.slice(0, 8).map((v) => ({ k: v.sym + " — " + L(v.uk, v.en).toLowerCase(), v: showIn(v.id) + (si[v.id] ? "" : "") }));
     steps.push({ t: L("Результат", "The result"), l: mode.vars.filter((v) => res.known[v.id]).map((v) => v.sym + " = " + showIn(v.id) + (siStr(v.id) !== showIn(v.id) && (Number(el("u_" + v.id)?.value) || 0) !== 0 ? "  (= " + siStr(v.id) + ")" : "")) });
     return { ok: true, expr: L(mode.nameUk, mode.nameEn), head: [tv.sym, headVal], headSub: siHead, tiles, steps, resText: tv.sym + " = " + headVal };
   }
@@ -339,6 +353,11 @@
   function clearFields() { if (MODE.type === "chain") MODE.vars.forEach((v) => { el("v_" + v.id).value = ""; el("u_" + v.id).value = "0"; }); else if (MODE.reset) MODE.reset(helpers()); }
   const G0 = () => { const li = document.querySelector("#gg_list li"); return li ? li.dataset.v : "9.8"; };
   function resetAll() { setDd("decs", "4"); setDd("gval", G0()); el("setBox").open = false; setMode(CFG.modes[0].key); render({ ok: false, incomplete: true }, false); last = null; }
+  function applyChip(ch) {
+    clearFields(); setDd("find", ch.find || MODE.find); syncFind();
+    Object.keys(ch.vals).forEach((id) => { const [val, un] = String(ch.vals[id]).split("|"); if (id !== (ch.find || MODE.find)) el("v_" + id).value = val; if (un !== undefined) el("u_" + id).value = un; });
+    syncFind(); calc(true);
+  }
   function fillExample() {
     const ex = MODE.example;
     if (MODE.type === "chain") { clearFields(); setDd("find", ex.find); syncFind(); Object.keys(ex.vals).forEach((id) => { const [val, un] = String(ex.vals[id]).split("|"); if (id !== ex.find) el("v_" + id).value = val; if (un !== undefined) el("u_" + id).value = un; }); syncFind(); }
