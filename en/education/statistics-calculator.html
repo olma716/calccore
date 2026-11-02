@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Statistics Calculator Online — Mean, Median, Std Dev | CalcCore</title>
+    <title>Statistics Calculator Online: Mean and Median | CalcCore</title>
     <meta name="description"
-        content="Calculate key statistics: mean, median, mode, standard deviation, variance, and range of a data set." />
+        content="Statistics calculator: mean, median, mode, quartiles, variance, outliers, correlation, regression and the normal distribution. Steps and charts." />
 
     <link rel="canonical" href="https://calccore.net/en/education/statistics-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/education/statistics-calculator" />
@@ -26,187 +28,427 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Statistics Calculator Online — Mean, Median, Std Dev" />
-    <meta property="og:description" content="Calculate key statistics: mean, median, mode, standard deviation, variance, and range of a data set." />
+    <meta property="og:title" content="Statistics Calculator Online: Mean and Median" />
+    <meta property="og:description" content="Statistics calculator: mean, median, mode, quartiles, variance, outliers, correlation, regression and the normal distribution. Steps and charts." />
     <meta property="og:url" content="https://calccore.net/en/education/statistics-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Statistics Calculator Online — Mean, Median, Std Dev" />
-    <meta name="twitter:description" content="Calculate key statistics: mean, median, mode, standard deviation, variance, and range of a data set." />
+    <meta name="twitter:title" content="Statistics Calculator Online: Mean and Median" />
+    <meta name="twitter:description" content="Statistics calculator: mean, median, mode, quartiles, variance, outliers, correlation, regression and the normal distribution. Steps and charts." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261102st1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/statistics-calculator.js?v=20260911" defer></script>
+    <script src="/js/i18n.js?v=20261102st1" defer></script>
+    <script src="/js/phys-core.js?v=20261102st1" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What's the difference between mean and median?",
-        "acceptedAnswer":{"@type":"Answer","text":"The mean is the sum of all values divided by their count. The median is the middle value in a sorted data set. The median is less sensitive to outliers (unusually large or small values)."}
-      },
-      {
-        "@type":"Question",
-        "name":"What does standard deviation show?",
-        "acceptedAnswer":{"@type":"Answer","text":"Standard deviation shows how spread out values in a data set are relative to the mean. A smaller value means data is tightly clustered around the mean, a larger value means it's widely spread."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can a data set have more than one mode?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, if multiple values occur with the same highest frequency, the set is multimodal. If all values are unique, there's no mode."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/stat.js?v=20261102st1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/education/statistics-calculator#app",
-    "name":"Statistics Calculator",
-    "description":"Calculate key statistics: mean, median, mode, standard deviation.",
-    "url":"https://calccore.net/en/education/statistics-calculator",
-    "applicationCategory":"EducationApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/education/statistics-calculator#app",
+  "name": "Statistics Calculator",
+  "description": "A statistics calculator with step-by-step solutions and charts: descriptive statistics (mean, median, mode, quartiles, IQR, outliers, variance and standard deviation for a sample or a population, coefficient of variation, skewness, kurtosis, histogram and box plot), a frequency table and the weighted mean, Pearson correlation and linear regression with a scatter plot, the z-score and the normal distribution (probabilities, intervals, quantiles). Exact fractions and roots.",
+  "url": "https://calccore.net/en/education/statistics-calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Mean, median, mode, range",
+    "Quartiles by three methods, IQR and outliers",
+    "Variance and deviation: sample or population",
+    "Coefficient of variation, skewness, kurtosis",
+    "Frequency table and the weighted mean",
+    "Pearson correlation and the regression line",
+    "Z-score, probabilities and quantiles of the normal distribution",
+    "Histogram, box plot, scatter plot"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/education/statistics-calculator#webpage",
+      "url": "https://calccore.net/en/education/statistics-calculator",
+      "name": "Statistics Calculator Online: Mean and Median | CalcCore",
+      "description": "Statistics calculator: mean, median, mode, quartiles, variance, outliers, correlation, regression and the normal distribution. Steps and charts.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/education/statistics-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/education/statistics-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-02",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/education/statistics-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Education",
+          "item": "https://calccore.net/en/education"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Statistics calculator",
+          "item": "https://calccore.net/en/education/statistics-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/education/statistics-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the arithmetic mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add all the numbers and divide the sum by their count. For 12, 15, 11.5, 18, 15, 22, 9, 15, 40 it is 157.5 / 9 = 17.5."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the median sometimes better than the mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The median does not depend on outliers: one very large or small value shifts the mean strongly but hardly changes the median."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the mode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most frequent value. If all values are different or equally frequent there is no mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between sample and population variance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The sample variance is divided by n − 1, the population variance by n. For a sample n − 1 gives an unbiased estimate; the calculator has a switch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the standard deviation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The square root of the variance: the typical spread of the values around the mean in the same units."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the quartiles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Q1 and Q3 are the medians of the lower and upper halves of the set (or by the Excel formulas). The method is chosen in the settings because the results differ for small samples."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is an outlier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A value far from the bulk of the data. By Tukey's rule it lies outside Q1 − 1.5·IQR and Q3 + 1.5·IQR."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the coefficient of variation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The standard deviation divided by the mean, in percent; handy for comparing the spread of sets with different units or scale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I use the frequency table?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In each row enter a value and how many times it occurs. The calculator expands the set and computes the mean, median, mode and variance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the correlation coefficient mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The direction and strength of a linear relation: 1 is a perfect positive one, −1 a negative one, 0 no relation. It does not prove that one quantity causes the other."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a z-score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The number of standard deviations between a value and the mean: z = (x − μ) / σ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I separate numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With a space, a comma, a semicolon or a new line. The decimal separator in the English version is a dot (3.5)."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cstats">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Statistics Calculator</h1>
-                    <p class="mcalc__p">
-                        Enter a data set — get all key statistical
-                        measures instantly.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Statistics Calculator</h1>
+                    <p class="ph__p">Enter numbers and the calculator finds the mean, median, mode, quartiles, variance, deviation and outliers, and shows a histogram and a box plot. Separate tabs: frequencies and the weighted mean, correlation with regression, the normal distribution. Every result comes with a step-by-step solution.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter data</h2>
-                        <span class="mcalc__badge">Education</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="numbersInput">Numbers (comma or space separated)</label>
-                            <textarea class="mcalc__input" id="numbersInput" rows="4"
-                                style="height:auto; padding:10px 12px; font-family:inherit;"
-                                placeholder="e.g.: 4, 8, 15, 16, 23, 42"></textarea>
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Education</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Calculate</button>
-                                <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="ph__tabs" role="tablist">
+                            <button type="button" class="ph__tab is-active" data-m="desc" role="tab" aria-selected="true"><b class="ph__tabT">Descriptive statistics</b><span class="ph__ex">12, 15, 11.5, 18, … → x̄ = 17.5</span></button>
+                            <button type="button" class="ph__tab" data-m="freq" role="tab" aria-selected="false"><b class="ph__tabT">Frequencies and weighted mean</b><span class="ph__ex">2 (×3), 3 (×5), 4 (×9) … → x̄ = 4</span></button>
+                            <button type="button" class="ph__tab" data-m="corr" role="tab" aria-selected="false"><b class="ph__tabT">Correlation and regression</b><span class="ph__ex">r ≈ 0.775; y = 2.2 + 0.6x</span></button>
+                            <button type="button" class="ph__tab" data-m="norm" role="tab" aria-selected="false"><b class="ph__tabT">Normal distribution</b><span class="ph__ex">μ = 100, σ = 15, x = 115 → z = 1</span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox">
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Quartile method</span>
+                                <input type="hidden" id="gval" value="half">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">Median of the halves (textbook)</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="half" aria-selected="true">Median of the halves (textbook)</li>
+                                        <li role="option" tabindex="-1" data-v="inc" aria-selected="false">Excel QUARTILE.INC</li>
+                                        <li role="option" tabindex="-1" data-v="exc" aria-selected="false">Excel QUARTILE.EXC</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Quartiles of small samples depend on the method: “median of the halves” is the textbook one, QUARTILE.INC and QUARTILE.EXC follow the Excel functions.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button">Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button">Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button">Copy the result</button>
                         </div>
                     </div>
-
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter numbers to calculate.
-                    </div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/en/education/gpa-calculator">GPA Calculator</a>
-                    <a href="/en/calculator">Scientific Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Key statistical measures</h2>
-            <ul>
-                <li><b>Mean:</b> the sum of all values divided by their count — the most common measure of central
-                    tendency.</li>
-                <li><b>Median:</b> the middle value in a sorted data set. If the count is even, the median is the
-                    average of the two middle numbers.</li>
-                <li><b>Mode:</b> the value (or values) that occur most frequently in the data set.</li>
-                <li><b>Standard deviation:</b> a measure of how spread out the data is relative to the mean.</li>
-                <li><b>Variance:</b> the square of the standard deviation, another measure of data spread.</li>
-                <li><b>Range:</b> the difference between the largest and smallest value in the set.</li>
-            </ul>
-
-            <h2>Why median is sometimes better than mean</h2>
-            <p>
-                The mean is sensitive to extreme values (outliers). For example, in a salary set
-                [30000, 32000, 35000, 500000], the mean will be skewed by one very large value and
-                won't reflect a typical salary. In this case, the median gives a more accurate picture
-                of a "typical" value, since it doesn't depend on how far an outlier is from the rest
-                of the data.
-            </p>
-
-            <h2>How to interpret standard deviation</h2>
-            <p>
-                Standard deviation shows the "typical" distance of values from the mean. A small
-                standard deviation means data is tightly clustered around the mean (low variability).
-                A large standard deviation means a wide spread of values (high variability). This is
-                a key metric in statistics, finance (volatility), and quality control.
-            </p>
-
-            <h2>Practical applications of statistics</h2>
-            <ul>
-                <li><b>Education:</b> analyzing test results, comparing grades across a student group.</li>
-                <li><b>Scientific research:</b> describing a data sample before further statistical analysis.</li>
-                <li><b>Business:</b> sales analysis, evaluating metric stability.</li>
-                <li><b>Sports:</b> analyzing player or team performance over a season.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                This calculator computes sample standard deviation (dividing by n−1), which is the
-                standard when working with a data sample rather than an entire population.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/education/percent-calculator"><b>Percentage Calculator</b><span>Percent of a number, percentage change.</span></a>
+                <a class="cc-related-card" href="/en/education/gpa-calculator"><b>GPA Calculator</b><span>Average by credits and scales.</span></a>
+                <a class="cc-related-card" href="/en/education/fraction-calculator"><b>Fraction Calculator</b><span>Operations with fractions step by step.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the statistics calculator does</h2>
+            <p>The <b>“Descriptive statistics”</b> tab computes the main measures of a set of numbers: mean, median, mode, quartiles, range, variance, standard deviation, standard error, coefficient of variation, skewness, kurtosis and outliers, and draws a histogram and a box plot. <b>“Frequencies and weighted mean”</b> works with a table of values and frequencies or weights. <b>“Correlation and regression”</b> looks for the relation between two series, and <b>“Normal distribution”</b> finds the z-score, probabilities and quantiles.</p>
+
+            <h2>Mean, median and mode</h2>
+            <p>The <b>mean</b> is the sum of the values divided by their number. The <b>median</b> is the middle value of the sorted set (for an even count, the mean of the two middle ones). The <b>mode</b> is the most frequent value. For the set 12, 15, 11.5, 18, 15, 22, 9, 15, 40 the mean is 17.5, the median 15 and the mode 15. One large value (40) pulls the mean strongly but hardly changes the median, so for data with outliers the median is more reliable.</p>
+
+            <h2>Variance and standard deviation</h2>
+            <p>Variance is the mean squared deviation from the mean. For a <b>sample</b> divide by n − 1 (s² = Σ(x − x̄)² / (n − 1)), for a <b>population</b> by n (σ² = Σ(x − x̄)² / n). For the example above Σ(x − x̄)² = 684, so s² = 684 / 8 = 85.5 and s = √85.5 ≈ <b>9.2466</b>. The standard deviation has the same units as the data. The coefficient of variation CV = s / x̄ · 100 % shows the spread relative to the mean.</p>
+
+            <h2>Quartiles and outliers</h2>
+            <p><b>Q1</b> and <b>Q3</b> cut off the lowest and highest quarter of the values, and <b>IQR = Q3 − Q1</b>. Outliers are values outside [Q1 − 1.5·IQR; Q3 + 1.5·IQR]. In the example, by the “median of the halves” method Q1 = 11.75, Q3 = 20, IQR = 8.25, the fences are −0.625 and 32.375, so <b>40 is an outlier</b>. For small samples the result depends on the method: the calculator supports the textbook one (median of the halves), Excel QUARTILE.INC and QUARTILE.EXC; choose it in the settings.</p>
+
+            <h2>Frequencies and the weighted mean</h2>
+            <p>When values repeat it is convenient to give them with frequencies: the mean x̄ = Σ(f·x) / Σf. For the values 2, 3, 4, 5, 6 with frequencies 3, 5, 9, 7, 2 the sum of frequencies is 26, Σ(f·x) = 104 and the mean is <b>4</b>. The weighted mean works the same way, only any weights are used instead of frequencies, for example the credits of subjects or shares in a final grade.</p>
+
+            <h2>Correlation and linear regression</h2>
+            <p>The Pearson correlation coefficient <b>r = Sxy / √(Sxx · Syy)</b> measures a linear relation from −1 to 1; r² is the share of the variability of Y explained by X. The regression line y = a + bx has b = Sxy / Sxx and a = ȳ − b·x̄. For X = 1…5 and Y = 2, 4, 5, 4, 5 you get b = 0.6, a = 2.2, <b>r ≈ 0.7746</b>, r² = 0.6 and the prediction for x = 6 is 5.8. Correlation does not prove causation, and a prediction far outside the data is unreliable.</p>
+
+            <h2>Normal distribution and the z-score</h2>
+            <p>The z-score <b>z = (x − μ) / σ</b> shows by how many standard deviations a value differs from the mean. For μ = 100, σ = 15 and x = 115 we get z = 1 and P(X < 115) ≈ <b>0.8413</b>, P(X > 115) ≈ 0.1587. In a normal distribution about 68 % of the values lie within ±1σ, 95 % within ±2σ and 99.7 % within ±3σ. The inverse task: the 95th percentile has z ≈ 1.6449, that is x ≈ 124.67.</p>
+            <p class="ph-mini">All calculations are exact (fractions and roots are not rounded), decimals are rounded to the chosen number of places. Skewness, kurtosis, the geometric mean and the normal distribution are approximate values.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What's the difference between mean and median?</h3>
-                <p>The mean is the sum of all values divided by their count. The median is the middle value in a sorted
-                    data set. The median is less sensitive to outliers (unusually large or small values).</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the arithmetic mean?</h3>
+                <p>Add all the numbers and divide the sum by their count. For 12, 15, 11.5, 18, 15, 22, 9, 15, 40 it is 157.5 / 9 = 17.5.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What does standard deviation show?</h3>
-                <p>Standard deviation shows how spread out values in a data set are relative to the mean. A smaller
-                    value means data is tightly clustered around the mean, a larger value means it's widely spread.</p>
+            <div class="cc-faq-item">
+                <h3>Why is the median sometimes better than the mean?</h3>
+                <p>The median does not depend on outliers: one very large or small value shifts the mean strongly but hardly changes the median.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can a data set have more than one mode?</h3>
-                <p>Yes, if multiple values occur with the same highest frequency, the set is multimodal. If all values
-                    are unique, there's no mode.</p>
+            <div class="cc-faq-item">
+                <h3>What is the mode?</h3>
+                <p>The most frequent value. If all values are different or equally frequent there is no mode.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the difference between sample and population variance?</h3>
+                <p>The sample variance is divided by n − 1, the population variance by n. For a sample n − 1 gives an unbiased estimate; the calculator has a switch.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the standard deviation?</h3>
+                <p>The square root of the variance: the typical spread of the values around the mean in the same units.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the quartiles?</h3>
+                <p>Q1 and Q3 are the medians of the lower and upper halves of the set (or by the Excel formulas). The method is chosen in the settings because the results differ for small samples.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is an outlier?</h3>
+                <p>A value far from the bulk of the data. By Tukey's rule it lies outside Q1 − 1.5·IQR and Q3 + 1.5·IQR.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the coefficient of variation?</h3>
+                <p>The standard deviation divided by the mean, in percent; handy for comparing the spread of sets with different units or scale.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I use the frequency table?</h3>
+                <p>In each row enter a value and how many times it occurs. The calculator expands the set and computes the mean, median, mode and variance.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does the correlation coefficient mean?</h3>
+                <p>The direction and strength of a linear relation: 1 is a perfect positive one, −1 a negative one, 0 no relation. It does not prove that one quantity causes the other.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is a z-score?</h3>
+                <p>The number of standard deviations between a value and the mean: z = (x − μ) / σ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I separate numbers?</h3>
+                <p>With a space, a comma, a semicolon or a new line. The decimal separator in the English version is a dot (3.5).</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

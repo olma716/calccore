@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Статистичний калькулятор: середнє, медіана, відхилення | CalcCore</title>
+    <title>Статистичний калькулятор онлайн: середнє й медіана | CalcCore</title>
     <meta name="description"
-        content="Розрахунок основних статистичних показників: середнє арифметичне, медіана, мода, стандартне відхилення, дисперсія та діапазон набору чисел." />
+        content="Статистичний калькулятор: середнє, медіана, мода, квартили, дисперсія, викиди, кореляція, регресія й нормальний розподіл. Кроки й графіки." />
 
     <link rel="canonical" href="https://calccore.net/education/statistics-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/education/statistics-calculator" />
@@ -26,189 +28,427 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Статистичний калькулятор: середнє, медіана, відхилення" />
-    <meta property="og:description" content="Розрахунок основних статистичних показників: середнє арифметичне, медіана, мода, стандартне відхилення, дисперсія та діапазон набору чисел." />
+    <meta property="og:title" content="Статистичний калькулятор онлайн: середнє й медіана" />
+    <meta property="og:description" content="Статистичний калькулятор: середнє, медіана, мода, квартили, дисперсія, викиди, кореляція, регресія й нормальний розподіл. Кроки й графіки." />
     <meta property="og:url" content="https://calccore.net/education/statistics-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Статистичний калькулятор: середнє, медіана, відхилення" />
-    <meta name="twitter:description" content="Розрахунок основних статистичних показників: середнє арифметичне, медіана, мода, стандартне відхилення, дисперсія та діапазон набору чисел." />
+    <meta name="twitter:title" content="Статистичний калькулятор онлайн: середнє й медіана" />
+    <meta name="twitter:description" content="Статистичний калькулятор: середнє, медіана, мода, квартили, дисперсія, викиди, кореляція, регресія й нормальний розподіл. Кроки й графіки." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261102st1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/statistics-calculator.js?v=20260911" defer></script>
+    <script src="/js/i18n.js?v=20261102st1" defer></script>
+    <script src="/js/phys-core.js?v=20261102st1" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"У чому різниця між середнім і медіаною?",
-        "acceptedAnswer":{"@type":"Answer","text":"Середнє арифметичне — це сума всіх значень поділена на їх кількість. Медіана — це середнє значення у відсортованому наборі. Медіана менш чутлива до викидів (аномально великих чи малих значень)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що показує стандартне відхилення?",
-        "acceptedAnswer":{"@type":"Answer","text":"Стандартне відхилення показує, наскільки значення в наборі розкидані відносно середнього. Менше значення означає, що дані щільно згруповані навколо середнього, більше — що вони сильно розкидані."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи може набір чисел мати кілька мод?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, якщо кілька значень зустрічаються з однаковою найвищою частотою, набір є мультимодальним. Якщо всі значення унікальні, моди не існує."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/stat.js?v=20261102st1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/education/statistics-calculator#app",
-    "name":"Statistics Calculator",
-    "description":"Розрахунок основних статистичних показників: середнє, медіана, мода, стандартне відхилення.",
-    "url":"https://calccore.net/education/statistics-calculator",
-    "applicationCategory":"EducationApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/education/statistics-calculator#app",
+  "name": "Статистичний калькулятор",
+  "description": "Статистичний калькулятор з розв'язанням по кроках і графіками: описова статистика (середнє, медіана, мода, квартили, IQR, викиди, дисперсія й стандартне відхилення для вибірки чи генеральної сукупності, коефіцієнт варіації, асиметрія, ексцес, гістограма і ящик з вусами), частотна таблиця та зважене середнє, кореляція Пірсона й лінійна регресія з діаграмою розсіювання, z-оцінка та нормальний розподіл (ймовірності, інтервали, квантилі). Точні дроби й корені.",
+  "url": "https://calccore.net/education/statistics-calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Середнє, медіана, мода, розмах",
+    "Квартили трьома методами, IQR і викиди",
+    "Дисперсія й відхилення: вибірка чи генеральна",
+    "Коефіцієнт варіації, асиметрія, ексцес",
+    "Частотна таблиця й зважене середнє",
+    "Кореляція Пірсона й пряма регресії",
+    "Z-оцінка, ймовірності й квантилі нормального розподілу",
+    "Гістограма, ящик з вусами, діаграма розсіювання"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/education/statistics-calculator#webpage",
+      "url": "https://calccore.net/education/statistics-calculator",
+      "name": "Статистичний калькулятор онлайн: середнє й медіана | CalcCore",
+      "description": "Статистичний калькулятор: середнє, медіана, мода, квартили, дисперсія, викиди, кореляція, регресія й нормальний розподіл. Кроки й графіки.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/education/statistics-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/education/statistics-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-02",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/education/statistics-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Освіта",
+          "item": "https://calccore.net/education"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Статистичний калькулятор",
+          "item": "https://calccore.net/education/statistics-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/education/statistics-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати середнє арифметичне?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Додайте всі числа й поділіть суму на їх кількість. Для 12; 15; 11,5; 18; 15; 22; 9; 15; 40 це 157,5 / 9 = 17,5."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим медіана краще за середнє?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Медіана не залежить від викидів: одне дуже велике чи мале значення сильно зсуває середнє, але майже не змінює медіану."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке мода?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Значення, що зустрічається найчастіше. Якщо всі значення різні або однаково часті, моди немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим відрізняється вибіркова дисперсія від генеральної?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вибіркову ділять на n − 1, генеральну на n. Для вибірки n − 1 дає незміщену оцінку; калькулятор має перемикач."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке стандартне відхилення?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Корінь із дисперсії: типовий розкид значень навколо середнього в тих самих одиницях."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як знайти квартилі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Q1 і Q3 — медіани нижньої й верхньої половин набору (або за формулами Excel). Метод обирають у налаштуваннях, бо на малих вибірках результати різняться."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке викид?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Значення, що лежить далеко від основної маси даних. За правилом Тьюкі — поза межами Q1 − 1,5·IQR і Q3 + 1,5·IQR."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке коефіцієнт варіації?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відношення стандартного відхилення до середнього у відсотках; зручно порівнювати розкид наборів із різними одиницями чи масштабом."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як користуватися таблицею частот?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть у кожному рядку значення й скільки разів воно зустрічається. Калькулятор розгорне набір, порахує середнє, медіану, моду й дисперсію."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що означає коефіцієнт кореляції?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Напрямок і силу лінійного зв'язку: 1 — ідеальний прямий, −1 — обернений, 0 — зв'язку немає. Він не доводить, що одна величина спричиняє іншу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке z-оцінка?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Кількість стандартних відхилень між значенням і середнім: z = (x − μ) / σ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розділяти числа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Пробілом, переносом рядка чи крапкою з комою. Кома всередині числа в українській версії — десятковий знак (3,5)."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cstats">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Статистичний калькулятор</h1>
-                    <p class="mcalc__p">
-                        Введи набір чисел — отримай усі основні статистичні
-                        показники миттєво.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Статистичний калькулятор</h1>
+                    <p class="ph__p">Введіть числа — і калькулятор порахує середнє, медіану, моду, квартили, дисперсію, відхилення й викиди, покаже гістограму та ящик з вусами. Окремі вкладки: частоти й зважене середнє, кореляція з регресією, нормальний розподіл. До кожного результату — розв'язання по кроках.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Введи дані</h2>
-                        <span class="mcalc__badge">Education</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="numbersInput">Числа (через кому чи пробіл)</label>
-                            <textarea class="mcalc__input" id="numbersInput" rows="4"
-                                style="height:auto; padding:10px 12px; font-family:inherit;"
-                                placeholder="напр.: 4, 8, 15, 16, 23, 42"></textarea>
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Освіта</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Розрахувати</button>
-                                <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="ph__tabs" role="tablist">
+                            <button type="button" class="ph__tab is-active" data-m="desc" role="tab" aria-selected="true"><b class="ph__tabT">Описова статистика</b><span class="ph__ex">12; 15; 11,5; 18; … → x̄ = 17,5</span></button>
+                            <button type="button" class="ph__tab" data-m="freq" role="tab" aria-selected="false"><b class="ph__tabT">Частоти й зважене середнє</b><span class="ph__ex">2 (×3), 3 (×5), 4 (×9) … → x̄ = 4</span></button>
+                            <button type="button" class="ph__tab" data-m="corr" role="tab" aria-selected="false"><b class="ph__tabT">Кореляція й регресія</b><span class="ph__ex">r ≈ 0,775; y = 2,2 + 0,6x</span></button>
+                            <button type="button" class="ph__tab" data-m="norm" role="tab" aria-selected="false"><b class="ph__tabT">Нормальний розподіл</b><span class="ph__ex">μ = 100, σ = 15, x = 115 → z = 1</span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox">
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Метод квартилів</span>
+                                <input type="hidden" id="gval" value="half">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">Медіани половин (шкільний)</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="half" aria-selected="true">Медіани половин (шкільний)</li>
+                                        <li role="option" tabindex="-1" data-v="inc" aria-selected="false">Excel QUARTILE.INC</li>
+                                        <li role="option" tabindex="-1" data-v="exc" aria-selected="false">Excel QUARTILE.EXC</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Квартили на малих вибірках залежать від методу: «медіани половин» — шкільний, QUARTILE.INC і QUARTILE.EXC — як у функціях Excel.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button">Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button">Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button">Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button">Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button">Копіювати результат</button>
                         </div>
                     </div>
-
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи числа для розрахунку.
-                    </div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/education/gpa-calculator">Калькулятор GPA</a>
-                    <a href="/calculator">Науковий калькулятор</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Основні статистичні показники</h2>
-            <ul>
-                <li><b>Середнє арифметичне:</b> сума всіх значень поділена на їх кількість — найпоширеніший показник
-                    центральної тенденції.</li>
-                <li><b>Медіана:</b> середнє значення у відсортованому наборі даних. Якщо кількість значень парна,
-                    медіана — середнє арифметичне двох центральних чисел.</li>
-                <li><b>Мода:</b> значення (чи значення), які зустрічаються найчастіше в наборі даних.</li>
-                <li><b>Стандартне відхилення:</b> міра розкиду даних відносно середнього значення.</li>
-                <li><b>Дисперсія:</b> квадрат стандартного відхилення, ще одна міра розкиду даних.</li>
-                <li><b>Діапазон (розмах):</b> різниця між найбільшим і найменшим значенням у наборі.</li>
-            </ul>
-
-            <h2>Чому медіана іноді краще за середнє</h2>
-            <p>
-                Середнє арифметичне чутливе до екстремальних значень (викидів). Наприклад, у наборі
-                зарплат [30000, 32000, 35000, 500000] середнє буде спотворене одним дуже великим
-                значенням і не відображатиме типову зарплату. Медіана в такому випадку дає точнішу
-                картину "типового" значення, оскільки не залежить від того, наскільки далеко викид
-                від решти даних.
-            </p>
-
-            <h2>Як інтерпретувати стандартне відхилення</h2>
-            <p>
-                Стандартне відхилення показує "типову" відстань значень від середнього. Невелике
-                стандартне відхилення означає, що дані щільно згруповані навколо середнього (низька
-                варіативність). Велике стандартне відхилення означає широкий розкид значень (висока
-                варіативність). Це ключовий показник у статистиці, фінансах (волатильність) та якісному
-                контролі.
-            </p>
-
-            <h2>Практичне застосування статистики</h2>
-            <ul>
-                <li><b>Навчання:</b> аналіз результатів тестів, порівняння оцінок групи студентів.</li>
-                <li><b>Наукові дослідження:</b> опис вибірки даних перед подальшим статистичним аналізом.</li>
-                <li><b>Бізнес:</b> аналіз продажів, оцінка стабільності показників.</li>
-                <li><b>Спорт:</b> аналіз результативності гравців чи команд протягом сезону.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Цей калькулятор обчислює вибіркове стандартне відхилення (з діленням на n−1), яке є
-                стандартом при роботі з вибіркою даних, а не всією генеральною сукупністю.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/education/percent-calculator"><b>Калькулятор відсотків</b><span>Відсоток від числа, зміна у відсотках.</span></a>
+                <a class="cc-related-card" href="/education/gpa-calculator"><b>Калькулятор GPA</b><span>Середній бал за кредитами й шкалами.</span></a>
+                <a class="cc-related-card" href="/education/fraction-calculator"><b>Калькулятор дробів</b><span>Дії з дробами по кроках.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що вміє статистичний калькулятор</h2>
+            <p>Вкладка <b>«Описова статистика»</b> рахує всі основні показники набору чисел: середнє, медіану, моду, квартили, розмах, дисперсію, стандартне відхилення, стандартну похибку, коефіцієнт варіації, асиметрію, ексцес і викиди, а ще малює гістограму та ящик з вусами. <b>«Частоти й зважене середнє»</b> працює з таблицею значень і частот чи ваг. <b>«Кореляція й регресія»</b> шукає зв'язок між двома рядами, а <b>«Нормальний розподіл»</b> знаходить z-оцінку, ймовірності й квантилі.</p>
+
+            <h2>Середнє, медіана й мода</h2>
+            <p><b>Середнє</b> — сума значень, поділена на їх кількість. <b>Медіана</b> — серединне значення впорядкованого набору (для парної кількості — середнє двох серединних). <b>Мода</b> — значення, яке зустрічається найчастіше. Для набору 12; 15; 11,5; 18; 15; 22; 9; 15; 40 середнє 17,5, медіана 15, мода 15. Одне велике значення (40) сильно тягне середнє, а медіану майже не змінює, тому для даних із викидами медіана надійніша.</p>
+
+            <h2>Дисперсія й стандартне відхилення</h2>
+            <p>Дисперсія — середній квадрат відхилення від середнього. Для <b>вибірки</b> ділять на n − 1 (s² = Σ(x − x̄)² / (n − 1)), для <b>генеральної сукупності</b> — на n (σ² = Σ(x − x̄)² / n). Для прикладу вище Σ(x − x̄)² = 684, тож s² = 684 / 8 = 85,5, а s = √85,5 ≈ <b>9,2466</b>. Стандартне відхилення має ті самі одиниці, що й дані. Коефіцієнт варіації CV = s / x̄ · 100 % показує розкид відносно середнього.</p>
+
+            <h2>Квартили й викиди</h2>
+            <p><b>Q1</b> і <b>Q3</b> відсікають чверть найменших і найбільших значень, <b>IQR = Q3 − Q1</b>. Викидами вважають значення поза межами [Q1 − 1,5·IQR; Q3 + 1,5·IQR]. У прикладі за методом «медіани половин» Q1 = 11,75, Q3 = 20, IQR = 8,25, межі −0,625 і 32,375, тому <b>40 — викид</b>. На малих вибірках результат залежить від методу: калькулятор підтримує шкільний (медіани половин), Excel QUARTILE.INC і QUARTILE.EXC; метод обирають у налаштуваннях.</p>
+
+            <h2>Частоти й зважене середнє</h2>
+            <p>Якщо значення повторюються, їх зручно задавати з частотами: середнє x̄ = Σ(f·x) / Σf. Для значень 2, 3, 4, 5, 6 із частотами 3, 5, 9, 7, 2 сума частот 26, Σ(f·x) = 104, середнє = <b>4</b>. Зважене середнє працює так само, тільки замість частот беруться довільні ваги, наприклад кредити предметів чи частки в підсумковому балі.</p>
+
+            <h2>Кореляція й лінійна регресія</h2>
+            <p>Коефіцієнт кореляції Пірсона <b>r = Sxy / √(Sxx · Syy)</b> вимірює лінійний зв'язок від −1 до 1; r² показує частку мінливості Y, яку пояснює X. Пряма регресії y = a + bx має b = Sxy / Sxx і a = ȳ − b·x̄. Для X = 1…5 і Y = 2, 4, 5, 4, 5 вийде b = 0,6, a = 2,2, <b>r ≈ 0,7746</b>, r² = 0,6, а прогноз для x = 6 — 5,8. Кореляція не доводить причинності, а прогноз далеко за межами даних ненадійний.</p>
+
+            <h2>Нормальний розподіл і z-оцінка</h2>
+            <p>Z-оцінка <b>z = (x − μ) / σ</b> показує, на скільки стандартних відхилень значення відрізняється від середнього. Для μ = 100, σ = 15 і x = 115 маємо z = 1, а P(X < 115) ≈ <b>0,8413</b>, P(X > 115) ≈ 0,1587. У нормальному розподілі близько 68 % значень лежить у межах ±1σ, 95 % — ±2σ і 99,7 % — ±3σ. Зворотне завдання: 95-й процентиль має z ≈ 1,6449, тобто x ≈ 124,67.</p>
+            <p class="ph-mini">Усі обчислення точні (дроби й корені не округлюються), десяткові наближені до обраної кількості знаків. Асиметрія, ексцес, геометричне середнє й нормальний розподіл — наближені значення.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>У чому різниця між середнім і медіаною?</h3>
-                <p>Середнє арифметичне — це сума всіх значень поділена на їх кількість. Медіана — це середнє значення у
-                    відсортованому наборі. Медіана менш чутлива до викидів (аномально великих чи малих значень).</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати середнє арифметичне?</h3>
+                <p>Додайте всі числа й поділіть суму на їх кількість. Для 12; 15; 11,5; 18; 15; 22; 9; 15; 40 це 157,5 / 9 = 17,5.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Що показує стандартне відхилення?</h3>
-                <p>Стандартне відхилення показує, наскільки значення в наборі розкидані відносно середнього. Менше
-                    значення означає, що дані щільно згруповані навколо середнього, більше — що вони сильно розкидані.
-                </p>
+            <div class="cc-faq-item">
+                <h3>Чим медіана краще за середнє?</h3>
+                <p>Медіана не залежить від викидів: одне дуже велике чи мале значення сильно зсуває середнє, але майже не змінює медіану.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи може набір чисел мати кілька мод?</h3>
-                <p>Так, якщо кілька значень зустрічаються з однаковою найвищою частотою, набір є мультимодальним. Якщо
-                    всі значення унікальні, моди не існує.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке мода?</h3>
+                <p>Значення, що зустрічається найчастіше. Якщо всі значення різні або однаково часті, моди немає.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим відрізняється вибіркова дисперсія від генеральної?</h3>
+                <p>Вибіркову ділять на n − 1, генеральну на n. Для вибірки n − 1 дає незміщену оцінку; калькулятор має перемикач.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке стандартне відхилення?</h3>
+                <p>Корінь із дисперсії: типовий розкид значень навколо середнього в тих самих одиницях.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти квартилі?</h3>
+                <p>Q1 і Q3 — медіани нижньої й верхньої половин набору (або за формулами Excel). Метод обирають у налаштуваннях, бо на малих вибірках результати різняться.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке викид?</h3>
+                <p>Значення, що лежить далеко від основної маси даних. За правилом Тьюкі — поза межами Q1 − 1,5·IQR і Q3 + 1,5·IQR.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке коефіцієнт варіації?</h3>
+                <p>Відношення стандартного відхилення до середнього у відсотках; зручно порівнювати розкид наборів із різними одиницями чи масштабом.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як користуватися таблицею частот?</h3>
+                <p>Введіть у кожному рядку значення й скільки разів воно зустрічається. Калькулятор розгорне набір, порахує середнє, медіану, моду й дисперсію.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що означає коефіцієнт кореляції?</h3>
+                <p>Напрямок і силу лінійного зв'язку: 1 — ідеальний прямий, −1 — обернений, 0 — зв'язку немає. Він не доводить, що одна величина спричиняє іншу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке z-оцінка?</h3>
+                <p>Кількість стандартних відхилень між значенням і середнім: z = (x − μ) / σ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як розділяти числа?</h3>
+                <p>Пробілом, переносом рядка чи крапкою з комою. Кома всередині числа в українській версії — десятковий знак (3,5).</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
