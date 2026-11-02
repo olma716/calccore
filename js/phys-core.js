@@ -437,6 +437,21 @@
     document.addEventListener("click", (e) => { if (!e.target.closest(".ph__usel")) closeUnits(null); });
   }
 
+  // Список-таблиця (ph__lst): колонки з шапкою або пари «підпис — значення» (kv); у вузькому блоці рядки стають картками
+  const escL = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const cellL = (c) => (c !== null && typeof c === "object" ? { t: c.h !== undefined ? c.h : escL(c.t), cls: c.cls || "" } : { t: escL(c), cls: "" });
+  window.PhysUI = {
+    list(cols, rows, o = {}) {
+      const kv = !!o.kv, w = o.w || cols.map((_, i) => (i ? "minmax(0, 1fr)" : "minmax(0, 1.5fr)")).join(" ");
+      const head = kv ? "" : '<div class="ph__lstHead">' + cols.map((c) => "<span>" + escL(c) + "</span>").join("") + "</div>";
+      const body = rows.map((r) => {
+        const cells = (r.cells || r).map(cellL), main = r.main ? " is-main" : "";
+        return '<div class="ph__lstRow' + main + '">' + cells.map((c, i) => '<span class="ph__lstC' + (i === 0 ? " is-first" : "") + (c.cls ? " " + c.cls : "") + '"' + (i && !kv ? ' data-l="' + escL(cols[i]) + '"' : "") + ">" + c.t + "</span>").join("") + "</div>";
+      }).join("");
+      return '<div class="ph__lst' + (kv ? " ph__lst--kv" : "") + '" style="--cols:' + w + '">' + head + body + "</div>";
+    }
+  };
+
   window.PhysCalc = {
     start(cfgFn) {
       CFG = cfgFn({ L, u, X, UN, parseF, DErr });

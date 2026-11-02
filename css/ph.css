@@ -2788,3 +2788,67 @@
 .ph .ph__uselList li:hover, .ph .ph__uselList li:focus { background: #eaf1fc; outline: none; }
 .ph .ph__uselList li[aria-selected="true"] { background: #dfeafb; color: #1f2f55; font-weight: 800; }
 .ph .ph__uselList li[aria-selected="true"]::after { content: ""; flex: 0 0 auto; width: 5px; height: 10px; margin: 0 2px 3px 0; border-right: 2px solid #283b69; border-bottom: 2px solid #283b69; transform: rotate(45deg); }
+/* текстові й хронологічні калькулятори */
+.ph textarea.ph__out { background: #f6f8fd; font-weight: 600; min-height: 120px; }
+.ph__togGrp { margin-top: 14px; }
+.ph__togTitle { margin-bottom: 6px; color: #5b6b8c; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.ph__togs { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+.ph__tog { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border: 1.5px solid #cfd9ee; border-radius: 12px; background: #fff; color: #1f2f55; font: inherit; font-size: 13px; font-weight: 700; line-height: 1.25; text-align: left; cursor: pointer; transition: background .15s, border-color .15s, box-shadow .15s; }
+.ph__tog:hover { border-color: #8fa8dd; background: #f3f7ff; }
+.ph__tog:focus-visible { outline: 2px solid #4b7bdc; outline-offset: 2px; }
+.ph__togBox { position: relative; flex: 0 0 20px; width: 20px; height: 20px; border: 2px solid #9fb1d6; border-radius: 6px; background: #fff; transition: background .15s, border-color .15s; }
+.ph__tog[aria-pressed="true"] { border-color: #3d63c9; background: #e4edff; box-shadow: 0 1px 3px rgba(40, 59, 105, .15); }
+.ph__tog[aria-pressed="true"] .ph__togBox { border-color: #283b69; background: #283b69; }
+.ph__tog[aria-pressed="true"] .ph__togBox::after { content: ""; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.ph .ph__tbl--txt th, .ph .ph__tbl--txt td { white-space: normal; overflow-wrap: anywhere; vertical-align: top; }
+.ph .ph__tbl--txt td { text-align: left; }
+/* свята за юліанським календарем */
+.ph__fsts { container: fsts / inline-size; margin-top: 8px; border: 1px solid #dfe5f2; border-radius: 14px; background: #fff; overflow: hidden; }
+.ph__fstHead, .ph__fst { display: grid; grid-template-columns: minmax(0, 1fr) 104px 128px 96px; gap: 10px; align-items: center; padding: 10px 14px; }
+.ph__fstHead { background: #283b69; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .03em; }
+.ph__fst { border-top: 1px solid #e8edf7; font-size: 13px; color: #1f2f55; }
+.ph__fst:nth-child(even) { background: #f6f8fd; }
+.ph__fst.is-main { background: #e4edff; box-shadow: inset 4px 0 0 #283b69; }
+.ph__fstN { font-weight: 700; line-height: 1.3; }
+.ph__fstJ { color: #5b6b8c; font-variant-numeric: tabular-nums; }
+.ph__fstG b { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #dfeafb; color: #1d3a8a; font-weight: 800; white-space: nowrap; }
+.ph__fst.is-main .ph__fstG b { background: #283b69; color: #fff; }
+.ph__fstW { color: #5b6b8c; }
+@container fsts (max-width: 560px) {
+  .ph__fstHead { display: none; }
+  .ph__fst { grid-template-columns: 1fr auto; grid-template-areas: "n g" "j w"; gap: 4px 10px; padding: 10px 12px; }
+  .ph__fstN { grid-area: n; }
+  .ph__fstJ { grid-area: j; }
+  .ph__fstJ::before { content: attr(data-l) ": "; color: #8a97b4; font-size: 11px; }
+  .ph__fstG { grid-area: g; justify-self: end; align-self: start; }
+  .ph__fstW { grid-area: w; justify-self: end; font-size: 12px; }
+}
+/* список-таблиця (PhysUI.list) */
+.ph__lst { container: lst / inline-size; margin-top: 8px; border: 1px solid #dfe5f2; border-radius: 14px; background: #fff; overflow: hidden; }
+.ph__lstHead, .ph__lstRow { display: grid; grid-template-columns: var(--cols); gap: 10px; align-items: center; padding: 10px 14px; }
+.ph__lstHead { background: #283b69; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .03em; }
+.ph__lstRow { border-top: 1px solid #e8edf7; font-size: 13px; color: #1f2f55; }
+.ph__lst > .ph__lstRow:first-child, .ph__lstHead + .ph__lstRow { border-top: 0; }
+.ph__lstHead ~ .ph__lstRow:nth-child(odd), .ph__lst--kv .ph__lstRow:nth-child(even) { background: #f6f8fd; }
+.ph__lstRow.is-main { background: #e4edff !important; box-shadow: inset 4px 0 0 #283b69; }
+.ph__lstC { min-width: 0; overflow-wrap: anywhere; }
+.ph__lstC.is-first { font-weight: 700; line-height: 1.3; }
+.ph__lstC.muted { color: #5b6b8c; }
+.ph__lstC.chip { justify-self: start; padding: 4px 10px; border-radius: 999px; background: #dfeafb; color: #1d3a8a; font-weight: 800; white-space: nowrap; overflow-wrap: normal; }
+.ph__lstC.chip.ok { background: #d9f3e3; color: #12683a; }
+.ph__lstC.chip.bad { background: #fde3e3; color: #a12626; }
+.ph__lstC.strong { font-weight: 800; }
+.ph__lst--kv .ph__lstRow { grid-template-columns: minmax(0, 1fr) auto; }
+.ph__lst--kv .ph__lstC.is-first { color: #5b6b8c; font-weight: 700; }
+.ph__lst--kv .ph__lstC:nth-child(2) { justify-self: end; text-align: right; font-weight: 800; }
+.ph__bar { display: inline-block; height: 8px; margin-right: 6px; border-radius: 4px; background: #6f8fd6; vertical-align: middle; }
+.ph__lstTitle { margin: 14px 0 0; color: #5b6b8c; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+@container lst (max-width: 560px) {
+  .ph__lstHead { display: none; }
+  .ph__lst:not(.ph__lst--kv) .ph__lstRow { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 10px 12px; }
+  .ph__lst:not(.ph__lst--kv) .ph__lstC.is-first { flex: 1 0 100%; }
+  .ph__lst:not(.ph__lst--kv) .ph__lstC:not(.is-first)::before { content: attr(data-l) ": "; color: #8a97b4; font-size: 11px; font-weight: 700; }
+  .ph__lst:not(.ph__lst--kv) .ph__lstC.chip:not(.is-first)::before { color: inherit; opacity: .7; }
+}
+.ph__pre { padding: 10px 12px; border-radius: 12px; background: #f6f8fd; color: #1f2f55; }
+.ph__chips { display: flex; flex-wrap: wrap; gap: 8px; }
