@@ -44,7 +44,7 @@
   const ROMAN = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
   const toRoman = (n) => { let s = ""; for (const [v, r] of ROMAN) while (n >= v) { s += r; n -= v; } return s; };
   function fromRoman(str) {
-    const s = String(str).trim().toUpperCase().replace(/Х/g, "X").replace(/І/g, "I").replace(/С/g, "C").replace(/М/g, "M").replace(/Д/g, "D").replace(/Л/g, "L").replace(/В/g, "V");
+    const s = String(str).trim().toUpperCase().replace(/Х/g, "X").replace(/І/g, "I").replace(/С/g, "C").replace(/М/g, "M");
     if (!/^[IVXLCDM]+$/.test(s)) return null;
     const val = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }; let n = 0;
     for (let i = 0; i < s.length; i++) { const v = val[s[i]], nx = val[s[i + 1]] || 0; n += v < nx ? -v : v; }

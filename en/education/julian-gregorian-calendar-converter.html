@@ -17,7 +17,7 @@
 
     <title>Julian and Gregorian Calendar Converter | CalcCore</title>
     <meta name="description"
-        content="Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, fixed feasts by the Julian calendar." />
+        content="Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, BC dates." />
 
     <link rel="canonical" href="https://calccore.net/en/education/julian-gregorian-calendar-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/education/julian-gregorian-calendar-converter" />
@@ -29,7 +29,7 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
     <meta property="og:title" content="Julian and Gregorian Calendar Converter" />
-    <meta property="og:description" content="Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, fixed feasts by the Julian calendar." />
+    <meta property="og:description" content="Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, BC dates." />
     <meta property="og:url" content="https://calccore.net/en/education/julian-gregorian-calendar-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
@@ -37,16 +37,16 @@
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Julian and Gregorian Calendar Converter" />
-    <meta name="twitter:description" content="Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, fixed feasts by the Julian calendar." />
+    <meta name="twitter:description" content="Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, BC dates." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/ph.css?v=20261103tx19" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261103tx22" />
 
-    <script src="/js/i18n.js?v=20261103tx19" defer></script>
-    <script src="/js/phys-core.js?v=20261103tx19" defer></script>
-    <script src="/js/chr-data.js?v=20261103tx19" defer></script>
-    <script src="/js/chr-cal.js?v=20261103tx19" defer></script>
+    <script src="/js/i18n.js?v=20261103tx22" defer></script>
+    <script src="/js/phys-core.js?v=20261103tx22" defer></script>
+    <script src="/js/chr-data.js?v=20261103tx22" defer></script>
+    <script src="/js/chr-cal.js?v=20261103tx22" defer></script>
 
     <script type="application/ld+json">
 {
@@ -57,7 +57,7 @@
   ],
   "@id": "https://calccore.net/en/education/julian-gregorian-calendar-converter#app",
   "name": "Julian and Gregorian Calendar Converter",
-  "description": "An online date converter between the Julian (old style) and Gregorian (new style) calendars: both directions, weekday, Julian day number JDN and the Gregorian dates of the fixed feasts of the Julian calendar for any year.",
+  "description": "An online date converter between the Julian (old style) and Gregorian (new style) calendars: both directions, weekday, Julian day number JDN, the gap between the calendars and BC dates.",
   "url": "https://calccore.net/en/education/julian-gregorian-calendar-converter",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Any",
@@ -77,7 +77,6 @@
   "featureList": [
     "Julian ↔ Gregorian both ways",
     "Weekday and Julian day number (JDN)",
-    "Fixed feasts of the Julian calendar",
     "BC dates and dates before 1582",
     "Proleptic calendars with explanations"
   ]
@@ -92,7 +91,7 @@
       "@id": "https://calccore.net/en/education/julian-gregorian-calendar-converter#webpage",
       "url": "https://calccore.net/en/education/julian-gregorian-calendar-converter",
       "name": "Julian and Gregorian Calendar Converter | CalcCore",
-      "description": "Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, fixed feasts by the Julian calendar.",
+      "description": "Convert dates between the Julian and Gregorian calendars: old and new style, weekday, the 13-day gap, BC dates.",
       "isPartOf": {
         "@id": "https://calccore.net/#website"
       },
@@ -232,7 +231,7 @@
           "name": "Does the calculator include the Revised Julian calendar?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, it works with the two main calendars. The Revised Julian coincides with the Gregorian until 2800, so no separate calculation is needed for modern dates."
+            "text": "Not separately: the converter works with the Julian and Gregorian calendars. The Revised Julian coincides with the Gregorian until 2800, so for modern dates its dates are the same as the Gregorian ones (Christmas by it is 25 December)."
           }
         }
       ]
@@ -249,7 +248,7 @@
 
                 <div class="ph__titlebar">
                     <h1 class="ph__h1">Julian and Gregorian Calendar Converter</h1>
-                    <p class="ph__p">Enter a date in the old or new style and the calculator shows it in the other calendar together with the weekday and the gap between the calendars. A separate tab shows the fixed feasts of the Julian calendar.</p>
+                    <p class="ph__p">Enter a date in the old or new style and the calculator shows it in the other calendar together with the weekday and the gap between the calendars.</p>
                 </div>
 
                 <div class="ph__grid">
@@ -267,9 +266,8 @@
                             <span class="ph__badge">Education</span>
                         </div>
 
-                        <div class="ph__tabs" role="tablist">
+                        <div class="ph__tabs" role="tablist" hidden>
                             <button type="button" class="ph__tab is-active" data-m="conv" role="tab" aria-selected="true"><b class="ph__tabT">Date converter</b><span class="ph__ex">25.12.2025 (Jul.) → 7 January 2026</span></button>
-                            <button type="button" class="ph__tab" data-m="feasts" role="tab" aria-selected="false"><b class="ph__tabT">Julian-calendar feasts</b><span class="ph__ex">2026 → Christmas 7 January, Pokrova 14 October</span></button>
                         </div>
 
                         <div>
@@ -368,13 +366,13 @@
             <p>The calculator first converts your date to the <b>Julian day number (JDN)</b> — a continuous day count shared by both calendars — and then restores the date in the other calendar. This avoids accumulating errors at century boundaries. 25 December 2025 in the Julian calendar becomes 7 January 2026, a Wednesday; 1 March 1900 in the old style is 14 March in the new one; and 29 February 1900 (a day that does not exist in the Gregorian calendar but does in the Julian) is 13 March.</p>
 
             <h2>Fixed feasts of the Julian calendar</h2>
-            <p>Orthodox feasts with a fixed date — Christmas (25 Dec), Epiphany (6 Jan), Presentation (2 Feb), Annunciation (25 Mar), John the Baptist (24 Jun), Peter and Paul (29 Jun), Transfiguration (6 Aug), Dormition (15 Aug), Pokrova (1 Oct), Entry into the Temple (4 Dec), Saint Nicholas (6 Dec) — stay on the same Julian dates. On the Gregorian calendar in 2026 they fall on 7 Jan, 19 Jan, 15 Feb, 7 Apr, 7 Jul, 12 Jul, 19 Aug, 28 Aug, 14 Oct, 17 Dec and 19 Dec. The “Julian-calendar feasts” tab shows these dates for any year.</p>
+            <p>Orthodox feasts with a fixed date — Christmas (25 Dec), Epiphany (6 Jan), Presentation (2 Feb), Annunciation (25 Mar), John the Baptist (24 Jun), Peter and Paul (29 Jun), Transfiguration (6 Aug), Dormition (15 Aug), Pokrova (1 Oct), Entry into the Temple (4 Dec), Saint Nicholas (6 Dec) — stay on the same Julian dates. On the Gregorian calendar in 2026 they fall on 7 Jan, 19 Jan, 15 Feb, 7 Apr, 7 Jul, 12 Jul, 19 Aug, 28 Aug, 14 Oct, 17 Dec and 19 Dec. To find the Gregorian date of any feast in any year, enter its Julian date in the converter. Since 2023 the OCU and some parishes celebrate the fixed feasts by the Revised Julian calendar: its dates coincide with the Gregorian ones, so Christmas is on 25 December.</p>
 
             <h2>When countries switched</h2>
-            <p>Countries moved to the Gregorian calendar at different times: Catholic Europe in 1582, Great Britain and its colonies in 1752 (2 September was followed by 14 September), the territory of the former Russian Empire in early 1918 and Greece in 1923. That is why historical dates often have a double form “O.S. / N.S.”, for example the October Revolution — 25 October Old Style and 7 November New Style. On the converter tab you can enter a date in either calendar and see its counterpart at once.</p>
+            <p>Countries moved to the Gregorian calendar at different times: Catholic Europe in 1582, Great Britain and its colonies in 1752 (2 September was followed by 14 September), the territory of the former Russian Empire in early 1918 and Greece in 1923. That is why historical dates often have a double form “O.S. / N.S.”, for example the October Revolution — 25 October Old Style and 7 November New Style. In the converter you can enter a date in either calendar and see its counterpart at once.</p>
 
             <h2>Special cases: BC and before 1582</h2>
-            <p>For dates before 15 October 1582 the Gregorian calendar is proleptic — extended backwards by the modern rules although it was not in use then. Years BC are entered with the separate “Era” field: there is no year zero, so 1 BC is followed directly by AD 1. Internally the calculator uses astronomical numbering where 1 BC is year 0. The Revised Julian calendar, used by some churches for the fixed feasts, coincides with the Gregorian one until 2800, so there is no separate tab for it.</p>
+            <p>For dates before 15 October 1582 the Gregorian calendar is proleptic — extended backwards by the modern rules although it was not in use then. Years BC are entered with the separate “Era” field: there is no year zero, so 1 BC is followed directly by AD 1. Internally the calculator uses astronomical numbering where 1 BC is year 0. The Revised Julian calendar, used by some churches for the fixed feasts, coincides with the Gregorian one until 2800, so the feasts fall on the same dates as in the Gregorian calendar. Not all churches and parishes have switched, so check the dates against the calendar of your community.</p>
             <p class="ph-mini">For dates before 15 October 1582 the Gregorian calendar is proleptic (extended backwards by the modern rules). Real switches to the new style happened at different times in different countries.</p>
         </section>
 
@@ -438,7 +436,7 @@
 
             <div class="cc-faq-item">
                 <h3>Does the calculator include the Revised Julian calendar?</h3>
-                <p>No, it works with the two main calendars. The Revised Julian coincides with the Gregorian until 2800, so no separate calculation is needed for modern dates.</p>
+                <p>Not separately: the converter works with the Julian and Gregorian calendars. The Revised Julian coincides with the Gregorian until 2800, so for modern dates its dates are the same as the Gregorian ones (Christmas by it is 25 December).</p>
             </div>
         </section>
     </main>

@@ -9,22 +9,6 @@ PhysCalc.start(({ L }) => {
   const fmt = (d) => { const a = C.fromAstro(d.y); return d.d + " " + MN[d.m - 1] + " " + a.y + (a.bc ? L(" до н. е.", " BC") : ""); };
   const grp = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   const intOf = (s) => (/^\d{1,4}$/.test(String(s).trim()) ? Number(String(s).trim()) : null);
-  const FEASTS = [
-    [1, 1, L("Старий Новий рік (Новий рік за юліанським календарем)", "Old New Year (New Year by the Julian calendar)")],
-    [1, 6, L("Богоявлення (Хрещення Господнє)", "Epiphany (Theophany)")],
-    [2, 2, L("Стрітення Господнє", "Presentation of the Lord")],
-    [3, 25, L("Благовіщення", "Annunciation")],
-    [6, 24, L("Різдво Івана Хрестителя (Івана Купала)", "Nativity of John the Baptist")],
-    [6, 29, L("Петра і Павла", "Saints Peter and Paul")],
-    [8, 6, L("Преображення Господнє (Яблучний Спас)", "Transfiguration")],
-    [8, 15, L("Успіння Пресвятої Богородиці", "Dormition of the Theotokos")],
-    [9, 8, L("Різдво Пресвятої Богородиці", "Nativity of the Theotokos")],
-    [9, 14, L("Воздвиження Хреста Господнього", "Exaltation of the Cross")],
-    [10, 1, L("Покрова Пресвятої Богородиці", "Protection of the Theotokos")],
-    [12, 4, L("Введення в храм Пресвятої Богородиці", "Entry of the Theotokos into the Temple")],
-    [12, 6, L("Миколая Чудотворця", "Saint Nicholas")],
-    [12, 25, L("Різдво Христове", "Nativity of Christ (Christmas)")]
-  ];
 
   function readDate(el) {
     const d = intOf(el("cvD").value), y = intOf(el("cvY").value), m = Number(el("cvM").value), bc = el("cvE").value === "1";
@@ -64,43 +48,5 @@ PhysCalc.start(({ L }) => {
     apply(qs, h) { const { el } = h; if (qs.has("c") && ["j", "g"].includes(qs.get("c"))) el("cvC").value = qs.get("c"); if (qs.has("d")) el("cvD").value = qs.get("d").slice(0, 2); if (qs.has("mo") && Number(qs.get("mo")) >= 1 && Number(qs.get("mo")) <= 12) el("cvM").value = qs.get("mo"); if (qs.has("y")) el("cvY").value = qs.get("y").slice(0, 4); if (qs.has("e") && ["0", "1"].includes(qs.get("e"))) el("cvE").value = qs.get("e"); }
   };
 
-  // ----- нерухомі свята за юліанським календарем -----
-  const feasts = {
-    key: "feasts", type: "custom", nameUk: "Свята за юліанським", nameEn: "Julian-calendar feasts",
-    build(body, x, h) {
-      const { el, maybeCalc } = h;
-      body.innerHTML = '<div class="ph__vars"><div class="ph__var"><label class="ph__label" for="fsY">' + L("Рік (за григоріанським календарем)", "Year (Gregorian)") + '</label><input class="ph__input" id="fsY" type="text" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="2026" aria-label="' + L("Рік", "Year") + '"></div></div><div class="ph__chips ph__mt12" id="fsChips"><button type="button" class="ph__mini" data-y="2026">2026</button><button type="button" class="ph__mini" data-y="2100">2100</button><button type="button" class="ph__mini" data-y="1900">1900</button></div><div class="ph__hint ph__mt12">' + L("Нерухомі свята залишаються на тих самих числах юліанського календаря, а за григоріанським зсуваються: нині на 13 днів, а з 1 березня 2100 р. — на 14.", "Fixed feasts stay on the same Julian dates, while on the Gregorian calendar they shift: by 13 days now and by 14 from 1 March 2100.") + "</div>";
-      el("fsY").addEventListener("input", maybeCalc);
-      el("fsChips").addEventListener("click", (e) => { const b = e.target.closest("button[data-y]"); if (!b) return; el("fsY").value = b.dataset.y; h.calc(true); });
-    },
-    calc(h) {
-      const { el, esc } = h, s = el("fsY").value.trim();
-      if (!s) return { ok: false, incomplete: true };
-      const y = intOf(s);
-      if (y === null || y < 1 || y > 9999) return { ok: false, msg: L("Введіть рік від 1 до 9999.", "Enter a year from 1 to 9999.") };
-      // для кожного свята знаходимо його юліанську дату в юліанському році, чия григоріанська дата потрапляє в рік y
-      const rows = [];
-      FEASTS.forEach(([m, d, name]) => {
-        for (const jy of [y - 1, y, y + 1]) {
-          if (!C.validDate("j", jy, m, d)) continue;
-          const g = C.fromJdn("g", C.jdn("j", jy, m, d));
-          if (g.y === y) { rows.push({ name, m, d, jy, g, J: C.jdn("g", g.y, g.m, g.d) }); break; }
-        }
-      });
-      rows.sort((a, b) => a.J - b.J);
-      const lab = [L("Свято", "Feast"), L("Юліанська дата", "Julian date"), L("Григоріанська дата", "Gregorian date"), L("День тижня", "Weekday")];
-      const trs = rows.map((r) => { const xm = r.m === 12 && r.d === 25; return '<div class="ph__fst' + (xm ? " is-main" : "") + '"><span class="ph__fstN">' + esc(r.name) + '</span><span class="ph__fstJ" data-l="' + esc(lab[1]) + '">' + r.d + " " + MN[r.m - 1] + '</span><span class="ph__fstG" data-l="' + esc(lab[2]) + '"><b>' + r.g.d + " " + MN[r.g.m - 1] + '</b></span><span class="ph__fstW" data-l="' + esc(lab[3]) + '">' + esc(DN[C.weekday(r.J)]) + "</span></div>"; }).join("");
-      const table = '<div class="ph__fsts" role="table"><div class="ph__fstHead" role="row"><span>' + lab[0] + "</span><span>" + lab[1] + "</span><span>" + lab[2] + "</span><span>" + lab[3] + "</span></div>" + trs + "</div>";
-      const xm = rows.find((r) => r.m === 12 && r.d === 25), gap = xm ? C.jdn("j", xm.jy, 12, 25) - C.jdn("g", xm.jy, 12, 25) : 13;
-      const head = xm ? [L("Різдво у " + y + " р.", "Christmas in " + y), xm.g.d + " " + MN[xm.g.m - 1]] : [L("свят", "feasts"), String(rows.length)];
-      const steps = [{ t: L("Беремо юліанські дати свят", "Taking the Julian dates of the feasts"), l: [L("Наприклад, Різдво — 25 грудня за юліанським календарем.", "For example, Christmas is 25 December in the Julian calendar.")] }, { t: L("Переводимо їх у григоріанський календар", "Converting them to the Gregorian calendar"), l: [L("Різниця календарів у " + y + " р.: ", "Calendar gap in " + y + ": ") + gap + L(" дн. (для дат після 1 березня; до цієї дати — на день менше).", " days (for dates after 1 March; one day less before it).")], note: L("Різниця зростає на добу на межі століть, що не діляться на 400, — у 1700, 1800, 1900, 2100, 2200…", "The gap grows by a day at century boundaries not divisible by 400 — 1700, 1800, 1900, 2100, 2200…") }];
-      return { ok: true, expr: L("Нерухомі свята у ", "Fixed feasts in ") + y, head, headSub: L("свят у таблиці: ", "feasts in the table: ") + rows.length, subRaw: true, tiles: [{ k: L("Різниця календарів", "Calendar gap"), v: gap + L(" дн.", " days") }, { k: L("Свят у таблиці", "Feasts in the table"), v: String(rows.length) }], extraHtml: table, steps, resText: rows.map((r) => r.name + " — " + r.d + " " + MN[r.m - 1] + " → " + r.g.d + " " + MN[r.g.m - 1]).join("; ") };
-    },
-    reset(h) { h.el("fsY").value = ""; },
-    fill(h) { h.el("fsY").value = "2026"; },
-    share(p, h) { if (h.el("fsY").value.trim()) p.set("y", h.el("fsY").value.trim()); },
-    apply(qs, h) { if (qs.has("y")) h.el("fsY").value = qs.get("y").slice(0, 4); }
-  };
-
-  return { modes: [conv, feasts] };
+  return { modes: [conv] };
 });
