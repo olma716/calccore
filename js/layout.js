@@ -318,3 +318,46 @@ document.dispatchEvent(new CustomEvent('headerReady'));
   if (ukLink) ukLink.classList.toggle("is-active", !isEn);
   if (enLink) enLink.classList.toggle("is-active", isEn);
 });
+/* ================= аналітика: події калькуляторів на сторінках без спільного рушія =================
+   Спільний рушій (phys-core.js) шле власні події, тут вони не дублюються. Надсилаються лише назви дій,
+   сторінка, мова й підпис вкладки — без введених значень. Рахуються тільки справжні дії користувача. */
+(() => {
+  const PAGE = location.pathname.replace(/\/+$/, "").split("/").pop() || "home";
+  let started = false;
+  const send = (name, extra) => {
+    try { if (typeof window.gtag === "function") window.gtag("event", name, Object.assign({ calc: PAGE, lang: document.documentElement.lang || "" }, extra)); } catch (e) { /* без аналітики */ }
+  };
+  // [id кнопки, початок тексту кнопки, подія]
+  const KINDS = [
+    [/^(exampleBtn|btnExample)$/i, /^(приклад|example)/i, "calc_example"],
+    [/^(resetBtn|btnReset)$/i, /^(скинути|очистити|reset|clear)/i, "calc_reset"],
+    [/^(shareBtn|btnShare)$/i, /^(поділитись|поділитися|share)/i, "calc_share"],
+    [/^(copyBtn|btnCopy|btnCopyPassword)$/i, /^(копіювати результат|copy result)/i, "calc_copy"],
+    [/^copyTbl$/i, /^(копіювати таблицю|copy table)/i, "calc_copy_table"],
+    [/^csvBtn$/i, /^(завантажити csv|download csv)/i, "calc_csv"],
+    [/^(calcBtn|btnCalc|calculate|btnToDate|btnToTs|btnGenerate|btnConvert)$/i, /^(розрахувати|обчислити|конвертувати|згенерувати|calculate|compute|convert|generate)/i, "calc_calculate"],
+    [/^btnDownload$/i, /^(завантажити|download)/i, "calc_download"]
+  ];
+  const kindOf = (b) => {
+    const id = b.id || "", tx = (b.value || b.textContent || "").replace(/\s+/g, " ").trim();
+    const k = KINDS.find(([ri, rt]) => (id && ri.test(id)) || rt.test(tx));
+    return k ? k[2] : "";
+  };
+  const inMain = (t) => !!(t && t.closest && t.closest("main"));
+  const start = () => { if (!started) { started = true; send("calc_start"); } };
+  document.addEventListener("click", (e) => {
+    if (!e.isTrusted || window.PhysCalc || !inMain(e.target)) return;
+    const tab = e.target.closest('[role="tab"]');
+    if (tab) { send("calc_tab", { mode: String(tab.dataset.m || tab.id || tab.textContent || "").replace(/\s+/g, " ").trim().slice(0, 30) }); return; }
+    const b = e.target.closest('button, input[type="button"], input[type="submit"]');
+    if (!b) return;
+    const kind = kindOf(b);
+    if (!kind) return;
+    if (kind === "calc_example" || kind === "calc_calculate") start();
+    send(kind);
+  }, true);
+  ["input", "change"].forEach((t) => document.addEventListener(t, (e) => {
+    if (!e.isTrusted || window.PhysCalc || !inMain(e.target) || !/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+    start();
+  }, true));
+})();
