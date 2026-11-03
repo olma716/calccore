@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>DOTS Score Calculator Online — Powerlifting | CalcCore</title>
+    <title>DOTS Calculator Online: Powerlifting Score and IPF GL | CalcCore</title>
     <meta name="description"
-        content="Calculate your DOTS score for powerlifting — compare relative strength between athletes of different body weights. Official IPF formula since 2020." />
+        content="DOTS calculator for powerlifting: points from total and body weight, IPF GL Points, the total needed for a goal and a table of totals by body weight, kg and lb." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/dots-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/dots-calculator" />
@@ -26,241 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="DOTS Score Calculator Online — Powerlifting" />
-    <meta property="og:description" content="Calculate your DOTS score for powerlifting — compare relative strength between athletes of different body weights. Official IPF formula since 2020." />
+    <meta property="og:title" content="DOTS Calculator Online: Powerlifting Score and IPF GL" />
+    <meta property="og:description" content="DOTS calculator for powerlifting: points from total and body weight, IPF GL Points, the total needed for a goal and a table of totals by body weight, kg and lb." />
     <meta property="og:url" content="https://calccore.net/en/sport/dots-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DOTS Score Calculator Online — Powerlifting" />
-    <meta name="twitter:description" content="Calculate your DOTS score for powerlifting — compare relative strength between athletes of different body weights. Official IPF formula since 2020." />
+    <meta name="twitter:title" content="DOTS Calculator Online: Powerlifting Score and IPF GL" />
+    <meta name="twitter:description" content="DOTS calculator for powerlifting: points from total and body weight, IPF GL Points, the total needed for a goal and a table of totals by body weight, kg and lb." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104rq1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/dots-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is DOTS?",
-        "acceptedAnswer":{"@type":"Answer","text":"DOTS is a formula for comparing the relative strength of powerlifters of different body weights. It replaced the Wilks formula as the official IPF standard in 2020."}
-      },
-      {
-        "@type":"Question",
-        "name":"How is DOTS different from Wilks?",
-        "acceptedAnswer":{"@type":"Answer","text":"DOTS more accurately accounts for modern strength data across different bodyweight categories and is considered fairer than the older Wilks formula."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is a good DOTS score?",
-        "acceptedAnswer":{"@type":"Answer","text":"Roughly: 250+ is beginner, 300+ is intermediate, 400+ is advanced, 500+ is elite, 600+ is world class."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104rq1" defer></script>
+    <script src="/js/phys-core.js?v=20261104rq1" defer></script>
+    <script src="/js/dt-data.js?v=20261104rq1" defer></script>
+    <script src="/js/dt-calc.js?v=20261104rq1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/dots-calculator#app",
-    "name":"DOTS Score Calculator",
-    "description":"Calculate your DOTS score to compare relative strength across different body weights.",
-    "url":"https://calccore.net/en/sport/dots-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/dots-calculator#app",
+  "name": "DOTS Calculator (Powerlifting)",
+  "description": "An online DOTS calculator for powerlifting: points from the total of squat, bench press and deadlift and body weight, IPF GL Points for classic powerlifting, each lift's contribution, unofficial levels, the total needed for a target DOTS and a table of totals for different body weights. Kilograms and pounds, with a warning for body weight outside the formula's valid range.",
+  "url": "https://calccore.net/en/sport/dots-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "DOTS from the total of three lifts and body weight",
+    "IPF GL Points for classic powerlifting alongside",
+    "Contribution of squat, bench and deadlift to the total",
+    "The total needed for a target DOTS",
+    "A table of totals for different body weights",
+    "Kg/lb and a warning for body weight out of range"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/dots-calculator#webpage",
+      "url": "https://calccore.net/en/sport/dots-calculator",
+      "name": "DOTS Calculator Online: Powerlifting Score and IPF GL | CalcCore",
+      "description": "DOTS calculator for powerlifting: points from total and body weight, IPF GL Points, the total needed for a goal and a table of totals by body weight, kg and lb.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/dots-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/dots-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/dots-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DOTS calculator",
+          "item": "https://calccore.net/en/sport/dots-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/dots-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A formula for comparing the strength of powerlifters of different body weights: the total of three lifts is multiplied by a coefficient based on body weight and sex."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who created DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 2019 formula was developed by Tim Konertz of the German powerlifting federation BVDK. It is used, among others, by USAPL and USPA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is DOTS the official IPF formula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Since 2020 the IPF uses IPF GL Points. The calculator shows both so you can compare."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply the total of squat, bench and deadlift by 500 and divide by a polynomial of body weight. For 80 kg and a total of 585 kg it is 403.4."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What DOTS is considered good?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are no official thresholds. Guides: for men 300+ advanced, 400+ elite, 500+ world class; for women 250+, 350+ and 400+ respectively."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the coefficients the same for men and women?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, the formulas have different coefficients. That is why a woman with the same body weight and total gets more points."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "For what body weight is DOTS valid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For 40–210 kg in men and 40–150 kg in women. Outside this range the result is unreliable, and the calculator shows a warning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is DOTS different from Wilks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DOTS is a newer formula built on more modern data; unlike the old Wilks, it is considered fairer across body weights."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does DOTS account for age and equipment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. DOTS has no coefficients for age or separate ones for equipped and raw competitions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the total for a target DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide the target DOTS by the coefficient for your body weight. For 400 DOTS at 80 kg that is about 580.1 kg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are IPF GL Points?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The IPF formula for deciding the best lifter: 100 / (A − B·e^(−C·w)) × total. The calculator computes it for classic powerlifting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I calculate DOTS for a single lift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Officially DOTS is calculated from the total of three lifts. For one lift the calculator gives a reference number, but it should not be compared with official results."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdots">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">DOTS Score Calculator (Powerlifting)</h1>
-                    <p class="mcalc__p">
-                        Compare your relative strength to athletes of different body weights using the
-                        official <b>IPF DOTS</b> formula (replaced Wilks in 2020).
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">DOTS Calculator: Powerlifting Score</h1>
+                    <p class="ph__p">Enter your sex, body weight and the results of squat, bench press and deadlift and the calculator computes DOTS and, alongside, IPF GL Points. Separate tabs: the total needed for a target DOTS and a table of totals by body weight. Kilograms and pounds are supported.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sex">Sex</label>
-                                <select id="sex" class="mcalc__select">
-                                    <option value="male" selected>Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="bodyweight">Body weight (kg)</label>
-                                <input class="mcalc__input" id="bodyweight" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 80" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="total">Total (squat + bench + deadlift), kg</label>
-                                <input class="mcalc__input" id="total" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 500" />
-                                <div class="mcalc__hint">Or enter a single lift result if you want to compare just that.
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                                </div>
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="mine" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></svg><span class="ph__tileTx"><b class="ph__tabT">My DOTS</b><span class="ph__ex">DOTS from total and weight</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="need" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Required total</b><span class="ph__ex">Total for a target DOTS</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Table by weight</b><span class="ph__ex">Totals by body weight</span></span></button>
                         </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    DOTS levels <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="DOTS levels">
-                                    <thead>
-                                        <tr>
-                                            <th>Level</th>
-                                            <th>DOTS score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/en/sport/1pm-calculator">One-Rep Max Calculator</a>
-                            <a href="/en/sport/body-fat-calculator">Body Fat Percentage</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is DOTS</h2>
-            <p>
-                <b>DOTS</b> (Dynamic Objective Team Scoring) is a formula that allows comparing the
-                relative strength of powerlifters at different body weights. Since heavier athletes
-                can typically lift a larger absolute weight, DOTS "normalizes" results to fairly
-                compare athletes across different weight classes.
-            </p>
-
-            <h2>Why DOTS replaced Wilks</h2>
-            <p>
-                The Wilks formula was used for decades, but it was based on outdated strength data.
-                In 2020, the International Powerlifting Federation (IPF) officially switched to DOTS —
-                a newer formula built on more current statistical data, considered fairer for comparison
-                across a wider range of body weights.
-            </p>
-
-            <h2>How to interpret your score</h2>
-            <ul>
-                <li><b>250+ points:</b> beginner level — typical for those who recently started training.</li>
-                <li><b>300+ points:</b> intermediate level — steady training progress.</li>
-                <li><b>400+ points:</b> advanced level — serious strength training.</li>
-                <li><b>500+ points:</b> elite level — competitive at regional meets.</li>
-                <li><b>600+ points:</b> world class — level of top world-ranked powerlifters.</li>
-            </ul>
-
-            <h2>How to use this calculator</h2>
-            <p>
-                Enter your body weight and your total for the three main lifts (squat, bench press,
-                deadlift) — or the result of a single lift if you want to compare just that. The
-                calculator will output your DOTS score, which you can use to compare progress with
-                other athletes regardless of weight class.
-            </p>
-
-            <p class="m-hintSmall">
-                DOTS is a comparison tool, not an absolute measure of overall athleticism. It only
-                accounts for strength in the three main powerlifting lifts and doesn't reflect overall
-                fitness or health.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/1pm-calculator"><b>One-Rep Max Calculator</b><span>A one-rep max from 7 formulas.</span></a>
+                <a class="cc-related-card" href="/en/sport/body-fat-calculator"><b>Body Fat Calculator</b><span>Body fat percentage, composition and goal.</span></a>
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>Daily needs, pace and time to reach a goal.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What DOTS is</h2>
+            <p><b>DOTS</b> (Dynamic Objective Team Scoring) is a formula that turns the total of the three powerlifting lifts (squat, bench press, deadlift) into points taking body weight into account. It lets you compare athletes of different weight classes: a heavier lifter usually lifts more and DOTS “levels” the results. The 2019 formula was created by Tim Konertz of the German federation BVDK as a modern replacement for Wilks; it is used, among others, by USAPL and USPA to decide the best lifter of a meet.</p>
+
+            <h2>How DOTS is calculated</h2>
+            <p>DOTS = total × <b>500 / (a·w⁴ + b·w³ + c·w² + d·w + e)</b>, where w is body weight in kg and the coefficients are separate for men and women. For example, for a man of 80 kg the coefficient is 0.6895: with a squat of 200, bench of 140 and deadlift of 245 kg (a total of 585 kg) you get 585 × 0.6895 ≈ <b>403.4</b>. For a woman of 63 kg the coefficient is 1.0755 and a total of 365 kg gives 392.6. The formula is valid for body weights of 40–210 kg (men) and 40–150 kg (women): outside this the result is unreliable, and the calculator warns about it.</p>
+
+            <h2>DOTS or IPF GL Points</h2>
+            <p>Since 2020 the International Powerlifting Federation (IPF) decides the best lifter by <b>IPF GL Points</b> (Goodlift), not DOTS: DOTS is used by some other federations. That is why alongside DOTS the calculator shows IPF GL for classic (raw) powerlifting by the formula 100 / (A − B·e^(−C·w)) × total. For the same athlete (80 kg, total 585 kg) that is ≈ 82.5 points. The IPF coefficients were valid under a 2020–2023 document, so for official purposes check the current values on the IPF site.</p>
+
+            <h2>The total needed for a goal</h2>
+            <p>The “Required total” tab inverts the formula: <b>total = DOTS / coefficient</b>. For a man of 80 kg to reach 400 DOTS the total must be about 580.1 kg; for a woman of 60 kg and 300 DOTS about 270.6 kg; for a man of 100 kg and 500 DOTS about 812.3 kg. If you add your current total the calculator shows how far you are, or the margin above the goal.</p>
+
+            <h2>A table of totals by body weight</h2>
+            <p>The “Table by weight” tab shows the totals that give the chosen DOTS values (300, 400 and 500 by default) for body weights of 50–140 kg for men and 40–110 kg for women. You can change the goals and add your own weight as a separate row. It is handy to see how the required total grows with weight and to plan which weight class to aim for.</p>
+
+            <h2>DOTS levels: how to read them</h2>
+            <p>There are no official thresholds, and different sources differ by up to about 50 points. The calculator uses a common scale as a guide: for men beginner under 200, intermediate 200–299, advanced 300–399, elite 400–499 and world class from 500; for women under 150, 150–249, 250–349, 350–399 and from 400 respectively. It is an unofficial guide that does not depend on age or federation, so do not treat it as a strict classification.</p>
+
+            <h2>Limits</h2>
+            <p>DOTS has no separate coefficients for equipped and raw competitions and does not account for age. It compares only powerlifting strength and says nothing about health or general fitness. The calculator shows a “lift DOTS” as a reference figure (lift weight × coefficient), but the official result is calculated from the total of the three lifts.</p>
+            <p class="ph-mini">DOTS and IPF GL are sport formulas for comparing powerlifters of different weights, not a measure of health or general fitness. The levels in the calculator are unofficial guides.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>What is DOTS?</h3>
-                <p>DOTS is a formula for comparing the relative strength of powerlifters of different body weights. It
-                    replaced the Wilks formula as the official IPF standard in 2020.</p>
+                <p>A formula for comparing the strength of powerlifters of different body weights: the total of three lifts is multiplied by a coefficient based on body weight and sex.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Who created DOTS?</h3>
+                <p>The 2019 formula was developed by Tim Konertz of the German powerlifting federation BVDK. It is used, among others, by USAPL and USPA.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is DOTS the official IPF formula?</h3>
+                <p>No. Since 2020 the IPF uses IPF GL Points. The calculator shows both so you can compare.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate DOTS?</h3>
+                <p>Multiply the total of squat, bench and deadlift by 500 and divide by a polynomial of body weight. For 80 kg and a total of 585 kg it is 403.4.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What DOTS is considered good?</h3>
+                <p>There are no official thresholds. Guides: for men 300+ advanced, 400+ elite, 500+ world class; for women 250+, 350+ and 400+ respectively.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are the coefficients the same for men and women?</h3>
+                <p>No, the formulas have different coefficients. That is why a woman with the same body weight and total gets more points.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>For what body weight is DOTS valid?</h3>
+                <p>For 40–210 kg in men and 40–150 kg in women. Outside this range the result is unreliable, and the calculator shows a warning.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>How is DOTS different from Wilks?</h3>
-                <p>DOTS more accurately accounts for modern strength data across different bodyweight categories and is
-                    considered fairer than the older Wilks formula.</p>
+                <p>DOTS is a newer formula built on more modern data; unlike the old Wilks, it is considered fairer across body weights.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What is a good DOTS score?</h3>
-                <p>Roughly: 250+ is beginner, 300+ is intermediate, 400+ is advanced, 500+ is elite, 600+ is world
-                    class.</p>
+            <div class="cc-faq-item">
+                <h3>Does DOTS account for age and equipment?</h3>
+                <p>No. DOTS has no coefficients for age or separate ones for equipped and raw competitions.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the total for a target DOTS?</h3>
+                <p>Divide the target DOTS by the coefficient for your body weight. For 400 DOTS at 80 kg that is about 580.1 kg.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are IPF GL Points?</h3>
+                <p>The IPF formula for deciding the best lifter: 100 / (A − B·e^(−C·w)) × total. The calculator computes it for classic powerlifting.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I calculate DOTS for a single lift?</h3>
+                <p>Officially DOTS is calculated from the total of three lifts. For one lift the calculator gives a reference number, but it should not be compared with official results.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

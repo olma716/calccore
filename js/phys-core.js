@@ -233,7 +233,22 @@
       if (mode.chips) el("chipsRow").addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) applyChip(mode.chips[Number(b.dataset.i)]); });
       mode.vars.forEach((v) => { el("v_" + v.id).addEventListener("input", maybeCalc); el("u_" + v.id).addEventListener("change", maybeCalc); el("v_" + v.id).addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); calc(true); } }); });
       syncFind();
-    } else mode.build(body, X, helpers());
+    } else { mode.build(body, X, helpers()); markReq(); }
+  }
+  // зірочка біля обов'язкових полів: mode.req({ el }) повертає id полів, потрібних для розрахунку зараз
+  function markReq() {
+    const mode = MODE, body = el("phBody");
+    if (!body || !mode || mode.type === "chain") return;
+    const ids = typeof mode.req === "function" ? mode.req({ el }) : (mode.req || []);
+    body.querySelectorAll("label.ph__label").forEach((lb) => {
+      const id = lb.getAttribute("for"), want = ids.includes(id), star = lb.querySelector(".ph__star"), inp = el(id);
+      if (want && !star) lb.insertAdjacentHTML("beforeend", '<span class="ph__star" aria-hidden="true"> *</span>');
+      else if (!want && star) star.remove();
+      if (inp) { if (want) inp.setAttribute("aria-required", "true"); else inp.removeAttribute("aria-required"); }
+    });
+    let note = body.querySelector(".ph__reqnote");
+    if (ids.length && !note) { const vars = body.querySelector(".ph__vars"); if (vars) { vars.insertAdjacentHTML("afterend", '<div class="ph__hint ph__mt12 ph__reqnote"><span class="ph__star">*</span> ' + L("— обов'язкові для заповнення поля", "— required fields") + "</div>"); } }
+    else if (note) note.hidden = !ids.length;
   }
   function syncFind() {
     const mode = MODE; if (mode.type !== "chain") return;
@@ -318,6 +333,7 @@
   };
   const autoOn = () => !el("autoCalc") || el("autoCalc").checked;
   function calc(strict) {
+    markReq();
     let m;
     try { m = MODE.type === "chain" ? modeChain(MODE) : MODE.calc(helpers()); } catch (e) { m = { ok: false, msg: String(e && e.message ? e.message : e) }; }
     render(m, strict === true);

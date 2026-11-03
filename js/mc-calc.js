@@ -39,7 +39,7 @@ PhysCalc.start(({ L }) => {
   const MAPG = [["ca", "mcC"], ["un", "mcU"], ["wt", "mcW"], ["gl", "mcG"], ["pk", "mcP"], ["ft", "mcF"], ["ml", "mcM"]];
   const applyGoalDefaults = (el) => { const g = M.findGoal(el("mcG").value); setP(el, "mcP", String(g.p).replace(".", SEP)); setP(el, "mcF", String(g.f)); };
   const goal = {
-    key: "goal", type: "custom", nameUk: "БЖУ за ціллю", nameEn: "Macros by goal",
+    key: "goal", type: "custom", req: ({ el }) => ["mcC", "mcW"], nameUk: "БЖУ за ціллю", nameEn: "Macros by goal",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("mcC", L("Калорії на день, ккал", "Calories per day, kcal"), inp("mcC", L("напр.: 2200", "e.g.: 2200"), 5)) + weightF() + unitF() + fld("mcG", L("Ціль", "Goal"), sel("mcG", M.GOALS.map((g) => [g.id, L(g.uk, g.en)]), "maintain")) + fld("mcP", L("Білок, г на кг ваги", "Protein, g per kg"), inp("mcP", "1,8", 4)) + fld("mcF", L("Жир, % калорій", "Fat, % of calories"), inp("mcF", "30", 3)) + fld("mcM", L("Прийомів їжі", "Meals per day"), sel("mcM", [3, 4, 5, 6].map((n) => [n, String(n)]), 4)) + '</div><div class="ph__hint ph__mt12">' + L("Білок рахується від ваги, жир — відсоток калорій, вуглеводи — залишок. Типові значення залежать від цілі, їх можна змінити. Не знаєте калорій — скористайтеся калькулятором калорій.", "Protein is counted from weight, fat is a share of calories, carbs are the remainder. Typical values depend on the goal and can be changed. If you do not know your calories, use the calorie calculator.") + "</div>";
@@ -74,7 +74,7 @@ PhysCalc.start(({ L }) => {
   // ----- за співвідношенням -----
   const MAPR = [["ca", "mcC"], ["ps", "mcS"], ["pp", "mcPp"], ["fp", "mcFp"], ["cp", "mcCp"], ["un", "mcU"], ["wt", "mcW"]];
   const ratio = {
-    key: "ratio", type: "custom", nameUk: "За співвідношенням", nameEn: "By ratio",
+    key: "ratio", type: "custom", req: ({ el }) => ["mcC"], nameUk: "За співвідношенням", nameEn: "By ratio",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("mcC", L("Калорії на день, ккал", "Calories per day, kcal"), inp("mcC", L("напр.: 2200", "e.g.: 2200"), 5), true) + fld("mcS", L("Готова схема (Б / Ж / В, %)", "Preset (P / F / C, %)"), sel("mcS", M.PRESETS.map((p) => [p.id, L(p.uk, p.en) + " — " + p.p + " / " + p.f + " / " + p.c]).concat([["custom", L("Власні відсотки", "Custom percentages")]]), "athletic"), true) + fld("mcPp", L("Білки, %", "Protein, %"), inp("mcPp", "30", 3)) + fld("mcFp", L("Жири, %", "Fat, %"), inp("mcFp", "30", 3)) + fld("mcCp", L("Вуглеводи, %", "Carbs, %"), inp("mcCp", "40", 3)) + weightF(true) + unitF() + '</div><div class="ph__hint ph__mt12">' + L("Сума відсотків має дорівнювати 100. Готові схеми — приклади розподілу, а не рекомендації для кожного.", "The percentages must add up to 100. The presets are examples of a split, not recommendations for everyone.") + "</div>";
@@ -109,7 +109,7 @@ PhysCalc.start(({ L }) => {
   // ----- калорії з грамів -----
   const MAPK = [["gp", "mcGp"], ["gf", "mcGf"], ["gc", "mcGc"], ["ct", "mcT"]];
   const grams = {
-    key: "grams", type: "custom", nameUk: "Калорії з грамів", nameEn: "Calories from grams",
+    key: "grams", type: "custom", req: ({ el }) => ["mcGp", "mcGf", "mcGc"], nameUk: "Калорії з грамів", nameEn: "Calories from grams",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("mcGp", L("Білки, г", "Protein, g"), inp("mcGp", L("напр.: 150", "e.g.: 150"), 5)) + fld("mcGf", L("Жири, г", "Fat, g"), inp("mcGf", L("напр.: 70", "e.g.: 70"), 5)) + fld("mcGc", L("Вуглеводи, г", "Carbs, g"), inp("mcGc", L("напр.: 250", "e.g.: 250"), 5)) + fld("mcT", L("Ваша ціль, ккал (необов'язково)", "Your target, kcal (optional)"), inp("mcT", L("напр.: 2200", "e.g.: 2200"), 5)) + '</div><div class="ph__hint ph__mt12">' + L("Введіть, скільки грамів білків, жирів і вуглеводів у вашому раціоні за день, — калькулятор порахує калорії та частки. Можна залишити поле порожнім (нуль).", "Enter how many grams of protein, fat and carbs are in your daily diet and the calculator computes the calories and shares. You can leave a field empty (zero).") + "</div>";

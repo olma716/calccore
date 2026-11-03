@@ -40,7 +40,7 @@ PhysCalc.start(({ L }) => {
   // ----- зони за віком -----
   const MAP = [["ag", "hrA"], ["sx", "hrS"], ["fo", "hrF"], ["mx", "hrM"], ["mt", "hrT"], ["rh", "hrR"], ["cu", "hrC"]];
   const zonesMode = {
-    key: "zones", type: "custom", nameUk: "Зони за віком", nameEn: "Zones by age",
+    key: "zones", type: "custom", req: ({ el }) => [el("hrF").value === "custom" ? "hrM" : "hrA"], nameUk: "Зони за віком", nameEn: "Zones by age",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + ageF() + sexF() + fld("hrF", L("Формула максимального пульсу", "Max heart rate formula"), sel("hrF", formOpts(), "tanaka"), true) + fld("hrM", L("Ваш максимальний пульс, уд/хв", "Your max heart rate, bpm"), inp("hrM", L("напр.: 188", "e.g.: 188")), true) + fld("hrT", L("Метод зон", "Zone method"), sel("hrT", [["auto", L("Карвонен, якщо вказано пульс спокою", "Karvonen if resting HR is given")], ["max", L("% від максимального пульсу", "% of max heart rate")], ["hrr", L("% резерву пульсу (Карвонен)", "% of heart rate reserve (Karvonen)")]], "auto"), true) + fld("hrR", L("Пульс спокою, уд/хв", "Resting heart rate, bpm"), inp("hrR", L("необов'язково", "optional"))) + fld("hrC", L("Пульс на тренуванні, уд/хв", "Heart rate in training, bpm"), inp("hrC", L("необов'язково", "optional"))) + "</div>";
@@ -82,7 +82,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- порівняння формул -----
   const compare = {
-    key: "compare", type: "custom", nameUk: "Порівняння формул", nameEn: "Compare formulas",
+    key: "compare", type: "custom", req: ({ el }) => ["hrA"], nameUk: "Порівняння формул", nameEn: "Compare formulas",
     build(body, x, h) { const { el, maybeCalc } = h; body.innerHTML = '<div class="ph__vars">' + ageF() + sexF() + "</div>"; wire(el, maybeCalc, ["hrA", "hrS"]); },
     calc(h) {
       const { el } = h, as = el("hrA").value.trim();
@@ -105,7 +105,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- зони за порогом (LTHR) -----
   const lthr = {
-    key: "lthr", type: "custom", nameUk: "Зони за порогом", nameEn: "Threshold zones",
+    key: "lthr", type: "custom", req: ({ el }) => ["hrL"], nameUk: "Зони за порогом", nameEn: "Threshold zones",
     build(body, x, h) { const { el, maybeCalc } = h; body.innerHTML = '<div class="ph__vars">' + fld("hrL", L("Пульс лактатного порогу (LTHR), уд/хв", "Lactate threshold heart rate (LTHR), bpm"), inp("hrL", L("напр.: 165", "e.g.: 165")), true) + '</div><div class="ph__hint ph__mt12">' + L("Орієнтовно LTHR — це середній пульс останніх 20 хвилин із 30-хвилинного максимально рівного забігу (за Френом). Тут зони для бігу; LTHR не дорівнює максимальному пульсу.", "As a rough guide, LTHR is the average heart rate of the last 20 minutes of a 30-minute all-out steady run (per Friel). These are running zones; LTHR is not the same as max heart rate.") + "</div>"; wire(el, maybeCalc, ["hrL"]); },
     calc(h) {
       const { el } = h, ls = el("hrL").value.trim();

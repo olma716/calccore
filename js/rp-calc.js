@@ -66,7 +66,7 @@ PhysCalc.start(({ L }) => {
   const MAP1 = [["wf", "rpF"], ["un", "rpDu"], ["ds", "rpD"], ["th", "rpTh"], ["tm", "rpTm"], ["ts", "rpTs"], ["pm", "rpPm"], ["ps", "rpPs"], ["pu", "rpPu"]];
   const refresh1 = (el) => { const f = el("rpF").value; show(el, "rpD", f !== "dist"); ["rpTh", "rpTm", "rpTs"].forEach((id) => show(el, id, f !== "time")); ["rpPm", "rpPs", "rpPu"].forEach((id) => show(el, id, f !== "pace")); refreshD(el); };
   const mode1 = {
-    key: "calc", type: "custom", nameUk: "Темп, час, дистанція", nameEn: "Pace, time, distance",
+    key: "calc", type: "custom", req: ({ el }) => el("rpF").value === "time" ? ["rpD", "rpPm"] : el("rpF").value === "pace" ? ["rpD", "rpTm"] : ["rpPm", "rpTm"], nameUk: "Темп, час, дистанція", nameEn: "Pace, time, distance",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("rpF", L("Що знайти", "What to find"), sel("rpF", [["time", L("Час фінішу", "Finish time")], ["pace", L("Темп", "Pace")], ["dist", L("Дистанцію", "Distance")]], "time"), true) + distF() + timeF() + fld("rpPm", L("Темп, хвилини", "Pace, minutes"), inp("rpPm", L("напр.: 5", "e.g.: 5"), 3)) + fld("rpPs", L("Темп, секунди", "Pace, seconds"), inp("rpPs", L("напр.: 30", "e.g.: 30"), 5)) + fld("rpPu", L("Темп на", "Pace per"), sel("rpPu", [["km", L("Кілометр", "Kilometre")], ["mi", L("Милю", "Mile")]], "km")) + '</div><div class="ph__hint ph__mt12">' + L("Оберіть, що рахувати, і введіть дві інші величини.", "Choose what to calculate and enter the other two.") + "</div>";
@@ -109,7 +109,7 @@ PhysCalc.start(({ L }) => {
   // ----- спліти -----
   const MAP2 = [["un", "rpDu"], ["ds", "rpD"], ["th", "rpTh"], ["tm", "rpTm"], ["ts", "rpTs"], ["su", "rpSu"], ["ng", "rpNg"]];
   const mode2 = {
-    key: "splits", type: "custom", nameUk: "Спліти", nameEn: "Splits",
+    key: "splits", type: "custom", req: ({ el }) => ["rpD", "rpTm"], nameUk: "Спліти", nameEn: "Splits",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + distF() + timeF() + fld("rpSu", L("Спліт кожні", "Split every"), sel("rpSu", [["km", L("Кілометр", "Kilometre")], ["mi", L("Милю", "Mile")]], "km")) + fld("rpNg", L("Друга половина швидша на, %", "Second half faster by, %"), inp("rpNg", "0", 4)) + '</div><div class="ph__hint ph__mt12">' + L("Введіть дистанцію й цільовий час — калькулятор розпише час на кожному кілометрі чи милі. Нуль у «швидша на» означає рівний темп, значення більше нуля — негативний спліт (друга половина швидша за першу).", "Enter a distance and a target time and the calculator lays out the time for every kilometre or mile. Zero in “faster by” means even pace, above zero is a negative split (the second half faster than the first).") + "</div>";
@@ -136,7 +136,7 @@ PhysCalc.start(({ L }) => {
   // ----- прогноз Рігеля -----
   const MAP3 = [["un", "rpDu"], ["ds", "rpD"], ["th", "rpTh"], ["tm", "rpTm"], ["ts", "rpTs"], ["ex", "rpEx"], ["tg", "rpTg"], ["td", "rpTd"]];
   const mode3 = {
-    key: "predict", type: "custom", nameUk: "Прогноз на іншу дистанцію", nameEn: "Race predictor",
+    key: "predict", type: "custom", req: ({ el }) => ["rpD", "rpTm"], nameUk: "Прогноз на іншу дистанцію", nameEn: "Race predictor",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + distF() + timeF() + fld("rpTg", L("Прогноз на", "Predict for"), sel("rpTg", R.DISTS.map((d) => [d.id, L(d.uk, d.en)]), "full")) + fld("rpTd", L("Або своя дистанція (в одиницях вище)", "Or your own distance (in the unit above)"), inp("rpTd", L("необов'язково", "optional"))) + fld("rpEx", L("Показник Рігеля", "Riegel exponent"), inp("rpEx", "1,06", 5)) + '</div><div class="ph__hint ph__mt12">' + L("Введіть недавній результат — калькулятор оцінить час на інших дистанціях за формулою Рігеля T₂ = T₁ · (D₂ / D₁)^k. Класичний показник k = 1,06; його можна змінити.", "Enter a recent result and the calculator estimates your time over other distances with the Riegel formula T₂ = T₁ · (D₂ / D₁)^k. The classic exponent is k = 1.06; you can change it.") + "</div>";
@@ -165,7 +165,7 @@ PhysCalc.start(({ L }) => {
   // ----- VDOT і тренувальні темпи -----
   const MAP4 = [["un", "rpDu"], ["ds", "rpD"], ["th", "rpTh"], ["tm", "rpTm"], ["ts", "rpTs"]];
   const mode4 = {
-    key: "vdot", type: "custom", nameUk: "Темпи тренувань (VDOT)", nameEn: "Training paces (VDOT)",
+    key: "vdot", type: "custom", req: ({ el }) => ["rpD", "rpTm"], nameUk: "Темпи тренувань (VDOT)", nameEn: "Training paces (VDOT)",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + distF() + timeF() + '</div><div class="ph__hint ph__mt12">' + L("Введіть недавній результат забігу чи контрольного бігу з максимальними зусиллями — калькулятор визначить ваш VDOT (за Джеком Деніелсом) і розрахує тренувальні темпи: легкий, марафонський, пороговий, інтервальний, повторювальний.", "Enter a recent race or all-out time trial and the calculator finds your VDOT (after Jack Daniels) and computes training paces: easy, marathon, threshold, interval, repetition.") + "</div>";

@@ -88,7 +88,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- добова норма -----
   const tdee = {
-    key: "tdee", type: "custom", nameUk: "Добова норма (BMR / TDEE)", nameEn: "Daily needs (BMR / TDEE)",
+    key: "tdee", type: "custom", req: ({ el }) => ["cuA", "cuW", el("cuU").value === "imp" ? "cuFt" : "cuH"], nameUk: "Добова норма (BMR / TDEE)", nameEn: "Daily needs (BMR / TDEE)",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + personHtml({ formula: true, bf: true }) + "</div>";
@@ -117,7 +117,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- ціль за вагою -----
   const plan = {
-    key: "plan", type: "custom", nameUk: "Ціль за вагою", nameEn: "Weight goal",
+    key: "plan", type: "custom", req: ({ el }) => ["cuA", "cuW", el("cuU").value === "imp" ? "cuFt" : "cuH", "cuG"], nameUk: "Ціль за вагою", nameEn: "Weight goal",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + personHtml({}) + fld("cuG", '<span id="cuGL">' + L("Бажана вага, кг", "Goal weight, kg") + "</span>", inp("cuG", L("напр.: 68", "e.g.: 68"))) + fld("cuR", L("Темп зміни ваги", "Pace of change"), sel("cuR", rateOpts(false), 0.5)) + fld("cuT", L("Ваш TDEE, ккал (необов'язково)", "Your TDEE, kcal (optional)"), inp("cuT", L("якщо відомий", "if known"), 5), true) + '</div><div class="ph__hint ph__mt12">' + L("Без свого TDEE він береться за формулою Міффліна — Сент-Джеора й обраною активністю.", "Without your own TDEE it is taken from the Mifflin–St Jeor formula and the chosen activity.") + "</div>";
@@ -156,7 +156,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- порівняння формул -----
   const compare = {
-    key: "compare", type: "custom", nameUk: "Порівняння формул", nameEn: "Compare formulas",
+    key: "compare", type: "custom", req: ({ el }) => ["cuA", "cuW", el("cuU").value === "imp" ? "cuFt" : "cuH"], nameUk: "Порівняння формул", nameEn: "Compare formulas",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + personHtml({ bf: true }) + "</div>";
@@ -182,7 +182,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- витрати на тренування -----
   const met = {
-    key: "met", type: "custom", nameUk: "Витрати на тренування", nameEn: "Exercise calories",
+    key: "met", type: "custom", req: ({ el }) => ["cuW", "cuM"], nameUk: "Витрати на тренування", nameEn: "Exercise calories",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("cuU", L("Одиниці ваги", "Weight unit"), sel("cuU", [["metric", L("Кілограми (кг)", "Kilograms (kg)")], ["imp", L("Фунти (lb)", "Pounds (lb)")]], "metric")) + fld("cuW", '<span id="cuWL">' + L("Вага, кг", "Weight, kg") + "</span>", inp("cuW", L("напр.: 75", "e.g.: 75"))) + fld("cuE", L("Вид активності", "Activity"), sel("cuE", C.MET.map((m) => [m.id, L(m.uk, m.en) + " · " + fnum(m.v, 1) + " MET"]), "run10"), true) + fld("cuM", L("Тривалість, хвилин", "Duration, minutes"), inp("cuM", L("напр.: 30", "e.g.: 30"), 4)) + '</div><div class="ph__hint ph__mt12">' + L("MET — у скільки разів активність витрачає більше енергії, ніж спокій. Калорії = MET × вага (кг) × години.", "MET is how many times an activity burns more energy than rest. Calories = MET × weight (kg) × hours.") + "</div>";

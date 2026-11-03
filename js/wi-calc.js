@@ -36,7 +36,7 @@ PhysCalc.start(({ L }) => {
   const MAP1 = [["sx", "wiS"], ["wt", "wiW"], ["un", "wiU"], ["ac", "wiA"], ["cl", "wiC"], ["sp", "wiP"], ["pk", "wiK"]];
   const refresh1 = (el) => { show(el, "wiP", el("wiS").value === "f"); refreshU(el); };
   const need = {
-    key: "need", type: "custom", nameUk: "Норма води на день", nameEn: "Daily water need",
+    key: "need", type: "custom", req: ({ el }) => ["wiW"], nameUk: "Норма води на день", nameEn: "Daily water need",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("wiS", L("Стать", "Sex"), sel("wiS", [["m", L("Чоловіча", "Male")], ["f", L("Жіноча", "Female")]], "m")) + wF("wiW", "Вага", "Weight", L("напр.: 75", "e.g.: 75")) + unitF() + fld("wiA", L("Активність", "Activity"), sel("wiA", [["low", L("Низька (сидяча робота, мало руху)", "Low (desk job, little movement)")], ["walk", L("Звичайна (прогулянки, без тренувань) +200 мл", "Normal (walks, no workouts) +200 ml")], ["mod", L("Помірна (тренування 3–5 разів на тиждень) +350 мл", "Moderate (workouts 3–5 times a week) +350 ml")], ["high", L("Висока (щоденні інтенсивні тренування) +700 мл", "High (intense workouts daily) +700 ml")]], "mod"), true) + fld("wiC", L("Клімат", "Climate"), sel("wiC", [["normal", L("Помірний", "Temperate")], ["hot", L("Спекотний (літо, спека) +500 мл", "Hot (summer, heat) +500 ml")]], "normal"), true) + fld("wiP", L("Особливий стан", "Special condition"), sel("wiP", [["none", L("Немає", "None")], ["preg", L("Вагітність +300 мл", "Pregnancy +300 ml")], ["lact", L("Годування груддю +700 мл", "Breastfeeding +700 ml")]], "none"), true) + fld("wiK", L("Базова норма, мл на кг ваги", "Base amount, ml per kg"), inp("wiK", "33", 4)) + '</div><div class="ph__hint ph__mt12">' + L("Базова формула — 33 мл на кг ваги (значення можна змінити в межах 20–50), плюс поправки на активність (від 0 до 700 мл), спеку й особливий стан. Це орієнтири, а не клінічна норма; нижче для порівняння наведено офіційні норми.", "The base formula is 33 ml per kg of weight (adjustable from 20 to 50), plus adjustments for activity, heat and special conditions. These are guides, not a clinical norm; official reference values are shown below for comparison.") + "</div>";
@@ -67,7 +67,7 @@ PhysCalc.start(({ L }) => {
   // ----- потовиділення -----
   const MAP2 = [["wb", "wiW0"], ["wa", "wiW1"], ["un", "wiU"], ["dk", "wiD"], ["ur", "wiUr"], ["mn", "wiM"]];
   const sweat = {
-    key: "sweat", type: "custom", nameUk: "Потовиділення на тренуванні", nameEn: "Sweat rate",
+    key: "sweat", type: "custom", req: ({ el }) => ["wiW0", "wiW1", "wiM"], nameUk: "Потовиділення на тренуванні", nameEn: "Sweat rate",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + wF("wiW0", "Вага до тренування", "Weight before", L("напр.: 70", "e.g.: 70")) + wF("wiW1", "Вага після тренування", "Weight after", L("напр.: 69,4", "e.g.: 69.4")) + unitF() + vF("wiD", "Випито під час тренування", "Drunk during exercise", L("напр.: 400", "e.g.: 400"), true) + vF("wiUr", "Сеча під час тренування", "Urine during exercise", "0", true) + fld("wiM", L("Тривалість, хв", "Duration, min"), inp("wiM", L("напр.: 60", "e.g.: 60"), 4)) + '</div><div class="ph__hint ph__mt12">' + L("Зважтеся до й після тренування (без одягу чи в однаковому сухому одязі, після того як витерлися рушником), запишіть, скільки випили, а якщо ходили в туалет, то й обсяг сечі. За зміною ваги калькулятор знайде, скільки рідини ви втрачаєте з потом за годину й скільки треба випити для відновлення.", "Weigh yourself before and after exercise (without clothes or in the same dry clothes after towelling off), note how much you drank and, if you went to the toilet, the urine volume. From the weight change the calculator finds how much fluid you lose in sweat per hour and how much to drink to recover.") + "</div>";
@@ -102,7 +102,7 @@ PhysCalc.start(({ L }) => {
   // ----- розклад -----
   const MAP3 = [["nd", "wiN"], ["un", "wiU"], ["wk", "wiT1"], ["sl", "wiT2"], ["gl", "wiG"]];
   const sched = {
-    key: "sched", type: "custom", nameUk: "Розклад на день", nameEn: "Daily schedule",
+    key: "sched", type: "custom", req: ({ el }) => ["wiN", "wiT1", "wiT2"], nameUk: "Розклад на день", nameEn: "Daily schedule",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + vF("wiN", "Норма на день", "Daily amount", L("напр.: 2500", "e.g.: 2500")) + unitF() + fld("wiT1", L("Прокидаюсь о", "I wake up at"), inp("wiT1", "07:00", 5)) + fld("wiT2", L("Лягаю спати о", "I go to bed at"), inp("wiT2", "23:00", 5)) + vF("wiG", "Об'єм склянки", "Glass size", "250", true) + '</div><div class="ph__hint ph__mt12">' + L("Калькулятор рівномірно розподілить норму від пробудження до години перед сном: перший прийом одразу після підйому, останній за годину до сну (так менше шансів прокидатися вночі). Норму візьміть з першої вкладки.", "The calculator spreads the amount evenly from waking up to an hour before bed: the first drink right after waking and the last one an hour before sleep (so you are less likely to wake at night). Take the amount from the first tab.") + "</div>";

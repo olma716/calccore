@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор DOTS онлайн — пауерліфтинг бал | CalcCore</title>
+    <title>Калькулятор DOTS онлайн: бали пауерліфтингу, IPF GL | CalcCore</title>
     <meta name="description"
-        content="Розрахунок DOTS балу для пауерліфтингу — порівняння сили атлетів різної ваги тіла. Офіційна формула IPF з 2020 року." />
+        content="Калькулятор DOTS для пауерліфтингу: бали за сумою й вагою тіла, IPF GL Points, яка сума потрібна для цілі та таблиця сум за вагою тіла, кг і фунти." />
 
     <link rel="canonical" href="https://calccore.net/sport/dots-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/dots-calculator" />
@@ -26,241 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор DOTS онлайн — пауерліфтинг бал" />
-    <meta property="og:description" content="Розрахунок DOTS балу для пауерліфтингу — порівняння сили атлетів різної ваги тіла. Офіційна формула IPF з 2020 року." />
+    <meta property="og:title" content="Калькулятор DOTS онлайн: бали пауерліфтингу, IPF GL" />
+    <meta property="og:description" content="Калькулятор DOTS для пауерліфтингу: бали за сумою й вагою тіла, IPF GL Points, яка сума потрібна для цілі та таблиця сум за вагою тіла, кг і фунти." />
     <meta property="og:url" content="https://calccore.net/sport/dots-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор DOTS онлайн — пауерліфтинг бал" />
-    <meta name="twitter:description" content="Розрахунок DOTS балу для пауерліфтингу — порівняння сили атлетів різної ваги тіла. Офіційна формула IPF з 2020 року." />
+    <meta name="twitter:title" content="Калькулятор DOTS онлайн: бали пауерліфтингу, IPF GL" />
+    <meta name="twitter:description" content="Калькулятор DOTS для пауерліфтингу: бали за сумою й вагою тіла, IPF GL Points, яка сума потрібна для цілі та таблиця сум за вагою тіла, кг і фунти." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104rq1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/dots-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Що таке DOTS?",
-        "acceptedAnswer":{"@type":"Answer","text":"DOTS — це формула для порівняння відносної сили пауерліфтерів різної ваги тіла. Вона замінила формулу Wilks як офіційний стандарт IPF з 2020 року."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чим DOTS відрізняється від Wilks?",
-        "acceptedAnswer":{"@type":"Answer","text":"DOTS точніше враховує сучасні дані про силові показники атлетів різних вагових категорій і вважається справедливішою за застарілу формулу Wilks."}
-      },
-      {
-        "@type":"Question",
-        "name":"Який хороший бал DOTS?",
-        "acceptedAnswer":{"@type":"Answer","text":"Орієнтовно: 250+ — початківець, 300+ — середній рівень, 400+ — просунутий, 500+ — елітний рівень, 600+ — світовий класс."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104rq1" defer></script>
+    <script src="/js/phys-core.js?v=20261104rq1" defer></script>
+    <script src="/js/dt-data.js?v=20261104rq1" defer></script>
+    <script src="/js/dt-calc.js?v=20261104rq1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/sport/dots-calculator#app",
-    "name":"DOTS Score Calculator",
-    "description":"Розрахунок DOTS балу для порівняння відносної сили атлетів різної ваги.",
-    "url":"https://calccore.net/sport/dots-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/sport/dots-calculator#app",
+  "name": "Калькулятор DOTS (пауерліфтинг)",
+  "description": "Онлайн-калькулятор DOTS для пауерліфтингу: бали за сумою присідання, жиму лежачи й станової тяги та вагою тіла, IPF GL Points для класичного пауерліфтингу, внесок кожної вправи, неофіційні рівні, розрахунок суми, потрібної для цільового DOTS, і таблиця сум для різної ваги тіла. Кілограми й фунти, попередження про вагу поза чинним діапазоном формули.",
+  "url": "https://calccore.net/sport/dots-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "DOTS за сумою трьох вправ і вагою тіла",
+    "IPF GL Points для класичного пауерліфтингу поруч",
+    "Внесок присідання, жиму й тяги в суму",
+    "Яка сума потрібна для цільового DOTS",
+    "Таблиця сум для різної ваги тіла",
+    "Кг/фунти й попередження про вагу поза діапазоном"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/sport/dots-calculator#webpage",
+      "url": "https://calccore.net/sport/dots-calculator",
+      "name": "Калькулятор DOTS онлайн: бали пауерліфтингу, IPF GL | CalcCore",
+      "description": "Калькулятор DOTS для пауерліфтингу: бали за сумою й вагою тіла, IPF GL Points, яка сума потрібна для цілі та таблиця сум за вагою тіла, кг і фунти.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/sport/dots-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/sport/dots-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/sport/dots-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Спорт",
+          "item": "https://calccore.net/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор DOTS",
+          "item": "https://calccore.net/sport/dots-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/sport/dots-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Що таке DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Формула для порівняння сили пауерліфтерів різної ваги тіла: сума трьох вправ множиться на коефіцієнт за вагою тіла й статтю."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Хто створив DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Формулу 2019 року розробив Тім Конерц із німецької федерації пауерліфтингу BVDK. Нею користуються, зокрема, USAPL і USPA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є DOTS офіційною формулою IPF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. З 2020 року IPF застосовує IPF GL Points. Калькулятор показує обидва показники, щоб ви могли порівняти."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розрахувати DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножте суму присідання, жиму й тяги на 500 і поділіть на поліном від ваги тіла. Для 80 кг і суми 585 кг це 403,4."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який DOTS вважається хорошим?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Офіційних порогів немає. Орієнтири: для чоловіків 300+ просунутий, 400+ елітний, 500+ світовий клас; для жінок 250+, 350+ і 400+ відповідно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи однакові коефіцієнти для чоловіків і жінок?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, у формули різні коефіцієнти. Тому жінка з тією самою вагою тіла й сумою отримує більше балів."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Для якої ваги тіла чинний DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для 40–210 кг у чоловіків і 40–150 кг у жінок. Поза цим діапазоном результат ненадійний, і калькулятор показує попередження."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим DOTS відрізняється від Wilks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DOTS — новіша формула, створена на сучасніших даних; на відміну від старого Wilks, вона вважається справедливішою для різної ваги тіла."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує DOTS вік і екіпіровку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Коефіцієнтів для віку, а також окремих для змагань з екіпіровкою й без неї в DOTS немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як знайти суму для цільового DOTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поділіть цільовий DOTS на коефіцієнт для вашої ваги тіла. Для 400 DOTS при 80 кг це близько 580,1 кг."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке IPF GL Points?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Формула IPF для визначення найкращого атлета: 100 / (A − B·e^(−C·w)) × сума. Калькулятор рахує її для класичного пауерліфтингу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна рахувати DOTS для однієї вправи?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Офіційно DOTS рахується від суми трьох вправ. Для однієї вправи калькулятор дає довідкове число, але порівнювати його з офіційними результатами не варто."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdots">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор DOTS (пауерліфтинг)</h1>
-                    <p class="mcalc__p">
-                        Порівняй свою відносну силу з атлетами іншої ваги за офіційною формулою
-                        <b>IPF DOTS</b> (з 2020 року замінила Wilks).
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор DOTS: бали пауерліфтингу</h1>
+                    <p class="ph__p">Введіть стать, вагу тіла й результати присідання, жиму лежачи та станової тяги — калькулятор розрахує DOTS і поруч IPF GL Points. Окремі вкладки: яка сума потрібна для цільового DOTS і таблиця сум за вагою тіла. Підтримуються кілограми й фунти.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Спорт</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="mine" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></svg><span class="ph__tileTx"><b class="ph__tabT">Мій DOTS</b><span class="ph__ex">DOTS за сумою і вагою</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="need" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Потрібна сума</b><span class="ph__ex">Сума для цільового DOTS</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Таблиця за вагою</b><span class="ph__ex">Суми за вагою тіла</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sex">Стать</label>
-                                <select id="sex" class="mcalc__select">
-                                    <option value="male" selected>Чоловіча</option>
-                                    <option value="female">Жіноча</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="bodyweight">Вага тіла (кг)</label>
-                                <input class="mcalc__input" id="bodyweight" type="text" inputmode="decimal"
-                                    placeholder="напр.: 80" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="total">Сума (присідання + жим + станова), кг</label>
-                                <input class="mcalc__input" id="total" type="text" inputmode="decimal"
-                                    placeholder="напр.: 500" />
-                                <div class="mcalc__hint">Або введи результат однієї вправи, якщо хочеш порівняти лише
-                                    її.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Рівні DOTS <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="DOTS levels">
-                                    <thead>
-                                        <tr>
-                                            <th>Рівень</th>
-                                            <th>DOTS бал</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/sport/1pm-calculator">Калькулятор 1ПМ</a>
-                            <a href="/sport/body-fat-calculator">Відсоток жиру в тілі</a>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке DOTS</h2>
-            <p>
-                <b>DOTS</b> (Dynamic Objective Team Scoring) — це формула, яка дозволяє порівнювати
-                відносну силу пауерліфтерів різної ваги тіла. Оскільки більш важкі атлети зазвичай
-                можуть підняти більшу абсолютну вагу, DOTS "нормалізує" результати, щоб справедливо
-                порівнювати спортсменів у різних вагових категоріях.
-            </p>
-
-            <h2>Чому DOTS замінив Wilks</h2>
-            <p>
-                Формула Wilks використовувалась десятиліттями, але базувалась на застарілих даних про
-                силові показники атлетів. У 2020 році Міжнародна федерація пауерліфтингу (IPF) офіційно
-                перейшла на DOTS — новішу формулу, розроблену на основі сучасніших статистичних даних,
-                яка вважається справедливішою для порівняння через ширший діапазон ваги тіла.
-            </p>
-
-            <h2>Як інтерпретувати результат</h2>
-            <ul>
-                <li><b>250+ балів:</b> початковий рівень — типово для тих, хто нещодавно почав тренуватись.</li>
-                <li><b>300+ балів:</b> середній рівень — стабільний прогрес у тренуваннях.</li>
-                <li><b>400+ балів:</b> просунутий рівень — серйозна силова підготовка.</li>
-                <li><b>500+ балів:</b> елітний рівень — конкурентоспроможний на регіональних змаганнях.</li>
-                <li><b>600+ балів:</b> світовий клас — рівень топових світових пауерліфтерів.</li>
-            </ul>
-
-            <h2>Як користуватись калькулятором</h2>
-            <p>
-                Введи свою вагу тіла та суму трьох базових вправ (присідання, жим лежачи, станова тяга)
-                — або результат однієї конкретної вправи, якщо хочеш порівняти лише її. Калькулятор
-                видасть твій DOTS бал, за яким можна порівнювати прогрес з іншими атлетами незалежно
-                від вагової категорії.
-            </p>
-
-            <p class="m-hintSmall">
-                DOTS — інструмент для порівняння, а не абсолютна оцінка атлетичності. Він враховує лише
-                силові показники в трьох базових вправах пауерліфтингу і не відображає загальну фізичну
-                форму чи здоров'я.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/sport/1pm-calculator"><b>Калькулятор 1ПМ</b><span>Максимум на одне повторення за 7 формулами.</span></a>
+                <a class="cc-related-card" href="/sport/body-fat-calculator"><b>Калькулятор жиру в тілі</b><span>Відсоток жиру, склад тіла й ціль.</span></a>
+                <a class="cc-related-card" href="/sport/calories-calculator"><b>Калькулятор калорій</b><span>Добова норма, темп і строк досягнення цілі.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що таке DOTS</h2>
+            <p><b>DOTS</b> (Dynamic Objective Team Scoring) — формула, яка переводить суму трьох вправ пауерліфтингу (присідання, жим лежачи, станова тяга) у бали з урахуванням ваги тіла. Вона дозволяє порівнювати атлетів різних вагових категорій: важчий спортсмен зазвичай піднімає більше, і DOTS «вирівнює» результати. Формулу 2019 року створив Тім Конерц із німецької федерації BVDK як сучасну заміну Wilks; нею користуються, зокрема, USAPL та USPA для визначення найкращого атлета змагань.</p>
+
+            <h2>Як рахується DOTS</h2>
+            <p>DOTS = сума × <b>500 / (a·w⁴ + b·w³ + c·w² + d·w + e)</b>, де w — вага тіла в кг, а коефіцієнти окремі для чоловіків і жінок. Наприклад, для чоловіка вагою 80 кг коефіцієнт дорівнює 0,6895: з присіданням 200, жимом 140 і тягою 245 кг (сума 585 кг) виходить 585 × 0,6895 ≈ <b>403,4</b>. Для жінки вагою 63 кг коефіцієнт 1,0755, а сума 365 кг дає 392,6. Формула чинна для ваги тіла 40–210 кг (чоловіки) і 40–150 кг (жінки): поза цим результат ненадійний, і калькулятор про це попереджає.</p>
+
+            <h2>DOTS чи IPF GL Points</h2>
+            <p>Міжнародна федерація пауерліфтингу (IPF) з 2020 року визначає найкращого атлета за <b>IPF GL Points</b> (Goodlift), а не за DOTS: DOTS застосовують окремі інші федерації. Тому поруч із DOTS калькулятор показує IPF GL для класичного (без екіпіровки) пауерліфтингу за формулою 100 / (A − B·e^(−C·w)) × сума. Для того самого атлета (80 кг, сума 585 кг) це ≈ 82,5 бала. Коефіцієнти IPF діяли за документом 2020–2023 років, тож для офіційних цілей перевіряйте актуальні значення на сайті IPF.</p>
+
+            <h2>Яка сума потрібна для цілі</h2>
+            <p>Вкладка «Потрібна сума» обертає формулу: <b>сума = DOTS / коефіцієнт</b>. Для чоловіка 80 кг, щоб набрати 400 DOTS, потрібна сума близько 580,1 кг; для жінки 60 кг і 300 DOTS — близько 270,6 кг; для чоловіка 100 кг і 500 DOTS — приблизно 812,3 кг. Якщо додати поточну суму, калькулятор покаже, скільки не вистачає, або запас над ціллю.</p>
+
+            <h2>Таблиця сум за вагою тіла</h2>
+            <p>Вкладка «Таблиця за вагою» показує суми, які дають вибрані значення DOTS (за замовчуванням 300, 400 і 500), для ваги тіла 50–140 кг у чоловіків і 40–110 кг у жінок. Цілі можна змінити, а власну вагу додати окремим рядком. Це зручно, щоб побачити, як зростає потрібна сума з вагою, і спланувати, до якої вагової категорії вигідніше цілитись.</p>
+
+            <h2>Рівні DOTS: як їх розуміти</h2>
+            <p>Офіційних порогів немає, а різні джерела розходяться приблизно до 50 балів. У калькуляторі як орієнтир використано поширену шкалу: для чоловіків початківець до 200, середній рівень 200–299, просунутий 300–399, елітний 400–499 і світовий клас від 500; для жінок відповідно до 150, 150–249, 250–349, 350–399 і від 400. Це неофіційний орієнтир, який не залежить від віку й федерації, тому не варто сприймати його як строгу класифікацію.</p>
+
+            <h2>Обмеження</h2>
+            <p>DOTS не має окремих коефіцієнтів для змагань з екіпіровкою й без неї та не враховує вік. Він порівнює тільки силу в пауерліфтингу й нічого не каже про здоров'я чи загальну форму. Калькулятор показує «DOTS вправи» як довідкову цифру (вага вправи × коефіцієнт), але офіційний результат рахується від суми трьох вправ.</p>
+            <p class="ph-mini">DOTS і IPF GL — спортивні формули для порівняння пауерліфтерів різної ваги, а не оцінка здоров'я чи загальної форми. Рівні в калькуляторі — неофіційні орієнтири.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>Що таке DOTS?</h3>
-                <p>DOTS — це формула для порівняння відносної сили пауерліфтерів різної ваги тіла. Вона замінила формулу
-                    Wilks як офіційний стандарт IPF з 2020 року.</p>
+                <p>Формула для порівняння сили пауерліфтерів різної ваги тіла: сума трьох вправ множиться на коефіцієнт за вагою тіла й статтю.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Хто створив DOTS?</h3>
+                <p>Формулу 2019 року розробив Тім Конерц із німецької федерації пауерліфтингу BVDK. Нею користуються, зокрема, USAPL і USPA.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є DOTS офіційною формулою IPF?</h3>
+                <p>Ні. З 2020 року IPF застосовує IPF GL Points. Калькулятор показує обидва показники, щоб ви могли порівняти.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як розрахувати DOTS?</h3>
+                <p>Помножте суму присідання, жиму й тяги на 500 і поділіть на поліном від ваги тіла. Для 80 кг і суми 585 кг це 403,4.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який DOTS вважається хорошим?</h3>
+                <p>Офіційних порогів немає. Орієнтири: для чоловіків 300+ просунутий, 400+ елітний, 500+ світовий клас; для жінок 250+, 350+ і 400+ відповідно.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи однакові коефіцієнти для чоловіків і жінок?</h3>
+                <p>Ні, у формули різні коефіцієнти. Тому жінка з тією самою вагою тіла й сумою отримує більше балів.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Для якої ваги тіла чинний DOTS?</h3>
+                <p>Для 40–210 кг у чоловіків і 40–150 кг у жінок. Поза цим діапазоном результат ненадійний, і калькулятор показує попередження.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Чим DOTS відрізняється від Wilks?</h3>
-                <p>DOTS точніше враховує сучасні дані про силові показники атлетів різних вагових категорій і вважається
-                    справедливішою за застарілу формулу Wilks.</p>
+                <p>DOTS — новіша формула, створена на сучасніших даних; на відміну від старого Wilks, вона вважається справедливішою для різної ваги тіла.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Який хороший бал DOTS?</h3>
-                <p>Орієнтовно: 250+ — початківець, 300+ — середній рівень, 400+ — просунутий, 500+ — елітний рівень,
-                    600+ — світовий класс.</p>
+            <div class="cc-faq-item">
+                <h3>Чи враховує DOTS вік і екіпіровку?</h3>
+                <p>Ні. Коефіцієнтів для віку, а також окремих для змагань з екіпіровкою й без неї в DOTS немає.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як знайти суму для цільового DOTS?</h3>
+                <p>Поділіть цільовий DOTS на коефіцієнт для вашої ваги тіла. Для 400 DOTS при 80 кг це близько 580,1 кг.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке IPF GL Points?</h3>
+                <p>Формула IPF для визначення найкращого атлета: 100 / (A − B·e^(−C·w)) × сума. Калькулятор рахує її для класичного пауерліфтингу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна рахувати DOTS для однієї вправи?</h3>
+                <p>Офіційно DOTS рахується від суми трьох вправ. Для однієї вправи калькулятор дає довідкове число, але порівнювати його з офіційними результатами не варто.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

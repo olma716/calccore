@@ -48,7 +48,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- мій ІМТ -----
   const mine = {
-    key: "bmi", type: "custom", nameUk: "Мій ІМТ", nameEn: "My BMI",
+    key: "bmi", type: "custom", req: ({ el }) => ["bmW", el("bmU").value === "imp" ? "bmFt" : "bmH"], nameUk: "Мій ІМТ", nameEn: "My BMI",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + weightF() + heightF() + unitF() + fld("bmA", L("Вік, років", "Age, years"), inp("bmA", L("необов'язково", "optional"), 3)) + fld("bmS", L("Орієнтири", "Reference"), sel("bmS", [["who", L("Стандарт ВООЗ", "WHO standard")], ["asia", L("ВООЗ + азійські орієнтири", "WHO + Asian action points")]], "who"), true) + "</div>";
@@ -78,7 +78,7 @@ PhysCalc.start(({ L }) => {
   // ----- цільова вага -----
   const MAPT = [["wt", "bmW"], ["ht", "bmH"], ["ft", "bmFt"], ["ic", "bmIn"], ["tb", "bmG"]];
   const target = {
-    key: "target", type: "custom", nameUk: "Цільова вага", nameEn: "Target weight",
+    key: "target", type: "custom", req: ({ el }) => ["bmG", el("bmU").value === "imp" ? "bmFt" : "bmH"], nameUk: "Цільова вага", nameEn: "Target weight",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + weightF(L("Поточна вага, кг (необов'язково)", "Current weight, kg (optional)")) + heightF() + unitF() + fld("bmG", '<span id="bmGL">' + L("Цільовий ІМТ", "Target BMI") + "</span>", inp("bmG", L("напр.: 22", "e.g.: 22"), 5), true) + '</div><div class="ph__hint ph__mt12">' + L("Нормальний ІМТ — від 18,5 до 25; середина норми — близько 22. Цільова вага = ІМТ × зріст².", "A normal BMI is 18.5 to 25; the middle of the range is about 22. Target weight = BMI × height².") + "</div>";
@@ -108,7 +108,7 @@ PhysCalc.start(({ L }) => {
   // ----- таблиця норми -----
   const MAPL = [["ht", "bmH"], ["ft", "bmFt"], ["ic", "bmIn"]];
   const table = {
-    key: "table", type: "custom", nameUk: "Таблиця норми", nameEn: "Normal weight table",
+    key: "table", type: "custom", req: ({ el }) => [el("bmU").value === "imp" ? "bmFt" : "bmH"], nameUk: "Таблиця норми", nameEn: "Normal weight table",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + heightF() + unitF() + '</div><div class="ph__hint ph__mt12">' + L("Таблиця показує нормальну вагу (ІМТ від 18,5 до 25) для зросту від 150 до 200 см. Вкажіть свій зріст, щоб підсвітити найближчий рядок.", "The table shows the normal weight (BMI 18.5 to 25) for heights from 150 to 200 cm. Enter your height to highlight the nearest row.") + "</div>";

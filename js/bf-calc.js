@@ -52,7 +52,7 @@ PhysCalc.start(({ L }) => {
   const MAP1 = [["sx", "bfS"], ["ht", "bfH"], ["nk", "bfN"], ["wa", "bfWa"], ["hp", "bfP"], ["wt", "bfW"], ["un", "bfU"]];
   const refresh1 = (el) => { show(el, "bfP", el("bfS").value === "f"); refreshU(el); };
   const navy = {
-    key: "navy", type: "custom", nameUk: "Метод ВМФ США", nameEn: "US Navy method",
+    key: "navy", type: "custom", req: ({ el }) => ["bfH", "bfN", "bfWa"].concat(el("bfS").value === "f" ? ["bfP"] : []), nameUk: "Метод ВМФ США", nameEn: "US Navy method",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + sexF() + lenF("bfH", "Зріст", "Height", L("напр.: 178", "e.g.: 178")) + lenF("bfN", "Шия", "Neck", L("напр.: 38", "e.g.: 38")) + lenF("bfWa", "Талія", "Waist", L("напр.: 85", "e.g.: 85")) + lenF("bfP", "Стегна", "Hips", L("напр.: 100", "e.g.: 100")) + wtF(true) + unitF() + '</div><div class="ph__hint ph__mt12">' + L("Шия: нижче кадика, стрічка трохи нахилена вниз спереду. Талія: чоловікам на рівні пупка, жінкам у найвужчому місці (зазвичай трохи вище пупка), після звичайного видиху без утягування живота. Стегна (жінкам): у найширшому місці сідниць. Мірьте стрічкою щільно, але не стискаючи шкіру.", "Neck: below the Adam's apple, the tape slightly angled down at the front. Waist: for men at the navel, for women at the narrowest point (usually a little above the navel), after a normal exhale without sucking in. Hips (women): at the widest part of the buttocks. Keep the tape snug but not pressing into the skin.") + "</div>";
@@ -82,7 +82,7 @@ PhysCalc.start(({ L }) => {
   // ----- за ІМТ і віком -----
   const MAP2 = [["sx", "bfS"], ["ag", "bfA"], ["wt", "bfW"], ["ht", "bfH"], ["un", "bfU"]];
   const bmi = {
-    key: "bmi", type: "custom", nameUk: "За ІМТ і віком", nameEn: "From BMI and age",
+    key: "bmi", type: "custom", req: ({ el }) => ["bfA", "bfW", "bfH"], nameUk: "За ІМТ і віком", nameEn: "From BMI and age",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + sexF() + fld("bfA", L("Вік, років", "Age, years"), inp("bfA", L("напр.: 30", "e.g.: 30"), 3)) + wtF() + lenF("bfH", "Зріст", "Height", L("напр.: 178", "e.g.: 178")) + unitF() + '</div><div class="ph__hint ph__mt12">' + L("Груба оцінка за формулою Дейренберга: жир залежить від ІМТ, віку й статі. Не потребує вимірювань стрічкою, але менш точна, ніж обхвати: вона не відрізняє м'язи від жиру.", "A rough estimate by the Deurenberg formula: fat depends on BMI, age and sex. It needs no tape measurements but is less accurate than circumferences: it cannot tell muscle from fat.") + "</div>";
@@ -114,7 +114,7 @@ PhysCalc.start(({ L }) => {
   // ----- склад тіла й ціль -----
   const MAP3 = [["sx", "bfS"], ["wt", "bfW"], ["un", "bfU"], ["bf", "bfF"], ["ht", "bfH"], ["tg", "bfT"]];
   const comp = {
-    key: "comp", type: "custom", nameUk: "Склад тіла й ціль", nameEn: "Body composition and goal",
+    key: "comp", type: "custom", req: ({ el }) => ["bfW", "bfF"], nameUk: "Склад тіла й ціль", nameEn: "Body composition and goal",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + sexF() + wtF() + unitF() + fld("bfF", L("Жиру в тілі зараз, %", "Body fat now, %"), inp("bfF", L("напр.: 20", "e.g.: 20"), 5)) + lenF("bfH", "Зріст", "Height", L("напр.: 178", "e.g.: 178"), true) + fld("bfT", L("Ціль, % жиру", "Goal, % body fat") + L(" (необов'язково)", " (optional)"), inp("bfT", L("напр.: 15", "e.g.: 15"), 5)) + '</div><div class="ph__hint ph__mt12">' + L("Введіть вагу та відсоток жиру (з вимірювання чи будь-якої вкладки) — отримаєте жирову й суху масу. Якщо задати ціль у відсотках, калькулятор покаже вагу при цілі в припущенні, що суха маса (м'язи, кістки, вода) не змінюється.", "Enter your weight and body fat percentage (from a measurement or any tab) to get fat and lean mass. If you set a goal percentage, the calculator shows the weight at that goal assuming lean mass (muscle, bone, water) stays the same.") + "</div>";

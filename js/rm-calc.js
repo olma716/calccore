@@ -38,7 +38,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- 1ПМ за підходом -----
   const onerm = {
-    key: "onerm", type: "custom", nameUk: "1ПМ за підходом", nameEn: "1RM from a set",
+    key: "onerm", type: "custom", req: ({ el }) => ["rmW", "rmR"], nameUk: "1ПМ за підходом", nameEn: "1RM from a set",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("rmW", L("Піднята вага", "Weight lifted"), inp("rmW", L("напр.: 100", "e.g.: 100"))) + fld("rmR", L("Повторень у підході", "Reps in the set"), inp("rmR", L("напр.: 5", "e.g.: 5"), 2)) + common() + '</div><div class="ph__hint ph__mt12">' + L("Найточніше працює для 2–10 повторень; до 30 повторень калькулятор рахує, але понад 12 похибка зростає. Одне повторення — це і є 1ПМ.", "Works best for 2–10 reps; up to 30 reps are accepted, but above 12 the error grows. A single rep is the 1RM itself.") + "</div>";
@@ -72,7 +72,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- вага за відсотком чи повтореннями -----
   const load = {
-    key: "load", type: "custom", nameUk: "Яка вага для підходу", nameEn: "Weight for a set",
+    key: "load", type: "custom", req: ({ el }) => ["rmM", "ldV"], nameUk: "Яка вага для підходу", nameEn: "Weight for a set",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("rmM", L("Ваш 1ПМ", "Your 1RM"), inp("rmM", L("напр.: 120", "e.g.: 120"))) + fld("ldK", L("Задати підхід", "Define the set by"), sel("ldK", [["pct", L("відсотком від 1ПМ", "percentage of the 1RM")], ["reps", L("кількістю повторень", "number of reps")]], "pct")) + fld("ldV", '<span id="ldLbl">' + L("Відсоток від 1ПМ, %", "Percentage of the 1RM, %") + "</span>", inp("ldV", L("напр.: 80", "e.g.: 80"), 5), true) + common() + "</div>";
@@ -109,7 +109,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- скільки повторень -----
   const reps = {
-    key: "reps", type: "custom", nameUk: "Скільки повторень", nameEn: "How many reps",
+    key: "reps", type: "custom", req: ({ el }) => ["rmM", "rpW"], nameUk: "Скільки повторень", nameEn: "How many reps",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("rmM", L("Ваш 1ПМ", "Your 1RM"), inp("rmM", L("напр.: 120", "e.g.: 120"))) + fld("rpW", L("Робоча вага", "Working weight"), inp("rpW", L("напр.: 90", "e.g.: 90"))) + fld("rmF", L("Формула", "Formula"), sel("rmF", fOpts(), "epley")) + fld("rmU", L("Одиниця ваги", "Weight unit"), sel("rmU", uOpts(), "kg")) + "</div>";
@@ -136,7 +136,7 @@ PhysCalc.start(({ L }) => {
 
   // ----- порівняння формул -----
   const compare = {
-    key: "compare", type: "custom", nameUk: "Порівняння формул", nameEn: "Compare formulas",
+    key: "compare", type: "custom", req: ({ el }) => ["rmW", "rmR"], nameUk: "Порівняння формул", nameEn: "Compare formulas",
     build(body, x, h) {
       const { el, maybeCalc } = h;
       body.innerHTML = '<div class="ph__vars">' + fld("rmW", L("Піднята вага", "Weight lifted"), inp("rmW", L("напр.: 100", "e.g.: 100"))) + fld("rmR", L("Повторень у підході", "Reps in the set"), inp("rmR", L("напр.: 5", "e.g.: 5"), 2)) + fld("rmU", L("Одиниця ваги", "Weight unit"), sel("rmU", uOpts(), "kg"), true) + "</div>";
