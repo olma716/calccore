@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Body Fat Percentage Calculator — Navy Method | CalcCore</title>
+    <title>Body Fat Calculator Online: US Navy Method, BMI, Goal | CalcCore</title>
     <meta name="description"
-        content="Calculate body fat percentage using the US Navy method (neck, waist, hip measurements). Categories: essential, athletic, fitness, acceptable, obese." />
+        content="Body fat percentage calculator: US Navy method, an estimate from BMI and age, fat and lean mass, weight at a goal, categories for men and women." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/body-fat-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/body-fat-calculator" />
@@ -26,258 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Body Fat Percentage Calculator — Navy Method" />
-    <meta property="og:description" content="Calculate body fat percentage using the US Navy method (neck, waist, hip measurements). Categories: essential, athletic, fitness, acceptable, obese." />
+    <meta property="og:title" content="Body Fat Calculator Online: US Navy Method, BMI, Goal" />
+    <meta property="og:description" content="Body fat percentage calculator: US Navy method, an estimate from BMI and age, fat and lean mass, weight at a goal, categories for men and women." />
     <meta property="og:url" content="https://calccore.net/en/sport/body-fat-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Body Fat Percentage Calculator — Navy Method" />
-    <meta name="twitter:description" content="Calculate body fat percentage using the US Navy method (neck, waist, hip measurements). Categories: essential, athletic, fitness, acceptable, obese." />
+    <meta name="twitter:title" content="Body Fat Calculator Online: US Navy Method, BMI, Goal" />
+    <meta name="twitter:description" content="Body fat percentage calculator: US Navy method, an estimate from BMI and age, fat and lean mass, weight at a goal, categories for men and women." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104bf1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/body-fat-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How accurate is the tape measure method?",
-        "acceptedAnswer":{"@type":"Answer","text":"The US Navy tape method has an error margin of about ±3-4% compared to lab methods (DEXA scans), but it's an accessible and free estimation method."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I measure waist circumference correctly?",
-        "acceptedAnswer":{"@type":"Answer","text":"Measure at the level of the navel, standing straight, without sucking in your stomach, after a normal exhale."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why do men and women use different measurements?",
-        "acceptedAnswer":{"@type":"Answer","text":"The formula for women additionally accounts for hip circumference, since fat distribution differs between sexes."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104bf1" defer></script>
+    <script src="/js/phys-core.js?v=20261104bf1" defer></script>
+    <script src="/js/bf-data.js?v=20261104bf1" defer></script>
+    <script src="/js/bf-calc.js?v=20261104bf1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/body-fat-calculator#app",
-    "name":"Body Fat Percentage Calculator",
-    "description":"Calculate body fat percentage using the US Navy method with categories.",
-    "url":"https://calccore.net/en/sport/body-fat-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/body-fat-calculator#app",
+  "name": "Body Fat Percentage Calculator",
+  "description": "An online body fat percentage calculator: the US Navy method from neck, waist and hip circumferences, a rough estimate from BMI and age (the Deurenberg formula), ACE categories separately for men and women on a coloured scale, fat and lean mass, FMI and FFMI indices, and the weight at a target body fat percentage with lean mass unchanged. Metric and imperial units.",
+  "url": "https://calccore.net/en/sport/body-fat-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "US Navy method from neck, waist and hip circumferences",
+    "An estimate from BMI, age and sex (Deurenberg)",
+    "Categories for men and women on a coloured scale",
+    "Fat and lean mass, FMI and FFMI",
+    "Weight at a target body fat percentage",
+    "Kg/lb, centimetres/inches"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/body-fat-calculator#webpage",
+      "url": "https://calccore.net/en/sport/body-fat-calculator",
+      "name": "Body Fat Calculator Online: US Navy Method, BMI, Goal | CalcCore",
+      "description": "Body fat percentage calculator: US Navy method, an estimate from BMI and age, fat and lean mass, weight at a goal, categories for men and women.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/body-fat-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/body-fat-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/body-fat-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Body fat calculator",
+          "item": "https://calccore.net/en/sport/body-fat-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/body-fat-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate body fat percentage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Measure your neck, waist (and hips for women) and height and enter them on the “US Navy method” tab. For a man of 178 cm with a 38 cm neck and an 85 cm waist the result is 16.4%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What body fat percentage is normal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By ACE categories: 14–24% for men (fitness and average), 21–31% for women. Athletes have lower values, and from 25% in men and 32% in women it is obesity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are the limits higher for women?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Women need more essential fat for hormonal and reproductive function, so their scale is shifted up by roughly 8–10 percentage points."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the US Navy method?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is an estimate: it usually errs by a few percentage points compared with laboratory methods. It is better to compare your own results over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do I measure the waist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For men at the navel, for women at the narrowest point (usually a little above the navel), after an exhale without sucking in. Use the same place every time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is it different from BMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BMI depends only on weight and height and cannot tell muscle from fat, while body fat percentage shows body composition. That is why trained people can have an “overweight” BMI with normal fat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Deurenberg formula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An estimate of fat from BMI, age and sex: 1.20·BMI + 0.23·age − 10.8·sex − 5.4. The standard error is ≈ 4 percentage points and the formula is for adults only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is lean mass?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Everything except fat: muscle, bone, organs and water. For 80 kg at 20% fat the lean mass is 64 kg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are FMI and FFMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fat mass index and fat-free mass index: the mass of fat or lean mass in kg divided by the square of height in metres. They depend on height less than percentages do."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate weight at a target body fat percentage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With lean mass unchanged: weight = lean mass / (1 − goal). For 80 kg and 20% at a goal of 15% it is 75.3 kg, i.e. 4.7 kg of fat less."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a very low body fat percentage safe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, below the essential level (about 2–5% for men, 10–13% for women) it is dangerous for health. The calculator warns if a goal or result is below it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the norm depend on age?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ACE categories do not account for age, although the fat share usually grows over the years. For an individual norm consult a doctor or coach."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cbf">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Body Fat Percentage Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate using the <b>US Navy method</b> (neck, waist, hip measurements). Categories:
-                        essential, athletic, fitness, acceptable, obese.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Body Fat Percentage Calculator</h1>
+                    <p class="ph__p">Measure your neck, waist (and hips for women) and height and the calculator estimates your body fat percentage by the US Navy method and shows the category for your sex. Separate tabs: a rough estimate from BMI and age and a calculation of fat and lean mass with the weight at a target body fat percentage.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sex">Sex</label>
-                                <select id="sex" class="mcalc__select">
-                                    <option value="male" selected>Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="height">Height (cm)</label>
-                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 178" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="neck">Neck circumference (cm)</label>
-                                <input class="mcalc__input" id="neck" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 38" />
-                                <div class="mcalc__hint">Measure below the Adam's apple, head tilted slightly down.
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="waist">Waist circumference (cm)</label>
-                                <input class="mcalc__input" id="waist" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 85" />
-                                <div class="mcalc__hint">At the navel level, after a normal exhale.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full" id="hipWrap" style="display:none;">
-                                <label class="mcalc__label" for="hip">Hip circumference (cm)</label>
-                                <input class="mcalc__input" id="hip" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 100" />
-                                <div class="mcalc__hint">At the widest part of the hips (women only).</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                                </div>
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="navy" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg><span class="ph__tileTx"><b class="ph__tabT">US Navy method</b><span class="ph__ex">Neck, waist and hip measurements</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="bmi" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">From BMI and age</b><span class="ph__ex">Weight, height and age</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="comp" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg><span class="ph__tileTx"><b class="ph__tabT">Body composition and goal</b><span class="ph__ex">Fat, muscle and a goal in percent</span></span></button>
                         </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="bmi-scale" id="bfScale" style="display:none;">
-                            <div class="bmi-scale__track">
-                                <div class="bmi-scale__segment"
-                                    style="flex:6; background:#60a5fa; border-radius:999px 0 0 999px;"></div>
-                                <div class="bmi-scale__segment" style="flex:8; background:#34d399;"></div>
-                                <div class="bmi-scale__segment" style="flex:8; background:#a3e635;"></div>
-                                <div class="bmi-scale__segment" style="flex:8; background:#fbbf24;"></div>
-                                <div class="bmi-scale__segment"
-                                    style="flex:10; background:#f87171; border-radius:0 999px 999px 0;"></div>
-                                <div class="bmi-scale__marker" id="bfMarker"></div>
-                            </div>
-                            <div class="bmi-scale__labels">
-                                <span>2</span>
-                                <span>14</span>
-                                <span>18</span>
-                                <span>25</span>
-                                <span>32</span>
-                                <span>40</span>
-                            </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/sport/bmi-calculator">BMI Calculator</a>
-                            <a href="/en/sport/macros-calculator">Macro Calculator</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/bmi-calculator"><b>BMI Calculator</b><span>WHO category and normal weight for your height.</span></a>
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>Daily needs, pace and time to reach a goal.</span></a>
+                <a class="cc-related-card" href="/en/sport/macros-calculator"><b>Macro Calculator</b><span>Protein, fat and carbs for your goal.</span></a>
+            </div>
+        </section>
 
-        <section class="m-seo">
-            <h2>What is body fat percentage</h2>
-            <p>
-                <b>Body fat percentage</b> is the proportion of total body mass made up of fat tissue.
-                Unlike BMI, this metric distinguishes between fat and muscle mass, giving a more accurate
-                picture of physical condition.
-            </p>
+        <div class="cc-divider"></div>
 
-            <h2>The US Navy method</h2>
-            <p>
-                This method estimates body fat percentage using body circumferences — neck, waist (and hips
-                for women) — along with height. It was developed for the US Navy as a quick and inexpensive
-                way to assess physical fitness without special equipment.
-            </p>
+        <section class="cc-seo">
+            <h2>What body fat percentage is</h2>
+            <p><b>Body fat percentage</b> is the share of fat tissue in your total body mass. Unlike BMI, it tells fat from muscle, so it shows fitness better: two people of the same weight and height can have very different body composition. The rest of the mass is lean (fat-free) mass: muscle, bone, organs and water.</p>
+
+            <h2>The US Navy method: how it works</h2>
+            <p>The method was developed for the US Navy as a quick estimate that needs no special equipment. Men enter height, neck and waist circumference, women also add hip circumference. The metric formula (cm): <b>men: 495 / (1.0324 − 0.19077·lg(waist − neck) + 0.15456·lg(height)) − 450</b>; women use the sum of waist and hips minus neck with different coefficients. For a man of 178 cm with a 38 cm neck and an 85 cm waist the result is 16.4%, and for a woman of 165 cm with a neck of 32, a waist of 74 and hips of 98 cm it is 28.4%.</p>
 
             <h2>How to measure correctly</h2>
-            <ul>
-                <li><b>Neck:</b> below the Adam's apple, with the tape angled slightly downward at the front.</li>
-                <li><b>Waist:</b> at the navel level, standing straight, after a normal exhale, without sucking in.</li>
-                <li><b>Hips (women):</b> at the widest part of the buttocks.</li>
-            </ul>
+            <p>Measure the neck below the Adam's apple, with the tape slightly angled down at the front. For men the waist is measured at the navel, for women at the narrowest point (usually a little above the navel), after a normal exhale without sucking in. For women the hips are measured at the widest part of the buttocks. The tape should be snug but not press into the skin. To compare over time, measure at the same time of day with the same tape: even one centimetre at the waist visibly changes the result.</p>
 
-            <h2>Body fat percentage categories</h2>
-            <ul>
-                <li><b>Essential fat:</b> minimum required for basic physical function (men ~2-5%, women ~10-13%).</li>
-                <li><b>Athletic:</b> typical of elite athletes (men 6-13%, women 14-20%).</li>
-                <li><b>Fitness:</b> good physical condition (men 14-17%, women 21-24%).</li>
-                <li><b>Acceptable:</b> average healthy level (men 18-24%, women 25-31%).</li>
-                <li><b>Obese:</b> elevated health risk (men 25%+, women 32%+).</li>
-            </ul>
+            <h2>Categories for men and women</h2>
+            <p>The calculator uses the American Council on Exercise (ACE) categories. For men: essential fat 2–5%, athletes 6–13%, fitness 14–17%, average 18–24%, obese from 25%. For women: 10–13%, 14–20%, 21–24%, 25–31% and from 32%. The limits differ because women need more essential fat for health, so the scale on the page is built separately for each sex. These are guides, not a diagnosis: they do not depend on age and do not replace a doctor's advice.</p>
 
-            <p class="m-hintSmall">
-                The tape measure method has an error margin of about ±3-4% compared to lab methods (DEXA
-                scans, hydrostatic weighing). For a more precise body composition assessment, consult a
-                specialist with the appropriate equipment.
-            </p>
+            <h2>An estimate from BMI and age</h2>
+            <p>Without a tape you can use the formula of Deurenberg and colleagues (1991): <b>body fat, % = 1.20·BMI + 0.23·age − 10.8·sex − 5.4</b>, where sex is 1 for men and 0 for women. For a 30-year-old man of 80 kg and 178 cm (BMI 25.2) it gives 21.0%. The formula is for adults, its standard error in the authors' study is about 4 percentage points, and in people with obesity it slightly overestimates fat. It cannot tell muscle from fat, so for trained people it is less accurate than circumferences.</p>
+
+            <h2>Fat and lean mass, a goal in percent</h2>
+            <p>The third tab turns the percentage into kilograms. For 80 kg and 20% fat that is 16.0 kg of fat and 64.0 kg of lean mass; for a height of 178 cm the fat mass index (FMI) is 5.0 kg/m² and the fat-free mass index (FFMI) is 20.2 kg/m². If you set a goal of 15%, the calculator computes the weight at the goal with lean mass unchanged: 64.0 / (1 − 0.15) = 75.3 kg, so about 4.7 kg of fat to lose. This is a simplification: in a calorie deficit part of the weight is also lost from muscle, so combine the calculation with strength training and the calorie calculator.</p>
+
+            <h2>Accuracy and limits</h2>
+            <p>All three ways give an estimate, not a measurement: the circumference method usually errs by a few percentage points compared with DEXA or hydrostatic weighing, and the BMI formula is even less accurate. The result is affected by measurement, hydration, where fat is stored and anatomy. Very low values (below essential fat) are dangerous for health. For decisions about health, diet or treatment see a doctor.</p>
+            <p class="ph-mini">This is a formula-based estimate, not a medical test: body composition is measured more accurately by DEXA, bioimpedance or hydrostatic weighing. Discuss health questions with a doctor.</p>
         </section>
 
-        <section class="m-faq">
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How accurate is the tape measure method?</h3>
-                <p>The US Navy tape method has an error margin of about ±3-4% compared to lab methods (DEXA scans), but
-                    it's an accessible and free estimation method.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate body fat percentage?</h3>
+                <p>Measure your neck, waist (and hips for women) and height and enter them on the “US Navy method” tab. For a man of 178 cm with a 38 cm neck and an 85 cm waist the result is 16.4%.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I measure waist circumference correctly?</h3>
-                <p>Measure at the level of the navel, standing straight, without sucking in your stomach, after a normal
-                    exhale.</p>
+            <div class="cc-faq-item">
+                <h3>What body fat percentage is normal?</h3>
+                <p>By ACE categories: 14–24% for men (fitness and average), 21–31% for women. Athletes have lower values, and from 25% in men and 32% in women it is obesity.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why do men and women use different measurements?</h3>
-                <p>The formula for women additionally accounts for hip circumference, since fat distribution differs
-                    between sexes.</p>
+            <div class="cc-faq-item">
+                <h3>Why are the limits higher for women?</h3>
+                <p>Women need more essential fat for hormonal and reproductive function, so their scale is shifted up by roughly 8–10 percentage points.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I fully trust this result?</h3>
-                <p>This is an estimate. For precise body composition, use DEXA scanning, hydrostatic weighing, or
-                    bioelectrical impedance analysis with a specialist.</p>
+            <div class="cc-faq-item">
+                <h3>How accurate is the US Navy method?</h3>
+                <p>It is an estimate: it usually errs by a few percentage points compared with laboratory methods. It is better to compare your own results over time.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where do I measure the waist?</h3>
+                <p>For men at the navel, for women at the narrowest point (usually a little above the navel), after an exhale without sucking in. Use the same place every time.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How is it different from BMI?</h3>
+                <p>BMI depends only on weight and height and cannot tell muscle from fat, while body fat percentage shows body composition. That is why trained people can have an “overweight” BMI with normal fat.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the Deurenberg formula?</h3>
+                <p>An estimate of fat from BMI, age and sex: 1.20·BMI + 0.23·age − 10.8·sex − 5.4. The standard error is ≈ 4 percentage points and the formula is for adults only.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is lean mass?</h3>
+                <p>Everything except fat: muscle, bone, organs and water. For 80 kg at 20% fat the lean mass is 64 kg.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are FMI and FFMI?</h3>
+                <p>The fat mass index and fat-free mass index: the mass of fat or lean mass in kg divided by the square of height in metres. They depend on height less than percentages do.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate weight at a target body fat percentage?</h3>
+                <p>With lean mass unchanged: weight = lean mass / (1 − goal). For 80 kg and 20% at a goal of 15% it is 75.3 kg, i.e. 4.7 kg of fat less.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is a very low body fat percentage safe?</h3>
+                <p>No, below the essential level (about 2–5% for men, 10–13% for women) it is dangerous for health. The calculator warns if a goal or result is below it.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the norm depend on age?</h3>
+                <p>ACE categories do not account for age, although the fat share usually grows over the years. For an individual norm consult a doctor or coach.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

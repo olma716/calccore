@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор відсотка жиру в тілі онлайн — метод обхватів | CalcCore</title>
+    <title>Калькулятор жиру в тілі онлайн: метод ВМФ США, ІМТ | CalcCore</title>
     <meta name="description"
-        content="Розрахунок відсотка жиру в тілі за методом ВМФ США (обхвати шиї, талії, стегон). Категорії: есенційний, спортивний, фітнес, прийнятний, ожиріння." />
+        content="Калькулятор відсотка жиру в тілі: метод ВМФ США за обхватами, оцінка за ІМТ і віком, жирова й суха маса, вага при цілі, категорії для чоловіків і жінок." />
 
     <link rel="canonical" href="https://calccore.net/sport/body-fat-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/body-fat-calculator" />
@@ -26,257 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор відсотка жиру в тілі онлайн — метод обхватів" />
-    <meta property="og:description" content="Розрахунок відсотка жиру в тілі за методом ВМФ США (обхвати шиї, талії, стегон). Категорії: есенційний, спортивний, фітнес, прийнятний, ожиріння." />
+    <meta property="og:title" content="Калькулятор жиру в тілі онлайн: метод ВМФ США, ІМТ" />
+    <meta property="og:description" content="Калькулятор відсотка жиру в тілі: метод ВМФ США за обхватами, оцінка за ІМТ і віком, жирова й суха маса, вага при цілі, категорії для чоловіків і жінок." />
     <meta property="og:url" content="https://calccore.net/sport/body-fat-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор відсотка жиру в тілі онлайн — метод обхватів" />
-    <meta name="twitter:description" content="Розрахунок відсотка жиру в тілі за методом ВМФ США (обхвати шиї, талії, стегон). Категорії: есенційний, спортивний, фітнес, прийнятний, ожиріння." />
+    <meta name="twitter:title" content="Калькулятор жиру в тілі онлайн: метод ВМФ США, ІМТ" />
+    <meta name="twitter:description" content="Калькулятор відсотка жиру в тілі: метод ВМФ США за обхватами, оцінка за ІМТ і віком, жирова й суха маса, вага при цілі, категорії для чоловіків і жінок." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104bf1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/body-fat-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Наскільки точний метод обхватів?",
-        "acceptedAnswer":{"@type":"Answer","text":"Метод обхватів (US Navy) має похибку приблизно ±3-4% порівняно з лабораторними методами (DEXA-сканування), але є доступним і безкоштовним способом оцінки."}
-      },
-      {
-        "@type":"Question",
-        "name":"Як правильно виміряти обхват талії?",
-        "acceptedAnswer":{"@type":"Answer","text":"Виміряй обхват на рівні пупка, стоячи прямо, не втягуючи живіт, після звичайного видиху."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому в жінок і чоловіків різні виміри?",
-        "acceptedAnswer":{"@type":"Answer","text":"Формула для жінок додатково враховує обхват стегон, оскільки розподіл жиру в тілі різниться між статями."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104bf1" defer></script>
+    <script src="/js/phys-core.js?v=20261104bf1" defer></script>
+    <script src="/js/bf-data.js?v=20261104bf1" defer></script>
+    <script src="/js/bf-calc.js?v=20261104bf1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/sport/body-fat-calculator#app",
-    "name":"Body Fat Percentage Calculator",
-    "description":"Розрахунок відсотка жиру в тілі за методом ВМФ США з категоріями.",
-    "url":"https://calccore.net/sport/body-fat-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/sport/body-fat-calculator#app",
+  "name": "Калькулятор відсотка жиру в тілі",
+  "description": "Онлайн-калькулятор відсотка жиру в тілі: метод ВМФ США за обхватами шиї, талії й стегон, груба оцінка за ІМТ і віком (формула Дейренберга), категорії ACE окремо для чоловіків і жінок на кольоровій шкалі, жирова й суха маса, індекси FMI та FFMI, вага при цільовому відсотку жиру за незмінної сухої маси. Метричні й імперські одиниці.",
+  "url": "https://calccore.net/sport/body-fat-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Метод ВМФ США за обхватами шиї, талії та стегон",
+    "Оцінка за ІМТ, віком і статтю (Дейренберг)",
+    "Категорії для чоловіків і жінок на кольоровій шкалі",
+    "Жирова й суха маса, FMI та FFMI",
+    "Вага при цільовому відсотку жиру",
+    "Кг/фунти, сантиметри/дюйми"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/sport/body-fat-calculator#webpage",
+      "url": "https://calccore.net/sport/body-fat-calculator",
+      "name": "Калькулятор жиру в тілі онлайн: метод ВМФ США, ІМТ | CalcCore",
+      "description": "Калькулятор відсотка жиру в тілі: метод ВМФ США за обхватами, оцінка за ІМТ і віком, жирова й суха маса, вага при цілі, категорії для чоловіків і жінок.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/sport/body-fat-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/sport/body-fat-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/sport/body-fat-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Спорт",
+          "item": "https://calccore.net/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор жиру в тілі",
+          "item": "https://calccore.net/sport/body-fat-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/sport/body-fat-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як розрахувати відсоток жиру в тілі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Виміряйте шию, талію (жінкам ще й стегна) та зріст і введіть на вкладці «Метод ВМФ США». Для чоловіка 178 см із шиєю 38 і талією 85 см виходить 16,4 %."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який відсоток жиру нормальний?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За категоріями ACE: чоловікам 14–24 % (фітнес і середній рівень), жінкам 21–31 %. Спортсмени мають нижчі значення, а від 25 % у чоловіків і 32 % у жінок це вже ожиріння."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому межі для жінок вищі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Жінкам потрібно більше необхідного жиру для гормональної та репродуктивної функцій, тому шкала для них зсунута вгору приблизно на 8–10 відсоткових пунктів."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Наскільки точний метод ВМФ США?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це оцінка: зазвичай вона помиляється на кілька відсоткових пунктів порівняно з лабораторними методами. Порівнювати краще власні результати в динаміці."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Де міряти талію?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Чоловікам на рівні пупка, жінкам у найвужчому місці (зазвичай трохи вище пупка), після видиху без утягування живота. Тримайтеся однакового місця щоразу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим відрізняється від ІМТ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ІМТ залежить лише від ваги й зросту й не відрізняє м'язи від жиру, а відсоток жиру показує склад тіла. Тому у тренованих людей ІМТ може бути «надлишковим» при нормальному жирі."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке формула Дейренберга?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оцінка жиру за ІМТ, віком і статтю: 1,20·ІМТ + 0,23·вік − 10,8·стать − 5,4. Стандартна похибка ≈ 4 відсоткових пункти, формула лише для дорослих."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке суха маса?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Усе, крім жиру: м'язи, кістки, органи й вода. Для 80 кг при 20 % жиру суха маса становить 64 кг."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке FMI та FFMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Індекс жирової маси та індекс безжирової маси: маса жиру чи сухої маси в кг, поділена на квадрат зросту в метрах. Вони не залежать від зросту так сильно, як відсотки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати вагу при цільовому відсотку жиру?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За незмінної сухої маси: вага = суха маса / (1 − ціль). Для 80 кг і 20 % при цілі 15 % це 75,3 кг, тобто мінус 4,7 кг жиру."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи безпечно мати дуже низький відсоток жиру?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, нижче необхідного рівня (чоловікам близько 2–5 %, жінкам 10–13 %) це небезпечно для здоров'я. Калькулятор попереджає, якщо ціль або результат нижчі за цей рівень."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи залежить норма від віку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Категорії ACE не враховують вік, хоча з роками частка жиру зазвичай зростає. Для індивідуальної норми порадьтеся з лікарем чи тренером."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cbf">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор відсотка жиру в тілі</h1>
-                    <p class="mcalc__p">
-                        Розрахунок за методом <b>ВМФ США</b> (обхвати шиї, талії, стегон). Категорії:
-                        есенційний, спортивний, фітнес, прийнятний, ожиріння.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор відсотка жиру в тілі</h1>
+                    <p class="ph__p">Виміряйте шию, талію (і стегна жінкам) та зріст — калькулятор оцінить відсоток жиру в тілі за методом ВМФ США й покаже категорію для вашої статі. Окремі вкладки: груба оцінка за ІМТ і віком та розрахунок жирової й сухої маси з вагою при цільовому відсотку жиру.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Спорт</span>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sex">Стать</label>
-                                <select id="sex" class="mcalc__select">
-                                    <option value="male" selected>Чоловіча</option>
-                                    <option value="female">Жіноча</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="height">Зріст (см)</label>
-                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
-                                    placeholder="напр.: 178" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="neck">Обхват шиї (см)</label>
-                                <input class="mcalc__input" id="neck" type="text" inputmode="decimal"
-                                    placeholder="напр.: 38" />
-                                <div class="mcalc__hint">Вимірюй нижче адамового яблука, злегка нахиливши голову вниз.
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="waist">Обхват талії (см)</label>
-                                <input class="mcalc__input" id="waist" type="text" inputmode="decimal"
-                                    placeholder="напр.: 85" />
-                                <div class="mcalc__hint">На рівні пупка, після звичайного видиху.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full" id="hipWrap" style="display:none;">
-                                <label class="mcalc__label" for="hip">Обхват стегон (см)</label>
-                                <input class="mcalc__input" id="hip" type="text" inputmode="decimal"
-                                    placeholder="напр.: 100" />
-                                <div class="mcalc__hint">На рівні найширшої частини стегон (тільки для жінок).</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
-                                </div>
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="navy" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Метод ВМФ США</b><span class="ph__ex">Обхвати шиї, талії, стегон</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="bmi" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">За ІМТ і віком</b><span class="ph__ex">Вага, зріст і вік</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="comp" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg><span class="ph__tileTx"><b class="ph__tabT">Склад тіла й ціль</b><span class="ph__ex">Жир, м'язи й ціль у відсотках</span></span></button>
                         </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="bmi-scale" id="bfScale" style="display:none;">
-                            <div class="bmi-scale__track">
-                                <div class="bmi-scale__segment"
-                                    style="flex:6; background:#60a5fa; border-radius:999px 0 0 999px;"></div>
-                                <div class="bmi-scale__segment" style="flex:8; background:#34d399;"></div>
-                                <div class="bmi-scale__segment" style="flex:8; background:#a3e635;"></div>
-                                <div class="bmi-scale__segment" style="flex:8; background:#fbbf24;"></div>
-                                <div class="bmi-scale__segment"
-                                    style="flex:10; background:#f87171; border-radius:0 999px 999px 0;"></div>
-                                <div class="bmi-scale__marker" id="bfMarker"></div>
-                            </div>
-                            <div class="bmi-scale__labels">
-                                <span>2</span>
-                                <span>14</span>
-                                <span>18</span>
-                                <span>25</span>
-                                <span>32</span>
-                                <span>40</span>
-                            </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
-                        <div class="m-navlinks">
-                            <a href="/sport/bmi-calculator">Калькулятор ІМТ</a>
-                            <a href="/sport/macros-calculator">Калькулятор БЖУ</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке відсоток жиру в тілі</h2>
-            <p>
-                <b>Відсоток жиру в тілі</b> — це частка загальної маси тіла, яка складається з жирової
-                тканини. На відміну від ІМТ, цей показник розрізняє жирову і м'язову масу, тому дає
-                точнішу картину фізичної форми.
-            </p>
-
-            <h2>Метод ВМФ США (US Navy)</h2>
-            <p>
-                Цей метод оцінює відсоток жиру за обхватами тіла — шиї, талії (і стегон для жінок) —
-                разом зі зростом. Він розроблений для військово-морського флоту США як швидкий і
-                недорогий спосіб оцінки фізичної форми без спеціального обладнання.
-            </p>
-
-            <h2>Як правильно виміряти обхвати</h2>
-            <ul>
-                <li><b>Шия:</b> нижче адамового яблука (кадика), стрічка трохи нахилена вниз спереду.</li>
-                <li><b>Талія:</b> на рівні пупка, стоячи прямо, після звичайного видиху, без втягування живота.</li>
-                <li><b>Стегна (для жінок):</b> на рівні найширшої частини сідниць.</li>
-            </ul>
-
-            <h2>Категорії відсотка жиру в тілі</h2>
-            <ul>
-                <li><b>Есенційний жир:</b> мінімум, необхідний для життєдіяльності (чоловіки ~2-5%, жінки ~10-13%).</li>
-                <li><b>Спортивний:</b> характерний для елітних спортсменів (чоловіки 6-13%, жінки 14-20%).</li>
-                <li><b>Фітнес:</b> добра фізична форма (чоловіки 14-17%, жінки 21-24%).</li>
-                <li><b>Прийнятний:</b> середній здоровий рівень (чоловіки 18-24%, жінки 25-31%).</li>
-                <li><b>Ожиріння:</b> підвищений ризик для здоров'я (чоловіки 25%+, жінки 32%+).</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Метод обхватів має похибку приблизно ±3-4% порівняно з лабораторними методами (DEXA,
-                гідростатичне зважування). Для точнішої оцінки складу тіла звернись до фахівця з
-                відповідним обладнанням.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/sport/bmi-calculator"><b>Калькулятор ІМТ</b><span>Категорія за ВООЗ і нормальна вага для зросту.</span></a>
+                <a class="cc-related-card" href="/sport/calories-calculator"><b>Калькулятор калорій</b><span>Добова норма, темп і строк досягнення цілі.</span></a>
+                <a class="cc-related-card" href="/sport/macros-calculator"><b>Калькулятор БЖУ</b><span>Білки, жири й вуглеводи під вашу ціль.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що таке відсоток жиру в тілі</h2>
+            <p><b>Відсоток жиру в тілі</b> — це частка жирової тканини в загальній масі тіла. На відміну від ІМТ, він відрізняє жир від м'язів, тому краще показує форму: двоє людей однакової ваги й зросту можуть мати зовсім різний склад тіла. Решта маси — суха (безжирова) маса: м'язи, кістки, органи й вода.</p>
+
+            <h2>Метод ВМФ США: як він працює</h2>
+            <p>Метод розробили для військово-морського флоту США як швидку оцінку без спеціального обладнання. Чоловіки вводять зріст, обхват шиї й талії, жінки додатково обхват стегон. Формулу в метричних одиницях (см): <b>чоловіки: 495 / (1,0324 − 0,19077·lg(талія − шия) + 0,15456·lg(зріст)) − 450</b>; жінки використовують суму талії й стегон мінус шия з іншими коефіцієнтами. Для чоловіка зростом 178 см із шиєю 38 см і талією 85 см виходить 16,4 %, а для жінки 165 см із шиєю 32, талією 74 і стегнами 98 см — 28,4 %.</p>
+
+            <h2>Як правильно виміряти</h2>
+            <p>Шию міряйте нижче кадика, стрічка трохи нахилена вниз спереду. Талію чоловікам міряють на рівні пупка, жінкам у найвужчому місці (зазвичай трохи вище пупка), після звичайного видиху без утягування живота. Стегна жінкам міряють у найширшому місці сідниць. Стрічка має прилягати щільно, але не стискати шкіру. Для порівняння в динаміці міряйтеся в той самий час доби й тією самою стрічкою: навіть сантиметр у талії помітно змінює результат.</p>
+
+            <h2>Категорії для чоловіків і жінок</h2>
+            <p>Калькулятор використовує категорії Американської ради з фізичних вправ (ACE). Для чоловіків: необхідний жир 2–5 %, спортивна форма 6–13 %, фітнес 14–17 %, середній рівень 18–24 %, ожиріння від 25 %. Для жінок: 10–13 %, 14–20 %, 21–24 %, 25–31 % і від 32 %. Межі різні, бо жінкам для здоров'я потрібно більше необхідного жиру, тому шкала на сторінці будується окремо для кожної статі. Це орієнтири, а не діагноз: вони не залежать від віку й не замінюють консультацію лікаря.</p>
+
+            <h2>Оцінка за ІМТ і віком</h2>
+            <p>Якщо стрічки немає, можна скористатися формулою Дейренберга з колегами (1991): <b>жир, % = 1,20·ІМТ + 0,23·вік − 10,8·стать − 5,4</b>, де стать дорівнює 1 для чоловіків і 0 для жінок. Для чоловіка 30 років, 80 кг і 178 см (ІМТ 25,2) вийде 21,0 %. Формула призначена для дорослих, її стандартна похибка в дослідженні авторів близько 4 відсоткових пунктів, а у людей з ожирінням вона трохи завищує жир. Вона не відрізняє м'язи від жиру, тому для тренованих людей менш точна, ніж обхвати.</p>
+
+            <h2>Жирова й суха маса, ціль за відсотком</h2>
+            <p>Третя вкладка переводить відсоток у кілограми. Для 80 кг і 20 % жиру це 16,0 кг жиру й 64,0 кг сухої маси; для зросту 178 см індекс жирової маси (FMI) становить 5,0 кг/м², а безжирової (FFMI) — 20,2 кг/м². Якщо задати ціль 15 %, калькулятор за незмінної сухої маси порахує вагу при цілі: 64,0 / (1 − 0,15) = 75,3 кг, тобто потрібно скинути близько 4,7 кг жиру. Це спрощення: за дефіциту калорій частина ваги втрачається й з м'язів, тому поєднуйте розрахунок із силовими тренуваннями й калькулятором калорій.</p>
+
+            <h2>Точність і обмеження</h2>
+            <p>Усі три способи дають оцінку, а не вимірювання: метод обхватів зазвичай помиляється на кілька відсоткових пунктів порівняно з DEXA чи гідростатичним зважуванням, а формула за ІМТ ще менш точна. На результат впливають вимірювання, гідратація, ділянка накопичення жиру й анатомія. Дуже низькі значення (нижче необхідного жиру) небезпечні для здоров'я. Для рішень про здоров'я, дієту чи лікування зверніться до лікаря.</p>
+            <p class="ph-mini">Це оцінка за формулами, а не медичний аналіз: точніше склад тіла визначають DEXA, біоімпеданс чи гідростатичне зважування. Питання здоров'я обговорюйте з лікарем.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Наскільки точний метод обхватів?</h3>
-                <p>Метод обхватів (US Navy) має похибку приблизно ±3-4% порівняно з лабораторними методами
-                    (DEXA-сканування), але є доступним і безкоштовним способом оцінки.</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати відсоток жиру в тілі?</h3>
+                <p>Виміряйте шию, талію (жінкам ще й стегна) та зріст і введіть на вкладці «Метод ВМФ США». Для чоловіка 178 см із шиєю 38 і талією 85 см виходить 16,4 %.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Як правильно виміряти обхват талії?</h3>
-                <p>Виміряй обхват на рівні пупка, стоячи прямо, не втягуючи живіт, після звичайного видиху.</p>
+            <div class="cc-faq-item">
+                <h3>Який відсоток жиру нормальний?</h3>
+                <p>За категоріями ACE: чоловікам 14–24 % (фітнес і середній рівень), жінкам 21–31 %. Спортсмени мають нижчі значення, а від 25 % у чоловіків і 32 % у жінок це вже ожиріння.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому в жінок і чоловіків різні виміри?</h3>
-                <p>Формула для жінок додатково враховує обхват стегон, оскільки розподіл жиру в тілі різниться між
-                    статями.</p>
+            <div class="cc-faq-item">
+                <h3>Чому межі для жінок вищі?</h3>
+                <p>Жінкам потрібно більше необхідного жиру для гормональної та репродуктивної функцій, тому шкала для них зсунута вгору приблизно на 8–10 відсоткових пунктів.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна довіряти цьому розрахунку на 100%?</h3>
-                <p>Це орієнтовна оцінка. Для точного визначення складу тіла використовуй DEXA-сканування, гідростатичне
-                    зважування або біоімпедансометрію у фахівця.</p>
+            <div class="cc-faq-item">
+                <h3>Наскільки точний метод ВМФ США?</h3>
+                <p>Це оцінка: зазвичай вона помиляється на кілька відсоткових пунктів порівняно з лабораторними методами. Порівнювати краще власні результати в динаміці.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Де міряти талію?</h3>
+                <p>Чоловікам на рівні пупка, жінкам у найвужчому місці (зазвичай трохи вище пупка), після видиху без утягування живота. Тримайтеся однакового місця щоразу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим відрізняється від ІМТ?</h3>
+                <p>ІМТ залежить лише від ваги й зросту й не відрізняє м'язи від жиру, а відсоток жиру показує склад тіла. Тому у тренованих людей ІМТ може бути «надлишковим» при нормальному жирі.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке формула Дейренберга?</h3>
+                <p>Оцінка жиру за ІМТ, віком і статтю: 1,20·ІМТ + 0,23·вік − 10,8·стать − 5,4. Стандартна похибка ≈ 4 відсоткових пункти, формула лише для дорослих.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке суха маса?</h3>
+                <p>Усе, крім жиру: м'язи, кістки, органи й вода. Для 80 кг при 20 % жиру суха маса становить 64 кг.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке FMI та FFMI?</h3>
+                <p>Індекс жирової маси та індекс безжирової маси: маса жиру чи сухої маси в кг, поділена на квадрат зросту в метрах. Вони не залежать від зросту так сильно, як відсотки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати вагу при цільовому відсотку жиру?</h3>
+                <p>За незмінної сухої маси: вага = суха маса / (1 − ціль). Для 80 кг і 20 % при цілі 15 % це 75,3 кг, тобто мінус 4,7 кг жиру.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи безпечно мати дуже низький відсоток жиру?</h3>
+                <p>Ні, нижче необхідного рівня (чоловікам близько 2–5 %, жінкам 10–13 %) це небезпечно для здоров'я. Калькулятор попереджає, якщо ціль або результат нижчі за цей рівень.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи залежить норма від віку?</h3>
+                <p>Категорії ACE не враховують вік, хоча з роками частка жиру зазвичай зростає. Для індивідуальної норми порадьтеся з лікарем чи тренером.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
