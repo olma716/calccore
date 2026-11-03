@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор темпу бігу онлайн — час, темп, дистанція | CalcCore</title>
+    <title>Калькулятор темпу бігу онлайн: темп, час, спліти, VDOT | CalcCore</title>
     <meta name="description"
-        content="Розрахунок темпу бігу, часу на дистанції або дистанції за темпом. Прогноз часу для 5км, 10км, півмарафону та марафону." />
+        content="Калькулятор темпу бігу: темп, час фінішу чи дистанція, спліти по км, прогноз Рігеля для 5 і 10 км, півмарафону й марафону, VDOT і тренувальні темпи." />
 
     <link rel="canonical" href="https://calccore.net/sport/running-pace-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/running-pace-calculator" />
@@ -26,270 +28,425 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор темпу бігу онлайн — час, темп, дистанція" />
-    <meta property="og:description" content="Розрахунок темпу бігу, часу на дистанції або дистанції за темпом. Прогноз часу для 5км, 10км, півмарафону та марафону." />
+    <meta property="og:title" content="Калькулятор темпу бігу онлайн: темп, час, спліти, VDOT" />
+    <meta property="og:description" content="Калькулятор темпу бігу: темп, час фінішу чи дистанція, спліти по км, прогноз Рігеля для 5 і 10 км, півмарафону й марафону, VDOT і тренувальні темпи." />
     <meta property="og:url" content="https://calccore.net/sport/running-pace-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор темпу бігу онлайн — час, темп, дистанція" />
-    <meta name="twitter:description" content="Розрахунок темпу бігу, часу на дистанції або дистанції за темпом. Прогноз часу для 5км, 10км, півмарафону та марафону." />
+    <meta name="twitter:title" content="Калькулятор темпу бігу онлайн: темп, час, спліти, VDOT" />
+    <meta name="twitter:description" content="Калькулятор темпу бігу: темп, час фінішу чи дистанція, спліти по км, прогноз Рігеля для 5 і 10 км, півмарафону й марафону, VDOT і тренувальні темпи." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104rp1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/running-pace-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Що таке темп бігу?",
-        "acceptedAnswer":{"@type":"Answer","text":"Темп бігу — це час, за який пробігається 1 кілометр (або миля). Вимірюється в хвилинах на кілометр (хв/км)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Як розрахувати час фінішу на марафоні за поточним темпом?",
-        "acceptedAnswer":{"@type":"Answer","text":"Помнож свій темп (хв/км) на дистанцію марафону (42.195 км). Врахуй, що на довгих дистанціях темп зазвичай трохи сповільнюється порівняно з короткими забігами."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому мій темп на марафоні буде повільнішим, ніж на 5км?",
-        "acceptedAnswer":{"@type":"Answer","text":"На довших дистанціях організм має підтримувати темп значно довше, тому фізіологічно неможливо бігти з тією ж швидкістю, що на коротких забігах. Це називається негативним чи позитивним спліт-ефектом."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104rp1" defer></script>
+    <script src="/js/phys-core.js?v=20261104rp1" defer></script>
+    <script src="/js/rp-data.js?v=20261104rp1" defer></script>
+    <script src="/js/rp-calc.js?v=20261104rp1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/sport/running-pace-calculator#app",
-    "name":"Running Pace Calculator",
-    "description":"Розрахунок темпу бігу, часу на дистанції або дистанції за темпом з прогнозом для стандартних забігів.",
-    "url":"https://calccore.net/sport/running-pace-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/sport/running-pace-calculator#app",
+  "name": "Калькулятор темпу бігу",
+  "description": "Онлайн-калькулятор темпу бігу: темп, час фінішу або дистанція за двома відомими величинами в кілометрах і милях, швидкість у км/год і милях/год, спліти на кожен кілометр чи милю з рівним або негативним темпом, прогноз часу на іншу дистанцію за формулою Рігеля, VDOT за Джеком Деніелсом і тренувальні темпи (легкий, марафонський, пороговий, інтервальний, повторювальний).",
+  "url": "https://calccore.net/sport/running-pace-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Темп, час фінішу або дистанція за двома відомими величинами",
+    "Кілометри й милі, темп на км і на милю, швидкість",
+    "Таблиця часу на 1500 м, миля, 3, 5, 10, 15 км, півмарафон, марафон",
+    "Спліти по кілометрах із рівним чи негативним темпом",
+    "Прогноз за формулою Рігеля зі змінним показником",
+    "VDOT і п'ять тренувальних темпів"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/sport/running-pace-calculator#webpage",
+      "url": "https://calccore.net/sport/running-pace-calculator",
+      "name": "Калькулятор темпу бігу онлайн: темп, час, спліти, VDOT | CalcCore",
+      "description": "Калькулятор темпу бігу: темп, час фінішу чи дистанція, спліти по км, прогноз Рігеля для 5 і 10 км, півмарафону й марафону, VDOT і тренувальні темпи.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/sport/running-pace-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/sport/running-pace-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/sport/running-pace-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Спорт",
+          "item": "https://calccore.net/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор темпу бігу",
+          "item": "https://calccore.net/sport/running-pace-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/sport/running-pace-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як розрахувати темп бігу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поділіть час на дистанцію. Наприклад, 10 км за 55:00 — це 55:00 / 10 = 5:30 на кілометр."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розрахувати час фінішу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножте темп на дистанцію. Для темпу 5:30/км і 10 км це 55:00, для півмарафону (21,0975 км) — 1:56:02."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим темп відрізняється від швидкості?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Темп — це хвилини на кілометр, швидкість — кілометри за годину. Темп 5:30/км — це швидкість 10,9 км/год. Калькулятор показує обидва значення."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як перевести темп з км у милі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножте темп на 1,609344: 5:30/км — це 8:51 на милю. І навпаки, 8:00 на милю — це 4:58 на кілометр."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка довжина півмарафону й марафону?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Півмарафон — 21,0975 км, марафон — 42,195 км. Саме ці точні значення використовує калькулятор."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке негативний спліт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Бігти другу половину дистанції швидше за першу. Калькулятор дозволяє задати, на скільки відсотків друга половина швидша, і розписує час по кожному кілометру."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке формула Рігеля?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Емпірична формула T₂ = T₁ · (D₂ / D₁)^1,06 для прогнозу часу на іншу дистанцію за відомим результатом. Показник 1,06 можна змінити."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи точний прогноз на марафон за результатом 5 км?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, зазвичай він надто оптимістичний: марафон потребує спеціальної витривалості. Надійніше прогнозувати дистанції, не набагато довші за відому."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке VDOT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оцінка бігової форми за Джеком Деніелсом, яка залежить від дистанції та часу вашого забігу. За нею розраховуються тренувальні темпи й рівноцінні результати."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які тренувальні темпи розраховує калькулятор?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Легкий, марафонський, пороговий, інтервальний і повторювальний — у хвилинах на кілометр і на милю."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який результат вводити для VDOT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Недавній забіг або контрольний біг із максимальними зусиллями на дистанції від 1500 м до марафону. Старий чи неповноцінний результат дасть занижений VDOT."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор рельєф і погоду?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Калькулятор рахує за формулами для рівного маршруту в нормальних умовах; спека, підйоми й вітер збільшать реальний час."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="crun">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор темпу бігу</h1>
-                    <p class="mcalc__p">
-                        Розрахуй темп, час фінішу або дистанцію. Прогноз часу для 5км, 10км,
-                        півмарафону та марафону на основі твого темпу.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор темпу бігу: темп, час, дистанція</h1>
+                    <p class="ph__p">Введіть дистанцію й темп — і калькулятор покаже час фінішу, а за часом і дистанцією знайде темп. Окремі вкладки: спліти на кожен кілометр, прогноз результату на іншу дистанцію за формулою Рігеля та тренувальні темпи за VDOT Джека Деніелса. Підтримуються кілометри й милі.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Спорт</span>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="mode">Що розрахувати</label>
-                                <select id="mode" class="mcalc__select">
-                                    <option value="time" selected>Час фінішу (за дистанцією і темпом)</option>
-                                    <option value="pace">Темп (за дистанцією і часом)</option>
-                                    <option value="distance">Дистанцію (за темпом і часом)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field" id="distanceWrap">
-                                <label class="mcalc__label" for="distance">Дистанція (км)</label>
-                                <input class="mcalc__input" id="distance" type="text" inputmode="decimal"
-                                    placeholder="напр.: 10" />
-                            </div>
-
-                            <div class="mcalc__field" id="paceWrap">
-                                <label class="mcalc__label" for="paceMin">Темп (хв:сек на км)</label>
-                                <div style="display:flex; gap:6px;">
-                                    <input class="mcalc__input" id="paceMin" type="text" inputmode="numeric"
-                                        placeholder="хв" style="text-align:center;" />
-                                    <input class="mcalc__input" id="paceSec" type="text" inputmode="numeric"
-                                        placeholder="сек" style="text-align:center;" />
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field m-full" id="timeWrap" style="display:none;">
-                                <label class="mcalc__label">Час (год:хв:сек)</label>
-                                <div style="display:flex; gap:6px;">
-                                    <input class="mcalc__input" id="timeH" type="text" inputmode="numeric"
-                                        placeholder="год" style="text-align:center;" />
-                                    <input class="mcalc__input" id="timeM" type="text" inputmode="numeric"
-                                        placeholder="хв" style="text-align:center;" />
-                                    <input class="mcalc__input" id="timeS" type="text" inputmode="numeric"
-                                        placeholder="сек" style="text-align:center;" />
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
-                                </div>
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="calc" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Темп, час, дистанція</b><span class="ph__ex">Темп, час, дистанція</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="splits" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span class="ph__tileTx"><b class="ph__tabT">Спліти</b><span class="ph__ex">Час на кожному кілометрі</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="predict" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span class="ph__tileTx"><b class="ph__tabT">Прогноз на іншу дистанцію</b><span class="ph__ex">Результат на іншій дистанції</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="vdot" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Темпи тренувань (VDOT)</b><span class="ph__ex">Легкий, пороговий, інтервальний</span></span></button>
                         </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Прогноз для стандартних дистанцій <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
-                                    type="button">Копіювати таблицю</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Race predictions">
-                                    <thead>
-                                        <tr>
-                                            <th>Дистанція</th>
-                                            <th>Прогнозований час</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
-                            <a href="/sport/heart-rate-calculator">Пульсові зони</a>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке темп бігу</h2>
-            <p>
-                <b>Темп бігу</b> — це час, за який пробігається 1 кілометр, виражений у хвилинах і секундах
-                (наприклад, 5:30 хв/км). Це основна метрика для бігунів, зручніша за швидкість (км/год) для
-                планування тренувань і забігів.
-            </p>
-        
-            <h2>Три способи використання калькулятора</h2>
-            <ul>
-                <li><b>Розрахунок часу фінішу:</b> знаючи дистанцію забігу та свій звичний темп, дізнайся приблизний час фінішу.
-                </li>
-                <li><b>Розрахунок темпу:</b> якщо в тебе є цільовий час на дистанцію, дізнайся, з яким темпом потрібно бігти.
-                </li>
-                <li><b>Розрахунок дистанції:</b> знаючи свій темп і час бігу, дізнайся приблизну дистанцію.</li>
-            </ul>
-        
-            <h2>Прогноз для стандартних дистанцій</h2>
-            <p>
-                Калькулятор також показує орієнтовний час для популярних дистанцій (5км, 10км, півмарафон
-                21.1км, марафон 42.195км) на основі введеного темпу. Це корисно для планування цілей на
-                майбутні забіги.
-            </p>
-        
-            <h2>Як використовувати темп у тренуваннях</h2>
-            <ul>
-                <li><b>Легкий біг (відновлення):</b> темп на 60-90 секунд повільніше за змагальний темп на 10км — розмовний
-                    темп, комфортне дихання.</li>
-                <li><b>Темповий біг:</b> темп трохи повільніше за змагальний темп на 10км, підтримується 20-40 хвилин
-                    безперервно.</li>
-                <li><b>Інтервали на швидкість:</b> темп швидший за змагальний темп на 5км, короткі відрізки з відпочинком між
-                    ними.</li>
-                <li><b>Довгий біг:</b> темп на 60-120 секунд повільніше за марафонський темп, для розвитку витривалості.</li>
-            </ul>
-        
-            <h2>Чому темп на різних дистанціях відрізняється</h2>
-            <p>
-                На коротких дистанціях (5км) можна бігти значно швидше, бо організм витрачає більше анаеробної
-                енергії протягом короткого часу. На довгих дистанціях (марафон) темп сповільнюється, бо потрібно
-                економити глікоген та уникати передчасної втоми. Типове правило: марафонський темп зазвичай на
-                45-75 секунд повільніший за темп на 10км, залежно від рівня тренованості.
-            </p>
-        
-            <p class="m-hintSmall">
-                Прогноз є орієнтовним — на довших дистанціях темп зазвичай трохи сповільнюється через
-                накопичену втому, тож реальний фінішний час на марафоні може бути дещо вищим, ніж проста
-                екстраполяція темпу з коротшого забігу.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/sport/heart-rate-calculator"><b>Калькулятор пульсових зон</b><span>П'ять зон для тренувань за пульсом.</span></a>
+                <a class="cc-related-card" href="/sport/calories-calculator"><b>Калькулятор калорій</b><span>Добова норма й витрати на тренування.</span></a>
+                <a class="cc-related-card" href="/sport/macros-calculator"><b>Калькулятор БЖУ</b><span>Білки, жири й вуглеводи під вашу ціль.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що таке темп бігу</h2>
+            <p><b>Темп бігу</b> — це час, за який ви пробігаєте один кілометр (або милю), наприклад 5:30 хв/км. Для планування тренувань і забігів він зручніший за швидкість: темп 5:30/км відповідає швидкості 10,9 км/год, а в милях — 8:51 на милю (6,8 миль/год). Одна миля дорівнює 1,609344 км, і калькулятор показує обидва варіанти.</p>
+
+            <h2>Як знайти темп, час і дистанцію</h2>
+            <p>Три величини пов'язані формулою <b>час = дистанція × темп</b>. На першій вкладці оберіть, що шукати, і введіть дві інші. Наприклад, 10 км за темпом 5:30/км — це 55:00; 10 км за 55:00 дають темп 5:30/км; а 55:00 за темпом 5:30/км — рівно 10 км. Поряд калькулятор будує таблицю часу на стандартних дистанціях за цим темпом: 5 км за 27:30, півмарафон (21,0975 км) за 1:56:02, марафон (42,195 км) за 3:52:04. Секунди округлюються правильно, без «5:60».</p>
+
+            <h2>Спліти: рівний і негативний темп</h2>
+            <p>Вкладка «Спліти» розписує цільовий час по кожному кілометру чи милі з накопиченим часом. Для півмарафону за 1:45:00 середній темп — 4:59/км. Якщо друга половина на 2 % швидша (негативний спліт), перша половина йде 5:02/км, друга 4:56/км, а на половині дистанції ви маєте 53:02. Нуль у полі «швидша на» дає рівний темп. Негативний спліт зазвичай допомагає не «перегоріти» на старті.</p>
+
+            <h2>Прогноз результату за формулою Рігеля</h2>
+            <p>Інженер Пітер Рігель у 1977 році запропонував формулу <b>T₂ = T₁ · (D₂ / D₁)^1,06</b>: час на нову дистанцію залежить від часу на відомій. Показник 1,06 означає, що з подвоєнням дистанції ви сповільнюєтеся приблизно на 6 %. Для 5 км за 25:00 формула дає 10 км за 52:07, півмарафон за 1:55:00 і марафон за 3:59:47 (темп 5:41/км). Прогноз найнадійніший для дистанцій, не набагато довших за вашу; марафон за результатом на 5 км зазвичай виходить надто оптимістичним, бо потребує спеціальної витривалості. Показник можна змінити, якщо знаєте свою схильність до довгих чи коротких дистанцій.</p>
+
+            <h2>VDOT і тренувальні темпи Деніелса</h2>
+            <p>Тренер Джек Деніелс запропонував оцінювати форму числом <b>VDOT</b>: воно виходить зі швидкості вашого забігу й частки максимального споживання кисню, яку можна втримувати цей час. За VDOT розраховуються темпи: <b>легкий</b> (близько 59–74 % VO₂max), <b>марафонський</b>, <b>пороговий</b> (≈ 88 %), <b>інтервальний</b> (≈ 98 %) і <b>повторювальний</b> (≈ 105 %). Для 5 км за 20:00 вийде VDOT 49,8: легкий біг 4:54–5:53/км, марафонський темп 4:32, пороговий 4:16, інтервальний 3:55 і повторювальний 3:42 на км. Рівноцінні результати: 10 км за 41:28, півмарафон за 1:31:50, марафон за 3:11:17. Це орієнтир, який може відрізнятися від офіційних таблиць на кілька секунд.</p>
+
+            <h2>Як користуватися темпами в тренуваннях</h2>
+            <p>Більшість тижневого обсягу вправляють у легкому темпі, коли можна вільно розмовляти. Пороговий темп (зазвичай 20–40 хвилин безперервно або відрізками) розвиває здатність довго тримати швидкість, інтервальний — максимальне споживання кисню, повторювальний — швидкість і економічність бігу. Для контролю навантаження поєднуйте темп із пульсом: для цього є калькулятор пульсових зон.</p>
+
+            <h2>Обмеження розрахунку</h2>
+            <p>Усі формули — статистичні моделі. Рельєф, спека, вітер, висота над рівнем моря, взуття й стан здоров'я можуть змінити реальний час на хвилини. Формула Деніелса точніша для результатів приблизно від кількох хвилин до трьох годин. Новачкам і людям із хронічними хворобами варто узгодити тренувальні навантаження з лікарем.</p>
+            <p class="ph-mini">Це розрахунок за формулами для планування: на реальний час впливають рельєф, погода, підготовка й самопочуття. Перед важкими тренуваннями й забігами зверніться до лікаря чи тренера.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Що таке темп бігу?</h3>
-                <p>Темп бігу — це час, за який пробігається 1 кілометр (або миля). Вимірюється в хвилинах на кілометр
-                    (хв/км).</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати темп бігу?</h3>
+                <p>Поділіть час на дистанцію. Наприклад, 10 км за 55:00 — це 55:00 / 10 = 5:30 на кілометр.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Як розрахувати час фінішу на марафоні за поточним темпом?</h3>
-                <p>Помнож свій темп (хв/км) на дистанцію марафону (42.195 км). Врахуй, що на довгих дистанціях темп
-                    зазвичай трохи сповільнюється порівняно з короткими забігами.</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати час фінішу?</h3>
+                <p>Помножте темп на дистанцію. Для темпу 5:30/км і 10 км це 55:00, для півмарафону (21,0975 км) — 1:56:02.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому мій темп на марафоні буде повільнішим, ніж на 5км?</h3>
-                <p>На довших дистанціях організм має підтримувати темп значно довше, тому фізіологічно неможливо бігти з
-                    тією ж швидкістю, що на коротких забігах.</p>
+            <div class="cc-faq-item">
+                <h3>Чим темп відрізняється від швидкості?</h3>
+                <p>Темп — це хвилини на кілометр, швидкість — кілометри за годину. Темп 5:30/км — це швидкість 10,9 км/год. Калькулятор показує обидва значення.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як перевести темп з км у милі?</h3>
+                <p>Помножте темп на 1,609344: 5:30/км — це 8:51 на милю. І навпаки, 8:00 на милю — це 4:58 на кілометр.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка довжина півмарафону й марафону?</h3>
+                <p>Півмарафон — 21,0975 км, марафон — 42,195 км. Саме ці точні значення використовує калькулятор.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке негативний спліт?</h3>
+                <p>Бігти другу половину дистанції швидше за першу. Калькулятор дозволяє задати, на скільки відсотків друга половина швидша, і розписує час по кожному кілометру.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке формула Рігеля?</h3>
+                <p>Емпірична формула T₂ = T₁ · (D₂ / D₁)^1,06 для прогнозу часу на іншу дистанцію за відомим результатом. Показник 1,06 можна змінити.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи точний прогноз на марафон за результатом 5 км?</h3>
+                <p>Ні, зазвичай він надто оптимістичний: марафон потребує спеціальної витривалості. Надійніше прогнозувати дистанції, не набагато довші за відому.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке VDOT?</h3>
+                <p>Оцінка бігової форми за Джеком Деніелсом, яка залежить від дистанції та часу вашого забігу. За нею розраховуються тренувальні темпи й рівноцінні результати.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які тренувальні темпи розраховує калькулятор?</h3>
+                <p>Легкий, марафонський, пороговий, інтервальний і повторювальний — у хвилинах на кілометр і на милю.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який результат вводити для VDOT?</h3>
+                <p>Недавній забіг або контрольний біг із максимальними зусиллями на дистанції від 1500 м до марафону. Старий чи неповноцінний результат дасть занижений VDOT.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор рельєф і погоду?</h3>
+                <p>Ні. Калькулятор рахує за формулами для рівного маршруту в нормальних умовах; спека, підйоми й вітер збільшать реальний час.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

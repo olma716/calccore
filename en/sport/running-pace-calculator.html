@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Running Pace Calculator — Time, Pace, Distance | CalcCore</title>
+    <title>Running Pace Calculator: Pace, Time, Splits, VDOT | CalcCore</title>
     <meta name="description"
-        content="Calculate running pace, finish time, or distance. Race time predictions for 5K, 10K, half marathon, and marathon." />
+        content="Running pace calculator: pace, finish time or distance, splits per km, Riegel prediction for 5K, 10K, half marathon and marathon, VDOT and training paces." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/running-pace-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/running-pace-calculator" />
@@ -26,267 +28,425 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Running Pace Calculator — Time, Pace, Distance" />
-    <meta property="og:description" content="Calculate running pace, finish time, or distance. Race time predictions for 5K, 10K, half marathon, and marathon." />
+    <meta property="og:title" content="Running Pace Calculator: Pace, Time, Splits, VDOT" />
+    <meta property="og:description" content="Running pace calculator: pace, finish time or distance, splits per km, Riegel prediction for 5K, 10K, half marathon and marathon, VDOT and training paces." />
     <meta property="og:url" content="https://calccore.net/en/sport/running-pace-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Running Pace Calculator — Time, Pace, Distance" />
-    <meta name="twitter:description" content="Calculate running pace, finish time, or distance. Race time predictions for 5K, 10K, half marathon, and marathon." />
+    <meta name="twitter:title" content="Running Pace Calculator: Pace, Time, Splits, VDOT" />
+    <meta name="twitter:description" content="Running pace calculator: pace, finish time or distance, splits per km, Riegel prediction for 5K, 10K, half marathon and marathon, VDOT and training paces." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104rp1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/running-pace-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is running pace?",
-        "acceptedAnswer":{"@type":"Answer","text":"Running pace is the time it takes to run 1 kilometer (or mile), measured in minutes per kilometer (min/km)."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I calculate marathon finish time from my current pace?",
-        "acceptedAnswer":{"@type":"Answer","text":"Multiply your pace (min/km) by the marathon distance (42.195 km). Keep in mind that pace usually slows slightly over longer distances compared to shorter runs."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why will my marathon pace be slower than my 5K pace?",
-        "acceptedAnswer":{"@type":"Answer","text":"Over longer distances, the body has to sustain effort for much longer, so it's physiologically impossible to maintain the same pace as a shorter run."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104rp1" defer></script>
+    <script src="/js/phys-core.js?v=20261104rp1" defer></script>
+    <script src="/js/rp-data.js?v=20261104rp1" defer></script>
+    <script src="/js/rp-calc.js?v=20261104rp1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/running-pace-calculator#app",
-    "name":"Running Pace Calculator",
-    "description":"Calculate running pace, finish time, or distance with race predictions for standard distances.",
-    "url":"https://calccore.net/en/sport/running-pace-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/running-pace-calculator#app",
+  "name": "Running Pace Calculator",
+  "description": "An online running pace calculator: pace, finish time or distance from two known values in kilometres and miles, speed in km/h and mph, splits for every kilometre or mile with even or negative pace, a time prediction for another distance with the Riegel formula, VDOT by Jack Daniels and training paces (easy, marathon, threshold, interval, repetition).",
+  "url": "https://calccore.net/en/sport/running-pace-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Pace, finish time or distance from two known values",
+    "Kilometres and miles, pace per km and per mile, speed",
+    "A time table for 1500 m, mile, 3, 5, 10, 15 km, half marathon, marathon",
+    "Splits by kilometre with even or negative pace",
+    "A Riegel prediction with an adjustable exponent",
+    "VDOT and five training paces"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/running-pace-calculator#webpage",
+      "url": "https://calccore.net/en/sport/running-pace-calculator",
+      "name": "Running Pace Calculator: Pace, Time, Splits, VDOT | CalcCore",
+      "description": "Running pace calculator: pace, finish time or distance, splits per km, Riegel prediction for 5K, 10K, half marathon and marathon, VDOT and training paces.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/running-pace-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/running-pace-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/running-pace-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Running pace calculator",
+          "item": "https://calccore.net/en/sport/running-pace-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/running-pace-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate running pace?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide the time by the distance. For example 10 km in 55:00 is 55:00 / 10 = 5:30 per kilometre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate finish time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply pace by distance. For a pace of 5:30/km and 10 km it is 55:00, for a half marathon (21.0975 km) it is 1:56:02."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is pace different from speed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pace is minutes per kilometre and speed is kilometres per hour. A pace of 5:30/km is a speed of 10.9 km/h. The calculator shows both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert pace from km to miles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply pace by 1.609344: 5:30/km is 8:51 per mile. And the other way, 8:00 per mile is 4:58 per kilometre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long is a half marathon and a marathon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A half marathon is 21.0975 km and a marathon is 42.195 km. The calculator uses exactly these values."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a negative split?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Running the second half faster than the first. The calculator lets you set by what percent the second half is faster and lays out the time for each kilometre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Riegel formula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An empirical formula T₂ = T₁ · (D₂ / D₁)^1.06 for predicting time over another distance from a known result. The exponent 1.06 can be changed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a marathon prediction from a 5 km result accurate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, it is usually too optimistic: a marathon needs specific endurance. It is more reliable to predict distances not much longer than the known one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is VDOT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A running fitness score by Jack Daniels that depends on the distance and time of your race. Training paces and equivalent results are calculated from it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which training paces does the calculator compute?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Easy, marathon, threshold, interval and repetition, in minutes per kilometre and per mile."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which result should I enter for VDOT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A recent race or an all-out time trial over a distance from 1500 m to a marathon. An old or half-hearted result gives an understated VDOT."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for terrain and weather?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It calculates by formulas for a flat route in normal conditions; heat, hills and wind will increase the real time."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="crun">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Running Pace Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate pace, finish time, or distance. Race time predictions for 5K, 10K,
-                        half marathon, and marathon based on your pace.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Running Pace Calculator: Pace, Time, Distance</h1>
+                    <p class="ph__p">Enter a distance and a pace and the calculator shows the finish time, or finds the pace from a time and a distance. Separate tabs: splits for every kilometre, a result prediction for another distance with the Riegel formula and training paces from Jack Daniels' VDOT. Kilometres and miles are supported.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="mode">What to calculate</label>
-                                <select id="mode" class="mcalc__select">
-                                    <option value="time" selected>Finish time (from distance and pace)</option>
-                                    <option value="pace">Pace (from distance and time)</option>
-                                    <option value="distance">Distance (from pace and time)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field" id="distanceWrap">
-                                <label class="mcalc__label" for="distance">Distance (km)</label>
-                                <input class="mcalc__input" id="distance" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 10" />
-                            </div>
-
-                            <div class="mcalc__field" id="paceWrap">
-                                <label class="mcalc__label" for="paceMin">Pace (min:sec per km)</label>
-                                <div style="display:flex; gap:6px;">
-                                    <input class="mcalc__input" id="paceMin" type="text" inputmode="numeric"
-                                        placeholder="min" style="text-align:center;" />
-                                    <input class="mcalc__input" id="paceSec" type="text" inputmode="numeric"
-                                        placeholder="sec" style="text-align:center;" />
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field m-full" id="timeWrap" style="display:none;">
-                                <label class="mcalc__label">Time (h:min:sec)</label>
-                                <div style="display:flex; gap:6px;">
-                                    <input class="mcalc__input" id="timeH" type="text" inputmode="numeric"
-                                        placeholder="h" style="text-align:center;" />
-                                    <input class="mcalc__input" id="timeM" type="text" inputmode="numeric"
-                                        placeholder="min" style="text-align:center;" />
-                                    <input class="mcalc__input" id="timeS" type="text" inputmode="numeric"
-                                        placeholder="sec" style="text-align:center;" />
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                                </div>
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="calc" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Pace, time, distance</b><span class="ph__ex">Pace, time, distance</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="splits" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span class="ph__tileTx"><b class="ph__tabT">Splits</b><span class="ph__ex">Time for every kilometre</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="predict" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span class="ph__tileTx"><b class="ph__tabT">Race predictor</b><span class="ph__ex">A result at another distance</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="vdot" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Training paces (VDOT)</b><span class="ph__ex">Easy, threshold, interval</span></span></button>
                         </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Race predictions <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Race predictions">
-                                    <thead>
-                                        <tr>
-                                            <th>Distance</th>
-                                            <th>Predicted time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
-                            <a href="/en/sport/heart-rate-calculator">Heart Rate Zones</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is running pace</h2>
-            <p>
-                <b>Running pace</b> is the time it takes to run 1 kilometer, expressed in minutes and
-                seconds (e.g., 5:30 min/km). It's the main metric runners use, more convenient than speed
-                (km/h) for planning training and races.
-            </p>
-        
-            <h2>Three ways to use this calculator</h2>
-            <ul>
-                <li><b>Calculate finish time:</b> knowing the race distance and your usual pace, find your estimated finish
-                    time.</li>
-                <li><b>Calculate pace:</b> if you have a target time for a distance, find out what pace you need to run.</li>
-                <li><b>Calculate distance:</b> knowing your pace and running time, find the approximate distance covered.</li>
-            </ul>
-        
-            <h2>Predictions for standard distances</h2>
-            <p>
-                The calculator also shows estimated times for popular race distances (5K, 10K, half marathon
-                21.1K, marathon 42.195K) based on your entered pace. This is useful for planning goals for
-                upcoming races.
-            </p>
-        
-            <h2>How to use pace in your training</h2>
-            <ul>
-                <li><b>Easy run (recovery):</b> pace 60-90 seconds slower than 10K race pace — conversational pace, comfortable
-                    breathing.</li>
-                <li><b>Tempo run:</b> pace slightly slower than 10K race pace, sustained for 20-40 minutes continuously.</li>
-                <li><b>Speed intervals:</b> pace faster than 5K race pace, short segments with rest in between.</li>
-                <li><b>Long run:</b> pace 60-120 seconds slower than marathon pace, for building endurance.</li>
-            </ul>
-        
-            <h2>Why pace differs across distances</h2>
-            <p>
-                On short distances (5K), you can run significantly faster because the body draws more on
-                anaerobic energy over a short period. On long distances (marathon), pace slows down because
-                you need to conserve glycogen and avoid premature fatigue. A typical rule of thumb: marathon
-                pace is usually 45-75 seconds slower per km than 10K pace, depending on fitness level.
-            </p>
-        
-            <p class="m-hintSmall">
-                These predictions are estimates — over longer distances, pace typically slows down due to
-                accumulated fatigue, so your actual marathon finish time may be somewhat higher than a
-                simple extrapolation from a shorter run's pace.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/heart-rate-calculator"><b>Heart Rate Zone Calculator</b><span>Five zones for heart-rate training.</span></a>
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>Daily needs and workout energy.</span></a>
+                <a class="cc-related-card" href="/en/sport/macros-calculator"><b>Macro Calculator</b><span>Protein, fat and carbs for your goal.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What running pace is</h2>
+            <p><b>Running pace</b> is the time it takes you to run one kilometre (or mile), for example 5:30 per km. For planning training and races it is handier than speed: a pace of 5:30/km equals 10.9 km/h, and in miles it is 8:51 per mile (6.8 mph). One mile is 1.609344 km and the calculator shows both.</p>
+
+            <h2>How to find pace, time and distance</h2>
+            <p>The three values are linked by <b>time = distance × pace</b>. On the first tab choose what to find and enter the other two. For example, 10 km at 5:30/km is 55:00; 10 km in 55:00 gives a pace of 5:30/km; and 55:00 at 5:30/km is exactly 10 km. Alongside, the calculator builds a table of times over standard distances at this pace: 5 km in 27:30, a half marathon (21.0975 km) in 1:56:02, a marathon (42.195 km) in 3:52:04. Seconds are rounded correctly, with no “5:60”.</p>
+
+            <h2>Splits: even and negative pace</h2>
+            <p>The “Splits” tab lays out your target time for every kilometre or mile with the running total. For a half marathon in 1:45:00 the average pace is 4:59/km. If the second half is 2% faster (a negative split), the first half runs at 5:02/km, the second at 4:56/km and you are at 53:02 at halfway. Zero in “faster by” gives an even pace. A negative split usually helps you avoid burning out at the start.</p>
+
+            <h2>Result prediction with the Riegel formula</h2>
+            <p>In 1977 the engineer Peter Riegel proposed the formula <b>T₂ = T₁ · (D₂ / D₁)^1.06</b>: the time for a new distance depends on the time for a known one. The exponent 1.06 means you slow down by about 6% each time the distance doubles. For 5 km in 25:00 the formula gives 10 km in 52:07, a half marathon in 1:55:00 and a marathon in 3:59:47 (5:41/km). A prediction is most reliable for distances not much longer than yours; a marathon from a 5 km result usually comes out too optimistic because it needs specific endurance. You can change the exponent if you know your tendency towards long or short distances.</p>
+
+            <h2>VDOT and Daniels training paces</h2>
+            <p>Coach Jack Daniels proposed rating fitness with a number called <b>VDOT</b>: it comes from the speed of your race and the share of maximal oxygen uptake you can hold for that time. Training paces are calculated from VDOT: <b>easy</b> (about 59–74% of VO₂max), <b>marathon</b>, <b>threshold</b> (≈ 88%), <b>interval</b> (≈ 98%) and <b>repetition</b> (≈ 105%). For 5 km in 20:00 you get a VDOT of 49.8: easy running 4:54–5:53/km, marathon pace 4:32, threshold 4:16, interval 3:55 and repetition 3:42 per km. Equivalent results: 10 km in 41:28, a half marathon in 1:31:50, a marathon in 3:11:17. It is a guide that can differ from the official tables by a few seconds.</p>
+
+            <h2>Using paces in training</h2>
+            <p>Most of the weekly volume is run at an easy pace where you can talk freely. Threshold pace (usually 20–40 minutes continuously or in repeats) builds the ability to hold speed for long, interval pace develops maximal oxygen uptake and repetition pace develops speed and running economy. To control the load, combine pace with heart rate: there is a heart rate zone calculator for that.</p>
+
+            <h2>Limits of the calculation</h2>
+            <p>All formulas are statistical models. Terrain, heat, wind, altitude, shoes and health can change the real time by minutes. The Daniels formula is more accurate for results from a few minutes to about three hours. Beginners and people with chronic conditions should agree training loads with a doctor.</p>
+            <p class="ph-mini">This is a formula-based calculation for planning: terrain, weather, fitness and how you feel affect the real time. See a doctor or coach before hard training and races.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is running pace?</h3>
-                <p>Running pace is the time it takes to run 1 kilometer (or mile), measured in minutes per kilometer
-                    (min/km).</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate running pace?</h3>
+                <p>Divide the time by the distance. For example 10 km in 55:00 is 55:00 / 10 = 5:30 per kilometre.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I calculate marathon finish time from my current pace?</h3>
-                <p>Multiply your pace (min/km) by the marathon distance (42.195 km). Keep in mind that pace usually
-                    slows slightly over longer distances compared to shorter runs.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate finish time?</h3>
+                <p>Multiply pace by distance. For a pace of 5:30/km and 10 km it is 55:00, for a half marathon (21.0975 km) it is 1:56:02.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why will my marathon pace be slower than my 5K pace?</h3>
-                <p>Over longer distances, the body has to sustain effort for much longer, so it's physiologically
-                    impossible to maintain the same pace as a shorter run.</p>
+            <div class="cc-faq-item">
+                <h3>How is pace different from speed?</h3>
+                <p>Pace is minutes per kilometre and speed is kilometres per hour. A pace of 5:30/km is a speed of 10.9 km/h. The calculator shows both.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I convert pace from km to miles?</h3>
+                <p>Multiply pace by 1.609344: 5:30/km is 8:51 per mile. And the other way, 8:00 per mile is 4:58 per kilometre.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How long is a half marathon and a marathon?</h3>
+                <p>A half marathon is 21.0975 km and a marathon is 42.195 km. The calculator uses exactly these values.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is a negative split?</h3>
+                <p>Running the second half faster than the first. The calculator lets you set by what percent the second half is faster and lays out the time for each kilometre.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the Riegel formula?</h3>
+                <p>An empirical formula T₂ = T₁ · (D₂ / D₁)^1.06 for predicting time over another distance from a known result. The exponent 1.06 can be changed.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is a marathon prediction from a 5 km result accurate?</h3>
+                <p>No, it is usually too optimistic: a marathon needs specific endurance. It is more reliable to predict distances not much longer than the known one.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is VDOT?</h3>
+                <p>A running fitness score by Jack Daniels that depends on the distance and time of your race. Training paces and equivalent results are calculated from it.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which training paces does the calculator compute?</h3>
+                <p>Easy, marathon, threshold, interval and repetition, in minutes per kilometre and per mile.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which result should I enter for VDOT?</h3>
+                <p>A recent race or an all-out time trial over a distance from 1500 m to a marathon. An old or half-hearted result gives an understated VDOT.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for terrain and weather?</h3>
+                <p>No. It calculates by formulas for a flat route in normal conditions; heat, hills and wind will increase the real time.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
