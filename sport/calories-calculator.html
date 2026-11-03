@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор калорій онлайн — BMR і TDEE | CalcCore</title>
+    <title>Калькулятор калорій онлайн: BMR, TDEE і ціль за вагою | CalcCore</title>
     <meta name="description"
-        content="Розрахунок базового метаболізму (BMR) та денної норми калорій (TDEE) за формулою Міффліна-Сент-Джеора. Рекомендації для схуднення, підтримки та набору маси." />
+        content="Калькулятор калорій: BMR і TDEE за п'ятьма формулами, калорії для схуднення чи набору, строк досягнення цілі, витрати на тренування (MET)." />
 
     <link rel="canonical" href="https://calccore.net/sport/calories-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/calories-calculator" />
@@ -26,271 +28,425 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор калорій онлайн — BMR і TDEE" />
-    <meta property="og:description" content="Розрахунок базового метаболізму (BMR) та денної норми калорій (TDEE) за формулою Міффліна-Сент-Джеора. Рекомендації для схуднення, підтримки та набору маси." />
+    <meta property="og:title" content="Калькулятор калорій онлайн: BMR, TDEE і ціль за вагою" />
+    <meta property="og:description" content="Калькулятор калорій: BMR і TDEE за п'ятьма формулами, калорії для схуднення чи набору, строк досягнення цілі, витрати на тренування (MET)." />
     <meta property="og:url" content="https://calccore.net/sport/calories-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор калорій онлайн — BMR і TDEE" />
-    <meta name="twitter:description" content="Розрахунок базового метаболізму (BMR) та денної норми калорій (TDEE) за формулою Міффліна-Сент-Джеора. Рекомендації для схуднення, підтримки та набору маси." />
+    <meta name="twitter:title" content="Калькулятор калорій онлайн: BMR, TDEE і ціль за вагою" />
+    <meta name="twitter:description" content="Калькулятор калорій: BMR і TDEE за п'ятьма формулами, калорії для схуднення чи набору, строк досягнення цілі, витрати на тренування (MET)." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104cal9" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/calories-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Що таке BMR і TDEE?",
-        "acceptedAnswer":{"@type":"Answer","text":"BMR (базовий метаболізм) — це кількість калорій, яку тіло витрачає у стані повного спокою. TDEE — це BMR помножений на коефіцієнт активності, тобто реальна денна витрата калорій."}
-      },
-      {
-        "@type":"Question",
-        "name":"Яку формулу використовує калькулятор?",
-        "acceptedAnswer":{"@type":"Answer","text":"Формулу Міффліна-Сент-Джеора — вона вважається найточнішою серед популярних формул для сучасної популяції."}
-      },
-      {
-        "@type":"Question",
-        "name":"Скільки калорій прибрати для схуднення?",
-        "acceptedAnswer":{"@type":"Answer","text":"Дефіцит 10-20% від TDEE вважається помірним і стійким темпом схуднення без значної втрати м'язової маси."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104cal9" defer></script>
+    <script src="/js/phys-core.js?v=20261104cal9" defer></script>
+    <script src="/js/cal-data.js?v=20261104cal9" defer></script>
+    <script src="/js/cal-calc.js?v=20261104cal9" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/sport/calories-calculator#app",
-    "name":"Calorie Calculator (BMR/TDEE)",
-    "description":"Розрахунок базового метаболізму та денної норми калорій за формулою Міффліна-Сент-Джеора з рекомендаціями для різних цілей.",
-    "url":"https://calccore.net/sport/calories-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/sport/calories-calculator#app",
+  "name": "Калькулятор калорій (BMR, TDEE)",
+  "description": "Онлайн-калькулятор калорій: базовий обмін (BMR) за формулами Міффліна — Сент-Джеора, Харріса — Бенедикта, Скофілда, Кетча — Макардла й Каннінгема, добова норма (TDEE) за рівнем активності, калорії для схуднення чи набору маси, план за бажаною вагою зі строком і темпом, порівняння формул та витрати калорій на тренування за MET. Кілограми й фунти, сантиметри й фути.",
+  "url": "https://calccore.net/sport/calories-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "П'ять формул BMR і порівняння між ними",
+    "TDEE за рівнем активності або власним коефіцієнтом",
+    "Калорії для схуднення, підтримки й набору",
+    "План за бажаною вагою: темп, строк, орієнтовна дата",
+    "Витрати на тренування за MET для 23 видів активності",
+    "Кг і фунти, см і фути-дюйми, попередження про безпечні межі"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/sport/calories-calculator#webpage",
+      "url": "https://calccore.net/sport/calories-calculator",
+      "name": "Калькулятор калорій онлайн: BMR, TDEE і ціль за вагою | CalcCore",
+      "description": "Калькулятор калорій: BMR і TDEE за п'ятьма формулами, калорії для схуднення чи набору, строк досягнення цілі, витрати на тренування (MET).",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/sport/calories-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/sport/calories-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/sport/calories-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Спорт",
+          "item": "https://calccore.net/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор калорій",
+          "item": "https://calccore.net/sport/calories-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/sport/calories-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Що таке BMR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Базовий обмін — калорії, які тіло витрачає у стані повного спокою за добу. Це мінімум, потрібний для підтримки життя, без урахування руху."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке TDEE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Загальна добова витрата енергії: BMR, помножений на коефіцієнт активності. Це кількість калорій, за якої вага не змінюється."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка формула BMR найточніша?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Єдиної найточнішої немає. Міффліна — Сент-Джеора найчастіше дає найменшу похибку для дорослих; Кетча — Макардла точніша, якщо відомий відсоток жиру. Калькулятор показує діапазон усіх формул."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати калорії для схуднення?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Від TDEE віднімають дефіцит: 10–20 % або 300–500 ккал на день. Вкладка «Ціль за вагою» рахує дефіцит за темпом, наприклад 0,5 кг на тиждень — це 550 ккал на день."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому 7700 ккал на кілограм?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це поширене наближення енергії в 1 кг жирової маси. Насправді темп зміни ваги залежить від складу тіла й змінюється в часі, тож це орієнтир."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка мінімальна безпечна калорійність?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поширений орієнтир без нагляду лікаря — не менш як 1200 ккал для жінок і 1500 для чоловіків і не нижче вашого BMR. Індивідуальна потреба може бути вищою."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Який темп схуднення безпечний?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зазвичай радять 0,25–1 кг на тиждень, але не більше близько 1 % маси тіла. Швидший темп частіше супроводжується втратою м'язів."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як вибрати рівень активності?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Орієнтуйтеся на тренування й побут: сидяча робота — 1,2, 3–5 тренувань на тиждень — 1,55. За сумніву беріть нижчий рівень і коригуйте за вагою через 2–3 тижні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому результати за формулами різняться?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Формули виведені на різних вибірках і мають різну форму, а деякі враховують склад тіла. Розкид у кілька відсотків — нормальна невизначеність оцінки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке MET?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Метаболічний еквівалент: у скільки разів активність витрачає більше енергії, ніж спокій (1 MET). Калорії = MET × вага (кг) × години."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому витрати на тренування в довіднику й у фітнес-трекері різні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MET — середні значення для групи людей, а трекери оцінюють за пульсом і рухом. Обидва підходи дають орієнтир, не точне вимірювання."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор вагітність чи хвороби?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Формули виведені на здорових дорослих, тому в таких випадках результат лише орієнтовний, а харчування краще узгодити з лікарем."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ccalories">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор калорій (BMR / TDEE)</h1>
-                    <p class="mcalc__p">
-                        Базовий метаболізм (BMR) та денна норма калорій (TDEE) за формулою
-                        <b>Міффліна-Сент-Джеора</b>. Рекомендації для схуднення, підтримки чи набору маси.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор калорій: BMR і TDEE</h1>
+                    <p class="ph__p">Введіть стать, вік, вагу, зріст і рівень активності — і калькулятор оцінить базовий обмін (BMR), добову норму калорій (TDEE) та калорії для схуднення, підтримки чи набору. Окремі вкладки: план за бажаною вагою зі строком, порівняння формул і витрати калорій на тренування.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Спорт</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="tdee" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Добова норма (BMR / TDEE)</b><span class="ph__ex">BMR, TDEE і калорії для цілі</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="plan" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Ціль за вагою</b><span class="ph__ex">Темп, строк і дата</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="compare" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span class="ph__tileTx"><b class="ph__tabT">Порівняння формул</b><span class="ph__ex">П'ять формул поруч</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="met" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Витрати на тренування</b><span class="ph__ex">Калорії за MET</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="sex">Стать</label>
-                                <select id="sex" class="mcalc__select">
-                                    <option value="male" selected>Чоловіча</option>
-                                    <option value="female">Жіноча</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="age">Вік (років)</label>
-                                <input class="mcalc__input" id="age" type="text" inputmode="numeric"
-                                    placeholder="напр.: 30" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="weight">Вага (кг)</label>
-                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
-                                    placeholder="напр.: 75" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="height">Зріст (см)</label>
-                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
-                                    placeholder="напр.: 178" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="activity">Рівень активності</label>
-                                <select id="activity" class="mcalc__select">
-                                    <option value="1.2">Мінімальний (сидяча робота, без спорту)</option>
-                                    <option value="1.375">Легкий (тренування 1-3 рази/тиждень)</option>
-                                    <option value="1.55" selected>Помірний (тренування 3-5 разів/тиждень)</option>
-                                    <option value="1.725">Високий (тренування 6-7 разів/тиждень)</option>
-                                    <option value="1.9">Дуже високий (фізична робота + тренування)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Калорії за цілями <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule"
-                                    type="button">Копіювати таблицю</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Calories by goal">
-                                    <thead>
-                                        <tr>
-                                            <th>Мета</th>
-                                            <th>Калорії/день</th>
-                                            <th>Різниця від TDEE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/sport/1pm-calculator">Калькулятор 1ПМ</a>
-                            <a href="/calculator">Науковий калькулятор</a>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/sport/macros-calculator"><b>Калькулятор БЖВ</b><span>Білки, жири й вуглеводи під вашу ціль.</span></a>
+                <a class="cc-related-card" href="/sport/bmi-calculator"><b>Калькулятор ІМТ</b><span>Індекс маси тіла й категорія ваги.</span></a>
+                <a class="cc-related-card" href="/sport/water-intake-calculator"><b>Калькулятор води</b><span>Скільки води пити щодня.</span></a>
+            </div>
+        </section>
 
-        <section class="m-seo">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
             <h2>Що таке BMR і TDEE</h2>
-            <p>
-                <b>BMR</b> (базовий рівень метаболізму) — кількість калорій, яку організм витрачає у стані повного
-                спокою для підтримки життєво важливих функцій: дихання, кровообігу, роботи органів.
-                <b>TDEE</b> (загальна денна витрата енергії) — це BMR, помножений на коефіцієнт активності,
-                тобто реальна кількість калорій, яку ти витрачаєш за день з урахуванням тренувань і побутової
-                активності.
-            </p>
+            <p><b>BMR</b> (базовий обмін) — калорії, які тіло витрачає у стані спокою за добу: на дихання, кровообіг, роботу органів. <b>TDEE</b> (загальна добова витрата) — це BMR, помножений на коефіцієнт активності, тобто реальна кількість калорій з урахуванням руху й тренувань. Саме TDEE — відправна точка для будь-якої цілі: щоб худнути, потрібно їсти менше за TDEE, щоб набирати масу — більше, щоб тримати вагу — приблизно стільки ж.</p>
 
-            <h2>Формула Міффліна-Сент-Джеора</h2>
-            <p>
-                Цей калькулятор використовує формулу Міффліна-Сент-Джеора (1990) — вона вважається найточнішою
-                серед популярних формул для сучасної популяції, точніша за старішу формулу Харріса-Бенедикта.
-            </p>
-            <ul>
-                <li><b>Чоловіки:</b> BMR = 10 × вага(кг) + 6.25 × зріст(см) − 5 × вік + 5</li>
-                <li><b>Жінки:</b> BMR = 10 × вага(кг) + 6.25 × зріст(см) − 5 × вік − 161</li>
-            </ul>
+            <h2>П'ять формул базового обміну</h2>
+            <p><b>Міффліна — Сент-Джеора</b> (за замовчуванням): 10 × вага + 6,25 × зріст − 5 × вік, плюс 5 для чоловіків або мінус 161 для жінок. <b>Харріса — Бенедикта</b> (переглянута, 1984): окремі коефіцієнти для чоловіків і жінок. <b>Скофілда</b> (ВООЗ): лінійна за вагою, окремо для віку 18–29, 30–59 і 60+ років. <b>Кетча — Макардла</b> і <b>Каннінгема</b> рахують від сухої маси тіла (потрібен відсоток жиру): 370 + 21,6 × суха маса та 500 + 22 × суха маса. Для чоловіка 30 років, 75 кг, 178 см із 18 % жиру вони дають 1718 (Міффлін), 1777 (Харріс — Бенедикт), 1734 (Скофілд), 1698 (Кетч — Макардл) і 1853 ккал (Каннінгем): розкид близько 9 % від середнього 1756 ккал.</p>
 
             <h2>Як обрати рівень активності</h2>
-            <ul>
-                <li><b>Мінімальний:</b> сидяча робота, мало або немає фізичних навантажень</li>
-                <li><b>Легкий:</b> легкі тренування 1-3 рази на тиждень</li>
-                <li><b>Помірний:</b> тренування середньої інтенсивності 3-5 разів на тиждень</li>
-                <li><b>Високий:</b> інтенсивні тренування 6-7 разів на тиждень</li>
-                <li><b>Дуже високий:</b> фізична робота плюс регулярні тренування</li>
-            </ul>
+            <p>Коефіцієнт множить BMR: 1,2 — сидяча робота без спорту; 1,375 — легкі тренування 1–3 рази на тиждень; 1,55 — помірні 3–5 разів; 1,725 — інтенсивні 6–7 разів; 1,9 — фізична праця плюс регулярні тренування. Люди найчастіше переоцінюють активність, тому за сумніву беріть нижчий рівень і коригуйте за результатом. Можна ввести і власний коефіцієнт від 1,0 до 2,5, якщо ви його знаєте. Для прикладу вище TDEE становить 1717,5 × 1,55 ≈ 2662 ккал на день.</p>
 
-            <h2>Як користуватись результатом для своєї мети</h2>
-            <p>
-                Для <b>схуднення</b> зазвичай рекомендують дефіцит 10-20% від TDEE — це дозволяє втрачати вагу
-                поступово, зберігаючи м'язову масу. Для <b>набору маси</b> — профіцит 10-15%. Для <b>підтримки</b>
-                ваги — калорійність, що дорівнює TDEE.
-            </p>
+            <h2>Калорії для схуднення, підтримки й набору</h2>
+            <p>Вкладка «Добова норма» показує п'ять цілей: швидке схуднення (−20 % від TDEE), помірне (−10 %), підтримку, чистий набір (+10 %) і швидкий (+15 %), а також орієнтовну зміну ваги на тиждень. Для TDEE 2662 ккал це 2130, 2396, 2662, 2928 і 3061 ккал, тобто приблизно −0,48; −0,24; 0; +0,24 і +0,36 кг на тиждень. Розрахунок спирається на спрощення: приблизно 7700 ккал відповідають 1 кг жирової маси. Якщо калорійність нижча за ваш BMR або за поширений мінімум 1200 (жінки) чи 1500 (чоловіки) ккал, калькулятор попереджає: так худнути без нагляду лікаря не варто.</p>
 
-            <p class="m-hintSmall">
-                Результат є оціночним і базується на середньостатистичних формулах. Індивідуальний метаболізм
-                може відрізнятися залежно від генетики, складу тіла, гормонального фону та інших факторів.
-                Для точнішої оцінки консультуйся з дієтологом чи спортивним лікарем.
-            </p>
+            <h2>План за бажаною вагою</h2>
+            <p>Вкладка «Ціль за вагою» за поточною й бажаною вагою та темпом (0,25–1 кг на тиждень) рахує калорії на день, строк і орієнтовну дату. Наприклад, схуднення з 75 до 68 кг у темпі 0,5 кг на тиждень потребує дефіциту 550 ккал на день: за TDEE 2662 це 2112 ккал і 14 тижнів. Калькулятор попереджає, якщо темп перевищує близько 1 % маси тіла на тиждень, дефіцит більший за 25 % TDEE або ціль далі ніж за два роки. Модель лінійна: насправді з втратою ваги витрата падає, тож темп сповільнюється — перераховуйте норму після кожних 4–5 кг.</p>
+
+            <h2>Витрати калорій на тренування</h2>
+            <p>Вкладка «Витрати на тренування» використовує MET — у скільки разів активність витрачає більше енергії, ніж спокій. Калорії = MET × вага (кг) × години. Для бігу 10 км/год (9,8 MET) 70-кілограмовій людині за 30 хвилин це 343 ккал повної витрати, з яких «додатково» (без спокою) — 308. Значення MET — середні з довідника фізичної активності; у списку 23 види: ходьба, біг, велосипед, плавання, силові, йога, ігрові види спорту. Реальна витрата залежить від темпу, рельєфу, техніки й тренованості.</p>
+
+            <h2>Точність і обмеження</h2>
+            <p>Формули виведено на вибірках дорослих здорових людей. Формулу Міффліна — Сент-Джеора перевіряли для віку приблизно 19–78 років, Скофілда — для дорослих. Для підлітків, вагітних, людей з порушеннями обміну речовин чи значною надмірною вагою результат лише орієнтовний. Найкращий спосіб уточнити норму — тижні спостережень: слідкуйте за вагою й коригуйте калорійність за фактом. Результат не є медичною порадою; при хворобах і значному схудненні консультуйтеся з лікарем або дієтологом.</p>
+            <p class="ph-mini">Усі значення — оцінки за статистичними формулами, а не вимірювання. Це не медична порада: при захворюваннях, вагітності чи значному схудненні консультуйтеся з лікарем або дієтологом.</p>
         </section>
 
-        <section class="m-faq">
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Що таке BMR і TDEE?</h3>
-                <p>BMR (базовий метаболізм) — це кількість калорій, яку тіло витрачає у стані повного спокою. TDEE — це
-                    BMR помножений на коефіцієнт активності, тобто реальна денна витрата калорій.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке BMR?</h3>
+                <p>Базовий обмін — калорії, які тіло витрачає у стані повного спокою за добу. Це мінімум, потрібний для підтримки життя, без урахування руху.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Яку формулу використовує калькулятор?</h3>
-                <p>Формулу Міффліна-Сент-Джеора — вона вважається найточнішою серед популярних формул для сучасної
-                    популяції.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке TDEE?</h3>
+                <p>Загальна добова витрата енергії: BMR, помножений на коефіцієнт активності. Це кількість калорій, за якої вага не змінюється.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Скільки калорій прибрати для схуднення?</h3>
-                <p>Дефіцит 10-20% від TDEE вважається помірним і стійким темпом схуднення без значної втрати м'язової
-                    маси.</p>
+            <div class="cc-faq-item">
+                <h3>Яка формула BMR найточніша?</h3>
+                <p>Єдиної найточнішої немає. Міффліна — Сент-Джеора найчастіше дає найменшу похибку для дорослих; Кетча — Макардла точніша, якщо відомий відсоток жиру. Калькулятор показує діапазон усіх формул.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому результат може відрізнятись від реальності?</h3>
-                <p>Формули дають статистичну оцінку. Реальний метаболізм залежить від генетики, м'язової маси, гормонів
-                    і рівня стресу — тому варто відстежувати вагу протягом кількох тижнів і коригувати калорійність за
-                    фактом.</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати калорії для схуднення?</h3>
+                <p>Від TDEE віднімають дефіцит: 10–20 % або 300–500 ккал на день. Вкладка «Ціль за вагою» рахує дефіцит за темпом, наприклад 0,5 кг на тиждень — це 550 ккал на день.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому 7700 ккал на кілограм?</h3>
+                <p>Це поширене наближення енергії в 1 кг жирової маси. Насправді темп зміни ваги залежить від складу тіла й змінюється в часі, тож це орієнтир.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка мінімальна безпечна калорійність?</h3>
+                <p>Поширений орієнтир без нагляду лікаря — не менш як 1200 ккал для жінок і 1500 для чоловіків і не нижче вашого BMR. Індивідуальна потреба може бути вищою.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Який темп схуднення безпечний?</h3>
+                <p>Зазвичай радять 0,25–1 кг на тиждень, але не більше близько 1 % маси тіла. Швидший темп частіше супроводжується втратою м'язів.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як вибрати рівень активності?</h3>
+                <p>Орієнтуйтеся на тренування й побут: сидяча робота — 1,2, 3–5 тренувань на тиждень — 1,55. За сумніву беріть нижчий рівень і коригуйте за вагою через 2–3 тижні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому результати за формулами різняться?</h3>
+                <p>Формули виведені на різних вибірках і мають різну форму, а деякі враховують склад тіла. Розкид у кілька відсотків — нормальна невизначеність оцінки.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке MET?</h3>
+                <p>Метаболічний еквівалент: у скільки разів активність витрачає більше енергії, ніж спокій (1 MET). Калорії = MET × вага (кг) × години.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому витрати на тренування в довіднику й у фітнес-трекері різні?</h3>
+                <p>MET — середні значення для групи людей, а трекери оцінюють за пульсом і рухом. Обидва підходи дають орієнтир, не точне вимірювання.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор вагітність чи хвороби?</h3>
+                <p>Ні. Формули виведені на здорових дорослих, тому в таких випадках результат лише орієнтовний, а харчування краще узгодити з лікарем.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

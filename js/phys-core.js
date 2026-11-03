@@ -296,7 +296,7 @@
   const tidy = (s) => String(s).replace(/= ≈ /g, "≈ ");
   function stepsHtml(steps) { return '<div class="ph__sub">' + L("Розв'язання", "Solution") + "</div>" + steps.map((s, i) => '<div class="ph__step"><span class="ph__stepN">' + (i + 1) + '</span><div class="ph__stepB"><b class="ph__stepT">' + esc(s.t) + "</b>" + s.l.map((x) => '<p class="ph__math">' + esc(tidy(x)) + "</p>").join("") + (s.html || "") + (s.note ? '<p class="ph__stepNote">' + esc(s.note) + "</p>" : "") + "</div></div>").join(""); }
   const lc1 = (s) => s.charAt(0).toLowerCase() + s.slice(1);
-  const clean = (s) => s.replace(/ /g, "");
+  const clean = (s) => s.replace(/[\u00a0\u202f]/g, " ");
   let last = null;
   function textOf(m) { return tidy(clean([m.expr + "  →  " + m.resText, ""].concat(m.steps.map((s, i) => (i + 1) + ". " + s.t + "\n   " + s.l.join("\n   "))).join("\n"))); }
   function render(m, strict) {
@@ -446,7 +446,7 @@
       const head = kv ? "" : '<div class="ph__lstHead">' + cols.map((c) => "<span>" + escL(c) + "</span>").join("") + "</div>";
       const body = rows.map((r) => {
         const cells = (r.cells || r).map(cellL), main = r.main ? " is-main" : "";
-        return '<div class="ph__lstRow' + main + '">' + cells.map((c, i) => '<span class="ph__lstC' + (i === 0 ? " is-first" : "") + (c.cls ? " " + c.cls : "") + '"' + (i && !kv ? ' data-l="' + escL(cols[i]) + '"' : "") + ">" + c.t + "</span>").join("") + "</div>";
+        return '<div class="ph__lstRow' + main + '">' + cells.map((c, i) => '<span class="ph__lstC' + (i === 0 ? " is-first" : "") + (c.cls ? " " + c.cls : "") + '"' + (i && !kv && cols[i] && c.t !== "" ? ' data-l="' + escL(cols[i]) + '"' : "") + ">" + c.t + "</span>").join("") + "</div>";
       }).join("");
       return '<div class="ph__lst' + (kv ? " ph__lst--kv" : "") + '" style="--cols:' + w + '">' + head + body + "</div>";
     }
