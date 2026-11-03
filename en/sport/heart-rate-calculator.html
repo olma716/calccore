@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Heart Rate Zones Calculator — 5 Training Zones | CalcCore</title>
+    <title>Heart Rate Zones Calculator: 5 Zones and Karvonen | CalcCore</title>
     <meta name="description"
-        content="Calculate your heart rate training zones using the Karvonen formula or the simple 220-age formula. 5 intensity zones: warm-up, fat-burn, aerobic, anaerobic, maximum." />
+        content="Heart rate zones calculator: max heart rate by formulas, 5 zones by % of max or Karvonen, running threshold zones by LTHR." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/heart-rate-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/heart-rate-calculator" />
@@ -26,239 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Heart Rate Zones Calculator — 5 Training Zones" />
-    <meta property="og:description" content="Calculate your heart rate training zones using the Karvonen formula or the simple 220-age formula. 5 intensity zones: warm-up, fat-burn, aerobic, anaerobic, maximum." />
+    <meta property="og:title" content="Heart Rate Zones Calculator: 5 Zones and Karvonen" />
+    <meta property="og:description" content="Heart rate zones calculator: max heart rate by formulas, 5 zones by % of max or Karvonen, running threshold zones by LTHR." />
     <meta property="og:url" content="https://calccore.net/en/sport/heart-rate-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Heart Rate Zones Calculator — 5 Training Zones" />
-    <meta name="twitter:description" content="Calculate your heart rate training zones using the Karvonen formula or the simple 220-age formula. 5 intensity zones: warm-up, fat-burn, aerobic, anaerobic, maximum." />
+    <meta name="twitter:title" content="Heart Rate Zones Calculator: 5 Zones and Karvonen" />
+    <meta name="twitter:description" content="Heart rate zones calculator: max heart rate by formulas, 5 zones by % of max or Karvonen, running threshold zones by LTHR." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104hr3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/heart-rate-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What are heart rate zones?",
-        "acceptedAnswer":{"@type":"Answer","text":"Heart rate zones are ranges of heart rate that correspond to different training intensities: from a light warm-up to maximum effort."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is the Karvonen formula and why is it better?",
-        "acceptedAnswer":{"@type":"Answer","text":"The Karvonen formula accounts for resting heart rate, making the zone calculation more accurate and personalized compared to a simple formula based only on maximum heart rate."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I measure my resting heart rate?",
-        "acceptedAnswer":{"@type":"Answer","text":"Measure your pulse right after waking up, while still lying in bed, before getting up. Count beats for a full 60 seconds for the most accurate result."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104hr3" defer></script>
+    <script src="/js/phys-core.js?v=20261104hr3" defer></script>
+    <script src="/js/hr-data.js?v=20261104hr3" defer></script>
+    <script src="/js/hr-calc.js?v=20261104hr3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/heart-rate-calculator#app",
-    "name":"Heart Rate Zones Calculator",
-    "description":"Calculate heart rate training zones using the Karvonen formula with 5 intensity zones.",
-    "url":"https://calccore.net/en/sport/heart-rate-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/heart-rate-calculator#app",
+  "name": "Heart Rate Zones Calculator",
+  "description": "An online heart rate zones calculator: max heart rate by the Tanaka, Fox, HUNT and Gulati formulas or your own value, 5 zones by percentage of the max or by heart rate reserve (Karvonen) with the effort description and the talk test, highlighting your zone by current heart rate, a comparison of formulas and 7 running threshold zones by lactate threshold heart rate (LTHR).",
+  "url": "https://calccore.net/en/sport/heart-rate-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Max heart rate by four formulas or your own",
+    "Five zones by percentage of max or Karvonen",
+    "Non-overlapping zones with effort and talk test",
+    "Highlight your zone by training heart rate",
+    "A comparison of max heart rate formulas",
+    "Running threshold zones by LTHR"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/heart-rate-calculator#webpage",
+      "url": "https://calccore.net/en/sport/heart-rate-calculator",
+      "name": "Heart Rate Zones Calculator: 5 Zones and Karvonen | CalcCore",
+      "description": "Heart rate zones calculator: max heart rate by formulas, 5 zones by % of max or Karvonen, running threshold zones by LTHR.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/heart-rate-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/heart-rate-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/heart-rate-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Heart rate zones calculator",
+          "item": "https://calccore.net/en/sport/heart-rate-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/heart-rate-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate max heart rate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The simplest is 220 − age (Fox). The Tanaka formula, 208 − 0.7 × age, is more accurate for most adults. The best option is a value measured in a real all-out effort."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which max heart rate formula is the most accurate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no single one: all give a group average, and an individual maximum differs by 10–20 bpm. Tanaka is usually more accurate than Fox, especially after 40."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Karvonen formula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Zone limit = resting rate + (maximum − resting rate) × percentage. It accounts for the resting heart rate, so it reflects individual fitness better."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is heart rate reserve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The difference between the max heart rate and the resting heart rate. Karvonen zones are percentages of this reserve."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I measure my resting heart rate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the morning right after waking, lying still, count your pulse for a minute for several days in a row and take the average."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many heart rate zones are there and what are they?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Five: recovery (50–60%), easy (60–70%), moderate (70–80%), hard (80–90%) and maximum (90–100%)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "In which zone do you burn fat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fat is used in all zones; its share is higher in the easy one (zone 2). For weight loss the total calorie deficit decides, not the “fat-burning zone”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which zone should I choose for endurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most endurance training volume is done in zones 1–2, sometimes with short bursts in zones 4–5."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the talk test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In zone 2 you can speak in full sentences, in zone 3 in short phrases, in zone 4 a few words, and in zone 5 you can hardly speak."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is LTHR and how do I find it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lactate threshold heart rate. As a rough guide, it is the average heart rate of the last 20 minutes of a 30-minute steady run at maximum sustainable effort."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my heart rate in training different?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Heart rate depends on fatigue, stress, heat, caffeine, medication and sleep. The formulas are only a starting point, so also go by how you feel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to train in zones 4 and 5?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a healthy person in moderate amounts yes, but you need a warm-up and gradual progress. With heart disease or hypertension agree the intensity with a doctor."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="chr">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Heart Rate Zones Calculator</h1>
-                    <p class="mcalc__p">
-                        5 training intensity zones using the <b>Karvonen formula</b> (with resting heart rate)
-                        or the simple <b>220 − age</b> formula.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Heart Rate Zones Calculator</h1>
+                    <p class="ph__p">Enter your age and the calculator estimates your max heart rate and shows five heart rate zones with a description of the effort. Add your resting heart rate to use Karvonen, or your current heart rate to see your zone. Separate tabs: a comparison of formulas and threshold zones by LTHR.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="zones" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="ph__tileTx"><b class="ph__tabT">Zones by age</b><span class="ph__ex">Max, 5 zones, Karvonen</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="compare" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span class="ph__tileTx"><b class="ph__tabT">Compare formulas</b><span class="ph__ex">Max formulas side by side</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="lthr" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span class="ph__tileTx"><b class="ph__tabT">Threshold zones</b><span class="ph__ex">Zones from lactate threshold</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="age">Age (years)</label>
-                                <input class="mcalc__input" id="age" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 30" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="restHr">Resting heart rate (opt.)</label>
-                                <input class="mcalc__input" id="restHr" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 65" />
-                                <div class="mcalc__hint">Measure right after waking up. Leave empty if unknown.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Heart rate zones <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Heart rate zones">
-                                    <thead>
-                                        <tr>
-                                            <th>Zone</th>
-                                            <th>% of max</th>
-                                            <th>BPM</th>
-                                            <th>Goal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
-                            <a href="/en/sport/1pm-calculator">One-Rep Max Calculator</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What are heart rate zones</h2>
-            <p>
-                Heart rate zones are ranges of heart rate (HR) that correspond to different levels of physical
-                exertion. Training in different zones produces different effects: from improving overall
-                endurance to developing maximum power output.
-            </p>
-
-            <h2>The Karvonen formula</h2>
-            <p>
-                If you enter your <b>resting heart rate</b>, the calculator uses the Karvonen formula — it
-                accounts for heart rate reserve (the difference between max HR and resting HR), giving a more
-                accurate and personalized result than a simple formula based only on max HR.
-            </p>
-            <p>
-                <b>Formula:</b> Target HR = ((HRmax − HRrest) × %intensity) + HRrest<br>
-                <b>Max HR:</b> 220 − age (simplified estimate)
-            </p>
-
-            <h2>5 intensity zones</h2>
-            <ul>
-                <li><b>Zone 1 (50-60%):</b> warm-up and recovery — very light effort.</li>
-                <li><b>Zone 2 (60-70%):</b> fat burning — comfortable pace, you can still talk without gasping.</li>
-                <li><b>Zone 3 (70-80%):</b> aerobic endurance — improves cardiovascular fitness.</li>
-                <li><b>Zone 4 (80-90%):</b> anaerobic threshold — builds speed and power.</li>
-                <li><b>Zone 5 (90-100%):</b> maximum effort — short intervals at the limit of capacity.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                This result is an estimate. The 220-age formula has an error margin of ±10-12 bpm for
-                individuals. For a more precise zone determination, a lab VO2max test or a sports physician
-                consultation is recommended.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/running-pace-calculator"><b>Running Pace Calculator</b><span>Pace, distance and time for a run.</span></a>
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>BMR, TDEE and exercise calories.</span></a>
+                <a class="cc-related-card" href="/en/sport/1pm-calculator"><b>1RM Calculator</b><span>One-rep max and percentages.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What heart rate zones are</h2>
+            <p><b>Heart rate zones</b> are ranges of heart rate that match different training intensities. Training by heart rate means controlling effort not by speed or weight but by the heart's response: the same running speed can be easy on a rested day and hard when tired or hot, and the heart rate shows it. The classic split is five zones from recovery to maximum effort, each training a different quality.</p>
+
+            <h2>Max heart rate: four formulas</h2>
+            <p>Zones are counted from the maximum heart rate. The best-known <b>Fox</b> formula is 220 − age, but it is crude. The <b>Tanaka</b> formula (2001) — 208 − 0.7 × age — was derived from a meta-analysis of many studies and is usually more accurate for adults of different ages: it gives lower values than Fox under 40 and higher after 40. The <b>HUNT</b> formula is 211 − 0.64 × age, derived on a large sample of Norwegians. <b>Gulati</b> — 206 − 0.88 × age — is for women only. For a 30-year-old these are 187 (Tanaka), 190 (Fox), 192 (HUNT) and 180 (Gulati, woman) bpm. All are group averages: an individual maximum can differ by 10–20 bpm, so the best option is a value measured in a real all-out effort.</p>
+
+            <h2>The Karvonen method and heart rate reserve</h2>
+            <p>The simple method takes a percentage of the maximum. The <b>Karvonen</b> method also uses the resting heart rate: limit = resting rate + (maximum − resting rate) × share. The difference between the maximum and the resting rate is called the <b>heart rate reserve</b>. For a maximum of 187 and a resting rate of 60 the reserve is 127, and the five zones become 124–136, 137–149, 150–162, 163–174 and 175–187 bpm against 94–112, 113–131, 132–150, 151–168 and 169–187 by the simple method. Karvonen reflects individual fitness better: trained people have a lower resting rate, and the zones shift up.</p>
+
+            <h2>Five intensity zones</h2>
+            <p><b>Zone 1 (50–60%)</b> — recovery, talking is effortless, effort 2–3 out of 10. <b>Zone 2 (60–70%)</b> — easy, full sentences are possible; the base of aerobic endurance. <b>Zone 3 (70–80%)</b> — moderate, short phrases. <b>Zone 4 (80–90%)</b> — hard, only a few words, develops speed and threshold. <b>Zone 5 (90–100%)</b> — maximum, talking is almost impossible; it is held in short intervals. The zones in the calculator do not overlap: the upper limit of a zone is rounded and the next zone starts 1 bpm higher. The descriptions of effort and the talk test are approximate.</p>
+
+            <h2>The fat-burning zone is a simplification</h2>
+            <p>The “fat-burning zone” usually means zone 2: in easy exercise the share of fat in the energy is higher. But for weight loss the total calorie deficit decides, and in harder zones more calories are burned in the same time. So easy zones are for the base and recovery, not “the only place where fat burns”. If your goal is weight loss, use the calorie calculator.</p>
+
+            <h2>Threshold zones by LTHR</h2>
+            <p>Trained runners often count zones not from the maximum but from the <b>lactate threshold heart rate</b> (LTHR). Per Friel it is estimated as the average heart rate of the last 20 minutes of a 30-minute steady run at maximum sustainable effort. Running zones as percentages of LTHR: below 85% — zone 1, 85–89 — 2, 90–94 — 3, 95–99 — 4, 100–102 — 5a, 103–106 — 5b, above 106 — 5c. For an LTHR of 165 that is zone 2: 140–148, zone 4: 157–164, threshold (5a): 165–169 bpm. This scale is for running; for cycling and swimming the percentages differ.</p>
+
+            <h2>Accuracy and safety</h2>
+            <p>The formulas give a group average, while heart rate depends on fatigue, stress, heat, caffeine, medication and fitness. So also rely on how you feel: the talk test and the effort scale. The result is not medical advice. With heart disease, hypertension or medication that affects heart rate (for example beta-blockers) agree the intensity with a doctor; a constant resting heart rate above 100 bpm is also worth discussing with one.</p>
+            <p class="ph-mini">All values are estimates from statistical formulas. Your own max heart rate can differ by 10–20 bpm. This is not medical advice: with heart conditions or medication agree the intensity with a doctor.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What are heart rate zones?</h3>
-                <p>Heart rate zones are ranges of heart rate that correspond to different training intensities: from a
-                    light warm-up to maximum effort.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate max heart rate?</h3>
+                <p>The simplest is 220 − age (Fox). The Tanaka formula, 208 − 0.7 × age, is more accurate for most adults. The best option is a value measured in a real all-out effort.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What is the Karvonen formula and why is it better?</h3>
-                <p>The Karvonen formula accounts for resting heart rate, making the zone calculation more accurate and
-                    personalized compared to a simple formula based only on maximum heart rate.</p>
+            <div class="cc-faq-item">
+                <h3>Which max heart rate formula is the most accurate?</h3>
+                <p>There is no single one: all give a group average, and an individual maximum differs by 10–20 bpm. Tanaka is usually more accurate than Fox, especially after 40.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>What is the Karvonen formula?</h3>
+                <p>Zone limit = resting rate + (maximum − resting rate) × percentage. It accounts for the resting heart rate, so it reflects individual fitness better.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is heart rate reserve?</h3>
+                <p>The difference between the max heart rate and the resting heart rate. Karvonen zones are percentages of this reserve.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>How do I measure my resting heart rate?</h3>
-                <p>Measure your pulse right after waking up, while still lying in bed, before getting up. Count beats
-                    for a full 60 seconds for the most accurate result.</p>
+                <p>In the morning right after waking, lying still, count your pulse for a minute for several days in a row and take the average.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Which zone should I pick for weight loss?</h3>
-                <p>Zone 2 (fat burning, 60-70% of max) is traditionally considered optimal for extended fat-burning
-                    sessions, though total calories burned per workout matters more than the specific zone.</p>
+            <div class="cc-faq-item">
+                <h3>How many heart rate zones are there and what are they?</h3>
+                <p>Five: recovery (50–60%), easy (60–70%), moderate (70–80%), hard (80–90%) and maximum (90–100%).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>In which zone do you burn fat?</h3>
+                <p>Fat is used in all zones; its share is higher in the easy one (zone 2). For weight loss the total calorie deficit decides, not the “fat-burning zone”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which zone should I choose for endurance?</h3>
+                <p>Most endurance training volume is done in zones 1–2, sometimes with short bursts in zones 4–5.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the talk test?</h3>
+                <p>In zone 2 you can speak in full sentences, in zone 3 in short phrases, in zone 4 a few words, and in zone 5 you can hardly speak.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is LTHR and how do I find it?</h3>
+                <p>Lactate threshold heart rate. As a rough guide, it is the average heart rate of the last 20 minutes of a 30-minute steady run at maximum sustainable effort.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is my heart rate in training different?</h3>
+                <p>Heart rate depends on fatigue, stress, heat, caffeine, medication and sleep. The formulas are only a starting point, so also go by how you feel.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is it safe to train in zones 4 and 5?</h3>
+                <p>For a healthy person in moderate amounts yes, but you need a warm-up and gradual progress. With heart disease or hypertension agree the intensity with a doctor.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
