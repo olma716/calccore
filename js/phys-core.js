@@ -306,11 +306,22 @@
     const tiles = m.tiles && m.tiles.length ? '<div class="ph__tiles">' + m.tiles.map((t) => '<div class="ph__tile"><small>' + esc(t.k) + "</small><b>" + esc(t.v) + "</b></div>").join("") + "</div>" : "";
     box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + esc(tidy((m.subRaw ? "" : "= ") + m.headSub)) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + (m.note !== undefined ? (m.note ? '<div class="ph__note">' + m.note + "</div>" : "") : CFG.exactNote === false ? "" : '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>");
   }
+  // події аналітики: лише назви дій і ключ вкладки, без введених значень
+  const PAGE = location.pathname.replace(/\/+$/, "").split("/").pop() || "home";
+  let userAct = false, rTimer = 0, eTimer = 0;
+  const track = (name, extra) => { try { if (typeof window.gtag === "function") window.gtag("event", name, Object.assign({ calc: PAGE, mode: MODE ? MODE.key : "", lang: document.documentElement.lang || "" }, extra)); } catch (e) { /* без аналітики */ } };
+  const trackCalc = (m) => {
+    if (!userAct) return;
+    clearTimeout(rTimer); clearTimeout(eTimer);
+    if (m.ok) rTimer = setTimeout(() => track("calc_result"), 2000);
+    else if (m.msg) eTimer = setTimeout(() => track("calc_error"), 2000);
+  };
   const autoOn = () => !el("autoCalc") || el("autoCalc").checked;
   function calc(strict) {
     let m;
     try { m = MODE.type === "chain" ? modeChain(MODE) : MODE.calc(helpers()); } catch (e) { m = { ok: false, msg: String(e && e.message ? e.message : e) }; }
     render(m, strict === true);
+    trackCalc(m);
     return m;
   }
   function maybeCalc() { if (autoOn()) calc(); }
@@ -365,12 +376,13 @@
     const ex = MODE.example;
     if (MODE.type === "chain") { clearFields(); setDd("find", ex.find); syncFind(); Object.keys(ex.vals).forEach((id) => { const [val, un] = String(ex.vals[id]).split("|"); if (id !== ex.find) el("v_" + id).value = val; if (un !== undefined) el("u_" + id).value = un; }); syncFind(); }
     else MODE.fill(helpers());
-    calc(true); toast(T.example);
+    track("calc_example"); calc(true); toast(T.example);
   }
   function share() {
     const p = new URLSearchParams(); p.set("m", MODE.key); p.set("dc", el("decs").value); p.set("gg", el("gval").value);
     if (MODE.type === "chain") { p.set("fd", find); if (el("u_" + find).value !== "0") p.set("ru", el("u_" + find).value); MODE.vars.forEach((v) => { if (v.id !== find && el("v_" + v.id).value.trim()) { p.set("v_" + v.id, el("v_" + v.id).value.trim()); const ui = el("u_" + v.id).value; if (ui !== "0") p.set("u_" + v.id, ui); } }); }
     else MODE.share(p, helpers());
+    track("calc_share");
     navigator.clipboard?.writeText(location.origin + location.pathname + "?" + p.toString()).then(() => toast(T.linkCopied)).catch(() => toast(T.copyFailed));
   }
   function applyFromUrl() {
@@ -384,7 +396,7 @@
     else MODE.apply(qs, helpers());
     return true;
   }
-  async function copyResult() { if (!last) { toast(T.calcFirst); return; } try { await navigator.clipboard.writeText(textOf(last)); toast(T.copied); } catch { toast(T.copyFailed); } }
+  async function copyResult() { if (!last) { toast(T.calcFirst); return; } track("calc_copy"); try { await navigator.clipboard.writeText(textOf(last)); toast(T.copied); } catch { toast(T.copyFailed); } }
 
   // ===== власний список замість рідного select.ph__unit (select лишається джерелом значення) =====
   const NATIVE_VAL = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
@@ -457,7 +469,8 @@
       CFG = cfgFn({ L, u, X, UN, parseF, DErr });
       CFG.ctx = ctxNow;
       window.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".ph__tab").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.m)));
+        document.querySelectorAll(".ph__tab").forEach((b) => b.addEventListener("click", () => { if (MODE && MODE.key !== b.dataset.m) track("calc_tab", { mode: b.dataset.m }); setMode(b.dataset.m); }));
+        ["input", "change", "click"].forEach((t) => document.addEventListener(t, (e) => { if (e.isTrusted) userAct = true; }, true));
         initUnits();
         initDd("fd", (v) => { setDd("find", v); syncFind(); maybeCalc(); });
         initDd("dc", (v) => { setDd("decs", v); maybeCalc(); });
