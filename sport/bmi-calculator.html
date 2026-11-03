@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор ІМТ онлайн — індекс маси тіла | CalcCore</title>
+    <title>Калькулятор ІМТ онлайн: індекс маси тіла за ВООЗ | CalcCore</title>
     <meta name="description"
-        content="Розрахунок індексу маси тіла (ІМТ/BMI) за зростом і вагою. Категорії: недостатня вага, норма, надлишкова вага, ожиріння. Шкала ВООЗ." />
+        content="Калькулятор ІМТ: індекс маси тіла й категорія за ВООЗ, нормальна вага для вашого зросту, цільова вага, таблиця норми, кг і фунти." />
 
     <link rel="canonical" href="https://calccore.net/sport/bmi-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/bmi-calculator" />
@@ -26,246 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор ІМТ онлайн — індекс маси тіла" />
-    <meta property="og:description" content="Розрахунок індексу маси тіла (ІМТ/BMI) за зростом і вагою. Категорії: недостатня вага, норма, надлишкова вага, ожиріння. Шкала ВООЗ." />
+    <meta property="og:title" content="Калькулятор ІМТ онлайн: індекс маси тіла за ВООЗ" />
+    <meta property="og:description" content="Калькулятор ІМТ: індекс маси тіла й категорія за ВООЗ, нормальна вага для вашого зросту, цільова вага, таблиця норми, кг і фунти." />
     <meta property="og:url" content="https://calccore.net/sport/bmi-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор ІМТ онлайн — індекс маси тіла" />
-    <meta name="twitter:description" content="Розрахунок індексу маси тіла (ІМТ/BMI) за зростом і вагою. Категорії: недостатня вага, норма, надлишкова вага, ожиріння. Шкала ВООЗ." />
+    <meta name="twitter:title" content="Калькулятор ІМТ онлайн: індекс маси тіла за ВООЗ" />
+    <meta name="twitter:description" content="Калькулятор ІМТ: індекс маси тіла й категорія за ВООЗ, нормальна вага для вашого зросту, цільова вага, таблиця норми, кг і фунти." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104bmi6" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/bmi-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Що таке ІМТ?",
-        "acceptedAnswer":{"@type":"Answer","text":"ІМТ (індекс маси тіла) — це показник співвідношення ваги до зросту, що використовується для приблизної оцінки, чи вага людини знаходиться в межах норми."}
-      },
-      {
-        "@type":"Question",
-        "name":"Які межі норми ІМТ?",
-        "acceptedAnswer":{"@type":"Answer","text":"За класифікацією ВООЗ: менше 18.5 — недостатня вага, 18.5-24.9 — норма, 25-29.9 — надлишкова вага, від 30 — ожиріння."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи враховує ІМТ м'язову масу?",
-        "acceptedAnswer":{"@type":"Answer","text":"Ні, ІМТ не розрізняє м'язову і жирову масу. У спортсменів з великою м'язовою масою ІМТ може бути завищеним, хоча відсоток жиру в тілі низький."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104bmi6" defer></script>
+    <script src="/js/phys-core.js?v=20261104bmi6" defer></script>
+    <script src="/js/bmi-data.js?v=20261104bmi6" defer></script>
+    <script src="/js/bmi-calc.js?v=20261104bmi6" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/sport/bmi-calculator#app",
-    "name":"BMI Calculator",
-    "description":"Розрахунок індексу маси тіла за зростом і вагою з категоріями за шкалою ВООЗ.",
-    "url":"https://calccore.net/sport/bmi-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/sport/bmi-calculator#app",
+  "name": "Калькулятор ІМТ (індекс маси тіла)",
+  "description": "Онлайн-калькулятор індексу маси тіла (ІМТ, BMI): розрахунок за вагою й зростом із категорією за ВООЗ (три ступені дефіциту, норма, надлишок, три класи ожиріння), кольорова шкала, нормальна вага для вашого зросту й різниця до норми, цільова вага за бажаним ІМТ, таблиця норми за зростом, BMI Prime, новий ІМТ Трефетена та азійські орієнтири. Кілограми й фунти, сантиметри й фути.",
+  "url": "https://calccore.net/sport/bmi-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "ІМТ і категорія за ВООЗ з тяжкістю дефіциту й класами ожиріння",
+    "Кольорова шкала з маркером і діапазон норми для вашого зросту",
+    "Скільки втратити чи набрати до норми",
+    "Цільова вага за бажаним ІМТ",
+    "Таблиця нормальної ваги для зросту 150–200 см",
+    "Кг/фунти, см/фути-дюйми, азійські орієнтири"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/sport/bmi-calculator#webpage",
+      "url": "https://calccore.net/sport/bmi-calculator",
+      "name": "Калькулятор ІМТ онлайн: індекс маси тіла за ВООЗ | CalcCore",
+      "description": "Калькулятор ІМТ: індекс маси тіла й категорія за ВООЗ, нормальна вага для вашого зросту, цільова вага, таблиця норми, кг і фунти.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/sport/bmi-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/sport/bmi-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/sport/bmi-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Спорт",
+          "item": "https://calccore.net/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор ІМТ",
+          "item": "https://calccore.net/sport/bmi-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/sport/bmi-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як розрахувати ІМТ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поділіть вагу в кілограмах на квадрат зросту в метрах. Для 75 кг і 178 см: 75 / (1,78 × 1,78) ≈ 23,7."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка норма ІМТ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За ВООЗ для дорослих норма — від 18,5 до 24,9. Менше — дефіцит маси, від 25 — надлишок, від 30 — ожиріння."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки має важити людина для мого зросту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нормальна вага — від ІМТ 18,5 до 25 помножити на квадрат зросту. Для 170 см це 53,5–72,3 кг. Точні межі для вашого зросту показує калькулятор."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна довіряти ІМТ на 100 %?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні: це скринінг. ІМТ не відрізняє м'язи від жиру й не враховує, де відкладений жир, тому для висновків потрібні інші показники й лікар."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому в спортсмена ІМТ «надлишковий»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мускулатура важча за жир, тому у людини з великою м'язовою масою ІМТ може бути високим за низького відсотка жиру."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи підходить ІМТ для дітей?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні: для дітей і підлітків ІМТ оцінюють за перцентильними таблицями віку й статі. Категорії дорослих тут для них лише орієнтир."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке ожиріння I, II і III ступеня?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За ІМТ: 30–34,9 — I ступінь, 35–39,9 — II, від 40 — III. З кожним ступенем зростає ризик хронічних хвороб."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке BMI Prime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ІМТ, поділений на 25: показує, яку частку від верхньої межі норми становить ваш ІМТ. Значення понад 1 означає надлишок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке новий ІМТ Трефетена?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Пропозиція математика Ніка Трефетена: 1,3 × вага / зріст^2,5. Для високих людей значення нижче, для низьких вище; це довідковий показник."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи однакові межі ІМТ для всіх народів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Стандарт ВООЗ єдиний, але для азійських популяцій ВООЗ-2004 додала точки дій 23 і 27,5, бо ризики можуть починатися за нижчого ІМТ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як поставити цільову вагу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть ІМТ у нормі (приблизно 22 — середина) й перемножте на квадрат зросту. Вкладка «Цільова вага» робить це за вас."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому на межі категорій число й категорія можуть здаватися різними?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ІМТ округлюється до десятих, а категорія береться за точним значенням: 24,95 показується як 25,0, але ще належить до норми. Калькулятор у таких випадках пояснює це."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cbmi">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор ІМТ (індекс маси тіла)</h1>
-                    <p class="mcalc__p">
-                        Розрахунок ІМТ за зростом і вагою з категоріями за шкалою <b>ВООЗ</b>:
-                        недостатня вага, норма, надлишкова вага, ожиріння.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор ІМТ: індекс маси тіла</h1>
+                    <p class="ph__p">Введіть вагу й зріст — і калькулятор розрахує ІМТ, покаже категорію за ВООЗ на кольоровій шкалі, діапазон нормальної ваги для вашого зросту та скільки бракує чи надлишку до норми. Окремі вкладки: цільова вага за бажаним ІМТ і таблиця норми за зростом.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Спорт</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="bmi" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Мій ІМТ</b><span class="ph__ex">ІМТ, категорія й діапазон норми</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="target" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Цільова вага</b><span class="ph__ex">Вага за бажаним ІМТ</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Таблиця норми</b><span class="ph__ex">Норма для зросту 150–200 см</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="weight">Вага (кг)</label>
-                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
-                                    placeholder="напр.: 75" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="height">Зріст (см)</label>
-                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
-                                    placeholder="напр.: 178" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="bmi-scale" id="bmiScale" style="display:none;">
-                            <div class="bmi-scale__track">
-                                <div class="bmi-scale__segment bmi-scale__segment--under"></div>
-                                <div class="bmi-scale__segment bmi-scale__segment--normal"></div>
-                                <div class="bmi-scale__segment bmi-scale__segment--over"></div>
-                                <div class="bmi-scale__segment bmi-scale__segment--obese"></div>
-                                <div class="bmi-scale__marker" id="bmiMarker"></div>
-                            </div>
-                            <div class="bmi-scale__labels">
-                                <span>16</span>
-                                <span>18.5</span>
-                                <span>25</span>
-                                <span>30</span>
-                                <span>40</span>
-                            </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
-                        <div class="m-navlinks">
-                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
-                            <a href="/sport/heart-rate-calculator">Пульсові зони</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке ІМТ (індекс маси тіла)</h2>
-            <p>
-                <b>ІМТ</b> (BMI, Body Mass Index) — це простий показник співвідношення ваги до квадрату зросту,
-                який використовується для швидкої попередньої оцінки, чи вага людини знаходиться в межах норми.
-            </p>
-        
-            <h2>Формула розрахунку</h2>
-            <p>
-                <b>ІМТ = вага(кг) / зріст(м)²</b><br>
-                Наприклад, при вазі 75 кг і зрості 1.78 м: ІМТ = 75 / (1.78 × 1.78) ≈ 23.7
-            </p>
-        
-            <h2>Категорії ІМТ за шкалою ВООЗ</h2>
-            <ul>
-                <li><b>Менше 18.5:</b> недостатня вага — можливий дефіцит поживних речовин, варто проконсультуватись з лікарем.
-                </li>
-                <li><b>18.5–24.9:</b> норма — асоціюється з найнижчим ризиком для здоров'я за популяційними дослідженнями.</li>
-                <li><b>25–29.9:</b> надлишкова вага — підвищений ризик серцево-судинних захворювань та діабету 2 типу.</li>
-                <li><b>30 і більше:</b> ожиріння — значно підвищений ризик хронічних захворювань, рекомендована консультація
-                    лікаря.</li>
-            </ul>
-        
-            <h2>Чому ІМТ — лише орієнтир, а не діагноз</h2>
-            <p>
-                ІМТ — це проста скринінгова оцінка, яка <b>не враховує</b> склад тіла. У спортсменів і людей
-                з великою м'язовою масою ІМТ може бути завищеним, хоча відсоток жиру в тілі низький. Наприклад,
-                професійний важкоатлет з ІМТ 28 може мати менше жиру, ніж людина з ІМТ 23, яка не займається спортом.
-            </p>
-            <p>
-                ІМТ також не враховує розподіл жиру в тілі — жир навколо талії (вісцеральний) становить більший
-                ризик для здоров'я, ніж жир на стегнах чи сідницях, навіть при однаковому ІМТ. Для повнішої картини
-                варто додатково враховувати обхват талії, співвідношення талія/стегна або відсоток жиру в тілі
-                (визначається біоімпедансометрією чи каліперометрією).
-            </p>
-        
-            <h2>Особливі випадки</h2>
-            <ul>
-                <li><b>Діти та підлітки:</b> для них використовують окремі перцентильні таблиці ІМТ за віком і статтю, а не
-                    дорослу шкалу.</li>
-                <li><b>Вагітність:</b> поточний ІМТ не застосовується для оцінки ваги під час вагітності — рекомендований набір
-                    ваги визначають за ІМТ до вагітності. Розрахуйте його в <a href="/pregnancy/weight-gain-calculator">калькуляторі набору ваги при вагітності</a>.</li>
-                <li><b>Люди похилого віку:</b> дещо вищий ІМТ (25-27) у літніх людей іноді асоціюється з кращими показниками
-                    здоров'я, ніж "ідеальна" норма.</li>
-                <li><b>Різні етнічні групи:</b> деякі дослідження показують, що ризики для здоров'я можуть наступати при різних
-                    порогових значеннях ІМТ залежно від етнічного походження.</li>
-            </ul>
-        
-            <p class="m-hintSmall">
-                Результат є орієнтовним показником, а не медичним діагнозом. Для повної оцінки стану здоров'я
-                консультуйся з лікарем, який врахує додаткові фактори: склад тіла, обхват талії, аналізи, сімейний анамнез.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/sport/calories-calculator"><b>Калькулятор калорій</b><span>Добова норма, темп і строк досягнення цілі.</span></a>
+                <a class="cc-related-card" href="/sport/body-fat-calculator"><b>Калькулятор жиру в тілі</b><span>Відсоток жиру за обхватами.</span></a>
+                <a class="cc-related-card" href="/sport/macros-calculator"><b>Калькулятор БЖВ</b><span>Білки, жири й вуглеводи під вашу ціль.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що таке ІМТ</h2>
+            <p><b>Індекс маси тіла</b> (ІМТ, англ. BMI) — відношення ваги в кілограмах до квадрата зросту в метрах: <b>ІМТ = вага / зріст²</b>. Його придумав бельгієць Адольф Кетле, а сьогодні ВООЗ і лікарі використовують як швидкий скринінг: він показує, чи вага відповідає зросту, але не пояснює чому. Для людини 75 кг і 178 см ІМТ становить 75 / 1,78² ≈ 23,7 — це норма.</p>
+
+            <h2>Категорії ІМТ за ВООЗ</h2>
+            <p>Для дорослих ВООЗ виділяє: менше 16 — виражений дефіцит маси тіла, 16–16,9 — помірний, 17–18,4 — легкий; <b>18,5–24,9 — норма</b>; 25–29,9 — надлишкова маса (предожиріння); 30–34,9 — ожиріння I ступеня, 35–39,9 — II ступеня, від 40 — III ступеня. Нижня межа входить у категорію: ІМТ рівно 25 — вже надлишкова маса. Шкала на сторінці показує вашу позицію маркером, а таблиця категорій одразу переводить межі у вагу для вашого зросту.</p>
+
+            <h2>Нормальна вага для вашого зросту</h2>
+            <p>Нормальна вага — це вага, за якої ІМТ від 18,5 до 25: <b>вага = ІМТ × зріст²</b>. Для 178 см це від 58,6 до 79,2 кг, а для 170 см — від 53,5 до 72,3 кг. Калькулятор показує, скільки потрібно набрати чи втратити до нижньої або верхньої межі норми, а вкладка «Таблиця норми» дає діапазони для зростів від 150 до 200 см: наприклад, 150 см — 42–56 кг, 180 см — 60–81 кг, 200 см — 74–100 кг.</p>
+
+            <h2>Цільова вага за бажаним ІМТ</h2>
+            <p>Вкладка «Цільова вага» рахує вагу за вибраним ІМТ: для 178 см і ІМТ 24 це 76 кг, тобто на 9 кг менше за 85 кг, де ІМТ 26,8 (надлишкова маса). Середина норми — приблизно ІМТ 22. Якщо цільовий ІМТ поза нормою, калькулятор попередить. Про безпечний темп зміни ваги й калорії скористайтеся калькулятором калорій.</p>
+
+            <h2>Додаткові показники: BMI Prime і новий ІМТ</h2>
+            <p><b>BMI Prime</b> — це ІМТ, поділений на 25 (верхню межу норми): 0,95 означає 95 % від межі, а більше 1 — вже надлишок. <b>Новий ІМТ</b> запропонував математик Нік Трефетен: 1,3 × вага / зріст^2,5. Він зменшує значення для високих і збільшує для низьких людей: для 190 см і 80 кг звичайний ІМТ 22,2, а новий 20,9; для 150 см і 55 кг — 24,4 і 25,9. Це пропозиція, а не стандарт, і категорії ВООЗ для нього не визначені, тому тут він лише довідковий.</p>
+
+            <h2>Азійські орієнтири</h2>
+            <p>У 2004 році консультація ВООЗ зберегла міжнародну класифікацію, але зазначила: у азійських популяцій ризики можуть починатися за нижчих значень ІМТ, тому додала «точки дій» для охорони здоров'я — 23,0 і 27,5 (за різними популяціями ризик спостерігається від 22 до 25, високий — від 26 до 31). Це не офіційні категорії, тож вибір «ВООЗ + азійські орієнтири» лише додає пояснення, а категорія лишається за стандартною шкалою.</p>
+
+            <h2>Обмеження ІМТ</h2>
+            <p>ІМТ не відрізняє м'язи від жиру: у культуриста з великою м'язовою масою він може бути «надлишковим», а у людини з малою м'язовою масою — нормальним при високому відсотку жиру. Він не показує, де відкладений жир (обхват талії важливіший для ризику). Для дітей і підлітків використовують перцентильні таблиці віку й статі, для вагітних і літніх людей ІМТ менш показовий. Тому ІМТ — відправна точка, а не діагноз: доповніть його обхватом талії, відсотком жиру та консультацією лікаря.</p>
+            <p class="ph-mini">ІМТ — це скринінговий показник, а не діагноз: він не відрізняє м'язи від жиру й не враховує розподіл жиру. Для оцінки здоров'я зверніться до лікаря.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Що таке ІМТ?</h3>
-                <p>ІМТ (індекс маси тіла) — це показник співвідношення ваги до зросту, що використовується для
-                    приблизної оцінки, чи вага людини знаходиться в межах норми.</p>
+            <div class="cc-faq-item">
+                <h3>Як розрахувати ІМТ?</h3>
+                <p>Поділіть вагу в кілограмах на квадрат зросту в метрах. Для 75 кг і 178 см: 75 / (1,78 × 1,78) ≈ 23,7.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Які межі норми ІМТ?</h3>
-                <p>За класифікацією ВООЗ: менше 18.5 — недостатня вага, 18.5-24.9 — норма, 25-29.9 — надлишкова вага,
-                    від 30 — ожиріння.</p>
+            <div class="cc-faq-item">
+                <h3>Яка норма ІМТ?</h3>
+                <p>За ВООЗ для дорослих норма — від 18,5 до 24,9. Менше — дефіцит маси, від 25 — надлишок, від 30 — ожиріння.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи враховує ІМТ м'язову масу?</h3>
-                <p>Ні, ІМТ не розрізняє м'язову і жирову масу. У спортсменів з великою м'язовою масою ІМТ може бути
-                    завищеним, хоча відсоток жиру в тілі низький.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки має важити людина для мого зросту?</h3>
+                <p>Нормальна вага — від ІМТ 18,5 до 25 помножити на квадрат зросту. Для 170 см це 53,5–72,3 кг. Точні межі для вашого зросту показує калькулятор.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна довіряти ІМТ на 100%?</h3>
-                <p>ІМТ — корисний скринінговий інструмент, але не діагноз. Для повної картини здоров'я варто враховувати
-                    склад тіла, обхват талії та консультацію лікаря.</p>
+            <div class="cc-faq-item">
+                <h3>Чи можна довіряти ІМТ на 100 %?</h3>
+                <p>Ні: це скринінг. ІМТ не відрізняє м'язи від жиру й не враховує, де відкладений жир, тому для висновків потрібні інші показники й лікар.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому в спортсмена ІМТ «надлишковий»?</h3>
+                <p>Мускулатура важча за жир, тому у людини з великою м'язовою масою ІМТ може бути високим за низького відсотка жиру.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи підходить ІМТ для дітей?</h3>
+                <p>Ні: для дітей і підлітків ІМТ оцінюють за перцентильними таблицями віку й статі. Категорії дорослих тут для них лише орієнтир.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке ожиріння I, II і III ступеня?</h3>
+                <p>За ІМТ: 30–34,9 — I ступінь, 35–39,9 — II, від 40 — III. З кожним ступенем зростає ризик хронічних хвороб.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке BMI Prime?</h3>
+                <p>ІМТ, поділений на 25: показує, яку частку від верхньої межі норми становить ваш ІМТ. Значення понад 1 означає надлишок.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке новий ІМТ Трефетена?</h3>
+                <p>Пропозиція математика Ніка Трефетена: 1,3 × вага / зріст^2,5. Для високих людей значення нижче, для низьких вище; це довідковий показник.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи однакові межі ІМТ для всіх народів?</h3>
+                <p>Стандарт ВООЗ єдиний, але для азійських популяцій ВООЗ-2004 додала точки дій 23 і 27,5, бо ризики можуть починатися за нижчого ІМТ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як поставити цільову вагу?</h3>
+                <p>Оберіть ІМТ у нормі (приблизно 22 — середина) й перемножте на квадрат зросту. Вкладка «Цільова вага» робить це за вас.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому на межі категорій число й категорія можуть здаватися різними?</h3>
+                <p>ІМТ округлюється до десятих, а категорія береться за точним значенням: 24,95 показується як 25,0, але ще належить до норми. Калькулятор у таких випадках пояснює це.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

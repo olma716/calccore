@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>BMI Calculator Online — Body Mass Index | CalcCore</title>
+    <title>BMI Calculator Online: Body Mass Index by WHO | CalcCore</title>
     <meta name="description"
-        content="Calculate your Body Mass Index (BMI) from height and weight. Categories: underweight, normal, overweight, obese. Based on the WHO scale." />
+        content="BMI calculator: body mass index and WHO category, normal weight for your height, target weight, a normal weight table, kg and lb." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/bmi-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/bmi-calculator" />
@@ -26,244 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="BMI Calculator Online — Body Mass Index" />
-    <meta property="og:description" content="Calculate your Body Mass Index (BMI) from height and weight. Categories: underweight, normal, overweight, obese. Based on the WHO scale." />
+    <meta property="og:title" content="BMI Calculator Online: Body Mass Index by WHO" />
+    <meta property="og:description" content="BMI calculator: body mass index and WHO category, normal weight for your height, target weight, a normal weight table, kg and lb." />
     <meta property="og:url" content="https://calccore.net/en/sport/bmi-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="BMI Calculator Online — Body Mass Index" />
-    <meta name="twitter:description" content="Calculate your Body Mass Index (BMI) from height and weight. Categories: underweight, normal, overweight, obese. Based on the WHO scale." />
+    <meta name="twitter:title" content="BMI Calculator Online: Body Mass Index by WHO" />
+    <meta name="twitter:description" content="BMI calculator: body mass index and WHO category, normal weight for your height, target weight, a normal weight table, kg and lb." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/bmi-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104bmi6" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/bmi-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is BMI?",
-        "acceptedAnswer":{"@type":"Answer","text":"BMI (Body Mass Index) is a measure of the ratio between weight and height, used as a rough screening tool to estimate whether a person's weight is within a healthy range."}
-      },
-      {
-        "@type":"Question",
-        "name":"What are the normal BMI ranges?",
-        "acceptedAnswer":{"@type":"Answer","text":"According to the WHO classification: below 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, and 30 or above is obese."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does BMI account for muscle mass?",
-        "acceptedAnswer":{"@type":"Answer","text":"No, BMI doesn't distinguish between muscle and fat mass. Athletes with high muscle mass may show an elevated BMI despite having low body fat."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104bmi6" defer></script>
+    <script src="/js/phys-core.js?v=20261104bmi6" defer></script>
+    <script src="/js/bmi-data.js?v=20261104bmi6" defer></script>
+    <script src="/js/bmi-calc.js?v=20261104bmi6" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/bmi-calculator#app",
-    "name":"BMI Calculator",
-    "description":"Calculate your Body Mass Index from height and weight with WHO-scale categories.",
-    "url":"https://calccore.net/en/sport/bmi-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/bmi-calculator#app",
+  "name": "BMI Calculator (Body Mass Index)",
+  "description": "An online body mass index (BMI) calculator: weight and height with the WHO category (three grades of thinness, normal, overweight, three obesity classes), a coloured scale, normal weight for your height and the difference to it, target weight for a desired BMI, a normal weight table by height, BMI Prime, Trefethen's new BMI and Asian action points. Kilograms and pounds, centimetres and feet.",
+  "url": "https://calccore.net/en/sport/bmi-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "BMI and WHO category with thinness grades and obesity classes",
+    "A coloured scale with a marker and the normal range for your height",
+    "How much to lose or gain to reach the normal range",
+    "Target weight for a desired BMI",
+    "A normal weight table for heights 150–200 cm",
+    "Kg/lb, cm/ft-in, Asian action points"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/bmi-calculator#webpage",
+      "url": "https://calccore.net/en/sport/bmi-calculator",
+      "name": "BMI Calculator Online: Body Mass Index by WHO | CalcCore",
+      "description": "BMI calculator: body mass index and WHO category, normal weight for your height, target weight, a normal weight table, kg and lb.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/bmi-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/bmi-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/bmi-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "BMI calculator",
+          "item": "https://calccore.net/en/sport/bmi-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/bmi-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate BMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide the weight in kilograms by the square of the height in metres. For 75 kg and 178 cm: 75 / (1.78 × 1.78) ≈ 23.7."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a normal BMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By the WHO for adults normal is 18.5 to 24.9. Below is thinness, from 25 overweight, from 30 obesity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I weigh for my height?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Normal weight is a BMI of 18.5 to 25 times the square of the height. For 170 cm that is 53.5–72.3 kg. The calculator shows the exact limits for your height."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I trust BMI 100%?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: it is a screen. BMI does not tell muscle from fat and does not account for where fat is stored, so other measures and a doctor are needed for conclusions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is an athlete's BMI “overweight”?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Muscle is heavier than fat, so a person with a lot of muscle can have a high BMI with a low body fat percentage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is BMI suitable for children?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: for children and teenagers BMI is assessed with age- and sex-specific percentile charts. The adult categories here are only a guide for them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are obesity classes I, II and III?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By BMI: 30–34.9 is class I, 35–39.9 class II, 40 and above class III. The risk of chronic diseases grows with each class."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is BMI Prime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The BMI divided by 25: it shows what share of the upper limit of normal your BMI is. A value above 1 means overweight."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Trefethen's new BMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A proposal by the mathematician Nick Trefethen: 1.3 × weight / height^2.5. The value is lower for tall people and higher for short ones; it is a reference measure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the BMI limits the same for all peoples?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The WHO standard is one, but for Asian populations the 2004 WHO consultation added action points of 23 and 27.5, because risks may start at a lower BMI."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I set a target weight?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose a BMI in the normal range (about 22 is the middle) and multiply it by the square of the height. The “Target weight” tab does it for you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can the number and the category seem different at a boundary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BMI is rounded to a tenth while the category uses the exact value: 24.95 is shown as 25.0 but still belongs to normal. In such cases the calculator explains it."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cbmi">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">BMI Calculator (Body Mass Index)</h1>
-                    <p class="mcalc__p">
-                        Calculate your BMI from height and weight with categories based on the <b>WHO</b> scale:
-                        underweight, normal, overweight, obese.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">BMI Calculator: Body Mass Index</h1>
+                    <p class="ph__p">Enter your weight and height and the calculator computes your BMI, shows the WHO category on a coloured scale, the normal weight range for your height and how far you are from it. Separate tabs: target weight for a desired BMI and a normal weight table by height.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="bmi" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">My BMI</b><span class="ph__ex">BMI, category and normal range</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="target" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Target weight</b><span class="ph__ex">Weight for a desired BMI</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Normal weight table</b><span class="ph__ex">Normal for heights 150–200 cm</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="weight">Weight (kg)</label>
-                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 75" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="height">Height (cm)</label>
-                                <input class="mcalc__input" id="height" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 178" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="bmi-scale" id="bmiScale" style="display:none;">
-                            <div class="bmi-scale__track">
-                                <div class="bmi-scale__segment bmi-scale__segment--under"></div>
-                                <div class="bmi-scale__segment bmi-scale__segment--normal"></div>
-                                <div class="bmi-scale__segment bmi-scale__segment--over"></div>
-                                <div class="bmi-scale__segment bmi-scale__segment--obese"></div>
-                                <div class="bmi-scale__marker" id="bmiMarker"></div>
-                            </div>
-                            <div class="bmi-scale__labels">
-                                <span>16</span>
-                                <span>18.5</span>
-                                <span>25</span>
-                                <span>30</span>
-                                <span>40</span>
-                            </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
-                            <a href="/en/sport/heart-rate-calculator">Heart Rate Zones</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is BMI (Body Mass Index)</h2>
-            <p>
-                <b>BMI</b> is a simple ratio of weight to height squared, used for a quick preliminary
-                assessment of whether a person's weight falls within a healthy range.
-            </p>
-        
-            <h2>Calculation formula</h2>
-            <p>
-                <b>BMI = weight(kg) / height(m)²</b><br>
-                For example, at 75 kg and 1.78 m: BMI = 75 / (1.78 × 1.78) ≈ 23.7
-            </p>
-        
-            <h2>BMI categories on the WHO scale</h2>
-            <ul>
-                <li><b>Below 18.5:</b> underweight — may indicate nutritional deficiency; consult a doctor.</li>
-                <li><b>18.5–24.9:</b> normal weight — associated with the lowest health risk in population studies.</li>
-                <li><b>25–29.9:</b> overweight — increased risk of cardiovascular disease and type 2 diabetes.</li>
-                <li><b>30 and above:</b> obese — significantly increased risk of chronic disease; medical consultation
-                    recommended.</li>
-            </ul>
-        
-            <h2>Why BMI is a guide, not a diagnosis</h2>
-            <p>
-                BMI is a simple screening measure that <b>does not account</b> for body composition. Athletes
-                and people with high muscle mass may show an elevated BMI despite having low body fat. For example,
-                a professional weightlifter with a BMI of 28 may have less body fat than a sedentary person with a BMI of 23.
-            </p>
-            <p>
-                BMI also doesn't account for fat distribution — belly fat (visceral fat) poses a greater health
-                risk than fat on the hips or thighs, even at the same BMI. For a fuller picture, consider waist
-                circumference, waist-to-hip ratio, or body fat percentage (measured via bioimpedance or calipers).
-            </p>
-        
-            <h2>Special cases</h2>
-            <ul>
-                <li><b>Children and teens:</b> age- and sex-specific BMI percentile charts are used instead of the adult scale.
-                </li>
-                <li><b>Pregnancy:</b> the current BMI is not used to assess weight during pregnancy — the recommended weight gain is set
-                    by the pre-pregnancy BMI. Work it out in the <a href="/en/pregnancy/weight-gain-calculator">pregnancy weight gain calculator</a>.</li>
-                <li><b>Older adults:</b> a slightly higher BMI (25-27) in seniors is sometimes associated with better health
-                    outcomes than the "ideal" range.</li>
-                <li><b>Different ethnic groups:</b> some studies show health risks may begin at different BMI thresholds
-                    depending on ethnic background.</li>
-            </ul>
-        
-            <p class="m-hintSmall">
-                The result is an approximate indicator, not a medical diagnosis. For a full health assessment,
-                consult a doctor who can factor in body composition, waist circumference, lab tests, and family history.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>Daily needs, pace and time to reach a goal.</span></a>
+                <a class="cc-related-card" href="/en/sport/body-fat-calculator"><b>Body Fat Calculator</b><span>Body fat percentage from measurements.</span></a>
+                <a class="cc-related-card" href="/en/sport/macros-calculator"><b>Macros Calculator</b><span>Protein, fat and carbs for your goal.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What BMI is</h2>
+            <p><b>Body mass index</b> (BMI) is the ratio of weight in kilograms to the square of height in metres: <b>BMI = weight / height²</b>. It was devised by the Belgian Adolphe Quetelet and is used today by the WHO and doctors as a quick screen: it shows whether weight fits height but not why. For a person of 75 kg and 178 cm the BMI is 75 / 1.78² ≈ 23.7 — normal.</p>
+
+            <h2>WHO BMI categories</h2>
+            <p>For adults the WHO distinguishes: below 16 — severe thinness, 16–16.9 — moderate, 17–18.4 — mild; <b>18.5–24.9 — normal</b>; 25–29.9 — overweight (pre-obesity); 30–34.9 — obesity class I, 35–39.9 — class II, 40 and above — class III. The lower limit belongs to the category: a BMI of exactly 25 is already overweight. The scale on the page shows your position with a marker, and the category table converts the limits into weights for your height.</p>
+
+            <h2>Normal weight for your height</h2>
+            <p>Normal weight is the weight at which BMI is from 18.5 to 25: <b>weight = BMI × height²</b>. For 178 cm that is 58.6 to 79.2 kg and for 170 cm 53.5 to 72.3 kg. The calculator shows how much to gain or lose to reach the lower or upper limit, and the “Normal weight table” tab gives ranges for heights from 150 to 200 cm: for example 150 cm — 42–56 kg, 180 cm — 60–81 kg, 200 cm — 74–100 kg.</p>
+
+            <h2>Target weight for a desired BMI</h2>
+            <p>The “Target weight” tab computes weight for a chosen BMI: for 178 cm and a BMI of 24 that is 76 kg, i.e. 9 kg below 85 kg, where the BMI is 26.8 (overweight). The middle of the normal range is about a BMI of 22. If the target BMI is outside the normal range, the calculator warns you. For a safe pace of weight change and the calories, use the calorie calculator.</p>
+
+            <h2>Extra measures: BMI Prime and the new BMI</h2>
+            <p><b>BMI Prime</b> is the BMI divided by 25 (the upper limit of normal): 0.95 means 95% of the limit, and above 1 is already overweight. The <b>new BMI</b> was proposed by the mathematician Nick Trefethen: 1.3 × weight / height^2.5. It lowers the value for tall people and raises it for short ones: for 190 cm and 80 kg the usual BMI is 22.2 and the new one 20.9; for 150 cm and 55 kg — 24.4 and 25.9. It is a proposal, not a standard, and WHO categories are not defined for it, so here it is for reference only.</p>
+
+            <h2>Asian action points</h2>
+            <p>In 2004 a WHO consultation kept the international classification but noted that in Asian populations risks may start at lower BMI values, and added public health “action points” — 23.0 and 27.5 (risk is observed from 22 to 25 in different populations, high risk from 26 to 31). These are not official categories, so choosing “WHO + Asian action points” only adds an explanation and the category stays on the standard scale.</p>
+
+            <h2>Limits of BMI</h2>
+            <p>BMI does not tell muscle from fat: a bodybuilder with a lot of muscle may be “overweight”, and a person with little muscle may be normal with a high body fat percentage. It does not show where fat is stored (waist circumference matters more for risk). For children and teenagers age- and sex-specific percentile charts are used, and for pregnant and older people BMI is less informative. So BMI is a starting point, not a diagnosis: complement it with waist circumference, body fat percentage and a doctor's advice.</p>
+            <p class="ph-mini">BMI is a screening measure, not a diagnosis: it does not tell muscle from fat and ignores fat distribution. See a doctor to assess your health.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is BMI?</h3>
-                <p>BMI (Body Mass Index) is a measure of the ratio between weight and height, used as a rough screening
-                    tool to estimate whether a person's weight is within a healthy range.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate BMI?</h3>
+                <p>Divide the weight in kilograms by the square of the height in metres. For 75 kg and 178 cm: 75 / (1.78 × 1.78) ≈ 23.7.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>What are the normal BMI ranges?</h3>
-                <p>According to the WHO classification: below 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is
-                    overweight, and 30 or above is obese.</p>
+            <div class="cc-faq-item">
+                <h3>What is a normal BMI?</h3>
+                <p>By the WHO for adults normal is 18.5 to 24.9. Below is thinness, from 25 overweight, from 30 obesity.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Does BMI account for muscle mass?</h3>
-                <p>No, BMI doesn't distinguish between muscle and fat mass. Athletes with high muscle mass may show an
-                    elevated BMI despite having low body fat.</p>
+            <div class="cc-faq-item">
+                <h3>How much should I weigh for my height?</h3>
+                <p>Normal weight is a BMI of 18.5 to 25 times the square of the height. For 170 cm that is 53.5–72.3 kg. The calculator shows the exact limits for your height.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I fully trust BMI?</h3>
-                <p>BMI is a useful screening tool, but not a diagnosis. For a complete health picture, consider body
-                    composition, waist circumference, and a doctor's consultation.</p>
+            <div class="cc-faq-item">
+                <h3>Can I trust BMI 100%?</h3>
+                <p>No: it is a screen. BMI does not tell muscle from fat and does not account for where fat is stored, so other measures and a doctor are needed for conclusions.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is an athlete's BMI “overweight”?</h3>
+                <p>Muscle is heavier than fat, so a person with a lot of muscle can have a high BMI with a low body fat percentage.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is BMI suitable for children?</h3>
+                <p>No: for children and teenagers BMI is assessed with age- and sex-specific percentile charts. The adult categories here are only a guide for them.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are obesity classes I, II and III?</h3>
+                <p>By BMI: 30–34.9 is class I, 35–39.9 class II, 40 and above class III. The risk of chronic diseases grows with each class.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is BMI Prime?</h3>
+                <p>The BMI divided by 25: it shows what share of the upper limit of normal your BMI is. A value above 1 means overweight.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is Trefethen's new BMI?</h3>
+                <p>A proposal by the mathematician Nick Trefethen: 1.3 × weight / height^2.5. The value is lower for tall people and higher for short ones; it is a reference measure.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are the BMI limits the same for all peoples?</h3>
+                <p>The WHO standard is one, but for Asian populations the 2004 WHO consultation added action points of 23 and 27.5, because risks may start at a lower BMI.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I set a target weight?</h3>
+                <p>Choose a BMI in the normal range (about 22 is the middle) and multiply it by the square of the height. The “Target weight” tab does it for you.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why can the number and the category seem different at a boundary?</h3>
+                <p>BMI is rounded to a tenth while the category uses the exact value: 24.95 is shown as 25.0 but still belongs to normal. In such cases the calculator explains it.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
