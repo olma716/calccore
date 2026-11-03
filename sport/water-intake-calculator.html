@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор норми води онлайн — скільки пити на день | CalcCore</title>
+    <title>Калькулятор норми води: скільки пити на день | CalcCore</title>
     <meta name="description"
-        content="Розрахунок денної норми води за вагою, активністю та кліматом. Дізнайся, скільки літрів води потрібно пити щодня для здоров'я та тренувань." />
+        content="Калькулятор норми води: скільки пити на день за вагою, активністю й кліматом, потовиділення на тренуванні, розклад питва та офіційні норми EFSA." />
 
     <link rel="canonical" href="https://calccore.net/sport/water-intake-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/water-intake-calculator" />
@@ -26,250 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор норми води онлайн — скільки пити на день" />
-    <meta property="og:description" content="Розрахунок денної норми води за вагою, активністю та кліматом. Дізнайся, скільки літрів води потрібно пити щодня для здоров'я та тренувань." />
+    <meta property="og:title" content="Калькулятор норми води: скільки пити на день" />
+    <meta property="og:description" content="Калькулятор норми води: скільки пити на день за вагою, активністю й кліматом, потовиділення на тренуванні, розклад питва та офіційні норми EFSA." />
     <meta property="og:url" content="https://calccore.net/sport/water-intake-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор норми води онлайн — скільки пити на день" />
-    <meta name="twitter:description" content="Розрахунок денної норми води за вагою, активністю та кліматом. Дізнайся, скільки літрів води потрібно пити щодня для здоров'я та тренувань." />
+    <meta name="twitter:title" content="Калькулятор норми води: скільки пити на день" />
+    <meta name="twitter:description" content="Калькулятор норми води: скільки пити на день за вагою, активністю й кліматом, потовиділення на тренуванні, розклад питва та офіційні норми EFSA." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104wi3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/water-intake-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Скільки води потрібно пити на день?",
-        "acceptedAnswer":{"@type":"Answer","text":"Базова рекомендація — приблизно 30-35 мл води на кг ваги тіла, з коригуванням на рівень активності та клімат."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи входить кава і чай у денну норму води?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, усі рідини, включно з кавою і чаєм, зараховуються до загального споживання рідини, хоча кофеїн має легкий сечогінний ефект."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна випити забагато води?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, надмірне споживання води може призвести до гіпонатріємії (розведення солей у крові). Це рідкісний стан, але важливо не перевищувати норму значно без потреби."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104wi3" defer></script>
+    <script src="/js/phys-core.js?v=20261104wi3" defer></script>
+    <script src="/js/wi-data.js?v=20261104wi3" defer></script>
+    <script src="/js/wi-calc.js?v=20261104wi3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/sport/water-intake-calculator#app",
-    "name":"Water Intake Calculator",
-    "description":"Розрахунок денної норми води за вагою, активністю та кліматом.",
-    "url":"https://calccore.net/sport/water-intake-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/sport/water-intake-calculator#app",
+  "name": "Калькулятор норми води",
+  "description": "Онлайн-калькулятор норми води: орієнтир для напоїв на день за вагою, активністю, кліматом, вагітністю чи годуванням груддю з довідкою про офіційні норми EFSA та Національних академій США, розрахунок потовиділення на тренуванні за зміною ваги з рекомендацією для відновлення та рівномірний розклад питва за годинами пробудження. Метричні й імперські одиниці.",
+  "url": "https://calccore.net/sport/water-intake-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Орієнтир для напоїв за вагою, активністю й кліматом",
+    "Поправки на вагітність і годування груддю",
+    "Довідкові норми EFSA та Національних академій США",
+    "Потовиділення на тренуванні за зміною ваги",
+    "Скільки випити для відновлення після тренування",
+    "Розклад питва за годинами пробудження"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/sport/water-intake-calculator#webpage",
+      "url": "https://calccore.net/sport/water-intake-calculator",
+      "name": "Калькулятор норми води: скільки пити на день | CalcCore",
+      "description": "Калькулятор норми води: скільки пити на день за вагою, активністю й кліматом, потовиділення на тренуванні, розклад питва та офіційні норми EFSA.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/sport/water-intake-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/sport/water-intake-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/sport/water-intake-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Спорт",
+          "item": "https://calccore.net/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор норми води",
+          "item": "https://calccore.net/sport/water-intake-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/sport/water-intake-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скільки води потрібно пити на день?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Залежить від ваги, активності й клімату. Орієнтир калькулятора: 33 мл на кг плюс поправки; для людини 75 кг із помірною активністю це близько 2,8 літра."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи правда, що треба пити 2 літри?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це лише орієнтир. EFSA називає 2,0 л загальної води для жінок і 2,5 л для чоловіків, з урахуванням води з їжі, а потреба в напоях залежить від людини."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи входять чай, кава й супи в норму?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, усі рідини й вода в їжі зараховуються до загального балансу. Кофеїн має легкий сечогінний ефект, але чай і кава все одно додають рідини."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Звідки береться 33 мл на кг?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це поширена, але неофіційна евристика. Калькулятор дозволяє змінити коефіцієнт і показує офіційні норми EFSA та Національних академій США для порівняння."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки пити вагітним і при годуванні груддю?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EFSA пропонує додати близько 300 мл на день у вагітність і близько 700 мл при годуванні груддю. Конкретну норму краще узгодити з лікарем."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати втрату рідини на тренуванні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зважтеся до й після. Піт = втрата ваги + випита рідина − сеча; поділіть на тривалість у годинах, щоб отримати швидкість потовиділення."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки пити після тренування?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Приблизно 150 % від втраченої ваги, тобто 1,5 л на кожен кілограм, протягом кількох годин (рекомендація ACSM)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому небезпечна втрата понад 2 % ваги?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Втрата понад 2 % маси через піт знижує витривалість і працездатність. Тому на тренуванні варто пити так, щоб не доходити до цього рівня."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як розподілити воду протягом дня?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Рівномірно від пробудження до години перед сном. Калькулятор складає розклад за вашими годинами й обсягом склянки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна випити забагато води?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. Дуже великі обсяги за короткий час можуть розбавити натрій у крові (гіпонатріємія). Не пийте понад ~5 літрів на день без потреби."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як зрозуміти, що води достатньо?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Світло-жовтий або прозорий колір сечі зазвичай свідчить про достатню гідратацію, темно-жовтий — про потребу пити більше."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи залежить норма від клімату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. У спеку й за сильного потовиділення потреба зростає; калькулятор додає орієнтовно 500 мл для спекотного клімату."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cwater">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор норми води на день</h1>
-                    <p class="mcalc__p">
-                        Розрахунок денної норми води за вагою, рівнем активності та кліматом.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор норми води: скільки пити на день</h1>
+                    <p class="ph__p">Введіть вагу, активність і клімат — і калькулятор покаже орієнтир, скільки рідини пити на день, а поруч офіційні норми для порівняння. Окремі вкладки: потовиділення на тренуванні за зміною ваги та розклад питва за годинами між підйомом і сном.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Спорт</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="need" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span class="ph__tileTx"><b class="ph__tabT">Норма на день</b><span class="ph__ex">Скільки пити на день</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="sweat" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Потовиділення</b><span class="ph__ex">Піт за зміною ваги</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="sched" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Розклад на день</b><span class="ph__ex">Час і кількість прийомів</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="weight">Вага (кг)</label>
-                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
-                                    placeholder="напр.: 75" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="activity">Активність</label>
-                                <select id="activity" class="mcalc__select">
-                                    <option value="low">Низька (сидяча робота)</option>
-                                    <option value="moderate" selected>Помірна (тренування 3-5 разів/тиждень)</option>
-                                    <option value="high">Висока (щоденні інтенсивні тренування)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="climate">Клімат/погода</label>
-                                <select id="climate" class="mcalc__select">
-                                    <option value="normal" selected>Помірний клімат</option>
-                                    <option value="hot">Спекотний клімат / літо</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дані для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Розподіл протягом дня <span class="muted">(відкрити)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Water schedule">
-                                    <thead>
-                                        <tr>
-                                            <th>Час</th>
-                                            <th>Кількість</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/sport/calories-calculator">Калькулятор калорій</a>
-                            <a href="/sport/macros-calculator">Калькулятор БЖУ</a>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Скільки води потрібно пити на день</h2>
-            <p>
-                Точна потреба у воді залежить від ваги тіла, рівня фізичної активності, клімату та
-                загального стану здоров'я. Базова формула — приблизно <b>30-35 мл води на кг ваги тіла</b>
-                на день, з додатковим коригуванням на тренування та спеку.
-            </p>
-        
-            <h2>Чому вода важлива</h2>
-            <ul>
-                <li><b>Терморегуляція:</b> вода допомагає організму охолоджуватись через потовиділення.</li>
-                <li><b>Транспорт поживних речовин:</b> кров, яка на 90% складається з води, доставляє кисень і поживні речовини
-                    до клітин.</li>
-                <li><b>Функція суглобів:</b> вода є частиною синовіальної рідини, що змащує суглоби.</li>
-                <li><b>Спортивна продуктивність:</b> навіть 2% зневоднення може суттєво знизити витривалість і силу.</li>
-            </ul>
-        
-            <h2>Фактори, що впливають на потребу у воді</h2>
-            <ul>
-                <li><b>Фізична активність:</b> тренування збільшують втрати рідини через піт, тому потрібно пити більше.</li>
-                <li><b>Клімат:</b> спекотна погода підвищує потовиділення навіть без фізичного навантаження.</li>
-                <li><b>Дієта:</b> високобілкова дієта та кофеїн можуть трохи підвищувати потребу у воді.</li>
-            </ul>
-        
-            <h2>Як розпізнати ознаки зневоднення</h2>
-            <ul>
-                <li><b>Колір сечі:</b> темно-жовтий колір — сигнал пити більше води; світло-жовтий чи прозорий — ознака
-                    достатньої гідратації.</li>
-                <li><b>Спрага:</b> відчуття спраги вже свідчить про легке зневоднення — краще пити регулярно, не чекаючи на
-                    спрагу.</li>
-                <li><b>Втома і головний біль:</b> навіть незначне зневоднення може викликати втому, зниження концентрації та
-                    головний біль.</li>
-                <li><b>Сухість шкіри та губ:</b> ще один видимий показник нестачі рідини в організмі.</li>
-            </ul>
-        
-            <h2>Джерела рідини, які враховуються в нормі</h2>
-            <p>
-                До денної норми входить не лише чиста вода, а й інші рідини: чай, кава, соки, супи, а також
-                вода, що міститься у фруктах і овочах (кавуни, огірки, апельсини містять до 90-95% води).
-                Кофеїновмісні напої мають легкий сечогінний ефект, але все одно зараховуються до загального
-                балансу рідини.
-            </p>
-        
-            <p class="m-hintSmall">
-                Це орієнтовний розрахунок. Індивідуальні потреби можуть відрізнятися залежно від стану
-                здоров'я (наприклад, захворювання нирок чи серця вимагають іншого підходу до споживання
-                рідини) — консультуйся з лікарем при особливих медичних умовах.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/sport/calories-calculator"><b>Калькулятор калорій</b><span>Добова норма, темп і строк досягнення цілі.</span></a>
+                <a class="cc-related-card" href="/sport/heart-rate-calculator"><b>Калькулятор пульсових зон</b><span>П'ять зон для тренувань за пульсом.</span></a>
+                <a class="cc-related-card" href="/sport/macros-calculator"><b>Калькулятор БЖУ</b><span>Білки, жири й вуглеводи під вашу ціль.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Скільки води потрібно пити на день</h2>
+            <p>Єдиної точної норми немає: потреба залежить від ваги, активності, клімату й стану здоров'я. Офіційні орієнтири подають загальну воду з напоїв і їжі: <b>EFSA</b> (ЄС) називає 2,5 л на день для чоловіків і 2,0 л для жінок, а Національні академії США — 3,7 і 2,7 л. Лише з напоїв це приблизно 2,0 і 1,6 л за EFSA та 3,0 і 2,2 л за американськими нормами, бо близько 20 % води людина отримує з їжі. Ці цифри для дорослих при помірній температурі й активності.</p>
+
+            <h2>Як рахує калькулятор</h2>
+            <p>Базова формула проста: <b>вага × 33 мл</b>, а потім поправки. Для людини 75 кг із помірною активністю (+350 мл) виходить 75 × 33 + 350 = 2825 мл, тобто 2,83 л, або близько 11 склянок по 250 мл. Правило «30–35 мл на кг» дуже поширене, але офіційного джерела в нього немає, тому калькулятор дозволяє змінити коефіцієнт у межах 20–50 мл на кг, а поруч показує офіційні норми для порівняння.</p>
+
+            <h2>Поправки на активність, спеку й особливий стан</h2>
+            <p>За звичайним навантаженням додається 0, 200, 350 або 700 мл залежно від того, чи у вас сидяча робота з малим рухом, звичайний день із прогулянками без тренувань, тренування 3–5 разів на тиждень чи щоденні інтенсивні заняття; у спеку ще +500 мл. Це орієнтири без офіційного джерела, а не клінічна норма. Для вагітних EFSA пропонує додати 300 мл на день, для жінок, які годують груддю, близько 700 мл. Якщо ви багато потієте, точніше потребу покаже вкладка потовиділення.</p>
+
+            <h2>Потовиділення на тренуванні</h2>
+            <p>Зважтеся до й після тренування. Піт = втрата ваги + випита рідина − сеча, якщо ходили в туалет. Приклад: 70 кг до, 69,4 кг після, випито 400 мл за 60 хвилин: втрата 600 мл + 400 мл випитого = 1000 мл піту, тобто 1000 мл на годину. Втрата ваги становить 0,9 % маси. За позицією Американського коледжу спортивної медицини (ACSM) під час тренування варто не втрачати понад 2 % маси, а після неї відновлювати приблизно 150 % втраченої ваги (1,5 л на кг): у прикладі це близько 900 мл протягом кількох годин. Швидкість потовиділення дуже індивідуальна, зазвичай приблизно від 0,4 до 1,8 л на годину залежно від людини, спеки й навантаження, тому її краще міряти самому. Зважуйтеся в однаковому сухому одязі чи без нього: мокрий одяг тримає частину поту й заниження втрати.</p>
+
+            <h2>Розклад питва за годинами</h2>
+            <p>Вкладка «Розклад на день» розподіляє норму рівномірно від підйому до години перед сном. Для 2825 мл з підйомом о 07:00 і сном о 23:00 це 11 прийомів по близько 257 мл кожні 1 годину 30 хвилин, останній о 22:00. Розклад працює як нагадування: пити невеликими порціями регулярно легше, ніж «надолужувати» ввечері. Останній прийом за годину до сну допомагає менше прокидатися вночі.</p>
+
+            <h2>Що входить у норму</h2>
+            <p>До загального споживання води входять не лише вода, а й чай, кава, соки, супи та вода в їжі: кавуни, огірки й апельсини містять до 90–95 % води. Кофеїн має легкий сечогінний ефект, але напої з ним усе одно зараховуються. Колір сечі допомагає орієнтуватися: темно-жовтий означає, що варто пити більше, світло-жовтий чи прозорий — що води достатньо.</p>
+
+            <h2>Коли вода шкодить</h2>
+            <p>Забагато води за короткий час небезпечне: розведення натрію в крові (гіпонатріємія) може траплятися при дуже великих обсягах питва, особливо під час тривалих навантажень. Тому калькулятор попереджає про значення понад 5 літрів на день. Людям із хворобами серця чи нирок, при обмеженні рідини й вагітності норму визначає лікар.</p>
+            <p class="ph-mini">Це орієнтир для здорової дорослої людини, а не медичне призначення: при хворобах серця, нирок, обмеженні рідини, вагітності чи прийомі ліків норму визначає лікар.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>Скільки води потрібно пити на день?</h3>
-                <p>Базова рекомендація — приблизно 30-35 мл води на кг ваги тіла, з коригуванням на рівень активності та
-                    клімат.</p>
+                <p>Залежить від ваги, активності й клімату. Орієнтир калькулятора: 33 мл на кг плюс поправки; для людини 75 кг із помірною активністю це близько 2,8 літра.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи входить кава і чай у денну норму води?</h3>
-                <p>Так, усі рідини, включно з кавою і чаєм, зараховуються до загального споживання рідини, хоча кофеїн
-                    має легкий сечогінний ефект.</p>
+            <div class="cc-faq-item">
+                <h3>Чи правда, що треба пити 2 літри?</h3>
+                <p>Це лише орієнтир. EFSA називає 2,0 л загальної води для жінок і 2,5 л для чоловіків, з урахуванням води з їжі, а потреба в напоях залежить від людини.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Чи входять чай, кава й супи в норму?</h3>
+                <p>Так, усі рідини й вода в їжі зараховуються до загального балансу. Кофеїн має легкий сечогінний ефект, але чай і кава все одно додають рідини.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Звідки береться 33 мл на кг?</h3>
+                <p>Це поширена, але неофіційна евристика. Калькулятор дозволяє змінити коефіцієнт і показує офіційні норми EFSA та Національних академій США для порівняння.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки пити вагітним і при годуванні груддю?</h3>
+                <p>EFSA пропонує додати близько 300 мл на день у вагітність і близько 700 мл при годуванні груддю. Конкретну норму краще узгодити з лікарем.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як порахувати втрату рідини на тренуванні?</h3>
+                <p>Зважтеся до й після. Піт = втрата ваги + випита рідина − сеча; поділіть на тривалість у годинах, щоб отримати швидкість потовиділення.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки пити після тренування?</h3>
+                <p>Приблизно 150 % від втраченої ваги, тобто 1,5 л на кожен кілограм, протягом кількох годин (рекомендація ACSM).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому небезпечна втрата понад 2 % ваги?</h3>
+                <p>Втрата понад 2 % маси через піт знижує витривалість і працездатність. Тому на тренуванні варто пити так, щоб не доходити до цього рівня.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як розподілити воду протягом дня?</h3>
+                <p>Рівномірно від пробудження до години перед сном. Калькулятор складає розклад за вашими годинами й обсягом склянки.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Чи можна випити забагато води?</h3>
-                <p>Так, надмірне споживання води може призвести до гіпонатріємії (розведення солей у крові). Це
-                    рідкісний стан, але важливо не перевищувати норму значно без потреби.</p>
+                <p>Так. Дуже великі обсяги за короткий час можуть розбавити натрій у крові (гіпонатріємія). Не пийте понад ~5 літрів на день без потреби.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як зрозуміти, що води достатньо?</h3>
+                <p>Світло-жовтий або прозорий колір сечі зазвичай свідчить про достатню гідратацію, темно-жовтий — про потребу пити більше.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи залежить норма від клімату?</h3>
+                <p>Так. У спеку й за сильного потовиділення потреба зростає; калькулятор додає орієнтовно 500 мл для спекотного клімату.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Water Intake Calculator — How Much Water to Drink Daily | CalcCore</title>
+    <title>Water Intake Calculator: How Much to Drink a Day | CalcCore</title>
     <meta name="description"
-        content="Calculate your daily water intake based on weight, activity level, and climate. Find out how many liters of water you need each day for health and training." />
+        content="Water intake calculator: how much to drink a day by weight, activity and climate, sweat rate in exercise, a drinking schedule and EFSA reference values." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/water-intake-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/water-intake-calculator" />
@@ -26,249 +28,424 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Water Intake Calculator — How Much Water to Drink Daily" />
-    <meta property="og:description" content="Calculate your daily water intake based on weight, activity level, and climate. Find out how many liters of water you need each day for health and training." />
+    <meta property="og:title" content="Water Intake Calculator: How Much to Drink a Day" />
+    <meta property="og:description" content="Water intake calculator: how much to drink a day by weight, activity and climate, sweat rate in exercise, a drinking schedule and EFSA reference values." />
     <meta property="og:url" content="https://calccore.net/en/sport/water-intake-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Water Intake Calculator — How Much Water to Drink Daily" />
-    <meta name="twitter:description" content="Calculate your daily water intake based on weight, activity level, and climate. Find out how many liters of water you need each day for health and training." />
+    <meta name="twitter:title" content="Water Intake Calculator: How Much to Drink a Day" />
+    <meta name="twitter:description" content="Water intake calculator: how much to drink a day by weight, activity and climate, sweat rate in exercise, a drinking schedule and EFSA reference values." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261104wi3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/water-intake-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How much water should I drink per day?",
-        "acceptedAnswer":{"@type":"Answer","text":"The basic recommendation is about 30-35 ml of water per kg of body weight, adjusted for activity level and climate."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does coffee and tea count toward daily water intake?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, all fluids, including coffee and tea, count toward total fluid intake, though caffeine has a mild diuretic effect."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I drink too much water?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, excessive water intake can lead to hyponatremia (dilution of salts in the blood). This is a rare condition, but it's important not to significantly exceed your needs without reason."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261104wi3" defer></script>
+    <script src="/js/phys-core.js?v=20261104wi3" defer></script>
+    <script src="/js/wi-data.js?v=20261104wi3" defer></script>
+    <script src="/js/wi-calc.js?v=20261104wi3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/water-intake-calculator#app",
-    "name":"Water Intake Calculator",
-    "description":"Calculate your daily water intake based on weight, activity level, and climate.",
-    "url":"https://calccore.net/en/sport/water-intake-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/water-intake-calculator#app",
+  "name": "Water Intake Calculator",
+  "description": "An online water intake calculator: a drinks target per day from weight, activity, climate, pregnancy or breastfeeding with the official EFSA and US National Academies reference values, a sweat rate calculation during exercise from weight change with a recovery recommendation, and an even drinking schedule across your waking hours. Metric and imperial units.",
+  "url": "https://calccore.net/en/sport/water-intake-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "A drinks target from weight, activity and climate",
+    "Adjustments for pregnancy and breastfeeding",
+    "EFSA and US National Academies reference values",
+    "Sweat rate during exercise from weight change",
+    "How much to drink to recover after exercise",
+    "A drinking schedule across your waking hours"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/water-intake-calculator#webpage",
+      "url": "https://calccore.net/en/sport/water-intake-calculator",
+      "name": "Water Intake Calculator: How Much to Drink a Day | CalcCore",
+      "description": "Water intake calculator: how much to drink a day by weight, activity and climate, sweat rate in exercise, a drinking schedule and EFSA reference values.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/water-intake-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/water-intake-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-04",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/water-intake-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Water intake calculator",
+          "item": "https://calccore.net/en/sport/water-intake-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/water-intake-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much water should I drink a day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on weight, activity and climate. The calculator's guide is 33 ml per kg plus adjustments; for a 75 kg person with moderate activity that is about 2.8 litres."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it true that I need 2 litres?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is only a guide. EFSA names 2.0 L of total water for women and 2.5 L for men, including water from food, and the need for drinks depends on the person."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do tea, coffee and soup count?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all fluids and the water in food count towards the total balance. Caffeine has a mild diuretic effect, but tea and coffee still add fluid."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does 33 ml per kg come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a common but unofficial rule of thumb. The calculator lets you change the factor and shows the official EFSA and US National Academies values for comparison."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I drink in pregnancy and while breastfeeding?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EFSA suggests adding about 300 ml a day in pregnancy and about 700 ml while breastfeeding. Agree the exact amount with a doctor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate fluid loss during exercise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Weigh yourself before and after. Sweat = weight lost + fluid drunk − urine; divide by the duration in hours to get the sweat rate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I drink after exercise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About 150% of the weight lost, i.e. 1.5 L for each kilogram, over a few hours (an ACSM recommendation)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is losing more than 2% of body weight a problem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Losing more than 2% of body mass through sweat reduces endurance and performance. So during exercise you should drink to avoid reaching that level."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I spread water through the day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evenly from waking up to an hour before bed. The calculator builds a schedule from your hours and glass size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you drink too much water?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Very large amounts in a short time can dilute blood sodium (hyponatraemia). Do not drink more than ~5 litres a day without need."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know I drink enough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pale yellow or clear urine usually means good hydration, dark yellow means you should drink more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the amount depend on climate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In heat and with heavy sweating the need grows; the calculator adds about 500 ml for a hot climate."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cwater">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Daily Water Intake Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate your daily water needs based on weight, activity level, and climate.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Water Intake Calculator: How Much to Drink a Day</h1>
+                    <p class="ph__p">Enter your weight, activity and climate and the calculator shows a guide to how much fluid to drink a day, with the official reference values alongside for comparison. Separate tabs: sweat rate during exercise from weight change and a drinking schedule across the hours between waking and bed.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="need" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span class="ph__tileTx"><b class="ph__tabT">Daily amount</b><span class="ph__ex">How much to drink a day</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="sweat" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Sweat rate</b><span class="ph__ex">Sweat from weight change</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="sched" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Daily schedule</b><span class="ph__ex">Time and number of drinks</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="weight">Weight (kg)</label>
-                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 75" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="activity">Activity level</label>
-                                <select id="activity" class="mcalc__select">
-                                    <option value="low">Low (desk job)</option>
-                                    <option value="moderate" selected>Moderate (exercise 3-5 times/week)</option>
-                                    <option value="high">High (daily intense training)</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="climate">Climate/weather</label>
-                                <select id="climate" class="mcalc__select">
-                                    <option value="normal" selected>Moderate climate</option>
-                                    <option value="hot">Hot climate / summer</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Daily schedule <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Water schedule">
-                                    <thead>
-                                        <tr>
-                                            <th>Time</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/en/sport/calories-calculator">Calorie Calculator</a>
-                            <a href="/en/sport/macros-calculator">Macro Calculator</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How much water should you drink daily</h2>
-            <p>
-                Exact water needs depend on body weight, physical activity level, climate, and overall
-                health. The basic formula is approximately <b>30-35 ml of water per kg of body weight</b>
-                per day, with additional adjustments for exercise and heat.
-            </p>
-        
-            <h2>Why water matters</h2>
-            <ul>
-                <li><b>Thermoregulation:</b> water helps your body cool down through sweating.</li>
-                <li><b>Nutrient transport:</b> blood, which is 90% water, delivers oxygen and nutrients to cells.</li>
-                <li><b>Joint function:</b> water is part of synovial fluid, which lubricates joints.</li>
-                <li><b>Athletic performance:</b> even 2% dehydration can significantly reduce endurance and strength.</li>
-            </ul>
-        
-            <h2>Factors affecting water needs</h2>
-            <ul>
-                <li><b>Physical activity:</b> exercise increases fluid loss through sweat, so you need more water.</li>
-                <li><b>Climate:</b> hot weather increases sweating even without exercise.</li>
-                <li><b>Diet:</b> a high-protein diet and caffeine can slightly increase water needs.</li>
-            </ul>
-        
-            <h2>How to spot signs of dehydration</h2>
-            <ul>
-                <li><b>Urine color:</b> dark yellow is a signal to drink more water; light yellow or clear indicates adequate
-                    hydration.</li>
-                <li><b>Thirst:</b> feeling thirsty already indicates mild dehydration — it's better to drink regularly rather
-                    than wait for thirst.</li>
-                <li><b>Fatigue and headache:</b> even mild dehydration can cause tiredness, reduced concentration, and
-                    headaches.</li>
-                <li><b>Dry skin and lips:</b> another visible sign of insufficient fluid intake.</li>
-            </ul>
-        
-            <h2>Fluid sources that count toward your total</h2>
-            <p>
-                Your daily target includes not just plain water, but other fluids too: tea, coffee, juice,
-                soups, and water content in fruits and vegetables (watermelon, cucumber, oranges contain up
-                to 90-95% water). Caffeinated drinks have a mild diuretic effect but still count toward your
-                overall fluid balance.
-            </p>
-        
-            <p class="m-hintSmall">
-                This is an estimate. Individual needs may vary depending on health conditions (for
-                example, kidney or heart disease requires a different approach to fluid intake) — consult
-                a doctor for specific medical conditions.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>Daily needs, pace and time to reach a goal.</span></a>
+                <a class="cc-related-card" href="/en/sport/heart-rate-calculator"><b>Heart Rate Zone Calculator</b><span>Five zones for heart-rate training.</span></a>
+                <a class="cc-related-card" href="/en/sport/macros-calculator"><b>Macro Calculator</b><span>Protein, fat and carbs for your goal.</span></a>
+            </div>
         </section>
-        
-        <section class="m-faq">
+
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How much water you need a day</h2>
+            <p>There is no single exact norm: the need depends on weight, activity, climate and health. Official guides give total water from drinks and food: <b>EFSA</b> (EU) names 2.5 L a day for men and 2.0 L for women, and the US National Academies 3.7 and 2.7 L. From drinks alone this is about 2.0 and 1.6 L by EFSA and 3.0 and 2.2 L by the American values, because about 20% of water comes from food. These figures are for adults at moderate temperature and activity.</p>
+
+            <h2>How the calculator works</h2>
+            <p>The base formula is simple: <b>weight × 33 ml</b>, then adjustments. For a 75 kg person with moderate activity (+350 ml) that is 75 × 33 + 350 = 2825 ml, i.e. 2.83 L, or about 11 glasses of 250 ml. The “30–35 ml per kg” rule is very common but has no official source, so the calculator lets you change the factor from 20 to 50 ml per kg and shows the official reference values alongside for comparison.</p>
+
+            <h2>Adjustments for activity, heat and special conditions</h2>
+            <p>On top of the usual load 0, 200, 350 or 700 ml is added depending on whether you have a desk job with little movement, a normal day with walks but no workouts, work out 3–5 times a week or train intensely every day; in hot weather another +500 ml. These are guides with no official source, not a clinical norm. For pregnancy EFSA suggests adding 300 ml a day, for breastfeeding about 700 ml. If you sweat a lot, the sweat rate tab will show your need more precisely.</p>
+
+            <h2>Sweat rate during exercise</h2>
+            <p>Weigh yourself before and after exercise. Sweat = weight lost + fluid drunk − urine, if you went to the toilet. Example: 70 kg before, 69.4 kg after, 400 ml drunk in 60 minutes: a loss of 600 ml + 400 ml drunk = 1000 ml of sweat, i.e. 1000 ml per hour. The weight loss is 0.9% of body mass. By the position of the American College of Sports Medicine (ACSM) you should aim not to lose more than 2% of body mass during exercise and to replace about 150% of the weight lost afterwards (1.5 L per kg): in the example about 900 ml over a few hours. Sweat rate is very individual, usually roughly from 0.4 to 1.8 L per hour depending on the person, heat and effort, so it is best measured yourself. Weigh in the same dry clothes or without them: wet clothing holds some sweat and understates the loss.</p>
+
+            <h2>A drinking schedule by hours</h2>
+            <p>The “Daily schedule” tab spreads the amount evenly from waking up to an hour before bed. For 2825 ml with waking at 07:00 and bed at 23:00 that is 11 drinks of about 257 ml every 1 hour 30 minutes, the last at 22:00. The schedule works as a reminder: drinking small portions regularly is easier than “catching up” in the evening. A last drink an hour before bed helps you wake less at night.</p>
+
+            <h2>What counts towards the amount</h2>
+            <p>Total water intake includes not only water but also tea, coffee, juices, soups and the water in food: watermelon, cucumbers and oranges contain up to 90–95% water. Caffeine has a mild diuretic effect, but drinks with it still count. The colour of urine is a handy guide: dark yellow means you should drink more, pale yellow or clear means you have enough.</p>
+
+            <h2>When water harms</h2>
+            <p>Too much water in a short time is dangerous: dilution of blood sodium (hyponatraemia) can occur with very large amounts of drinking, especially during long exercise. That is why the calculator warns about values over 5 litres a day. People with heart or kidney disease, on fluid restriction or pregnant should have the amount set by a doctor.</p>
+            <p class="ph-mini">This is a guide for a healthy adult, not medical advice: with heart or kidney disease, fluid restriction, pregnancy or medication the amount is set by a doctor.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How much water should I drink per day?</h3>
-                <p>The basic recommendation is about 30-35 ml of water per kg of body weight, adjusted for activity
-                    level and climate.</p>
+            <div class="cc-faq-item">
+                <h3>How much water should I drink a day?</h3>
+                <p>It depends on weight, activity and climate. The calculator's guide is 33 ml per kg plus adjustments; for a 75 kg person with moderate activity that is about 2.8 litres.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Does coffee and tea count toward daily water intake?</h3>
-                <p>Yes, all fluids, including coffee and tea, count toward total fluid intake, though caffeine has a
-                    mild diuretic effect.</p>
+            <div class="cc-faq-item">
+                <h3>Is it true that I need 2 litres?</h3>
+                <p>It is only a guide. EFSA names 2.0 L of total water for women and 2.5 L for men, including water from food, and the need for drinks depends on the person.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I drink too much water?</h3>
-                <p>Yes, excessive water intake can lead to hyponatremia (dilution of salts in the blood). This is a rare
-                    condition, but it's important not to significantly exceed your needs without reason.</p>
+            <div class="cc-faq-item">
+                <h3>Do tea, coffee and soup count?</h3>
+                <p>Yes, all fluids and the water in food count towards the total balance. Caffeine has a mild diuretic effect, but tea and coffee still add fluid.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where does 33 ml per kg come from?</h3>
+                <p>It is a common but unofficial rule of thumb. The calculator lets you change the factor and shows the official EFSA and US National Academies values for comparison.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much should I drink in pregnancy and while breastfeeding?</h3>
+                <p>EFSA suggests adding about 300 ml a day in pregnancy and about 700 ml while breastfeeding. Agree the exact amount with a doctor.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I calculate fluid loss during exercise?</h3>
+                <p>Weigh yourself before and after. Sweat = weight lost + fluid drunk − urine; divide by the duration in hours to get the sweat rate.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much should I drink after exercise?</h3>
+                <p>About 150% of the weight lost, i.e. 1.5 L for each kilogram, over a few hours (an ACSM recommendation).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is losing more than 2% of body weight a problem?</h3>
+                <p>Losing more than 2% of body mass through sweat reduces endurance and performance. So during exercise you should drink to avoid reaching that level.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I spread water through the day?</h3>
+                <p>Evenly from waking up to an hour before bed. The calculator builds a schedule from your hours and glass size.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can you drink too much water?</h3>
+                <p>Yes. Very large amounts in a short time can dilute blood sodium (hyponatraemia). Do not drink more than ~5 litres a day without need.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I know I drink enough?</h3>
+                <p>Pale yellow or clear urine usually means good hydration, dark yellow means you should drink more.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the amount depend on climate?</h3>
+                <p>Yes. In heat and with heavy sweating the need grows; the calculator adds about 500 ml for a hot climate.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
