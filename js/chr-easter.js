@@ -71,5 +71,5 @@ PhysCalc.start(({ L }) => {
     apply(qs, h) { if (qs.has("y")) h.el("elY").value = qs.get("y").slice(0, 4); if (qs.has("n") && [10, 20, 30, 50].includes(Number(qs.get("n")))) h.el("elN").value = qs.get("n"); }
   };
 
-  return { modes: [one, list] };
+  return { modes: [one, list], exactNote: false };
 });

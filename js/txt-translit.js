@@ -58,5 +58,5 @@ PhysCalc.start(({ L }) => {
     share(p, h) { const { el } = h; if (!el("fiS").value.trim() && !el("fiN").value.trim() && !el("fiP").value.trim()) return; p.set("s", el("fiS").value.trim()); p.set("n", el("fiN").value.trim()); p.set("p", el("fiP").value.trim()); p.set("cs", el("fiC").value); p.set("hy", el("fiH").value); },
     apply(qs, h) { const { el } = h; ["s:fiS", "n:fiN", "p:fiP"].forEach((m) => { const [k, id] = m.split(":"); if (qs.has(k)) el(id).value = qs.get(k).slice(0, 40); }); if (qs.has("cs") && ["up", "cap"].includes(qs.get("cs"))) el("fiC").value = qs.get("cs"); if (qs.has("hy") && ["0", "1"].includes(qs.get("hy"))) el("fiH").value = qs.get("hy"); }
   };
-  return { modes: [text, fio] };
+  return { modes: [text, fio], exactNote: false };
 });

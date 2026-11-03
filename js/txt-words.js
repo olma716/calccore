@@ -71,5 +71,5 @@ PhysCalc.start(({ L }) => {
     share(p, h) { if (h.el("nlT").value.trim()) { p.set("n", h.el("nlT").value.trim().split("\n").slice(0, 30).join("|")); shareOpts("nl", p, h.el); } },
     apply(qs, h) { if (qs.has("n")) h.el("nlT").value = qs.get("n").slice(0, 600).split("|").join("\n"); applyOpts("nl", qs, h.el); }
   };
-  return { modes: [one, many] };
+  return { modes: [one, many], exactNote: false };
 });

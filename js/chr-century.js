@@ -130,5 +130,5 @@ PhysCalc.start(({ L }) => {
     share(p, h) { const { el } = h; if (!el("spA").value.trim() || !el("spB").value.trim()) return; p.set("a", el("spA").value.trim()); p.set("ae", el("spAE").value); p.set("b", el("spB").value.trim()); p.set("be", el("spBE").value); },
     apply(qs, h) { const { el } = h; if (qs.has("a")) el("spA").value = qs.get("a").slice(0, 5); if (qs.has("b")) el("spB").value = qs.get("b").slice(0, 5); if (qs.has("ae") && ["0", "1"].includes(qs.get("ae"))) el("spAE").value = qs.get("ae"); if (qs.has("be") && ["0", "1"].includes(qs.get("be"))) el("spBE").value = qs.get("be"); }
   };
-  return { modes: [yc, cy, rn, sp] };
+  return { modes: [yc, cy, rn, sp], exactNote: false };
 });

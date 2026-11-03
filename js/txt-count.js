@@ -101,5 +101,5 @@ PhysCalc.start(({ L }) => {
     share(p, h) { if (h.el("fqText").value.trim()) { p.set("t", h.el("fqText").value.slice(0, 1500)); p.set("mn", h.el("fqMin").value); p.set("tp", h.el("fqTop").value); } },
     apply(qs, h) { if (qs.has("t")) h.el("fqText").value = qs.get("t").slice(0, 1500); if (qs.has("mn") && [1, 2, 3, 4, 5].includes(Number(qs.get("mn")))) h.el("fqMin").value = qs.get("mn"); if (qs.has("tp") && [10, 20, 50, 1000].includes(Number(qs.get("tp")))) h.el("fqTop").value = qs.get("tp"); }
   };
-  return { modes: [count, limits, freq] };
+  return { modes: [count, limits, freq], exactNote: false };
 });

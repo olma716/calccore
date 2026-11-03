@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>One-Rep Max (1RM) Calculator — Free & Accurate | CalcCore</title>
+    <title>1RM Calculator Online: One-Rep Max and Percentages | CalcCore</title>
     <meta name="description"
-        content="Calculate your one-rep max (1RM) using the Epley and Brzycki formulas. Includes a percentage table for training planning." />
+        content="1RM calculator: seven formulas (Epley, Brzycki, Lander and more), percentages of your max, weight by reps, kg and lb, rounding to plates." />
 
     <link rel="canonical" href="https://calccore.net/en/sport/1pm-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/sport/1pm-calculator" />
@@ -26,278 +28,425 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="One-Rep Max (1RM) Calculator — Free & Accurate" />
-    <meta property="og:description" content="Calculate your one-rep max (1RM) using the Epley and Brzycki formulas. Includes a percentage table for training planning." />
+    <meta property="og:title" content="1RM Calculator Online: One-Rep Max and Percentages" />
+    <meta property="og:description" content="1RM calculator: seven formulas (Epley, Brzycki, Lander and more), percentages of your max, weight by reps, kg and lb, rounding to plates." />
     <meta property="og:url" content="https://calccore.net/en/sport/1pm-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="One-Rep Max (1RM) Calculator — Free & Accurate" />
-    <meta name="twitter:description" content="Calculate your one-rep max (1RM) using the Epley and Brzycki formulas. Includes a percentage table for training planning." />
+    <meta name="twitter:title" content="1RM Calculator Online: One-Rep Max and Percentages" />
+    <meta name="twitter:description" content="1RM calculator: seven formulas (Epley, Brzycki, Lander and more), percentages of your max, weight by reps, kg and lb, rounding to plates." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261103rm3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/1pm-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is 1RM?",
-        "acceptedAnswer":{"@type":"Answer","text":"1RM (one-rep max) is the maximum weight you can lift for a single repetition with proper form in a given exercise."}
-      },
-      {
-        "@type":"Question",
-        "name":"Which formula is more accurate: Epley or Brzycki?",
-        "acceptedAnswer":{"@type":"Answer","text":"Both formulas give an approximate estimate. Brzycki is considered slightly more accurate for 2–10 reps, while Epley is simpler and more popular. The difference is usually small."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I fully trust this calculation?",
-        "acceptedAnswer":{"@type":"Answer","text":"No, it's an estimate. Accuracy decreases with a high number of reps (above 10–12). The most accurate way is an actual 1RM test supervised by an experienced coach."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261103rm3" defer></script>
+    <script src="/js/phys-core.js?v=20261103rm3" defer></script>
+    <script src="/js/rm-data.js?v=20261103rm3" defer></script>
+    <script src="/js/rm-calc.js?v=20261103rm3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/sport/1pm-calculator#app",
-    "name":"One-Rep Max Calculator",
-    "description":"Calculate your one-rep max (1RM) using the Epley and Brzycki formulas with a training percentage table.",
-    "url":"https://calccore.net/en/sport/1pm-calculator",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/sport/1pm-calculator#app",
+  "name": "One-Rep Max (1RM) Calculator",
+  "description": "An online one-rep max (1RM) calculator: seven formulas (Epley, Brzycki, Lander, Lombardi, O'Conner, Mayhew, Wathen) and their mean, a table of percentages of the 1RM with reps and training goal, the weight for a set by percentage or reps, the number of reps for a weight, a comparison of the formulas, kg and lb, and rounding to barbell plates.",
+  "url": "https://calccore.net/en/sport/1pm-calculator",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Seven 1RM formulas and their mean",
+    "Percentage table with reps and training goal",
+    "The weight for a set by percentage or reps",
+    "How many reps with a given weight",
+    "A comparison of formulas with a chart",
+    "Kilograms and pounds, rounding to plates"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/sport/1pm-calculator#webpage",
+      "url": "https://calccore.net/en/sport/1pm-calculator",
+      "name": "1RM Calculator Online: One-Rep Max and Percentages | CalcCore",
+      "description": "1RM calculator: seven formulas (Epley, Brzycki, Lander and more), percentages of your max, weight by reps, kg and lb, rounding to plates.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/sport/1pm-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/sport/1pm-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-03",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/sport/1pm-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sport",
+          "item": "https://calccore.net/en/sport"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "1RM calculator",
+          "item": "https://calccore.net/en/sport/1pm-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/sport/1pm-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a 1RM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The one-rep max is the heaviest weight you can lift once with good technique in a given exercise. It is usually estimated from a set of several reps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate a 1RM with the Epley formula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply the weight by (1 + r / 30), where r is the number of reps. For 100 kg × 5 that is 100 × (1 + 5/30) ≈ 116.7 kg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which 1RM formula is the most accurate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no single most accurate one: each is better for certain exercises and rep ranges. That is why the calculator shows the range of all formulas and their mean."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many reps should I enter for the best accuracy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From 2 to 10. With one rep the 1RM equals the weight lifted, and above 12 reps the error grows noticeably."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do the formulas give different results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They were derived on different samples and have different shapes. At 5 reps the spread is small (about 6%), at 20 reps it is huge."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the weight for a set at 80% of the 1RM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the “Weight for a set” tab: enter the 1RM and 80%. For 120 kg that is 96 kg, or 95 kg rounded to 2.5 kg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many reps can I do at 75% of the 1RM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About 10 reps by the Epley and Brzycki formulas. The “How many reps” tab shows the estimate by every formula."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I calculate in pounds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, choose pounds in the “Weight unit” field — the result and the table are in pounds, and the kilogram equivalent is shown separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why round to barbell plates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "So that the working weight matches a real set of plates: for example 116.7 kg cannot be loaded on a bar, but 117.5 kg can."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which percentages match strength, hypertrophy and endurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Roughly: 85–100% strength, 65–84% hypertrophy, below 65% endurance. These are guidelines that differ slightly across the literature."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to test a 1RM in practice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A direct test puts a heavy load on the body and needs a warm-up, spotters and an experienced coach. For planning, a calculation from a set is usually enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is there a dash instead of reps in the table?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some formulas (Lombardi, Mayhew, Wathen) do not describe very small percentages of the 1RM within 30 reps, so the reps are not shown for such rows."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="c1pm">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">One-Rep Max (1RM) Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate your 1RM using the <b>Epley</b> and <b>Brzycki</b> formulas. Includes a
-                        percentage table for planning strength, hypertrophy, or endurance training.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">One-Rep Max (1RM) Calculator</h1>
+                    <p class="ph__p">Enter the weight you lifted and the number of reps and the calculator estimates your one-rep max by the chosen formula, shows the range of all formulas and a table of working weights by percentage. Separate tabs: the weight for a set, how many reps with your weight, and a comparison of the formulas.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Sport</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs" role="tablist">
+                            <button type="button" class="ph__tab is-active" data-m="onerm" role="tab" aria-selected="true"><b class="ph__tabT">1RM from a set</b><span class="ph__ex">100 kg × 5 → 1RM ≈ 116.7 kg</span></button>
+                            <button type="button" class="ph__tab" data-m="load" role="tab" aria-selected="false"><b class="ph__tabT">Weight for a set</b><span class="ph__ex">1RM 120 kg, 80% → 95 kg (rounding 2.5)</span></button>
+                            <button type="button" class="ph__tab" data-m="reps" role="tab" aria-selected="false"><b class="ph__tabT">How many reps</b><span class="ph__ex">1RM 120 kg, weight 90 kg → ≈ 10 reps</span></button>
+                            <button type="button" class="ph__tab" data-m="compare" role="tab" aria-selected="false"><b class="ph__tabT">Compare formulas</b><span class="ph__ex">100 kg × 8 → 120.0–127.7 kg</span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="formula">Formula</label>
-                                <select id="formula" class="mcalc__select">
-                                    <option value="epley" selected>Epley</option>
-                                    <option value="brzycki">Brzycki</option>
-                                    <option value="avg">Average (Epley + Brzycki)</option>
-                                </select>
-                                <div class="mcalc__hint">For 2–10 reps both formulas give similar results.</div>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="weight">Weight lifted (kg)</label>
-                                <input class="mcalc__input" id="weight" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 100" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="reps">Repetitions</label>
-                                <input class="mcalc__input" id="reps" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 5" />
-                                <div class="mcalc__hint">Most accurate at 1–10 reps. Above 12, error increases.</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button">Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-chart">
-                            <div class="m-chart__head">
-                                <div class="m-chart__title">Weight by % of 1RM</div>
-                            </div>
-                            <canvas id="growthChart" width="900" height="280"
-                                aria-label="1RM percentage chart"></canvas>
-                            <div class="m-hintSmall">Weight for each percentage of your calculated 1RM.</div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button">Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button">Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button">Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button">Copy the result</button>
                         </div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Percentage table <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tools">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnCopySchedule" type="button">Copy
-                                    table</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnDownloadCSV" type="button">📄
-                                    Download (Excel)</button>
-                            </div>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Percentage table">
-                                    <thead>
-                                        <tr>
-                                            <th>% of 1RM</th>
-                                            <th>Weight</th>
-                                            <th>Reps</th>
-                                            <th>Goal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/en/education/percent-calculator">Percentage Calculator</a>
-                            <a href="/en/calculator">Scientific Calculator</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is One-Rep Max (1RM)</h2>
-            <p>
-                <b>1RM</b> is the maximum weight an athlete can lift for a single repetition with proper form in a
-                given exercise (squat, bench press, deadlift, etc.). Knowing your 1RM allows precise planning of
-                training weights for different goals — from building strength to improving endurance.
-            </p>
-        
-            <h2>Why estimate 1RM instead of testing it directly</h2>
-            <p>
-                A true 1RM test means lifting your absolute maximum for one rep, which puts high stress on joints
-                and connective tissue and increases injury risk, especially for beginners. Formulas let you estimate
-                1RM safely — just perform a set of a few reps with a moderate weight, and the calculator extrapolates
-                the result.
-            </p>
-        
-            <h2>Calculation formulas</h2>
-            <ul>
-                <li><b>Epley:</b> 1RM = weight × (1 + reps / 30) — simple and the most popular formula, works well for 1–10
-                    reps.</li>
-                <li><b>Brzycki:</b> 1RM = weight × 36 / (37 − reps) — slightly more conservative, often more accurate at 2–6
-                    reps.</li>
-                <li><b>Average:</b> arithmetic mean of both formulas — a compromise if you're unsure which formula to trust
-                    more.</li>
-            </ul>
-        
-            <h2>How to use the percentage table</h2>
-            <p>
-                After calculating your 1RM, the calculator builds a table showing what weight to use for training
-                different qualities.
-            </p>
-            <ul>
-                <li><b>Strength (85–100% of 1RM, 1–5 reps):</b> low reps with heavy weight, long rest between sets (3–5 min).
-                    Good for peaking strength cycles.</li>
-                <li><b>Hypertrophy (65–85%, 6–12 reps):</b> the classic range for muscle growth, rest 60–90 sec.</li>
-                <li><b>Endurance (below 65%, 12+ reps):</b> lighter weight, high reps, short rest — builds muscular endurance.
-                </li>
-            </ul>
-        
-            <h2>Limitations and accuracy</h2>
-            <p>
-                These formulas give a good estimate at 1–10 reps. The more reps in a set, the less accurate the
-                prediction — beyond 12–15 reps, the error can reach 10–15%, since muscular endurance starts to play
-                a bigger role than raw strength. The result also depends on technique, warm-up, and fatigue level —
-                so treat it as a training-planning guide rather than an exact sports-science measurement.
-            </p>
-        
-            <p class="m-hintSmall">
-                This is an estimate. The most accurate 1RM value is determined by an actual test supervised by an
-                experienced coach following proper safety protocols and warm-up.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/sport/dots-calculator"><b>DOTS Calculator</b><span>Strength points from your squat, bench and deadlift.</span></a>
+                <a class="cc-related-card" href="/en/sport/calories-calculator"><b>Calorie Calculator</b><span>Daily calorie needs (BMR/TDEE).</span></a>
+                <a class="cc-related-card" href="/en/sport/macros-calculator"><b>Macros Calculator</b><span>Protein, fat and carbs for your goal.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the 1RM is and why you need it</h2>
+            <p>The <b>1RM</b> (one-rep max) is the heaviest weight you can lift once with good technique in a given exercise: a squat, a bench press, a deadlift. Modern strength programs start from it: working weights are set as percentages of the 1RM and progress is tracked by its change. A direct max test puts a heavy load on joints and ligaments and needs a warm-up and spotters, so the 1RM is usually estimated from a moderate-weight set of several reps.</p>
+
+            <h2>The formulas used by the calculator</h2>
+            <p>Every formula computes the multiplier “1RM / weight” for <b>r</b> reps. <b>Epley:</b> weight × (1 + r / 30). <b>Brzycki:</b> weight × 36 / (37 − r). <b>Lander:</b> 100 × weight / (101.3 − 2.67123 × r). <b>Lombardi:</b> weight × r^0.10. <b>O'Conner:</b> weight × (1 + 0.025 × r). <b>Mayhew:</b> 100 × weight / (52.2 + 41.9 × e^(−0.055 × r)). <b>Wathen:</b> 100 × weight / (48.8 + 53.8 × e^(−0.075 × r)). You can choose any of them or the mean of all seven. For a single rep the 1RM equals the weight lifted by definition.</p>
+
+            <h2>Example: 100 kg for 5 reps</h2>
+            <p>For a set of 100 kg × 5 the formulas give: Epley — 116.7 kg, Brzycki — 112.5, O'Conner — 112.5, Lander — 113.7, Wathen — 116.6, Lombardi — 117.5, Mayhew — 119.0; the mean is 115.5 kg. The range from 112.5 to 119.0 kg is about 5.6% of the mean, and that spread shows the real uncertainty of the estimate. That is why the “Compare formulas” tab is useful: it shows the whole range instead of one “exact” number.</p>
+
+            <h2>The percentage table and the training goal</h2>
+            <p>The “1RM from a set” tab builds a table from 100 to 50% with the working weight, the number of reps the formula matches to that percentage, and the goal. Roughly, <b>85–100%</b> belongs to strength work (1–5 reps, long rests), <b>65–84%</b> to hypertrophy (6–12 reps) and below <b>65%</b> to endurance (12 or more reps). For a 1RM of 116.7 kg by Epley that is 99.2 kg at 85%, 93.3 kg at 80% and 81.7 kg at 70%. Some formulas (Lombardi, Mayhew, Wathen) do not describe very small percentages, and then the table shows a dash.</p>
+
+            <h2>The four tabs</h2>
+            <p><b>“1RM from a set”</b> is the main calculation with a table and a chart. <b>“Weight for a set”</b> finds, from your 1RM, the weight for a given percentage or number of reps — for example 80% of 120 kg is 96 kg, or 95 kg rounded to 2.5 kg. <b>“How many reps”</b> estimates from the 1RM and the working weight how many reps you can do: for 90 kg with a 1RM of 120 kg it is about 10. <b>“Compare formulas”</b> shows all seven formulas side by side with the deviation from the mean.</p>
+
+            <h2>Accuracy and limits</h2>
+            <p>The formulas are empirical: they were derived on samples of healthy people and particular exercises, so accuracy depends on the exercise, technique, fatigue and training status. They work best for 2–10 reps. At 20 reps, for example, 100 kg gives anything from 134.9 kg (Lombardi) to 211.8 kg (Brzycki): the spread is so large that the result is a guide, not a measurement. The calculator accepts up to 30 reps but shows a warning above 12. The result is not medical advice; before a max attempt you need a warm-up, spotters and an experienced coach.</p>
+
+            <h2>Kilograms, pounds and rounding</h2>
+            <p>The formulas work with any unit of weight, so you can enter pounds and get the answer in pounds; the calculator also shows the equivalent in the other unit (1 lb = 0.45359237 kg). To make the working weights loadable with real plates, choose the rounding: 0.5, 1, 1.25, 2.5 or 5 for kilograms, 1, 2.5, 5 or 10 for pounds. Only the weights in the table and in the set results are rounded; the 1RM itself is shown to a tenth.</p>
+            <p class="ph-mini">All values are estimates from empirical formulas, not measurements. The formulas work best for 2–10 reps; above 12 reps the error grows noticeably.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is 1RM?</h3>
-                <p>1RM (one-rep max) is the maximum weight you can lift for a single repetition with proper form in a
-                    given exercise.</p>
+            <div class="cc-faq-item">
+                <h3>What is a 1RM?</h3>
+                <p>The one-rep max is the heaviest weight you can lift once with good technique in a given exercise. It is usually estimated from a set of several reps.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Which formula is more accurate: Epley or Brzycki?</h3>
-                <p>Both formulas give an approximate estimate. Brzycki is considered slightly more accurate for 2–10
-                    reps, while Epley is simpler and more popular. The difference is usually small.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate a 1RM with the Epley formula?</h3>
+                <p>Multiply the weight by (1 + r / 30), where r is the number of reps. For 100 kg × 5 that is 100 × (1 + 5/30) ≈ 116.7 kg.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I fully trust this calculation?</h3>
-                <p>No, it's an estimate. Accuracy decreases with a high number of reps (above 10–12). The most accurate
-                    way is an actual 1RM test supervised by an experienced coach.</p>
+            <div class="cc-faq-item">
+                <h3>Which 1RM formula is the most accurate?</h3>
+                <p>There is no single most accurate one: each is better for certain exercises and rep ranges. That is why the calculator shows the range of all formulas and their mean.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How many reps should I enter for the most accurate result?</h3>
-                <p>Optimally 2–10 reps. At 1 rep, the result is essentially your actual 1RM (formulas barely matter).
-                </p>
+            <div class="cc-faq-item">
+                <h3>How many reps should I enter for the best accuracy?</h3>
+                <p>From 2 to 10. With one rep the 1RM equals the weight lifted, and above 12 reps the error grows noticeably.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why do the formulas give different results?</h3>
+                <p>They were derived on different samples and have different shapes. At 5 reps the spread is small (about 6%), at 20 reps it is huge.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the weight for a set at 80% of the 1RM?</h3>
+                <p>Use the “Weight for a set” tab: enter the 1RM and 80%. For 120 kg that is 96 kg, or 95 kg rounded to 2.5 kg.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many reps can I do at 75% of the 1RM?</h3>
+                <p>About 10 reps by the Epley and Brzycki formulas. The “How many reps” tab shows the estimate by every formula.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I calculate in pounds?</h3>
+                <p>Yes, choose pounds in the “Weight unit” field — the result and the table are in pounds, and the kilogram equivalent is shown separately.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why round to barbell plates?</h3>
+                <p>So that the working weight matches a real set of plates: for example 116.7 kg cannot be loaded on a bar, but 117.5 kg can.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which percentages match strength, hypertrophy and endurance?</h3>
+                <p>Roughly: 85–100% strength, 65–84% hypertrophy, below 65% endurance. These are guidelines that differ slightly across the literature.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is it safe to test a 1RM in practice?</h3>
+                <p>A direct test puts a heavy load on the body and needs a warm-up, spotters and an experienced coach. For planning, a calculation from a set is usually enough.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is there a dash instead of reps in the table?</h3>
+                <p>Some formulas (Lombardi, Mayhew, Wathen) do not describe very small percentages of the 1RM within 30 reps, so the reps are not shown for such rows.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

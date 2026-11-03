@@ -48,5 +48,5 @@ PhysCalc.start(({ L }) => {
     apply(qs, h) { const { el } = h; if (qs.has("c") && ["j", "g"].includes(qs.get("c"))) el("cvC").value = qs.get("c"); if (qs.has("d")) el("cvD").value = qs.get("d").slice(0, 2); if (qs.has("mo") && Number(qs.get("mo")) >= 1 && Number(qs.get("mo")) <= 12) el("cvM").value = qs.get("mo"); if (qs.has("y")) el("cvY").value = qs.get("y").slice(0, 4); if (qs.has("e") && ["0", "1"].includes(qs.get("e"))) el("cvE").value = qs.get("e"); }
   };
 
-  return { modes: [conv] };
+  return { modes: [conv], exactNote: false };
 });

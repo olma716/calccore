@@ -84,5 +84,5 @@ PhysCalc.start(({ L }) => {
     share(p, h) { if (!h.el("clT").value.trim()) return; p.set("t", h.el("clT").value.slice(0, 1500)); p.set("o", [...h.el("clTogs").querySelectorAll("button[aria-pressed=true]")].map((b) => b.dataset.k).join(",")); },
     apply(qs, h) { if (qs.has("t")) h.el("clT").value = qs.get("t").slice(0, 1500); if (qs.has("o")) { const on = qs.get("o").split(",").filter((k) => CLEAN.some((c) => c[0] === k)); h.el("clTogs").querySelectorAll("button[data-k]").forEach((b) => b.setAttribute("aria-pressed", on.includes(b.dataset.k) ? "true" : "false")); } }
   };
-  return { modes: [cases, clean] };
+  return { modes: [cases, clean], exactNote: false };
 });
