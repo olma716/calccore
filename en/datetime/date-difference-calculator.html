@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Date Difference Calculator Online — Days, Weeks, Months | CalcCore</title>
+    <title>Date Difference Calculator: Days, Months, Working Days | CalcCore</title>
     <meta name="description"
-        content="Calculate the number of days, weeks, months, and years between two dates. Precise difference accounting for leap years." />
+        content="Date difference calculator: days, weeks, months and years between two dates, working days with weekends and your own holidays, with or without the last day." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/date-difference-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/date-difference-calculator" />
@@ -26,197 +28,429 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Date Difference Calculator Online — Days, Weeks, Months" />
-    <meta property="og:description" content="Calculate the number of days, weeks, months, and years between two dates. Precise difference accounting for leap years." />
+    <meta property="og:title" content="Date Difference Calculator: Days, Months, Working Days" />
+    <meta property="og:description" content="Date difference calculator: days, weeks, months and years between two dates, working days with weekends and your own holidays, with or without the last day." />
     <meta property="og:url" content="https://calccore.net/en/datetime/date-difference-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Date Difference Calculator Online — Days, Weeks, Months" />
-    <meta name="twitter:description" content="Calculate the number of days, weeks, months, and years between two dates. Precise difference accounting for leap years." />
+    <meta name="twitter:title" content="Date Difference Calculator: Days, Months, Working Days" />
+    <meta name="twitter:description" content="Date difference calculator: days, weeks, months and years between two dates, working days with weekends and your own holidays, with or without the last day." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106df1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106df1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/date-difference-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How is the difference between dates calculated?",
-        "acceptedAnswer":{"@type":"Answer","text":"The calculator subtracts one date from another, showing the result in different units: total number of days, plus a breakdown into years, months, and days."}
-      },
-      {
-        "@type":"Question",
-        "name":"Are weekends counted separately?",
-        "acceptedAnswer":{"@type":"Answer","text":"The calculator shows the total number of days plus a separate count of business days (excluding Saturday/Sunday) between the dates."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I calculate the difference in reverse order (a past date)?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, the calculator automatically detects which date is earlier and shows the correct difference regardless of input order."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106df1" defer></script>
+    <script src="/js/phys-core.js?v=20261106df1" defer></script>
+    <script src="/js/datepick.js?v=20261106df1" defer></script>
+    <script src="/js/ag-data.js?v=20261106df1" defer></script>
+    <script src="/js/df-data.js?v=20261106df1" defer></script>
+    <script src="/js/df-calc.js?v=20261106df1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/date-difference-calculator#app",
-    "name":"Date Difference Calculator",
-    "description":"Calculate the number of days, weeks, months, and years between two dates.",
-    "url":"https://calccore.net/en/datetime/date-difference-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/date-difference-calculator#app",
+  "name": "Date Difference Calculator",
+  "description": "An online calculator for the difference between two dates: years, months and days with correct plurals, total days, weeks and months, modes with and without the last day, working days with a choice of weekend (Saturday and Sunday, Sunday only, Friday and Saturday) and your own list of holidays, and the number of each weekday in the range. Dates can be typed or picked from a calendar.",
+  "url": "https://calccore.net/en/datetime/date-difference-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "The difference in years, months and days between two dates",
+    "Total days, weeks and months",
+    "Modes with and without the last day",
+    "Working days with a choice of weekend and your own holidays",
+    "The number of each weekday in the range",
+    "Dates typed in or picked from a calendar"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/date-difference-calculator#webpage",
+      "url": "https://calccore.net/en/datetime/date-difference-calculator",
+      "name": "Date Difference Calculator: Days, Months, Working Days | CalcCore",
+      "description": "Date difference calculator: days, weeks, months and years between two dates, working days with weekends and your own holidays, with or without the last day.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/date-difference-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/date-difference-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/date-difference-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Date difference calculator",
+          "item": "https://calccore.net/en/datetime/date-difference-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/date-difference-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate the difference between two dates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter both dates: the calculator shows the difference in years, months and days and the total days. For 01/15/2025 and 03/10/2025 that is 54 days, or 1 month 23 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the last day counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not by default. Choose “Including the last day” if both the first and the last date should count: January 1 – December 31, 2024 then gives 366 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I enter the dates in reverse order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the calculator works out which date is earlier and shows a positive difference. A note says the dates were swapped."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many days have passed from a date until today?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter only the first date: the second is “Today” by default. That counts how many days have passed since an event."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are working days counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calendar days of the range minus weekends and holidays. By default both end dates are included, as in Excel; you can change it to “Without the last date”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator have state holidays?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, they change. Enter holidays as your own list of dates and the calculator will not count them as working days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a holiday falls on a weekend?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is not subtracted a second time: a weekend day is already not a working day. The calculator tells you about it in a separate line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I change the weekend days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the “Weekend days” field choose “Saturday and Sunday”, “Sunday only”, “Friday and Saturday” or “No weekend”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does January 31 to March 1 give 1 month 1 day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1 month is added to January 31 and, since February has no 31st, February 28 is used (the 29th in a leap year). From February 28 to March 1 there is 1 day left."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for leap years?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all differences use the real calendar, including 29 February."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the calculator suitable for legal deadlines?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only as an aid. Deadlines in contracts and laws have their own rules (starting from the next day, moving to a working day), so check them against documents or with a lawyer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work for dates before 1582?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The result is nominal because the calculation uses the Gregorian calendar. For old Julian dates there is a separate converter."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdatediff">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Date Difference Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate the number of days, weeks, months, and years between two dates.
-                        Includes business days count.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Date Difference Calculator</h1>
+                    <p class="ph__p">Choose two dates and the calculator shows the difference in years, months and days, plus total days and weeks. The dates can be entered in any order, and the second one is today by default. A separate tab counts working days with a choice of weekend and your own list of holidays.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Date/Time</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="diff" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Date difference</b><span class="ph__ex">Days, weeks, months, years</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="work" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Working days</b><span class="ph__ex">Working days with holidays</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateFrom">Date from</label>
-                                <input class="mcalc__input" id="dateFrom" type="date" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateTo">Date to</label>
-                                <input class="mcalc__input" id="dateTo" type="date" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter two dates to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/datetime/age-calculator">Age Calculator</a>
-                            <a href="/en/calculator">Scientific Calculator</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How date difference is calculated</h2>
-            <p>
-                The calculator finds the exact number of days between two dates, and also presents the
-                result in a more readable format — a breakdown into years, months, and days. This is
-                useful for event planning, document validity calculations, project deadlines, or just
-                out of curiosity.
-            </p>
-
-            <h2>What the calculator shows</h2>
-            <ul>
-                <li><b>Total days</b> — the exact difference between the two dates.</li>
-                <li><b>Years, months, days</b> — a breakdown for easier understanding of long periods.</li>
-                <li><b>Number of weeks</b> — an alternative time measure.</li>
-                <li><b>Business days</b> — the number of days excluding Saturday and Sunday, useful for business
-                    deadline calculations.</li>
-            </ul>
-
-            <h2>Practical uses</h2>
-            <p>
-                This calculator is commonly used for: calculating pregnancy duration, relationship or
-                wedding anniversary length, days until a vacation or important event, contract or visa
-                validity periods, and precise work tenure calculations.
-            </p>
-
-            <p class="m-hintSmall">
-                The calculator automatically detects which of the two dates is earlier, so input order
-                doesn't affect the result — the difference will always be a positive number.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/age-calculator"><b>Age Calculator</b><span>Exact age, birthdays and round dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/add-days-calculator"><b>Add Days to a Date</b><span>What date it will be in N days.</span></a>
+                <a class="cc-related-card" href="/en/datetime/countdown-timer"><b>Countdown Timer</b><span>How long until an important event.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator counts</h2>
+            <p>The calculator finds the difference between two dates in <b>years, months and days</b>, plus total days, weeks and months. The dates can be entered in any order: it works out which is earlier. For example, from January 15 to March 10, 2025, <b>54 days</b> have passed, i.e. 7 weeks and 5 days, or 1 month 23 days. The second date is today by default, so to find how many days have passed since an event you only need to enter the first one.</p>
+
+            <h2>With or without the last day</h2>
+            <p>A plain difference does not count the last day: from January 1 to December 31, 2024 it is 365 days. If you need both dates included, choose “Including the last day”: then you get 366 days, i.e. exactly 1 year. This mode suits leave, rentals and event lengths where both the first and the last day count. For working days both dates are included by default, as in Excel functions.</p>
+
+            <h2>Months of different lengths</h2>
+            <p>Months have different numbers of days, so whole months are added to the start date and, if the target month has no such day, its last day is used: January 31 plus 1 month is February 28. Thanks to that, from January 31 to March 1, 2023 you get 1 month 1 day, with no negative or lost days. The difference in days is calculated in UTC, so a daylight saving time change shifts nothing.</p>
+
+            <h2>Working days</h2>
+            <p>The “Working days” tab counts days that are neither weekends nor holidays. For May 2025, of 31 calendar days 9 fall on Saturday and Sunday, leaving <b>22 working days</b>. If you add two holidays on working days (for example May 1 and 8), you get <b>20 working days</b>. A holiday that falls on a weekend is not subtracted twice.</p>
+
+            <h2>A choice of weekend</h2>
+            <p>By default the weekend is Saturday and Sunday, but you can choose “Sunday only”, “Friday and Saturday” (as some countries work) or “No weekend” if every day counts as working. That makes the calculator suitable for shift schedules and international projects.</p>
+
+            <h2>Holidays are entered by hand</h2>
+            <p>State holidays change, including during martial law, so there is no built-in list: enter holidays as your own list of dates separated by commas, spaces or new lines in the MM/DD/YYYY or YYYY-MM-DD format. Holidays outside the chosen range are ignored, and those on weekends are not subtracted separately, which the calculator tells you. The list can be saved in the link via “Share”.</p>
+
+            <h2>How many of each weekday between the dates</h2>
+            <p>Under the result there is a collapsed block (click to open): how many Mondays, Tuesdays, Wednesdays and so on are in the range, marked weekend or working. For May 2025 that is 4 each of Mondays, Tuesdays, Wednesdays and Sundays and 5 each of Thursdays, Fridays and Saturdays. The table helps plan shifts, schedules and classes.</p>
+
+            <h2>Limits</h2>
+            <p>The calculation uses the Gregorian calendar: for dates before 1582 the result is nominal. The calculator does not know about transferred working days and has no built-in state holidays. Legal deadlines (contracts, limitation periods, leave) have their own counting rules, so for them rely on the law and documents and use the calculator as an aid.</p>
+            <p class="ph-mini">The calculation uses the Gregorian calendar. For legal deadlines (contracts, limitation periods, leave) rely on the law and documents, not on the calculator.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How is the difference between dates calculated?</h3>
-                <p>The calculator subtracts one date from another, showing the result in different units: total number
-                    of days, plus a breakdown into years, months, and days.</p>
+            <div class="cc-faq-item">
+                <h3>How do I calculate the difference between two dates?</h3>
+                <p>Enter both dates: the calculator shows the difference in years, months and days and the total days. For 01/15/2025 and 03/10/2025 that is 54 days, or 1 month 23 days.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Are weekends counted separately?</h3>
-                <p>The calculator shows the total number of days plus a separate count of business days (excluding
-                    Saturday/Sunday) between the dates.</p>
+            <div class="cc-faq-item">
+                <h3>Is the last day counted?</h3>
+                <p>Not by default. Choose “Including the last day” if both the first and the last date should count: January 1 – December 31, 2024 then gives 366 days.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I calculate the difference in reverse order?</h3>
-                <p>Yes, the calculator automatically detects which date is earlier and shows the correct difference
-                    regardless of input order.</p>
+            <div class="cc-faq-item">
+                <h3>Can I enter the dates in reverse order?</h3>
+                <p>Yes, the calculator works out which date is earlier and shows a positive difference. A note says the dates were swapped.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many days have passed from a date until today?</h3>
+                <p>Enter only the first date: the second is “Today” by default. That counts how many days have passed since an event.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How are working days counted?</h3>
+                <p>The calendar days of the range minus weekends and holidays. By default both end dates are included, as in Excel; you can change it to “Without the last date”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator have state holidays?</h3>
+                <p>No, they change. Enter holidays as your own list of dates and the calculator will not count them as working days.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if a holiday falls on a weekend?</h3>
+                <p>It is not subtracted a second time: a weekend day is already not a working day. The calculator tells you about it in a separate line.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I change the weekend days?</h3>
+                <p>In the “Weekend days” field choose “Saturday and Sunday”, “Sunday only”, “Friday and Saturday” or “No weekend”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does January 31 to March 1 give 1 month 1 day?</h3>
+                <p>1 month is added to January 31 and, since February has no 31st, February 28 is used (the 29th in a leap year). From February 28 to March 1 there is 1 day left.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for leap years?</h3>
+                <p>Yes, all differences use the real calendar, including 29 February.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is the calculator suitable for legal deadlines?</h3>
+                <p>Only as an aid. Deadlines in contracts and laws have their own rules (starting from the next day, moving to a working day), so check them against documents or with a lawyer.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does it work for dates before 1582?</h3>
+                <p>The result is nominal because the calculation uses the Gregorian calendar. For old Julian dates there is a separate converter.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор різниці між датами онлайн — дні, тижні, місяці | CalcCore</title>
+    <title>Різниця між датами: дні, місяці, робочі дні | CalcCore</title>
     <meta name="description"
-        content="Розрахунок кількості днів, тижнів, місяців та років між двома датами. Точна різниця з урахуванням високосних років." />
+        content="Калькулятор різниці між датами: скільки днів, тижнів, місяців і років між двома датами, робочі дні з вихідними та власними святами, з останнім днем чи без." />
 
     <link rel="canonical" href="https://calccore.net/datetime/date-difference-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/date-difference-calculator" />
@@ -26,196 +28,429 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор різниці між датами онлайн — дні, тижні, місяці" />
-    <meta property="og:description" content="Розрахунок кількості днів, тижнів, місяців та років між двома датами. Точна різниця з урахуванням високосних років." />
+    <meta property="og:title" content="Різниця між датами: дні, місяці, робочі дні" />
+    <meta property="og:description" content="Калькулятор різниці між датами: скільки днів, тижнів, місяців і років між двома датами, робочі дні з вихідними та власними святами, з останнім днем чи без." />
     <meta property="og:url" content="https://calccore.net/datetime/date-difference-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор різниці між датами онлайн — дні, тижні, місяці" />
-    <meta name="twitter:description" content="Розрахунок кількості днів, тижнів, місяців та років між двома датами. Точна різниця з урахуванням високосних років." />
+    <meta name="twitter:title" content="Різниця між датами: дні, місяці, робочі дні" />
+    <meta name="twitter:description" content="Калькулятор різниці між датами: скільки днів, тижнів, місяців і років між двома датами, робочі дні з вихідними та власними святами, з останнім днем чи без." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106df1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106df1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/date-difference-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Як рахується різниця між датами?",
-        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор віднімає одну дату від іншої, показуючи результат у різних одиницях: загальна кількість днів, а також розбивка на роки, місяці й дні."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи враховуються вихідні дні окремо?",
-        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор показує загальну кількість днів та окремо кількість робочих днів (без вихідних субота/неділя) між датами."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна порахувати різницю у зворотньому напрямку (дата в минулому)?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, калькулятор автоматично визначає, яка дата раніша, і показує коректну різницю незалежно від порядку введення дат."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106df1" defer></script>
+    <script src="/js/phys-core.js?v=20261106df1" defer></script>
+    <script src="/js/datepick.js?v=20261106df1" defer></script>
+    <script src="/js/ag-data.js?v=20261106df1" defer></script>
+    <script src="/js/df-data.js?v=20261106df1" defer></script>
+    <script src="/js/df-calc.js?v=20261106df1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/datetime/date-difference-calculator#app",
-    "name":"Date Difference Calculator",
-    "description":"Розрахунок кількості днів, тижнів, місяців та років між двома датами.",
-    "url":"https://calccore.net/datetime/date-difference-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/datetime/date-difference-calculator#app",
+  "name": "Калькулятор різниці між датами",
+  "description": "Онлайн-калькулятор різниці між двома датами: роки, місяці й дні з правильною множиною, усього днів, тижнів і місяців, режими з останнім днем і без, робочі дні з вибором вихідних (субота й неділя, лише неділя, п'ятниця й субота) та власним списком свят, кількість кожного дня тижня в діапазоні. Дати вводяться з клавіатури або з календаря.",
+  "url": "https://calccore.net/datetime/date-difference-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Різниця в роках, місяцях і днях між двома датами",
+    "Усього днів, тижнів і місяців",
+    "Режим із останнім днем і без нього",
+    "Робочі дні з вибором вихідних і власним списком свят",
+    "Кількість кожного дня тижня в діапазоні",
+    "Введення дат з клавіатури або з календаря"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/datetime/date-difference-calculator#webpage",
+      "url": "https://calccore.net/datetime/date-difference-calculator",
+      "name": "Різниця між датами: дні, місяці, робочі дні | CalcCore",
+      "description": "Калькулятор різниці між датами: скільки днів, тижнів, місяців і років між двома датами, робочі дні з вихідними та власними святами, з останнім днем чи без.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/datetime/date-difference-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/datetime/date-difference-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/datetime/date-difference-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Дата/час",
+          "item": "https://calccore.net/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор різниці між датами",
+          "item": "https://calccore.net/datetime/date-difference-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/datetime/date-difference-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як порахувати різницю між двома датами?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть обидві дати: калькулятор покаже різницю в роках, місяцях і днях та всього днів. Для 15.01.2025 і 10.03.2025 це 54 дні, або 1 місяць 23 дні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховується останній день?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За замовчуванням ні. Оберіть «Включно з останнім днем», якщо треба порахувати й першу, й останню дату: 1 січня – 31 грудня 2024 тоді дає 366 днів."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна ввести дати в зворотному порядку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, калькулятор сам визначить, яка дата раніша, і покаже додатну різницю. У підписі буде позначка, що дати поміняно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки днів минуло з певної дати до сьогодні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть лише першу дату: друга за замовчуванням «Сьогодні». Так рахується, скільки днів минуло з події."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як рахуються робочі дні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Календарні дні діапазону мінус вихідні й свята. За замовчуванням обидві крайні дати входять у підрахунок, як у Excel; це можна змінити на «Без останньої дати»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є в калькуляторі державні свята?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, вони змінюються. Введіть свята власним списком дат, і калькулятор не рахуватиме їх робочими."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що буде, якщо свято випаде на вихідний?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Воно не віднімається другий раз: вихідний день уже не є робочим. Калькулятор повідомляє про це окремим рядком."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як змінити вихідні дні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У полі «Вихідні дні» оберіть «Субота й неділя», «Лише неділя», «П'ятниця й субота» чи «Без вихідних»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому від 31 січня до 1 березня виходить 1 місяць 1 день?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "До 31 січня додається 1 місяць, і, оскільки в лютому немає 31-го, береться 28 лютого (у високосний рік 29-те). Від 28 лютого до 1 березня лишається 1 день."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор високосні роки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, усі різниці рахуються за реальним календарем, включно з 29 лютого."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи підходить калькулятор для юридичних строків?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Лише як допомога. Строки в договорах і законах мають власні правила (початок із наступного дня, перенесення на робочий день), тому перевіряйте їх за документами чи в юриста."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи працює калькулятор для дат до 1582 року?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Результат умовний, бо розрахунок за григоріанським календарем. Для старих дат за юліанським календарем є окремий конвертер."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdatediff">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор різниці між датами</h1>
-                    <p class="mcalc__p">
-                        Розрахуй кількість днів, тижнів, місяців та років між двома датами.
-                        Включно з кількістю робочих днів.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор різниці між датами</h1>
+                    <p class="ph__p">Оберіть дві дати — і калькулятор покаже різницю в роках, місяцях і днях, усього днів і тижнів. Дати можна вводити в будь-якому порядку, а друга за замовчуванням — сьогодні. Окрема вкладка рахує робочі дні з вибором вихідних і власним списком свят.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
                             <span>Авто-розрахунок</span>
                         </label>
                     </div>
-
-                    <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи дані</h2>
-                            <span class="mcalc__badge">Date/Time</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Дата/час</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="diff" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Різниця між датами</b><span class="ph__ex">Дні, тижні, місяці, роки</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="work" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Робочі дні</b><span class="ph__ex">Робочі дні зі святами</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateFrom">Дата від</label>
-                                <input class="mcalc__input" id="dateFrom" type="date" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateTo">Дата до</label>
-                                <input class="mcalc__input" id="dateTo" type="date" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Розрахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Результат</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи дві дати для розрахунку.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/datetime/age-calculator">Калькулятор віку</a>
-                            <a href="/calculator">Науковий калькулятор</a>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як розраховується різниця між датами</h2>
-            <p>
-                Калькулятор знаходить точну кількість днів між двома датами, а також подає результат
-                у зручнішому форматі — розбивку на роки, місяці та дні. Це корисно для планування
-                подій, розрахунку термінів дії документів, дедлайнів проєктів чи просто для цікавості.
-            </p>
-
-            <h2>Що показує калькулятор</h2>
-            <ul>
-                <li><b>Загальна кількість днів</b> — точна різниця між двома датами.</li>
-                <li><b>Роки, місяці, дні</b> — розбивка для зручнішого сприйняття довгих періодів.</li>
-                <li><b>Кількість тижнів</b> — альтернативний вимір часу.</li>
-                <li><b>Робочі дні</b> — кількість днів без урахування суботи й неділі, корисно для розрахунку дедлайнів
-                    у бізнесі.</li>
-            </ul>
-
-            <h2>Практичне застосування</h2>
-            <p>
-                Цей калькулятор часто використовують для розрахунку: терміну вагітності, віку стосунків
-                чи весілля, кількості днів до відпустки чи важливої події, строку дії контракту чи візи,
-                а також для точного розрахунку робочого стажу.
-            </p>
-
-            <p class="m-hintSmall">
-                Калькулятор автоматично визначає, яка з двох дат раніша, тому порядок введення дат
-                не впливає на результат — різниця завжди буде позитивним числом.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/datetime/age-calculator"><b>Калькулятор віку</b><span>Точний вік, дні народження й круглі дати.</span></a>
+                <a class="cc-related-card" href="/datetime/add-days-calculator"><b>Додати дні до дати</b><span>Яка дата буде через N днів.</span></a>
+                <a class="cc-related-card" href="/datetime/countdown-timer"><b>Відлік до дати</b><span>Скільки лишилось до важливої події.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що рахує калькулятор</h2>
+            <p>Калькулятор знаходить різницю між двома датами в <b>роках, місяцях і днях</b>, а також усього днів, тижнів і місяців. Дати можна вводити в будь-якому порядку: він сам визначить, яка раніша. Наприклад, від 15 січня до 10 березня 2025 року минуло <b>54 дні</b>, тобто 7 тижнів і 5 днів, або 1 місяць 23 дні. Друга дата за замовчуванням — сьогодні, тож щоб дізнатися, скільки днів минуло з події, достатньо ввести лише першу.</p>
+
+            <h2>З останнім днем чи без</h2>
+            <p>Звичайна різниця не рахує останній день: від 1 січня до 31 грудня 2024 року це 365 днів. Якщо потрібно врахувати обидві дати, оберіть «Включно з останнім днем»: тоді вийде 366 днів, тобто рівно 1 рік. Такий режим зручний для відпусток, оренди й тривалості подій, де рахують і перший, і останній день. Для робочих днів за замовчуванням обидві дати входять у підрахунок, як у функціях Excel.</p>
+
+            <h2>Місяці різної довжини</h2>
+            <p>У місяцях різна кількість днів, тому до початкової дати додаються повні місяці, а якщо в потрібному місяці немає такого числа, береться його останній день: 31 січня плюс 1 місяць — це 28 лютого. Завдяки цьому від 31 січня до 1 березня 2023 року виходить 1 місяць 1 день, без від'ємних чи втрачених днів. Різниця в днях рахується за UTC, тому перехід на літній час нічого не зсуває.</p>
+
+            <h2>Робочі дні</h2>
+            <p>Вкладка «Робочі дні» рахує дні, які не є вихідними чи святами. Для травня 2025 року з 31 календарного дня 9 припадає на суботу й неділю, тож лишається <b>22 робочі дні</b>. Якщо додати два свята на робочі дні (наприклад, 1 і 8 травня), вийде <b>20 робочих днів</b>. Свято, що випало на вихідний, не віднімається двічі.</p>
+
+            <h2>Вихідні на вибір</h2>
+            <p>За замовчуванням вихідні — субота й неділя, але можна обрати «Лише неділя», «П'ятниця й субота» (так працюють деякі країни) або «Без вихідних», якщо всі дні вважаються робочими. Так калькулятор підходить і для змінних графіків, і для міжнародних проєктів.</p>
+
+            <h2>Свята вводяться вручну</h2>
+            <p>Державні свята змінюються, зокрема в період воєнного стану, тому вбудованого списку немає: свята вводьте власним переліком дат через кому, пробіл чи новий рядок у форматі ДД.ММ.РРРР або РРРР-ММ-ДД. Свята поза вибраним діапазоном ігноруються, а ті, що випали на вихідні, окремо не віднімаються, про що калькулятор повідомляє. Список можна зберегти в посиланні через «Поділитись».</p>
+
+            <h2>Скільки конкретних днів тижня між датами</h2>
+            <p>Під результатом є згорнутий блок (відкривається кліком): скільки понеділків, вівторків, середин і так далі в діапазоні, з позначкою вихідний чи робочий. Для травня 2025 року це по 4 понеділки, вівторки, середи й неділі та по 5 четвергів, п'ятниць і субот. Таблиця корисна для планування змін, графіків і занять за розкладом.</p>
+
+            <h2>Обмеження</h2>
+            <p>Розрахунок за григоріанським календарем: для дат до 1582 року результат умовний. Калькулятор не знає про переноси робочих днів і не вбудовує державні свята. Юридичні строки (договори, позовна давність, відпустки) мають власні правила обчислення, тому для них орієнтуйтеся на закон і документи, а калькулятор використовуйте як допомогу.</p>
+            <p class="ph-mini">Розрахунок за григоріанським календарем. Для юридичних строків (договори, позовна давність, відпустка) орієнтуйтеся на закон і документи, а не на калькулятор.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Як рахується різниця між датами?</h3>
-                <p>Калькулятор віднімає одну дату від іншої, показуючи результат у різних одиницях: загальна кількість
-                    днів, а також розбивка на роки, місяці й дні.</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати різницю між двома датами?</h3>
+                <p>Введіть обидві дати: калькулятор покаже різницю в роках, місяцях і днях та всього днів. Для 15.01.2025 і 10.03.2025 це 54 дні, або 1 місяць 23 дні.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи враховуються вихідні дні окремо?</h3>
-                <p>Калькулятор показує загальну кількість днів та окремо кількість робочих днів (без вихідних
-                    субота/неділя) між датами.</p>
+            <div class="cc-faq-item">
+                <h3>Чи враховується останній день?</h3>
+                <p>За замовчуванням ні. Оберіть «Включно з останнім днем», якщо треба порахувати й першу, й останню дату: 1 січня – 31 грудня 2024 тоді дає 366 днів.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна порахувати різницю у зворотньому напрямку?</h3>
-                <p>Так, калькулятор автоматично визначає, яка дата раніша, і показує коректну різницю незалежно від
-                    порядку введення дат.</p>
+            <div class="cc-faq-item">
+                <h3>Чи можна ввести дати в зворотному порядку?</h3>
+                <p>Так, калькулятор сам визначить, яка дата раніша, і покаже додатну різницю. У підписі буде позначка, що дати поміняно.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки днів минуло з певної дати до сьогодні?</h3>
+                <p>Введіть лише першу дату: друга за замовчуванням «Сьогодні». Так рахується, скільки днів минуло з події.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як рахуються робочі дні?</h3>
+                <p>Календарні дні діапазону мінус вихідні й свята. За замовчуванням обидві крайні дати входять у підрахунок, як у Excel; це можна змінити на «Без останньої дати».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є в калькуляторі державні свята?</h3>
+                <p>Ні, вони змінюються. Введіть свята власним списком дат, і калькулятор не рахуватиме їх робочими.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що буде, якщо свято випаде на вихідний?</h3>
+                <p>Воно не віднімається другий раз: вихідний день уже не є робочим. Калькулятор повідомляє про це окремим рядком.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як змінити вихідні дні?</h3>
+                <p>У полі «Вихідні дні» оберіть «Субота й неділя», «Лише неділя», «П'ятниця й субота» чи «Без вихідних».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому від 31 січня до 1 березня виходить 1 місяць 1 день?</h3>
+                <p>До 31 січня додається 1 місяць, і, оскільки в лютому немає 31-го, береться 28 лютого (у високосний рік 29-те). Від 28 лютого до 1 березня лишається 1 день.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор високосні роки?</h3>
+                <p>Так, усі різниці рахуються за реальним календарем, включно з 29 лютого.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи підходить калькулятор для юридичних строків?</h3>
+                <p>Лише як допомога. Строки в договорах і законах мають власні правила (початок із наступного дня, перенесення на робочий день), тому перевіряйте їх за документами чи в юриста.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи працює калькулятор для дат до 1582 року?</h3>
+                <p>Результат умовний, бо розрахунок за григоріанським календарем. Для старих дат за юліанським календарем є окремий конвертер.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
