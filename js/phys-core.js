@@ -314,12 +314,15 @@
   const clean = (s) => s.replace(/[\u00a0\u202f]/g, " ");
   let last = null;
   function textOf(m) { return tidy(clean([m.expr + "  →  " + m.resText, ""].concat(m.steps.map((s, i) => (i + 1) + ". " + s.t + "\n   " + s.l.join("\n   "))).join("\n"))); }
+  const foldOpen = {};
+  function restoreFolds(box) { box.querySelectorAll("details[data-keep]").forEach((d) => { if (foldOpen[d.dataset.keep]) d.open = true; }); }
   function render(m, strict) {
     const box = el("result");
     if (!m.ok) { last = null; if (m.incomplete && !strict) { box.innerHTML = T.enter; return; } box.innerHTML = '<div class="ph__hintbox">' + esc(m.msg || T.enter) + "</div>"; return; }
     last = m;
     const tiles = m.tiles && m.tiles.length ? '<div class="ph__tiles">' + m.tiles.map((t) => '<div class="ph__tile"><small>' + esc(t.k) + "</small><b>" + esc(t.v) + "</b></div>").join("") + "</div>" : "";
     box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + esc(tidy((m.subRaw ? "" : "= ") + m.headSub)) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + (m.note !== undefined ? (m.note ? '<div class="ph__note">' + m.note + "</div>" : "") : CFG.exactNote === false ? "" : '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>");
+    restoreFolds(box);
   }
   // події аналітики: лише назви дій і ключ вкладки, без введених значень
   const PAGE = location.pathname.replace(/\/+$/, "").split("/").pop() || "home";
@@ -491,6 +494,7 @@
         initDd("fd", (v) => { setDd("find", v); syncFind(); maybeCalc(); });
         initDd("dc", (v) => { setDd("decs", v); maybeCalc(); });
         initDd("gg", (v) => { setDd("gval", v); maybeCalc(); });
+        el("result").addEventListener("toggle", (e) => { const d = e.target; if (d && d.matches && d.matches("details[data-keep]")) foldOpen[d.dataset.keep] = d.open; }, true);
         el("calcBtn").addEventListener("click", () => { const m = calc(true); if (!m.ok && m.msg) toast(m.msg); });
         el("exampleBtn").addEventListener("click", fillExample);
         el("resetBtn").addEventListener("click", () => { resetAll(); toast(T.reset); });
