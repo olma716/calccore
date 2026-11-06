@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Add Days Calculator Online — What Date Will It Be | CalcCore</title>
+    <title>Add Days to a Date: Days, Months, Working Days | CalcCore</title>
     <meta name="description"
-        content="Find out what date it will be N days, weeks, or months from a chosen date, or what date it was N days ago." />
+        content="Add or subtract days, weeks, months and years from a date, or find the date after N working days with your own holidays. Shows weekday and week." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/add-days-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/add-days-calculator" />
@@ -26,216 +28,430 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Add Days Calculator Online — What Date Will It Be" />
-    <meta property="og:description" content="Find out what date it will be N days, weeks, or months from a chosen date, or what date it was N days ago." />
+    <meta property="og:title" content="Add Days to a Date: Days, Months, Working Days" />
+    <meta property="og:description" content="Add or subtract days, weeks, months and years from a date, or find the date after N working days with your own holidays. Shows weekday and week." />
     <meta property="og:url" content="https://calccore.net/en/datetime/add-days-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Add Days Calculator Online — What Date Will It Be" />
-    <meta name="twitter:description" content="Find out what date it will be N days, weeks, or months from a chosen date, or what date it was N days ago." />
+    <meta name="twitter:title" content="Add Days to a Date: Days, Months, Working Days" />
+    <meta name="twitter:description" content="Add or subtract days, weeks, months and years from a date, or find the date after N working days with your own holidays. Shows weekday and week." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106ad1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106ad1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/add-days-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How do I calculate a date N days from now?",
-        "acceptedAnswer":{"@type":"Answer","text":"Choose a start date, enter the number of days (or weeks or months), and click 'add' — the calculator will show the exact future date."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I subtract days instead of adding?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, select the 'subtract' mode to find out what date it was a certain number of days ago."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does it account for months of different lengths?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, when adding months, the calculator correctly handles varying month lengths and year-end transitions."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106ad1" defer></script>
+    <script src="/js/phys-core.js?v=20261106ad1" defer></script>
+    <script src="/js/datepick.js?v=20261106ad1" defer></script>
+    <script src="/js/ag-data.js?v=20261106ad1" defer></script>
+    <script src="/js/df-data.js?v=20261106ad1" defer></script>
+    <script src="/js/ad-data.js?v=20261106ad1" defer></script>
+    <script src="/js/ad-calc.js?v=20261106ad1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/add-days-calculator#app",
-    "name":"Add/Subtract Days Calculator",
-    "description":"Calculate a date N days, weeks, or months from a chosen date.",
-    "url":"https://calccore.net/en/datetime/add-days-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/add-days-calculator#app",
+  "name": "Add Days to a Date Calculator",
+  "description": "An online calculator that adds or subtracts years, months, weeks and days from a date at the same time and finds the date after N working days. Month ends are handled correctly (January 31 plus a month gives February 28), the start date can count as day 1, you can choose the weekend and enter your own holidays. The result shows the weekday, the week number and the distance from today.",
+  "url": "https://calccore.net/en/datetime/add-days-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Adding and subtracting years, months, weeks and days together",
+    "Correct month ends and leap years",
+    "The date after N working days with a choice of weekend and your own list of holidays",
+    "The start date as day 1 when needed",
+    "Weekday, ISO week number and distance from today",
+    "Dates typed in or picked from a calendar"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/add-days-calculator#webpage",
+      "url": "https://calccore.net/en/datetime/add-days-calculator",
+      "name": "Add Days to a Date: Days, Months, Working Days | CalcCore",
+      "description": "Add or subtract days, weeks, months and years from a date, or find the date after N working days with your own holidays. Shows weekday and week.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/add-days-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/add-days-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/add-days-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Add or subtract days from a date",
+          "item": "https://calccore.net/en/datetime/add-days-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/add-days-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I find the date in N days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the start date (or leave today), type N in the “Days” field and keep “Add”. For 01/15/2025 and 90 days that is 04/15/2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I subtract days from a date?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose the “Subtract” operation: the calculator shows a past date. 30 days before 03/10/2025 is 02/08/2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add years, months and days at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, fill in several fields. Years and months are added first, then weeks and days: 01/15/2025 + 1 year 3 months 10 days = 04/25/2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I add a month to January 31?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "February has no 31st, so its last day is used: February 28 (the 29th in a leap year)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the calculator treat February 29?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you add years to February 29 and February has 28 days in the target year, February 28 is used: 02/29/2024 + 1 year = 02/28/2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does “The start date is day 1” change?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the normal mode the start date is not counted: +30 days from January 1 is January 31. In the “day 1” mode it counts as day 1 and the result is January 30."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the date after N working days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Working days” tab, enter the number and, if needed, holidays. From 04/28/2025 plus 10 working days without holidays is 05/12/2025, and with holidays on May 1 and 8 it is 05/14/2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the start date counted among the working days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not by default, as in Excel's WORKDAY: the first working day is the one after the start date. To count it as the first, choose “The start date is day 1”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator have state holidays?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, they change. Enter holidays as your own list of dates and the calculator will skip them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the ISO week number?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the international week numbering: a week starts on Monday and the first week of the year contains January 4. December 30, 2024 already belongs to week 1 of 2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I enter a fractional number of days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, the calculator accepts only whole non-negative numbers and shows an error rather than silently rounding. Use the “Subtract” operation to go the other way."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the calculator suitable for legal deadlines?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only as an aid: it shows the calendar date. Check the counting rules (from the next day, moving to a working day) against the law and documents."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cadddays">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Add or Subtract Days from a Date</h1>
-                    <p class="mcalc__p">
-                        Find out what date it will be N days, weeks, or months from now — or what date
-                        it was that long ago.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Add or Subtract Days from a Date</h1>
+                    <p class="ph__p">Choose a start date (today by default) and enter how many years, months, weeks and days to add or subtract. The calculator shows the date, the weekday and the week number. A separate tab finds the date after N working days, taking weekends and your holidays into account.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Date/Time</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="add" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Add or subtract</b><span class="ph__ex">Add or subtract time</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="work" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Working days</b><span class="ph__ex">A date after working days</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="startDate">Start date</label>
-                                <input class="mcalc__input" id="startDate" type="date" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="operation">Operation</label>
-                                <select id="operation" class="mcalc__select">
-                                    <option value="add" selected>Add</option>
-                                    <option value="subtract">Subtract</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="amount">Amount</label>
-                                <input class="mcalc__input" id="amount" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 30" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="unit">Unit</label>
-                                <select id="unit" class="mcalc__select">
-                                    <option value="days" selected>Days</option>
-                                    <option value="weeks">Weeks</option>
-                                    <option value="months">Months</option>
-                                    <option value="years">Years</option>
-                                </select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/datetime/date-difference-calculator">Date Difference Calculator</a>
-                            <a href="/en/datetime/age-calculator">Age Calculator</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why you need an add days calculator</h2>
-            <p>
-                This tool helps you quickly find an exact date in the future or past without manually
-                counting on a calendar. It's especially useful for long periods (months, years), where
-                it's easy to make mistakes with manual calculations.
-            </p>
-
-            <h2>Practical uses</h2>
-            <ul>
-                <li><b>Document validity:</b> when a power of attorney, warranty, or visa expires, if you know the
-                    validity period from the issue date.</li>
-                <li><b>Event planning:</b> what date it will be 90 days from now for an important deadline or event.
-                </li>
-                <li><b>Medical timelines:</b> calculating the date of a next appointment or the end of a treatment
-                    course.</li>
-                <li><b>Financial calculations:</b> loan repayment date or deposit maturity date.</li>
-            </ul>
-
-            <h2>How month and year calculations work</h2>
-            <p>
-                When adding months or years, the calculator keeps the same day of the month whenever
-                possible. For example, adding 1 month to January 31 gives February 28 (or 29 in a leap
-                year), since February doesn't have 31 days. This is standard behavior for calendar
-                calculations.
-            </p>
-
-            <p class="m-hintSmall">
-                This calculator uses the standard Gregorian calendar for all calculations.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><b>Date Difference Calculator</b><span>How many days, weeks and months between two dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/age-calculator"><b>Age Calculator</b><span>Exact age, birthdays and round dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/countdown-timer"><b>Countdown Timer</b><span>How long until an important event.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator counts</h2>
+            <p>The calculator adds years, months, weeks and days to a date or subtracts them from it, and all the amounts can be combined: for example 1 year, 3 months and 10 days. The start date is today by default. January 15, 2025 plus 90 days is <b>April 15, 2025</b>, a Tuesday, and plus 1 year 3 months and 10 days is <b>April 25, 2026</b>, a Saturday. The result also shows the weekday, the ISO week number and the distance from today (“in 90 days” or “37 days ago”).</p>
+
+            <h2>Month ends and leap years</h2>
+            <p>Months have different numbers of days, so when the target month has no such day its last day is used. Adding 1 month to January 31, 2025 gives <b>February 28</b>, and for 2024 it is February 29. The same goes for years: February 29, 2024 plus 1 year is February 28, 2025, and plus 4 years is February 29, 2028. Years and months are added first and only then weeks and days, so the order is always the same.</p>
+
+            <h2>The start date as day 1</h2>
+            <p>Normally “in 30 days” means the start date is not counted: from January 1, 2025 that is <b>January 31</b>. But in deadlines and schedules the first day is often counted as day 1. Then choose “The start date is day 1”: 30 days from January 1 end on <b>January 30</b>, and a month from January 1 ends on January 31. For subtraction the shift is mirrored: the result is a day closer to the start date.</p>
+
+            <h2>Subtracting days from a date</h2>
+            <p>Choose “Subtract” and the calculator finds a date in the past: 30 days before March 10, 2025 is February 8, 2025, a Saturday. That tells you when a period started, what the date was a week or a month ago, or where to start a countdown.</p>
+
+            <h2>The date after working days</h2>
+            <p>The “Working days” tab finds the date after N working days, skipping weekends and holidays. From April 28, 2025 plus 10 working days is <b>May 12</b> (a Monday, 14 calendar days, 4 weekend days skipped). If your holiday list has May 1 and 8, the result shifts to <b>May 14</b> (a Wednesday): two more days skipped. The start date is not counted, which is how Excel's WORKDAY function works.</p>
+
+            <h2>Weekends and holidays</h2>
+            <p>By default the weekend is Saturday and Sunday, but you can choose “Sunday only”, “Friday and Saturday” or “No weekend”. State holidays are not built in because they change, including during martial law: enter your own list of dates separated by commas, spaces or new lines in the MM/DD/YYYY or YYYY-MM-DD format. A holiday that falls on a weekend is not skipped separately, and holidays outside the range are ignored, which the calculator tells you.</p>
+
+            <h2>Quick buttons and the link</h2>
+            <p>Below the fields there are buttons for 7, 14, 30, 60 and 90 days, 6 months and 1 year: one click fills in the amount and calculates at once. The “Share” button creates a link with all your fields, for example with a holiday list for colleagues.</p>
+
+            <h2>Limits</h2>
+            <p>The calculation uses the Gregorian calendar: for dates before 1582 the result is nominal. The calculator does not know about transferred working days and has no built-in state holidays. Legal deadlines (power of attorney, warranty, visa) have their own counting rules, so check them against the law and documents and use the calculator as an aid. Dates from the year 1000 to 2999 are allowed.</p>
+            <p class="ph-mini">The date is calculated with the Gregorian calendar. For legal deadlines (power of attorney, warranty, visa) rely on the law and documents: the calculator only shows the calendar date.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How do I calculate a date N days from now?</h3>
-                <p>Choose a start date, enter the number of days (or weeks or months), and click "add" — the calculator
-                    will show the exact future date.</p>
+            <div class="cc-faq-item">
+                <h3>How do I find the date in N days?</h3>
+                <p>Enter the start date (or leave today), type N in the “Days” field and keep “Add”. For 01/15/2025 and 90 days that is 04/15/2025.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I subtract days instead of adding?</h3>
-                <p>Yes, select the "subtract" mode to find out what date it was a certain number of days ago.</p>
+            <div class="cc-faq-item">
+                <h3>How do I subtract days from a date?</h3>
+                <p>Choose the “Subtract” operation: the calculator shows a past date. 30 days before 03/10/2025 is 02/08/2025.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Does it account for months of different lengths?</h3>
-                <p>Yes, when adding months, the calculator correctly handles varying month lengths and year-end
-                    transitions.</p>
+            <div class="cc-faq-item">
+                <h3>Can I add years, months and days at once?</h3>
+                <p>Yes, fill in several fields. Years and months are added first, then weeks and days: 01/15/2025 + 1 year 3 months 10 days = 04/25/2026.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What happens if I add a month to January 31?</h3>
+                <p>February has no 31st, so its last day is used: February 28 (the 29th in a leap year).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does the calculator treat February 29?</h3>
+                <p>If you add years to February 29 and February has 28 days in the target year, February 28 is used: 02/29/2024 + 1 year = 02/28/2025.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does “The start date is day 1” change?</h3>
+                <p>In the normal mode the start date is not counted: +30 days from January 1 is January 31. In the “day 1” mode it counts as day 1 and the result is January 30.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the date after N working days?</h3>
+                <p>Open the “Working days” tab, enter the number and, if needed, holidays. From 04/28/2025 plus 10 working days without holidays is 05/12/2025, and with holidays on May 1 and 8 it is 05/14/2025.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is the start date counted among the working days?</h3>
+                <p>Not by default, as in Excel's WORKDAY: the first working day is the one after the start date. To count it as the first, choose “The start date is day 1”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator have state holidays?</h3>
+                <p>No, they change. Enter holidays as your own list of dates and the calculator will skip them.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the ISO week number?</h3>
+                <p>It is the international week numbering: a week starts on Monday and the first week of the year contains January 4. December 30, 2024 already belongs to week 1 of 2025.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter a fractional number of days?</h3>
+                <p>No, the calculator accepts only whole non-negative numbers and shows an error rather than silently rounding. Use the “Subtract” operation to go the other way.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is the calculator suitable for legal deadlines?</h3>
+                <p>Only as an aid: it shows the calendar date. Check the counting rules (from the next day, moving to a working day) against the law and documents.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
