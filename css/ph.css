@@ -2885,6 +2885,15 @@
 .ph textarea.ph__textarea { display: block; width: 100%; min-height: 84px; padding: 9px 10px; border: 0; border-radius: 10px; background: #fff; color: #1f2937; font: inherit; font-size: 13px; line-height: 1.45; outline: none; resize: vertical; box-shadow: 0 1px 2px rgba(31, 47, 85, .04), 0 3px 8px rgba(40, 59, 105, .08); }
 .ph textarea.ph__textarea::placeholder { color: #9ca3af; }
 .ph textarea.ph__textarea:focus { box-shadow: 0 0 0 3px rgba(40, 59, 105, .18), 0 3px 8px rgba(40, 59, 105, .08); }
+/* вимкнена кнопка: без підйому, блиску й вказівника */
+.ph .ph__btn:disabled { background: #e6eaf4; color: #8793b1; opacity: 1; cursor: default; filter: none; box-shadow: inset 0 0 0 1px #d6ddee; text-shadow: none; }
+.ph .ph__btn:disabled:hover { top: 0; box-shadow: none; }
+.ph .ph__btn:disabled:hover::before { transform: translateX(-120%); }
+/* живий відлік: чотири плитки в ряд */
+.ph .ph__tiles#ctLive { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ph .ph__tiles#ctLive .ph__tile { padding: 12px 4px; text-align: center; }
+.ph .ph__tiles#ctLive .ph__tile b { font-size: 24px; font-variant-numeric: tabular-nums; }
+@media (max-width: 420px) { .ph .ph__tiles#ctLive .ph__tile b { font-size: 19px; } .ph .ph__tiles#ctLive .ph__tile small { font-size: 11px; } }
 /* згортана таблиця в результаті */
 .ph__fold { margin-top: 14px; }
 .ph__fold .ph__foldBody { padding: 12px 12px 0; }

@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Таймер зворотного відліку онлайн — скільки часу до події | CalcCore</title>
+    <title>Таймер і відлік до дати онлайн: дні, години, секунди | CalcCore</title>
     <meta name="description"
-        content="Живий таймер зворотного відліку до будь-якої дати чи події: Новий рік, день народження, весілля, відпустка. Дні, години, хвилини, секунди в реальному часі." />
+        content="Онлайн-відлік до події наживо з часовими поясами та таймер на хвилини зі звуком: Новий рік, свято, дедлайн, Помодоро. Залишок видно в заголовку вкладки." />
 
     <link rel="canonical" href="https://calccore.net/datetime/countdown-timer" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/countdown-timer" />
@@ -26,197 +28,427 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Таймер зворотного відліку онлайн — скільки часу до події" />
-    <meta property="og:description" content="Живий таймер зворотного відліку до будь-якої дати чи події: Новий рік, день народження, весілля, відпустка. Дні, години, хвилини, секунди в реальному часі." />
+    <meta property="og:title" content="Таймер і відлік до дати онлайн: дні, години, секунди" />
+    <meta property="og:description" content="Онлайн-відлік до події наживо з часовими поясами та таймер на хвилини зі звуком: Новий рік, свято, дедлайн, Помодоро. Залишок видно в заголовку вкладки." />
     <meta property="og:url" content="https://calccore.net/datetime/countdown-timer" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Таймер зворотного відліку онлайн — скільки часу до події" />
-    <meta name="twitter:description" content="Живий таймер зворотного відліку до будь-якої дати чи події: Новий рік, день народження, весілля, відпустка. Дні, години, хвилини, секунди в реальному часі." />
+    <meta name="twitter:title" content="Таймер і відлік до дати онлайн: дні, години, секунди" />
+    <meta name="twitter:description" content="Онлайн-відлік до події наживо з часовими поясами та таймер на хвилини зі звуком: Новий рік, свято, дедлайн, Помодоро. Залишок видно в заголовку вкладки." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/countdown-timer.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106ct1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106ct1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/countdown-timer.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Чи оновлюється таймер автоматично?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, таймер оновлюється щосекунди в реальному часі без необхідності перезавантажувати сторінку."}
-      },
-      {
-        "@type":"Question",
-        "name":"Що станеться, коли час події настане?",
-        "acceptedAnswer":{"@type":"Answer","text":"Таймер покаже спеціальне повідомлення про те, що подія вже настала."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна вибрати дату в минулому?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, у такому випадку калькулятор покаже, скільки часу минуло з тієї події, а не залишилось до неї."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106ct1" defer></script>
+    <script src="/js/phys-core.js?v=20261106ct1" defer></script>
+    <script src="/js/datepick.js?v=20261106ct1" defer></script>
+    <script src="/js/ag-data.js?v=20261106ct1" defer></script>
+    <script src="/js/df-data.js?v=20261106ct1" defer></script>
+    <script src="/js/ct-data.js?v=20261106ct1" defer></script>
+    <script src="/js/ct-calc.js?v=20261106ct1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/datetime/countdown-timer#app",
-    "name":"Countdown Timer",
-    "description":"Живий таймер зворотного відліку до будь-якої дати чи події.",
-    "url":"https://calccore.net/datetime/countdown-timer",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/datetime/countdown-timer#app",
+  "name": "Таймер зворотного відліку",
+  "description": "Онлайн-відлік до події в реальному часі: дні, години, хвилини й секунди до обраної дати з вибором часового поясу, а також таймер на години, хвилини й секунди з паузою та звуковим сигналом. Залишок показується в заголовку вкладки, а посилання зберігає ваш відлік.",
+  "url": "https://calccore.net/datetime/countdown-timer",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Відлік до дати й часу в реальному часі",
+    "Вибір часового поясу події",
+    "Тижні, години, хвилини, секунди й робочі дні до події",
+    "Таймер з паузою й звуковим сигналом",
+    "Залишок у заголовку вкладки",
+    "Посилання, що відновлює відлік"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/datetime/countdown-timer#webpage",
+      "url": "https://calccore.net/datetime/countdown-timer",
+      "name": "Таймер і відлік до дати онлайн: дні, години, секунди | CalcCore",
+      "description": "Онлайн-відлік до події наживо з часовими поясами та таймер на хвилини зі звуком: Новий рік, свято, дедлайн, Помодоро. Залишок видно в заголовку вкладки.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/datetime/countdown-timer#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/datetime/countdown-timer#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/datetime/countdown-timer#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Дата/час",
+          "item": "https://calccore.net/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Таймер зворотного відліку",
+          "item": "https://calccore.net/datetime/countdown-timer"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/datetime/countdown-timer#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як зробити відлік до дати онлайн?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть дату події (і за бажанням час та назву): відлік запуститься автоматично й оновлюватиметься щосекунди."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи оновлюється відлік без перезавантаження?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, лічильник оновлюється щосекунди. Він рахується від поточного часу, тому не відстає, навіть якщо вкладка у фоні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що буде, коли час події настане?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "З'явиться повідомлення про те, що подія настала, а лічильник перейде на відлік «минуло з події»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна вибрати дату в минулому?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, калькулятор покаже, скільки часу минуло з тієї події."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як врахувати інший часовий пояс?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У полі «Часовий пояс події» оберіть місто чи UTC: калькулятор покаже й час події, і той самий момент за вашим годинником."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховується перехід на літній час?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так. Лічильник рахує реальні секунди, тож у ніч переходу доба в Києві триває 23 або 25 годин."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як запустити таймер на 5 хвилин?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відкрийте вкладку «Таймер», натисніть «5 хв» і «Старт». Можна ввести й власний час до 99 годин 59 хвилин 59 секунд."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є пауза в таймері?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так: «Пауза» зберігає залишок, «Продовжити» запускає далі, «Скинути» повертає початкове значення."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому не лунає звук?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Браузери вмикають звук лише після дії користувача, тому запустіть таймер кнопкою «Старт» і перевірте, що сигнал увімкнено й гучність не вимкнена. Вкладка при цьому може бути у фоні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи видно залишок, якщо я в іншій вкладці?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, залишок показується в заголовку вкладки браузера, а коли таймер закінчується, там зʼявляється «Час вийшов!»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як поділитися відліком?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Натисніть «Поділитись» і надішліть посилання: воно відновлює назву, дату, час і часовий пояс події."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому відлік не збігається з моїм годинником?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Калькулятор спирається на годинник пристрою. Перевірте, що час, дата й часовий пояс на пристрої налаштовані автоматично."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ccountdown">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Таймер зворотного відліку</h1>
-                    <p class="mcalc__p">
-                        Обери подію — і дивись, скільки часу залишилось у реальному часі.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Таймер зворотного відліку</h1>
+                    <p class="ph__p">Оберіть дату й час події, і калькулятор покаже, скільки днів, годин, хвилин і секунд лишилось, наживо. Можна вибрати часовий пояс події. Окрема вкладка запускає таймер на потрібний час зі звуковим сигналом.</p>
                 </div>
 
-                <div class="mcalc__card countdown-card">
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="eventName">Назва події (опц.)</label>
-                            <input class="mcalc__input" id="eventName" type="text"
-                                placeholder="напр.: Мій день народження" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Дата/час</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="eventDate">Дата події</label>
-                            <input class="mcalc__input" id="eventDate" type="date" />
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="cd" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Відлік до події</b><span class="ph__ex">Дні й секунди до дати</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="tm" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Таймер</b><span class="ph__ex">Старт, пауза, сигнал</span></span></button>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="eventTime">Час (опц.)</label>
-                            <input class="mcalc__input" id="eventTime" type="time" />
-                        </div>
-
-                        <div class="mcalc__field m-full">
-                            <div class="countdown-quick">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnNewYear" type="button">Новий
-                                    рік</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnWeekend"
-                                    type="button">Вихідні</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
                             </div>
                         </div>
+                        <div id="phBody"></div>
 
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="countdown-display" id="countdownDisplay" style="display:none;">
-                        <div class="countdown-title" id="countdownTitle"></div>
-                        <div class="countdown-grid">
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdDays">0</div>
-                                <div class="countdown-label" id="lblDays">днів</div>
-                            </div>
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdHours">00</div>
-                                <div class="countdown-label" id="lblHours">год</div>
-                            </div>
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdMinutes">00</div>
-                                <div class="countdown-label" id="lblMinutes">хв</div>
-                            </div>
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdSeconds">00</div>
-                                <div class="countdown-label" id="lblSeconds">сек</div>
-                            </div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-                        <div class="countdown-message" id="countdownMessage"></div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
+                        </div>
                     </div>
-
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/datetime/date-difference-calculator">Різниця між датами</a>
-                    <a href="/datetime/age-calculator">Калькулятор віку</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке таймер зворотного відліку</h2>
-            <p>
-                Таймер зворотного відліку показує в реальному часі, скільки днів, годин, хвилин і
-                секунд залишилось до обраної дати чи події. На відміну від статичного розрахунку,
-                цей таймер оновлюється щосекунди прямо на сторінці.
-            </p>
-
-            <h2>Для чого використовують таймери зворотного відліку</h2>
-            <ul>
-                <li><b>Особисті події:</b> день народження, весілля, річниця стосунків.</li>
-                <li><b>Свята:</b> Новий рік, інші важливі дати календаря.</li>
-                <li><b>Подорожі:</b> відлік до відпустки чи важливої поїздки.</li>
-                <li><b>Дедлайни:</b> здача проєкту, іспит, важлива зустріч.</li>
-                <li><b>Запуски продуктів:</b> очікування релізу гри, фільму чи технологічного анонсу.</li>
-            </ul>
-
-            <h2>Як користуватись</h2>
-            <p>
-                Просто вибери дату (і опційно точний час) події, за бажанням додай назву — і таймер
-                автоматично почне живий відлік. Якщо обрана дата вже в минулому, калькулятор покаже,
-                скільки часу минуло з того моменту.
-            </p>
-
-            <p class="m-hintSmall">
-                Таймер працює на основі часу твого пристрою та браузера. Тримай вкладку відкритою,
-                щоб бачити відлік у реальному часі.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/datetime/date-difference-calculator"><b>Різниця між датами</b><span>Скільки днів, тижнів і місяців між двома датами.</span></a>
+                <a class="cc-related-card" href="/datetime/add-days-calculator"><b>Додати дні до дати</b><span>Яка дата буде через N днів.</span></a>
+                <a class="cc-related-card" href="/datetime/age-calculator"><b>Калькулятор віку</b><span>Точний вік, дні народження й круглі дати.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Як працює відлік до події</h2>
+            <p>Введіть дату події, за потреби її назву й час (за замовчуванням 00:00): калькулятор щосекунди показує, скільки <b>днів, годин, хвилин і секунд</b> лишилось. Нижче видно тижні й дні, усього годин, хвилин і секунд, день тижня події та кількість робочих днів до неї. Коли подія настає, зʼявляється повідомлення, а лічильник переходить на відлік «минуло з події». Якщо дата вже в минулому, одразу видно, скільки часу минуло.</p>
+
+            <h2>Часові пояси</h2>
+            <p>Подія часто відбувається в іншому часовому поясі: прямий ефір, реліз, початок онлайн-конференції. Оберіть пояс події: Київ, Лондон, Берлін чи Париж, Нью-Йорк, Лос-Анджелес, Токіо або UTC. Наприклад, 1 січня 2027 року о 00:00 за Нью-Йорком настане о <b>07:00 за Києвом</b>. У кроках розв'язання калькулятор показує і час події, і той самий момент за вашим годинником. Літній час враховується автоматично.</p>
+
+            <h2>Швидкі дати</h2>
+            <p>Під полями є кнопки «Новий рік», «Різдво (25.12)», «8 Березня», «День Незалежності (24.08)» та «Вихідні». Вони підставляють найближчу таку дату з 00:00, а «Вихідні» — найближчу суботу. Для дат, що рухаються, наприклад Великодня, скористайтеся окремим калькулятором Великодня та введіть отриману дату вручну.</p>
+
+            <h2>Таймер на час</h2>
+            <p>Вкладка «Таймер» працює як звичайний таймер: вкажіть години, хвилини й секунди (до 99 годин 59 хвилин 59 секунд) або натисніть готове значення — 1, 5, 10, 15, 25 чи 45 хвилин. Кнопка «Старт» запускає відлік, «Пауза» зберігає залишок, «Продовжити» вмикає далі, а «Скинути» повертає початковий стан. Калькулятор показує, о котрій годині таймер закінчиться, а в кінці лунає звуковий сигнал, який можна вимкнути. Для техніки Помодоро зручно взяти 25 хвилин, тобто <b>1 500 секунд</b>.</p>
+
+            <h2>Залишок у заголовку вкладки</h2>
+            <p>Поки тече відлік чи таймер, залишок показується в заголовку вкладки браузера, тож його видно, навіть якщо ви працюєте в іншій вкладці. Коли таймер закінчується, заголовок змінюється на «Час вийшов!». Браузер може сповільнювати фонові сторінки, але залишок рахується від поточного часу, тому не відстає.</p>
+
+            <h2>Поділитися відліком</h2>
+            <p>Кнопка «Поділитись» створює посилання з назвою, датою, часом і часовим поясом події. Той, хто його відкриє, одразу побачить такий самий живий відлік, наприклад до спільної події чи дедлайну. Налаштування таймера теж зберігаються в посиланні, але сам він не запускається, доки ви не натиснете «Старт».</p>
+
+            <h2>Особливості й обмеження</h2>
+            <p>Лічильник рахує реальні секунди між поточним моментом і подією, тому в ніч переходу на літній час доба в Києві має 23 години, а зимового часу — 25. Калькулятор покладається на годинник пристрою: якщо там збитий час чи пояс, результат теж зсунеться. Звук вмикається лише після вашого кліку «Старт», так вимагають браузери. Дозволено дати від 1970 до 2100 року.</p>
+            <p class="ph-mini">Відлік іде за годинником вашого пристрою: якщо в нього збитий час, залишок теж буде неточним. Тримайте вкладку відкритою.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Чи оновлюється таймер автоматично?</h3>
-                <p>Так, таймер оновлюється щосекунди в реальному часі без необхідності перезавантажувати сторінку.</p>
+            <div class="cc-faq-item">
+                <h3>Як зробити відлік до дати онлайн?</h3>
+                <p>Введіть дату події (і за бажанням час та назву): відлік запуститься автоматично й оновлюватиметься щосекунди.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Що станеться, коли час події настане?</h3>
-                <p>Таймер покаже спеціальне повідомлення про те, що подія вже настала.</p>
+            <div class="cc-faq-item">
+                <h3>Чи оновлюється відлік без перезавантаження?</h3>
+                <p>Так, лічильник оновлюється щосекунди. Він рахується від поточного часу, тому не відстає, навіть якщо вкладка у фоні.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Що буде, коли час події настане?</h3>
+                <p>З'явиться повідомлення про те, що подія настала, а лічильник перейде на відлік «минуло з події».</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Чи можна вибрати дату в минулому?</h3>
-                <p>Так, у такому випадку калькулятор покаже, скільки часу минуло з тієї події, а не залишилось до неї.
-                </p>
+                <p>Так, калькулятор покаже, скільки часу минуло з тієї події.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як врахувати інший часовий пояс?</h3>
+                <p>У полі «Часовий пояс події» оберіть місто чи UTC: калькулятор покаже й час події, і той самий момент за вашим годинником.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховується перехід на літній час?</h3>
+                <p>Так. Лічильник рахує реальні секунди, тож у ніч переходу доба в Києві триває 23 або 25 годин.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як запустити таймер на 5 хвилин?</h3>
+                <p>Відкрийте вкладку «Таймер», натисніть «5 хв» і «Старт». Можна ввести й власний час до 99 годин 59 хвилин 59 секунд.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є пауза в таймері?</h3>
+                <p>Так: «Пауза» зберігає залишок, «Продовжити» запускає далі, «Скинути» повертає початкове значення.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому не лунає звук?</h3>
+                <p>Браузери вмикають звук лише після дії користувача, тому запустіть таймер кнопкою «Старт» і перевірте, що сигнал увімкнено й гучність не вимкнена. Вкладка при цьому може бути у фоні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи видно залишок, якщо я в іншій вкладці?</h3>
+                <p>Так, залишок показується в заголовку вкладки браузера, а коли таймер закінчується, там зʼявляється «Час вийшов!».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як поділитися відліком?</h3>
+                <p>Натисніть «Поділитись» і надішліть посилання: воно відновлює назву, дату, час і часовий пояс події.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому відлік не збігається з моїм годинником?</h3>
+                <p>Калькулятор спирається на годинник пристрою. Перевірте, що час, дата й часовий пояс на пристрої налаштовані автоматично.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

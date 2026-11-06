@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Countdown Timer Online — Time Left Until Event | CalcCore</title>
+    <title>Countdown Timer Online: Days, Hours, Seconds | CalcCore</title>
     <meta name="description"
-        content="Live countdown timer to any date or event: New Year, birthday, wedding, vacation. Real-time days, hours, minutes, seconds." />
+        content="A live countdown to an event with time zones and a timer with sound: New Year, a holiday, a deadline, Pomodoro. The remainder shows in the tab title." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/countdown-timer" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/countdown-timer" />
@@ -26,196 +28,427 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Countdown Timer Online — Time Left Until Event" />
-    <meta property="og:description" content="Live countdown timer to any date or event: New Year, birthday, wedding, vacation. Real-time days, hours, minutes, seconds." />
+    <meta property="og:title" content="Countdown Timer Online: Days, Hours, Seconds" />
+    <meta property="og:description" content="A live countdown to an event with time zones and a timer with sound: New Year, a holiday, a deadline, Pomodoro. The remainder shows in the tab title." />
     <meta property="og:url" content="https://calccore.net/en/datetime/countdown-timer" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Countdown Timer Online — Time Left Until Event" />
-    <meta name="twitter:description" content="Live countdown timer to any date or event: New Year, birthday, wedding, vacation. Real-time days, hours, minutes, seconds." />
+    <meta name="twitter:title" content="Countdown Timer Online: Days, Hours, Seconds" />
+    <meta name="twitter:description" content="A live countdown to an event with time zones and a timer with sound: New Year, a holiday, a deadline, Pomodoro. The remainder shows in the tab title." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/countdown-timer.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106ct1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106ct1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/countdown-timer.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Does the timer update automatically?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, the timer updates every second in real time without needing to reload the page."}
-      },
-      {
-        "@type":"Question",
-        "name":"What happens when the event time arrives?",
-        "acceptedAnswer":{"@type":"Answer","text":"The timer will show a special message indicating the event has already happened."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I select a date in the past?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, in that case the calculator will show how much time has passed since that event, instead of time remaining."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106ct1" defer></script>
+    <script src="/js/phys-core.js?v=20261106ct1" defer></script>
+    <script src="/js/datepick.js?v=20261106ct1" defer></script>
+    <script src="/js/ag-data.js?v=20261106ct1" defer></script>
+    <script src="/js/df-data.js?v=20261106ct1" defer></script>
+    <script src="/js/ct-data.js?v=20261106ct1" defer></script>
+    <script src="/js/ct-calc.js?v=20261106ct1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/countdown-timer#app",
-    "name":"Countdown Timer",
-    "description":"Live countdown timer to any date or event.",
-    "url":"https://calccore.net/en/datetime/countdown-timer",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/countdown-timer#app",
+  "name": "Countdown Timer",
+  "description": "An online live countdown to an event: days, hours, minutes and seconds until the chosen date with a choice of time zone, plus a timer for hours, minutes and seconds with pause and a sound alert. The remainder is shown in the tab title and a link keeps your countdown.",
+  "url": "https://calccore.net/en/datetime/countdown-timer",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "A live countdown to a date and time",
+    "A choice of event time zone",
+    "Weeks, hours, minutes, seconds and working days to the event",
+    "A timer with pause and a sound alert",
+    "The remainder in the tab title",
+    "A link that restores the countdown"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/countdown-timer#webpage",
+      "url": "https://calccore.net/en/datetime/countdown-timer",
+      "name": "Countdown Timer Online: Days, Hours, Seconds | CalcCore",
+      "description": "A live countdown to an event with time zones and a timer with sound: New Year, a holiday, a deadline, Pomodoro. The remainder shows in the tab title.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/countdown-timer#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/countdown-timer#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/countdown-timer#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Countdown timer",
+          "item": "https://calccore.net/en/datetime/countdown-timer"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/countdown-timer#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I make a countdown to a date online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the event date (and optionally the time and name): the countdown starts automatically and updates every second."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the countdown update without reloading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the counter updates every second. It is calculated from the current time, so it does not fall behind even if the tab is in the background."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when the event time arrives?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A message appears saying the event has arrived and the counter switches to counting “since the event”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I pick a date in the past?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the calculator shows how long ago that event was."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I account for another time zone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the “Event time zone” field choose a city or UTC: the calculator shows both the event time and the same moment by your clock."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the daylight saving change accounted for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The counter counts real seconds, so on the night of the change a day in Kyiv lasts 23 or 25 hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I start a 5-minute timer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Timer” tab, press “5 min” and “Start”. You can also enter your own time up to 99 hours 59 minutes 59 seconds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the timer have a pause?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes: “Pause” keeps the remainder, “Resume” continues and “Reset” returns the initial value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is there no sound?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Browsers enable sound only after a user action, so start the timer with the “Start” button and check that the alert is on and the volume is not muted. The tab can be in the background."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I see the remainder in another tab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the remainder is shown in the browser tab title, and when the timer finishes it changes to “Time is up!”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I share a countdown?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Press “Share” and send the link: it restores the name, date, time and time zone of the event."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the countdown not match my clock?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator relies on the device clock. Check that the time, date and time zone on the device are set automatically."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ccountdown">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Countdown Timer</h1>
-                    <p class="mcalc__p">
-                        Choose an event — and watch the time remaining update in real time.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Countdown Timer</h1>
+                    <p class="ph__p">Choose the date and time of an event and the calculator shows live how many days, hours, minutes and seconds are left. You can pick the time zone of the event. A separate tab starts a timer for any time with a sound alert.</p>
                 </div>
 
-                <div class="mcalc__card countdown-card">
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="eventName">Event name (opt.)</label>
-                            <input class="mcalc__input" id="eventName" type="text" placeholder="e.g.: My birthday" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="eventDate">Event date</label>
-                            <input class="mcalc__input" id="eventDate" type="date" />
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="cd" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Event countdown</b><span class="ph__ex">Days and seconds to a date</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="tm" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Timer</b><span class="ph__ex">Start, pause, alert</span></span></button>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="eventTime">Time (opt.)</label>
-                            <input class="mcalc__input" id="eventTime" type="time" />
-                        </div>
-
-                        <div class="mcalc__field m-full">
-                            <div class="countdown-quick">
-                                <button class="mcalc__btn mcalc__btn--small" id="btnNewYear" type="button">New
-                                    Year</button>
-                                <button class="mcalc__btn mcalc__btn--small" id="btnWeekend"
-                                    type="button">Weekend</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
                         </div>
+                        <div id="phBody"></div>
 
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="countdown-display" id="countdownDisplay" style="display:none;">
-                        <div class="countdown-title" id="countdownTitle"></div>
-                        <div class="countdown-grid">
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdDays">0</div>
-                                <div class="countdown-label" id="lblDays">days</div>
-                            </div>
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdHours">00</div>
-                                <div class="countdown-label" id="lblHours">hrs</div>
-                            </div>
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdMinutes">00</div>
-                                <div class="countdown-label" id="lblMinutes">min</div>
-                            </div>
-                            <div class="countdown-unit">
-                                <div class="countdown-num" id="cdSeconds">00</div>
-                                <div class="countdown-label" id="lblSeconds">sec</div>
-                            </div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-                        <div class="countdown-message" id="countdownMessage"></div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
+                        </div>
                     </div>
-
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/en/datetime/date-difference-calculator">Date Difference Calculator</a>
-                    <a href="/en/datetime/age-calculator">Age Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is a countdown timer</h2>
-            <p>
-                A countdown timer shows in real time how many days, hours, minutes, and seconds remain
-                until a chosen date or event. Unlike a static calculation, this timer updates every
-                second right on the page.
-            </p>
-
-            <h2>What countdown timers are used for</h2>
-            <ul>
-                <li><b>Personal events:</b> birthdays, weddings, relationship anniversaries.</li>
-                <li><b>Holidays:</b> New Year and other important calendar dates.</li>
-                <li><b>Travel:</b> counting down to a vacation or important trip.</li>
-                <li><b>Deadlines:</b> project submission, an exam, an important meeting.</li>
-                <li><b>Product launches:</b> waiting for a game, movie, or tech announcement release.</li>
-            </ul>
-
-            <h2>How to use it</h2>
-            <p>
-                Simply choose a date (and optionally an exact time) for your event, optionally add a
-                name — and the timer will automatically start a live countdown. If the chosen date is
-                already in the past, the calculator will show how much time has passed since that moment.
-            </p>
-
-            <p class="m-hintSmall">
-                The timer runs based on your device and browser's time. Keep the tab open to see the
-                live countdown update.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><b>Date Difference Calculator</b><span>How many days, weeks and months between two dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/add-days-calculator"><b>Add Days to a Date</b><span>What date it will be in N days.</span></a>
+                <a class="cc-related-card" href="/en/datetime/age-calculator"><b>Age Calculator</b><span>Exact age, birthdays and round dates.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How the event countdown works</h2>
+            <p>Enter the event date and, if needed, its name and time (00:00 by default): every second the calculator shows how many <b>days, hours, minutes and seconds</b> are left. Below you see weeks and days, total hours, minutes and seconds, the weekday of the event and the number of working days to it. When the event arrives a message appears and the counter switches to counting “since the event”. If the date is already in the past you immediately see how long ago it was.</p>
+
+            <h2>Time zones</h2>
+            <p>An event is often held in another time zone: a live stream, a release, the start of an online conference. Choose the time zone of the event: Kyiv, London, Berlin or Paris, New York, Los Angeles, Tokyo or UTC. For example, January 1, 2027 at 00:00 in New York arrives at <b>07:00 in Kyiv</b>. In the solution steps the calculator shows both the event time and the same moment by your clock. Daylight saving time is handled automatically.</p>
+
+            <h2>Quick dates</h2>
+            <p>Under the fields there are buttons “New Year”, “Christmas (Dec 25)”, “Mar 8”, “Independence Day (Aug 24)” and “Weekend”. They fill in the nearest such date at 00:00, and “Weekend” fills in the nearest Saturday. For moving dates such as Easter, use the separate Easter calculator and enter the date by hand.</p>
+
+            <h2>The timer</h2>
+            <p>The “Timer” tab works like an ordinary timer: enter hours, minutes and seconds (up to 99 hours 59 minutes 59 seconds) or press a ready value — 1, 5, 10, 15, 25 or 45 minutes. “Start” begins the count, “Pause” keeps the remainder, “Resume” continues and “Reset” returns the initial state. The calculator shows what time the timer will end and at the end a sound alert plays, which you can turn off. For the Pomodoro technique 25 minutes is convenient, i.e. <b>1,500 seconds</b>.</p>
+
+            <h2>The remainder in the tab title</h2>
+            <p>While a countdown or timer runs, the remainder is shown in the browser tab title, so you can see it even when you work in another tab. When the timer finishes, the title changes to “Time is up!”. A browser may slow background pages down, but the remainder is calculated from the current time, so it does not fall behind.</p>
+
+            <h2>Sharing a countdown</h2>
+            <p>The “Share” button creates a link with the name, date, time and time zone of the event. Whoever opens it immediately sees the same live countdown, for example to a shared event or deadline. Timer settings are also kept in the link, but the timer itself does not start until you press “Start”.</p>
+
+            <h2>Notes and limits</h2>
+            <p>The counter counts real seconds between the current moment and the event, so on the night of the spring clock change a day in Kyiv has 23 hours and on the autumn change 25. The calculator relies on the device clock: if its time or zone is off, the result shifts too. Sound is enabled only after your click on “Start”, as browsers require. Dates from 1970 to 2100 are allowed.</p>
+            <p class="ph-mini">The countdown follows your device clock: if it is off, the remainder will be off too. Keep the tab open.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Does the timer update automatically?</h3>
-                <p>Yes, the timer updates every second in real time without needing to reload the page.</p>
+            <div class="cc-faq-item">
+                <h3>How do I make a countdown to a date online?</h3>
+                <p>Enter the event date (and optionally the time and name): the countdown starts automatically and updates every second.</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Does the countdown update without reloading?</h3>
+                <p>Yes, the counter updates every second. It is calculated from the current time, so it does not fall behind even if the tab is in the background.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>What happens when the event time arrives?</h3>
-                <p>The timer will show a special message indicating the event has already happened.</p>
+                <p>A message appears saying the event has arrived and the counter switches to counting “since the event”.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I select a date in the past?</h3>
-                <p>Yes, in that case the calculator will show how much time has passed since that event, instead of time
-                    remaining.</p>
+            <div class="cc-faq-item">
+                <h3>Can I pick a date in the past?</h3>
+                <p>Yes, the calculator shows how long ago that event was.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I account for another time zone?</h3>
+                <p>In the “Event time zone” field choose a city or UTC: the calculator shows both the event time and the same moment by your clock.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is the daylight saving change accounted for?</h3>
+                <p>Yes. The counter counts real seconds, so on the night of the change a day in Kyiv lasts 23 or 25 hours.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I start a 5-minute timer?</h3>
+                <p>Open the “Timer” tab, press “5 min” and “Start”. You can also enter your own time up to 99 hours 59 minutes 59 seconds.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the timer have a pause?</h3>
+                <p>Yes: “Pause” keeps the remainder, “Resume” continues and “Reset” returns the initial value.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is there no sound?</h3>
+                <p>Browsers enable sound only after a user action, so start the timer with the “Start” button and check that the alert is on and the volume is not muted. The tab can be in the background.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I see the remainder in another tab?</h3>
+                <p>Yes, the remainder is shown in the browser tab title, and when the timer finishes it changes to “Time is up!”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I share a countdown?</h3>
+                <p>Press “Share” and send the link: it restores the name, date, time and time zone of the event.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does the countdown not match my clock?</h3>
+                <p>The calculator relies on the device clock. Check that the time, date and time zone on the device are set automatically.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
