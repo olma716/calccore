@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>What Day of the Week Was/Will Be a Date — Calculator | CalcCore</title>
+    <title>Day of the Week for a Date: Past or Future | CalcCore</title>
     <meta name="description"
-        content="Find out what day of the week any date falls on — past, present, or future. Fast and accurate calculation." />
+        content="Find the weekday of any date in the Gregorian or Julian calendar. Week number, day of the year, the third Sunday of a month, Friday the 13th." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/day-of-week-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/day-of-week-calculator" />
@@ -26,169 +28,429 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="What Day of the Week Was/Will Be a Date — Calculator" />
-    <meta property="og:description" content="Find out what day of the week any date falls on — past, present, or future. Fast and accurate calculation." />
+    <meta property="og:title" content="Day of the Week for a Date: Past or Future" />
+    <meta property="og:description" content="Find the weekday of any date in the Gregorian or Julian calendar. Week number, day of the year, the third Sunday of a month, Friday the 13th." />
     <meta property="og:url" content="https://calccore.net/en/datetime/day-of-week-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="What Day of the Week Was/Will Be a Date — Calculator" />
-    <meta name="twitter:description" content="Find out what day of the week any date falls on — past, present, or future. Fast and accurate calculation." />
+    <meta name="twitter:title" content="Day of the Week for a Date: Past or Future" />
+    <meta name="twitter:description" content="Find the weekday of any date in the Gregorian or Julian calendar. Week number, day of the year, the third Sunday of a month, Friday the 13th." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106dw1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/day-of-week-calculator.js?v=20260908" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How do I find the day of the week for a date in the distant past?",
-        "acceptedAnswer":{"@type":"Answer","text":"The calculator uses the standard Gregorian calendar and correctly computes the day of the week for any date within that calendar's applicable range."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I find the day of the week for a future date?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, the calculator is equally accurate for both past and future dates."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is this useful?",
-        "acceptedAnswer":{"@type":"Answer","text":"It's often useful to know what day of the week an important future date falls on (wedding, meeting) or what day of the week a historical date was."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106dw1" defer></script>
+    <script src="/js/phys-core.js?v=20261106dw1" defer></script>
+    <script src="/js/chr-data.js?v=20261106dw1" defer></script>
+    <script src="/js/dw-data.js?v=20261106dw1" defer></script>
+    <script src="/js/dw-calc.js?v=20261106dw1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/day-of-week-calculator#app",
-    "name":"Day of the Week Calculator",
-    "description":"Calculate the day of the week for any date — past or future.",
-    "url":"https://calccore.net/en/datetime/day-of-week-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/day-of-week-calculator#app",
+  "name": "Day of the Week Calculator",
+  "description": "An online calculator that finds the weekday of any date from the year 1 to 9999 in the Gregorian or Julian calendar, shows the day of the year, the ISO week number, the quarter, the distance from today and the same date in the other calendar, shows which weekdays a date falls on in different years, and finds the Nth weekday of a month and Fridays the 13th.",
+  "url": "https://calccore.net/en/datetime/day-of-week-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "The weekday of any date in the Gregorian and Julian calendars",
+    "Day of the year, ISO week number, quarter, distance from today",
+    "The same date in the other calendar",
+    "The weekday of the same date for every year of a range",
+    "The Nth weekday of a month, for example the third Sunday of May",
+    "Fridays the 13th over a range of years"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/day-of-week-calculator#webpage",
+      "url": "https://calccore.net/en/datetime/day-of-week-calculator",
+      "name": "Day of the Week for a Date: Past or Future | CalcCore",
+      "description": "Find the weekday of any date in the Gregorian or Julian calendar. Week number, day of the year, the third Sunday of a month, Friday the 13th.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/day-of-week-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/day-of-week-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/day-of-week-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Day of the week for a date",
+          "item": "https://calccore.net/en/datetime/day-of-week-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/day-of-week-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I find the weekday of a date?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the day, month and year: the calculator shows the weekday. For example, November 6, 2026 is a Friday."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What weekday was my birthday?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter your date of birth: the result shows the weekday and how many days have passed. The second tab shows which weekday your birthday falls on in the coming years."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator work for future dates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for any date up to the year 9999. It shows how many days until the date."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose the Julian calendar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For historical dates: until 1582 Europe used the Julian calendar, and Ukraine and Russia until 1918. January 1, 1500 was a Wednesday in it, but a Monday in the proleptic Gregorian calendar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do weekdays break at the switch between calendars?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Thursday October 4, 1582 (Julian) was followed by Friday October 15 (Gregorian)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the week number counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By ISO 8601: a week starts on Monday and the first week of the year contains January 4. January 1, 2026 is week 1, and December 30, 2024 is already week 1 of 2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the day of the year mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the ordinal number of the day in the year: November 6, 2026 is the 310th of 365, and a leap year has 366."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the third Sunday of May or the fourth Thursday of November?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Find a date” tab, choose “The Nth weekday of a month” and give the year, month, number and weekday. The third Sunday of May 2027 is May 16."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many Fridays the 13th are there in a year?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From one to three. In 2026 there are three: February 13, March 13 and November 13. Over 400 years there are 688."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is there no result for February 29 in some years?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "February 29 exists only in leap years: in a range the calculator skips the other years and shows how many there are."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are public holidays taken into account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Saturday and Sunday count as weekends, and the calculator does not know public holidays or transferred working days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the earliest and latest dates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Years from 1 to 9999, in the Gregorian or Julian calendar. For dates before 1582 the Gregorian result is nominal."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cdow">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">What Day of the Week Was or Will Be</h1>
-                    <p class="mcalc__p">
-                        Enter any date — past or future — and find out what day of the week
-                        it falls on.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Day of the Week for a Date</h1>
+                    <p class="ph__p">Enter the day, month and year: the calculator shows which weekday the date falls on, whether it was a weekend, and the day of the year and week. The Julian calendar is available for historical dates. The other tabs show the same date over the years and find, for example, the third Sunday of May or Fridays the 13th.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter a date</h2>
-                        <span class="mcalc__badge">Date/Time</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="checkDate">Date</label>
-                            <input class="mcalc__input" id="checkDate" type="date" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Calculate</button>
-                                <button class="mcalc__btn" id="btnToday" type="button">Today</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="dw" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Weekday</b><span class="ph__ex">What day it was</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="yrs" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">The same date over the years</b><span class="ph__ex">Weekdays over the years</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="find" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Find a date</b><span class="ph__ex">Nth day, Fridays the 13th</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter a date to calculate.</div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/datetime/age-calculator">Age Calculator</a>
-                    <a href="/en/datetime/date-difference-calculator">Date Difference Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why find out the day of the week for a date</h2>
-            <p>
-                This simple but useful tool helps you quickly determine what day of the week any date
-                falls on — without flipping through a paper or digital calendar. Especially handy for
-                dates far in the past or future, where manual counting is harder.
-            </p>
-
-            <h2>Practical uses</h2>
-            <ul>
-                <li><b>Event planning:</b> check whether an important future date falls on a weekend.</li>
-                <li><b>Historical facts:</b> find out what day of the week you were born on, or another historical date.
-                </li>
-                <li><b>Business planning:</b> verify whether a project deadline falls on a working day.</li>
-                <li><b>Fun facts:</b> interesting trivia about days of the week for specific past dates.</li>
-            </ul>
-
-            <h2>How it's calculated</h2>
-            <p>
-                The calculator uses the standard Gregorian calendar — the same one used by most countries
-                worldwide today. The calculation accounts for all calendar quirks, including leap years,
-                so the result is always accurate.
-            </p>
-
-            <p class="m-hintSmall">
-                For dates before 1582 (when the Gregorian calendar was introduced), the result may differ
-                from historical records, since a different calendar was used at that time.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><b>Date Difference Calculator</b><span>How many days, weeks and months between dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/add-days-calculator"><b>Add Days to a Date</b><span>What date it will be in N days.</span></a>
+                <a class="cc-related-card" href="/en/education/julian-gregorian-calendar-converter"><b>Julian and Gregorian Calendar</b><span>Converting dates between old and new style.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How the weekday is found</h2>
+            <p>The calculator converts the date to a Julian day number (JDN), a continuous count of days, and takes the remainder after dividing by 7. For November 6, 2026 that is a <b>Friday</b>, the 310th day of 365 in the year. For July 20, 1969 the result is a <b>Sunday</b>. Besides the name of the day the calculator shows how many days remain or have passed from today, the week number under ISO 8601, the quarter, whether the year is a leap year and whether the day is a weekend or a weekday.</p>
+
+            <h2>The Julian calendar for historical dates</h2>
+            <p>Until 1582 Europe used the Julian calendar, and in Ukraine and Russia it stayed in force until 1918. If you enter an old date in the Gregorian calendar you get a nominal (proleptic) result. That is why you can choose the calendar: January 1, 1500 in the Julian calendar was a <b>Wednesday</b> and corresponds to January 10 in the Gregorian one, whereas in the Gregorian calendar it would be a Monday. The calculator also shows the same date in the other calendar, for example December 25, 1917 (Julian) is January 7, 1918 (Gregorian), and both are a Monday.</p>
+
+            <h2>The switch of 1582</h2>
+            <p>Weekdays did not shift at the switch between calendars: Thursday October 4, 1582 in the Julian calendar was followed by <b>Friday October 15</b> in the Gregorian one. That is why October 5–14, 1582 simply do not exist in the countries that moved to the new style then, and the calculator warns you about it. For dates before 1582 the Gregorian result is only nominal.</p>
+
+            <h2>Week number and day of the year</h2>
+            <p>The week number follows ISO 8601: a week starts on Monday and the first week of the year contains January 4. So January 1, 2026 is week 1 of 2026, December 31, 2026 is week 53 and December 30, 2024 already belongs to week 1 of 2025. The day of the year is shown with the year length: the 310th of 365 for November 6, 2026. The ISO week number is shown for Gregorian dates.</p>
+
+            <h2>The same date over the years</h2>
+            <p>The second tab shows which weekdays your date falls on over a range of up to 100 years: for birthdays, holidays and anniversaries. For example, August 24 from 2026 to 2035 falls on Monday, Tuesday, Thursday, Friday, Saturday, Sunday, Tuesday, Wednesday, Thursday and Friday. Below the table it counts how many times each weekday occurred. February 29 exists only in leap years, so for other years the calculator says there is no such date.</p>
+
+            <h2>Find the Nth weekday of a month</h2>
+            <p>The third tab finds a date by the rule “the Nth weekday of a month”: the third Sunday of May 2027 is <b>May 16</b>, the fourth Thursday of November 2026 is November 26, the last Monday of May 2026 is May 25. That is how movable holidays and event dates are worked out. You can also list all such days of the month at once. If a month has no fifth such day, the calculator tells you.</p>
+
+            <h2>Fridays the 13th</h2>
+            <p>The “Find a date” tab counts Fridays the 13th over a range of years. In 2026 there are three: in February, March and November. There are never more than three in a year. The calendar repeats every 400 years and over that period the 13th falls on a Friday 688 times, more often than on any other weekday.</p>
+
+            <h2>Limits</h2>
+            <p>Years from 1 to 9999 are allowed. For dates before the Gregorian calendar was introduced the result depends on when a country switched to the new style. Only Saturday and Sunday are treated as weekends: public holidays and transferred working days are not taken into account.</p>
+            <p class="ph-mini">For dates before 1582 choose the calendar that was used at the time. Saturday and Sunday count as weekends, with no public holidays.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How do I find the day of the week for a date in the distant past?</h3>
-                <p>The calculator uses the standard Gregorian calendar and correctly computes the day of the week for
-                    any date within that calendar's applicable range.</p>
+            <div class="cc-faq-item">
+                <h3>How do I find the weekday of a date?</h3>
+                <p>Enter the day, month and year: the calculator shows the weekday. For example, November 6, 2026 is a Friday.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I find the day of the week for a future date?</h3>
-                <p>Yes, the calculator is equally accurate for both past and future dates.</p>
+            <div class="cc-faq-item">
+                <h3>What weekday was my birthday?</h3>
+                <p>Enter your date of birth: the result shows the weekday and how many days have passed. The second tab shows which weekday your birthday falls on in the coming years.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why is this useful?</h3>
-                <p>It's often useful to know what day of the week an important future date falls on (wedding, meeting)
-                    or what day of the week a historical date was.</p>
+            <div class="cc-faq-item">
+                <h3>Does the calculator work for future dates?</h3>
+                <p>Yes, for any date up to the year 9999. It shows how many days until the date.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why choose the Julian calendar?</h3>
+                <p>For historical dates: until 1582 Europe used the Julian calendar, and Ukraine and Russia until 1918. January 1, 1500 was a Wednesday in it, but a Monday in the proleptic Gregorian calendar.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Do weekdays break at the switch between calendars?</h3>
+                <p>No. Thursday October 4, 1582 (Julian) was followed by Friday October 15 (Gregorian).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How is the week number counted?</h3>
+                <p>By ISO 8601: a week starts on Monday and the first week of the year contains January 4. January 1, 2026 is week 1, and December 30, 2024 is already week 1 of 2025.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does the day of the year mean?</h3>
+                <p>It is the ordinal number of the day in the year: November 6, 2026 is the 310th of 365, and a leap year has 366.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the third Sunday of May or the fourth Thursday of November?</h3>
+                <p>Open the “Find a date” tab, choose “The Nth weekday of a month” and give the year, month, number and weekday. The third Sunday of May 2027 is May 16.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many Fridays the 13th are there in a year?</h3>
+                <p>From one to three. In 2026 there are three: February 13, March 13 and November 13. Over 400 years there are 688.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is there no result for February 29 in some years?</h3>
+                <p>February 29 exists only in leap years: in a range the calculator skips the other years and shows how many there are.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are public holidays taken into account?</h3>
+                <p>No. Saturday and Sunday count as weekends, and the calculator does not know public holidays or transferred working days.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are the earliest and latest dates?</h3>
+                <p>Years from 1 to 9999, in the Gregorian or Julian calendar. For dates before 1582 the Gregorian result is nominal.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
