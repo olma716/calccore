@@ -428,32 +428,71 @@
     const btn = wrap.firstChild, list = wrap.lastChild, txt = btn.firstChild;
     wrap._btn = btn; wrap._list = list; wrap._sel = sel; wrap._sig = null;
     sel.classList.add("is-enh"); sel.after(wrap); unitLists.push(wrap);
-    const items = () => Array.from(list.querySelectorAll("li"));
+    const allItems = () => Array.from(list.querySelectorAll("li[data-v]"));
+    const items = () => Array.from(list.querySelectorAll("li[data-v]:not([hidden])"));
+    const searchEl = () => list.querySelector("input.ph__uselSearch");
+    const SEARCH_MIN = 12; // для довгих списків (понад 12 пунктів) зверху з'являється поле пошуку
+    const norm = (s) => String(s || "").toLowerCase().replace(/[’ʼ`]/g, "'").replace(/[_/]+/g, " ").trim();
     const sync = () => {
-      const opts = Array.from(sel.options), sig = opts.map((o) => o.value + "\u0001" + o.textContent).join("\u0002");
-      if (sig !== wrap._sig) { wrap._sig = sig; list.innerHTML = opts.map((o) => '<li role="option" tabindex="-1" data-v="' + esc(o.value) + '">' + esc(o.textContent) + "</li>").join(""); }
+      const opts = Array.from(sel.options), li = (o) => '<li role="option" tabindex="-1" data-v="' + esc(o.value) + '" data-s="' + esc(norm(o.textContent + " " + o.value)) + '">' + esc(o.textContent) + "</li>";
+      // optgroup показується заголовком групи (не вибирається)
+      const body = Array.from(sel.children).map((n) => (n.tagName === "OPTGROUP" ? '<li class="ph__uselGroup" role="presentation">' + esc(n.label) + "</li>" + Array.from(n.children).map(li).join("") : li(n))).join("");
+      const search = opts.length > SEARCH_MIN ? '<li class="ph__uselSearchRow" role="presentation"><input type="text" class="ph__uselSearch" autocomplete="off" spellcheck="false" placeholder="' + esc(L("Пошук…", "Search…")) + '" aria-label="' + esc(L("Пошук", "Search")) + '"></li>' : "";
+      const html = search + body + (search ? '<li class="ph__uselNone" role="presentation" hidden>' + esc(L("Нічого не знайдено", "Nothing found")) + "</li>" : "");
+      if (html !== wrap._sig) { wrap._sig = html; list.innerHTML = html; }
       const cur = sel.selectedIndex, label = cur >= 0 && opts[cur] ? opts[cur].textContent : "";
       if (txt.textContent !== label) txt.textContent = label;
-      items().forEach((li, i) => { const on = String(i === cur); if (li.getAttribute("aria-selected") !== on) li.setAttribute("aria-selected", on); });
+      allItems().forEach((li, i) => { const on = String(i === cur); if (li.getAttribute("aria-selected") !== on) li.setAttribute("aria-selected", on); });
       if (wrap.hidden !== sel.hidden) wrap.hidden = sel.hidden;
     };
+    // фільтр за введеним текстом: приховує невідповідні пункти й порожні групи
+    const filter = (q) => {
+      const query = norm(q); let any = false, grp = null, has = false;
+      const fin = () => { if (grp) grp.hidden = !has; };
+      Array.from(list.children).forEach((n) => {
+        if (n.classList.contains("ph__uselGroup")) { fin(); grp = n; has = false; }
+        else if (n.dataset && n.dataset.v !== undefined) { const m = !query || n.dataset.s.indexOf(query) >= 0; n.hidden = !m; if (m) { has = true; any = true; } }
+      });
+      fin();
+      const none = list.querySelector(".ph__uselNone"); if (none) none.hidden = any;
+    };
+    const setQuery = (q) => { const s = searchEl(); if (!s) return; s.value = q; filter(q); s.focus({ preventScroll: true }); try { s.setSelectionRange(q.length, q.length); } catch (e) { /* без курсора */ } };
     wrap._sync = sync;
     Object.defineProperty(sel, "value", { configurable: true, get() { return NATIVE_VAL.get.call(sel); }, set(v) { NATIVE_VAL.set.call(sel, v); sync(); } });
     const close = (f) => { list.hidden = true; btn.setAttribute("aria-expanded", "false"); if (f) btn.focus(); };
-    const open = () => { closeUnits(wrap); sync(); list.hidden = false; btn.setAttribute("aria-expanded", "true"); const all = items(); (all.find((li) => li.getAttribute("aria-selected") === "true") || all[0]).focus(); };
+    const open = () => {
+      closeUnits(wrap); sync(); filter(""); const s = searchEl(); if (s) s.value = "";
+      list.hidden = false; btn.setAttribute("aria-expanded", "true");
+      const all = items(), cur = all.find((li) => li.getAttribute("aria-selected") === "true") || all[0];
+      if (s) { if (cur) list.scrollTop = Math.max(0, cur.offsetTop - list.clientHeight / 2); s.focus({ preventScroll: true }); } else if (cur) cur.focus();
+    };
     const pick = (li) => { NATIVE_VAL.set.call(sel, li.dataset.v); sync(); close(true); sel.dispatchEvent(new Event("change", { bubbles: true })); };
+    const printable = (e) => e.key.length === 1 && e.key !== " " && !e.ctrlKey && !e.metaKey && !e.altKey;
     btn.addEventListener("click", (e) => { e.stopPropagation(); if (list.hidden) open(); else close(); });
-    btn.addEventListener("keydown", (e) => { if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); open(); } });
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); open(); }
+      else if (printable(e) && wrap._sig && wrap._sig.indexOf("ph__uselSearch") >= 0) { e.preventDefault(); open(); setQuery(e.key); }
+    });
     list.addEventListener("click", (e) => { const li = e.target.closest("li[data-v]"); if (li) pick(li); });
+    list.addEventListener("input", (e) => { if (e.target.classList && e.target.classList.contains("ph__uselSearch")) { filter(e.target.value); list.scrollTop = 0; } });
     list.addEventListener("keydown", (e) => {
-      const all = items(), i = all.indexOf(document.activeElement);
-      if (e.key === "ArrowDown") { e.preventDefault(); all[Math.min(all.length - 1, i + 1)].focus(); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); all[Math.max(0, i - 1)].focus(); }
-      else if (e.key === "Home") { e.preventDefault(); all[0].focus(); }
-      else if (e.key === "End") { e.preventDefault(); all[all.length - 1].focus(); }
+      const all = items(), s = searchEl(), inSearch = !!s && document.activeElement === s, i = all.indexOf(document.activeElement);
+      if (inSearch) {
+        if (e.key === "ArrowDown") { e.preventDefault(); if (all[0]) all[0].focus(); }
+        else if (e.key === "Enter") { e.preventDefault(); if (all[0]) pick(all[0]); }
+        else if (e.key === "Escape") { e.preventDefault(); close(true); }
+        else if (e.key === "Tab") close();
+        return;
+      }
+      if (e.key === "ArrowDown") { e.preventDefault(); if (all.length) all[Math.min(all.length - 1, i + 1)].focus(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); if (i <= 0 && s) s.focus({ preventScroll: true }); else if (all.length) all[Math.max(0, i - 1)].focus(); }
+      else if (e.key === "Home") { e.preventDefault(); if (all.length) all[0].focus(); }
+      else if (e.key === "End") { e.preventDefault(); if (all.length) all[all.length - 1].focus(); }
       else if ((e.key === "Enter" || e.key === " ") && i >= 0) { e.preventDefault(); pick(all[i]); }
       else if (e.key === "Escape") { e.preventDefault(); close(true); }
       else if (e.key === "Tab") close();
+      else if (s && printable(e)) { e.preventDefault(); setQuery(s.value + e.key); list.scrollTop = 0; }
+      else if (s && e.key === "Backspace") { e.preventDefault(); setQuery(s.value.slice(0, -1)); }
     });
     sync();
   }

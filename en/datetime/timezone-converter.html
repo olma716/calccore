@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Time Zone Converter Online — What Time Is It There | CalcCore</title>
+    <title>Time Zone Converter and Meeting Time Planner | CalcCore</title>
     <meta name="description"
-        content="Find out what time it is in any city around the world. Convert time between time zones for calls, meetings, and travel planning." />
+        content="Convert time between time zones with daylight saving and find a common working window for a meeting in several cities. Over 500 cities, with offsets." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/timezone-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/timezone-converter" />
@@ -26,208 +28,430 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Time Zone Converter Online — What Time Is It There" />
-    <meta property="og:description" content="Find out what time it is in any city around the world. Convert time between time zones for calls, meetings, and travel planning." />
+    <meta property="og:title" content="Time Zone Converter and Meeting Time Planner" />
+    <meta property="og:description" content="Convert time between time zones with daylight saving and find a common working window for a meeting in several cities. Over 500 cities, with offsets." />
     <meta property="og:url" content="https://calccore.net/en/datetime/timezone-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Time Zone Converter Online — What Time Is It There" />
-    <meta name="twitter:description" content="Find out what time it is in any city around the world. Convert time between time zones for calls, meetings, and travel planning." />
+    <meta name="twitter:title" content="Time Zone Converter and Meeting Time Planner" />
+    <meta name="twitter:description" content="Convert time between time zones with daylight saving and find a common working window for a meeting in several cities. Over 500 cities, with offsets." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106tz1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106tz1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/timezone-converter.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Does it account for daylight saving time?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, the converter uses your browser's current time zone data, which automatically accounts for daylight saving transitions where applicable."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why do some countries have time offsets that aren't a full hour?",
-        "acceptedAnswer":{"@type":"Answer","text":"Some countries (India, Iran, parts of Australia) use 30 or 45-minute offsets from UTC instead of a whole hour."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I find the time difference for a call?",
-        "acceptedAnswer":{"@type":"Answer","text":"Select your time zone and the other person's time zone — the calculator will immediately show the corresponding time in both places."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106tz1" defer></script>
+    <script src="/js/phys-core.js?v=20261106tz1" defer></script>
+    <script src="/js/datepick.js?v=20261106tz1" defer></script>
+    <script src="/js/ag-data.js?v=20261106tz1" defer></script>
+    <script src="/js/ct-data.js?v=20261106tz1" defer></script>
+    <script src="/js/tz-data.js?v=20261106tz1" defer></script>
+    <script src="/js/tz-calc.js?v=20261106tz1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/timezone-converter#app",
-    "name":"Time Zone Converter",
-    "description":"Convert time between time zones for planning calls and travel.",
-    "url":"https://calccore.net/en/datetime/timezone-converter",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/timezone-converter#app",
+  "name": "Time Zone Converter",
+  "description": "An online time zone converter: converts time between more than 500 cities with daylight saving time, offsets for the chosen date, a next or previous day marker, warnings about times that do not exist or happen twice when clocks change, and a meeting planner that finds a common working window for several cities.",
+  "url": "https://calccore.net/en/datetime/timezone-converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "More than 500 cities and zones",
+    "Offsets for the chosen date with daylight saving",
+    "A next or previous day marker",
+    "Warnings about times that do not exist or repeat",
+    "A common working window for a meeting in several cities",
+    "A link with all the settings"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/timezone-converter#webpage",
+      "url": "https://calccore.net/en/datetime/timezone-converter",
+      "name": "Time Zone Converter and Meeting Time Planner | CalcCore",
+      "description": "Convert time between time zones with daylight saving and find a common working window for a meeting in several cities. Over 500 cities, with offsets.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/timezone-converter#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/timezone-converter#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/timezone-converter#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Time zone converter",
+          "item": "https://calccore.net/en/datetime/timezone-converter"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/timezone-converter#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert time from one time zone to another?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the date, the time and the zone where it is given, plus the target zone: the calculator shows the time there and the weekday. 18:00 in Kyiv on 11/06/2026 is 11:00 in New York."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is daylight saving time taken into account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The offset of each zone is taken for the chosen date from the browser's time zone database, so the difference can change during the year."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the difference between Kyiv and New York sometimes 6 hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The US moves to summer time a few weeks before Ukraine. Between those dates (March 8 to 29 in 2026) the difference is 6 hours instead of 7."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does “next day” mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the second city the next date has already arrived, for example 23:00 in Kyiv is 06:00 the next day in Tokyo. There is also a “previous day” marker."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the time I entered does not exist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When daylight saving time starts an hour disappears: the calculator warns you and shows the result for the shifted time, for example 03:30 in Kyiv on 03/29/2026 becomes 04:30."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a time happens twice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When daylight saving time ends an hour occurs twice. The calculator shows the first, daylight saving, occurrence and tells you what the second would be."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the difference in India not a whole hour?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "India uses UTC+5:30 and Nepal UTC+5:45. The calculator accounts for such offsets: 12:00 in Kyiv is 15:30 in Delhi."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a time for a meeting in several cities?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Meeting in several cities” tab, give the date, your zone and the participants' cities: the calculator finds a common window of working hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change the working hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the “Working hours from” and “until” fields set your own range; the default is 09:00–18:00."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if there is no common window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator shows the best match: how many cities are in working hours and who is outside them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does the calculator get zone rules?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From your browser's time zone database (IANA). For important flights and events check the time in the official schedule."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my own time zone in the list?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kyiv is in the list, and by default the calculator uses your device's zone if it is among the more than 500 cities."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ctz">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Time Zone Converter</h1>
-                    <p class="mcalc__p">
-                        Find out what time it is in another city around the world — handy for calls,
-                        meetings, and travel planning.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Time Zone Converter</h1>
+                    <p class="ph__p">Choose a date, a time and two time zones: the calculator shows what time it is in the other city, with daylight saving and a day marker. A separate tab finds a common working window for a meeting in several cities.</p>
                 </div>
 
-                <div class="mcalc__grid">
-
-                    <div class="m-topline">
-                        <label class="m-autocalc">
-                            <input id="autoCalc" type="checkbox" checked />
-                            <span>Auto-calc</span>
-                        </label>
-                    </div>
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter inputs</h2>
-                            <span class="mcalc__badge">Date/Time</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="conv" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Converter</b><span class="ph__ex">Time in another zone</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="meet" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">Meeting in several cities</b><span class="ph__ex">A window for a meeting</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateInput">Date</label>
-                                <input class="mcalc__input" id="dateInput" type="date" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="timeInput">Time</label>
-                                <input class="mcalc__input" id="timeInput" type="time" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="fromZone">From time zone</label>
-                                <select id="fromZone" class="mcalc__select"></select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="toZone">To time zone</label>
-                                <select id="toZone" class="mcalc__select"></select>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnNow" type="button">Now</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Select time zones to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/datetime/countdown-timer">Countdown Timer</a>
-                            <a href="/en/datetime/age-calculator">Age Calculator</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why you need a time zone converter</h2>
-            <p>
-                When communicating with people in other countries, planning online meetings, or
-                traveling, it's easy to make mistakes calculating time manually. The converter instantly
-                shows the corresponding time in any time zone worldwide.
-            </p>
-
-            <h2>Time zone characteristics</h2>
-            <ul>
-                <li><b>UTC offset:</b> every time zone is defined by an offset relative to UTC (Coordinated Universal
-                    Time).</li>
-                <li><b>Daylight saving time:</b> some countries change their clocks twice a year, temporarily shifting
-                    the offset by one hour.</li>
-                <li><b>Non-whole offsets:</b> some regions (India +5:30, Nepal +5:45) use 30 or 45-minute offsets.</li>
-                <li><b>Date may differ:</b> with a large time difference, the date in another zone may be a different
-                    day.</li>
-            </ul>
-
-            <h2>Practical uses</h2>
-            <p>
-                A time zone converter is useful for planning international video calls, coordinating
-                distributed team work, booking flights with layovers, and figuring out the best time to
-                call family or friends abroad.
-            </p>
-
-            <p class="m-hintSmall">
-                The calculation is based on your browser's time zone data, which automatically accounts
-                for daylight saving transition rules for each region.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/countdown-timer"><b>Countdown Timer</b><span>A countdown to an event with time zones.</span></a>
+                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><b>Date Difference Calculator</b><span>How many days, weeks and months between dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/age-calculator"><b>Age Calculator</b><span>Exact age, birthdays and round dates.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How the converter works</h2>
+            <p>Choose a date, a time and the zone in which that time is given, plus the zone to convert to. The calculator shows the time in the second city, the weekday, the date with a “same / next / previous day” marker and the difference in hours. For example, <b>18:00 in Kyiv on November 6, 2026 is 11:00 in New York</b>, a difference of 7 hours. The “Now” button fills in the current time in your zone and “Swap” reverses the direction.</p>
+
+            <h2>Daylight saving time</h2>
+            <p>The difference between cities changes during the year because countries switch clocks on different days. The calculator shows the offset of each zone for the chosen date, not for today. For example, Kyiv and New York are usually 7 hours apart, but on March 15, 2026 it is only <b>6 hours</b>: the US has already moved to summer time (March 8) and Ukraine has not yet (March 29). So 18:00 in Kyiv is then 12:00 in New York.</p>
+
+            <h2>Times that do not exist and times that repeat</h2>
+            <p>When daylight saving time starts, an hour disappears: on March 29, 2026 in Kyiv the clocks go from 03:00 to 04:00 and 03:30 does not exist. The calculator warns you and shows the result for the shifted time. When it ends an hour repeats: on October 25, 2026, 03:30 in Kyiv happens twice. Then the first, daylight saving, occurrence is shown and the second one is described. The same applies to New York on March 8 and November 1.</p>
+
+            <h2>Non-whole offsets</h2>
+            <p>Not every zone differs by a whole hour. India uses <b>UTC+5:30</b>, Nepal UTC+5:45 and part of Australia also half an hour. The calculator takes such offsets into account and shows them in the result, for example 12:00 in Kyiv is 15:30 in Delhi.</p>
+
+            <h2>Big cities by country</h2>
+            <p>Besides capitals and zones, the list includes large cities of the USA, the United Kingdom, France, Spain, Germany, Italy, Brazil and Argentina: Houston, Manchester, Marseille, Barcelona, Munich, Milan, Rio de Janeiro, Rosario and many more. The country is shown next to the name. All cities of one country in one zone show the same time (for example all of London, Manchester and Edinburgh), but they are easier to find by name. The USA and Brazil have several zones, so Houston is on Central time and Seattle on Pacific time.</p>
+
+            <h2>A meeting in several cities</h2>
+            <p>The “Meeting in several cities” tab looks for a time that suits everyone. Enter the date, your zone, up to five participant cities and the working hours (09:00–18:00 by default). The calculator checks the day in 15-minute steps and shows the common window and its start and end in every city. For Kyiv, London and New York on November 6, 2026 that is <b>16:00–18:00 in Kyiv</b>, i.e. 14:00–16:00 in London and 09:00–11:00 in New York. For Kyiv and Tokyo the window is shorter: from 09:00 to 11:00 in Kyiv.</p>
+
+            <h2>If there is no common window</h2>
+            <p>When there are no hours that suit everyone, the calculator shows the best match: in how many cities it is working time for the longest stretch, and who is outside it. If you also give a meeting time, a table below the result shows what time it is in each city, the offset and the state: working, off hours or night.</p>
+
+            <h2>Limits</h2>
+            <p>The calculator takes time zone and daylight saving rules from your browser's database (IANA), so for far future dates they may change if countries change their rules. Dates from 1970 to 2100 are allowed. For flights, tickets and legally significant events also check the time in the official schedule.</p>
+            <p class="ph-mini">Zone rules and daylight saving come from your browser's database (IANA). For important flights and events also check the time in the official schedule.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Does it account for daylight saving time?</h3>
-                <p>Yes, the converter uses your browser's current time zone data, which automatically accounts for
-                    daylight saving transitions where applicable.</p>
+            <div class="cc-faq-item">
+                <h3>How do I convert time from one time zone to another?</h3>
+                <p>Enter the date, the time and the zone where it is given, plus the target zone: the calculator shows the time there and the weekday. 18:00 in Kyiv on 11/06/2026 is 11:00 in New York.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why do some countries have time offsets that aren't a full hour?</h3>
-                <p>Some countries (India, Iran, parts of Australia) use 30 or 45-minute offsets from UTC instead of a
-                    whole hour.</p>
+            <div class="cc-faq-item">
+                <h3>Is daylight saving time taken into account?</h3>
+                <p>Yes. The offset of each zone is taken for the chosen date from the browser's time zone database, so the difference can change during the year.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I find the time difference for a call?</h3>
-                <p>Select your time zone and the other person's time zone — the calculator will immediately show the
-                    corresponding time in both places.</p>
+            <div class="cc-faq-item">
+                <h3>Why is the difference between Kyiv and New York sometimes 6 hours?</h3>
+                <p>The US moves to summer time a few weeks before Ukraine. Between those dates (March 8 to 29 in 2026) the difference is 6 hours instead of 7.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does “next day” mean?</h3>
+                <p>In the second city the next date has already arrived, for example 23:00 in Kyiv is 06:00 the next day in Tokyo. There is also a “previous day” marker.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if the time I entered does not exist?</h3>
+                <p>When daylight saving time starts an hour disappears: the calculator warns you and shows the result for the shifted time, for example 03:30 in Kyiv on 03/29/2026 becomes 04:30.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if a time happens twice?</h3>
+                <p>When daylight saving time ends an hour occurs twice. The calculator shows the first, daylight saving, occurrence and tells you what the second would be.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why is the difference in India not a whole hour?</h3>
+                <p>India uses UTC+5:30 and Nepal UTC+5:45. The calculator accounts for such offsets: 12:00 in Kyiv is 15:30 in Delhi.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find a time for a meeting in several cities?</h3>
+                <p>Open the “Meeting in several cities” tab, give the date, your zone and the participants' cities: the calculator finds a common window of working hours.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I change the working hours?</h3>
+                <p>Yes, the “Working hours from” and “until” fields set your own range; the default is 09:00–18:00.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if there is no common window?</h3>
+                <p>The calculator shows the best match: how many cities are in working hours and who is outside them.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where does the calculator get zone rules?</h3>
+                <p>From your browser's time zone database (IANA). For important flights and events check the time in the official schedule.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is my own time zone in the list?</h3>
+                <p>Kyiv is in the list, and by default the calculator uses your device's zone if it is among the more than 500 cities.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
