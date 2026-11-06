@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Moon Phase Calculator Online — Calendar by Date | CalcCore</title>
+    <title>Moon Phases: Phase on a Date, Calendar and Exact Times | CalcCore</title>
     <meta name="description"
-        content="Find the moon phase for any date: new moon, first quarter, full moon, last quarter, and in-between phases. Illumination percentage." />
+        content="Find the Moon phase on any date, its age and illumination, a calendar of phases for a month and the exact moments of the New Moon, quarters and Full Moon." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/moon-phase-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/moon-phase-calculator" />
@@ -26,203 +28,431 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Moon Phase Calculator Online — Calendar by Date" />
-    <meta property="og:description" content="Find the moon phase for any date: new moon, first quarter, full moon, last quarter, and in-between phases. Illumination percentage." />
+    <meta property="og:title" content="Moon Phases: Phase on a Date, Calendar and Exact Times" />
+    <meta property="og:description" content="Find the Moon phase on any date, its age and illumination, a calendar of phases for a month and the exact moments of the New Moon, quarters and Full Moon." />
     <meta property="og:url" content="https://calccore.net/en/datetime/moon-phase-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Moon Phase Calculator Online — Calendar by Date" />
-    <meta name="twitter:description" content="Find the moon phase for any date: new moon, first quarter, full moon, last quarter, and in-between phases. Illumination percentage." />
+    <meta name="twitter:title" content="Moon Phases: Phase on a Date, Calendar and Exact Times" />
+    <meta name="twitter:description" content="Find the Moon phase on any date, its age and illumination, a calendar of phases for a month and the exact moments of the New Moon, quarters and Full Moon." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/moon-phase-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106mp1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106mp1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/moon-phase-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How long is a lunar cycle?",
-        "acceptedAnswer":{"@type":"Answer","text":"A synodic month (a full cycle of moon phases) lasts approximately 29.53 days."}
-      },
-      {
-        "@type":"Question",
-        "name":"How many moon phases are there?",
-        "acceptedAnswer":{"@type":"Answer","text":"There are 8 main phases: new moon, waxing crescent, first quarter, waxing gibbous, full moon, waning gibbous, last quarter, waning crescent."}
-      },
-      {
-        "@type":"Question",
-        "name":"How accurate is this calculation?",
-        "acceptedAnswer":{"@type":"Answer","text":"The calculation is based on the average synodic month length and provides accuracy within about ±1 day for most practical purposes."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106mp1" defer></script>
+    <script src="/js/phys-core.js?v=20261106mp1" defer></script>
+    <script src="/js/datepick.js?v=20261106mp1" defer></script>
+    <script src="/js/ag-data.js?v=20261106mp1" defer></script>
+    <script src="/js/ct-data.js?v=20261106mp1" defer></script>
+    <script src="/js/mp-data.js?v=20261106mp1" defer></script>
+    <script src="/js/mp-calc.js?v=20261106mp1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/moon-phase-calculator#app",
-    "name":"Moon Phase Calculator",
-    "description":"Calculate the moon phase for any date with illumination percentage.",
-    "url":"https://calccore.net/en/datetime/moon-phase-calculator",
-    "applicationCategory":"LifestyleApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/moon-phase-calculator#app",
+  "name": "Moon Phase Calculator",
+  "description": "An online Moon phase calculator based on astronomical formulas: the phase on any date with a picture of the Moon for the northern and southern hemispheres, illumination and age, the exact moments of the nearest New Moon, quarters and Full Moon, a calendar of phases for a month and all the main phases of a year with a Blue Moon mark. Years from 1900 to 2100.",
+  "url": "https://calccore.net/en/datetime/moon-phase-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "The Moon phase on a date and time with a picture for both hemispheres",
+    "Illumination, the age of the Moon and the Moon–Sun angle",
+    "The exact moments of the New Moon, quarters and Full Moon",
+    "A calendar of phases for a month with the illumination of each day",
+    "All the main phases of a year and a Blue Moon mark",
+    "Moments in UTC"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/moon-phase-calculator#webpage",
+      "url": "https://calccore.net/en/datetime/moon-phase-calculator",
+      "name": "Moon Phases: Phase on a Date, Calendar and Exact Times | CalcCore",
+      "description": "Find the Moon phase on any date, its age and illumination, a calendar of phases for a month and the exact moments of the New Moon, quarters and Full Moon.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/moon-phase-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/moon-phase-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/moon-phase-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Moon phases",
+          "item": "https://calccore.net/en/datetime/moon-phase-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/moon-phase-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is today's Moon phase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Phase on a date” tab: today's date is set by default and the calculator shows the phase, the illumination and the age of the Moon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the lunar cycle last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The mean length of the synodic month is 29.53 days, and the real one varies from 29.27 to 29.83 days. From one main phase to the next there are 6.6 to 8.2 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the illumination of the Moon determined?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By the angle between the Moon and the Sun: the illumination equals (1 − cos angle) / 2. It is near zero at the New Moon, 50% at the quarters and 100% at the Full Moon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the age of the Moon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the time since the previous New Moon. The Full Moon arrives at about 14 to 15 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find the exact moment of a Full Moon or New Moon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator shows the nearest New Moon, First Quarter, Full Moon and Last Quarter with the exact time in UTC, and the “Phases for a year” tab collects them for the whole year."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a Blue Moon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The second Full Moon in a calendar month. It is only a name, the Moon does not change color. In 2026 there is one in May: May 1 and 31."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many Full Moons are there in a year?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually 12 and sometimes 13. In 2026 there are 13."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the Moon look different in the two hemispheres?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the northern hemisphere a waxing Moon is lit on the right, in the southern one on the left. The hemisphere choice mirrors the picture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do the phases differ from an average calculation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An average cycle gives an error of up to half a day, while the calculator works out the real moments with astronomical formulas to within a few minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator account for the time zone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The moments and the input time are in UTC. The phase on a date is taken at noon UTC, and if you give a time, at that time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator give planting or haircut advice by the Moon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: such traditions have no scientific support. The calculator only shows astronomical data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which years does the calculator support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From 1900 to 2100. It does not calculate moonrise and moonset or a “supermoon”."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cmoon">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Moon Phase by Date</h1>
-                    <p class="mcalc__p">
-                        Find out what moon phase was or will be on any date — past or future.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Moon Phases by Date</h1>
+                    <p class="ph__p">Enter a date (and a time if you like): the calculator shows the Moon phase with a picture, the illumination, the age and the exact moments of the nearest New Moon, quarters and Full Moon. The other tabs give a calendar of phases for a month and all the main phases of a year.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter a date</h2>
-                        <span class="mcalc__badge">Date/Time</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="moonDate">Date</label>
-                            <input class="mcalc__input" id="moonDate" type="date" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Calculate</button>
-                                <button class="mcalc__btn" id="btnToday" type="button">Today</button>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="day" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Phase on a date</b><span class="ph__ex">Phase on a date</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="month" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Calendar for a month</b><span class="ph__ex">Calendar for a month</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="year" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Phases for a year</b><span class="ph__ex">All phases of a year</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="moon-result" id="moonResult" style="display:none;">
-                        <div class="moon-emoji" id="moonEmoji">🌕</div>
-                        <div class="moon-name" id="moonName"></div>
-                        <div class="moon-illumination" id="moonIllumination"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/datetime/zodiac-calculator">Zodiac Sign Calculator</a>
-                    <a href="/en/datetime/age-calculator">Age Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What are moon phases</h2>
-            <p>
-                Moon phases are the changing appearance of the illuminated portion of the Moon as seen
-                from Earth, depending on the relative positions of the Sun, Earth, and Moon. A full
-                cycle — from one new moon to the next — is called a <b>synodic month</b> and lasts
-                approximately <b>29.53 days</b>.
-            </p>
-        
-            <h2>Why the Moon changes appearance</h2>
-            <p>
-                The Moon doesn't emit its own light — we only see the portion of its surface that's
-                illuminated by the Sun and facing Earth. As the Moon orbits Earth, the angle between the
-                Sun, Moon, and Earth changes, which changes the visible illuminated fraction of the
-                lunar disk.
-            </p>
-        
-            <h2>The 8 main moon phases</h2>
-            <ul>
-                <li><b>🌑 New Moon</b> — the Moon isn't visible, its illuminated side faces away from Earth.</li>
-                <li><b>🌒 Waxing Crescent</b> — a thin sliver of light appears on the right side (Northern Hemisphere).</li>
-                <li><b>🌓 First Quarter</b> — exactly half the disk is illuminated.</li>
-                <li><b>🌔 Waxing Gibbous</b> — more than half illuminated, approaching full.</li>
-                <li><b>🌕 Full Moon</b> — the entire disk is fully illuminated.</li>
-                <li><b>🌖 Waning Gibbous</b> — the illuminated portion begins to shrink.</li>
-                <li><b>🌗 Last Quarter</b> — half the disk illuminated again, on the opposite side.</li>
-                <li><b>🌘 Waning Crescent</b> — a thin sliver before the next new moon.</li>
-            </ul>
-        
-            <h2>The Moon's influence on Earth</h2>
-            <p>
-                The Moon is responsible for ocean tides through gravitational pull. The strongest tides
-                (spring tides) occur during new moon and full moon, when the Sun, Earth, and Moon align
-                in a straight line and their gravitational forces combine.
-            </p>
-        
-            <h2>Why knowing the moon phase matters</h2>
-            <ul>
-                <li><b>Astronomical observation:</b> full moon is worse for stargazing due to bright light; new moon is best.
-                </li>
-                <li><b>Gardening:</b> some gardening traditions follow lunar calendars for planting.</li>
-                <li><b>Fishing and hunting:</b> some animal activity patterns are linked to moon phases.</li>
-                <li><b>Cultural and religious holidays:</b> many calendars (Islamic, Jewish) are based on lunar cycles.</li>
-                <li><b>Photography:</b> landscape photographers often plan shoots around the full moon for natural night
-                    lighting.</li>
-            </ul>
-        
-            <h2>Lunar calendars across cultures</h2>
-            <p>
-                The Islamic calendar is entirely based on lunar cycles, so religious holidays (like
-                Ramadan) shift each year relative to the Gregorian calendar. The Jewish calendar is
-                lunisolar, combining lunar months with the solar year by adding leap months. Chinese
-                New Year is also determined by the lunar calendar and falls on the second new moon
-                after the winter solstice.
-            </p>
-        
-            <p class="m-hintSmall">
-                The calculation is based on the average synodic month length relative to a known new
-                moon and provides accuracy within about ±1 day — sufficient for most practical and
-                entertainment purposes.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/zodiac-calculator"><b>Zodiac Sign Calculator</b><span>Western and Chinese sign by date.</span></a>
+                <a class="cc-related-card" href="/en/datetime/day-of-week-calculator"><b>Day of the Week for a Date</b><span>Which weekday a date was or will be.</span></a>
+                <a class="cc-related-card" href="/en/datetime/age-calculator"><b>Age Calculator</b><span>Exact age, birthdays and round dates.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator shows</h2>
+            <p>The calculator finds the <b>Moon phase</b> on any date from 1900 to 2100: the name of the phase, the illumination, the age of the Moon (how many days have passed since the New Moon) and the angle between the Moon and the Sun. It draws the Moon with the correct terminator and shows the <b>exact moments</b> of the nearest New Moon, First Quarter, Full Moon and Last Quarter in UTC. For example, the Full Moon of January 25, 2024 happened at 17:54 UTC.</p>
+
+            <h2>Exact moments, not an average cycle</h2>
+            <p>The Moon completes a cycle from New Moon to New Moon in <b>29.53 days</b> on average, but the real cycle varies from 29.27 to 29.83 days, so a calculation with the average gives an error of up to half a day. The calculator works out the real moments of the phases with astronomical formulas and takes the phase on a date from the true position of the Moon and the Sun. The main phases are accurate to within a few minutes and the illumination to about ±0.5%.</p>
+
+            <h2>Illumination and the age of the Moon</h2>
+            <p>The illumination depends on the angle between the Moon and the Sun: it equals (1 − cos angle) / 2. At the New Moon the angle is 0° and the illumination is near zero, at the First Quarter it is 90° and 50%, at the Full Moon 180° and 100%, at the Last Quarter 270° and again 50%. The age of the Moon is the time since the previous New Moon. For example, on January 25, 2024 at 19:00 UTC the Moon is 14.3 days old and the angle is 180.5° (a Full Moon). On November 6, 2026 at midday only 8% is lit, a Waning Crescent, and the next Full Moon arrives on November 24.</p>
+
+            <h2>Eight phases</h2>
+            <p>There are four main phases: New Moon, First Quarter, Full Moon and Last Quarter. Between them the phase is named by the angle: Waxing Crescent and Waxing Gibbous before the Full Moon, Waning Gibbous and Waning Crescent after it. “Quarter” means a quarter of the cycle, while half of the disc is lit. Between two neighbouring main phases there are 6.6 to 8.2 days. The day on which the exact moment of a main phase falls is marked with that phase.</p>
+
+            <h2>The northern and southern hemispheres</h2>
+            <p>In the northern hemisphere a waxing Moon is lit on the right and a waning one on the left. In the southern hemisphere, for example in Australia or Brazil, everything is mirrored. That is why the calculator has a hemisphere choice: the picture and the emoji change accordingly, while the moments of the phases are the same for everyone.</p>
+
+            <h2>The calendar for a month and the phases for a year</h2>
+            <p>The “Calendar for a month” tab shows for each day the phase and the illumination at midday and marks the main phases with their exact time. The “Phases for a year” tab collects all the New Moons, quarters and Full Moons of the year by month. In 2026 there are 13 Full Moons, and in May there are two: May 1 and 31. The second Full Moon in a calendar month is called a “Blue Moon”: it is only a name, the Moon does not change color.</p>
+
+            <h2>The Moon and the Earth</h2>
+            <p>The Moon causes tides in the oceans. The strongest, spring tides, occur near the New Moon and Full Moon, when the Sun, Earth and Moon are almost in a line. For observing faint objects the best time is near the New Moon, while a Full Moon lights up the sky. Folk traditions (planting, fishing, haircuts) based on the lunar calendar have no scientific support, so the calculator gives no such advice.</p>
+
+            <h2>Limits</h2>
+            <p>Dates from 1900 to 2100 are allowed. The Moon picture is schematic: a diagram of the phase, not a photograph. The calculator does not show moonrise and moonset or the distance of the Moon (that needs the place of observation), and it does not tell a “supermoon”.</p>
+            <p class="ph-mini">The moments of the phases are calculated with astronomical formulas to within a few minutes. The Moon picture is schematic. Folk traditions about the Moon have no scientific support.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How long is a lunar cycle?</h3>
-                <p>A synodic month (a full cycle of moon phases) lasts approximately 29.53 days.</p>
+            <div class="cc-faq-item">
+                <h3>What is today's Moon phase?</h3>
+                <p>Open the “Phase on a date” tab: today's date is set by default and the calculator shows the phase, the illumination and the age of the Moon.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How many moon phases are there?</h3>
-                <p>There are 8 main phases: new moon, waxing crescent, first quarter, waxing gibbous, full moon, waning
-                    gibbous, last quarter, waning crescent.</p>
+            <div class="cc-faq-item">
+                <h3>How long does the lunar cycle last?</h3>
+                <p>The mean length of the synodic month is 29.53 days, and the real one varies from 29.27 to 29.83 days. From one main phase to the next there are 6.6 to 8.2 days.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How accurate is this calculation?</h3>
-                <p>The calculation is based on the average synodic month length and provides accuracy within about ±1
-                    day for most practical purposes.</p>
+            <div class="cc-faq-item">
+                <h3>How is the illumination of the Moon determined?</h3>
+                <p>By the angle between the Moon and the Sun: the illumination equals (1 − cos angle) / 2. It is near zero at the New Moon, 50% at the quarters and 100% at the Full Moon.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the age of the Moon?</h3>
+                <p>It is the time since the previous New Moon. The Full Moon arrives at about 14 to 15 days.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find the exact moment of a Full Moon or New Moon?</h3>
+                <p>The calculator shows the nearest New Moon, First Quarter, Full Moon and Last Quarter with the exact time in UTC, and the “Phases for a year” tab collects them for the whole year.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is a Blue Moon?</h3>
+                <p>The second Full Moon in a calendar month. It is only a name, the Moon does not change color. In 2026 there is one in May: May 1 and 31.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many Full Moons are there in a year?</h3>
+                <p>Usually 12 and sometimes 13. In 2026 there are 13.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does the Moon look different in the two hemispheres?</h3>
+                <p>In the northern hemisphere a waxing Moon is lit on the right, in the southern one on the left. The hemisphere choice mirrors the picture.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do the phases differ from an average calculation?</h3>
+                <p>An average cycle gives an error of up to half a day, while the calculator works out the real moments with astronomical formulas to within a few minutes.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator account for the time zone?</h3>
+                <p>The moments and the input time are in UTC. The phase on a date is taken at noon UTC, and if you give a time, at that time.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator give planting or haircut advice by the Moon?</h3>
+                <p>No: such traditions have no scientific support. The calculator only shows astronomical data.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which years does the calculator support?</h3>
+                <p>From 1900 to 2100. It does not calculate moonrise and moonset or a “supermoon”.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

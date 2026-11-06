@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Фази Місяця онлайн — календар за датою | CalcCore</title>
+    <title>Фази Місяця: фаза на дату, календар і точні моменти | CalcCore</title>
     <meta name="description"
-        content="Дізнайся фазу Місяця на будь-яку дату: молодик, перша чверть, повний місяць, остання чверть та проміжні фази. Відсоток освітленості." />
+        content="Дізнайтеся фазу Місяця на будь-яку дату, його вік і освітленість, календар фаз на місяць і точні моменти молодика, чвертей і повного місяця за рік." />
 
     <link rel="canonical" href="https://calccore.net/datetime/moon-phase-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/moon-phase-calculator" />
@@ -26,204 +28,431 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Фази Місяця онлайн — календар за датою" />
-    <meta property="og:description" content="Дізнайся фазу Місяця на будь-яку дату: молодик, перша чверть, повний місяць, остання чверть та проміжні фази. Відсоток освітленості." />
+    <meta property="og:title" content="Фази Місяця: фаза на дату, календар і точні моменти" />
+    <meta property="og:description" content="Дізнайтеся фазу Місяця на будь-яку дату, його вік і освітленість, календар фаз на місяць і точні моменти молодика, чвертей і повного місяця за рік." />
     <meta property="og:url" content="https://calccore.net/datetime/moon-phase-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Фази Місяця онлайн — календар за датою" />
-    <meta name="twitter:description" content="Дізнайся фазу Місяця на будь-яку дату: молодик, перша чверть, повний місяць, остання чверть та проміжні фази. Відсоток освітленості." />
+    <meta name="twitter:title" content="Фази Місяця: фаза на дату, календар і точні моменти" />
+    <meta name="twitter:description" content="Дізнайтеся фазу Місяця на будь-яку дату, його вік і освітленість, календар фаз на місяць і точні моменти молодика, чвертей і повного місяця за рік." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/moon-phase-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106mp1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106mp1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/moon-phase-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Скільки триває місячний цикл?",
-        "acceptedAnswer":{"@type":"Answer","text":"Синодичний місяць (повний цикл фаз Місяця) триває приблизно 29.53 доби."}
-      },
-      {
-        "@type":"Question",
-        "name":"Скільки всього фаз Місяця?",
-        "acceptedAnswer":{"@type":"Answer","text":"Виділяють 8 основних фаз: молодик, зростаючий серп, перша чверть, зростаючий випуклий, повний місяць, спадаючий випуклий, остання чверть, спадаючий серп."}
-      },
-      {
-        "@type":"Question",
-        "name":"Наскільки точний цей розрахунок?",
-        "acceptedAnswer":{"@type":"Answer","text":"Розрахунок базується на середній тривалості синодичного місяця і дає точність в межах приблизно ±1 дня для більшості практичних цілей."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106mp1" defer></script>
+    <script src="/js/phys-core.js?v=20261106mp1" defer></script>
+    <script src="/js/datepick.js?v=20261106mp1" defer></script>
+    <script src="/js/ag-data.js?v=20261106mp1" defer></script>
+    <script src="/js/ct-data.js?v=20261106mp1" defer></script>
+    <script src="/js/mp-data.js?v=20261106mp1" defer></script>
+    <script src="/js/mp-calc.js?v=20261106mp1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/datetime/moon-phase-calculator#app",
-    "name":"Moon Phase Calculator",
-    "description":"Розрахунок фази Місяця на будь-яку дату з відсотком освітленості.",
-    "url":"https://calccore.net/datetime/moon-phase-calculator",
-    "applicationCategory":"LifestyleApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/datetime/moon-phase-calculator#app",
+  "name": "Калькулятор фаз Місяця",
+  "description": "Онлайн-калькулятор фаз Місяця за астрономічними формулами: фаза на будь-яку дату з малюнком Місяця для північної й південної півкулі, освітленість і вік, точні моменти найближчих молодика, чвертей і повного місяця, календар фаз на місяць і всі головні фази року з позначкою блакитного місяця. Роки від 1900 до 2100.",
+  "url": "https://calccore.net/datetime/moon-phase-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Фаза Місяця на дату й час з малюнком для обох півкуль",
+    "Освітленість, вік Місяця й кут Місяць–Сонце",
+    "Точні моменти молодика, чвертей і повного місяця",
+    "Календар фаз на місяць з освітленістю кожного дня",
+    "Усі головні фази року й позначка блакитного місяця",
+    "Моменти за київським часом і UTC"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/datetime/moon-phase-calculator#webpage",
+      "url": "https://calccore.net/datetime/moon-phase-calculator",
+      "name": "Фази Місяця: фаза на дату, календар і точні моменти | CalcCore",
+      "description": "Дізнайтеся фазу Місяця на будь-яку дату, його вік і освітленість, календар фаз на місяць і точні моменти молодика, чвертей і повного місяця за рік.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/datetime/moon-phase-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/datetime/moon-phase-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/datetime/moon-phase-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Дата/час",
+          "item": "https://calccore.net/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Фази Місяця",
+          "item": "https://calccore.net/datetime/moon-phase-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/datetime/moon-phase-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Яка фаза Місяця сьогодні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відкрийте вкладку «Фаза на дату»: за замовчуванням стоїть сьогоднішня дата, і калькулятор покаже фазу, освітленість і вік Місяця."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки триває місячний цикл?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Середня тривалість синодичного місяця 29,53 доби, а справжня від 29,27 до 29,83 доби. Від однієї головної фази до наступної проходить від 6,6 до 8,2 доби."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як визначається освітленість Місяця?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За кутом між Місяцем і Сонцем: освітленість дорівнює (1 − cos кута) / 2. У молодик вона близька до нуля, у чверті 50%, у повний місяць 100%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке вік Місяця?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це час від попереднього молодика. Повний місяць настає приблизно на 14–15-й добі."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як дізнатись точний момент повного місяця чи молодика?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Калькулятор показує найближчі молодик, першу чверть, повний місяць і останню чверть із точним часом за київським часом і UTC, а вкладка «Фази за рік» збирає їх за весь рік."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке блакитний місяць?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Другий повний місяць у календарному місяці. Це лише назва, колір Місяця не змінюється. У 2026 році такий у травні: 1 і 31 травня."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки повних місяців буває за рік?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зазвичай 12, а іноді 13. У 2026 році їх 13."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому Місяць виглядає по-різному в різних півкулях?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У північній півкулі зростаючий Місяць освітлений праворуч, у південній ліворуч. Вибір півкулі дзеркально змінює малюнок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим фази відрізняються від середнього розрахунку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Середній цикл дає похибку до півдоби, а калькулятор рахує реальні моменти за астрономічними формулами з точністю до кількох хвилин."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор часовий пояс?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Моменти показано за київським часом і UTC. Фаза на дату береться на полудень за Києвом, а якщо вказати час, то на цей час."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи дає калькулятор поради щодо посадок чи стрижки за Місяцем?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні: такі традиції наукового підтвердження не мають. Калькулятор лише показує астрономічні дані."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які роки підтримує калькулятор?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Від 1900 до 2100 року. Сходу й заходу Місяця та «супермісяця» калькулятор не рахує."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cmoon">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Фази Місяця за датою</h1>
-                    <p class="mcalc__p">
-                        Дізнайся, яка фаза Місяця була чи буде на будь-яку дату — минулу чи майбутню.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Фази Місяця за датою</h1>
+                    <p class="ph__p">Введіть дату (і за бажанням час): калькулятор покаже фазу Місяця з малюнком, освітленість, вік і точні моменти найближчого молодика, чвертей і повного місяця. Інші вкладки дають календар фаз на місяць і всі головні фази року.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Введи дату</h2>
-                        <span class="mcalc__badge">Date/Time</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="moonDate">Дата</label>
-                            <input class="mcalc__input" id="moonDate" type="date" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Дата/час</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Розрахувати</button>
-                                <button class="mcalc__btn" id="btnToday" type="button">Сьогодні</button>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="day" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Фаза на дату</b><span class="ph__ex">Фаза на дату</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="month" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Календар на місяць</b><span class="ph__ex">Календар на місяць</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="year" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Фази за рік</b><span class="ph__ex">Усі фази року</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
                             </div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="moon-result" id="moonResult" style="display:none;">
-                        <div class="moon-emoji" id="moonEmoji">🌕</div>
-                        <div class="moon-name" id="moonName"></div>
-                        <div class="moon-illumination" id="moonIllumination"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/datetime/zodiac-calculator">Калькулятор зодіакального знаку</a>
-                    <a href="/datetime/age-calculator">Калькулятор віку</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке фази Місяця</h2>
-            <p>
-                Фази Місяця — це зміна вигляду освітленої частини Місяця, яку ми бачимо з Землі,
-                залежно від взаємного розташування Сонця, Землі та Місяця. Повний цикл — від одного
-                молодика до наступного — називається <b>синодичним місяцем</b> і триває приблизно
-                <b>29.53 доби</b>.
-            </p>
-        
-            <h2>Чому Місяць змінює вигляд</h2>
-            <p>
-                Місяць не випромінює власного світла — ми бачимо лише ту частину його поверхні, яка
-                освітлена Сонцем і повернута до Землі. У міру того, як Місяць обертається навколо Землі,
-                кут між Сонцем, Місяцем і Землею змінюється, тому змінюється й видима освітлена частка
-                місячного диска.
-            </p>
-        
-            <h2>8 основних фаз Місяця</h2>
-            <ul>
-                <li><b>🌑 Молодик</b> — Місяць не видно, освітлена сторона повернута від Землі.</li>
-                <li><b>🌒 Зростаючий серп</b> — тонкий серп світла з правого боку (у північній півкулі).</li>
-                <li><b>🌓 Перша чверть</b> — освітлена рівно половина диска.</li>
-                <li><b>🌔 Зростаючий випуклий</b> — освітлено більше половини, наближення до повного.</li>
-                <li><b>🌕 Повний місяць</b> — весь диск повністю освітлений.</li>
-                <li><b>🌖 Спадаючий випуклий</b> — освітлена частина починає зменшуватись.</li>
-                <li><b>🌗 Остання чверть</b> — знову освітлена половина диска, з іншого боку.</li>
-                <li><b>🌘 Спадаючий серп</b> — тонкий серп перед новим молодиком.</li>
-            </ul>
-        
-            <h2>Вплив Місяця на Землю</h2>
-            <p>
-                Місяць відповідає за припливи й відпливи океанів через гравітаційне притягання. Найсильніші
-                припливи (сизигійні) трапляються під час молодика й повного місяця, коли Сонце, Земля і
-                Місяць вишиковуються в одну лінію, і їхні гравітаційні сили складаються.
-            </p>
-        
-            <h2>Навіщо знати фазу Місяця</h2>
-            <ul>
-                <li><b>Астрономічні спостереження:</b> повний місяць — гірший час для спостереження зірок через яскраве світло,
-                    новий місяць — найкращий.</li>
-                <li><b>Садівництво:</b> деякі традиції садівництва орієнтуються на місячний календар для посадки рослин.</li>
-                <li><b>Риболовля та полювання:</b> активність деяких тварин пов'язують з фазами Місяця.</li>
-                <li><b>Культурні та релігійні свята:</b> багато календарів (ісламський, єврейський) базуються на місячних
-                    циклах.</li>
-                <li><b>Фотографія:</b> фотографи-пейзажисти часто планують зйомки на повний місяць для нічних кадрів з природним
-                    освітленням.</li>
-            </ul>
-        
-            <h2>Місячні календарі в різних культурах</h2>
-            <p>
-                Ісламський календар повністю базується на місячних циклах, тому релігійні свята (наприклад,
-                Рамадан) щороку зміщуються відносно григоріанського календаря. Єврейський календар —
-                місячно-сонячний, поєднує місячні місяці з сонячним роком через додавання високосних місяців.
-                Китайський Новий рік також визначається за місячним календарем і випадає на другий молодик
-                після зимового сонцестояння.
-            </p>
-        
-            <p class="m-hintSmall">
-                Розрахунок базується на середній тривалості синодичного місяця відносно відомого
-                молодика і дає точність в межах приблизно ±1 дня — достатньо для більшості практичних
-                і розважальних цілей.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/datetime/zodiac-calculator"><b>Знак зодіаку</b><span>Західний і китайський знак за датою.</span></a>
+                <a class="cc-related-card" href="/datetime/day-of-week-calculator"><b>День тижня за датою</b><span>Який день тижня був чи буде.</span></a>
+                <a class="cc-related-card" href="/datetime/age-calculator"><b>Калькулятор віку</b><span>Точний вік, дні народження й круглі дати.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що показує калькулятор</h2>
+            <p>Калькулятор визначає <b>фазу Місяця</b> на будь-яку дату від 1900 до 2100 року: назву фази, освітленість, вік Місяця (скільки діб минуло від молодика) і кут між Місяцем та Сонцем. Він малює Місяць із правильною лінією освітлення й показує <b>точні моменти</b> найближчого молодика, першої чверті, повного місяця й останньої чверті за київським часом та UTC. Наприклад, повний місяць 25 січня 2024 року настав о 17:54 UTC (19:54 за Києвом).</p>
+
+            <h2>Точні моменти, а не середній цикл</h2>
+            <p>Місяць робить повний цикл від молодика до молодика за <b>29,53 доби</b> у середньому, але справжній цикл коливається від 29,27 до 29,83 доби, тож розрахунок за середнім значенням дає похибку до півдоби. Калькулятор рахує реальні моменти фаз за астрономічними формулами, а фазу на дату бере зі справжнього положення Місяця й Сонця. Моменти головних фаз точні до кількох хвилин, освітленість приблизно до ±0,5%.</p>
+
+            <h2>Освітленість і вік Місяця</h2>
+            <p>Освітленість залежить від кута між Місяцем і Сонцем: вона дорівнює (1 − cos кута) / 2. У молодик кут 0°, і освітленість близька до нуля, у першу чверть 90° і 50%, у повний місяць 180° і 100%, в останню чверть 270° і знову 50%. Вік Місяця — це час від попереднього молодика. Наприклад, 25 січня 2024 року о 21:00 за Києвом Місяцю 14,3 доби, а кут 180,5° (повний місяць). 6 листопада 2026 року вдень освітлено лише 8%, це спадаючий серп, а наступний повний місяць настане 24 листопада.</p>
+
+            <h2>Вісім фаз</h2>
+            <p>Головних фаз чотири: молодик, перша чверть, повний місяць і остання чверть. Між ними фаза називається за кутом: зростаючий серп і зростаючий випуклий до повного місяця, спадаючий випуклий і спадаючий серп після нього. «Чверть» означає чверть циклу, а освітлена половина диска. Між двома сусідніми головними фазами проходить від 6,6 до 8,2 доби. Добу, у яку припадає точний момент головної фази, калькулятор позначає саме цією фазою.</p>
+
+            <h2>Північна й південна півкуля</h2>
+            <p>У північній півкулі, зокрема в Україні, зростаючий Місяць освітлений праворуч, а спадаючий ліворуч. У південній півкулі, наприклад в Австралії чи Бразилії, усе дзеркально. Тому в калькуляторі є вибір півкулі: малюнок і емодзі змінюються відповідно, а самі моменти фаз однакові для всіх.</p>
+
+            <h2>Календар на місяць і фази за рік</h2>
+            <p>Вкладка «Календар на місяць» показує для кожного дня фазу й освітленість на полудень за Києвом, а головні фази позначає точним часом. Вкладка «Фази за рік» збирає всі молодики, чверті й повні місяці року за місяцями. У 2026 році 13 повних місяців, і в травні їх два: 1 і 31 травня. Другий повний місяць у календарному місяці називають «блакитним місяцем»: це лише назва, колір Місяця не змінюється.</p>
+
+            <h2>Місяць і Земля</h2>
+            <p>Місяць викликає припливи й відпливи в океанах. Найсильніші, сизигійні, припливи бувають біля молодика й повного місяця, коли Сонце, Земля й Місяць майже на одній лінії. Для астрономічних спостережень слабкого неба кращий час біля молодика, а повний місяць засвічує небо. Народні традиції (посадки, риболовля, стрижка) за місячним календарем наукового підтвердження не мають, тому калькулятор не дає таких порад.</p>
+
+            <h2>Обмеження</h2>
+            <p>Дозволені дати від 1900 до 2100 року. Малюнок Місяця умовний: це схема фази, а не знімок. Калькулятор не показує час сходу й заходу Місяця та його відстань (для цього потрібне місце спостереження), а також не відрізняє «супермісяць».</p>
+            <p class="ph-mini">Моменти фаз рахуються за астрономічними формулами з точністю до кількох хвилин. Малюнок Місяця умовний. Народні традиції щодо Місяця наукового підтвердження не мають.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>Яка фаза Місяця сьогодні?</h3>
+                <p>Відкрийте вкладку «Фаза на дату»: за замовчуванням стоїть сьогоднішня дата, і калькулятор покаже фазу, освітленість і вік Місяця.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Скільки триває місячний цикл?</h3>
-                <p>Синодичний місяць (повний цикл фаз Місяця) триває приблизно 29.53 доби.</p>
+                <p>Середня тривалість синодичного місяця 29,53 доби, а справжня від 29,27 до 29,83 доби. Від однієї головної фази до наступної проходить від 6,6 до 8,2 доби.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Скільки всього фаз Місяця?</h3>
-                <p>Виділяють 8 основних фаз: молодик, зростаючий серп, перша чверть, зростаючий випуклий, повний місяць,
-                    спадаючий випуклий, остання чверть, спадаючий серп.</p>
+            <div class="cc-faq-item">
+                <h3>Як визначається освітленість Місяця?</h3>
+                <p>За кутом між Місяцем і Сонцем: освітленість дорівнює (1 − cos кута) / 2. У молодик вона близька до нуля, у чверті 50%, у повний місяць 100%.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Наскільки точний цей розрахунок?</h3>
-                <p>Розрахунок базується на середній тривалості синодичного місяця і дає точність в межах приблизно ±1
-                    дня для більшості практичних цілей.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке вік Місяця?</h3>
+                <p>Це час від попереднього молодика. Повний місяць настає приблизно на 14–15-й добі.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як дізнатись точний момент повного місяця чи молодика?</h3>
+                <p>Калькулятор показує найближчі молодик, першу чверть, повний місяць і останню чверть із точним часом за київським часом і UTC, а вкладка «Фази за рік» збирає їх за весь рік.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке блакитний місяць?</h3>
+                <p>Другий повний місяць у календарному місяці. Це лише назва, колір Місяця не змінюється. У 2026 році такий у травні: 1 і 31 травня.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки повних місяців буває за рік?</h3>
+                <p>Зазвичай 12, а іноді 13. У 2026 році їх 13.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому Місяць виглядає по-різному в різних півкулях?</h3>
+                <p>У північній півкулі зростаючий Місяць освітлений праворуч, у південній ліворуч. Вибір півкулі дзеркально змінює малюнок.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим фази відрізняються від середнього розрахунку?</h3>
+                <p>Середній цикл дає похибку до півдоби, а калькулятор рахує реальні моменти за астрономічними формулами з точністю до кількох хвилин.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор часовий пояс?</h3>
+                <p>Моменти показано за київським часом і UTC. Фаза на дату береться на полудень за Києвом, а якщо вказати час, то на цей час.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи дає калькулятор поради щодо посадок чи стрижки за Місяцем?</h3>
+                <p>Ні: такі традиції наукового підтвердження не мають. Калькулятор лише показує астрономічні дані.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які роки підтримує калькулятор?</h3>
+                <p>Від 1900 до 2100 року. Сходу й заходу Місяця та «супермісяця» калькулятор не рахує.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
