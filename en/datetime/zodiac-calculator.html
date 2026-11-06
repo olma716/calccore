@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Zodiac Sign Calculator Online — By Birth Date | CalcCore</title>
+    <title>Zodiac Sign by Date of Birth: Western and Chinese | CalcCore</title>
     <meta name="description"
-        content="Find your Western zodiac sign and Chinese zodiac animal based on your birth date. Element, ruling planet, and basic personality traits." />
+        content="Find your Western zodiac sign by the position of the Sun and your Chinese animal by Chinese New Year, plus the signs for any year and each animal's years." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/zodiac-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/zodiac-calculator" />
@@ -26,189 +28,431 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Zodiac Sign Calculator Online — By Birth Date" />
-    <meta property="og:description" content="Find your Western zodiac sign and Chinese zodiac animal based on your birth date. Element, ruling planet, and basic personality traits." />
+    <meta property="og:title" content="Zodiac Sign by Date of Birth: Western and Chinese" />
+    <meta property="og:description" content="Find your Western zodiac sign by the position of the Sun and your Chinese animal by Chinese New Year, plus the signs for any year and each animal's years." />
     <meta property="og:url" content="https://calccore.net/en/datetime/zodiac-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Zodiac Sign Calculator Online — By Birth Date" />
-    <meta name="twitter:description" content="Find your Western zodiac sign and Chinese zodiac animal based on your birth date. Element, ruling planet, and basic personality traits." />
+    <meta name="twitter:title" content="Zodiac Sign by Date of Birth: Western and Chinese" />
+    <meta name="twitter:description" content="Find your Western zodiac sign by the position of the Sun and your Chinese animal by Chinese New Year, plus the signs for any year and each animal's years." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/zodiac-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106zd1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106zd1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/zodiac-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How is a zodiac sign determined?",
-        "acceptedAnswer":{"@type":"Answer","text":"The Western zodiac sign is determined by day and month of birth — each sign corresponds to a specific date range during the year."}
-      },
-      {
-        "@type":"Question",
-        "name":"How is the Chinese zodiac different from Western zodiac?",
-        "acceptedAnswer":{"@type":"Answer","text":"The Chinese zodiac is determined by birth year (a 12-year animal cycle), while the Western zodiac is based on day and month of birth."}
-      },
-      {
-        "@type":"Question",
-        "name":"Is there scientific evidence for astrology?",
-        "acceptedAnswer":{"@type":"Answer","text":"No, astrology has no scientific evidence supporting an influence on personality or fate. It's more of a cultural and entertainment tradition."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106zd1" defer></script>
+    <script src="/js/phys-core.js?v=20261106zd1" defer></script>
+    <script src="/js/datepick.js?v=20261106zd1" defer></script>
+    <script src="/js/ag-data.js?v=20261106zd1" defer></script>
+    <script src="/js/ct-data.js?v=20261106zd1" defer></script>
+    <script src="/js/zd-data.js?v=20261106zd1" defer></script>
+    <script src="/js/zd-calc.js?v=20261106zd1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/zodiac-calculator#app",
-    "name":"Zodiac Sign Calculator",
-    "description":"Determine your Western zodiac sign and Chinese zodiac animal from your birth date.",
-    "url":"https://calccore.net/en/datetime/zodiac-calculator",
-    "applicationCategory":"LifestyleApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/zodiac-calculator#app",
+  "name": "Zodiac Sign Calculator by Date of Birth",
+  "description": "An online calculator that finds the Western zodiac sign by the position of the Sun (with a warning about the cusp and the time of the change) and the Chinese sign by Chinese New Year with its element and yin/yang, shows the dates of the signs for the chosen year and the years of each Chinese animal. Years from 1900 to 2100.",
+  "url": "https://calccore.net/en/datetime/zodiac-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "The Western sign by the position of the Sun, not a fixed table",
+    "A warning about the cusp and the time the Sun changes sign",
+    "The Chinese sign by Chinese New Year, with element and yin/yang",
+    "A table of the signs for any year with the moments of change",
+    "The years of each Chinese animal over a range",
+    "The element, quality and ruling planet of the sign"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/zodiac-calculator#webpage",
+      "url": "https://calccore.net/en/datetime/zodiac-calculator",
+      "name": "Zodiac Sign by Date of Birth: Western and Chinese | CalcCore",
+      "description": "Find your Western zodiac sign by the position of the Sun and your Chinese animal by Chinese New Year, plus the signs for any year and each animal's years.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/zodiac-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/zodiac-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/zodiac-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Zodiac sign by date of birth",
+          "item": "https://calccore.net/en/datetime/zodiac-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/zodiac-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I find my zodiac sign by date of birth?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the date on the “My sign” tab: the calculator shows the Western sign by the position of the Sun and the Chinese animal. Those born on February 10, 2026 are Aquarius and Snake."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do the dates of the signs differ from tables elsewhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Sun enters a sign at a different time every year, so the boundaries shift by about a day. The calculator uses the real moment of the change, not a fixed date."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I was born on the cusp of two signs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator warns you and shows the time the Sun changes sign. Those born before it belong to the previous sign, after it to the next. For the exact sign you need the time and place of birth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why am I in the previous year by the Chinese zodiac?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Chinese year starts at Chinese New Year (between January 21 and February 20). Those born before it belong to the animal of the previous year."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When was Chinese New Year in my birth year?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The “Chinese New Year” tile on the “My sign” tab shows the date, and the “Chinese by years” tab gives all the years of an animal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do the element and yin/yang mean in the Chinese sign?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are features of the 60-year cycle: the five elements (wood, fire, earth, metal, water) alternate every two years, and yin and yang alternate every year."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which years belong to the Horse or another animal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Chinese by years” tab and choose an animal. The years of the Horse are 1990, 2002, 2014, 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the Western zodiac differ from the constellations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The tropical zodiac is tied to the equinox and the seasons, not to the constellations. Because of precession the signs and the constellations of the same name have drifted apart by about a whole sign over the centuries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the time the Sun enters a sign?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About 2 minutes for equinoxes and solstices and up to 15 minutes for the other signs. That is why the time is rounded to 5 minutes and marked “≈”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does astrology have scientific support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Astrology has no scientific support for any influence on character or fate: it is an entertainment and cultural tradition."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are there two kinds of ruling planets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional astrology used the seven visible planets, while Uranus, Neptune and Pluto, discovered later, became the modern rulers of Aquarius, Pisces and Scorpio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which years does the calculator support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From 1900 to 2100 for both zodiacs. For the Chinese calendar the dates of New Year come from a table for these years."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="czodiac">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Zodiac Sign Calculator</h1>
-                    <p class="mcalc__p">
-                        Find your Western zodiac sign and Chinese zodiac animal based on your
-                        birth date.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Zodiac Sign by Date of Birth</h1>
+                    <p class="ph__p">Enter your date of birth: the calculator shows your Western sign by the position of the Sun and your Chinese animal with its element. For dates on the cusp of two signs it warns you and shows the time of the change, and for January and February it takes Chinese New Year into account. The other tabs give the signs for any year and the years of each animal.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter your birth date</h2>
-                        <span class="mcalc__badge">Date/Time</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="birthDate">Date of birth</label>
-                            <input class="mcalc__input" id="birthDate" type="date" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Calculate</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="me" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">My sign</b><span class="ph__ex">Western and Chinese sign</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="tbl" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Signs by dates</b><span class="ph__ex">The signs for a year</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="cn" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Chinese by years</b><span class="ph__ex">An animal's years over a range</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="zodiac-result" id="zodiacResult" style="display:none;">
-                        <div class="zodiac-card">
-                            <div class="zodiac-emoji" id="westernEmoji">♈</div>
-                            <div class="zodiac-name" id="westernName"></div>
-                            <div class="zodiac-details" id="westernDetails"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-                        <div class="zodiac-card">
-                            <div class="zodiac-emoji" id="chineseEmoji">🐉</div>
-                            <div class="zodiac-name" id="chineseName"></div>
-                            <div class="zodiac-details" id="chineseDetails"></div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/datetime/age-calculator">Age Calculator</a>
-                    <a href="/en/datetime/day-of-week-calculator">Day of the Week Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is a zodiac sign</h2>
-            <p>
-                The <b>Western zodiac</b> consists of 12 signs, each corresponding to a specific date
-                range during the year, based on the Sun's position relative to constellations at the
-                time of birth. Each sign is associated with an element (fire, earth, air, water) and a
-                ruling planet.
-            </p>
-
-            <h2>The Chinese zodiac</h2>
-            <p>
-                Unlike the Western zodiac, the <b>Chinese zodiac</b> is determined by birth year using
-                a 12-year animal cycle: Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey,
-                Rooster, Dog, Pig. Each animal symbolizes certain personality traits and has its own
-                element under the Wu Xing system (metal, wood, water, fire, earth).
-            </p>
-
-            <h2>The 12 Western zodiac signs</h2>
-            <ul>
-                <li><b>Aries</b> (Mar 21 — Apr 19) — fire</li>
-                <li><b>Taurus</b> (Apr 20 — May 20) — earth</li>
-                <li><b>Gemini</b> (May 21 — Jun 20) — air</li>
-                <li><b>Cancer</b> (Jun 21 — Jul 22) — water</li>
-                <li><b>Leo</b> (Jul 23 — Aug 22) — fire</li>
-                <li><b>Virgo</b> (Aug 23 — Sep 22) — earth</li>
-                <li><b>Libra</b> (Sep 23 — Oct 22) — air</li>
-                <li><b>Scorpio</b> (Oct 23 — Nov 21) — water</li>
-                <li><b>Sagittarius</b> (Nov 22 — Dec 21) — fire</li>
-                <li><b>Capricorn</b> (Dec 22 — Jan 19) — earth</li>
-                <li><b>Aquarius</b> (Jan 20 — Feb 18) — air</li>
-                <li><b>Pisces</b> (Feb 19 — Mar 20) — water</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                This is an entertainment and cultural tool. Astrology has no scientific evidence
-                supporting its influence on personality, fate, or compatibility.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/age-calculator"><b>Age Calculator</b><span>Exact age, birthdays and round dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/day-of-week-calculator"><b>Day of the Week for a Date</b><span>Which weekday a date was or will be.</span></a>
+                <a class="cc-related-card" href="/en/datetime/moon-phase-calculator"><b>Moon Phase Calculator</b><span>The Moon phase on any date.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator shows</h2>
+            <p>Enter your date of birth and the calculator finds your <b>Western zodiac sign</b> and your <b>Chinese sign</b>. For the Western one it shows the symbol, the element (fire, earth, air, water), the quality (cardinal, fixed, mutable), the ruling planet and the dates of the sign in that year. For the Chinese one it shows the animal, the element (wood, fire, earth, metal, water), yin or yang, and the start and end of the animal's year. For example, those born on <b>February 10, 2026</b> are Aquarius in the Western zodiac and Snake in the Chinese one.</p>
+
+            <h2>The Western zodiac and the position of the Sun</h2>
+            <p>The Western (tropical) zodiac splits the year into 12 parts of 30° each from the March equinox, not by the constellations. So the sign depends on where the Sun is in the sky at that moment. The dates shift by about a day from year to year, and a fixed table like “Aries — March 21” gives errors. In 2026 the Sun enters Aries on <b>March 20 at ≈ 14:45 UTC</b> (≈ 16:45 Kyiv time), while in 2003 it happened on March 21 at ≈ 01:00 UTC.</p>
+
+            <h2>The cusp of two signs</h2>
+            <p>If you were born on the day the Sun moves into another sign, the calculator warns you and gives the time of the change. For example, on March 20, 2026 the Sun moves from Pisces to Aries at about 14:45 UTC: those born before that moment are Pisces, after it Aries. The sign is shown for Kyiv noon. For the exact sign you need the time and place of birth. The time of the change is approximate: for equinoxes and solstices the error is about 2 minutes, for the other signs up to 15 minutes.</p>
+
+            <h2>Chinese New Year</h2>
+            <p>The Chinese year of the animal does not begin on January 1 but at Chinese New Year, which falls between <b>January 21 and February 20</b>. So those born in January or early February often belong to the animal of the previous year. Chinese New Year 2026 fell on February 17, so those born on February 10, 2026 are still Snakes (the Snake year ran from January 29, 2025 to February 16, 2026), and from February 17 the Horse year begins, lasting until February 5, 2027. The calculator uses a table of Chinese New Year dates for 1900–2100.</p>
+
+            <h2>Animals, elements and the cycle</h2>
+            <p>The Chinese calendar combines 12 animals, 5 elements and yin or yang, so the full cycle lasts 60 years. The animal is (year − 4) mod 12 and the element comes from (year − 4) mod 10: an even value is yang, an odd one is yin. For 2026 that gives Horse and Fire (yang). The years of the Horse over recent decades are 1990 (metal), 2002 (water), 2014 (wood) and 2026 (fire).</p>
+
+            <h2>The signs by dates for a chosen year</h2>
+            <p>The “Signs by dates” tab shows for the chosen year when the Sun enters each of the 12 signs and the four astronomical events: the March equinox, the June solstice, the September equinox and the December solstice. In 2026 they are March 20, June 21, September 23 and December 21. The table helps you see how the dates of the signs shift from year to year.</p>
+
+            <h2>Ruling planets</h2>
+            <p>For each sign the ruling planet is shown. Traditional astrology used the seven visible bodies, so Scorpio belongs to Mars, Aquarius to Saturn and Pisces to Jupiter. Modern astrology added Pluto, Uranus and Neptune. The calculator shows both versions when they differ.</p>
+
+            <h2>Limits</h2>
+            <p>Dates from 1900 to 2100 are allowed. Astrology has no scientific support: it is an entertainment and cultural tradition, not a forecast of character or fate. The calculator determines the sign by the astronomical position of the Sun and by the calendar, without adding personality descriptions.</p>
+            <p class="ph-mini">Astrology has no scientific support: it is an entertainment and cultural tradition. The time the Sun changes sign is approximate, more accurate for equinoxes and solstices.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How is a zodiac sign determined?</h3>
-                <p>The Western zodiac sign is determined by day and month of birth — each sign corresponds to a specific
-                    date range during the year.</p>
+            <div class="cc-faq-item">
+                <h3>How do I find my zodiac sign by date of birth?</h3>
+                <p>Enter the date on the “My sign” tab: the calculator shows the Western sign by the position of the Sun and the Chinese animal. Those born on February 10, 2026 are Aquarius and Snake.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How is the Chinese zodiac different from Western zodiac?</h3>
-                <p>The Chinese zodiac is determined by birth year (a 12-year animal cycle), while the Western zodiac is
-                    based on day and month of birth.</p>
+            <div class="cc-faq-item">
+                <h3>Why do the dates of the signs differ from tables elsewhere?</h3>
+                <p>The Sun enters a sign at a different time every year, so the boundaries shift by about a day. The calculator uses the real moment of the change, not a fixed date.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Is there scientific evidence for astrology?</h3>
-                <p>No, astrology has no scientific evidence supporting an influence on personality or fate. It's more of
-                    a cultural and entertainment tradition.</p>
+            <div class="cc-faq-item">
+                <h3>What if I was born on the cusp of two signs?</h3>
+                <p>The calculator warns you and shows the time the Sun changes sign. Those born before it belong to the previous sign, after it to the next. For the exact sign you need the time and place of birth.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why am I in the previous year by the Chinese zodiac?</h3>
+                <p>The Chinese year starts at Chinese New Year (between January 21 and February 20). Those born before it belong to the animal of the previous year.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When was Chinese New Year in my birth year?</h3>
+                <p>The “Chinese New Year” tile on the “My sign” tab shows the date, and the “Chinese by years” tab gives all the years of an animal.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What do the element and yin/yang mean in the Chinese sign?</h3>
+                <p>They are features of the 60-year cycle: the five elements (wood, fire, earth, metal, water) alternate every two years, and yin and yang alternate every year.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which years belong to the Horse or another animal?</h3>
+                <p>Open the “Chinese by years” tab and choose an animal. The years of the Horse are 1990, 2002, 2014, 2026.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How does the Western zodiac differ from the constellations?</h3>
+                <p>The tropical zodiac is tied to the equinox and the seasons, not to the constellations. Because of precession the signs and the constellations of the same name have drifted apart by about a whole sign over the centuries.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How accurate is the time the Sun enters a sign?</h3>
+                <p>About 2 minutes for equinoxes and solstices and up to 15 minutes for the other signs. That is why the time is rounded to 5 minutes and marked “≈”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does astrology have scientific support?</h3>
+                <p>No. Astrology has no scientific support for any influence on character or fate: it is an entertainment and cultural tradition.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why are there two kinds of ruling planets?</h3>
+                <p>Traditional astrology used the seven visible planets, while Uranus, Neptune and Pluto, discovered later, became the modern rulers of Aquarius, Pisces and Scorpio.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which years does the calculator support?</h3>
+                <p>From 1900 to 2100 for both zodiacs. For the Chinese calendar the dates of New Year come from a table for these years.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор знаку зодіаку за датою народження | CalcCore</title>
+    <title>Знак зодіаку за датою народження: західний, китайський | CalcCore</title>
     <meta name="description"
-        content="Дізнайся свій західний зодіакальний знак та символ китайського календаря за датою народження. Стихія, планета-покровитель та基основні риси характеру." />
+        content="Дізнайтеся західний знак зодіаку за положенням Сонця й китайську тварину за китайським Новим роком, дати знаків на будь-який рік і роки кожної тварини." />
 
     <link rel="canonical" href="https://calccore.net/datetime/zodiac-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/zodiac-calculator" />
@@ -26,189 +28,431 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор знаку зодіаку за датою народження" />
-    <meta property="og:description" content="Дізнайся свій західний зодіакальний знак та символ китайського календаря за датою народження. Стихія, планета-покровитель та基основні риси характеру." />
+    <meta property="og:title" content="Знак зодіаку за датою народження: західний, китайський" />
+    <meta property="og:description" content="Дізнайтеся західний знак зодіаку за положенням Сонця й китайську тварину за китайським Новим роком, дати знаків на будь-який рік і роки кожної тварини." />
     <meta property="og:url" content="https://calccore.net/datetime/zodiac-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор знаку зодіаку за датою народження" />
-    <meta name="twitter:description" content="Дізнайся свій західний зодіакальний знак та символ китайського календаря за датою народження. Стихія, планета-покровитель та基основні риси характеру." />
+    <meta name="twitter:title" content="Знак зодіаку за датою народження: західний, китайський" />
+    <meta name="twitter:description" content="Дізнайтеся західний знак зодіаку за положенням Сонця й китайську тварину за китайським Новим роком, дати знаків на будь-який рік і роки кожної тварини." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/zodiac-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261106zd1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261106zd1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/zodiac-calculator.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Як визначається зодіакальний знак?",
-        "acceptedAnswer":{"@type":"Answer","text":"Західний зодіакальний знак визначається за днем і місяцем народження — кожен знак відповідає певному діапазону дат протягом року."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чим відрізняється китайський зодіак від західного?",
-        "acceptedAnswer":{"@type":"Answer","text":"Китайський зодіак визначається роком народження (12-річний цикл тварин), тоді як західний — днем і місяцем народження."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи має астрологічне значення науковий доказ?",
-        "acceptedAnswer":{"@type":"Answer","text":"Ні, астрологія не має наукового підтвердження впливу на характер чи долю. Це радше культурна та розважальна традиція."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261106zd1" defer></script>
+    <script src="/js/phys-core.js?v=20261106zd1" defer></script>
+    <script src="/js/datepick.js?v=20261106zd1" defer></script>
+    <script src="/js/ag-data.js?v=20261106zd1" defer></script>
+    <script src="/js/ct-data.js?v=20261106zd1" defer></script>
+    <script src="/js/zd-data.js?v=20261106zd1" defer></script>
+    <script src="/js/zd-calc.js?v=20261106zd1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/datetime/zodiac-calculator#app",
-    "name":"Zodiac Sign Calculator",
-    "description":"Визначення західного зодіакального знаку та китайського символу за датою народження.",
-    "url":"https://calccore.net/datetime/zodiac-calculator",
-    "applicationCategory":"LifestyleApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/datetime/zodiac-calculator#app",
+  "name": "Калькулятор знаку зодіаку за датою народження",
+  "description": "Онлайн-калькулятор, який визначає західний знак зодіаку за положенням Сонця (з попередженням про межу знаків і часом переходу) та китайський знак за китайським Новим роком зі стихією й інь/ян, показує дати знаків на вибраний рік і роки кожної китайської тварини. Роки від 1900 до 2100.",
+  "url": "https://calccore.net/datetime/zodiac-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Західний знак за положенням Сонця, а не за фіксованою таблицею",
+    "Попередження про межу знаків і час переходу Сонця",
+    "Китайський знак за китайським Новим роком, зі стихією й інь/ян",
+    "Таблиця знаків на будь-який рік з моментами переходу",
+    "Роки кожної китайської тварини за діапазон",
+    "Стихія, якість і планета-покровитель знака"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/datetime/zodiac-calculator#webpage",
+      "url": "https://calccore.net/datetime/zodiac-calculator",
+      "name": "Знак зодіаку за датою народження: західний, китайський | CalcCore",
+      "description": "Дізнайтеся західний знак зодіаку за положенням Сонця й китайську тварину за китайським Новим роком, дати знаків на будь-який рік і роки кожної тварини.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/datetime/zodiac-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/datetime/zodiac-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-06",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/datetime/zodiac-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Дата/час",
+          "item": "https://calccore.net/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Знак зодіаку за датою народження",
+          "item": "https://calccore.net/datetime/zodiac-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/datetime/zodiac-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як визначити знак зодіаку за датою народження?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть дату на вкладці «Мій знак»: калькулятор покаже західний знак за положенням Сонця й китайську тварину. Народжені 10 лютого 2026 року — Водолії та Змії."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому дати знаків відрізняються від таблиць в інших місцях?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сонце входить у знак у різний час щороку, тому межі зсуваються приблизно на добу. Калькулятор рахує реальний момент переходу, а не фіксовану дату."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що робити, якщо я народився на межі двох знаків?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Калькулятор попередить і покаже час переходу Сонця. Народжені до нього належать до попереднього знака, після нього до наступного. Для точного знака потрібні час і місце народження."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому за китайським зодіаком я належу до попереднього року?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Китайський рік починається з китайського Нового року (від 21 січня до 20 лютого). Народжені до нього належать до тварини попереднього року."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Коли був китайський Новий рік у мій рік народження?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Дату показує плитка «Китайський Новий рік» на вкладці «Мій знак», а вкладка «Китайський за роками» дає всі роки тварини."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що означають стихія й інь/ян у китайському знаку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це ознаки 60-річного циклу: п'ять стихій (дерево, вогонь, земля, метал, вода) чергуються кожні два роки, а інь і ян чергуються щороку."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які роки належать Коню чи іншій тварині?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відкрийте вкладку «Китайський за роками» й виберіть тварину. Роки Коня: 1990, 2002, 2014, 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим західний зодіак відрізняється від сузір'їв?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Тропічний зодіак прив'язаний до рівнодення й пір року, а не до сузір'їв. Через прецесію знаки та однойменні сузір'я за століття розійшлися приблизно на цілий знак."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка точність часу переходу Сонця в знак?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для рівнодень і сонцестоянь близько 2 хвилин, для решти знаків до 15 хвилин. Тому час показано округленим до 5 хвилин із позначкою «≈»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи має астрологія наукове підтвердження?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Астрологія не має наукового підтвердження впливу на характер чи долю: це розважальна й культурна традиція."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому планета-покровитель буває двох видів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У традиційній астрології використовували сім видимих планет, а відкриті пізніше Уран, Нептун і Плутон у сучасній стали покровителями Водолія, Риб і Скорпіона."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які роки підтримує калькулятор?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Від 1900 до 2100 року для обох зодіаків. Для китайського календаря дати Нового року взято з таблиці на ці роки."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="czodiac">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор зодіакального знаку</h1>
-                    <p class="mcalc__p">
-                        Дізнайся свій західний зодіакальний знак та символ китайського календаря
-                        за датою народження.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Знак зодіаку за датою народження</h1>
+                    <p class="ph__p">Введіть дату народження: калькулятор покаже західний знак за положенням Сонця й китайську тварину зі стихією. Для дат на межі знаків він попередить і покаже час переходу, а для січня й лютого врахує китайський Новий рік. Інші вкладки дають знаки на будь-який рік і роки кожної тварини.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Введи дату народження</h2>
-                        <span class="mcalc__badge">Date/Time</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="birthDate">Дата народження</label>
-                            <input class="mcalc__input" id="birthDate" type="date" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Дата/час</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Розрахувати</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="me" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Мій знак</b><span class="ph__ex">Західний і китайський знак</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="tbl" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Знаки за датами</b><span class="ph__ex">Знаки на вибраний рік</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="cn" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Китайський за роками</b><span class="ph__ex">Роки тварини за діапазон</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="zodiac-result" id="zodiacResult" style="display:none;">
-                        <div class="zodiac-card">
-                            <div class="zodiac-emoji" id="westernEmoji">♈</div>
-                            <div class="zodiac-name" id="westernName"></div>
-                            <div class="zodiac-details" id="westernDetails"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-                        <div class="zodiac-card">
-                            <div class="zodiac-emoji" id="chineseEmoji">🐉</div>
-                            <div class="zodiac-name" id="chineseName"></div>
-                            <div class="zodiac-details" id="chineseDetails"></div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/datetime/age-calculator">Калькулятор віку</a>
-                    <a href="/datetime/day-of-week-calculator">День тижня за датою</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке зодіакальний знак</h2>
-            <p>
-                <b>Західний зодіак</b> складається з 12 знаків, кожен з яких відповідає певному
-                проміжку дат протягом року, залежно від позиції Сонця відносно сузір'їв на момент
-                народження. Кожен знак асоціюється зі стихією (вогонь, земля, повітря, вода) та
-                планетою-покровителем.
-            </p>
-
-            <h2>Китайський зодіак</h2>
-            <p>
-                На відміну від західного, <b>китайський зодіак</b> визначається роком народження за
-                12-річним циклом тварин: Щур, Бик, Тигр, Кролик, Дракон, Змія, Кінь, Коза, Мавпа,
-                Півень, Собака, Свиня. Кожна тварина символізує певні риси характеру та має свою
-                стихію за системою у-сін (метал, дерево, вода, вогонь, земля).
-            </p>
-
-            <h2>12 знаків західного зодіаку</h2>
-            <ul>
-                <li><b>Овен</b> (21 бер — 19 кві) — вогонь</li>
-                <li><b>Телець</b> (20 кві — 20 тра) — земля</li>
-                <li><b>Близнюки</b> (21 тра — 20 чер) — повітря</li>
-                <li><b>Рак</b> (21 чер — 22 лип) — вода</li>
-                <li><b>Лев</b> (23 лип — 22 сер) — вогонь</li>
-                <li><b>Діва</b> (23 сер — 22 вер) — земля</li>
-                <li><b>Терези</b> (23 вер — 22 жов) — повітря</li>
-                <li><b>Скорпіон</b> (23 жов — 21 лис) — вода</li>
-                <li><b>Стрілець</b> (22 лис — 21 гру) — вогонь</li>
-                <li><b>Козеріг</b> (22 гру — 19 січ) — земля</li>
-                <li><b>Водолій</b> (20 січ — 18 лют) — повітря</li>
-                <li><b>Риби</b> (19 лют — 20 бер) — вода</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Це розважальний і культурний інструмент. Астрологія не має наукового підтвердження
-                впливу на характер, долю чи сумісність людей.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/datetime/age-calculator"><b>Калькулятор віку</b><span>Точний вік, дні народження й круглі дати.</span></a>
+                <a class="cc-related-card" href="/datetime/day-of-week-calculator"><b>День тижня за датою</b><span>Який день тижня був чи буде.</span></a>
+                <a class="cc-related-card" href="/datetime/moon-phase-calculator"><b>Фази Місяця</b><span>Фаза Місяця на будь-яку дату.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що показує калькулятор</h2>
+            <p>Введіть дату народження, і калькулятор визначить <b>західний знак зодіаку</b> й <b>китайського знака</b>. Для західного показано символ, стихію (вогонь, земля, повітря, вода), якість (кардинальний, фіксований, змінний), планету-покровителя й дати знака в цей рік. Для китайського, тварину, стихію (дерево, вогонь, земля, метал, вода), інь чи ян, початок і кінець року тварини. Наприклад, народжені <b>10 лютого 2026 року</b> — Водолії за західним зодіаком і Змії за китайським.</p>
+
+            <h2>Західний зодіак і положення Сонця</h2>
+            <p>Західний (тропічний) зодіак розділяє рік на 12 частин по 30° від весняного рівнодення, а не за сузір'ями. Тому знак залежить від того, де на небі Сонце в цю мить. Дати змінюються з року в рік приблизно на добу, і фіксована таблиця «Овен — 21 березня» дає помилки. У 2026 році Сонце входить в Овен <b>20 березня о ≈ 16:45 за Києвом</b> (≈ 14:45 UTC), а в 2003 році це сталося вже 21 березня о ≈ 03:00 за Києвом.</p>
+
+            <h2>Межа знаків</h2>
+            <p>Якщо ви народилися в день, коли Сонце переходить в інший знак, калькулятор попередить про це й назве час переходу. Наприклад, 20 березня 2026 року Сонце переходить із Риб в Овен приблизно о 14:45 UTC: народжені до цього моменту — Риби, після — Овен. Показано знак за київським полуднем. Для точного знака потрібні час і місце народження. Час переходу наближений: для рівнодень і сонцестоянь похибка близько 2 хвилин, для решти знаків до 15 хвилин.</p>
+
+            <h2>Китайський Новий рік</h2>
+            <p>Китайський рік тварини починається не 1 січня, а з китайського Нового року, який припадає на період від <b>21 січня до 20 лютого</b>. Тому народжені в січні чи на початку лютого часто належать до тварини попереднього року. Новий рік 2026 року припав на 17 лютого, тож народжені 10 лютого 2026 року ще Змії (рік Змії 29 січня 2025 – 16 лютого 2026), а з 17 лютого настає рік Коня, який триває до 5 лютого 2027 року. Калькулятор використовує таблицю дат китайського Нового року на 1900–2100 роки.</p>
+
+            <h2>Тварини, стихії й цикл</h2>
+            <p>Китайський календар поєднує 12 тварин, 5 стихій і інь чи ян, тому повний цикл триває 60 років. Тварина визначається як (рік − 4) mod 12, а стихія з (рік − 4) mod 10: парне значення — ян, непарне — інь. Для 2026 року виходить Кінь і Вогонь (ян). Роки Коня за останні десятиліття: 1990 (метал), 2002 (вода), 2014 (дерево) і 2026 (вогонь).</p>
+
+            <h2>Знаки за датами на вибраний рік</h2>
+            <p>Вкладка «Знаки за датами» показує для вибраного року, коли Сонце входить у кожен із 12 знаків, і чотири астрономічні події: весняне рівнодення, літнє сонцестояння, осіннє рівнодення й зимове сонцестояння. У 2026 році це 20 березня, 21 червня, 23 вересня й 21 грудня. Таблиця зручна, щоб побачити, як дати знаків зсуваються від року до року.</p>
+
+            <h2>Планети-покровителі</h2>
+            <p>Для кожного знака показано планету-покровителя. У традиційній астрології їх сім видимих небесних тіл, тому Скорпіон належить Марсу, Водолій Сатурну, Риби Юпітеру. У сучасній астрології додано Плутон, Уран і Нептун. Калькулятор показує обидва варіанти, коли вони відрізняються.</p>
+
+            <h2>Обмеження</h2>
+            <p>Дозволені дати від 1900 до 2100 року. Астрологія не має наукового підтвердження: це розважальна й культурна традиція, а не прогноз характеру чи долі. Калькулятор визначає знак за астрономічним положенням Сонця й календарем, не додаючи характеристик особистості.</p>
+            <p class="ph-mini">Астрологія не має наукового підтвердження: це розважальна й культурна традиція. Час переходу Сонця наближений, для рівнодень і сонцестоянь точніший.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Як визначається зодіакальний знак?</h3>
-                <p>Західний зодіакальний знак визначається за днем і місяцем народження — кожен знак відповідає певному
-                    діапазону дат протягом року.</p>
+            <div class="cc-faq-item">
+                <h3>Як визначити знак зодіаку за датою народження?</h3>
+                <p>Введіть дату на вкладці «Мій знак»: калькулятор покаже західний знак за положенням Сонця й китайську тварину. Народжені 10 лютого 2026 року — Водолії та Змії.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чим відрізняється китайський зодіак від західного?</h3>
-                <p>Китайський зодіак визначається роком народження (12-річний цикл тварин), тоді як західний — днем і
-                    місяцем народження.</p>
+            <div class="cc-faq-item">
+                <h3>Чому дати знаків відрізняються від таблиць в інших місцях?</h3>
+                <p>Сонце входить у знак у різний час щороку, тому межі зсуваються приблизно на добу. Калькулятор рахує реальний момент переходу, а не фіксовану дату.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи має астрологічне значення науковий доказ?</h3>
-                <p>Ні, астрологія не має наукового підтвердження впливу на характер чи долю. Це радше культурна та
-                    розважальна традиція.</p>
+            <div class="cc-faq-item">
+                <h3>Що робити, якщо я народився на межі двох знаків?</h3>
+                <p>Калькулятор попередить і покаже час переходу Сонця. Народжені до нього належать до попереднього знака, після нього до наступного. Для точного знака потрібні час і місце народження.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому за китайським зодіаком я належу до попереднього року?</h3>
+                <p>Китайський рік починається з китайського Нового року (від 21 січня до 20 лютого). Народжені до нього належать до тварини попереднього року.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Коли був китайський Новий рік у мій рік народження?</h3>
+                <p>Дату показує плитка «Китайський Новий рік» на вкладці «Мій знак», а вкладка «Китайський за роками» дає всі роки тварини.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що означають стихія й інь/ян у китайському знаку?</h3>
+                <p>Це ознаки 60-річного циклу: п'ять стихій (дерево, вогонь, земля, метал, вода) чергуються кожні два роки, а інь і ян чергуються щороку.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які роки належать Коню чи іншій тварині?</h3>
+                <p>Відкрийте вкладку «Китайський за роками» й виберіть тварину. Роки Коня: 1990, 2002, 2014, 2026.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим західний зодіак відрізняється від сузір'їв?</h3>
+                <p>Тропічний зодіак прив'язаний до рівнодення й пір року, а не до сузір'їв. Через прецесію знаки та однойменні сузір'я за століття розійшлися приблизно на цілий знак.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка точність часу переходу Сонця в знак?</h3>
+                <p>Для рівнодень і сонцестоянь близько 2 хвилин, для решти знаків до 15 хвилин. Тому час показано округленим до 5 хвилин із позначкою «≈».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи має астрологія наукове підтвердження?</h3>
+                <p>Ні. Астрологія не має наукового підтвердження впливу на характер чи долю: це розважальна й культурна традиція.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому планета-покровитель буває двох видів?</h3>
+                <p>У традиційній астрології використовували сім видимих планет, а відкриті пізніше Уран, Нептун і Плутон у сучасній стали покровителями Водолія, Риб і Скорпіона.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які роки підтримує калькулятор?</h3>
+                <p>Від 1900 до 2100 року для обох зодіаків. Для китайського календаря дати Нового року взято з таблиці на ці роки.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
