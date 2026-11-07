@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Safe Meat Temperature Guide — Doneness Chart | CalcCore</title>
+    <title>Meat Temperature: USDA Minimums and Doneness | CalcCore</title>
     <meta name="description"
-        content="Reference chart for safe internal cooking temperatures for beef, chicken, pork, fish, and more. Rest time after cooking included." />
+        content="The safe temperature of meat and poultry by USDA, a thermometer reading check, beef doneness levels and the pull temperature with carryover." />
 
     <link rel="canonical" href="https://calccore.net/en/kitchen/meat-temperature-guide" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/meat-temperature-guide" />
@@ -26,200 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Safe Meat Temperature Guide — Doneness Chart" />
-    <meta property="og:description" content="Reference chart for safe internal cooking temperatures for beef, chicken, pork, fish, and more. Rest time after cooking included." />
+    <meta property="og:title" content="Meat Temperature: USDA Minimums and Doneness" />
+    <meta property="og:description" content="The safe temperature of meat and poultry by USDA, a thermometer reading check, beef doneness levels and the pull temperature with carryover." />
     <meta property="og:url" content="https://calccore.net/en/kitchen/meat-temperature-guide" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Safe Meat Temperature Guide — Doneness Chart" />
-    <meta name="twitter:description" content="Reference chart for safe internal cooking temperatures for beef, chicken, pork, fish, and more. Rest time after cooking included." />
+    <meta name="twitter:title" content="Meat Temperature: USDA Minimums and Doneness" />
+    <meta name="twitter:description" content="The safe temperature of meat and poultry by USDA, a thermometer reading check, beef doneness levels and the pull temperature with carryover." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/meat-temperature-guide.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107mt2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/meat-temperature-guide.js?v=20260908" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Why is it important to let meat rest after cooking?",
-        "acceptedAnswer":{"@type":"Answer","text":"During resting, juices redistribute throughout the meat, making it juicier. The temperature also continues to rise slightly (carryover cooking)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is the temperature for chicken higher than for beef?",
-        "acceptedAnswer":{"@type":"Answer","text":"Poultry has a higher risk of salmonella contamination, requiring full cooking to 74°C, while beef can be safely eaten at lower temperatures (medium rare)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I rely on the color of meat alone to determine doneness?",
-        "acceptedAnswer":{"@type":"Answer","text":"No, color is an unreliable indicator — the only accurate way to check meat safety is a cooking thermometer inserted into the thickest part, away from bone."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107mt2" defer></script>
+    <script src="/js/phys-core.js?v=20261107mt2" defer></script>
+    <script src="/js/km-data.js?v=20261107mt2" defer></script>
+    <script src="/js/mt-data.js?v=20261107mt2" defer></script>
+    <script src="/js/mt-calc.js?v=20261107mt2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/kitchen/meat-temperature-guide#app",
-    "name":"Meat Temperature Guide",
-    "description":"Reference chart for safe internal temperatures for various meats and fish.",
-    "url":"https://calccore.net/en/kitchen/meat-temperature-guide",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/kitchen/meat-temperature-guide#app",
+  "name": "Meat Temperature: Safe Minimums and Doneness",
+  "description": "An online guide to meat doneness temperatures: the USDA safe minimums for poultry, ground meat, whole cuts of beef, pork, veal and lamb, ham, fish, eggs, leftovers and casseroles in °C and °F with the rest, a check of your thermometer reading, beef doneness levels (rare, medium rare, medium, medium well, well done) and the pull temperature with carryover.",
+  "url": "https://calccore.net/en/kitchen/meat-temperature-guide",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "USDA safe minimums in °C and °F with the rest",
+    "A thermometer reading check: safe or not",
+    "Beef doneness levels and the pull temperature",
+    "Carryover for a thin steak and a large cut",
+    "A warning when a level is below the USDA minimum",
+    "Tables with source links"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/kitchen/meat-temperature-guide#webpage",
+      "url": "https://calccore.net/en/kitchen/meat-temperature-guide",
+      "name": "Meat Temperature: USDA Minimums and Doneness | CalcCore",
+      "description": "The safe temperature of meat and poultry by USDA, a thermometer reading check, beef doneness levels and the pull temperature with carryover.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/kitchen/meat-temperature-guide#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/kitchen/meat-temperature-guide#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/kitchen/meat-temperature-guide#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Kitchen",
+          "item": "https://calccore.net/en/kitchen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Meat temperature",
+          "item": "https://calccore.net/en/kitchen/meat-temperature-guide"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/kitchen/meat-temperature-guide#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What temperature should chicken be cooked to?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To 165 °F (73.9 °C) in the thickest part, and for a thigh in the innermost part, not touching the bone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the safe temperature for steak?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By USDA 145 °F (62.8 °C) with a rest of at least 3 minutes. Rare, medium rare and medium are below this minimum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What temperature should ground meat be cooked to?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To 160 °F (71.1 °C) for beef, pork, veal and lamb and to 165 °F (73.9 °C) for ground poultry."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How hot should pork be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For chops and roasts 145 °F (62.8 °C) with a rest of at least 3 minutes, for ground pork 160 °F (71.1 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the temperature of cooked fish?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "145 °F (62.8 °C) or until the flesh is opaque and separates easily with a fork."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should meat rest after cooking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDA requires at least 3 minutes for whole cuts of beef, pork, veal, lamb and fresh ham. For poultry and ground meat there is no separate rest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is carryover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is cooking from residual heat: the temperature in the center keeps rising by a few degrees after the meat leaves the heat (3–5 °F for a thin steak, 10–15 °F for a large cut)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I take a steak off the heat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A few degrees before the target temperature: the calculator subtracts carryover from the serving temperature. For a thin steak at medium rare that is 126–131 °F (52–55 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is medium rare safe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is below the USDA minimum of 145 °F (62.8 °C) for whole cuts of beef. Children, pregnant women, older adults and people with weakened immunity are better off choosing the safe minimum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What temperature should ham be heated to?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fully cooked ham from a USDA-inspected plant to 140 °F (60 °C), other ham to 165 °F (73.9 °C), and fresh or smoked raw ham is cooked to 145 °F (62.8 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I go by the color of the meat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, the color of meat and juices does not show that it is safe. Measure with a thermometer in the thickest part."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What temperature should leftovers be reheated to?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To 165 °F (73.9 °C), and the same for casseroles."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cmeat">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Safe Meat Temperature Guide</h1>
-                    <p class="mcalc__p">
-                        Reference chart for safe internal doneness temperatures for meat, poultry,
-                        and fish — with rest time after cooking.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Meat Temperature: Safe Minimums and Doneness</h1>
+                    <p class="ph__p">Choose a food and the calculator shows the minimum safe internal temperature by USDA in °C and °F, the rest and where to measure. Enter a thermometer reading to see whether it is safe yet. A separate tab gives the pull temperature for beef at the doneness you want, allowing for carryover.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Choose a category</h2>
-                        <span class="mcalc__badge">Kitchen</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Kitchen</span>
+                        </div>
+
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="safe" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Safe temperature</b><span class="ph__ex">USDA safe minimums</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="done" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Doneness</b><span class="ph__ex">Steak doneness</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">All temperatures</b><span class="ph__ex">All temperatures with sources</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="categorySelect">Category</label>
-                            <select id="categorySelect" class="mcalc__select"></select>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
                     </div>
-
-                    <div class="meat-table-wrap" id="meatTableWrap"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/en/kitchen/oven-temperature-converter">Oven Temperature Converter</a>
-                    <a href="/en/kitchen/ingredient-substitution">Ingredient Substitution</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why you need a cooking thermometer</h2>
-            <p>
-                Visual cues (juice color, meat color) are unreliable for determining food safety.
-                The only accurate way to ensure meat is safely cooked is to measure the internal
-                temperature with a cooking thermometer.
-            </p>
-        
-            <h2>How to measure temperature correctly</h2>
-            <p>
-                Insert the thermometer into the thickest part of the food, avoiding bones, fat, and
-                cartilage (they conduct heat differently and give inaccurate readings). For poultry,
-                the best spot is the inner thigh, without touching the bone. For large cuts (roast beef,
-                whole turkey), check temperature at multiple points to ensure even doneness.
-            </p>
-        
-            <h2>What "resting" meat means and why it matters</h2>
-            <p>
-                <b>Resting meat</b> is the period after removing a dish from heat during which it's left
-                uncut, allowing the fibers to "settle." This happens for two reasons:
-            </p>
-            <ul>
-                <li><b>Carryover cooking:</b> the outer layers of meat are hotter than the center, and that heat continues
-                    transferring inward even after removal from heat. The center temperature can rise another 3-8°C depending on
-                    the size of the cut — so large pieces (turkey, roast beef) should be removed from heat a few degrees before
-                    the target temperature.</li>
-                <li><b>Juice redistribution:</b> during cooking, heat pushes juices toward the center of the cut. If you cut
-                    into meat immediately, most of the juice will run out onto the plate or cutting board. After a few minutes
-                    of resting, the muscle fibers relax and reabsorb the juices evenly throughout the piece — which is why
-                    rested meat stays juicy rather than dry when sliced.</li>
-            </ul>
-        
-            <h2>How long to rest different types of meat</h2>
-            <ul>
-                <li><b>Small cuts</b> (chicken breasts, steaks, pork chops): 3-5 minutes is enough.</li>
-                <li><b>Medium cuts</b> (roast chicken, small roast beef): 10-15 minutes.</li>
-                <li><b>Large cuts</b> (whole turkey, large roast): 20-30 minutes, tented with foil to retain heat.</li>
-            </ul>
-            <p>
-                Rule of thumb: the larger the cut of meat, the longer it should rest — roughly 1 minute
-                of resting per 100-150g of weight for large cuts.
-            </p>
-        
-            <h2>How to use this guide in practice</h2>
-            <ol>
-                <li>Choose a food category (poultry, beef/lamb, pork, fish, eggs/leftovers) from the list above.</li>
-                <li>Find the specific dish and desired doneness level in the table.</li>
-                <li>Check the temperature with a thermometer in the thickest part about 5-10 minutes before expected doneness.
-                </li>
-                <li>Remove from heat slightly before the target temperature (accounting for carryover), then rest for the
-                    recommended time.</li>
-                <li>Slice and serve — the juices will stay inside the meat rather than on the cutting board.</li>
-            </ol>
-        
-            <h2>Why different foods have different requirements</h2>
-            <p>
-                Poultry (chicken, turkey) requires a higher temperature (74°C/165°F) due to increased
-                salmonella risk. Beef and lamb can be safely eaten at lower temperatures (medium rare,
-                63°C/145°F), since bacteria are usually only on the surface and are killed during
-                searing. Ground meat always needs full cooking, because bacteria can be mixed
-                throughout the volume during grinding.
-            </p>
-        
-            <p class="m-hintSmall">
-                Temperature values are based on general food safety guidelines. For immunocompromised
-                individuals, pregnant women, and young children, choosing a higher temperature
-                threshold is recommended.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/kitchen/oven-temperature-converter"><b>Oven Temperature Converter</b><span>°C, °F and gas mark with a fan oven adjustment.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/recipe-scaler"><b>Recipe Scaler</b><span>Scale a recipe to another number of servings.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/measurement-converter"><b>Cooking Measurement Converter</b><span>Cups, spoons and grams by ingredient.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator does</h2>
+            <p>The calculator shows the <b>minimum safe internal temperature</b> for meat, poultry, fish, eggs and leftovers, checks the reading of your thermometer and tells you when to take beef off the heat for the doneness you want. All temperatures are given in degrees Celsius and Fahrenheit.</p>
+
+            <h2>USDA safe minimums</h2>
+            <p>By the <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart" target="_blank" rel="noopener noreferrer">USDA FSIS</a> chart all poultry (breasts, whole bird, thighs, ground, stuffing) must reach <b>165 °F (73.9 °C)</b>. Ground beef, pork, veal and lamb need <b>160 °F (71.1 °C)</b>. Steaks, chops and roasts of beef, pork, veal and lamb, and fresh ham, are done at <b>145 °F (62.8 °C)</b> with a rest of at least 3 minutes. Fin fish needs 145 °F or until the flesh is opaque and separates with a fork. Egg dishes are cooked to 160 °F (71.1 °C), and leftovers and casseroles are reheated to 165 °F (73.9 °C).</p>
+
+            <h2>Ham</h2>
+            <p>For fully cooked ham that is reheated the value depends on its origin: ham packaged in a USDA-inspected plant is reheated to 140 °F (60 °C) and all other ham to 165 °F (73.9 °C). Fresh or smoked raw ham is cooked to 145 °F (62.8 °C) with a 3-minute rest.</p>
+
+            <h2>Rest</h2>
+            <p>USDA requires a rest of <b>at least 3 minutes</b> for whole cuts of beef, pork, veal, lamb and fresh ham: during that time the temperature holds and pathogens die off. For poultry and ground meat USDA does not require a separate rest. A longer rest of large cuts is a matter of juiciness, not safety.</p>
+
+            <h2>Doneness is not safety</h2>
+            <p>Beef doneness levels (rare, medium rare, medium, medium well, well done) are flavor guides. According to <a href="https://blog.thermoworks.com/steak-temps-getting-it-right" target="_blank" rel="noopener noreferrer">ThermoWorks</a> rare is served at 120–130 °F (49–54 °C), medium rare at 130–135 °F (54–57 °C), medium at 135–145 °F (57–63 °C), medium well at 145–155 °F (63–68 °C) and well done from 155 °F (68 °C). The first three levels are below the USDA minimum of 145 °F (63 °C) for whole cuts of beef, so the calculator shows a warning. Children, pregnant women, older adults and people with weakened immunity are better off choosing the safe minimum. Ground meat is always cooked to 160 °F.</p>
+
+            <h2>Carryover and the pull temperature</h2>
+            <p>After the meat is taken off the heat the temperature in the center keeps rising. The source advises allowing 3–5 °F (2–3 °C) for a thin steak and 10–15 °F (6–8 °C) for a large cut, and <a href="https://thermapen.co.uk/pages/steak-temperature-guide" target="_blank" rel="noopener noreferrer">Thermapen</a> gives similar pull temperatures. The calculator takes the middle of the range and subtracts it from the serving temperature: for a thin steak at medium rare that is 126–131 °F (52–55 °C). This is an estimate: carryover depends on thickness, the heat of the pan or oven and the accuracy of the thermometer.</p>
+
+            <h2>How to measure</h2>
+            <p>Insert the thermometer into the thickest part of the food, away from bones, fat and gristle. For poultry measure the innermost part of the thigh and wing and the thickest part of the breast. The color of the meat and juices does not show that it is safe, so go by the thermometer. For large cuts measure in several places.</p>
+
+            <h2>Sources, rights and contact</h2>
+            <p>The safe minimums come from the USDA FSIS chart, and for fish, eggs, leftovers and casseroles also from the <a href="https://www.fda.gov/media/107000/download" target="_blank" rel="noopener noreferrer">FDA</a> chart. The doneness levels are data from ThermoWorks and Thermapen. The data is collected from public sources and put in our own words. The site is not affiliated with these organizations or endorsed by them, and their names belong to their owners. If you are a rights holder and have a concern, write to us on the <a href="/en/contacts">Contacts</a> page: we will look into it and, if needed, correct or remove the data.</p>
+
+            <h2>Limits</h2>
+            <p>The calculator does not replace the advice of a doctor or the health authorities. The temperatures in the table are minimums for ordinary foods, not a guarantee of safety: freshness, storage and hygiene matter too. Doneness levels are given for beef only because there is no reliable data on levels for other kinds.</p>
+            <p class="ph-mini">The safe minimums come from the USDA chart; doneness levels are flavor guides. Rare, medium rare and medium are below the USDA minimum: for children, pregnant women, older adults and people with weakened immunity choose the safe minimum.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Why is it important to let meat rest after cooking?</h3>
-                <p>During resting, juices redistribute throughout the meat, making it juicier. The temperature also
-                    continues to rise slightly (carryover cooking).</p>
+            <div class="cc-faq-item">
+                <h3>What temperature should chicken be cooked to?</h3>
+                <p>To 165 °F (73.9 °C) in the thickest part, and for a thigh in the innermost part, not touching the bone.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why is the temperature for chicken higher than for beef?</h3>
-                <p>Poultry has a higher risk of salmonella contamination, requiring full cooking to 74°C, while beef can
-                    be safely eaten at lower temperatures (medium rare).</p>
+            <div class="cc-faq-item">
+                <h3>What is the safe temperature for steak?</h3>
+                <p>By USDA 145 °F (62.8 °C) with a rest of at least 3 minutes. Rare, medium rare and medium are below this minimum.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I rely on the color of meat alone to determine doneness?</h3>
-                <p>No, color is an unreliable indicator — the only accurate way to check meat safety is a cooking
-                    thermometer inserted into the thickest part, away from bone.</p>
+            <div class="cc-faq-item">
+                <h3>What temperature should ground meat be cooked to?</h3>
+                <p>To 160 °F (71.1 °C) for beef, pork, veal and lamb and to 165 °F (73.9 °C) for ground poultry.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How hot should pork be?</h3>
+                <p>For chops and roasts 145 °F (62.8 °C) with a rest of at least 3 minutes, for ground pork 160 °F (71.1 °C).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the temperature of cooked fish?</h3>
+                <p>145 °F (62.8 °C) or until the flesh is opaque and separates easily with a fork.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How long should meat rest after cooking?</h3>
+                <p>USDA requires at least 3 minutes for whole cuts of beef, pork, veal, lamb and fresh ham. For poultry and ground meat there is no separate rest.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is carryover?</h3>
+                <p>It is cooking from residual heat: the temperature in the center keeps rising by a few degrees after the meat leaves the heat (3–5 °F for a thin steak, 10–15 °F for a large cut).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>When should I take a steak off the heat?</h3>
+                <p>A few degrees before the target temperature: the calculator subtracts carryover from the serving temperature. For a thin steak at medium rare that is 126–131 °F (52–55 °C).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is medium rare safe?</h3>
+                <p>It is below the USDA minimum of 145 °F (62.8 °C) for whole cuts of beef. Children, pregnant women, older adults and people with weakened immunity are better off choosing the safe minimum.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What temperature should ham be heated to?</h3>
+                <p>Fully cooked ham from a USDA-inspected plant to 140 °F (60 °C), other ham to 165 °F (73.9 °C), and fresh or smoked raw ham is cooked to 145 °F (62.8 °C).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I go by the color of the meat?</h3>
+                <p>No, the color of meat and juices does not show that it is safe. Measure with a thermometer in the thickest part.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What temperature should leftovers be reheated to?</h3>
+                <p>To 165 °F (73.9 °C), and the same for casseroles.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

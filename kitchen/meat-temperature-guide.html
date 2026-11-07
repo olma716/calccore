@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Безпечна температура м'яса — таблиця готовності | CalcCore</title>
+    <title>Температура м'яса: мінімуми USDA й прожарка | CalcCore</title>
     <meta name="description"
-        content="Довідник безпечної внутрішньої температури для яловичини, курки, свинини, риби та інших продуктів. Час відпочинку після готування." />
+        content="Безпечна температура м'яса й птиці за USDA, перевірка показу термометра, ступені прожарки яловичини й температура зняття з вогню з урахуванням carryover." />
 
     <link rel="canonical" href="https://calccore.net/kitchen/meat-temperature-guide" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/meat-temperature-guide" />
@@ -26,200 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Безпечна температура м'яса — таблиця готовності" />
-    <meta property="og:description" content="Довідник безпечної внутрішньої температури для яловичини, курки, свинини, риби та інших продуктів. Час відпочинку після готування." />
+    <meta property="og:title" content="Температура м'яса: мінімуми USDA й прожарка" />
+    <meta property="og:description" content="Безпечна температура м'яса й птиці за USDA, перевірка показу термометра, ступені прожарки яловичини й температура зняття з вогню з урахуванням carryover." />
     <meta property="og:url" content="https://calccore.net/kitchen/meat-temperature-guide" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Безпечна температура м'яса — таблиця готовності" />
-    <meta name="twitter:description" content="Довідник безпечної внутрішньої температури для яловичини, курки, свинини, риби та інших продуктів. Час відпочинку після готування." />
+    <meta name="twitter:title" content="Температура м'яса: мінімуми USDA й прожарка" />
+    <meta name="twitter:description" content="Безпечна температура м'яса й птиці за USDA, перевірка показу термометра, ступені прожарки яловичини й температура зняття з вогню з урахуванням carryover." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/meat-temperature-guide.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107mt2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/meat-temperature-guide.js?v=20260908" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Чому важливо давати м'ясу \"відпочити\" після готування?",
-        "acceptedAnswer":{"@type":"Answer","text":"Під час відпочинку соки перерозподіляються по всьому шматку м'яса, роблячи його соковитішим. Температура також продовжує трохи підвищуватись (carryover cooking)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому температура для курки вища, ніж для яловичини?",
-        "acceptedAnswer":{"@type":"Answer","text":"Птиця має вищий ризик забруднення сальмонелою, тому вимагає повного приготування до 74°C, тоді як яловичину можна безпечно їсти при нижчих температурах (medium rare)."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна довіряти лише кольору м'яса для визначення готовності?",
-        "acceptedAnswer":{"@type":"Answer","text":"Ні, колір ненадійний показник — єдиний точний спосіб перевірити безпечність м'яса це кулінарний термометр, введений у найтовщу частину без кістки."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107mt2" defer></script>
+    <script src="/js/phys-core.js?v=20261107mt2" defer></script>
+    <script src="/js/km-data.js?v=20261107mt2" defer></script>
+    <script src="/js/mt-data.js?v=20261107mt2" defer></script>
+    <script src="/js/mt-calc.js?v=20261107mt2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/kitchen/meat-temperature-guide#app",
-    "name":"Meat Temperature Guide",
-    "description":"Довідник безпечної внутрішньої температури для різних видів м'яса та риби.",
-    "url":"https://calccore.net/kitchen/meat-temperature-guide",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/kitchen/meat-temperature-guide#app",
+  "name": "Температура м'яса: безпечні мінімуми й прожарка",
+  "description": "Онлайн-довідник температури готовності м'яса: безпечні мінімуми за USDA для птиці, фаршу, цілих шматків яловичини, свинини, телятини й баранини, шинки, риби, яєць, залишків і запіканок у °C та °F з відпочинком, перевірка показу вашого термометра, ступені прожарки яловичини (rare, medium rare, medium, medium well, well done) і температура зняття з вогню з урахуванням carryover.",
+  "url": "https://calccore.net/kitchen/meat-temperature-guide",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Безпечні мінімуми USDA в °C й °F з відпочинком",
+    "Перевірка показу термометра: безпечно чи ні",
+    "Ступені прожарки яловичини й температура зняття з вогню",
+    "Carryover для тонкого стейка й великого шматка",
+    "Застереження, коли ступінь нижчий за мінімум USDA",
+    "Таблиці з посиланнями на джерела"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/kitchen/meat-temperature-guide#webpage",
+      "url": "https://calccore.net/kitchen/meat-temperature-guide",
+      "name": "Температура м'яса: мінімуми USDA й прожарка | CalcCore",
+      "description": "Безпечна температура м'яса й птиці за USDA, перевірка показу термометра, ступені прожарки яловичини й температура зняття з вогню з урахуванням carryover.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/kitchen/meat-temperature-guide#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/kitchen/meat-temperature-guide#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/kitchen/meat-temperature-guide#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Кухня",
+          "item": "https://calccore.net/kitchen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Температура м'яса",
+          "item": "https://calccore.net/kitchen/meat-temperature-guide"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/kitchen/meat-temperature-guide#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "До якої температури готувати курку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "До 165 °F (73,9 °C) у найтовщій частині, для стегна у внутрішній частині, не торкаючись кістки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка безпечна температура для стейка?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За USDA 145 °F (62,8 °C) із відпочинком щонайменше 3 хв. Rare, medium rare і medium нижчі за цей мінімум."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "До якої температури готувати фарш?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "До 160 °F (71,1 °C) для яловичини, свинини, телятини й баранини і до 165 °F (73,9 °C) для фаршу з птиці."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки градусів потрібно для свинини?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для відбивних і шматків для запікання 145 °F (62,8 °C) із відпочинком щонайменше 3 хв, для фаршу 160 °F (71,1 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка температура готової риби?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "145 °F (62,8 °C) або доки м'якуш непрозорий і легко розділяється виделкою."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки відпочивати м'ясу після готування?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDA вимагає щонайменше 3 хв для цілих шматків яловичини, свинини, телятини, баранини й свіжої шинки. Для птиці й фаршу окремого відпочинку немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке carryover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це доготування від залишкового тепла: температура в центрі росте ще кілька градусів після зняття з вогню (3–5 °F для тонкого стейка, 10–15 °F для великого шматка)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Коли знімати стейк із вогню?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За кілька градусів до цільової температури: калькулятор віднімає carryover від температури подачі. Для medium rare тонкого стейка це 126–131 °F (52–55 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи безпечний medium rare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Він нижчий за мінімум USDA 145 °F (62,8 °C) для цілих шматків яловичини. Дітям, вагітним, літнім людям і людям з ослабленим імунітетом краще обирати безпечний мінімум."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "До якої температури розігрівати шинку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Готову шинку з підприємства під наглядом USDA до 140 °F (60 °C), іншу до 165 °F (73,9 °C), а свіжу чи копчену сиру шинку готують до 145 °F (62,8 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна орієнтуватись на колір м'яса?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, колір м'яса й соку не показує безпечність. Міряйте термометром у найтовщій частині."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "До якої температури розігрівати залишки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "До 165 °F (73,9 °C), так само запіканки."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cmeat">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Безпечна температура м'яса</h1>
-                    <p class="mcalc__p">
-                        Довідник внутрішньої температури готовності для м'яса, птиці та риби —
-                        з часом відпочинку після готування.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Температура м'яса: безпечні мінімуми й прожарка</h1>
+                    <p class="ph__p">Оберіть продукт, і калькулятор покаже мінімальну безпечну внутрішню температуру за USDA в °C та °F, відпочинок і де міряти. Введіть показ термометра, щоб побачити, чи вже безпечно. Окрема вкладка підкаже температуру зняття яловичини з вогню для потрібного ступеня прожарки з урахуванням carryover.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Обери продукт</h2>
-                        <span class="mcalc__badge">Kitchen</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Кухня</span>
+                        </div>
+
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="safe" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Безпечна температура</b><span class="ph__ex">Безпечні мінімуми USDA</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="done" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Ступінь прожарки</b><span class="ph__ex">Ступінь прожарки стейка</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Усі температури</b><span class="ph__ex">Усі температури з джерелами</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="categorySelect">Категорія</label>
-                            <select id="categorySelect" class="mcalc__select"></select>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
                     </div>
-
-                    <div class="meat-table-wrap" id="meatTableWrap"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/kitchen/oven-temperature-converter">Температура духовки</a>
-                    <a href="/kitchen/ingredient-substitution">Заміна інгредієнтів</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Навіщо потрібен термометр для готування</h2>
-            <p>
-                Візуальні ознаки (колір соку, колір м'яса) ненадійні для визначення безпечності
-                продукту. Єдиний точний спосіб переконатись, що м'ясо приготовано безпечно — це
-                виміряти внутрішню температуру кулінарним термометром.
-            </p>
-        
-            <h2>Як правильно вимірювати температуру</h2>
-            <p>
-                Встав термометр у найтовщу частину продукту, уникаючи кісток, жиру та хрящів
-                (вони проводять тепло інакше і дають неточні показники). Для птиці найкраще місце —
-                внутрішня частина стегна, не торкаючись кістки. Для великих шматків (ростбіф, ціла
-                індичка) вимірюй температуру в кількох точках, щоб переконатись у рівномірності готовності.
-            </p>
-        
-            <h2>Що таке "відпочинок" м'яса і навіщо він потрібен</h2>
-            <p>
-                <b>Відпочинок м'яса</b> — це період часу після зняття страви з вогню, протягом якого
-                її не ріжуть, даючи волокнам "заспокоїтись". Це відбувається з двох причин:
-            </p>
-            <ul>
-                <li><b>Carryover cooking (доготування за рахунок залишкового тепла):</b> зовнішні шари м'яса гарячіші за центр,
-                    і це тепло продовжує передаватись усередину навіть після зняття з вогню. Температура в центрі може піднятись
-                    ще на 3-8°C залежно від розміру шматка — тому великі шматки (індичка, ростбіф) варто знімати з вогню на
-                    кілька градусів раніше цільової температури.</li>
-                <li><b>Перерозподіл соків:</b> під час готування тепло виштовхує соки до центру шматка. Якщо розрізати м'ясо
-                    одразу, більшість соку витече на тарілку чи дошку. За кілька хвилин відпочинку м'язові волокна
-                    розслабляються і знову вбирають соки рівномірно по всьому шматку — тому нарізане м'ясо залишається
-                    соковитим, а не сухим.</li>
-            </ul>
-        
-            <h2>Як довго відпочивати різним видам м'яса</h2>
-            <ul>
-                <li><b>Невеликі шматки</b> (курячі грудки, стейки, свинячі відбивні): 3-5 хвилин достатньо.</li>
-                <li><b>Середні шматки</b> (смажена курка, невеликий ростбіф): 10-15 хвилин.</li>
-                <li><b>Великі шматки</b> (ціла індичка, великий ростбіф): 20-30 хвилин, накривши фольгою для збереження тепла.
-                </li>
-            </ul>
-            <p>
-                Правило: чим більший шматок м'яса, тим довше він має відпочивати — приблизно 1 хвилина
-                відпочинку на кожні 100-150 г ваги для великих шматків.
-            </p>
-        
-            <h2>Як практично користуватись цим гідом</h2>
-            <ol>
-                <li>Обери категорію продукту (птиця, яловичина/баранина, свинина, риба, яйця/залишки) у списку вище.</li>
-                <li>Знайди в таблиці конкретний вид страви та потрібний ступінь прожарки.</li>
-                <li>Виміряй температуру термометром у найтовщій частині за 5-10 хвилин до очікуваної готовності.</li>
-                <li>Знявши з вогню трохи раніше цільової температури (з урахуванням carryover), дай відпочити рекомендований
-                    час.</li>
-                <li>Наріж і подавай — соки залишаться всередині, а не на дошці для нарізки.</li>
-            </ol>
-        
-            <h2>Чому різні продукти мають різні вимоги</h2>
-            <p>
-                Птиця (курка, індичка) вимагає вищої температури (74°C) через підвищений ризик
-                сальмонели. Яловичину та баранину можна безпечно їсти при нижчих температурах
-                (medium rare, 63°C), оскільки бактерії зазвичай знаходяться лише на поверхні і
-                знищуються під час обсмажування. Мелене м'ясо завжди потребує повного приготування,
-                бо бактерії можуть бути перемішані по всьому об'єму під час подрібнення.
-            </p>
-        
-            <p class="m-hintSmall">
-                Значення температур базуються на загальних рекомендаціях харчової безпеки. Для
-                людей з ослабленим імунітетом, вагітних та маленьких дітей рекомендується обирати
-                вищий поріг температури.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/kitchen/oven-temperature-converter"><b>Температура духовки</b><span>°C, °F і газова марка з поправкою для вентилятора.</span></a>
+                <a class="cc-related-card" href="/kitchen/recipe-scaler"><b>Перерахунок порцій рецепта</b><span>Збільшення й зменшення рецепта на іншу кількість порцій.</span></a>
+                <a class="cc-related-card" href="/kitchen/measurement-converter"><b>Конвертер кулінарних мір</b><span>Склянки, ложки й грами з урахуванням продукту.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що робить калькулятор</h2>
+            <p>Калькулятор показує <b>мінімальну безпечну внутрішню температуру</b> для м'яса, птиці, риби, яєць і залишків їжі, перевіряє показ вашого термометра й підказує, коли знімати яловичину з вогню для потрібного ступеня прожарки. Усі температури наведено в градусах Цельсія та Фаренгейта.</p>
+
+            <h2>Безпечні мінімуми за USDA</h2>
+            <p>За таблицею <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart" target="_blank" rel="noopener noreferrer">USDA FSIS</a> уся птиця (грудка, ціла тушка, стегна, фарш, начинка) має прогрітися до <b>165 °F (73,9 °C)</b>. Фарш з яловичини, свинини, телятини й баранини потребує <b>160 °F (71,1 °C)</b>. Стейки, відбивні й шматки для запікання з яловичини, свинини, телятини й баранини, а також свіжа шинка готові при <b>145 °F (62,8 °C)</b> з відпочинком щонайменше 3 хв. Риба з плавцями потребує 145 °F або поки м'якуш не стане непрозорим і не розділятиметься виделкою. Страви з яєць готують до 160 °F (71,1 °C), залишки їжі й запіканки розігрівають до 165 °F (73,9 °C).</p>
+
+            <h2>Шинка</h2>
+            <p>Для готової шинки, яку розігрівають, значення залежить від походження: упаковану на підприємстві під наглядом USDA достатньо розігріти до 140 °F (60 °C), а всю іншу до 165 °F (73,9 °C). Свіжу чи копчену сиру шинку готують до 145 °F (62,8 °C) із відпочинком 3 хв.</p>
+
+            <h2>Відпочинок</h2>
+            <p>USDA вимагає відпочинок <b>щонайменше 3 хв</b> для цілих шматків яловичини, свинини, телятини, баранини й свіжої шинки: за цей час температура ще тримається, а патогени гинуть. Для птиці й фаршу окремого відпочинку USDA не вимагає. Довший відпочинок великих шматків це питання соковитості, а не безпеки.</p>
+
+            <h2>Ступінь прожарки це не безпека</h2>
+            <p>Ступені прожарки яловичини (rare, medium rare, medium, medium well, well done) це смакові орієнтири. За даними <a href="https://blog.thermoworks.com/steak-temps-getting-it-right" target="_blank" rel="noopener noreferrer">ThermoWorks</a> rare подають при 120–130 °F (49–54 °C), medium rare при 130–135 °F (54–57 °C), medium при 135–145 °F (57–63 °C), medium well при 145–155 °F (63–68 °C), well done від 155 °F (68 °C). Перші три ступені нижчі за мінімум USDA 145 °F (63 °C) для цілих шматків яловичини, тому калькулятор показує застереження. Дітям, вагітним, літнім людям і людям з ослабленим імунітетом краще обирати безпечний мінімум. Фарш завжди готують до 160 °F.</p>
+
+            <h2>Carryover і температура зняття з вогню</h2>
+            <p>Після зняття з вогню температура в центрі шматка ще росте. Джерело радить закладати 3–5 °F (2–3 °C) для тонкого стейка й 10–15 °F (6–8 °C) для великого шматка, а <a href="https://thermapen.co.uk/pages/steak-temperature-guide" target="_blank" rel="noopener noreferrer">Thermapen</a> дає схожі температури зняття. Калькулятор бере середину діапазону й віднімає її від температури подачі: для medium rare тонкого стейка це 126–131 °F (52–55 °C). Це оцінка: carryover залежить від товщини, жару сковороди чи духовки й точності термометра.</p>
+
+            <h2>Як міряти температуру</h2>
+            <p>Вставте термометр у найтовщу частину продукту, подалі від кісток, жиру й хрящів. Для птиці міряйте внутрішню частину стегна й крила та найтовшу частину грудки. Колір м'яса й соку не показує безпечність, тож орієнтуйтесь на термометр. Для великих шматків міряйте в кількох місцях.</p>
+
+            <h2>Джерела, права та контакт</h2>
+            <p>Безпечні мінімуми взято з таблиці USDA FSIS, для риби, яєць, залишків і запіканок також із таблиці <a href="https://www.fda.gov/media/107000/download" target="_blank" rel="noopener noreferrer">FDA</a>. Ступені прожарки це дані ThermoWorks і Thermapen. Дані зібрано з відкритих джерел і викладено своїми словами. Сайт не пов'язаний із цими організаціями й не підтверджений ними, а їхні назви належать їхнім власникам. Якщо ви правовласник і маєте зауваження, напишіть нам на сторінці <a href="/contacts">Контакти</a>: ми розглянемо звернення й за потреби виправимо чи приберемо дані.</p>
+
+            <h2>Обмеження</h2>
+            <p>Калькулятор не замінює рекомендацій лікаря чи санітарних служб. Температури в таблиці це мінімуми для звичайних продуктів, а не гарантія безпеки: на неї впливають свіжість, зберігання й гігієна. Ступені прожарки подано лише для яловичини, бо для інших видів немає надійних даних про ступені.</p>
+            <p class="ph-mini">Безпечні мінімуми взято з таблиці USDA, ступені прожарки це смакові орієнтири. Rare, medium rare і medium нижчі за мінімум USDA: дітям, вагітним, літнім людям і людям з ослабленим імунітетом обирайте безпечний мінімум.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Чому важливо давати м'ясу "відпочити" після готування?</h3>
-                <p>Під час відпочинку соки перерозподіляються по всьому шматку м'яса, роблячи його соковитішим.
-                    Температура також продовжує трохи підвищуватись (carryover cooking).</p>
+            <div class="cc-faq-item">
+                <h3>До якої температури готувати курку?</h3>
+                <p>До 165 °F (73,9 °C) у найтовщій частині, для стегна у внутрішній частині, не торкаючись кістки.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому температура для курки вища, ніж для яловичини?</h3>
-                <p>Птиця має вищий ризик забруднення сальмонелою, тому вимагає повного приготування до 74°C, тоді як
-                    яловичину можна безпечно їсти при нижчих температурах (medium rare).</p>
+            <div class="cc-faq-item">
+                <h3>Яка безпечна температура для стейка?</h3>
+                <p>За USDA 145 °F (62,8 °C) із відпочинком щонайменше 3 хв. Rare, medium rare і medium нижчі за цей мінімум.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна довіряти лише кольору м'яса для визначення готовності?</h3>
-                <p>Ні, колір ненадійний показник — єдиний точний спосіб перевірити безпечність м'яса це кулінарний
-                    термометр, введений у найтовщу частину без кістки.</p>
+            <div class="cc-faq-item">
+                <h3>До якої температури готувати фарш?</h3>
+                <p>До 160 °F (71,1 °C) для яловичини, свинини, телятини й баранини і до 165 °F (73,9 °C) для фаршу з птиці.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки градусів потрібно для свинини?</h3>
+                <p>Для відбивних і шматків для запікання 145 °F (62,8 °C) із відпочинком щонайменше 3 хв, для фаршу 160 °F (71,1 °C).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка температура готової риби?</h3>
+                <p>145 °F (62,8 °C) або доки м'якуш непрозорий і легко розділяється виделкою.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки відпочивати м'ясу після готування?</h3>
+                <p>USDA вимагає щонайменше 3 хв для цілих шматків яловичини, свинини, телятини, баранини й свіжої шинки. Для птиці й фаршу окремого відпочинку немає.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке carryover?</h3>
+                <p>Це доготування від залишкового тепла: температура в центрі росте ще кілька градусів після зняття з вогню (3–5 °F для тонкого стейка, 10–15 °F для великого шматка).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Коли знімати стейк із вогню?</h3>
+                <p>За кілька градусів до цільової температури: калькулятор віднімає carryover від температури подачі. Для medium rare тонкого стейка це 126–131 °F (52–55 °C).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи безпечний medium rare?</h3>
+                <p>Він нижчий за мінімум USDA 145 °F (62,8 °C) для цілих шматків яловичини. Дітям, вагітним, літнім людям і людям з ослабленим імунітетом краще обирати безпечний мінімум.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>До якої температури розігрівати шинку?</h3>
+                <p>Готову шинку з підприємства під наглядом USDA до 140 °F (60 °C), іншу до 165 °F (73,9 °C), а свіжу чи копчену сиру шинку готують до 145 °F (62,8 °C).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна орієнтуватись на колір м'яса?</h3>
+                <p>Ні, колір м'яса й соку не показує безпечність. Міряйте термометром у найтовщій частині.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>До якої температури розігрівати залишки?</h3>
+                <p>До 165 °F (73,9 °C), так само запіканки.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
