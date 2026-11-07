@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Unix Timestamp Converter Online — Epoch Time | CalcCore</title>
+    <title>Unix Timestamp Converter: Epoch to Date and Back | CalcCore</title>
     <meta name="description"
-        content="Convert Unix timestamp (epoch) to a regular date and vice versa. Live current timestamp, seconds and milliseconds support." />
+        content="Convert a Unix timestamp to a date and back: seconds, milliseconds, microseconds, nanoseconds, time zones, ISO 8601, FILETIME, Excel and other epochs." />
 
     <link rel="canonical" href="https://calccore.net/en/datetime/unix-timestamp-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/unix-timestamp-converter" />
@@ -26,217 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Unix Timestamp Converter Online — Epoch Time" />
-    <meta property="og:description" content="Convert Unix timestamp (epoch) to a regular date and vice versa. Live current timestamp, seconds and milliseconds support." />
+    <meta property="og:title" content="Unix Timestamp Converter: Epoch to Date and Back" />
+    <meta property="og:description" content="Convert a Unix timestamp to a date and back: seconds, milliseconds, microseconds, nanoseconds, time zones, ISO 8601, FILETIME, Excel and other epochs." />
     <meta property="og:url" content="https://calccore.net/en/datetime/unix-timestamp-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Unix Timestamp Converter Online — Epoch Time" />
-    <meta name="twitter:description" content="Convert Unix timestamp (epoch) to a regular date and vice versa. Live current timestamp, seconds and milliseconds support." />
+    <meta name="twitter:title" content="Unix Timestamp Converter: Epoch to Date and Back" />
+    <meta name="twitter:description" content="Convert a Unix timestamp to a date and back: seconds, milliseconds, microseconds, nanoseconds, time zones, ISO 8601, FILETIME, Excel and other epochs." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107ux1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261107ux1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/unix-timestamp-converter.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is a Unix timestamp?",
-        "acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's used in programming to store date and time as a single number."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is a timestamp sometimes in milliseconds and sometimes in seconds?",
-        "acceptedAnswer":{"@type":"Answer","text":"The standard Unix timestamp is measured in seconds. However, JavaScript and some other programming languages often use milliseconds (timestamp × 1000) for greater precision."}
-      },
-      {
-        "@type":"Question",
-        "name":"Is there a Year 2038 problem?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, 32-bit systems that store the timestamp as a signed integer will overflow on January 19, 2038. Modern 64-bit systems don't have this limitation."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107ux1" defer></script>
+    <script src="/js/phys-core.js?v=20261107ux1" defer></script>
+    <script src="/js/datepick.js?v=20261107ux1" defer></script>
+    <script src="/js/ag-data.js?v=20261107ux1" defer></script>
+    <script src="/js/ct-data.js?v=20261107ux1" defer></script>
+    <script src="/js/tz-data.js?v=20261107ux1" defer></script>
+    <script src="/js/ux-data.js?v=20261107ux1" defer></script>
+    <script src="/js/ux-calc.js?v=20261107ux1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/datetime/unix-timestamp-converter#app",
-    "name":"Unix Timestamp Converter",
-    "description":"Convert Unix timestamp to a date and back, with seconds and milliseconds support.",
-    "url":"https://calccore.net/en/datetime/unix-timestamp-converter",
-    "applicationCategory":"DeveloperApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/datetime/unix-timestamp-converter#app",
+  "name": "Unix Timestamp Converter",
+  "description": "An online Unix timestamp (epoch time) converter: it detects seconds, milliseconds, microseconds or nanoseconds automatically, parses 19-digit numbers exactly, shows the date in any time zone (ISO 8601, RFC 2822), converts a date to a timestamp with seconds and a fractional part and converts values between the Windows FILETIME, .NET, Excel, Apple and WebKit epochs and the Julian day. It has a live counter and code snippets.",
+  "url": "https://calccore.net/en/datetime/unix-timestamp-converter",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Automatic detection of seconds, milliseconds, microseconds and nanoseconds",
+    "Exact parsing of 19-digit numbers with no loss of precision",
+    "The date in any time zone, ISO 8601 and RFC 2822",
+    "A date and time with seconds and a fraction into a timestamp",
+    "A check of the Year 2038 limit and the 32-bit integer",
+    "Other epochs: FILETIME, .NET, Excel, Apple, WebKit, the Julian day"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/datetime/unix-timestamp-converter#webpage",
+      "url": "https://calccore.net/en/datetime/unix-timestamp-converter",
+      "name": "Unix Timestamp Converter: Epoch to Date and Back | CalcCore",
+      "description": "Convert a Unix timestamp to a date and back: seconds, milliseconds, microseconds, nanoseconds, time zones, ISO 8601, FILETIME, Excel and other epochs.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/datetime/unix-timestamp-converter#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/datetime/unix-timestamp-converter#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/datetime/unix-timestamp-converter#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Date/Time",
+          "item": "https://calccore.net/en/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Unix timestamp converter",
+          "item": "https://calccore.net/en/datetime/unix-timestamp-converter"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/datetime/unix-timestamp-converter#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert a Unix timestamp to a date?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste the number on the “Timestamp → date” tab: the calculator shows the date in UTC, in the chosen zone and in ISO 8601. For example 1700000000 is 11/14/2023 22:13:20 UTC."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I tell whether it is seconds or milliseconds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By the number of digits: 10 digits are seconds, 13 are milliseconds, 16 are microseconds, 19 are nanoseconds. The calculator detects it itself and lets you change it manually."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my date in the year 55,840?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Milliseconds (13 digits) were entered as seconds. Choose “Auto” or “Milliseconds” and the date becomes correct."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert a date to a timestamp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the “Date → timestamp” tab and enter the date, time and zone. 11/07/2026 14:30:05 in Kyiv is 1794054605."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Unix time account for time zones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The timestamp itself does not: it is a moment in UTC. A time zone is needed only to show the date or to enter a local time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Year 2038 problem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A signed 32-bit integer overflows at 2147483647, i.e. January 19, 2038 03:14:07 UTC. The calculator shows whether a value fits into 32 bits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are leap seconds counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Under POSIX every day in Unix time has exactly 86,400 seconds, so leap seconds are “stretched” into a neighbouring second."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is precision lost for 19-digit numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Numbers are parsed exactly, unlike ordinary JavaScript numbers, which lose the last digits after 15–16 digits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get the current timestamp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The form has a live counter and a “Now” button. In code: Math.floor(Date.now() / 1000) in JavaScript, int(time.time()) in Python, time() in PHP, date +%s in Bash."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Windows FILETIME and .NET ticks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They count intervals of 100 nanoseconds: FILETIME since January 1, 1601 and .NET ticks since January 1, 0001. The “Other epochs” tab converts them to Unix time and back."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are Excel dates before March 1900 wrong?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Excel treats 1900 as a leap year (although February 29, 1900 did not exist), so serial numbers 1–60 are shifted by a day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which dates does the calculator support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For date input from the year 1000 to 2999, for timestamps about ±275,760 years. A negative timestamp is a time before 1970."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cunix">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Unix Timestamp Converter</h1>
-                    <p class="mcalc__p">
-                        Convert Unix timestamp (epoch) to a regular date — and back.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Unix Timestamp Converter</h1>
+                    <p class="ph__p">Paste a Unix timestamp: the calculator works out by itself whether it is seconds, milliseconds or nanoseconds and shows the date in the chosen time zone, ISO 8601, the weekday and code snippets. The other tabs convert a date to a timestamp and values between the Windows, .NET, Excel and Apple epochs.</p>
                 </div>
 
-                <!-- Live current timestamp -->
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto 16px;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Current timestamp</h2>
-                        <span class="mcalc__badge">Live</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
                     </div>
-                    <div class="mcalc__bigNumber" id="liveTimestamp" style="font-family:monospace;">—</div>
-                </div>
-
-                <div class="mcalc__grid">
-
-                    <!-- LEFT: timestamp to date -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Timestamp → Date</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Date/Time</span>
                         </div>
 
-                        <div class="mcalc__rows">
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="tsInput">Unix timestamp</label>
-                                <input class="mcalc__input" id="tsInput" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 1735689600" />
-                            </div>
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="tsUnit">Unit</label>
-                                <select id="tsUnit" class="mcalc__select">
-                                    <option value="seconds" selected>Seconds</option>
-                                    <option value="milliseconds">Milliseconds</option>
-                                </select>
-                            </div>
-                            <div class="mcalc__field m-full">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnToDate"
-                                    type="button">Convert</button>
-                            </div>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="ts" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Timestamp → date</b><span class="ph__ex">Timestamp to date</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="dt" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Date → timestamp</b><span class="ph__ex">Date to timestamp</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="ep" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Other epochs</b><span class="ph__ex">Other epochs</span></span></button>
                         </div>
 
-                        <div class="mcalc__bigNumber" id="dateResult" style="margin-top:12px;">Enter a timestamp.</div>
-                        <div class="m-details" id="dateDetails"></div>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <!-- RIGHT: date to timestamp -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Date → Timestamp</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__rows">
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateInput">Date</label>
-                                <input class="mcalc__input" id="dateInput" type="date" />
-                            </div>
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="timeInput">Time (UTC)</label>
-                                <input class="mcalc__input" id="timeInput" type="time" />
-                            </div>
-                            <div class="mcalc__field m-full">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnToTs"
-                                    type="button">Convert</button>
-                            </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="tsResult" style="margin-top:12px;">Enter a date.</div>
-                        <div class="m-details" id="tsDetails"></div>
                     </div>
-
                 </div>
-
-                <div class="mcalc__toast" id="mToast" style="text-align:center; max-width:900px; margin:8px auto;">
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is a Unix timestamp</h2>
-            <p>
-                A <b>Unix timestamp</b> (also known as epoch time or POSIX time) is the number of seconds
-                that have elapsed since January 1, 1970, 00:00:00 UTC (the "Unix epoch"). It's a standard
-                way of representing date and time as a single integer, widely used in programming,
-                databases, and APIs.
-            </p>
-
-            <h2>Seconds vs milliseconds</h2>
-            <p>
-                The classic Unix timestamp is measured in <b>seconds</b>. However, JavaScript (via
-                <code>Date.now()</code>) and some other programming languages use timestamps in
-                <b>milliseconds</b> for greater precision — that's simply the timestamp in seconds
-                multiplied by 1000.
-            </p>
-
-            <h2>Why timestamps are used</h2>
-            <ul>
-                <li><b>Databases:</b> storing dates as numbers simplifies sorting and comparison.</li>
-                <li><b>APIs:</b> many REST APIs return dates as Unix timestamps.</li>
-                <li><b>Logs and event records:</b> precise recording of an event's moment regardless of time zone.</li>
-                <li><b>Debugging:</b> quickly converting a timestamp from logs into a readable date.</li>
-            </ul>
-
-            <h2>The Year 2038 problem (Y2038)</h2>
-            <p>
-                Older 32-bit systems store the Unix timestamp as a signed 32-bit integer, which will
-                overflow on <b>January 19, 2038 at 03:14:07 UTC</b>. This can cause errors in legacy
-                systems, similar to the Year 2000 problem (Y2K). Modern 64-bit systems don't have this
-                limitation.
-            </p>
-
-            <p class="m-hintSmall">
-                The "Date → Timestamp" conversion uses UTC as the base time zone.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/datetime/timezone-converter"><b>Time Zone Converter</b><span>Time in any city of the world.</span></a>
+                <a class="cc-related-card" href="/en/datetime/day-of-week-calculator"><b>Day of the Week for a Date</b><span>Which weekday a date was or will be.</span></a>
+                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><b>Date Difference Calculator</b><span>How many days, weeks and months between dates.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What a Unix timestamp is</h2>
+            <p>A Unix timestamp (epoch time, POSIX time) is the number of seconds that have passed since <b>January 1, 1970 00:00:00 UTC</b>. The number 0 is January 1, 1970, and <b>1700000000</b> is November 14, 2023 22:13:20 UTC (a Tuesday). It is a convenient way to store a moment in time as one number in databases, APIs, logs and file systems, regardless of the time zone. Leap seconds are not counted in Unix time: every day has exactly 86,400 seconds.</p>
+
+            <h2>Seconds, milliseconds, microseconds and nanoseconds</h2>
+            <p>A classic timestamp in seconds has <b>10 digits</b> (up to the year 2286). JavaScript, Java and many APIs use <b>milliseconds</b> (13 digits), some databases and profilers use microseconds (16 digits), and Go, Rust and time series use nanoseconds (19 digits). The calculator detects the unit by the number of digits and shows which one it chose, and you can change it manually if needed. Numbers are parsed exactly, so a 19-digit value like 1700000000123456789 does not lose digits, unlike ordinary JavaScript numbers.</p>
+
+            <h2>Time zones and formats</h2>
+            <p>A timestamp always corresponds to one moment, while the date depends on the zone. The same 1700000000 is 22:13:20 in UTC and already 00:13:20 on November 15 in Kyiv. The calculator shows the date in the chosen zone (with a search among more than 500 cities and zones), in ISO 8601 with an offset, RFC 2822 and HTTP date formats. For each moment you see the weekday, the day of the year, the ISO week number and “how long ago or from now”.</p>
+
+            <h2>Date to timestamp</h2>
+            <p>The “Date → timestamp” tab converts a date and time (with seconds and a fractional part, for example 14:30:05.123) into a timestamp in seconds, milliseconds, microseconds and nanoseconds. The time is entered in the chosen zone: November 7, 2026 14:30:05 in Kyiv is <b>1794054605</b>. If the time falls on a daylight saving change, the calculator warns you: an hour that does not exist or an hour that happens twice.</p>
+
+            <h2>The Year 2038 problem</h2>
+            <p>Old systems store a timestamp as a signed 32-bit integer: the largest value 2147483647 is <b>January 19, 2038 03:14:07 UTC</b>, and the next second overflows the number. The smallest value, −2147483648, is December 13, 1901. The calculator shows whether a value fits into 32 bits. Modern systems with 64-bit time do not have this problem.</p>
+
+            <h2>Other epochs</h2>
+            <p>Different systems count time from different dates. Windows FILETIME and LDAP use hundreds of nanoseconds since 1601, .NET ticks count from year 0001, Excel counts days since December 30, 1899, Apple counts seconds since 2001, WebKit browsers use microseconds since 1601 and astronomers use the Julian day. For January 1, 2000 these are 125911584000000000, 630822816000000000, 36526 and 2451544.5 respectively. In Excel, serial numbers 1–60 are shifted because of the well-known false leap year 1900.</p>
+
+            <h2>Code snippets</h2>
+            <p>Under the result there is a collapsed block with ready-made calls for JavaScript, Python, PHP, Go, Java, C#, Bash, PostgreSQL and MySQL: how to turn a timestamp into a date and how to get the current timestamp. The calculator itself loads and stores nothing, and the conversion runs in the browser.</p>
+
+            <h2>Limits</h2>
+            <p>Dates from the year 1000 to 2999 for date input, and for timestamps the browser's date limit of about ±275,760 years applies. Unix time does not count leap seconds and time zone rules come from the browser's database. The code snippets are typical, so check them for your version of the language.</p>
+            <p class="ph-mini">Unix time does not count leap seconds. The unit is detected by the number of digits: you can change it manually.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is a Unix timestamp?</h3>
-                <p>A Unix timestamp (epoch time) is the number of seconds that have elapsed since January 1, 1970,
-                    00:00:00 UTC. It's used in programming to store date and time as a single number.</p>
+            <div class="cc-faq-item">
+                <h3>How do I convert a Unix timestamp to a date?</h3>
+                <p>Paste the number on the “Timestamp → date” tab: the calculator shows the date in UTC, in the chosen zone and in ISO 8601. For example 1700000000 is 11/14/2023 22:13:20 UTC.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why is a timestamp sometimes in milliseconds and sometimes in seconds?</h3>
-                <p>The standard Unix timestamp is measured in seconds. However, JavaScript and some other programming
-                    languages often use milliseconds (timestamp × 1000) for greater precision.</p>
+            <div class="cc-faq-item">
+                <h3>How do I tell whether it is seconds or milliseconds?</h3>
+                <p>By the number of digits: 10 digits are seconds, 13 are milliseconds, 16 are microseconds, 19 are nanoseconds. The calculator detects it itself and lets you change it manually.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Is there a Year 2038 problem?</h3>
-                <p>Yes, 32-bit systems that store the timestamp as a signed integer will overflow on January 19, 2038.
-                    Modern 64-bit systems don't have this limitation.</p>
+            <div class="cc-faq-item">
+                <h3>Why is my date in the year 55,840?</h3>
+                <p>Milliseconds (13 digits) were entered as seconds. Choose “Auto” or “Milliseconds” and the date becomes correct.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I convert a date to a timestamp?</h3>
+                <p>Open the “Date → timestamp” tab and enter the date, time and zone. 11/07/2026 14:30:05 in Kyiv is 1794054605.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does Unix time account for time zones?</h3>
+                <p>The timestamp itself does not: it is a moment in UTC. A time zone is needed only to show the date or to enter a local time.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the Year 2038 problem?</h3>
+                <p>A signed 32-bit integer overflows at 2147483647, i.e. January 19, 2038 03:14:07 UTC. The calculator shows whether a value fits into 32 bits.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are leap seconds counted?</h3>
+                <p>No. Under POSIX every day in Unix time has exactly 86,400 seconds, so leap seconds are “stretched” into a neighbouring second.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is precision lost for 19-digit numbers?</h3>
+                <p>No. Numbers are parsed exactly, unlike ordinary JavaScript numbers, which lose the last digits after 15–16 digits.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I get the current timestamp?</h3>
+                <p>The form has a live counter and a “Now” button. In code: Math.floor(Date.now() / 1000) in JavaScript, int(time.time()) in Python, time() in PHP, date +%s in Bash.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are Windows FILETIME and .NET ticks?</h3>
+                <p>They count intervals of 100 nanoseconds: FILETIME since January 1, 1601 and .NET ticks since January 1, 0001. The “Other epochs” tab converts them to Unix time and back.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why are Excel dates before March 1900 wrong?</h3>
+                <p>Excel treats 1900 as a leap year (although February 29, 1900 did not exist), so serial numbers 1–60 are shifted by a day.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which dates does the calculator support?</h3>
+                <p>For date input from the year 1000 to 2999, for timestamps about ±275,760 years. A negative timestamp is a time before 1970.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

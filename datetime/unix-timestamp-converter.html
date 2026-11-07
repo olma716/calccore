@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Unix Timestamp конвертер онлайн — Epoch час | CalcCore</title>
+    <title>Unix timestamp конвертер: епоха в дату й назад | CalcCore</title>
     <meta name="description"
-        content="Конвертація Unix timestamp (epoch) у звичайну дату і навпаки. Поточний timestamp у реальному часі, підтримка секунд і мілісекунд." />
+        content="Перетворіть Unix timestamp у дату й дату в timestamp: секунди, мілісекунди, мікро- й наносекунди, часові пояси, ISO 8601, FILETIME, Excel та інші епохи." />
 
     <link rel="canonical" href="https://calccore.net/datetime/unix-timestamp-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/datetime/unix-timestamp-converter" />
@@ -26,216 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Unix Timestamp конвертер онлайн — Epoch час" />
-    <meta property="og:description" content="Конвертація Unix timestamp (epoch) у звичайну дату і навпаки. Поточний timestamp у реальному часі, підтримка секунд і мілісекунд." />
+    <meta property="og:title" content="Unix timestamp конвертер: епоха в дату й назад" />
+    <meta property="og:description" content="Перетворіть Unix timestamp у дату й дату в timestamp: секунди, мілісекунди, мікро- й наносекунди, часові пояси, ISO 8601, FILETIME, Excel та інші епохи." />
     <meta property="og:url" content="https://calccore.net/datetime/unix-timestamp-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Unix Timestamp конвертер онлайн — Epoch час" />
-    <meta name="twitter:description" content="Конвертація Unix timestamp (epoch) у звичайну дату і навпаки. Поточний timestamp у реальному часі, підтримка секунд і мілісекунд." />
+    <meta name="twitter:title" content="Unix timestamp конвертер: епоха в дату й назад" />
+    <meta name="twitter:description" content="Перетворіть Unix timestamp у дату й дату в timestamp: секунди, мілісекунди, мікро- й наносекунди, часові пояси, ISO 8601, FILETIME, Excel та інші епохи." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107ux1" />
+    <link rel="stylesheet" href="/css/datepick.css?v=20261107ux1" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/unix-timestamp-converter.js?v=20260908" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Що таке Unix timestamp?",
-        "acceptedAnswer":{"@type":"Answer","text":"Unix timestamp (epoch time) — це кількість секунд, що минули з 1 січня 1970 року 00:00:00 UTC. Використовується в програмуванні для зберігання дати й часу як одного числа."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому timestamp іноді в мілісекундах, а іноді в секундах?",
-        "acceptedAnswer":{"@type":"Answer","text":"Unix timestamp за стандартом вимірюється в секундах. Однак JavaScript та деякі інші мови програмування часто використовують мілісекунди (timestamp × 1000) для більшої точності."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи є проблема 2038 року?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, 32-бітні системи, що зберігають timestamp як знакове ціле число, переповняться 19 січня 2038 року. Сучасні 64-бітні системи не мають цієї проблеми."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107ux1" defer></script>
+    <script src="/js/phys-core.js?v=20261107ux1" defer></script>
+    <script src="/js/datepick.js?v=20261107ux1" defer></script>
+    <script src="/js/ag-data.js?v=20261107ux1" defer></script>
+    <script src="/js/ct-data.js?v=20261107ux1" defer></script>
+    <script src="/js/tz-data.js?v=20261107ux1" defer></script>
+    <script src="/js/ux-data.js?v=20261107ux1" defer></script>
+    <script src="/js/ux-calc.js?v=20261107ux1" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/datetime/unix-timestamp-converter#app",
-    "name":"Unix Timestamp Converter",
-    "description":"Конвертація Unix timestamp у дату і навпаки з підтримкою секунд і мілісекунд.",
-    "url":"https://calccore.net/datetime/unix-timestamp-converter",
-    "applicationCategory":"DeveloperApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/datetime/unix-timestamp-converter#app",
+  "name": "Unix timestamp конвертер",
+  "description": "Онлайн-конвертер Unix timestamp (epoch time): автоматично визначає секунди, мілісекунди, мікросекунди чи наносекунди, точно розбирає 19-значні числа, показує дату в будь-якому часовому поясі (ISO 8601, RFC 2822), дату перетворює в timestamp із секундами й дробовою частиною та переводить значення між епохами Windows FILETIME, .NET, Excel, Apple, WebKit і юліанським днем. Є живий лічильник і фрагменти коду.",
+  "url": "https://calccore.net/datetime/unix-timestamp-converter",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Автовизначення секунд, мілісекунд, мікро- й наносекунд",
+    "Точний розбір 19-значних чисел без втрати точності",
+    "Дата в будь-якому часовому поясі, ISO 8601 і RFC 2822",
+    "Дата й час із секундами й дробовою частиною в timestamp",
+    "Перевірка межі 2038 року й 32-бітного цілого",
+    "Інші епохи: FILETIME, .NET, Excel, Apple, WebKit, юліанський день"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/datetime/unix-timestamp-converter#webpage",
+      "url": "https://calccore.net/datetime/unix-timestamp-converter",
+      "name": "Unix timestamp конвертер: епоха в дату й назад | CalcCore",
+      "description": "Перетворіть Unix timestamp у дату й дату в timestamp: секунди, мілісекунди, мікро- й наносекунди, часові пояси, ISO 8601, FILETIME, Excel та інші епохи.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/datetime/unix-timestamp-converter#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/datetime/unix-timestamp-converter#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/datetime/unix-timestamp-converter#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Дата/час",
+          "item": "https://calccore.net/datetime"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Unix timestamp конвертер",
+          "item": "https://calccore.net/datetime/unix-timestamp-converter"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/datetime/unix-timestamp-converter#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як перетворити Unix timestamp у дату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Вставте число на вкладці «Timestamp → дата»: калькулятор покаже дату в UTC, обраному поясі й ISO 8601. Наприклад, 1700000000 — це 14.11.2023 22:13:20 UTC."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як дізнатись, секунди це чи мілісекунди?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "За кількістю цифр: 10 цифр — секунди, 13 — мілісекунди, 16 — мікросекунди, 19 — наносекунди. Калькулятор визначає це сам і дозволяє змінити вручну."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому моя дата в 55 840 році?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мілісекунди (13 цифр) ввели як секунди. Оберіть «Авто» чи «Мілісекунди», і дата стане правильною."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як перетворити дату в timestamp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відкрийте вкладку «Дата → timestamp», введіть дату, час і пояс. 07.11.2026 14:30:05 за Києвом — це 1794054605."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує Unix-час часові пояси?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сам timestamp ні: це момент у UTC. Часовий пояс потрібен лише для показу дати чи для введення місцевого часу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке проблема 2038 року?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Знакове 32-бітне ціле переповнюється на 2147483647, тобто 19 січня 2038 року 03:14:07 UTC. Калькулятор показує, чи вміщається значення в 32 біти."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховуються високосні секунди?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. За стандартом POSIX кожна доба в Unix-часі має рівно 86400 секунд, тому високосні секунди «розтягуються» в сусідню секунду."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи втрачається точність для 19-значних чисел?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Числа розбираються точно, на відміну від звичайних JavaScript-чисел, які втрачають останні цифри після 15–16 знаків."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як отримати поточний timestamp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У формі є живий лічильник і кнопка «Зараз». У коді: Math.floor(Date.now() / 1000) у JavaScript, int(time.time()) у Python, time() у PHP, date +%s у Bash."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке Windows FILETIME і .NET ticks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це кількість інтервалів по 100 наносекунд: FILETIME від 1 січня 1601 року, .NET ticks від 1 січня 0001 року. Вкладка «Інші епохи» переводить їх у Unix-час і назад."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому в Excel неправильні дати до березня 1900 року?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Excel вважає 1900 рік високосним (хоча 29 лютого 1900 року не існувало), тому серійні номери 1–60 зсунуті на добу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які дати підтримує калькулятор?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для введення дати з 1000 до 2999 року, для timestamp приблизно ±275 760 років. Дата в негативних timestamp відповідає часу до 1970 року."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cunix">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Unix Timestamp конвертер</h1>
-                    <p class="mcalc__p">
-                        Конвертуй Unix timestamp (epoch) у звичайну дату — і навпаки.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Unix timestamp конвертер</h1>
+                    <p class="ph__p">Вставте Unix timestamp: калькулятор сам визначить, секунди це, мілісекунди чи наносекунди, і покаже дату в обраному часовому поясі, ISO 8601, день тижня й фрагменти коду. Інші вкладки перетворюють дату в timestamp і значення між епохами Windows, .NET, Excel та Apple.</p>
                 </div>
 
-                <!-- Live current timestamp -->
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto 16px;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Поточний timestamp</h2>
-                        <span class="mcalc__badge">Live</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
                     </div>
-                    <div class="mcalc__bigNumber" id="liveTimestamp" style="font-family:monospace;">—</div>
-                </div>
-
-                <div class="mcalc__grid">
-
-                    <!-- LEFT: timestamp to date -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Timestamp → Дата</h2>
-                            <span class="mcalc__badge">Sport</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Дата/час</span>
                         </div>
 
-                        <div class="mcalc__rows">
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="tsInput">Unix timestamp</label>
-                                <input class="mcalc__input" id="tsInput" type="text" inputmode="numeric"
-                                    placeholder="напр.: 1735689600" />
-                            </div>
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="tsUnit">Одиниця</label>
-                                <select id="tsUnit" class="mcalc__select">
-                                    <option value="seconds" selected>Секунди</option>
-                                    <option value="milliseconds">Мілісекунди</option>
-                                </select>
-                            </div>
-                            <div class="mcalc__field m-full">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnToDate"
-                                    type="button">Конвертувати</button>
-                            </div>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="ts" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Timestamp → дата</b><span class="ph__ex">Timestamp у дату</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="dt" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Дата → timestamp</b><span class="ph__ex">Дата в timestamp</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="ep" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Інші епохи</b><span class="ph__ex">Інші епохи</span></span></button>
                         </div>
 
-                        <div class="mcalc__bigNumber" id="dateResult" style="margin-top:12px;">Введи timestamp.</div>
-                        <div class="m-details" id="dateDetails"></div>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <!-- RIGHT: date to timestamp -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Дата → Timestamp</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__rows">
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="dateInput">Дата</label>
-                                <input class="mcalc__input" id="dateInput" type="date" />
-                            </div>
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="timeInput">Час (UTC)</label>
-                                <input class="mcalc__input" id="timeInput" type="time" />
-                            </div>
-                            <div class="mcalc__field m-full">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnToTs"
-                                    type="button">Конвертувати</button>
-                            </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="tsResult" style="margin-top:12px;">Введи дату.</div>
-                        <div class="m-details" id="tsDetails"></div>
                     </div>
-
                 </div>
-
-                <div class="mcalc__toast" id="mToast" style="text-align:center; max-width:900px; margin:8px auto;">
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Що таке Unix timestamp</h2>
-            <p>
-                <b>Unix timestamp</b> (також відомий як epoch time чи POSIX time) — це кількість секунд,
-                що минули з 1 січня 1970 року 00:00:00 UTC (так звана "епоха Unix"). Це стандартний спосіб
-                представлення дати й часу як одного цілого числа, широко використовуваний у програмуванні,
-                базах даних та API.
-            </p>
-
-            <h2>Секунди vs мілісекунди</h2>
-            <p>
-                Класичний Unix timestamp вимірюється в <b>секундах</b>. Однак JavaScript (метод
-                <code>Date.now()</code>) та деякі інші мови програмування використовують timestamp у
-                <b>мілісекундах</b> для більшої точності — це просто timestamp у секундах, помножений на 1000.
-            </p>
-
-            <h2>Навіщо потрібен timestamp</h2>
-            <ul>
-                <li><b>Бази даних:</b> зберігання дат як чисел спрощує сортування та порівняння.</li>
-                <li><b>API:</b> багато REST API повертають дати саме як Unix timestamp.</li>
-                <li><b>Логи та журнали подій:</b> точна фіксація моменту події незалежно від часового поясу.</li>
-                <li><b>Дебагінг:</b> швидка конвертація timestamp з логів у зрозумілу дату.</li>
-            </ul>
-
-            <h2>Проблема 2038 року (Y2038)</h2>
-            <p>
-                Старіші 32-бітні системи зберігають Unix timestamp як знакове 32-бітне ціле число,
-                яке переповниться <b>19 січня 2038 року о 03:14:07 UTC</b>. Це може спричинити помилки
-                в старих системах, подібно до проблеми 2000 року (Y2K). Сучасні 64-бітні системи
-                не мають цього обмеження.
-            </p>
-
-            <p class="m-hintSmall">
-                Конвертація "Дата → Timestamp" використовує UTC як базовий часовий пояс.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/datetime/timezone-converter"><b>Конвертер часових поясів</b><span>Час у будь-якому місті світу.</span></a>
+                <a class="cc-related-card" href="/datetime/day-of-week-calculator"><b>День тижня за датою</b><span>Який день тижня був чи буде.</span></a>
+                <a class="cc-related-card" href="/datetime/date-difference-calculator"><b>Різниця між датами</b><span>Скільки днів, тижнів і місяців між датами.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що таке Unix timestamp</h2>
+            <p>Unix timestamp (epoch time, POSIX time) — це кількість секунд, що минули з <b>1 січня 1970 року 00:00:00 UTC</b>. Число 0 відповідає 1 січня 1970 року, а <b>1700000000</b> — 14 листопада 2023 року 22:13:20 UTC (вівторок). Це зручний спосіб зберігати момент у часі одним числом у базах даних, API, логах і файлових системах, незалежно від часового поясу. Високосні секунди в Unix-часі не враховуються: кожна доба має рівно 86400 секунд.</p>
+
+            <h2>Секунди, мілісекунди, мікро- й наносекунди</h2>
+            <p>Класичний timestamp у секундах має <b>10 цифр</b> (до 2286 року). JavaScript, Java й багато API використовують <b>мілісекунди</b> (13 цифр), деякі бази даних і системи профілювання мікросекунди (16 цифр), а Go, Rust і часові ряди наносекунди (19 цифр). Калькулятор визначає одиницю за кількістю цифр і показує, яку обрав, а за потреби її можна змінити вручну. Числа розбираються точно, тому 19-значне значення на кшталт 1700000000123456789 не втрачає цифр, на відміну від звичайних JavaScript-чисел.</p>
+
+            <h2>Часові пояси й формати</h2>
+            <p>Timestamp завжди відповідає одному моменту, а дата залежить від пояса. Той самий 1700000000 — це 22:13:20 за UTC і вже 00:13:20 15 листопада за Києвом. Калькулятор показує дату в обраному поясі (є пошук серед понад 500 міст і поясів), у форматі ISO 8601 зі зсувом, RFC 2822 і HTTP-дати. Для кожного моменту видно день тижня, день року, номер тижня ISO та «скільки минуло чи лишилось».</p>
+
+            <h2>Дата в timestamp</h2>
+            <p>Вкладка «Дата → timestamp» перетворює дату й час (із секундами й дробовою частиною, наприклад 14:30:05.123) у timestamp у секундах, мілісекундах, мікро- й наносекундах. Час вводиться в обраному поясі: 7 листопада 2026 року 14:30:05 за Києвом — це <b>1794054605</b>. Якщо час припадає на перехід на літній час, калькулятор попередить: година, якої немає, чи година, що повторюється двічі.</p>
+
+            <h2>Проблема 2038 року</h2>
+            <p>Старі системи зберігають timestamp як знакове 32-бітне ціле: найбільше значення 2147483647 відповідає <b>19 січня 2038 року 03:14:07 UTC</b>, а наступна секунда переповнює число. Найменше значення −2147483648 — це 13 грудня 1901 року. Калькулятор показує, чи вміщається значення в 32 біти. Сучасні системи із 64-бітним часом цієї проблеми не мають.</p>
+
+            <h2>Інші епохи</h2>
+            <p>Різні системи рахують час від різних дат. Windows FILETIME і LDAP — у сотнях наносекунд від 1601 року, .NET ticks — від 0001 року, Excel — у днях від 30 грудня 1899 року, Apple — у секундах від 2001 року, браузери на WebKit у мікросекундах від 1601 року, астрономи — юліанський день. Для 1 січня 2000 року це 125911584000000000, 630822816000000000, 36526 і 2451544,5 відповідно. Для Excel серійні номери 1–60 зсунуті через відомий хибний високосний 1900 рік.</p>
+
+            <h2>Фрагменти коду</h2>
+            <p>Під результатом є згорнутий блок із готовими викликами для JavaScript, Python, PHP, Go, Java, C#, Bash, PostgreSQL і MySQL: як перетворити timestamp на дату й як отримати поточний timestamp. Сам калькулятор нічого не завантажує й нічого не зберігає, а перерахунок іде в браузері.</p>
+
+            <h2>Обмеження</h2>
+            <p>Дати від 1000 до 2999 року для вводу дати, а для timestamp діє межа об'єкта дати браузера, приблизно ±275 760 років. Unix-час не враховує високосних секунд, а правила часових поясів беруться з бази браузера. Фрагменти коду типові, тому перевіряйте їх для своєї версії мови.</p>
+            <p class="ph-mini">Unix-час не враховує високосних секунд. Одиниця визначається за кількістю цифр: можна змінити вручну.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Що таке Unix timestamp?</h3>
-                <p>Unix timestamp (epoch time) — це кількість секунд, що минули з 1 січня 1970 року 00:00:00 UTC.
-                    Використовується в програмуванні для зберігання дати й часу як одного числа.</p>
+            <div class="cc-faq-item">
+                <h3>Як перетворити Unix timestamp у дату?</h3>
+                <p>Вставте число на вкладці «Timestamp → дата»: калькулятор покаже дату в UTC, обраному поясі й ISO 8601. Наприклад, 1700000000 — це 14.11.2023 22:13:20 UTC.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому timestamp іноді в мілісекундах, а іноді в секундах?</h3>
-                <p>Unix timestamp за стандартом вимірюється в секундах. Однак JavaScript та деякі інші мови
-                    програмування часто використовують мілісекунди (timestamp × 1000) для більшої точності.</p>
+            <div class="cc-faq-item">
+                <h3>Як дізнатись, секунди це чи мілісекунди?</h3>
+                <p>За кількістю цифр: 10 цифр — секунди, 13 — мілісекунди, 16 — мікросекунди, 19 — наносекунди. Калькулятор визначає це сам і дозволяє змінити вручну.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи є проблема 2038 року?</h3>
-                <p>Так, 32-бітні системи, що зберігають timestamp як знакове ціле число, переповняться 19 січня 2038
-                    року. Сучасні 64-бітні системи не мають цієї проблеми.</p>
+            <div class="cc-faq-item">
+                <h3>Чому моя дата в 55 840 році?</h3>
+                <p>Мілісекунди (13 цифр) ввели як секунди. Оберіть «Авто» чи «Мілісекунди», і дата стане правильною.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як перетворити дату в timestamp?</h3>
+                <p>Відкрийте вкладку «Дата → timestamp», введіть дату, час і пояс. 07.11.2026 14:30:05 за Києвом — це 1794054605.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує Unix-час часові пояси?</h3>
+                <p>Сам timestamp ні: це момент у UTC. Часовий пояс потрібен лише для показу дати чи для введення місцевого часу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке проблема 2038 року?</h3>
+                <p>Знакове 32-бітне ціле переповнюється на 2147483647, тобто 19 січня 2038 року 03:14:07 UTC. Калькулятор показує, чи вміщається значення в 32 біти.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховуються високосні секунди?</h3>
+                <p>Ні. За стандартом POSIX кожна доба в Unix-часі має рівно 86400 секунд, тому високосні секунди «розтягуються» в сусідню секунду.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи втрачається точність для 19-значних чисел?</h3>
+                <p>Ні. Числа розбираються точно, на відміну від звичайних JavaScript-чисел, які втрачають останні цифри після 15–16 знаків.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як отримати поточний timestamp?</h3>
+                <p>У формі є живий лічильник і кнопка «Зараз». У коді: Math.floor(Date.now() / 1000) у JavaScript, int(time.time()) у Python, time() у PHP, date +%s у Bash.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що таке Windows FILETIME і .NET ticks?</h3>
+                <p>Це кількість інтервалів по 100 наносекунд: FILETIME від 1 січня 1601 року, .NET ticks від 1 січня 0001 року. Вкладка «Інші епохи» переводить їх у Unix-час і назад.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому в Excel неправильні дати до березня 1900 року?</h3>
+                <p>Excel вважає 1900 рік високосним (хоча 29 лютого 1900 року не існувало), тому серійні номери 1–60 зсунуті на добу.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Які дати підтримує калькулятор?</h3>
+                <p>Для введення дати з 1000 до 2999 року, для timestamp приблизно ±275 760 років. Дата в негативних timestamp відповідає часу до 1970 року.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
