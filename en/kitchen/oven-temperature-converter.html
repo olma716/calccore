@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Oven Temperature Converter Online — °C, °F, Gas Mark | CalcCore</title>
+    <title>Oven Temperature Converter: °C, °F, Gas Mark, Fan | CalcCore</title>
     <meta name="description"
-        content="Convert oven temperature between Celsius, Fahrenheit, and Gas Mark. Handy for recipes from different countries." />
+        content="Convert oven temperature between °C, °F and gas mark, allow for a fan oven, find temperatures in a recipe text and use a conversion table with gas marks." />
 
     <link rel="canonical" href="https://calccore.net/en/kitchen/oven-temperature-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/oven-temperature-converter" />
@@ -26,209 +28,429 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Oven Temperature Converter Online — °C, °F, Gas Mark" />
-    <meta property="og:description" content="Convert oven temperature between Celsius, Fahrenheit, and Gas Mark. Handy for recipes from different countries." />
+    <meta property="og:title" content="Oven Temperature Converter: °C, °F, Gas Mark, Fan" />
+    <meta property="og:description" content="Convert oven temperature between °C, °F and gas mark, allow for a fan oven, find temperatures in a recipe text and use a conversion table with gas marks." />
     <meta property="og:url" content="https://calccore.net/en/kitchen/oven-temperature-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Oven Temperature Converter Online — °C, °F, Gas Mark" />
-    <meta name="twitter:description" content="Convert oven temperature between Celsius, Fahrenheit, and Gas Mark. Handy for recipes from different countries." />
+    <meta name="twitter:title" content="Oven Temperature Converter: °C, °F, Gas Mark, Fan" />
+    <meta name="twitter:description" content="Convert oven temperature between °C, °F and gas mark, allow for a fan oven, find temperatures in a recipe text and use a conversion table with gas marks." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107ov3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/oven-temperature-converter.js?v=20260908" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is Gas Mark?",
-        "acceptedAnswer":{"@type":"Answer","text":"Gas Mark is an oven temperature scale traditionally used in the UK for gas ovens, with values ranging from 1 to 9."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I convert Celsius to Fahrenheit manually?",
-        "acceptedAnswer":{"@type":"Answer","text":"Formula: °F = °C × 9/5 + 32. For example, 180°C × 9/5 + 32 = 356°F."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why do American recipes use Fahrenheit?",
-        "acceptedAnswer":{"@type":"Answer","text":"The US is one of the few countries that still officially uses the Fahrenheit scale in everyday life, including cooking recipes."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107ov3" defer></script>
+    <script src="/js/phys-core.js?v=20261107ov3" defer></script>
+    <script src="/js/km-data.js?v=20261107ov3" defer></script>
+    <script src="/js/ov-data.js?v=20261107ov3" defer></script>
+    <script src="/js/ov-calc.js?v=20261107ov3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/kitchen/oven-temperature-converter#app",
-    "name":"Oven Temperature Converter",
-    "description":"Convert oven temperature between Celsius, Fahrenheit, and Gas Mark.",
-    "url":"https://calccore.net/en/kitchen/oven-temperature-converter",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/kitchen/oven-temperature-converter#app",
+  "name": "Oven Temperature Converter",
+  "description": "An online oven temperature converter: degrees Celsius, Fahrenheit and gas mark (¼ to 9) with interpolation between table rows, an adjustment for a fan (convection) oven, conversion tables and conversion of temperatures straight in a recipe text (“Bake at 350°F”). It shows the oven mode, the place on the gas scale and a handy value for the dial.",
+  "url": "https://calccore.net/en/kitchen/oven-temperature-converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "°C, °F and gas mark ¼–9 with interpolation",
+    "Conventional and fan ovens",
+    "A handy value for the dial: 5 °C, 25 °F",
+    "Tables: gas marks, °C → °F, °F → °C",
+    "Temperatures in a recipe text are replaced automatically",
+    "Mode names from very cool to very hot"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/kitchen/oven-temperature-converter#webpage",
+      "url": "https://calccore.net/en/kitchen/oven-temperature-converter",
+      "name": "Oven Temperature Converter: °C, °F, Gas Mark, Fan | CalcCore",
+      "description": "Convert oven temperature between °C, °F and gas mark, allow for a fan oven, find temperatures in a recipe text and use a conversion table with gas marks.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/kitchen/oven-temperature-converter#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/kitchen/oven-temperature-converter#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/kitchen/oven-temperature-converter#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Kitchen",
+          "item": "https://calccore.net/en/kitchen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Oven temperature",
+          "item": "https://calccore.net/en/kitchen/oven-temperature-converter"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/kitchen/oven-temperature-converter#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many degrees Fahrenheit is 180 degrees Celsius?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "180 °C = 356 °F. Recipes usually round it to 350 °F."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is 350 °F in Celsius?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "350 °F ≈ 177 °C, usually written as 175 °C in recipes (gas mark 4 is 180 °C)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a gas mark?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a British scale of gas oven temperatures from ¼ to 9. Mark 4 is 180 °C (350 °F) and mark 6 is 200 °C (400 °F)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What temperature is gas mark 4?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "180 °C or 350 °F for a conventional oven."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What temperature is gas mark 3?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "170 °C (325 °F) in the Currys table; other tables, such as Which?, give 160 °C. The calculator uses 170 °C."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "By how much should I lower the temperature for a fan oven?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually by about 20 °C (≈ 25 °F). This is a general rule and you can change the amount in the settings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is convection in an oven?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a mode with a fan that circulates hot air. Food heats faster and more evenly, so the temperature is lowered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert Fahrenheit to Celsius by hand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Subtract 32 and multiply by 5/9: (350 − 32) × 5/9 ≈ 177 °C."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do American recipes use Fahrenheit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Fahrenheit scale is still used in everyday life in the US, including cooking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert all temperatures in a recipe at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on the “Temperatures in text” tab paste the text and choose the scale: every temperature found is replaced and the rest of the text stays."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which temperature counts as a moderate oven?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A moderate oven is gas mark 4, that is 180 °C (350 °F). Marks 5–6 are moderately hot, 7–8 hot and 9 very hot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the oven temperature exact?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, thermostats often differ from the real temperature by several tens of degrees. For accuracy use an oven thermometer."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="coven">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Oven Temperature Converter</h1>
-                    <p class="mcalc__p">
-                        Convert oven temperature between Celsius, Fahrenheit, and
-                        Gas Mark.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Oven Temperature Converter</h1>
+                    <p class="ph__p">Enter the temperature from a recipe, choose the scale and the oven type, and the calculator shows the equivalents in degrees Celsius, Fahrenheit and gas mark for a conventional oven and for a fan oven. Separate tabs give conversion tables and convert every temperature in a pasted recipe text.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter a temperature</h2>
-                        <span class="mcalc__badge">Kitchen</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
                     </div>
-
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="tempValue">Value</label>
-                            <input class="mcalc__input" id="tempValue" type="text" inputmode="decimal"
-                                placeholder="e.g.: 180" />
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Kitchen</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="tempUnit">Unit</label>
-                            <select id="tempUnit" class="mcalc__select">
-                                <option value="c" selected>Celsius (°C)</option>
-                                <option value="f">Fahrenheit (°F)</option>
-                                <option value="gas">Gas Mark</option>
-                            </select>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="conv" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Converter</b><span class="ph__ex">°C, °F, gas mark</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="table" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Table</b><span class="ph__ex">Fan oven</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="text" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Temperatures in text</b><span class="ph__ex">Temperatures in text</span></span></button>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Convert</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter a temperature.</div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                    <details class="m-schedule" id="scheduleWrap" style="margin-top:12px;">
-                        <summary class="m-sum">
-                            <span class="m-sum-left">
-                                <span class="m-ico" aria-hidden="true"></span>
-                                Reference table <span class="muted">(open)</span>
-                            </span>
-                            <span class="m-chevron" aria-hidden="true"></span>
-                        </summary>
-
-                        <div class="m-tablewrap">
-                            <table class="m-table" aria-label="Oven temperature table">
-                                <thead>
-                                    <tr>
-                                        <th>°C</th>
-                                        <th>°F</th>
-                                        <th>Gas Mark</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="refTableBody"></tbody>
-                            </table>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-                    </details>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/kitchen/measurement-converter">Cooking Measurement Converter</a>
-                    <a href="/en/kitchen/recipe-scaler">Recipe Scaler</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why you need an oven temperature converter</h2>
-            <p>
-                Recipes from different countries specify oven temperature differently: American ones
-                in Fahrenheit, most others in Celsius, and traditional British recipes often use Gas
-                Mark. This converter helps you quickly translate the value into the scale you need.
-            </p>
-
-            <h2>Conversion formulas</h2>
-            <ul>
-                <li><b>Celsius → Fahrenheit:</b> °F = °C × 9/5 + 32</li>
-                <li><b>Fahrenheit → Celsius:</b> °C = (°F − 32) × 5/9</li>
-                <li><b>Gas Mark → Celsius:</b> approximately via a reference table (non-linear scale)</li>
-            </ul>
-
-            <h2>What is Gas Mark</h2>
-            <p>
-                Gas Mark is a traditional British scale for gas ovens, using numbers from ¼ to 9
-                instead of degrees. It originated before thermostat standardization and still appears
-                in British cookbooks alongside modern Celsius values.
-            </p>
-
-            <h2>Practical temperature guidelines</h2>
-            <ul>
-                <li><b>Low (~120-150°C):</b> slow roasting, drying, meringues.</li>
-                <li><b>Moderate (~160-180°C):</b> most cakes, muffins, cookies.</li>
-                <li><b>High (~200-220°C):</b> bread, pizza, "crispy-crust" vegetables.</li>
-                <li><b>Very high (230°C+):</b> quick browning, some pastries.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                The table values are approximate guidelines. Actual dish behavior depends on the
-                specific oven (convection, thermostat calibration), so also rely on visual signs of
-                doneness rather than temperature and time alone.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/kitchen/measurement-converter"><b>Cooking Measurement Converter</b><span>Cups, spoons and grams by ingredient.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/recipe-scaler"><b>Recipe Scaler</b><span>Scale a recipe to another number of servings.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/pan-size-converter"><b>Pan Size Converter</b><span>Swap a baking pan by area and volume.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the converter does</h2>
+            <p>The converter converts oven temperature between <b>degrees Celsius, Fahrenheit and gas mark</b>. American recipes give the temperature in Fahrenheit, most others in Celsius, and British cookbooks often in gas marks from ¼ to 9. The calculator shows all three values at once, together with the equivalent for a fan oven, the name of the mode (moderate, hot and so on) and a handy value for the dial.</p>
+
+            <h2>Formulas</h2>
+            <p>From Celsius to Fahrenheit: °F = °C × 9/5 + 32, so 180 °C = 356 °F and 200 °C = 392 °F. From Fahrenheit to Celsius: °C = (°F − 32) × 5/9, so 350 °F ≈ 177 °C and 400 °F ≈ 204 °C. Recipes round to handy values: 350 °F is treated as 175 °C, 400 °F as 200 °C and 425 °F as 220 °C. The calculator shows the exact value and, separately, a handy one for the dial (steps of 5 °C or 25 °F).</p>
+
+            <h2>Gas mark</h2>
+            <p>Gas mark is a traditional British scale for gas ovens. In the table for a conventional oven gas mark ¼ is 110 °C (225 °F), mark 1 is 140 °C, mark 3 is 170 °C (325 °F), mark 4 is 180 °C (350 °F), mark 6 is 200 °C (400 °F), mark 7 is 220 °C and mark 9 is 240 °C (475 °F). For temperatures between rows the calculator interpolates: 175 °C is about gas mark 3.5 (between 3 and 4). For mark 3 sources differ: Currys gives 170 °C while Which? gives 160 °C, so the calculator uses 170 °C.</p>
+
+            <h2>Fan oven</h2>
+            <p>In fan (convection) ovens hot air circulates and food cooks faster, so the temperature is usually reduced by <b>about 20 °C (≈ 25 °F)</b>. Choose in the calculator which oven the recipe temperature is for: for a conventional oven it shows the fan value, and for a fan oven it raises the value for a conventional one. You can change the reduction in the settings if your oven's manual says otherwise. For fan-assisted gas ovens some sources advise reducing the gas mark by 1.</p>
+
+            <h2>Conversion tables</h2>
+            <p>The “Table” tab shows gas marks ¼–9 with degrees Celsius and Fahrenheit, the fan value and the mode name. There are also tables of °C → °F (100 to 260 °C in steps of 10) and °F → °C (225 to 500 °F in steps of 25) with the gas mark for each row. The modes are very cool (marks ¼–½), cool (1–2), warm (3), moderate (4), moderately hot (5–6), hot (7–8) and very hot (9).</p>
+
+            <h2>Temperatures in a recipe text</h2>
+            <p>The “Temperatures in text” tab finds entries such as <b>350°F</b>, 180 °C, 350 degrees F, 180 degrees, 350° or gas mark 4 in the pasted text and replaces them in the chosen scale. A range 350–375°F becomes 175–190 °C. The rest of the text stays unchanged. If no scale is given, the one set in the settings is used. You can say which oven the recipe is for and which you have, and the temperatures will shift by the adjustment.</p>
+
+            <h2>Why a recipe temperature is not always exact</h2>
+            <p>The real temperature depends on the oven: thermostats can be off by tens of degrees and different zones of an oven run differently. So for exact baking an oven thermometer helps, and it is worth going by how the dish looks rather than only by temperature and time. The values in the calculator are approximate.</p>
+
+            <h2>Limits</h2>
+            <p>The calculator accepts temperatures up to 500 °C (932 °F) and gas marks from ¼ to 9. Temperatures below 100 °C or above 300 °C are flagged as unusual for an oven. In the text, numbers without a scale mark that fall outside possible oven temperatures are ignored.</p>
+            <p class="ph-mini">The gas mark follows the table for a conventional oven, with values between rows interpolated. For a fan oven the temperature is usually reduced by about 20 °C (≈ 25 °F), but check your oven's manual.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What is Gas Mark?</h3>
-                <p>Gas Mark is an oven temperature scale traditionally used in the UK for gas ovens, with values ranging
-                    from 1 to 9.</p>
+            <div class="cc-faq-item">
+                <h3>How many degrees Fahrenheit is 180 degrees Celsius?</h3>
+                <p>180 °C = 356 °F. Recipes usually round it to 350 °F.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I convert Celsius to Fahrenheit manually?</h3>
-                <p>Formula: °F = °C × 9/5 + 32. For example, 180°C × 9/5 + 32 = 356°F.</p>
+            <div class="cc-faq-item">
+                <h3>What is 350 °F in Celsius?</h3>
+                <p>350 °F ≈ 177 °C, usually written as 175 °C in recipes (gas mark 4 is 180 °C).</p>
             </div>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
+                <h3>What is a gas mark?</h3>
+                <p>It is a British scale of gas oven temperatures from ¼ to 9. Mark 4 is 180 °C (350 °F) and mark 6 is 200 °C (400 °F).</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What temperature is gas mark 4?</h3>
+                <p>180 °C or 350 °F for a conventional oven.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What temperature is gas mark 3?</h3>
+                <p>170 °C (325 °F) in the Currys table; other tables, such as Which?, give 160 °C. The calculator uses 170 °C.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>By how much should I lower the temperature for a fan oven?</h3>
+                <p>Usually by about 20 °C (≈ 25 °F). This is a general rule and you can change the amount in the settings.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is convection in an oven?</h3>
+                <p>It is a mode with a fan that circulates hot air. Food heats faster and more evenly, so the temperature is lowered.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I convert Fahrenheit to Celsius by hand?</h3>
+                <p>Subtract 32 and multiply by 5/9: (350 − 32) × 5/9 ≈ 177 °C.</p>
+            </div>
+
+            <div class="cc-faq-item">
                 <h3>Why do American recipes use Fahrenheit?</h3>
-                <p>The US is one of the few countries that still officially uses the Fahrenheit scale in everyday life,
-                    including cooking recipes.</p>
+                <p>The Fahrenheit scale is still used in everyday life in the US, including cooking.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I convert all temperatures in a recipe at once?</h3>
+                <p>Yes, on the “Temperatures in text” tab paste the text and choose the scale: every temperature found is replaced and the rest of the text stays.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which temperature counts as a moderate oven?</h3>
+                <p>A moderate oven is gas mark 4, that is 180 °C (350 °F). Marks 5–6 are moderately hot, 7–8 hot and 9 very hot.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is the oven temperature exact?</h3>
+                <p>No, thermostats often differ from the real temperature by several tens of degrees. For accuracy use an oven thermometer.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

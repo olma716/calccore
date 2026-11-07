@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Перерахунок порцій рецепта онлайн — збільшити чи зменшити | CalcCore</title>
+    <title>Перерахунок порцій рецепта: збільшити чи зменшити | CalcCore</title>
     <meta name="description"
-        content="Автоматично перерахуй кількість інгредієнтів рецепта для будь-якої кількості порцій. Введи інгредієнти один раз — калькулятор зробить всю математику." />
+        content="Перерахуйте рецепт на іншу кількість порцій: дроби 1/2, діапазони, склянки й ложки, форми слів, підказки для спецій і розрахунок від наявного продукту." />
 
     <link rel="canonical" href="https://calccore.net/kitchen/recipe-scaler" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/recipe-scaler" />
@@ -26,206 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Перерахунок порцій рецепта онлайн — збільшити чи зменшити" />
-    <meta property="og:description" content="Автоматично перерахуй кількість інгредієнтів рецепта для будь-якої кількості порцій. Введи інгредієнти один раз — калькулятор зробить всю математику." />
+    <meta property="og:title" content="Перерахунок порцій рецепта: збільшити чи зменшити" />
+    <meta property="og:description" content="Перерахуйте рецепт на іншу кількість порцій: дроби 1/2, діапазони, склянки й ложки, форми слів, підказки для спецій і розрахунок від наявного продукту." />
     <meta property="og:url" content="https://calccore.net/kitchen/recipe-scaler" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Перерахунок порцій рецепта онлайн — збільшити чи зменшити" />
-    <meta name="twitter:description" content="Автоматично перерахуй кількість інгредієнтів рецепта для будь-якої кількості порцій. Введи інгредієнти один раз — калькулятор зробить всю математику." />
+    <meta name="twitter:title" content="Перерахунок порцій рецепта: збільшити чи зменшити" />
+    <meta name="twitter:description" content="Перерахуйте рецепт на іншу кількість порцій: дроби 1/2, діапазони, склянки й ложки, форми слів, підказки для спецій і розрахунок від наявного продукту." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/recipe-scaler.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107ov3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/recipe-scaler.js?v=20260908" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Як користуватись перерахунком порцій?",
-        "acceptedAnswer":{"@type":"Answer","text":"Введи кожен інгредієнт з кількістю на окремому рядку, вкажи початкову і бажану кількість порцій — калькулятор автоматично перерахує всі кількості пропорційно."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи всі інгредієнти масштабуються однаково?",
-        "acceptedAnswer":{"@type":"Answer","text":"Калькулятор масштабує всі кількості пропорційно, але зверни увагу: спеції, сіль, розпушувач і час випікання не завжди масштабуються лінійно — їх варто коригувати за смаком."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна ввести дробові числа?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, можна вводити як цілі числа, так і десяткові дроби (наприклад, 1.5 склянки)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107ov3" defer></script>
+    <script src="/js/phys-core.js?v=20261107ov3" defer></script>
+    <script src="/js/km-data.js?v=20261107ov3" defer></script>
+    <script src="/js/rs-data.js?v=20261107ov3" defer></script>
+    <script src="/js/rs-calc.js?v=20261107ov3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/kitchen/recipe-scaler#app",
-    "name":"Recipe Scaler",
-    "description":"Автоматичний перерахунок кількості інгредієнтів рецепта для будь-якої кількості порцій.",
-    "url":"https://calccore.net/kitchen/recipe-scaler",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/kitchen/recipe-scaler#app",
+  "name": "Перерахунок порцій рецепта",
+  "description": "Онлайн-калькулятор перерахунку рецепта: вставте інгредієнти й задайте кількість порцій, коефіцієнт або те, скільки у вас є одного з продуктів, і всі кількості будуть перераховані. Розуміє дроби (1/2, 1 1/2, ½), діапазони (2-3), кількості після тире («Борошно — 200 г»), склянки, ложки, грами й штуки, змінює форми слів (1 склянка, 2 склянки, 5 склянок), підказує зручніші одиниці й застерігає про спеції та розпушувач.",
+  "url": "https://calccore.net/kitchen/recipe-scaler",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Перерахунок за порціями, коефіцієнтом або від наявного продукту",
+    "Дроби 1/2, 1 1/2, ½, діапазони 2-3 і кількості після тире",
+    "Склянки, ложки, грами, штуки з правильними формами слів",
+    "Підказки: 1500 г = 1,5 кг, ≈ ¼ склянки, ≈ 2 ⅔",
+    "Застереження для спецій, солі, розпушувача й часу",
+    "Копіювання перерахованого списку й посилання на рецепт"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/kitchen/recipe-scaler#webpage",
+      "url": "https://calccore.net/kitchen/recipe-scaler",
+      "name": "Перерахунок порцій рецепта: збільшити чи зменшити | CalcCore",
+      "description": "Перерахуйте рецепт на іншу кількість порцій: дроби 1/2, діапазони, склянки й ложки, форми слів, підказки для спецій і розрахунок від наявного продукту.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/kitchen/recipe-scaler#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/kitchen/recipe-scaler#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/kitchen/recipe-scaler#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Кухня",
+          "item": "https://calccore.net/kitchen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Перерахунок порцій",
+          "item": "https://calccore.net/kitchen/recipe-scaler"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/kitchen/recipe-scaler#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як перерахувати рецепт на іншу кількість порцій?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Поділіть потрібну кількість порцій на ту, що вказана в рецепті, і помножте на цей коефіцієнт кожну кількість. Для 6 порцій замість 4 коефіцієнт 1,5. Калькулятор робить це для всього списку одразу."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як збільшити рецепт удвічі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На вкладці «За коефіцієнтом» введіть 2 або натисніть кнопку ×2. Кожна кількість подвоїться, але час готування, спеції й розпушувач краще коригувати окремо."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як зменшити рецепт вдвічі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть коефіцієнт ½ чи 1/2. Для яєць калькулятор підкаже, що половину яйця треба збити й розділити."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна вводити дроби?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так: 1/2, 1 1/2, 1-1/2, ½, 1½ та десяткові числа з комою чи крапкою. Діапазони на кшталт 2-3 теж підтримуються."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що робити, якщо в мене лише частина продукту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Скористайтеся вкладкою «Від наявного»: оберіть рядок, вкажіть, скільки цього продукту є, і калькулятор перерахує решту пропорційно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи множиться час приготування на коефіцієнт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Більша порція чи форма готується довше, але не прямо пропорційно, тому починайте перевіряти готовність у звичайний час і дивіться за станом страви."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи треба множити спеції й сіль так само?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Краще додавати їх поступово й куштувати: у великих порціях смак росте повільніше за кількість, а в малих відміряти складно, тож беріть щіпку й куштуйте."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як перерахувати рецепт, якщо виходить пів яйця?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Збийте яйце, розділіть його й візьміть потрібну частину. Іноді рецепт можна змінити так, щоб яєць було ціле число, але це залежить від страви."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи змінюється форма слів, наприклад «склянки» і «склянок»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, для відомих слів (склянка, яйце, зубчик, штука, банка та інших). Інші слова лишаються як у вашому рядку."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна писати «Борошно — 200 г» замість «200 г борошна»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, кількість можна ставити після тире, двокрапки чи просто після назви: «Борошно — 200 г», «Борошно: 2 склянки», «Яйця 3»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховуються числа в дужках, наприклад «банка (400 г)»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, числа біля одиниць ваги й об'єму в дужках масштабуються разом з основною кількістю. Температура й час у дужках не змінюються."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи потрібно змінювати форму для випічки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, площа форми має змінитися приблизно разом із кількістю тіста. Для розрахунку скористайтеся конвертером розмірів форм."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cscaler">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Перерахунок порцій рецепта</h1>
-                    <p class="mcalc__p">
-                        Введи інгредієнти свого рецепта — і миттєво перерахуй кількість
-                        для будь-якої кількості порцій.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Перерахунок порцій рецепта</h1>
+                    <p class="ph__p">Вставте інгредієнти по одному в рядок і вкажіть, на скільки порцій треба приготувати: калькулятор перерахує кожну кількість, збереже дроби й діапазони, поставить слова у правильну форму й підкаже, що в рецепті не масштабується прямо пропорційно. Можна задати коефіцієнт або вказати, скільки в вас є одного з продуктів.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Введи рецепт</h2>
-                            <span class="mcalc__badge">Kitchen</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Кухня</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="serv" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">За порціями</b><span class="ph__ex">Перерахунок за порціями</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="fact" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h6M18 6h2M4 12h2M14 12h6M4 18h9M21 18h-1"/><circle cx="14" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span class="ph__tileTx"><b class="ph__tabT">За коефіцієнтом</b><span class="ph__ex">Коефіцієнт ×2, ×½</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="have" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7c0-1.5 1-2 1-3.5M12 7c0-1.5 1-2 1-3.5M16 7c0-1.5 1-2 1-3.5"/></svg><span class="ph__tileTx"><b class="ph__tabT">Від наявного</b><span class="ph__ex">Від наявного продукту</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="originalServings">Оригінальна кількість порцій</label>
-                                <input class="mcalc__input" id="originalServings" type="text" inputmode="numeric"
-                                    placeholder="напр.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="targetServings">Бажана кількість порцій</label>
-                                <input class="mcalc__input" id="targetServings" type="text" inputmode="numeric"
-                                    placeholder="напр.: 6" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="ingredientsInput">Інгредієнти (один на рядок)</label>
-                                <textarea class="mcalc__input" id="ingredientsInput" rows="8"
-                                    style="height:auto; padding:10px 12px; font-family:inherit;"
-                                    placeholder="напр.:&#10;2 склянки борошна&#10;1 склянка цукру&#10;3 яйця&#10;100 г масла"></textarea>
-                                <div class="mcalc__hint">Формат: число + одиниця/назва (напр. "2 склянки борошна", "3
-                                    яйця").</div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Перерахувати</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Скинути</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Перерахований рецепт</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Введи рецепт зліва.</div>
-                        <div class="recipe-output" id="recipeOutput"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/kitchen/measurement-converter">Конвертер кулінарних мір</a>
-                            <a href="/education/percent-calculator">Калькулятор відсотків</a>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Навіщо потрібен перерахунок порцій</h2>
-            <p>
-                Рецепти часто розраховані на конкретну кількість порцій, яка може не збігатись з
-                твоєю ситуацією — наприклад, рецепт на 4 особи, а гостей буде 8, або навпаки —
-                потрібно приготувати менше для однієї людини. Ручний перерахунок кожного інгредієнта
-                займає час і легко призводить до помилок.
-            </p>
-
-            <h2>Як працює перерахунок</h2>
-            <p>
-                Калькулятор обчислює коефіцієнт масштабування як відношення бажаної кількості порцій
-                до оригінальної (наприклад, 6 порцій замість 4 = коефіцієнт 1.5), а потім множить
-                кожну кількість інгредієнта на цей коефіцієнт.
-            </p>
-
-            <h2>Що варто коригувати вручну</h2>
-            <ul>
-                <li><b>Спеції та приправи:</b> при значному збільшенні рецепта спеції краще додавати поступово й
-                    куштувати, а не масштабувати прямо пропорційно.</li>
-                <li><b>Розпушувач і сода:</b> у великих кількостях можуть надавати гіркуватий присмак — рекомендується
-                    трохи зменшувати пропорцію при значному збільшенні рецепта.</li>
-                <li><b>Час випікання/готування:</b> не масштабується лінійно! Подвоєння рецепта не означає подвоєння
-                    часу в духовці — форма більшого розміру чи більше страв потребують окремого контролю готовності.
-                </li>
-                <li><b>Розмір форми для випічки:</b> при зміні кількості порцій, ймовірно, доведеться змінити і розмір
-                    форми.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Для найкращого результату записуй інгредієнти у форматі "кількість + одиниця + назва"
-                (наприклад "2 склянки борошна"), щоб калькулятор міг правильно розпізнати число для
-                перерахунку.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/kitchen/measurement-converter"><b>Конвертер кулінарних мір</b><span>Склянки, ложки й грами з урахуванням продукту.</span></a>
+                <a class="cc-related-card" href="/kitchen/pan-size-converter"><b>Конвертер розмірів форм</b><span>Заміна форми для випічки за площею й об'ємом.</span></a>
+                <a class="cc-related-card" href="/kitchen/oven-temperature-converter"><b>Температура духовки</b><span>Градуси Цельсія, Фаренгейта й газова позначка.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що робить калькулятор</h2>
+            <p>Калькулятор <b>перераховує рецепт на іншу кількість порцій</b>. Ви вставляєте інгредієнти, по одному в рядок, задаєте, скільки порцій було й скільки потрібно, і отримуєте новий список із перерахованими кількостями. Він корисний, коли рецепт розрахований на 4 людини, а гостей буде 6 чи 10, або навпаки, коли треба приготувати лише одну порцію з великого рецепта. Перераховані рядки можна скопіювати або поділитися посиланням на рецепт із вибраним коефіцієнтом.</p>
+
+            <h2>Як перерахувати рецепт вручну</h2>
+            <p>Спершу знайдіть <b>коефіцієнт</b>: потрібну кількість порцій поділіть на ту, що вказана в рецепті. Для 6 порцій замість 4 це 6 / 4 = 1,5. Потім помножте на коефіцієнт кожну кількість: 200 г борошна стає 300 г, 1 1/2 склянки борошна стає 2 ¼ склянки, а 3 яйця дають 4,5 яйця. Калькулятор робить це автоматично, зберігає дроби в тих записах, які ви ввели, і округлює результат до зручної точності.</p>
+
+            <h2>Три способи перерахунку</h2>
+            <p>Вкладка <b>«За порціями»</b> рахує коефіцієнт із двох чисел: порцій у рецепті й порцій, які потрібні. Вкладка <b>«За коефіцієнтом»</b> дає змогу задати множник напряму, наприклад ×2, ½ чи 1 1/2, для швидких кнопок є ¼, ½, ¾, ×2, ×3 і ×4. Вкладка <b>«Від наявного»</b> відповідає на питання «у мене лише 150 г борошна, що виходить?»: оберіть рядок рецепта, вкажіть, скільки цього продукту є, і решта кількостей перерахується пропорційно.</p>
+
+            <h2>Які записи розуміє калькулятор</h2>
+            <p>Кількість може стояти на початку рядка: «2 склянки борошна», «1/2 склянки цукру», «1 1/2 склянки», «½ ч. л.», «0,5 л молока» або «250г масла». Підтримуються діапазони («2-3 зубчики часнику», «250 до 300 г борошна»), які перераховуються з обох боків. Кількість можна писати й після назви: «Борошно — 200 г», «Борошно: 2 склянки», «Яйця 3». Рядки з маркерами списку (дефіс, крапка, нумерація) теж підходять. Числа в дужках на кшталт «банка (400 г)» масштабуються разом із кількістю. Рядки без числа («сіль за смаком») і кількості в хвилинах чи градусах лишаються без змін.</p>
+
+            <h2>Правильні форми слів</h2>
+            <p>Коли кількість змінюється, слова-одиниці ставляться в правильну форму: 1 склянка, 2 склянки, 5 склянок, 1,5 склянки; 1 яйце, 3 яйця, 6 яєць; 1 зубчик, 4 зубчики, 5 зубчиків. Так працюють відомі слова: склянка, столова й чайна ложка, яйце, зубчик, штука, банка, пачка, щіпка, пучок, головка, цибулина, помідор, огірок, лимон та інші. Інші слова в рядку лишаються такими, як ви їх написали. Скорочення (г, мл, ст. л., ч. л.) не змінюються.</p>
+
+            <h2>Підказки до кількостей</h2>
+            <p>Поруч із кількістю калькулятор показує зручніший запис, не змінюючи результату: 1500 г = 1,5 кг, 4 ст. л. ≈ ¼ склянки, 0,67 склянки ≈ ⅔, 6 ч. л. = 2 ст. л. Склянку для цього можна вибрати в налаштуваннях: 250, 200 мл, американську 240 мл чи британську 284 мл. Для переведення склянок і ложок у грами за продуктом є <a href="/kitchen/measurement-converter">конвертер кулінарних мір</a>.</p>
+
+            <h2>Що не масштабується прямо пропорційно</h2>
+            <p>Лінійно множаться основні продукти, але частина рецепта так не працює. <b>Спеції й сіль</b> краще додавати поступово й куштувати. <b>Розпушувач і сода</b> у великій кількості дають гіркуватий присмак, а <b>дріжджам</b> для більшого тіста зазвичай потрібно менше, ніж прямо пропорційно. <b>Час приготування</b> не множиться на коефіцієнт: перевіряйте готовність у звичайний час. <b>Розмір форми й посуду</b> має змінитися разом із кількістю, щоб шар не став занадто тонким чи товстим (<a href="/kitchen/pan-size-converter">конвертер розмірів форм</a>). Рідина в ширшому посуді википає швидше. Калькулятор помічає такі рядки й підказує це, коли коефіцієнт дорівнює 2 або більше чи 0,5 або менше.</p>
+
+            <h2>Яйця та штучні продукти</h2>
+            <p>Якщо після перерахунку виходить 4,5 яйця чи 1,5 цибулини, калькулятор показує точне число й підказку: яйце не ділиться, його варто збити й узяти потрібну частину, а інші штучні продукти зазвичай округлюють до цілого. Для малих коефіцієнтів, наприклад ½, зверніть на це увагу в першу чергу.</p>
+
+            <h2>Обмеження</h2>
+            <p>Один рядок розуміється як один інгредієнт: якщо в рядку кілька кількостей, масштабується перша й числа в дужках біля одиниць ваги й об'єму. У рецепті може бути до 200 рядків. У посилання для поширення вміщується до 800 символів рецепта.</p>
+            <p class="ph-mini">Калькулятор масштабує кількості лінійно. Спеції, сіль, розпушувач, дріжджі, час готування й розмір форми коригуйте за смаком і станом страви: вони не ростуть прямо пропорційно.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Як користуватись перерахунком порцій?</h3>
-                <p>Введи кожен інгредієнт з кількістю на окремому рядку, вкажи початкову і бажану кількість порцій —
-                    калькулятор автоматично перерахує всі кількості пропорційно.</p>
+            <div class="cc-faq-item">
+                <h3>Як перерахувати рецепт на іншу кількість порцій?</h3>
+                <p>Поділіть потрібну кількість порцій на ту, що вказана в рецепті, і помножте на цей коефіцієнт кожну кількість. Для 6 порцій замість 4 коефіцієнт 1,5. Калькулятор робить це для всього списку одразу.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи всі інгредієнти масштабуються однаково?</h3>
-                <p>Калькулятор масштабує всі кількості пропорційно, але зверни увагу: спеції, сіль, розпушувач і час
-                    випікання не завжди масштабуються лінійно — їх варто коригувати за смаком.</p>
+            <div class="cc-faq-item">
+                <h3>Як збільшити рецепт удвічі?</h3>
+                <p>На вкладці «За коефіцієнтом» введіть 2 або натисніть кнопку ×2. Кожна кількість подвоїться, але час готування, спеції й розпушувач краще коригувати окремо.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна ввести дробові числа?</h3>
-                <p>Так, можна вводити як цілі числа, так і десяткові дроби (наприклад, 1.5 склянки).</p>
+            <div class="cc-faq-item">
+                <h3>Як зменшити рецепт вдвічі?</h3>
+                <p>Введіть коефіцієнт ½ чи 1/2. Для яєць калькулятор підкаже, що половину яйця треба збити й розділити.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна вводити дроби?</h3>
+                <p>Так: 1/2, 1 1/2, 1-1/2, ½, 1½ та десяткові числа з комою чи крапкою. Діапазони на кшталт 2-3 теж підтримуються.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що робити, якщо в мене лише частина продукту?</h3>
+                <p>Скористайтеся вкладкою «Від наявного»: оберіть рядок, вкажіть, скільки цього продукту є, і калькулятор перерахує решту пропорційно.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи множиться час приготування на коефіцієнт?</h3>
+                <p>Ні. Більша порція чи форма готується довше, але не прямо пропорційно, тому починайте перевіряти готовність у звичайний час і дивіться за станом страви.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи треба множити спеції й сіль так само?</h3>
+                <p>Краще додавати їх поступово й куштувати: у великих порціях смак росте повільніше за кількість, а в малих відміряти складно, тож беріть щіпку й куштуйте.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як перерахувати рецепт, якщо виходить пів яйця?</h3>
+                <p>Збийте яйце, розділіть його й візьміть потрібну частину. Іноді рецепт можна змінити так, щоб яєць було ціле число, але це залежить від страви.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи змінюється форма слів, наприклад «склянки» і «склянок»?</h3>
+                <p>Так, для відомих слів (склянка, яйце, зубчик, штука, банка та інших). Інші слова лишаються як у вашому рядку.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна писати «Борошно — 200 г» замість «200 г борошна»?</h3>
+                <p>Так, кількість можна ставити після тире, двокрапки чи просто після назви: «Борошно — 200 г», «Борошно: 2 склянки», «Яйця 3».</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховуються числа в дужках, наприклад «банка (400 г)»?</h3>
+                <p>Так, числа біля одиниць ваги й об'єму в дужках масштабуються разом з основною кількістю. Температура й час у дужках не змінюються.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи потрібно змінювати форму для випічки?</h3>
+                <p>Так, площа форми має змінитися приблизно разом із кількістю тіста. Для розрахунку скористайтеся конвертером розмірів форм.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

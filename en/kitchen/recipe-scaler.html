@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Recipe Scaler Online — Increase or Decrease Servings | CalcCore</title>
+    <title>Recipe Scaler: Increase or Decrease Servings | CalcCore</title>
     <meta name="description"
-        content="Automatically recalculate recipe ingredient amounts for any number of servings. Enter ingredients once — the calculator does all the math." />
+        content="Scale a recipe to other servings: fractions like 1/2, ranges, cups and spoons, word forms, tips for spices and leavening, scaling from what you have." />
 
     <link rel="canonical" href="https://calccore.net/en/kitchen/recipe-scaler" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/kitchen/recipe-scaler" />
@@ -26,204 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Recipe Scaler Online — Increase or Decrease Servings" />
-    <meta property="og:description" content="Automatically recalculate recipe ingredient amounts for any number of servings. Enter ingredients once — the calculator does all the math." />
+    <meta property="og:title" content="Recipe Scaler: Increase or Decrease Servings" />
+    <meta property="og:description" content="Scale a recipe to other servings: fractions like 1/2, ranges, cups and spoons, word forms, tips for spices and leavening, scaling from what you have." />
     <meta property="og:url" content="https://calccore.net/en/kitchen/recipe-scaler" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Recipe Scaler Online — Increase or Decrease Servings" />
-    <meta name="twitter:description" content="Automatically recalculate recipe ingredient amounts for any number of servings. Enter ingredients once — the calculator does all the math." />
+    <meta name="twitter:title" content="Recipe Scaler: Increase or Decrease Servings" />
+    <meta name="twitter:description" content="Scale a recipe to other servings: fractions like 1/2, ranges, cups and spoons, word forms, tips for spices and leavening, scaling from what you have." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/recipe-scaler.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261107ov3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/recipe-scaler.js?v=20260908" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How do I use the recipe scaler?",
-        "acceptedAnswer":{"@type":"Answer","text":"Enter each ingredient with its amount on a separate line, specify the original and desired number of servings — the calculator will automatically scale all amounts proportionally."}
-      },
-      {
-        "@type":"Question",
-        "name":"Do all ingredients scale the same way?",
-        "acceptedAnswer":{"@type":"Answer","text":"The calculator scales all amounts proportionally, but note: spices, salt, leavening agents, and cooking time don't always scale linearly — adjust them to taste."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I enter fractional numbers?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, you can enter both whole numbers and decimals (e.g., 1.5 cups)."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261107ov3" defer></script>
+    <script src="/js/phys-core.js?v=20261107ov3" defer></script>
+    <script src="/js/km-data.js?v=20261107ov3" defer></script>
+    <script src="/js/rs-data.js?v=20261107ov3" defer></script>
+    <script src="/js/rs-calc.js?v=20261107ov3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/kitchen/recipe-scaler#app",
-    "name":"Recipe Scaler",
-    "description":"Automatically recalculate recipe ingredient amounts for any number of servings.",
-    "url":"https://calccore.net/en/kitchen/recipe-scaler",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/kitchen/recipe-scaler#app",
+  "name": "Recipe Scaler",
+  "description": "An online recipe scaling calculator: paste the ingredients and set the number of servings, a factor, or how much of one ingredient you have, and every amount is recalculated. It understands fractions (1/2, 1 1/2, ½), ranges (2-3), amounts after a dash (“Flour — 200 g”), cups, spoons, grams and pieces, changes word forms (1 cup, 2 cups), suggests handier units and warns about spices and leavening.",
+  "url": "https://calccore.net/en/kitchen/recipe-scaler",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Scaling by servings, a factor or from what you have",
+    "Fractions 1/2, 1 1/2, ½, ranges 2-3 and amounts after a dash",
+    "Cups, spoons, grams and pieces with correct word forms",
+    "Hints: 1500 g = 1.5 kg, ≈ ¼ cup, ≈ 2 ⅔",
+    "Warnings for spices, salt, leavening and time",
+    "Copying the scaled list and a link to the recipe"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/kitchen/recipe-scaler#webpage",
+      "url": "https://calccore.net/en/kitchen/recipe-scaler",
+      "name": "Recipe Scaler: Increase or Decrease Servings | CalcCore",
+      "description": "Scale a recipe to other servings: fractions like 1/2, ranges, cups and spoons, word forms, tips for spices and leavening, scaling from what you have.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/kitchen/recipe-scaler#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/kitchen/recipe-scaler#breadcrumb"
+      },
+      "dateModified": "2026-11-07",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/kitchen/recipe-scaler#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Kitchen",
+          "item": "https://calccore.net/en/kitchen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Recipe scaler",
+          "item": "https://calccore.net/en/kitchen/recipe-scaler"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/kitchen/recipe-scaler#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I scale a recipe to a different number of servings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide the servings you need by the servings in the recipe and multiply every amount by that factor. For 6 servings instead of 4 the factor is 1.5. The calculator does it for the whole list at once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I double a recipe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the “By factor” tab enter 2 or press ×2. Every amount doubles, but cooking time, spices and leavening are better adjusted separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I halve a recipe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the factor ½ or 1/2. For eggs the calculator will remind you that half an egg has to be beaten and divided."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I enter fractions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes: 1/2, 1 1/2, 1-1/2, ½, 1½ and decimals with a comma or a point. Ranges such as 2-3 are supported too."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I only have part of an ingredient?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the “From what you have” tab: choose the line, enter how much of that ingredient you have and the calculator scales the rest in proportion."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does cooking time multiply by the factor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A larger portion or pan takes longer, but not in direct proportion, so start checking at the usual time and watch the dish."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should spices and salt scale the same way?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is better to add them gradually and taste: in large portions flavor grows more slowly than the amount, and in small ones they are hard to measure, so take a pinch and taste."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I do when scaling gives half an egg?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Beat the egg, divide it and use the part you need. Sometimes the recipe can be changed so that the eggs come out whole, but that depends on the dish."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do word forms like “cup” and “cups” change?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for known words (cup, egg, clove, can and others). Other words stay as in your line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I write “Flour — 200 g” instead of “200 g flour”?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the amount may come after a dash, a colon or simply after the name: “Flour — 200 g”, “Flour: 2 cups”, “Eggs 3”."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are numbers in brackets, such as “can (14 oz)”, scaled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, numbers next to units of weight and volume in brackets scale together with the main amount. Temperatures and times in brackets do not change."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to change the baking pan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the area of the pan should change roughly with the amount of dough. Use the pan size converter to work it out."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cscaler">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Recipe Scaler</h1>
-                    <p class="mcalc__p">
-                        Enter your recipe's ingredients — and instantly recalculate the amounts
-                        for any number of servings.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Recipe Scaler</h1>
+                    <p class="ph__p">Paste the ingredients one per line and say how many servings you need: the calculator rescales every amount, keeps fractions and ranges, puts words in the right form and tells you what in the recipe does not scale in direct proportion. You can set a factor or enter how much of one ingredient you have.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter your recipe</h2>
-                            <span class="mcalc__badge">Kitchen</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Kitchen</span>
                         </div>
 
-                        <div class="mcalc__rows">
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="originalServings">Original servings</label>
-                                <input class="mcalc__input" id="originalServings" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 4" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="targetServings">Desired servings</label>
-                                <input class="mcalc__input" id="targetServings" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 6" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="ingredientsInput">Ingredients (one per line)</label>
-                                <textarea class="mcalc__input" id="ingredientsInput" rows="8"
-                                    style="height:auto; padding:10px 12px; font-family:inherit;"
-                                    placeholder="e.g.:&#10;2 cups flour&#10;1 cup sugar&#10;3 eggs&#10;100 g butter"></textarea>
-                                <div class="mcalc__hint">Format: number + unit/name (e.g. "2 cups flour", "3 eggs").
-                                </div>
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc" type="button">Scale
-                                        recipe</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
-                                </div>
-                                <div class="mcalc__toast" id="mToast"></div>
-                            </div>
-
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="serv" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">By servings</b><span class="ph__ex">Scaling by servings</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="fact" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h6M18 6h2M4 12h2M14 12h6M4 18h9M21 18h-1"/><circle cx="14" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span class="ph__tileTx"><b class="ph__tabT">By factor</b><span class="ph__ex">Factor ×2, ×½</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="have" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7c0-1.5 1-2 1-3.5M12 7c0-1.5 1-2 1-3.5M16 7c0-1.5 1-2 1-3.5"/></svg><span class="ph__tileTx"><b class="ph__tabT">From what you have</b><span class="ph__ex">From what you have</span></span></button>
                         </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Scaled recipe</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter a recipe on the left.</div>
-                        <div class="recipe-output" id="recipeOutput"></div>
-
-                        <div class="m-navlinks">
-                            <a href="/en/kitchen/measurement-converter">Cooking Measurement Converter</a>
-                            <a href="/en/education/percent-calculator">Percentage Calculator</a>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why you need a recipe scaler</h2>
-            <p>
-                Recipes are often written for a specific number of servings that may not match your
-                situation — for example, a recipe for 4 people when you have 8 guests, or the opposite —
-                you need to cook less for one person. Manually recalculating every ingredient takes time
-                and is easy to get wrong.
-            </p>
-
-            <h2>How the scaling works</h2>
-            <p>
-                The calculator computes a scaling factor as the ratio of desired servings to original
-                servings (for example, 6 servings instead of 4 = a 1.5x factor), then multiplies each
-                ingredient amount by that factor.
-            </p>
-
-            <h2>What you should still adjust manually</h2>
-            <ul>
-                <li><b>Spices and seasonings:</b> when significantly scaling up a recipe, it's better to add spices
-                    gradually and taste rather than scale them exactly proportionally.</li>
-                <li><b>Leavening agents (baking soda/powder):</b> in large quantities they can add a bitter taste — it's
-                    recommended to slightly reduce the proportion when significantly scaling up.</li>
-                <li><b>Cooking/baking time:</b> doesn't scale linearly! Doubling a recipe doesn't mean doubling the oven
-                    time — a larger pan or more food requires separate doneness checks.</li>
-                <li><b>Baking pan size:</b> when changing the number of servings, you'll likely need to change the pan
-                    size too.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                For best results, write ingredients in the format "amount + unit + name" (e.g. "2 cups
-                flour") so the calculator can correctly detect the number to scale.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/kitchen/measurement-converter"><b>Cooking Measurement Converter</b><span>Cups, spoons and grams by ingredient.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/pan-size-converter"><b>Pan Size Converter</b><span>Swap a baking pan by area and volume.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/oven-temperature-converter"><b>Oven Temperature Converter</b><span>Celsius, Fahrenheit and gas mark.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator does</h2>
+            <p>The calculator <b>rescales a recipe to a different number of servings</b>. You paste the ingredients, one per line, say how many servings the recipe makes and how many you need, and get a new list with the amounts recalculated. It helps when a recipe is written for 4 people and you have 6 or 10 guests, or the other way round when you need a single portion of a big recipe. You can copy the scaled lines or share a link to the recipe with the chosen factor.</p>
+
+            <h2>How to scale a recipe by hand</h2>
+            <p>First find the <b>factor</b>: divide the servings you need by the servings in the recipe. For 6 servings instead of 4 it is 6 / 4 = 1.5. Then multiply every amount by the factor: 200 g of flour becomes 300 g, 1 1/2 cups of flour becomes 2 ¼ cups and 3 eggs become 4.5 eggs. The calculator does it automatically and rounds the result to a practical precision.</p>
+
+            <h2>Three ways to scale</h2>
+            <p>The <b>“By servings”</b> tab works out the factor from two numbers: the servings in the recipe and the servings you need. The <b>“By factor”</b> tab lets you set the multiplier directly, for example ×2, ½ or 1 1/2, with quick buttons for ¼, ½, ¾, ×2, ×3 and ×4. The <b>“From what you have”</b> tab answers “I only have 150 g of flour, what do I get?”: choose a line of the recipe, enter how much of that ingredient you have and the rest is scaled in proportion.</p>
+
+            <h2>Which entries the calculator understands</h2>
+            <p>An amount can stand at the start of a line: “2 cups flour”, “1/2 cup sugar”, “1 1/2 cups”, “½ tsp”, “0.5 l milk” or “250g butter”. Ranges are supported (“2-3 cloves garlic”, “250 to 300 g flour”) and are scaled at both ends. The amount can also come after the name: “Flour — 200 g”, “Flour: 2 cups”, “Eggs 3”. Lines with list markers (a dash, a bullet, numbering) are fine too. Numbers in brackets such as “can (14 oz)” scale together with the amount. Lines without a number (“salt to taste”) and amounts in minutes or degrees stay unchanged.</p>
+
+            <h2>Correct word forms</h2>
+            <p>When an amount changes, unit words get the right form: 1 cup, 2 cups; 1 egg, 3 eggs; 1 clove, 4 cloves. This works for known words: cup, tablespoon, teaspoon, egg, clove, can, pinch, piece, slice, stick, onion, tomato, lemon and others. Other words in the line stay as you typed them. Abbreviations (g, ml, tbsp, tsp) do not change.</p>
+
+            <h2>Hints for amounts</h2>
+            <p>Next to an amount the calculator shows a handier form without changing the result: 1500 g = 1.5 kg, 4 tbsp ≈ ¼ cup, 0.67 cup ≈ ⅔, 6 tsp = 2 tbsp. You can choose the cup in the settings: 250 or 200 ml, the US 240 ml or the British 284 ml. To convert cups and spoons to grams by ingredient there is the <a href="/en/kitchen/measurement-converter">cooking measurement converter</a>.</p>
+
+            <h2>What does not scale in direct proportion</h2>
+            <p>The main ingredients scale linearly, but part of a recipe does not. <b>Spices and salt</b> are better added gradually with tasting. <b>Baking powder and soda</b> taste bitter in large amounts, and <b>yeast</b> for a bigger dough usually needs less than direct proportion. <b>Cooking time</b> does not multiply by the factor: check for doneness at the usual time. <b>Pan and dish size</b> should change with the amount so that the layer does not become too thin or too thick (<a href="/en/kitchen/pan-size-converter">pan size converter</a>). Liquid evaporates faster in a wider pan. The calculator notices such lines and points it out when the factor is 2 or more, or 0.5 or less.</p>
+
+            <h2>Eggs and counted items</h2>
+            <p>If scaling gives 4.5 eggs or 1.5 onions, the calculator shows the exact number and a hint: an egg does not divide, so beat it and use the part you need, while other counted items are usually rounded to a whole number. Pay attention to this first for small factors such as ½.</p>
+
+            <h2>Limits</h2>
+            <p>One line is read as one ingredient: if a line has several amounts, the first is scaled together with the numbers in brackets next to units of weight and volume. A recipe can have up to 200 lines. A share link holds up to 800 characters of the recipe.</p>
+            <p class="ph-mini">The calculator scales amounts linearly. Spices, salt, leavening, yeast, cooking time and pan size should be adjusted to taste and to how the dish looks: they do not grow in direct proportion.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How do I use the recipe scaler?</h3>
-                <p>Enter each ingredient with its amount on a separate line, specify the original and desired number of
-                    servings — the calculator will automatically scale all amounts proportionally.</p>
+            <div class="cc-faq-item">
+                <h3>How do I scale a recipe to a different number of servings?</h3>
+                <p>Divide the servings you need by the servings in the recipe and multiply every amount by that factor. For 6 servings instead of 4 the factor is 1.5. The calculator does it for the whole list at once.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Do all ingredients scale the same way?</h3>
-                <p>The calculator scales all amounts proportionally, but note: spices, salt, leavening agents, and
-                    cooking time don't always scale linearly — adjust them to taste.</p>
+            <div class="cc-faq-item">
+                <h3>How do I double a recipe?</h3>
+                <p>On the “By factor” tab enter 2 or press ×2. Every amount doubles, but cooking time, spices and leavening are better adjusted separately.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I enter fractional numbers?</h3>
-                <p>Yes, you can enter both whole numbers and decimals (e.g., 1.5 cups).</p>
+            <div class="cc-faq-item">
+                <h3>How do I halve a recipe?</h3>
+                <p>Enter the factor ½ or 1/2. For eggs the calculator will remind you that half an egg has to be beaten and divided.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I enter fractions?</h3>
+                <p>Yes: 1/2, 1 1/2, 1-1/2, ½, 1½ and decimals with a comma or a point. Ranges such as 2-3 are supported too.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What if I only have part of an ingredient?</h3>
+                <p>Use the “From what you have” tab: choose the line, enter how much of that ingredient you have and the calculator scales the rest in proportion.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does cooking time multiply by the factor?</h3>
+                <p>No. A larger portion or pan takes longer, but not in direct proportion, so start checking at the usual time and watch the dish.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Should spices and salt scale the same way?</h3>
+                <p>It is better to add them gradually and taste: in large portions flavor grows more slowly than the amount, and in small ones they are hard to measure, so take a pinch and taste.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What do I do when scaling gives half an egg?</h3>
+                <p>Beat the egg, divide it and use the part you need. Sometimes the recipe can be changed so that the eggs come out whole, but that depends on the dish.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Do word forms like “cup” and “cups” change?</h3>
+                <p>Yes, for known words (cup, egg, clove, can and others). Other words stay as in your line.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I write “Flour — 200 g” instead of “200 g flour”?</h3>
+                <p>Yes, the amount may come after a dash, a colon or simply after the name: “Flour — 200 g”, “Flour: 2 cups”, “Eggs 3”.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are numbers in brackets, such as “can (14 oz)”, scaled?</h3>
+                <p>Yes, numbers next to units of weight and volume in brackets scale together with the main amount. Temperatures and times in brackets do not change.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Do I need to change the baking pan?</h3>
+                <p>Yes, the area of the pan should change roughly with the amount of dough. Use the pan size converter to work it out.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
