@@ -132,6 +132,30 @@
     setTimeout(() => setToast(""), 1200);
   });
 
+  // -------- Example (button #btnExamplePercent): fills the active tab and calculates --------
+  const EXAMPLES = {
+    t1: { t1_percent: "15", t1_number: "2000" },
+    t2: { t2_part: "50", t2_total: "200" },
+    t3: { t3_number: "1000", t3_percent: "12" },
+    t4: { t4_old: "80", t4_new: "100" },
+  };
+
+  $("btnExamplePercent")?.addEventListener("click", () => {
+    const id = activeTabId();
+    const ex = EXAMPLES[id];
+    if (!ex) return;
+    for (const [fid, val] of Object.entries(ex)) {
+      const inp = $(fid);
+      if (inp) inp.value = val;
+    }
+    const plus = document.querySelector('input[name="t3_op"][value="plus"]');
+    if (id === "t3" && plus) plus.checked = true;
+    runCalc({ silent: false });
+    const isEn = String(document.documentElement.lang || "").toLowerCase().startsWith("en");
+    setToast(isEn ? "Example filled in" : "Підставлено приклад");
+    setTimeout(() => setToast(""), 1500);
+  });
+
   // -----------------------------
   // Calculations
   // -----------------------------
