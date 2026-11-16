@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Unit Converter Online — Length, Weight, Volume | CalcCore</title>
+    <title>Unit Converter: Length, Weight, Volume, Temperature | CalcCore</title>
     <meta name="description"
-        content="Convert units of measurement: length, weight, volume, temperature, area, speed. Metric and imperial units." />
+        content="A converter for 130 units in 12 categories: length, mass, volume, area, speed, temperature, time, pressure, energy, power, angle and data with exact factors." />
 
     <link rel="canonical" href="https://calccore.net/en/misc/unit-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/unit-converter" />
@@ -26,180 +28,430 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Unit Converter Online — Length, Weight, Volume" />
-    <meta property="og:description" content="Convert units of measurement: length, weight, volume, temperature, area, speed. Metric and imperial units." />
+    <meta property="og:title" content="Unit Converter: Length, Weight, Volume, Temperature" />
+    <meta property="og:description" content="A converter for 130 units in 12 categories: length, mass, volume, area, speed, temperature, time, pressure, energy, power, angle and data with exact factors." />
     <meta property="og:url" content="https://calccore.net/en/misc/unit-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Unit Converter Online — Length, Weight, Volume" />
-    <meta name="twitter:description" content="Convert units of measurement: length, weight, volume, temperature, area, speed. Metric and imperial units." />
+    <meta name="twitter:title" content="Unit Converter: Length, Weight, Volume, Temperature" />
+    <meta name="twitter:description" content="A converter for 130 units in 12 categories: length, mass, volume, area, speed, temperature, time, pressure, energy, power, angle and data with exact factors." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261116un3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/unit-converter.js?v=20260909" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What's the difference between metric and imperial systems?",
-        "acceptedAnswer":{"@type":"Answer","text":"The metric system (kilometers, kilograms, liters) is used in most countries worldwide, while the imperial system (miles, pounds, gallons) is mainly used in the US."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why does temperature convert differently from other units?",
-        "acceptedAnswer":{"@type":"Answer","text":"Unlike length or weight, temperature scales have different zero points, so conversion requires an addition/subtraction formula rather than simple multiplication."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I convert between any two units directly?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, choose a category, enter a value in one unit — and instantly see the result in all other units of that category."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261116un3" defer></script>
+    <script src="/js/phys-core.js?v=20261116un3" defer></script>
+    <script src="/js/km-data.js?v=20261116un3" defer></script>
+    <script src="/js/un-data.js?v=20261116un3" defer></script>
+    <script src="/js/un-calc.js?v=20261116un3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/misc/unit-converter#app",
-    "name":"Unit Converter",
-    "description":"Convert units of measurement: length, weight, volume, temperature, area, speed.",
-    "url":"https://calccore.net/en/misc/unit-converter",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/misc/unit-converter#app",
+  "name": "Unit Converter",
+  "description": "An online converter for 130 units in 12 categories: length, mass and weight, volume (with US and British gallons, pints and cups), area, speed, temperature (°C, °F, K, °R), time, pressure, energy, power, angle and digital data (kB and KiB). Factors follow the exact SI and NIST definitions, with a choice of significant digits and a search in the unit lists.",
+  "url": "https://calccore.net/en/misc/unit-converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "130 units in 12 categories",
+    "Exact factors by SI and NIST definitions",
+    "US and British units separate, several kinds of cup",
+    "Temperature: °C, °F, K, °R with the formula",
+    "A choice of significant digits and a unit search"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/misc/unit-converter#webpage",
+      "url": "https://calccore.net/en/misc/unit-converter",
+      "name": "Unit Converter: Length, Weight, Volume, Temperature | CalcCore",
+      "description": "A converter for 130 units in 12 categories: length, mass, volume, area, speed, temperature, time, pressure, energy, power, angle and data with exact factors.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/misc/unit-converter#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/misc/unit-converter#breadcrumb"
+      },
+      "dateModified": "2026-11-16",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/misc/unit-converter#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Misc",
+          "item": "https://calccore.net/en/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Unit converter",
+          "item": "https://calccore.net/en/misc/unit-converter"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/misc/unit-converter#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many centimeters are in an inch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Exactly 2.54 cm by definition, so 1 inch is 0.0254 m."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many kilograms are in a pound?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Exactly 0.45359237 kg. An ounce is 28.349523125 g, and a pound has 16 ounces."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many liters are in a gallon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A US gallon is 3.785411784 L and a British (imperial) one 4.54609 L, so these gallons differ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many kilometers are in a mile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Exactly 1.609344 km, so 1 mile is 5280 feet. A nautical mile is 1852 m."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert Celsius to Fahrenheit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "°F = °C × 9/5 + 32: 0 °C is 32 °F, 100 °C is 212 °F and −40 °C equals −40 °F. The converter works through kelvin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many square meters are in an acre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "4046.8564224 m², which is 0.40468564224 ha."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between kB and KiB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A kilobyte (kB) is 1000 bytes and a kibibyte (KiB) 1024 bytes. So 1 GiB equals 1.073741824 GB."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many milliliters are in a cup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the choice: the metric cup is 250 ml, the US one 240 ml (customary 236.6 ml), the British 284.1 ml, and there is also 200 ml."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many seconds are in a year?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Julian year (365.25 days) has 31,557,600 s. The month in the converter is the average (a year divided by 12) and approximate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many kilocalories are in a kilojoule?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1 kcal is 4.184 kJ by the definition of the thermochemical calorie, so 1 kJ ≈ 0.239 kcal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which horsepower is more exact?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is a metric one (735.49875 W) and a mechanical one (745.69987 W), and the converter has both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the result sometimes show ≈?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It means the value is rounded to the chosen number of significant digits. Raise it in the settings to see more digits."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cunit">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Unit Converter</h1>
-                    <p class="mcalc__p">
-                        Length, weight, volume, temperature, area, speed — choose a
-                        category and convert instantly.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Unit Converter</h1>
+                    <p class="ph__p">Choose a category, enter a value and two units, and the calculator shows the result with the exact factor. The factors follow the SI and NIST definitions: an inch is exactly 2.54 cm and a pound 0.45359237 kg, so converting there and back agrees. There are 12 categories and a search in the unit lists.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Choose category and value</h2>
-                        <span class="mcalc__badge">Misc</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Misc</span>
+                        </div>
+
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="conv" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Converter</b><span class="ph__ex">Any unit into any other</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="all" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">All units</b><span class="ph__ex">All units of a category</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="category">Category</label>
-                            <select id="category" class="mcalc__select">
-                                <option value="length" selected>Length</option>
-                                <option value="weight">Weight</option>
-                                <option value="volume">Volume</option>
-                                <option value="temperature">Temperature</option>
-                                <option value="area">Area</option>
-                                <option value="speed">Speed</option>
-                            </select>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="inputValue">Value</label>
-                            <input class="mcalc__input" id="inputValue" type="text" inputmode="decimal"
-                                placeholder="e.g.: 1" />
-                        </div>
-
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="inputUnit">Unit</label>
-                            <select id="inputUnit" class="mcalc__select"></select>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
                         </div>
                     </div>
-
-                    <div class="unit-results" id="unitResults"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/en/calculator">Scientific Calculator</a>
-                    <a href="/en/education/percent-calculator">Percentage Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why you need a unit converter</h2>
-            <p>
-                In everyday life, it's common to need conversion between measurement systems —
-                reading a recipe from a foreign site, checking a product specification, or working
-                with international documents. This converter instantly shows the value in all common
-                units of the chosen category.
-            </p>
-
-            <h2>Metric vs imperial system</h2>
-            <p>
-                The <b>metric system</b> (kilometers, kilograms, liters, Celsius) is the official
-                standard in the vast majority of countries worldwide. The <b>imperial system</b>
-                (miles, pounds, gallons, Fahrenheit) remains the primary system in the US, and some
-                of its elements (like miles) are still used in the UK.
-            </p>
-
-            <h2>Conversion categories</h2>
-            <ul>
-                <li><b>Length:</b> meters, kilometers, centimeters, miles, feet, inches, yards.</li>
-                <li><b>Weight:</b> kilograms, grams, pounds, ounces, tons.</li>
-                <li><b>Volume:</b> liters, milliliters, gallons, quarts, pints, cups.</li>
-                <li><b>Temperature:</b> Celsius, Fahrenheit, Kelvin.</li>
-                <li><b>Area:</b> square meters, square kilometers, hectares, acres, square feet.</li>
-                <li><b>Speed:</b> km/h, mph, m/s, knots.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Conversion values are based on standard international factors and are highly
-                accurate for practical use.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/kitchen/measurement-converter"><b>Cooking Measurement Converter</b><span>Cups, spoons and grams by ingredient.</span></a>
+                <a class="cc-related-card" href="/en/kitchen/oven-temperature-converter"><b>Oven Temperature Converter</b><span>°C, °F and gas mark with a fan oven adjustment.</span></a>
+                <a class="cc-related-card" href="/en/education/percent-calculator"><b>Percentage Calculator</b><span>A percent of a number, a difference and a change by percent.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the converter does</h2>
+            <p>The converter converts values between <b>130 units in 12 categories</b>: length, mass and weight, volume, area, speed, temperature, time, pressure, energy, power, angle and digital data. Enter a number, choose the source and target units, and you see the result, the conversion factor, the inverse factor and all the other units of the category. The value can be entered with a comma or a point, with a sign and in a form like 1e-3.</p>
+
+            <h2>Exact factors</h2>
+            <p>The factors follow the exact definitions. An inch is <b>2.54 cm</b>, a pound <b>0.45359237 kg</b>, an ounce 28.349523125 g, a mile 1.609344 km, a nautical mile 1852 m, an acre 4046.8564224 m² (0.40468564224 ha), an atmosphere 101.325 kPa, a kilowatt-hour 3.6 MJ, a calorie 4.184 J and a knot 1.852 km/h. So converting there and back gives the same number, without tails like 0.453592.</p>
+
+            <h2>US and British units</h2>
+            <p>Gallons, pints and fluid ounces differ between the US and Britain. A US gallon is 3.785411784 L while the British (imperial) one is 4.54609 L, and a US pint is 473.176473 ml against 568.26125 ml. So in the converter they are split into the groups “US” and “British”. The same goes for tons: the short (US) ton is 2000 pounds and the long (British) ton 2240 pounds.</p>
+
+            <h2>The cup and the spoon</h2>
+            <p>A cup has no single size: the metric one is 250 ml, then 200 ml, the US legal 240 ml, the US customary 236.6 ml and the British 284.1 ml. All five are in the volume list, as are the teaspoon (5 ml) and the tablespoon (15 ml) and the US spoons. To convert cups and spoons to grams by ingredient there is the <a href="/en/kitchen/measurement-converter">cooking measurement converter</a>.</p>
+
+            <h2>Temperature</h2>
+            <p>Temperature is converted through kelvin because the scales have different zeros: K = °C + 273.15, K = (°F + 459.67) × 5/9, K = °R × 5/9. So 0 °C is 32 °F, 273.15 K and 491.67 °R, 100 °C is 212 °F and −40 °C equals −40 °F. A temperature below absolute zero is rejected. For an oven there is the <a href="/en/kitchen/oven-temperature-converter">oven temperature converter</a>.</p>
+
+            <h2>Digital data and time</h2>
+            <p>In data, decimal prefixes (a kilobyte is 1000 B, a gigabyte 10⁹ B) are distinguished from binary ones (a kibibyte is 1024 B, a gibibyte 2³⁰ B): 1 GiB is 1.073741824 GB. Bits and bytes are related as 1 B = 8 bits. In time a year is the Julian one (365.25 days, 31,557,600 s) and a month is the average (a year / 12), so it is marked approximate.</p>
+
+            <h2>Significant digits</h2>
+            <p>In the settings you can choose 4, 6, 8, 10, 12 or 15 significant digits. The calculation runs at full precision and only the display is rounded; the sign “≈” means the value is rounded. Very large and very small numbers are shown as a mantissa and a power of ten.</p>
+
+            <h2>Sources, rights and contact</h2>
+            <p>The definitions and factors come from the <a href="https://www.bipm.org/en/publications/si-brochure" target="_blank" rel="noopener noreferrer">SI Brochure (BIPM)</a>, <a href="https://www.nist.gov/pml/special-publication-811" target="_blank" rel="noopener noreferrer">NIST Special Publication 811</a> and <a href="https://www.nist.gov/pml/owm/nist-handbook-44-current-edition" target="_blank" rel="noopener noreferrer">NIST Handbook 44</a>. The data is collected from public sources and put in our own words. The site is not affiliated with these organizations or endorsed by them, and their names belong to their owners. If you are a rights holder and have a concern, write to us on the <a href="/en/contacts">Contacts</a> page.</p>
+
+            <h2>Limits</h2>
+            <p>The parsec and the average month are approximate, and conversion between units of different nature (for example mass and weight as a force) is not done. For legal and trade calculations use the official tables and the full values without rounding.</p>
+            <p class="ph-mini">The factors are exact by the SI and NIST definitions, and a cup and a gallon come in several kinds: US, British, metric. The parsec and the average month are approximate.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What's the difference between metric and imperial systems?</h3>
-                <p>The metric system (kilometers, kilograms, liters) is used in most countries worldwide, while the
-                    imperial system (miles, pounds, gallons) is mainly used in the US.</p>
+            <div class="cc-faq-item">
+                <h3>How many centimeters are in an inch?</h3>
+                <p>Exactly 2.54 cm by definition, so 1 inch is 0.0254 m.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why does temperature convert differently from other units?</h3>
-                <p>Unlike length or weight, temperature scales have different zero points, so conversion requires an
-                    addition/subtraction formula rather than simple multiplication.</p>
+            <div class="cc-faq-item">
+                <h3>How many kilograms are in a pound?</h3>
+                <p>Exactly 0.45359237 kg. An ounce is 28.349523125 g, and a pound has 16 ounces.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I convert between any two units directly?</h3>
-                <p>Yes, choose a category, enter a value in one unit — and instantly see the result in all other units
-                    of that category.</p>
+            <div class="cc-faq-item">
+                <h3>How many liters are in a gallon?</h3>
+                <p>A US gallon is 3.785411784 L and a British (imperial) one 4.54609 L, so these gallons differ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many kilometers are in a mile?</h3>
+                <p>Exactly 1.609344 km, so 1 mile is 5280 feet. A nautical mile is 1852 m.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I convert Celsius to Fahrenheit?</h3>
+                <p>°F = °C × 9/5 + 32: 0 °C is 32 °F, 100 °C is 212 °F and −40 °C equals −40 °F. The converter works through kelvin.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many square meters are in an acre?</h3>
+                <p>4046.8564224 m², which is 0.40468564224 ha.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the difference between kB and KiB?</h3>
+                <p>A kilobyte (kB) is 1000 bytes and a kibibyte (KiB) 1024 bytes. So 1 GiB equals 1.073741824 GB.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many milliliters are in a cup?</h3>
+                <p>It depends on the choice: the metric cup is 250 ml, the US one 240 ml (customary 236.6 ml), the British 284.1 ml, and there is also 200 ml.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many seconds are in a year?</h3>
+                <p>A Julian year (365.25 days) has 31,557,600 s. The month in the converter is the average (a year divided by 12) and approximate.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How many kilocalories are in a kilojoule?</h3>
+                <p>1 kcal is 4.184 kJ by the definition of the thermochemical calorie, so 1 kJ ≈ 0.239 kcal.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which horsepower is more exact?</h3>
+                <p>There is a metric one (735.49875 W) and a mechanical one (745.69987 W), and the converter has both.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does the result sometimes show ≈?</h3>
+                <p>It means the value is rounded to the chosen number of significant digits. Raise it in the settings to see more digits.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

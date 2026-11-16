@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Конвертер одиниць вимірювання онлайн — довжина, вага, об'єм | CalcCore</title>
+    <title>Конвертер одиниць: довжина, вага, об'єм, температура | CalcCore</title>
     <meta name="description"
-        content="Конвертація одиниць вимірювання: довжина, вага, об'єм, температура, площа, швидкість. Метричні та імперські одиниці." />
+        content="Конвертер 130 одиниць у 12 категоріях: довжина, маса, об'єм, площа, швидкість, температура, час, тиск, енергія, потужність, кут і дані з точними коефіцієнтами." />
 
     <link rel="canonical" href="https://calccore.net/misc/unit-converter" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/unit-converter" />
@@ -26,180 +28,430 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Конвертер одиниць вимірювання онлайн — довжина, вага, об'єм" />
-    <meta property="og:description" content="Конвертація одиниць вимірювання: довжина, вага, об'єм, температура, площа, швидкість. Метричні та імперські одиниці." />
+    <meta property="og:title" content="Конвертер одиниць: довжина, вага, об'єм, температура" />
+    <meta property="og:description" content="Конвертер 130 одиниць у 12 категоріях: довжина, маса, об'єм, площа, швидкість, температура, час, тиск, енергія, потужність, кут і дані з точними коефіцієнтами." />
     <meta property="og:url" content="https://calccore.net/misc/unit-converter" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Конвертер одиниць вимірювання онлайн — довжина, вага, об'єм" />
-    <meta name="twitter:description" content="Конвертація одиниць вимірювання: довжина, вага, об'єм, температура, площа, швидкість. Метричні та імперські одиниці." />
+    <meta name="twitter:title" content="Конвертер одиниць: довжина, вага, об'єм, температура" />
+    <meta name="twitter:description" content="Конвертер 130 одиниць у 12 категоріях: довжина, маса, об'єм, площа, швидкість, температура, час, тиск, енергія, потужність, кут і дані з точними коефіцієнтами." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261116un3" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/unit-converter.js?v=20260909" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Яка різниця між метричною та імперською системами?",
-        "acceptedAnswer":{"@type":"Answer","text":"Метрична система (кілометри, кілограми, літри) використовується в більшості країн світу, тоді як імперська (милі, фунти, галони) переважно застосовується в США."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чому температура конвертується інакше, ніж інші одиниці?",
-        "acceptedAnswer":{"@type":"Answer","text":"На відміну від довжини чи ваги, шкали температури мають різні нульові точки, тому конвертація вимагає формули з додаванням/відніманням, а не простого множення."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна конвертувати між будь-якими двома одиницями напряму?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, обери потрібну категорію, введи значення в одній одиниці — і одразу побачиш результат в усіх інших одиницях цієї категорії."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261116un3" defer></script>
+    <script src="/js/phys-core.js?v=20261116un3" defer></script>
+    <script src="/js/km-data.js?v=20261116un3" defer></script>
+    <script src="/js/un-data.js?v=20261116un3" defer></script>
+    <script src="/js/un-calc.js?v=20261116un3" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/misc/unit-converter#app",
-    "name":"Unit Converter",
-    "description":"Конвертація одиниць вимірювання: довжина, вага, об'єм, температура, площа, швидкість.",
-    "url":"https://calccore.net/misc/unit-converter",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/misc/unit-converter#app",
+  "name": "Конвертер одиниць вимірювання",
+  "description": "Онлайн-конвертер 130 одиниць у 12 категоріях: довжина, маса й вага, об'єм (з американськими й британськими галонами, пінтами, склянками), площа, швидкість, температура (°C, °F, K, °R), час, тиск, енергія, потужність, кут і цифрові дані (КБ і КіБ). Коефіцієнти за точними визначеннями SI та NIST, вибір кількості значущих цифр і пошук одиниці в списку.",
+  "url": "https://calccore.net/misc/unit-converter",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "130 одиниць у 12 категоріях",
+    "Точні коефіцієнти за визначеннями SI і NIST",
+    "Американські й британські одиниці окремо, кілька видів склянки",
+    "Температура: °C, °F, K, °R з формулою",
+    "Вибір кількості значущих цифр і пошук одиниці"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/misc/unit-converter#webpage",
+      "url": "https://calccore.net/misc/unit-converter",
+      "name": "Конвертер одиниць: довжина, вага, об'єм, температура | CalcCore",
+      "description": "Конвертер 130 одиниць у 12 категоріях: довжина, маса, об'єм, площа, швидкість, температура, час, тиск, енергія, потужність, кут і дані з точними коефіцієнтами.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/misc/unit-converter#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/misc/unit-converter#breadcrumb"
+      },
+      "dateModified": "2026-11-16",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/misc/unit-converter#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Різне",
+          "item": "https://calccore.net/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Конвертер одиниць",
+          "item": "https://calccore.net/misc/unit-converter"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/misc/unit-converter#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скільки сантиметрів в одному дюймі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Рівно 2,54 см за визначенням, тобто 1 дюйм це 0,0254 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки кілограмів у фунті?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Рівно 0,45359237 кг. У унції 28,349523125 г, а фунт містить 16 унцій."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки літрів у галоні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У галоні США 3,785411784 л, а в британському (імперському) 4,54609 л, тому ці галони різні."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки кілометрів у милі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Рівно 1,609344 км, тобто 1 миля це 5280 футів. Морська миля 1852 м."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як перевести градуси Цельсія у Фаренгейта?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "°F = °C × 9/5 + 32: 0 °C це 32 °F, 100 °C це 212 °F, а −40 °C дорівнює −40 °F. Конвертер рахує через кельвін."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки квадратних метрів в акрі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "4046,8564224 м², що становить 0,40468564224 га."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чим відрізняються КБ і КіБ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Кілобайт (КБ) це 1000 байтів, а кібібайт (КіБ) 1024 байти. Відповідно 1 ГіБ дорівнює 1,073741824 ГБ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки мілілітрів у склянці?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Залежить від вибору: метрична 250 мл, американська 240 мл (звичайна 236,6 мл), британська 284,1 мл, також є 200 мл."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки секунд у році?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "У юліанському році (365,25 доби) 31 557 600 с. Місяць у конвертері середній (рік, поділений на 12) і наближений."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки кілокалорій у кілоджоулі?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1 ккал це 4,184 кДж за визначенням термохімічної калорії, тобто 1 кДж ≈ 0,239 ккал."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яка кінська сила точніша?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Є метрична (735,49875 Вт) і механічна (745,69987 Вт), конвертер має обидві."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому результат інколи показує ≈?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це означає, що значення округлено до обраної кількості значущих цифр. Збільште її в налаштуваннях, щоб побачити більше цифр."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cunit">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Конвертер одиниць вимірювання</h1>
-                    <p class="mcalc__p">
-                        Довжина, вага, об'єм, температура, площа, швидкість — обери
-                        категорію та конвертуй миттєво.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Конвертер одиниць вимірювання</h1>
+                    <p class="ph__p">Оберіть категорію, введіть значення й дві одиниці, і калькулятор покаже результат із точним коефіцієнтом. Коефіцієнти взято за визначеннями SI та NIST: дюйм це рівно 2,54 см, фунт 0,45359237 кг, тож переведення туди й назад збігається. Є 12 категорій і пошук одиниці в списку.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:900px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Обери категорію та значення</h2>
-                        <span class="mcalc__badge">Misc</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Різне</span>
+                        </div>
+
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="conv" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Конвертер</b><span class="ph__ex">Будь-яка одиниця в будь-яку</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="all" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Усі одиниці</b><span class="ph__ex">Усі одиниці категорії</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="category">Категорія</label>
-                            <select id="category" class="mcalc__select">
-                                <option value="length" selected>Довжина</option>
-                                <option value="weight">Вага</option>
-                                <option value="volume">Об'єм</option>
-                                <option value="temperature">Температура</option>
-                                <option value="area">Площа</option>
-                                <option value="speed">Швидкість</option>
-                            </select>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="inputValue">Значення</label>
-                            <input class="mcalc__input" id="inputValue" type="text" inputmode="decimal"
-                                placeholder="напр.: 1" />
-                        </div>
-
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="inputUnit">Одиниця</label>
-                            <select id="inputUnit" class="mcalc__select"></select>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
                         </div>
                     </div>
-
-                    <div class="unit-results" id="unitResults"></div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:900px; margin:16px auto 0;">
-                    <a href="/calculator">Науковий калькулятор</a>
-                    <a href="/education/percent-calculator">Калькулятор відсотків</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Навіщо потрібен конвертер одиниць</h2>
-            <p>
-                У щоденному житті часто доводиться переводити значення з однієї системи вимірювання
-                в іншу — читаючи рецепт з іноземного сайту, дивлячись специфікації товару, чи
-                працюючи з міжнародними документами. Цей конвертер миттєво показує значення в усіх
-                поширених одиницях обраної категорії.
-            </p>
-
-            <h2>Метрична vs імперська система</h2>
-            <p>
-                <b>Метрична система</b> (кілометри, кілограми, літри, градуси Цельсія) — офіційний
-                стандарт у переважній більшості країн світу. <b>Імперська система</b> (милі, фунти,
-                галони, градуси Фаренгейта) залишається основною в США, а деякі її елементи
-                (наприклад, милі) використовуються у Великій Британії.
-            </p>
-
-            <h2>Категорії конвертації</h2>
-            <ul>
-                <li><b>Довжина:</b> метри, кілометри, сантиметри, милі, фути, дюйми, ярди.</li>
-                <li><b>Вага:</b> кілограми, грами, фунти, унції, тонни.</li>
-                <li><b>Об'єм:</b> літри, мілілітри, галони, кварти, пінти, чашки.</li>
-                <li><b>Температура:</b> Цельсій, Фаренгейт, Кельвін.</li>
-                <li><b>Площа:</b> квадратні метри, квадратні кілометри, гектари, акри, квадратні фути.</li>
-                <li><b>Швидкість:</b> км/год, миль/год, м/с, вузли.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Значення конвертації базуються на стандартних міжнародних коефіцієнтах і мають
-                високу точність для практичного використання.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/kitchen/measurement-converter"><b>Конвертер кулінарних мір</b><span>Склянки, ложки й грами з урахуванням продукту.</span></a>
+                <a class="cc-related-card" href="/kitchen/oven-temperature-converter"><b>Температура духовки</b><span>°C, °F і газова марка з поправкою для вентилятора.</span></a>
+                <a class="cc-related-card" href="/education/percent-calculator"><b>Калькулятор відсотків</b><span>Відсоток від числа, різниця й зміна на відсоток.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що робить конвертер</h2>
+            <p>Конвертер переводить значення між <b>130 одиницями у 12 категоріях</b>: довжина, маса й вага, об'єм, площа, швидкість, температура, час, тиск, енергія, потужність, кут і цифрові дані. Введіть число, оберіть початкову й цільову одиниці, і побачите результат, коефіцієнт переведення, обернений коефіцієнт і всі інші одиниці категорії. Значення можна вводити з комою чи крапкою, зі знаком і в записі 1e-3.</p>
+
+            <h2>Точні коефіцієнти</h2>
+            <p>Коефіцієнти взято за точними визначеннями. Дюйм дорівнює <b>2,54 см</b>, фунт <b>0,45359237 кг</b>, унція 28,349523125 г, миля 1,609344 км, морська миля 1852 м, акр 4046,8564224 м² (0,40468564224 га), атмосфера 101,325 кПа, кіловат-година 3,6 МДж, калорія 4,184 Дж, вузол 1,852 км/год. Через це переведення туди й назад дає те саме число, без «хвостів» на кшталт 0,453592.</p>
+
+            <h2>Американські й британські одиниці</h2>
+            <p>Галони, пінти й рідинні унції в США й Британії різні. Галон США це 3,785411784 л, а британський (імперський) 4,54609 л, пінта США 473,176473 мл, британська 568,26125 мл. Тому в конвертері вони розділені на групи «США» й «Британські». Те саме з тоннами: коротка (США) 2000 фунтів, довга (Британія) 2240 фунтів.</p>
+
+            <h2>Склянка й ложка</h2>
+            <p>Склянка не має єдиного розміру: метрична 250 мл, 200 мл, американська 240 мл, американська звичайна 236,6 мл і британська 284,1 мл. Усі п'ять є в списку об'ємів, як і чайна (5 мл) й столова (15 мл) ложки та американські ложки. Для переведення склянок і ложок у грами за продуктом є <a href="/kitchen/measurement-converter">конвертер кулінарних мір</a>.</p>
+
+            <h2>Температура</h2>
+            <p>Температура переводиться через кельвін, бо шкали мають різні нулі: K = °C + 273,15, K = (°F + 459,67) × 5/9, K = °R × 5/9. Тому 0 °C це 32 °F, 273,15 K і 491,67 °R, 100 °C це 212 °F, а −40 °C дорівнює −40 °F. Температура нижче абсолютного нуля відхиляється. Для духовки є <a href="/kitchen/oven-temperature-converter">конвертер температури духовки</a>.</p>
+
+            <h2>Цифрові дані й час</h2>
+            <p>У даних розрізняють десяткові префікси (кілобайт 1000 Б, гігабайт 10⁹ Б) і двійкові (кібібайт 1024 Б, гібібайт 2³⁰ Б): 1 ГіБ це 1,073741824 ГБ. Біти й байти пов'язані як 1 Б = 8 біт. У часі рік вважається юліанським (365,25 доби, 31 557 600 с), а місяць середнім (рік / 12), тому він позначений як наближений.</p>
+
+            <h2>Значущі цифри</h2>
+            <p>У налаштуваннях можна вибрати 4, 6, 8, 10, 12 чи 15 значущих цифр. Обчислення виконуються з повною точністю, а показ округлюється; знак «≈» означає, що значення округлено. Дуже великі й малі числа показуються у вигляді мантиси й степеня десяти.</p>
+
+            <h2>Джерела, права та контакт</h2>
+            <p>Визначення й коефіцієнти взято з <a href="https://www.bipm.org/en/publications/si-brochure" target="_blank" rel="noopener noreferrer">SI Brochure (BIPM)</a>, <a href="https://www.nist.gov/pml/special-publication-811" target="_blank" rel="noopener noreferrer">NIST Special Publication 811</a> і <a href="https://www.nist.gov/pml/owm/nist-handbook-44-current-edition" target="_blank" rel="noopener noreferrer">NIST Handbook 44</a>. Дані зібрано з відкритих джерел і викладено своїми словами. Сайт не пов'язаний із цими організаціями й не підтверджений ними, а їхні назви належать їхнім власникам. Якщо ви правовласник і маєте зауваження, напишіть нам на сторінці <a href="/contacts">Контакти</a>.</p>
+
+            <h2>Обмеження</h2>
+            <p>Парсек і середній місяць наближені, а переведення між одиницями різної природи (наприклад, маса й вага як сила) не виконується. Для юридичних і торгових розрахунків використовуйте офіційні таблиці й повні значення без округлення.</p>
+            <p class="ph-mini">Коефіцієнти точні за визначеннями SI і NIST, а склянка й галон мають кілька варіантів: американський, британський, метричний. Парсек і середній місяць наближені.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Яка різниця між метричною та імперською системами?</h3>
-                <p>Метрична система (кілометри, кілограми, літри) використовується в більшості країн світу, тоді як
-                    імперська (милі, фунти, галони) переважно застосовується в США.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки сантиметрів в одному дюймі?</h3>
+                <p>Рівно 2,54 см за визначенням, тобто 1 дюйм це 0,0254 м.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чому температура конвертується інакше, ніж інші одиниці?</h3>
-                <p>На відміну від довжини чи ваги, шкали температури мають різні нульові точки, тому конвертація вимагає
-                    формули з додаванням/відніманням, а не простого множення.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки кілограмів у фунті?</h3>
+                <p>Рівно 0,45359237 кг. У унції 28,349523125 г, а фунт містить 16 унцій.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна конвертувати між будь-якими двома одиницями напряму?</h3>
-                <p>Так, обери потрібну категорію, введи значення в одній одиниці — і одразу побачиш результат в усіх
-                    інших одиницях цієї категорії.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки літрів у галоні?</h3>
+                <p>У галоні США 3,785411784 л, а в британському (імперському) 4,54609 л, тому ці галони різні.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки кілометрів у милі?</h3>
+                <p>Рівно 1,609344 км, тобто 1 миля це 5280 футів. Морська миля 1852 м.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як перевести градуси Цельсія у Фаренгейта?</h3>
+                <p>°F = °C × 9/5 + 32: 0 °C це 32 °F, 100 °C це 212 °F, а −40 °C дорівнює −40 °F. Конвертер рахує через кельвін.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки квадратних метрів в акрі?</h3>
+                <p>4046,8564224 м², що становить 0,40468564224 га.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чим відрізняються КБ і КіБ?</h3>
+                <p>Кілобайт (КБ) це 1000 байтів, а кібібайт (КіБ) 1024 байти. Відповідно 1 ГіБ дорівнює 1,073741824 ГБ.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки мілілітрів у склянці?</h3>
+                <p>Залежить від вибору: метрична 250 мл, американська 240 мл (звичайна 236,6 мл), британська 284,1 мл, також є 200 мл.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки секунд у році?</h3>
+                <p>У юліанському році (365,25 доби) 31 557 600 с. Місяць у конвертері середній (рік, поділений на 12) і наближений.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Скільки кілокалорій у кілоджоулі?</h3>
+                <p>1 ккал це 4,184 кДж за визначенням термохімічної калорії, тобто 1 кДж ≈ 0,239 ккал.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Яка кінська сила точніша?</h3>
+                <p>Є метрична (735,49875 Вт) і механічна (745,69987 Вт), конвертер має обидві.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому результат інколи показує ≈?</h3>
+                <p>Це означає, що значення округлено до обраної кількості значущих цифр. Збільште її в налаштуваннях, щоб побачити більше цифр.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
