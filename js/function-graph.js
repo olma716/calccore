@@ -436,7 +436,7 @@
     const c = ctx2; c.setTransform(DPR, 0, 0, DPR, 0, 0);
     c.fillStyle = "#fff"; c.fillRect(0, 0, W, H);
     const sx = niceStep(view.x1 - view.x0), sy = niceStep(view.y1 - view.y0), grid = el("grid").value === "on";
-    c.font = "11px system-ui, sans-serif"; c.lineWidth = 1;
+    c.font = "11px Inter, system-ui, sans-serif"; c.lineWidth = 1;
     const ox = Math.min(Math.max(px(0), 0), W), oy = Math.min(Math.max(py(0), 0), H);
     if (grid) {
       c.strokeStyle = "#e9edf6";
