@@ -2766,7 +2766,7 @@
 .fg__tabs .fg__tab[data-m="tg"].is-active::before { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M3%2012h4l3-8%204%2016%203-8h4%27%2F%3E%3C%2Fsvg%3E"); }
 .fg__actions { gap: 10px; }
 #calcBtn.fg__btn, #shareBtn.fg__btn, #exampleBtn.fg__btn, #resetBtn.fg__btn, #copyBtn.fg__btn { position: relative; top: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 14px; overflow: hidden; border: 0; border-radius: 14px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, rgba(255, 255, 255, 0.07) 49%, rgba(255, 255, 255, 0) 50%), linear-gradient(135deg, #38497a 0%, #4f649a 55%, #6a80b8 100%); color: #fff; font-size: 14px; font-weight: 800; filter: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), inset 0 1px 0 rgba(255, 255, 255, .4), inset 0 -2px 0 rgba(15, 25, 50, .25), 0 2px 4px rgba(40, 59, 105, .22), 0 8px 18px rgba(44, 59, 95, .32); transition: top .45s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, background .65s ease, color .65s ease; }
-#calcBtn.fg__btn { width: 100%; flex: 1 1 100%; padding: 0 22px; }
+#calcBtn.fg__btn { width: auto; flex: 0 0 auto; min-width: 190px; padding: 0 28px; }
 #copyBtn.fg__btn { flex: 1 1 100%; }
 #shareBtn.fg__btn, #exampleBtn.fg__btn, #resetBtn.fg__btn { flex: 1 1 96px; min-width: 0; padding: 0 8px; gap: 6px; font-size: 13px; }
 #calcBtn.fg__btn::before, #shareBtn.fg__btn::before, #exampleBtn.fg__btn::before, #resetBtn.fg__btn::before, #copyBtn.fg__btn::before { content: ""; flex: 0 0 18px; width: 18px; height: 18px; background-position: center; background-repeat: no-repeat; background-size: 18px 18px; transition: transform .75s cubic-bezier(.3, 1.6, .5, 1); }
@@ -2788,3 +2788,12 @@
 #resetBtn.fg__btn:hover::before { transform: rotate(-200deg); background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23b3261e%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M3%2012a9%209%200%201%200%203-6.7L3%208%27%2F%3E%3Cpath%20d%3D%27M3%203v5h5%27%2F%3E%3C%2Fsvg%3E"); }
 @media (prefers-reduced-motion: reduce) { .fg__tabs .fg__tab, .fg__tabs .fg__tab::before, #calcBtn.fg__btn, #shareBtn.fg__btn, #exampleBtn.fg__btn, #resetBtn.fg__btn, #copyBtn.fg__btn, #calcBtn.fg__btn::before, #shareBtn.fg__btn::before, #exampleBtn.fg__btn::before, #resetBtn.fg__btn::before, #copyBtn.fg__btn::before, #calcBtn.fg__btn::after, #shareBtn.fg__btn::after, #exampleBtn.fg__btn::after, #resetBtn.fg__btn::after, #copyBtn.fg__btn::after { transition: none; } }
 /* <<< плитки й кнопки як у кухні й спорту */
+
+/* >>> анімація плиток режимів */
+.fg__tabs .fg__tab { position: relative; overflow: hidden; }
+.fg__tabs .fg__tab::after { content: ""; position: absolute; inset: 0; top: 0; right: 0; width: auto; height: auto; border-radius: 0; background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%); box-shadow: none; transform: translateX(-120%); transition: transform 1.5s ease; pointer-events: none; }
+.fg__tabs .fg__tab:hover::after { transform: translateX(120%); }
+.fg__tabs .fg__tab.is-active::after { content: ""; position: absolute; inset: 0; top: 0; right: 0; width: auto; height: auto; border-radius: 0; background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%); box-shadow: none; }
+.fg__tabs .fg__tab.is-active { background: radial-gradient(circle at calc(100% - 14px) 14px, #fff 0 4px, rgba(255, 255, 255, .22) 4px 8px, rgba(255, 255, 255, 0) 8.6px), linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, rgba(255, 255, 255, 0.07) 49%, rgba(255, 255, 255, 0) 50%), linear-gradient(135deg, #38497a 0%, #4f649a 55%, #6a80b8 100%); }
+@media (prefers-reduced-motion: reduce) { .fg__tabs .fg__tab::after { transition: none; } }
+/* <<< анімація плиток режимів */

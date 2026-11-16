@@ -66,7 +66,7 @@
 
   function push(disp, raw) { tokens.push({ disp, raw: raw ?? disp }); renderLive(); }
 
-  function wrapTrailingNumber(dispFn, rawFn) {
+  function wrapTrailingNumber(dispFn, rawFn, dispSuffix) {
     // capture contiguous trailing digit/dot tokens (a number literal)
     let i = tokens.length - 1;
     const isNumTok = (t) => (/^[0-9.]$/.test(t.raw) && t.raw.length === 1) || t.raw === "Math.PI" || t.raw === "Math.E";
@@ -83,7 +83,9 @@
     const capDisp = captured.map(t => t.disp).join("");
     const capRaw = captured.map(t => t.raw).join("");
     tokens.length = start;
-    tokens.push({ disp: dispFn + "(" + capDisp + ")", raw: rawFn + "(" + capRaw + ")" });
+    // n! показуємо як «5!», а не «(5)»: у dispSuffix лежить знак після числа
+    const disp = dispSuffix ? capDisp + dispSuffix : dispFn + "(" + capDisp + ")";
+    tokens.push({ disp, raw: rawFn + "(" + capRaw + ")" });
     renderLive();
   }
 
@@ -119,8 +121,17 @@
   }
 
   function tryEvaluate() {
-    const raw = balanceParens(rawString());
+    let raw = balanceParens(rawString());
     if (!raw.trim()) return null;
+    // 1) провідні нулі: 010 мало б бути 10, а не вісімковим 8; .05 замість 0.05 теж коректне число
+    raw = raw.replace(/(^|[^0-9.])0+(?=[0-9]|\.[0-9])/g, "$1");
+    // 2) «50 + 10 %» = 50 + 50·10/100 = 55, як на звичайному калькуляторі (проценти наприкінці виразу після + або −)
+    const pm = /^(.*[0-9)IE])([+-])([0-9]+(?:\.[0-9]+)?|\.[0-9]+)\/ 100$/.exec(raw);
+    if (pm) { let o = 0; for (const ch of pm[1]) { if (ch === "(") o++; if (ch === ")") o--; } if (o === 0) raw = "(" + pm[1] + ")*(1" + pm[2] + pm[3] + "/100)"; }
+    // 3) неявне множення: 2π, 3(4), (2)(3), 2sin(30), (2)5
+    raw = raw.replace(/(\d|\)|Math\.PI|Math\.E)(?=\(|Math\.|(?:sin|cos|tan|asin|acos|atan|log|ln|sqrt|fact)\()/g, "$1*").replace(/(\)|Math\.PI|Math\.E)(?=[0-9])/g, "$1*");
+    // 4) унарний мінус на початку чи після «(» як «0−»: −2^2 = −4, а JS не дозволяє −2**2
+    raw = raw.replace(/^-/, "0-").replace(/\(-/g, "(0-");
     try {
       const scope = makeScope();
       const fn = new Function(
@@ -204,7 +215,14 @@
   function toggleSign() {
     if (!tokens.length) return;
     const raw = rawString();
-    if (raw.startsWith("-(") && raw.endsWith(")")) {
+    // розгортаємо «−( … )» лише коли ця дужка справді закривається в самому кінці: у «−(2)+(3)» її не чіпаємо
+    const wrapsWhole = () => {
+      if (!raw.startsWith("-(") || !raw.endsWith(")")) return false;
+      let depth = 0;
+      for (let i = 1; i < raw.length; i++) { if (raw[i] === "(") depth++; if (raw[i] === ")") { depth--; if (depth === 0) return i === raw.length - 1; } }
+      return false;
+    };
+    if (wrapsWhole()) {
       // unwrap
       const inner = dispString().slice(2, -1);
       const innerRaw = raw.slice(2, -1);
@@ -241,6 +259,8 @@
     if (action === "mplus") { memory += current; setToast(T.memAdded); }
     if (action === "mminus") { memory -= current; setToast(T.memSub); }
     if (action === "mr") {
+      // MR замінює число, що зараз вводиться (3 → пам'ять 9 дає 9, а не 39)
+      while (tokens.length && /^[0-9.]$/.test(tokens[tokens.length - 1].raw)) tokens.pop();
       const s = String(memory);
       tokens.push({ disp: fmt(memory), raw: s });
       renderLive();
@@ -280,7 +300,7 @@
       ")": { disp: ")", raw: ")" },
       "π": { disp: "π", raw: "Math.PI" },
       "e": { disp: "e", raw: "Math.E" },
-      "%": { disp: "%", raw: "/100" },
+      "%": { disp: "%", raw: "/ 100" }, // пробіл відрізняє «%» від набраних цифр «÷100»
       ".": { disp: ".", raw: "." },
     };
     if (map[key]) { push(map[key].disp, map[key].raw); return; }
@@ -308,7 +328,7 @@
         }
         renderLive();
         break;
-      case "fact": wrapTrailingNumber("", "fact"); break;
+      case "fact": wrapTrailingNumber("", "fact", "!"); break;
       case "log": wrapTrailingNumber("log", "log"); break;
       case "ln": wrapTrailingNumber("ln", "ln"); break;
       case "trig": {
