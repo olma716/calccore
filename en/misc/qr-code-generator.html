@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>QR Code Generator Online — Free | CalcCore</title>
+    <title>QR Code Generator Online: Link, Wi-Fi, Contact | CalcCore</title>
     <meta name="description"
-        content="Create a QR code for a link, text, or contact info for free. Download as an image for printing or online use." />
+        content="Create a QR code for a link, text, Wi-Fi, a contact card, email, SMS or a location, choose the colour and correction level, and download PNG or SVG." />
 
     <link rel="canonical" href="https://calccore.net/en/misc/qr-code-generator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/qr-code-generator" />
@@ -26,180 +28,433 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="QR Code Generator Online — Free" />
-    <meta property="og:description" content="Create a QR code for a link, text, or contact info for free. Download as an image for printing or online use." />
+    <meta property="og:title" content="QR Code Generator Online: Link, Wi-Fi, Contact" />
+    <meta property="og:description" content="Create a QR code for a link, text, Wi-Fi, a contact card, email, SMS or a location, choose the colour and correction level, and download PNG or SVG." />
     <meta property="og:url" content="https://calccore.net/en/misc/qr-code-generator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="QR Code Generator Online — Free" />
-    <meta name="twitter:description" content="Create a QR code for a link, text, or contact info for free. Download as an image for printing or online use." />
+    <meta name="twitter:title" content="QR Code Generator Online: Link, Wi-Fi, Contact" />
+    <meta name="twitter:description" content="Create a QR code for a link, text, Wi-Fi, a contact card, email, SMS or a location, choose the colour and correction level, and download PNG or SVG." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/qr-code-generator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261117qr2" />
+    <link rel="stylesheet" href="/css/qr.css?v=20261117qr2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
-    <script src="/js/qr-code-generator.js?v=20260909" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Is it safe to generate a QR code online?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, the QR code is generated entirely in your browser — the entered data is never sent to or stored on a server."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does a QR code expire?",
-        "acceptedAnswer":{"@type":"Answer","text":"No, the QR code itself doesn't expire — it will always point to the entered address or display the entered text, as long as the linked content still exists."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I scan a QR code with a regular phone camera?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, most modern smartphones recognize QR codes directly through the standard camera app, without needing a separate scanner."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261117qr2" defer></script>
+    <script src="/js/phys-core.js?v=20261117qr2" defer></script>
+    <script src="/js/km-data.js?v=20261117qr2" defer></script>
+    <script src="/js/qr-lib.js?v=20261117qr2" defer></script>
+    <script src="/js/qr-data.js?v=20261117qr2" defer></script>
+    <script src="/js/qr-calc.js?v=20261117qr2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/misc/qr-code-generator#app",
-    "name":"QR Code Generator",
-    "description":"Create a QR code for links, text, or contacts with a download option.",
-    "url":"https://calccore.net/en/misc/qr-code-generator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/misc/qr-code-generator#app",
+  "name": "QR Code Generator",
+  "description": "An online QR code generator in the browser: text and links, Wi-Fi, a vCard contact, an email, an SMS, a call and a location; Cyrillic and emoji, automatic choice of the encoding mode and correction level, colours and quiet zone with a contrast check, PNG and SVG download and copying the image. Nothing is sent anywhere.",
+  "url": "https://calccore.net/en/misc/qr-code-generator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Text and links with any language and emoji",
+    "Wi-Fi: a guest connects without typing",
+    "A vCard contact for the address book",
+    "An email, an SMS, a call and a map point",
+    "Correction level L, M, Q, H or auto",
+    "Your own colours with a contrast check",
+    "PNG and SVG download",
+    "Data never leaves the browser"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/misc/qr-code-generator#webpage",
+      "url": "https://calccore.net/en/misc/qr-code-generator",
+      "name": "QR Code Generator Online: Link, Wi-Fi, Contact | CalcCore",
+      "description": "Create a QR code for a link, text, Wi-Fi, a contact card, email, SMS or a location, choose the colour and correction level, and download PNG or SVG.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/misc/qr-code-generator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/misc/qr-code-generator#breadcrumb"
+      },
+      "dateModified": "2026-11-17",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/misc/qr-code-generator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Misc",
+          "item": "https://calccore.net/en/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "QR code generator",
+          "item": "https://calccore.net/en/misc/qr-code-generator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/misc/qr-code-generator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it safe to create a QR code on a website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Here it is: the code is created in your browser, the data is not sent to a server or put in the link, browser storage or analytics, and no link to the result is created."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a code with Cyrillic and emoji work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the text is encoded in UTF-8. Modern phones read such codes correctly, but each character takes 2–4 bytes, so the code is bigger."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does such a QR code expire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, it is a static code: the data is written in the image itself. If the link you encoded later changes or disappears, the code leads to the old address."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the error correction level?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a reserve that lets the code be read despite scratches or a logo: L restores about 7% of the data, M 15%, Q 25% and H 30%. A higher level makes the code bigger."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which level should I choose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Leave “Auto”: it takes the highest level that does not make the code bigger. For small or worn surfaces choose H, and for long data L."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make a QR code for Wi-Fi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the Wi-Fi tab, enter the network name and password, choose the security type and mark a hidden network if needed. A guest points the camera and connects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a phone not open the code as a link?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most likely the address was entered without https://. Add the protocol and the phone opens it as a link rather than plain text."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the code not scan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Check the contrast, a quiet zone of at least 4 modules, the size and the amount of data. Inverted and very colourful codes scan worse. Shorten the text or the link."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which format should I download: PNG or SVG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PNG suits documents, email and websites. SVG is a vector, scales without loss and suits large print runs better."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much data does a QR code hold?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The biggest code holds up to 7089 digits, 4296 letters with digits or 2953 bytes, depending on the correction level. The generator tells you when there is too much data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I put a logo in the centre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, this generator has no logo in the centre. A logo covers modules, so it needs a higher correction level and must be tested with a scanner."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I create a QR code for a payment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, bank payment codes have their own formats. The generator creates codes for text, links, Wi-Fi, contacts, emails, SMS, calls and locations."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cqr">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">QR Code Generator</h1>
-                    <p class="mcalc__p">
-                        Enter a link or text — get a ready-made QR code
-                        for printing or sharing.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">QR Code Generator</h1>
+                    <p class="ph__p">Enter a link or text, Wi-Fi details, a contact or a message and the generator creates a QR code in your browser at once. You can choose the colour and the error correction level and download the finished code as PNG or SVG. Nothing is sent or stored.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter data</h2>
-                        <span class="mcalc__badge">Misc</span>
-                    </div>
+                <div class="ph__grid">
 
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="qrText">Link or text</label>
-                            <input class="mcalc__input" id="qrText" type="text"
-                                placeholder="e.g.: https://calccore.net" />
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Update the code on changes</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Misc</span>
                         </div>
 
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="qrSize">Size</label>
-                            <select id="qrSize" class="mcalc__select">
-                                <option value="200">Small (200×200)</option>
-                                <option value="300" selected>Medium (300×300)</option>
-                                <option value="500">Large (500×500)</option>
-                            </select>
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="url" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span class="ph__tileTx"><b class="ph__tabT">Text and link</b><span class="ph__ex">Text and links in any language, emoji</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="wifi" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/><circle cx="12" cy="18" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Wi-Fi</b><span class="ph__ex">Wi-Fi, a guest connects without typing</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="card" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">Contact</b><span class="ph__ex">A contact for the phone address book</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="msg" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Email, SMS, phone</b><span class="ph__ex">An email, an SMS, a call and a map point</span></span></button>
+                        </div>
+
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Create QR code</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Enter the data: the QR code will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the encoded text</button>
                         </div>
                     </div>
-
-                    <div class="qr-output" id="qrOutput">
-                        <div class="qr-canvas-wrap" id="qrCanvasWrap"></div>
-                        <button class="mcalc__btn mcalc__btn--primary" id="btnDownload" type="button"
-                            style="display:none; margin-top:14px;">
-                            Download QR code
-                        </button>
-                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/education/century-calculator">Century and Roman Numerals</a>
-                    <a href="/en/misc/password-generator">Password Generator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>What is a QR code</h2>
-            <p>
-                A <b>QR code</b> (Quick Response code) is a two-dimensional barcode that's scanned
-                by a camera and instantly decodes the embedded information: a link, text, contact
-                details, and more. Unlike a regular barcode, a QR code can hold significantly more
-                information thanks to its two-dimensional structure.
-            </p>
-
-            <h2>Practical uses of QR codes</h2>
-            <ul>
-                <li><b>Restaurant menus:</b> a link to a digital menu instead of a paper one.</li>
-                <li><b>Business cards and ads:</b> quick access to a website or portfolio without typing an address
-                    manually.</li>
-                <li><b>Payments:</b> QR codes for fast transfers or bill payments.</li>
-                <li><b>Wi-Fi access:</b> a QR code can contain data for automatically connecting to a network.</li>
-                <li><b>Product packaging:</b> links to instructions, warranty info, or additional product details.</li>
-            </ul>
-
-            <h2>How to use this generator</h2>
-            <p>
-                Enter a link or text, choose the desired size — the QR code generates instantly.
-                Click "Download QR code" to save the image for printing on business cards,
-                packaging, or anywhere else.
-            </p>
-
-            <p class="m-hintSmall">
-                The QR code is created entirely in your browser — no data is transmitted to our
-                servers. However, remember: if the link you encode is later removed or changed, the
-                QR code will continue pointing to the old (possibly invalid) address.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/misc/password-generator"><b>Password Generator</b><span>Passwords, passphrases, PINs, usernames and nicknames.</span></a>
+                <a class="cc-related-card" href="/en/misc/random-number-generator"><b>Random Number Generator</b><span>Numbers, dice, a coin and picking from a list.</span></a>
+                <a class="cc-related-card" href="/en/education/transliteration-calculator"><b>Transliteration</b><span>Ukrainian text in Latin letters by the official rules.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the generator does</h2>
+            <p>The generator creates <b>QR codes for text and links, a Wi-Fi network, a contact card, an email, an SMS, a call and a location</b>. Enter the data on the matching tab and the code updates at once. Cyrillic and emoji are supported. The finished code can be downloaded as PNG or SVG or copied as an image, and the encoded text can be copied separately.</p>
+
+            <h2>Wi-Fi without typing the password</h2>
+            <p>On the Wi-Fi tab enter the network name, the security type and the password: a guest points the camera and connects without typing. Special characters in the name and password (semicolon, colon, comma, quotes, backslash) are escaped automatically by the format WIFI:T:…;S:…;P:…;;. The password is built into the code itself, so do not post such a code where outsiders should not see it.</p>
+
+            <h2>A contact card and messages</h2>
+            <p>The “Contact” tab builds a contact in the vCard 3.0 format: name, company, job title, phone, email, website, address and a note. A phone reads the code and offers to add the contact to the address book. The “Email, SMS, phone” tab creates a ready email with a subject and text, an SMS, a call to a number or a map point by latitude and longitude.</p>
+
+            <h2>Encoding modes and correction levels</h2>
+            <p>The generator picks the densest mode on its own: digits, capital letters with digits and a few symbols, or UTF-8 bytes. The error correction level L, M, Q or H restores about 7, 15, 25 and 30% of damage respectively. The default is “Auto”: it takes the highest level that does not make the code bigger, so the code is sturdier for free.</p>
+
+            <h2>Size, version and capacity</h2>
+            <p>A QR code has versions from 1 to 40, from 21×21 to 177×177 modules. The biggest version holds up to 7089 digits, 4296 letters with digits or 2953 bytes. Cyrillic and emoji take 2–4 bytes per character, so a long text quickly makes the code bigger. The less data, the more reliably the code scans from a distance, so for links a short address is better.</p>
+
+            <h2>Colours, quiet zone and printing</h2>
+            <p>Dark modules on a light background scan most reliably. The generator checks the contrast and warns about an inverted code (light modules on a dark background), a transparent background and a small quiet zone: the standard advises at least 4 modules. For PNG the scale is a whole number so the edges stay sharp, while the SVG scales without loss and suits printing. Scan the code with several phones before a print run.</p>
+
+            <h2>Sources, rights and contact</h2>
+            <p>The code is created by the <a href="https://github.com/kazuhikoarase/qrcode-generator" target="_blank" rel="noopener noreferrer">qrcode-generator</a> library by Kazuhiko Arase (MIT licence), included unchanged. The structure of the code is described in the ISO/IEC 18004 standard. The Wi-Fi format is described in the <a href="https://github.com/zxing/zxing/wiki/Barcode-Contents" target="_blank" rel="noopener noreferrer">ZXing documentation</a>, the contact card in <a href="https://www.rfc-editor.org/rfc/rfc2426" target="_blank" rel="noopener noreferrer">RFC 2426</a>, and the mailto, sms and geo links in <a href="https://www.rfc-editor.org/rfc/rfc6068" target="_blank" rel="noopener noreferrer">RFC 6068</a>, <a href="https://www.rfc-editor.org/rfc/rfc5724" target="_blank" rel="noopener noreferrer">RFC 5724</a> and <a href="https://www.rfc-editor.org/rfc/rfc5870" target="_blank" rel="noopener noreferrer">RFC 5870</a>. The words “QR Code” are a registered trademark of DENSO WAVE INCORPORATED. The site is not affiliated with or endorsed by these organizations, and their names belong to their owners. If you are a rights holder with a concern, write to us on the <a href="/en/contacts">Contacts</a> page.</p>
+
+            <h2>Limits</h2>
+            <p>The generator creates static codes: they do not track visits and do not expire, but the content cannot be changed after printing. Bank payment QR codes have their own formats and are not supported here. How well the SMS and Wi-Fi formats work depends on the app that scans the code, so test the code on your own phone.</p>
+            <p class="ph-mini">Always scan the code with several phones before printing. Dark modules on a light background, a quiet zone of at least 4 modules and a short link make the code reliable even in small print.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>Is it safe to generate a QR code online?</h3>
-                <p>Yes, the QR code is generated entirely in your browser — the entered data is never sent to or stored
-                    on a server.</p>
+            <div class="cc-faq-item">
+                <h3>Is it safe to create a QR code on a website?</h3>
+                <p>Here it is: the code is created in your browser, the data is not sent to a server or put in the link, browser storage or analytics, and no link to the result is created.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Does a QR code expire?</h3>
-                <p>No, the QR code itself doesn't expire — it will always point to the entered address or display the
-                    entered text, as long as the linked content still exists.</p>
+            <div class="cc-faq-item">
+                <h3>Does a code with Cyrillic and emoji work?</h3>
+                <p>Yes, the text is encoded in UTF-8. Modern phones read such codes correctly, but each character takes 2–4 bytes, so the code is bigger.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I scan a QR code with a regular phone camera?</h3>
-                <p>Yes, most modern smartphones recognize QR codes directly through the standard camera app, without
-                    needing a separate scanner.</p>
+            <div class="cc-faq-item">
+                <h3>Does such a QR code expire?</h3>
+                <p>No, it is a static code: the data is written in the image itself. If the link you encoded later changes or disappears, the code leads to the old address.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What is the error correction level?</h3>
+                <p>It is a reserve that lets the code be read despite scratches or a logo: L restores about 7% of the data, M 15%, Q 25% and H 30%. A higher level makes the code bigger.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which level should I choose?</h3>
+                <p>Leave “Auto”: it takes the highest level that does not make the code bigger. For small or worn surfaces choose H, and for long data L.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I make a QR code for Wi-Fi?</h3>
+                <p>Open the Wi-Fi tab, enter the network name and password, choose the security type and mark a hidden network if needed. A guest points the camera and connects.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does a phone not open the code as a link?</h3>
+                <p>Most likely the address was entered without https://. Add the protocol and the phone opens it as a link rather than plain text.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does the code not scan?</h3>
+                <p>Check the contrast, a quiet zone of at least 4 modules, the size and the amount of data. Inverted and very colourful codes scan worse. Shorten the text or the link.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Which format should I download: PNG or SVG?</h3>
+                <p>PNG suits documents, email and websites. SVG is a vector, scales without loss and suits large print runs better.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How much data does a QR code hold?</h3>
+                <p>The biggest code holds up to 7089 digits, 4296 letters with digits or 2953 bytes, depending on the correction level. The generator tells you when there is too much data.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I put a logo in the centre?</h3>
+                <p>No, this generator has no logo in the centre. A logo covers modules, so it needs a higher correction level and must be tested with a scanner.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I create a QR code for a payment?</h3>
+                <p>No, bank payment codes have their own formats. The generator creates codes for text, links, Wi-Fi, contacts, emails, SMS, calls and locations.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
