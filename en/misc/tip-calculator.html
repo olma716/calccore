@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Tip Calculator Online — Split the Bill | CalcCore</title>
+    <title>Tip Calculator and Bill Splitter Online | CalcCore</title>
     <meta name="description"
-        content="Calculate tips and split the bill among multiple people. Quickly figure out how much each person owes at a restaurant or cafe." />
+        content="Work out the tip as a percentage or an amount, tax, rounding per person and a bill split equally or by orders, with the effective tip percentage." />
 
     <link rel="canonical" href="https://calccore.net/en/misc/tip-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/tip-calculator" />
@@ -26,196 +28,429 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Tip Calculator Online — Split the Bill" />
-    <meta property="og:description" content="Calculate tips and split the bill among multiple people. Quickly figure out how much each person owes at a restaurant or cafe." />
+    <meta property="og:title" content="Tip Calculator and Bill Splitter Online" />
+    <meta property="og:description" content="Work out the tip as a percentage or an amount, tax, rounding per person and a bill split equally or by orders, with the effective tip percentage." />
     <meta property="og:url" content="https://calccore.net/en/misc/tip-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tip Calculator Online — Split the Bill" />
-    <meta name="twitter:description" content="Calculate tips and split the bill among multiple people. Quickly figure out how much each person owes at a restaurant or cafe." />
+    <meta name="twitter:title" content="Tip Calculator and Bill Splitter Online" />
+    <meta name="twitter:description" content="Work out the tip as a percentage or an amount, tax, rounding per person and a bill split equally or by orders, with the effective tip percentage." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261116tp2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/tip-calculator.js?v=20260909" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How much tip is customary to leave?",
-        "acceptedAnswer":{"@type":"Answer","text":"Norms vary by country: in the US, 15-20% is typical, while in most European countries it's 5-10% or simply rounding up the bill, depending on service quality."}
-      },
-      {
-        "@type":"Question",
-        "name":"Is the tip calculated before or after splitting among people?",
-        "acceptedAnswer":{"@type":"Answer","text":"The total tip is calculated from the full bill first, then the total amount (bill + tip) is split equally among all participants."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I enter a fixed tip amount instead of a percentage?",
-        "acceptedAnswer":{"@type":"Answer","text":"This calculator computes tips as a percentage, which is the most common approach. For a fixed amount, simply add it manually to the total."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261116tp2" defer></script>
+    <script src="/js/phys-core.js?v=20261116tp2" defer></script>
+    <script src="/js/km-data.js?v=20261116tp2" defer></script>
+    <script src="/js/tp-data.js?v=20261116tp2" defer></script>
+    <script src="/js/tp-calc.js?v=20261116tp2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/misc/tip-calculator#app",
-    "name":"Tip Calculator",
-    "description":"Calculate tips and split the bill among multiple people.",
-    "url":"https://calccore.net/en/misc/tip-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/misc/tip-calculator#app",
+  "name": "Tip Calculator and Bill Splitter",
+  "description": "An online tip and bill split calculator: a tip as a percentage or a fixed amount, tax and the tip base (before or after tax), rounding the amount per person up, to a whole, to 5 or 10 with the effective tip percentage, an equal split and an unequal split by orders with shared dishes, and a reverse calculation of the percentage from the amount paid. All amounts are worked out in cents without errors.",
+  "url": "https://calccore.net/en/misc/tip-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "A tip as a percentage or a fixed amount",
+    "Tax and a choice of the tip base",
+    "Rounding per person with the effective percentage",
+    "An equal split and an unequal split by orders",
+    "Shared dishes split equally",
+    "What percentage of tip you left"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/misc/tip-calculator#webpage",
+      "url": "https://calccore.net/en/misc/tip-calculator",
+      "name": "Tip Calculator and Bill Splitter Online | CalcCore",
+      "description": "Work out the tip as a percentage or an amount, tax, rounding per person and a bill split equally or by orders, with the effective tip percentage.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/misc/tip-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/misc/tip-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-16",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/misc/tip-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Misc",
+          "item": "https://calccore.net/en/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Tip calculator",
+          "item": "https://calccore.net/en/misc/tip-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/misc/tip-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much should I tip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the country and the venue. By common practice in the US it is about 15–20% of the bill, in many European countries less, and sometimes service is already in the bill."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I work out a tip from the bill?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply the bill by the percentage: 100 × 15% = 15. The calculator adds the tip to the bill and divides the sum by the number of people."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the tip worked out before or after tax?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on custom. The calculator lets you choose the base: for 10% tax a 15% tip on the amount before tax is 15 and on the amount after tax 16.50 for a bill of 100."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I split a bill equally?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add the tip to the bill and divide the sum by the number of people: 115 for 4 people is 28.75 per person."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I split a bill when the orders differ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the “Unequal split” tab enter each person's amount: tax and tip are shared in proportion and shared dishes equally."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I do with shared dishes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter their amount in the “Shared dishes” field: it is split equally among everyone and added to each person's part."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I round the amount per person?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose rounding in “More”: to the nearest whole, up to a whole, to 5 or to 10. The difference goes to the tip and the effective percentage is shown separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I leave a tip as a fixed amount?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, choose “A fixed amount” in the “Tip” field. The calculator shows the effective percentage of the bill itself."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find out what percentage I tipped?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the “What percentage” tab enter the bill and the amount paid: the tip and the percentage are worked out automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the amount per person times the people not match the total?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If the division is not even, the remainder in cents stays in the total. The difference does not exceed the number of cents by the number of people."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I choose a currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, there are the symbols ₴, $, €, £ and zł or no symbol. Exchange rates are not converted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator take local tipping rules into account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, it works from the percentages you enter. Check whether a service charge is already in the bill."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ctip">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Tip Calculator</h1>
-                    <p class="mcalc__p">
-                        Calculate the tip and split the bill among multiple people
-                        in seconds.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Tip Calculator and Bill Splitter</h1>
+                    <p class="ph__p">Enter the bill, the tip percentage and the number of people, and the calculator shows the tip, the total and the amount per person. You can add tax, round the amount per person up and see what percentage the tip really came to. Separate tabs split the bill by orders with shared dishes and work out the percentage from the amount paid.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Enter inputs</h2>
-                        <span class="mcalc__badge">Misc</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
                     </div>
-
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="billAmount">Bill amount</label>
-                            <input class="mcalc__input" id="billAmount" type="text" inputmode="decimal"
-                                placeholder="e.g.: 1200" />
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Misc</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="tipPercent">Tip (%)</label>
-                            <input class="mcalc__input" id="tipPercent" type="text" inputmode="numeric"
-                                placeholder="e.g.: 10" value="10" />
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="tip" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Tip and split</b><span class="ph__ex">Tip and an equal split</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="split" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">Unequal split</b><span class="ph__ex">Everyone pays for their own</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="back" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">What percentage</b><span class="ph__ex">What percentage you left</span></span></button>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="peopleCount">Number of people</label>
-                            <input class="mcalc__input" id="peopleCount" type="text" inputmode="numeric"
-                                placeholder="e.g.: 2" value="1" />
-                        </div>
-
-                        <div class="mcalc__field m-full">
-                            <div class="tip-quick">
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="5" type="button">5%</button>
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="10" type="button">10%</button>
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="15" type="button">15%</button>
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="20" type="button">20%</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
                         </div>
+                        <div id="phBody"></div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Calculate</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
                         </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Enter the bill amount.</div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Enter the known quantities — the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy the result</button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/misc/unit-converter">Unit Converter</a>
-                    <a href="/en/education/percent-calculator">Percentage Calculator</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How much tip is customary to leave</h2>
-            <p>
-                Tipping norms vary significantly by country and venue type:
-            </p>
-            <ul>
-                <li><b>United States:</b> 15-20% of the bill is standard at restaurants, 20%+ for excellent service.
-                </li>
-                <li><b>Europe:</b> mostly 5-10% or simply rounding up the bill, since service is often already included
-                    in prices.</li>
-                <li><b>Cafes and bars:</b> usually less than full restaurants — 5-10% or rounding.</li>
-                <li><b>Food delivery:</b> typically 10-15% or a small fixed amount.</li>
-            </ul>
-
-            <h2>How bill splitting is calculated</h2>
-            <p>
-                The calculator first adds the tip to the bill amount to get the total due, then
-                splits that total equally among the number of people. This is the standard approach
-                when everyone ordered roughly the same amount.
-            </p>
-
-            <h2>When equal splitting doesn't work well</h2>
-            <p>
-                If people ordered dishes of very different value, it's fairer to split the bill
-                proportionally to what each person consumed rather than equally. In that case, it's
-                better to calculate each person's share separately, then add the tip proportionally
-                to their share of the bill.
-            </p>
-
-            <p class="m-hintSmall">
-                Tipping norms are a cultural practice, not a strict rule. Follow local customs and
-                the quality of service received.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/misc/unit-converter"><b>Unit Converter</b><span>Length, mass, volume, temperature and other units.</span></a>
+                <a class="cc-related-card" href="/en/education/percent-calculator"><b>Percentage Calculator</b><span>A percent of a number, a difference and a change by percent.</span></a>
+                <a class="cc-related-card" href="/en/finance/credit-calculator"><b>Loan Calculator</b><span>A payment, overpayment and schedule of a loan.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator does</h2>
+            <p>The calculator works out <b>the tip, the total and the amount per person</b>. Enter the bill and the percentage (the buttons 5, 10, 15 and 20% or your own) or a fixed tip amount, and the number of people. The result shows the tip, the total, the effective tip percentage and the calculation step by step. All amounts are worked out in cents, so there are no rounding errors.</p>
+
+            <h2>How the tip is worked out</h2>
+            <p>The tip is the bill times the percentage. For a bill of 100 and 15% it is 15, the total is 115 and for 4 people it is 28.75 per person. If the bill has tax, you can add it as a percentage and choose which amount the tip is worked out from: before tax or after. For 10% tax a 15% tip on the amount before tax gives 15 and a total of 125, and on the amount after tax 16.50 and a total of 126.50.</p>
+
+            <h2>Rounding the amount per person</h2>
+            <p>The amount per person often comes out with cents or an awkward figure. You can round it to the nearest whole or up to a whole, to 5 or 10. The difference from rounding is added to the tip, and the calculator shows the effective percentage. For example 28.75 per person rounded up to 5 is 30: a total of 120, a tip of 20 and effectively 20%.</p>
+
+            <h2>Unequal split by orders</h2>
+            <p>When guests ordered dishes of different cost, an equal split is unfair. On the “Unequal split” tab enter a name and an amount on each line (“Olga 30”), add shared dishes that are split equally, and the tip percentage. Tax and tip are shared in proportion to each person's part. For example Olga 30, Ivan 50, Masha 25 and shared 20 give a bill of 125, a 10% tip of 12.50 and a total of 137.50. The cents are distributed so that the sum matches to the cent.</p>
+
+            <h2>What percentage of tip you left</h2>
+            <p>The “What percentage” tab works out the percentage from the amount paid: if the bill is 85 and you paid 100, the tip is 15, about 17.6% of the bill. Below is a table of common percentages (5, 8, 10, 12, 15, 18, 20 and 25%) for this bill with the amount per person.</p>
+
+            <h2>How much to tip</h2>
+            <p>Tipping customs differ by country, type of venue and even city. By common practice in the US a restaurant tip is usually around 15–20% of the bill. In many European countries service is already included in the bill, so people leave less, round the amount up or leave nothing, and in some countries tipping is not customary. Check the bill: sometimes service is already in it. A general overview is on the <a href="https://en.wikipedia.org/wiki/Tipping" target="_blank" rel="noopener noreferrer">Tipping page of Wikipedia</a>.</p>
+
+            <h2>Sources, rights and contact</h2>
+            <p>All the calculations are arithmetic and do not depend on external data. The information about tipping customs is summarized from public sources and put in our own words. The site is not affiliated with these organizations or endorsed by them, and their names belong to their owners. If you are a rights holder and have a concern, write to us on the <a href="/en/contacts">Contacts</a> page.</p>
+
+            <h2>Limits</h2>
+            <p>The calculator does not know local rules: in some countries a tip or a service charge is already added to the bill, and in others tax is worked out separately. For several currencies choose the symbol in the settings: rates are not converted. The maximum is 100 people and 30 lines in the unequal split.</p>
+            <p class="ph-mini">Tipping is voluntary and customs differ by country and venue: check whether service is already in the bill. Rounding the amount per person adds the difference to the tip, and the effective percentage is shown separately.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>How much tip is customary to leave?</h3>
-                <p>Norms vary by country: in the US, 15-20% is typical, while in most European countries it's 5-10% or
-                    simply rounding up the bill, depending on service quality.</p>
+            <div class="cc-faq-item">
+                <h3>How much should I tip?</h3>
+                <p>It depends on the country and the venue. By common practice in the US it is about 15–20% of the bill, in many European countries less, and sometimes service is already in the bill.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Is the tip calculated before or after splitting among people?</h3>
-                <p>The total tip is calculated from the full bill first, then the total amount (bill + tip) is split
-                    equally among all participants.</p>
+            <div class="cc-faq-item">
+                <h3>How do I work out a tip from the bill?</h3>
+                <p>Multiply the bill by the percentage: 100 × 15% = 15. The calculator adds the tip to the bill and divides the sum by the number of people.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I enter a fixed tip amount instead of a percentage?</h3>
-                <p>This calculator computes tips as a percentage, which is the most common approach. For a fixed amount,
-                    simply add it manually to the total.</p>
+            <div class="cc-faq-item">
+                <h3>Is the tip worked out before or after tax?</h3>
+                <p>It depends on custom. The calculator lets you choose the base: for 10% tax a 15% tip on the amount before tax is 15 and on the amount after tax 16.50 for a bill of 100.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I split a bill equally?</h3>
+                <p>Add the tip to the bill and divide the sum by the number of people: 115 for 4 people is 28.75 per person.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I split a bill when the orders differ?</h3>
+                <p>On the “Unequal split” tab enter each person's amount: tax and tip are shared in proportion and shared dishes equally.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What do I do with shared dishes?</h3>
+                <p>Enter their amount in the “Shared dishes” field: it is split equally among everyone and added to each person's part.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I round the amount per person?</h3>
+                <p>Choose rounding in “More”: to the nearest whole, up to a whole, to 5 or to 10. The difference goes to the tip and the effective percentage is shown separately.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I leave a tip as a fixed amount?</h3>
+                <p>Yes, choose “A fixed amount” in the “Tip” field. The calculator shows the effective percentage of the bill itself.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find out what percentage I tipped?</h3>
+                <p>On the “What percentage” tab enter the bill and the amount paid: the tip and the percentage are worked out automatically.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why does the amount per person times the people not match the total?</h3>
+                <p>If the division is not even, the remainder in cents stays in the total. The difference does not exceed the number of cents by the number of people.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I choose a currency?</h3>
+                <p>Yes, there are the symbols ₴, $, €, £ and zł or no symbol. Exchange rates are not converted.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Does the calculator take local tipping rules into account?</h3>
+                <p>No, it works from the percentages you enter. Check whether a service charge is already in the bill.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

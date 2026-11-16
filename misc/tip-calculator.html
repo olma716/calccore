@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Калькулятор чайових онлайн — поділ рахунку | CalcCore</title>
+    <title>Калькулятор чайових і поділу рахунку онлайн | CalcCore</title>
     <meta name="description"
-        content="Розрахунок чайових та поділ рахунку між кількома людьми. Швидко порахуй, скільки платити на кожного в ресторані чи кафе." />
+        content="Порахуйте чайові у відсотках чи сумою, податок, округлення на людину й поділ рахунку порівну або за замовленнями з фактичним відсотком чайових." />
 
     <link rel="canonical" href="https://calccore.net/misc/tip-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/tip-calculator" />
@@ -26,195 +28,429 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Калькулятор чайових онлайн — поділ рахунку" />
-    <meta property="og:description" content="Розрахунок чайових та поділ рахунку між кількома людьми. Швидко порахуй, скільки платити на кожного в ресторані чи кафе." />
+    <meta property="og:title" content="Калькулятор чайових і поділу рахунку онлайн" />
+    <meta property="og:description" content="Порахуйте чайові у відсотках чи сумою, податок, округлення на людину й поділ рахунку порівну або за замовленнями з фактичним відсотком чайових." />
     <meta property="og:url" content="https://calccore.net/misc/tip-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Калькулятор чайових онлайн — поділ рахунку" />
-    <meta name="twitter:description" content="Розрахунок чайових та поділ рахунку між кількома людьми. Швидко порахуй, скільки платити на кожного в ресторані чи кафе." />
+    <meta name="twitter:title" content="Калькулятор чайових і поділу рахунку онлайн" />
+    <meta name="twitter:description" content="Порахуйте чайові у відсотках чи сумою, податок, округлення на людину й поділ рахунку порівну або за замовленнями з фактичним відсотком чайових." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261116tp2" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/tip-calculator.js?v=20260909" defer></script>
 
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Скільки чайових прийнято залишати?",
-        "acceptedAnswer":{"@type":"Answer","text":"Норми відрізняються за країнами: у США типово 15-20%, у більшості європейських країн — 5-10% або округлення рахунку, залежно від якості обслуговування."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чайові рахуються від суми до чи після поділу на людей?",
-        "acceptedAnswer":{"@type":"Answer","text":"Спочатку розраховується загальна сума чайових від повного рахунку, а вже потім загальна сума (рахунок + чайові) ділиться порівну між усіма учасниками."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна ввести чайові фіксованою сумою замість відсотка?",
-        "acceptedAnswer":{"@type":"Answer","text":"Цей калькулятор розраховує чайові у відсотках, що є найпоширенішим підходом. Для фіксованої суми просто додай її вручну до підсумку."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261116tp2" defer></script>
+    <script src="/js/phys-core.js?v=20261116tp2" defer></script>
+    <script src="/js/km-data.js?v=20261116tp2" defer></script>
+    <script src="/js/tp-data.js?v=20261116tp2" defer></script>
+    <script src="/js/tp-calc.js?v=20261116tp2" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/misc/tip-calculator#app",
-    "name":"Tip Calculator",
-    "description":"Розрахунок чайових та поділ рахунку між кількома людьми.",
-    "url":"https://calccore.net/misc/tip-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/misc/tip-calculator#app",
+  "name": "Калькулятор чайових і поділу рахунку",
+  "description": "Онлайн-калькулятор чайових і поділу рахунку: чайові у відсотках або фіксованою сумою, податок і база чайових (до чи після податку), округлення суми на людину вгору, до цілої, до 5 чи 10 з фактичним відсотком чайових, поділ порівну й нерівний поділ за замовленнями зі спільними стравами, зворотний розрахунок відсотка за сплаченою сумою. Усі суми рахуються в копійках без похибок.",
+  "url": "https://calccore.net/misc/tip-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Чайові у відсотках чи фіксованою сумою",
+    "Податок і вибір бази чайових",
+    "Округлення суми на людину з фактичним відсотком",
+    "Поділ порівну й нерівний поділ за замовленнями",
+    "Спільні страви ділять порівну",
+    "Який відсоток чайових ви залишили"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/misc/tip-calculator#webpage",
+      "url": "https://calccore.net/misc/tip-calculator",
+      "name": "Калькулятор чайових і поділу рахунку онлайн | CalcCore",
+      "description": "Порахуйте чайові у відсотках чи сумою, податок, округлення на людину й поділ рахунку порівну або за замовленнями з фактичним відсотком чайових.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/misc/tip-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/misc/tip-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-16",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/misc/tip-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Різне",
+          "item": "https://calccore.net/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Калькулятор чайових",
+          "item": "https://calccore.net/misc/tip-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/misc/tip-calculator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скільки чайових залишати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Залежить від країни й закладу. За поширеною практикою в США близько 15–20 % від рахунку, у багатьох країнах Європи менше, а інколи сервіс уже включено до рахунку."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як порахувати чайові з рахунку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Помножте рахунок на відсоток: 1000 × 15 % = 150. Калькулятор додає чайові до рахунку й ділить суму на кількість осіб."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чайові рахуються до чи після податку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Це залежить від звичаю. Калькулятор дозволяє обрати базу: для податку 10 % чайові 15 % від суми до податку це 150, від суми після податку 165 з рахунку 1000."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як поділити рахунок порівну?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Додайте чайові до рахунку й поділіть суму на кількість осіб: 1150 на 4 особи це 287,50 на людину."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як поділити рахунок, якщо замовлення різні?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На вкладці «Нерівний поділ» введіть суму кожного: податок і чайові поділяться пропорційно, а спільні страви порівну."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що робити зі спільними стравами?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Введіть їхню суму в поле «Спільні страви»: вона поділиться порівну між усіма й додасться до частки кожного."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як округлити суму на людину?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Оберіть округлення в «Додатково»: до найближчої цілої, вгору до цілої, до 5 чи до 10. Різниця піде в чайові, а фактичний відсоток покажеться окремо."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна залишити чайові фіксованою сумою?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, оберіть «Фіксованою сумою» у полі «Чайові». Фактичний відсоток від рахунку калькулятор покаже сам."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як дізнатися, який відсоток чайових я залишив?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На вкладці «Який відсоток» введіть рахунок і сплачену суму: чайові й відсоток порахуються автоматично."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чому сума на людину помножена на кількість осіб не збігається з разом?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Якщо ділення не рівне, остача в копійках лишається в загальній сумі. Різниця не перевищує кількості копійок за кількістю осіб."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна обрати валюту?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, є символи ₴, $, €, £ і zł або без символу. Курси валют не конвертуються."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи враховує калькулятор місцеві правила чайових?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, він рахує за введеними відсотками. Перевіряйте, чи сервісний збір уже не включено до рахунку."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="ctip">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Калькулятор чайових</h1>
-                    <p class="mcalc__p">
-                        Розрахуй чайові та поділи рахунок між кількома людьми
-                        за лічені секунди.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Калькулятор чайових і поділу рахунку</h1>
+                    <p class="ph__p">Введіть рахунок, відсоток чайових і кількість осіб, і калькулятор покаже чайові, суму разом і суму на людину. Можна додати податок, округлити суму на людину вгору й побачити, який відсоток чайових вийшов насправді. Окремі вкладки діляють рахунок за замовленнями зі спільними стравами й рахують відсоток за сплаченою сумою.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Введи дані</h2>
-                        <span class="mcalc__badge">Misc</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Авто-розрахунок</span>
+                        </label>
                     </div>
-
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field m-full">
-                            <label class="mcalc__label" for="billAmount">Сума рахунку</label>
-                            <input class="mcalc__input" id="billAmount" type="text" inputmode="decimal"
-                                placeholder="напр.: 1200" />
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Різне</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="tipPercent">Чайові (%)</label>
-                            <input class="mcalc__input" id="tipPercent" type="text" inputmode="numeric"
-                                placeholder="напр.: 10" value="10" />
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="tip" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg><span class="ph__tileTx"><b class="ph__tabT">Чайові й поділ</b><span class="ph__ex">Чайові й поділ порівну</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="split" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">Нерівний поділ</b><span class="ph__ex">Кожен платить за своє</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="back" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Який відсоток</b><span class="ph__ex">Який відсоток залишили</span></span></button>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="peopleCount">Кількість осіб</label>
-                            <input class="mcalc__input" id="peopleCount" type="text" inputmode="numeric"
-                                placeholder="напр.: 2" value="1" />
-                        </div>
-
-                        <div class="mcalc__field m-full">
-                            <div class="tip-quick">
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="5" type="button">5%</button>
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="10" type="button">10%</button>
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="15" type="button">15%</button>
-                                <button class="mcalc__btn mcalc__btn--small" data-tip="20" type="button">20%</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
                             </div>
                         </div>
+                        <div id="phBody"></div>
 
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                    type="button">Розрахувати</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Розрахувати</button>
                         </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="mcalc__bigNumber" id="mResult" style="margin-top:16px;">Введи суму рахунку.</div>
-                    <div class="m-details" id="mDetails" aria-live="polite"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Вкажіть відомі величини — результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/misc/unit-converter">Конвертер одиниць</a>
-                    <a href="/education/percent-calculator">Калькулятор відсотків</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Скільки чайових прийнято залишати</h2>
-            <p>
-                Норми чайових суттєво відрізняються залежно від країни та типу закладу:
-            </p>
-            <ul>
-                <li><b>США:</b> 15-20% від рахунку в ресторанах вважається стандартом, 20%+ — за відмінне
-                    обслуговування.</li>
-                <li><b>Європа:</b> здебільшого 5-10% або просто округлення рахунку до зручної суми, оскільки сервіс
-                    часто вже включений у ціну.</li>
-                <li><b>Кафе та бари:</b> зазвичай менше, ніж у повноцінних ресторанах — 5-10% або округлення.</li>
-                <li><b>Доставка їжі:</b> типово 10-15% або фіксована невелика сума.</li>
-            </ul>
-
-            <h2>Як рахується поділ рахунку</h2>
-            <p>
-                Калькулятор спочатку додає чайові до суми рахунку, отримуючи загальну суму до сплати,
-                а потім ділить цю загальну суму порівну на кількість осіб. Це стандартний підхід,
-                коли всі учасники замовляли приблизно однаково.
-            </p>
-
-            <h2>Коли поділ порівну не підходить</h2>
-            <p>
-                Якщо люди замовляли страви різної вартості, справедливіше ділити рахунок пропорційно
-                до того, що кожен з'їв, а не порівну. У такому разі краще порахувати частку кожної
-                людини окремо, а потім додати чайові пропорційно до її частки рахунку.
-            </p>
-
-            <p class="m-hintSmall">
-                Норми чайових — це культурна практика, а не жорстке правило. Орієнтуйся на місцеві
-                звичаї та якість отриманого обслуговування.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/misc/unit-converter"><b>Конвертер одиниць</b><span>Довжина, маса, об'єм, температура й інші одиниці.</span></a>
+                <a class="cc-related-card" href="/education/percent-calculator"><b>Калькулятор відсотків</b><span>Відсоток від числа, різниця й зміна на відсоток.</span></a>
+                <a class="cc-related-card" href="/finance/credit-calculator"><b>Кредитний калькулятор</b><span>Платіж, переплата й графік за кредитом.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Що робить калькулятор</h2>
+            <p>Калькулятор рахує <b>чайові, суму разом і суму на людину</b>. Введіть рахунок і відсоток (кнопки 5, 10, 15 і 20 % або свій) чи фіксовану суму чайових, а також кількість осіб. Результат показує чайові, загальну суму, фактичний відсоток чайових і розрахунок по кроках. Усі суми рахуються в копійках, тому немає похибок округлення.</p>
+
+            <h2>Як рахуються чайові</h2>
+            <p>Чайові дорівнюють рахунку, помноженому на відсоток. Для рахунку 1000 і 15 % це 150, разом 1150, а на 4 особи 287,50 на людину. Якщо в рахунку є податок, його можна додати у відсотках і вибрати, від якої суми рахувати чайові: до податку чи після. Для податку 10 % чайові 15 % від суми до податку дають 150 і разом 1250, а від суми після податку 165 і разом 1265.</p>
+
+            <h2>Округлення суми на людину</h2>
+            <p>Сума на людину часто виходить із копійками чи незручною. Можна округлити її до найближчої цілої або вгору до цілої, до 5 чи 10. Різниця від округлення додається до чайових, а калькулятор показує фактичний відсоток. Наприклад, 287,50 на людину, округлені вгору до 5, це 290 на людину: разом 1160, чайові 160 і фактично 16 %.</p>
+
+            <h2>Нерівний поділ за замовленнями</h2>
+            <p>Коли гості замовляли страви різної вартості, поділ порівну несправедливий. На вкладці «Нерівний поділ» введіть у кожному рядку ім'я й суму («Оля 300»), додайте спільні страви, які діляться порівну, і відсоток чайових. Податок і чайові діляться пропорційно частці кожного. Наприклад, Оля 300, Іван 500, Маша 250 і спільне 200 дають рахунок 1250, чайові 10 % це 125, разом 1375. Копійки розподіляються так, щоб сума збігалася до копійки.</p>
+
+            <h2>Який відсоток чайових ви залишили</h2>
+            <p>Вкладка «Який відсоток» рахує відсоток за сплаченою сумою: якщо рахунок 850, а ви заплатили 1000, чайові становлять 150 або приблизно 17,6 % від рахунку. Нижче показано таблицю типових відсотків (5, 8, 10, 12, 15, 18, 20 і 25 %) для цього рахунку із сумою на людину.</p>
+
+            <h2>Скільки чайових залишати</h2>
+            <p>Звичаї чайових різні за країнами, типами закладів і навіть містами. За поширеною практикою в США чайові в ресторані зазвичай становлять близько 15–20 % від рахунку. У багатьох країнах Європи обслуговування вже включено до рахунку, тому залишають менше, округлюють суму або не залишають зовсім, а в деяких країнах чайові не прийняті. Перевіряйте рахунок: інколи сервіс уже в ньому. Загальний огляд є на сторінці <a href="https://en.wikipedia.org/wiki/Tipping" target="_blank" rel="noopener noreferrer">Tipping у Wikipedia</a>.</p>
+
+            <h2>Джерела, права та контакт</h2>
+            <p>Усі розрахунки арифметичні й не залежать від зовнішніх даних. Відомості про звичаї чайових узагальнені з відкритих джерел і викладені своїми словами. Сайт не пов'язаний із цими організаціями й не підтверджений ними, а їхні назви належать їхнім власникам. Якщо ви правовласник і маєте зауваження, напишіть нам на сторінці <a href="/contacts">Контакти</a>.</p>
+
+            <h2>Обмеження</h2>
+            <p>Калькулятор не знає місцевих правил: у деяких країнах чайові або сервісний збір уже додані до рахунку, а в інших податок рахується окремо. Для кількох валют оберіть символ у налаштуваннях: курси не конвертуються. Максимум 100 осіб і до 30 рядків у нерівному поділі.</p>
+            <p class="ph-mini">Чайові добровільні, звичаї різні за країнами й закладами: перевірте, чи сервіс не включено до рахунку. Округлення суми на людину додає різницю до чайових, а фактичний відсоток показано окремо.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
-                <h3>Скільки чайових прийнято залишати?</h3>
-                <p>Норми відрізняються за країнами: у США типово 15-20%, у більшості європейських країн — 5-10% або
-                    округлення рахунку, залежно від якості обслуговування.</p>
+            <div class="cc-faq-item">
+                <h3>Скільки чайових залишати?</h3>
+                <p>Залежить від країни й закладу. За поширеною практикою в США близько 15–20 % від рахунку, у багатьох країнах Європи менше, а інколи сервіс уже включено до рахунку.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чайові рахуються від суми до чи після поділу на людей?</h3>
-                <p>Спочатку розраховується загальна сума чайових від повного рахунку, а вже потім загальна сума (рахунок
-                    + чайові) ділиться порівну між усіма учасниками.</p>
+            <div class="cc-faq-item">
+                <h3>Як порахувати чайові з рахунку?</h3>
+                <p>Помножте рахунок на відсоток: 1000 × 15 % = 150. Калькулятор додає чайові до рахунку й ділить суму на кількість осіб.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна ввести чайові фіксованою сумою замість відсотка?</h3>
-                <p>Цей калькулятор розраховує чайові у відсотках, що є найпоширенішим підходом. Для фіксованої суми
-                    просто додай її вручну до підсумку.</p>
+            <div class="cc-faq-item">
+                <h3>Чайові рахуються до чи після податку?</h3>
+                <p>Це залежить від звичаю. Калькулятор дозволяє обрати базу: для податку 10 % чайові 15 % від суми до податку це 150, від суми після податку 165 з рахунку 1000.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як поділити рахунок порівну?</h3>
+                <p>Додайте чайові до рахунку й поділіть суму на кількість осіб: 1150 на 4 особи це 287,50 на людину.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як поділити рахунок, якщо замовлення різні?</h3>
+                <p>На вкладці «Нерівний поділ» введіть суму кожного: податок і чайові поділяться пропорційно, а спільні страви порівну.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що робити зі спільними стравами?</h3>
+                <p>Введіть їхню суму в поле «Спільні страви»: вона поділиться порівну між усіма й додасться до частки кожного.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як округлити суму на людину?</h3>
+                <p>Оберіть округлення в «Додатково»: до найближчої цілої, вгору до цілої, до 5 чи до 10. Різниця піде в чайові, а фактичний відсоток покажеться окремо.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна залишити чайові фіксованою сумою?</h3>
+                <p>Так, оберіть «Фіксованою сумою» у полі «Чайові». Фактичний відсоток від рахунку калькулятор покаже сам.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як дізнатися, який відсоток чайових я залишив?</h3>
+                <p>На вкладці «Який відсоток» введіть рахунок і сплачену суму: чайові й відсоток порахуються автоматично.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чому сума на людину помножена на кількість осіб не збігається з разом?</h3>
+                <p>Якщо ділення не рівне, остача в копійках лишається в загальній сумі. Різниця не перевищує кількості копійок за кількістю осіб.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна обрати валюту?</h3>
+                <p>Так, є символи ₴, $, €, £ і zł або без символу. Курси валют не конвертуються.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи враховує калькулятор місцеві правила чайових?</h3>
+                <p>Ні, він рахує за введеними відсотками. Перевіряйте, чи сервісний збір уже не включено до рахунку.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
