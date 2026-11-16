@@ -2,6 +2,7 @@
 <html lang="uk">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Генератор випадкових чисел онлайн | CalcCore</title>
+    <title>Генератор випадкових чисел, кубиків і монети | CalcCore</title>
     <meta name="description"
-        content="Згенеруй випадкові числа у вказаному діапазоні. Один чи кілька результатів, з повторами або без — для розіграшів, ігор, вибірки." />
+        content="Випадкові числа в будь-якому діапазоні без повторів, кубики з імовірностями суми, орел чи решка та випадковий вибір зі списку в браузері." />
 
     <link rel="canonical" href="https://calccore.net/misc/random-number-generator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/random-number-generator" />
@@ -26,185 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Генератор випадкових чисел онлайн" />
-    <meta property="og:description" content="Згенеруй випадкові числа у вказаному діапазоні. Один чи кілька результатів, з повторами або без — для розіграшів, ігор, вибірки." />
+    <meta property="og:title" content="Генератор випадкових чисел, кубиків і монети" />
+    <meta property="og:description" content="Випадкові числа в будь-якому діапазоні без повторів, кубики з імовірностями суми, орел чи решка та випадковий вибір зі списку в браузері." />
     <meta property="og:url" content="https://calccore.net/misc/random-number-generator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: безкоштовні онлайн-калькулятори" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Генератор випадкових чисел онлайн" />
-    <meta name="twitter:description" content="Згенеруй випадкові числа у вказаному діапазоні. Один чи кілька результатів, з повторами або без — для розіграшів, ігор, вибірки." />
+    <meta name="twitter:title" content="Генератор випадкових чисел, кубиків і монети" />
+    <meta name="twitter:description" content="Випадкові числа в будь-якому діапазоні без повторів, кубики з імовірностями суми, орел чи решка та випадковий вибір зі списку в браузері." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/random-number-generator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261116rn8" />
+    <link rel="stylesheet" href="/css/rn.css?v=20261116rn8" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/random-number-generator.js?v=20260909" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"Наскільки випадкові ці числа?",
-        "acceptedAnswer":{"@type":"Answer","text":"Генератор використовує криптографічно надійне джерело випадковості браузера (Web Crypto API), що забезпечує високу якість випадковості."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи можна отримати числа без повторів?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, увімкни опцію 'без повторів' — тоді кожне число у виборці буде унікальним."}
-      },
-      {
-        "@type":"Question",
-        "name":"Чи підходить цей генератор для лотерей чи розіграшів?",
-        "acceptedAnswer":{"@type":"Answer","text":"Так, для неформальних розіграшів і особистого використання. Для офіційних лотерей з грошовими призами використовуються сертифіковані системи."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261116rn8" defer></script>
+    <script src="/js/phys-core.js?v=20261116rn8" defer></script>
+    <script src="/js/km-data.js?v=20261116rn8" defer></script>
+    <script src="/js/rn-data.js?v=20261116rn8" defer></script>
+    <script src="/js/rn-calc.js?v=20261116rn8" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/misc/random-number-generator#app",
-    "name":"Random Number Generator",
-    "description":"Генерація випадкових чисел у заданому діапазоні з опцією унікальності.",
-    "url":"https://calccore.net/misc/random-number-generator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"uk",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"UAH"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/misc/random-number-generator#app",
+  "name": "Генератор випадкових чисел, кубиків і монети",
+  "description": "Онлайн-генератор випадкових чисел: діапазон від −10¹⁵ до 10¹⁵, десяткові числа, до 1000 чисел за раз, без повторів, сортування, лотерейні набори; кубики d4–d100 із записом 2d6+3 і точними імовірностями сум; монета з серією кидків і імовірністю результату; вибір переможців і перемішування списку. Безпечна випадковість без зсуву, нічого не надсилається.",
+  "url": "https://calccore.net/misc/random-number-generator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "uk",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Числа в діапазоні без зсуву за модулем",
+    "Без повторів і десяткові числа",
+    "Лотерейні набори 6 з 49 і 5 з 36",
+    "Кубики з записом 2d6+3",
+    "Точні імовірності сум кубиків",
+    "Орел чи решка з серією кидків",
+    "Вибір переможців зі списку",
+    "Перемішування списку"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/misc/random-number-generator#webpage",
+      "url": "https://calccore.net/misc/random-number-generator",
+      "name": "Генератор випадкових чисел, кубиків і монети | CalcCore",
+      "description": "Випадкові числа в будь-якому діапазоні без повторів, кубики з імовірностями суми, орел чи решка та випадковий вибір зі списку в браузері.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/misc/random-number-generator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/misc/random-number-generator#breadcrumb"
+      },
+      "dateModified": "2026-11-16",
+      "inLanguage": "uk"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/misc/random-number-generator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Різне",
+          "item": "https://calccore.net/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Генератор випадкових чисел",
+          "item": "https://calccore.net/misc/random-number-generator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/misc/random-number-generator#faq",
+      "inLanguage": "uk",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Наскільки випадкові ці числа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Їх обирає криптографічний генератор браузера crypto.getRandomValues. Значення, що порушували б рівномірність, відкидаються, тому кожне число має однаковий шанс."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що таке зсув за модулем?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Якщо просто взяти залишок від ділення випадкового числа на розмір діапазону, менші числа випадають трохи частіше. Ми відкидаємо значення з «неповного хвоста», тож зсуву немає."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як отримати числа без повторів?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Увімкніть «Без повторів»: усі числа будуть різними. Кількість не може перевищувати розмір діапазону, інакше калькулятор повідомить про це."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна отримати десяткові числа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, оберіть кількість знаків після коми від 1 до 6. Значення рахуються точно, без похибок плаваючої коми."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як згенерувати числа для лотереї?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Натисніть «6 з 49» чи «5 з 36»: набір без повторів за зростанням. Усі набори рівноймовірні, а кількість можливих комбінацій показано поруч."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи є «щасливі» числа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Кожен набір у лотереї має однаковий шанс, а попередні тиражі на наступні не впливають."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що означає запис 2d6+3?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Кинути два шестигранні кубики й додати 3 до суми. Перше число — кількість кубиків, друге — кількість граней, після плюса чи мінуса — модифікатор."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як рахується імовірність суми кубиків?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Точно: розподіли окремих кубиків згортаються. Для двох шестигранних кубиків сума 7 має шанс 6 із 36, або 16,7 %."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи чесна монета?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так: кожен кидок — один випадковий біт, тому орел і решка рівноймовірні, а кидки незалежні. Серія з п’яти орлів поспіль у довгій серії — звичайна подія."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як обрати переможця з кількох учасників?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "На вкладці «Зі списку» вставте імена по одному в рядку, оберіть кількість переможців і натисніть «Згенерувати». Кожен має однаковий шанс."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можна використовувати це для офіційного розіграшу?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для публічних розіграшів із призами краще застосувати процес, який можуть перевірити учасники, наприклад із відеозаписом і свідками. Цей генератор підходить для неформальних жеребкувань."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи зберігаються чи надсилаються мої списки й результати?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. Усе відбувається у вашому браузері, нічого не надсилається й не зберігається, а посилання на результат не створюється."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="crandom">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Генератор випадкових чисел</h1>
-                    <p class="mcalc__p">
-                        Обери діапазон і кількість — отримай випадкові числа
-                        миттєво.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Генератор випадкових чисел, кубиків і монети</h1>
+                    <p class="ph__p">Вкажіть діапазон і кількість, і генератор виведе випадкові числа криптографічним генератором вашого браузера: з повторами чи без, цілі чи десяткові. Є кубики з записом 2d6+3 і точними імовірностями сум, монета, випадковий вибір переможців зі списку та його перемішування. Нічого не надсилається й не зберігається.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Налаштування</h2>
-                        <span class="mcalc__badge">Misc</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Нові значення при зміні параметрів</span>
+                        </label>
                     </div>
-
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="minValue">Від</label>
-                            <input class="mcalc__input" id="minValue" type="text" inputmode="numeric" value="1" />
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Введи дані</h2>
+                            <span class="ph__badge">Різне</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="maxValue">До</label>
-                            <input class="mcalc__input" id="maxValue" type="text" inputmode="numeric" value="100" />
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="num" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Числа</b><span class="ph__ex">Числа в діапазоні, без повторів, десяткові</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="dice" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Кубики</b><span class="ph__ex">Кубики d4–d100 з імовірністю суми</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="coin" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Монета</b><span class="ph__ex">Орел чи решка, серія кидків</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="list" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">Зі списку</b><span class="ph__ex">Вибір переможців чи перемішування списку</span></span></button>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="countValue">Кількість чисел</label>
-                            <input class="mcalc__input" id="countValue" type="text" inputmode="numeric" value="1" />
-                        </div>
-
-                        <div class="mcalc__field" style="display:flex; align-items:flex-end;">
-                            <label class="password-checkbox">
-                                <input type="checkbox" id="uniqueCheck" />
-                                <span>Без повторів</span>
-                            </label>
-                        </div>
-
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnGenerate"
-                                    type="button">Згенерувати</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Копіювати результат</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">Що знайти</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Одиниця результату"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Налаштування</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Знаків після коми</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Прискорення вільного падіння g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9,8 м/с²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9,8 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9,81 м/с²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 м/с² (шкільне)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">Значення g використовується там, де є вага чи вільне падіння.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Згенерувати</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="random-results" id="randomResults"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Результат</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Налаштуйте параметри: результат з'явиться тут.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Поділитись</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Приклад</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Скинути</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копіювати результат</button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/misc/password-generator">Генератор паролів</a>
-                    <a href="/misc/unit-converter">Конвертер одиниць</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Як працює генератор випадкових чисел</h2>
-            <p>
-                Цей інструмент використовує <b>Web Crypto API</b> браузера — той самий механізм,
-                що застосовується для криптографічних операцій, який забезпечує високоякісну
-                випадковість, значно кращу за прості псевдовипадкові алгоритми.
-            </p>
-
-            <h2>Опція "без повторів"</h2>
-            <p>
-                Коли увімкнена опція унікальності, кожне згенероване число у вибірці буде відрізнятись
-                від інших — корисно для розіграшів, де кожен учасник повинен отримати окремий номер,
-                чи для випадкового вибору кількох унікальних елементів зі списку.
-            </p>
-
-            <h2>Практичне застосування</h2>
-            <ul>
-                <li><b>Розіграші та лотереї:</b> вибір переможця серед учасників за номерами.</li>
-                <li><b>Ігри та настільні ігри:</b> заміна кубиків чи карток для випадкових подій.</li>
-                <li><b>Дослідження та статистика:</b> випадкова вибірка з популяції для опитувань.</li>
-                <li><b>Тестування ПЗ:</b> генерація тестових даних для перевірки функціональності.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                Для неформального використання (ігри, розіграші серед друзів) цей генератор чудово
-                підходить. Для офіційних лотерей з грошовими призами використовуються спеціальні
-                сертифіковані системи з незалежним аудитом.
-            </p>
+        <section class="cc-related">
+            <h2>Також може стати в пригоді</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/misc/password-generator"><b>Генератор паролів</b><span>Паролі, парольні фрази, PIN, логіни й ніки.</span></a>
+                <a class="cc-related-card" href="/education/statistics-calculator"><b>Калькулятор статистики</b><span>Середнє, медіана, відхилення й розподіл даних.</span></a>
+                <a class="cc-related-card" href="/misc/tip-calculator"><b>Калькулятор чайових</b><span>Чайові, податок і поділ рахунку.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>Як працює генератор</h2>
+            <p>Генератор обирає числа через <b>crypto.getRandomValues</b> — криптографічний генератор браузера, а не звичайний Math.random. Для діапазону береться потрібна кількість випадкових бітів, а значення поза діапазоном відкидаються й обираються знову. Завдяки цьому кожне число має точно однаковий шанс, без зсуву, який виникає, коли просто беруть залишок від ділення.</p>
+
+            <h2>Числа в діапазоні</h2>
+            <p>Вкажіть «Від» і «До», кількість до 1000 і за потреби кількість знаків після коми. Межі входять до діапазону, допускаються від’ємні числа до 10¹⁵. Для десяткових чисел значення рахуються цілими в масштабі кроку, тому немає похибок із плаваючою комою. Можна відсортувати результат і скопіювати його через кому, пробіл чи з нового рядка.</p>
+
+            <h2>Без повторів і лотерея</h2>
+            <p>Опція «Без повторів» обирає різні числа: набір 6 із 49 чи 5 із 36 виходить одним натисканням. Для цього використано алгоритм Флойда: він не будує масиву всього діапазону, тож працює навіть для діапазону до мільярда значень, а кожна підмножина й порядок рівноймовірні. Калькулятор показує кількість можливих наборів: для 6 з 49 це 13 983 816, і жодне «щасливе» число цього шансу не змінює.</p>
+
+            <h2>Кубики й імовірність суми</h2>
+            <p>Запис 2d6+3 означає два шестигранні кубики й додавання 3. Підтримуються кубики від d4 до d100 і власна кількість граней до 1000, до 20 кубиків і до 10 кидків за раз. Для суми показано точний розподіл імовірностей: для двох кубиків сума 7 випадає з шансом 16,7 %, а 2 чи 12 лише по 2,8 %. Для великої кількості кубиків показано середнє й стандартне відхилення.</p>
+
+            <h2>Монета</h2>
+            <p>Кожен кидок — один випадковий біт, тож орел і решка рівноймовірні, а кидки незалежні. Для серії калькулятор показує кількість, відсотки, найдовшу серію однакових і точну імовірність такого результату. У короткій серії відхилення від 50 на 50 звичайні: монета не «пам’ятає» попередні кидки.</p>
+
+            <h2>Вибір зі списку</h2>
+            <p>Вставте список — по одному елементу в рядку, до 500 — і оберіть кількість переможців чи перемішайте весь список. Вибір не повторює елементи, шанс кожного показано. Перемішування виконується за алгоритмом Фішера — Йейтса, тож усі порядки рівноймовірні. Однакові рядки рахуються окремо.</p>
+
+            <h2>Джерела, права та контакт</h2>
+            <p>Розрахунки математичні й не залежать від зовнішніх даних. Про джерело випадковості читайте в документації <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues" target="_blank" rel="noopener noreferrer">crypto.getRandomValues</a>, про перемішування — <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" target="_blank" rel="noopener noreferrer">алгоритм Фішера — Йейтса</a>, про запис кубиків — <a href="https://en.wikipedia.org/wiki/Dice_notation" target="_blank" rel="noopener noreferrer">dice notation</a>. Вибірку без повторів описано в книзі Бентлі «Programming Pearls» (алгоритм Флойда). Сайт не пов'язаний із цими організаціями й не підтверджений ними, а їхні назви належать їхнім власникам. Якщо ви правовласник і маєте зауваження, напишіть нам на сторінці <a href="/contacts">Контакти</a>.</p>
+
+            <h2>Обмеження</h2>
+            <p>Результат випадковий і не зберігається, тому посилання на нього не створюється. Для офіційних розіграшів і лотерей потрібен публічний незалежний процес із перевіркою, а цей інструмент підходить для ігор, вибірок і неформальних жеребкувань. Значення чисел обмежені за модулем величиною 10¹⁵, а за раз можна отримати до 1000 чисел.</p>
+            <p class="ph-mini">Кожне число в діапазоні має однаковий шанс, а попередні результати на наступні не впливають. «Щасливих» чисел не існує: у лотереї набір 1-2-3-4-5-6 так само ймовірний, як будь-який інший.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>Часті запитання</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>Наскільки випадкові ці числа?</h3>
-                <p>Генератор використовує криптографічно надійне джерело випадковості браузера (Web Crypto API), що
-                    забезпечує високу якість випадковості.</p>
+                <p>Їх обирає криптографічний генератор браузера crypto.getRandomValues. Значення, що порушували б рівномірність, відкидаються, тому кожне число має однаковий шанс.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи можна отримати числа без повторів?</h3>
-                <p>Так, увімкни опцію "без повторів" — тоді кожне число у виборці буде унікальним.</p>
+            <div class="cc-faq-item">
+                <h3>Що таке зсув за модулем?</h3>
+                <p>Якщо просто взяти залишок від ділення випадкового числа на розмір діапазону, менші числа випадають трохи частіше. Ми відкидаємо значення з «неповного хвоста», тож зсуву немає.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Чи підходить цей генератор для лотерей чи розіграшів?</h3>
-                <p>Так, для неформальних розіграшів і особистого використання. Для офіційних лотерей з грошовими призами
-                    використовуються сертифіковані системи.</p>
+            <div class="cc-faq-item">
+                <h3>Як отримати числа без повторів?</h3>
+                <p>Увімкніть «Без повторів»: усі числа будуть різними. Кількість не може перевищувати розмір діапазону, інакше калькулятор повідомить про це.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна отримати десяткові числа?</h3>
+                <p>Так, оберіть кількість знаків після коми від 1 до 6. Значення рахуються точно, без похибок плаваючої коми.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як згенерувати числа для лотереї?</h3>
+                <p>Натисніть «6 з 49» чи «5 з 36»: набір без повторів за зростанням. Усі набори рівноймовірні, а кількість можливих комбінацій показано поруч.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи є «щасливі» числа?</h3>
+                <p>Ні. Кожен набір у лотереї має однаковий шанс, а попередні тиражі на наступні не впливають.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Що означає запис 2d6+3?</h3>
+                <p>Кинути два шестигранні кубики й додати 3 до суми. Перше число — кількість кубиків, друге — кількість граней, після плюса чи мінуса — модифікатор.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як рахується імовірність суми кубиків?</h3>
+                <p>Точно: розподіли окремих кубиків згортаються. Для двох шестигранних кубиків сума 7 має шанс 6 із 36, або 16,7 %.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи чесна монета?</h3>
+                <p>Так: кожен кидок — один випадковий біт, тому орел і решка рівноймовірні, а кидки незалежні. Серія з п’яти орлів поспіль у довгій серії — звичайна подія.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Як обрати переможця з кількох учасників?</h3>
+                <p>На вкладці «Зі списку» вставте імена по одному в рядку, оберіть кількість переможців і натисніть «Згенерувати». Кожен має однаковий шанс.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи можна використовувати це для офіційного розіграшу?</h3>
+                <p>Для публічних розіграшів із призами краще застосувати процес, який можуть перевірити учасники, наприклад із відеозаписом і свідками. Цей генератор підходить для неформальних жеребкувань.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Чи зберігаються чи надсилаються мої списки й результати?</h3>
+                <p>Ні. Усе відбувається у вашому браузері, нічого не надсилається й не зберігається, а посилання на результат не створюється.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>

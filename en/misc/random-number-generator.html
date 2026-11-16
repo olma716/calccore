@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Random Number Generator Online | CalcCore</title>
+    <title>Random Number, Dice and Coin Flip Generator | CalcCore</title>
     <meta name="description"
-        content="Generate random numbers within a specified range. One or multiple results, with or without repeats — for giveaways, games, sampling." />
+        content="Random numbers in any range with no repeats, dice with exact sum probabilities, a heads or tails coin flip and a random pick from a list in your browser." />
 
     <link rel="canonical" href="https://calccore.net/en/misc/random-number-generator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/random-number-generator" />
@@ -26,185 +28,432 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Random Number Generator Online" />
-    <meta property="og:description" content="Generate random numbers within a specified range. One or multiple results, with or without repeats — for giveaways, games, sampling." />
+    <meta property="og:title" content="Random Number, Dice and Coin Flip Generator" />
+    <meta property="og:description" content="Random numbers in any range with no repeats, dice with exact sum probabilities, a heads or tails coin flip and a random pick from a list in your browser." />
     <meta property="og:url" content="https://calccore.net/en/misc/random-number-generator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Random Number Generator Online" />
-    <meta name="twitter:description" content="Generate random numbers within a specified range. One or multiple results, with or without repeats — for giveaways, games, sampling." />
+    <meta name="twitter:title" content="Random Number, Dice and Coin Flip Generator" />
+    <meta name="twitter:description" content="Random numbers in any range with no repeats, dice with exact sum probabilities, a heads or tails coin flip and a random pick from a list in your browser." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
-    <link rel="stylesheet" href="/css/random-number-generator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261116rn8" />
+    <link rel="stylesheet" href="/css/rn.css?v=20261116rn8" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/random-number-generator.js?v=20260909" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"How random are these numbers?",
-        "acceptedAnswer":{"@type":"Answer","text":"The generator uses the browser's cryptographically secure randomness source (Web Crypto API), which provides high-quality randomness."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I get numbers without repeats?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, enable the 'no repeats' option — then every number in the result set will be unique."}
-      },
-      {
-        "@type":"Question",
-        "name":"Is this generator suitable for lotteries or giveaways?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes, for informal giveaways and personal use. Official lotteries with cash prizes use certified systems."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261116rn8" defer></script>
+    <script src="/js/phys-core.js?v=20261116rn8" defer></script>
+    <script src="/js/km-data.js?v=20261116rn8" defer></script>
+    <script src="/js/rn-data.js?v=20261116rn8" defer></script>
+    <script src="/js/rn-calc.js?v=20261116rn8" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/misc/random-number-generator#app",
-    "name":"Random Number Generator",
-    "description":"Generate random numbers within a range with a uniqueness option.",
-    "url":"https://calccore.net/en/misc/random-number-generator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/misc/random-number-generator#app",
+  "name": "Random Number, Dice and Coin Flip Generator",
+  "description": "An online random number generator: a range from −10¹⁵ to 10¹⁵, decimals, up to 1000 numbers at a time, no repeats, sorting, lottery-style sets; dice d4–d100 with the 2d6+3 notation and exact sum probabilities; a coin with a series of flips and the probability of the result; picking winners and shuffling a list. Secure randomness without bias, nothing is sent anywhere.",
+  "url": "https://calccore.net/en/misc/random-number-generator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "Numbers in a range without modulo bias",
+    "No repeats and decimals",
+    "Lottery-style sets 6 of 49 and 5 of 36",
+    "Dice with the 2d6+3 notation",
+    "Exact probabilities of dice sums",
+    "Heads or tails with a series of flips",
+    "Picking winners from a list",
+    "Shuffling a list"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/misc/random-number-generator#webpage",
+      "url": "https://calccore.net/en/misc/random-number-generator",
+      "name": "Random Number, Dice and Coin Flip Generator | CalcCore",
+      "description": "Random numbers in any range with no repeats, dice with exact sum probabilities, a heads or tails coin flip and a random pick from a list in your browser.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/misc/random-number-generator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/misc/random-number-generator#breadcrumb"
+      },
+      "dateModified": "2026-11-16",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/misc/random-number-generator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Misc",
+          "item": "https://calccore.net/en/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Random number generator",
+          "item": "https://calccore.net/en/misc/random-number-generator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/misc/random-number-generator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How random are these numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are picked by the browser's cryptographic generator crypto.getRandomValues. Values that would break uniformity are rejected, so every number has the same chance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is modulo bias?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you simply take the remainder of a random number divided by the range size, smaller numbers come up slightly more often. We reject values from the “incomplete tail”, so there is no bias."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get numbers without repeats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turn on “No repeats”: all numbers will be different. The count cannot exceed the size of the range, otherwise the calculator says so."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get decimal numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, choose from 1 to 6 decimal places. The values are worked out exactly, without floating-point errors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I generate lottery numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Press “6 of 49” or “5 of 36”: a set with no repeats in ascending order. All sets are equally likely and the number of possible combinations is shown next to it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are there “lucky” numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Every set in a lottery has the same chance, and earlier draws do not affect later ones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the notation 2d6+3 mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Roll two six-sided dice and add 3 to the sum. The first number is the number of dice, the second the number of sides, and after the plus or minus comes the modifier."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the probability of a dice sum worked out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Exactly: the distributions of the single dice are convolved. For two six-sided dice a sum of 7 has a chance of 6 in 36, or 16.7%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the coin fair?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes: each flip is one random bit, so heads and tails are equally likely and the flips are independent. Five heads in a row is a normal event in a long series."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I pick a winner from several participants?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the “From a list” tab paste the names one per line, choose the number of winners and press “Generate”. Everyone has the same chance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this for an official draw?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For public prize draws a process the participants can verify is better, for example with a video recording and witnesses. This generator suits informal draws."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my lists and results stored or sent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything happens in your browser, nothing is sent or stored, and no link to the result is created."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="crandom">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Random Number Generator</h1>
-                    <p class="mcalc__p">
-                        Choose a range and quantity — get random numbers
-                        instantly.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Random Number, Dice and Coin Flip Generator</h1>
+                    <p class="ph__p">Enter a range and a count and the generator outputs random numbers with your browser's cryptographic generator: with or without repeats, whole or decimal. There are dice with the 2d6+3 notation and exact sum probabilities, a coin, a random pick of winners from a list and its shuffle. Nothing is sent or stored.</p>
                 </div>
 
-                <div class="mcalc__card" style="max-width:700px; margin:0 auto;">
-                    <div class="mcalc__sectionTitle">
-                        <h2 class="mcalc__h2">Settings</h2>
-                        <span class="mcalc__badge">Misc</span>
+                <div class="ph__grid">
+
+                    <!-- LEFT -->
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>New values when settings change</span>
+                        </label>
                     </div>
-
-                    <div class="mcalc__rows">
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="minValue">From</label>
-                            <input class="mcalc__input" id="minValue" type="text" inputmode="numeric" value="1" />
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Misc</span>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="maxValue">To</label>
-                            <input class="mcalc__input" id="maxValue" type="text" inputmode="numeric" value="100" />
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="num" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="ph__tileTx"><b class="ph__tabT">Numbers</b><span class="ph__ex">Numbers in a range, no repeats, decimals</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="dice" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span class="ph__tileTx"><b class="ph__tabT">Dice</b><span class="ph__ex">Dice d4–d100 with the probability of the sum</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="coin" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="ph__tileTx"><b class="ph__tabT">Coin</b><span class="ph__ex">Heads or tails, a series of flips</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="list" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">From a list</b><span class="ph__ex">Picking winners or shuffling a list</span></span></button>
                         </div>
 
-                        <div class="mcalc__field">
-                            <label class="mcalc__label" for="countValue">Count</label>
-                            <input class="mcalc__input" id="countValue" type="text" inputmode="numeric" value="1" />
-                        </div>
-
-                        <div class="mcalc__field" style="display:flex; align-items:flex-end;">
-                            <label class="password-checkbox">
-                                <input type="checkbox" id="uniqueCheck" />
-                                <span>No repeats</span>
-                            </label>
-                        </div>
-
-                        <div class="mcalc__field m-full">
-                            <div class="mcalc__actions m-mt10">
-                                <button class="mcalc__btn mcalc__btn--primary" id="btnGenerate"
-                                    type="button">Generate</button>
-                                <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
+                                </div>
                             </div>
-                            <div class="mcalc__toast" id="mToast"></div>
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Generate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
-                    <div class="random-results" id="randomResults"></div>
+                    <!-- RIGHT -->
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
+                        </div>
+                        <div class="ph__result" id="result">Set the options: the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy result</button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="m-navlinks" style="max-width:700px; margin:16px auto 0;">
-                    <a href="/en/misc/password-generator">Password Generator</a>
-                    <a href="/en/misc/unit-converter">Unit Converter</a>
-                </div>
-
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>How the random number generator works</h2>
-            <p>
-                This tool uses the browser's <b>Web Crypto API</b> — the same mechanism used for
-                cryptographic operations, which provides high-quality randomness, far superior to
-                simple pseudo-random algorithms.
-            </p>
-
-            <h2>The "no repeats" option</h2>
-            <p>
-                When uniqueness is enabled, every generated number in the result set will differ
-                from the others — useful for giveaways where each participant needs a distinct
-                number, or for randomly selecting several unique items from a list.
-            </p>
-
-            <h2>Practical uses</h2>
-            <ul>
-                <li><b>Giveaways and raffles:</b> selecting a winner among participants by number.</li>
-                <li><b>Games and board games:</b> replacing dice or cards for random events.</li>
-                <li><b>Research and statistics:</b> random sampling from a population for surveys.</li>
-                <li><b>Software testing:</b> generating test data to verify functionality.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                For informal use (games, giveaways among friends) this generator works great. For
-                official lotteries with cash prizes, specialized certified systems with independent
-                auditing are used.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/misc/password-generator"><b>Password Generator</b><span>Passwords, passphrases, PINs, usernames and nicknames.</span></a>
+                <a class="cc-related-card" href="/en/education/statistics-calculator"><b>Statistics Calculator</b><span>Mean, median, deviation and the distribution of data.</span></a>
+                <a class="cc-related-card" href="/en/misc/tip-calculator"><b>Tip Calculator</b><span>A tip, tax and splitting a bill.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>How the generator works</h2>
+            <p>The generator picks numbers with <b>crypto.getRandomValues</b>, the browser's cryptographic generator rather than the ordinary Math.random. For a range it takes the needed number of random bits and rejects values outside the range, drawing again. As a result every number has exactly the same chance, without the bias that appears when you simply take a remainder.</p>
+
+            <h2>Numbers in a range</h2>
+            <p>Enter “From” and “To”, a count of up to 1000 and, if needed, the number of decimal places. Both ends are included and negative numbers down to −10¹⁵ are allowed. For decimals the values are worked out as whole numbers in the scale of the step, so there are no floating-point errors. You can sort the result and copy it comma-separated, space-separated or one per line.</p>
+
+            <h2>No repeats and the lottery</h2>
+            <p>The “No repeats” option picks different numbers: a set 6 of 49 or 5 of 36 takes one press. It uses Floyd's algorithm, which does not build an array of the whole range, so it works even for ranges of a billion values, and every subset and order is equally likely. The calculator shows the number of possible sets: for 6 of 49 it is 13,983,816, and no “lucky” number changes that chance.</p>
+
+            <h2>Dice and the probability of a sum</h2>
+            <p>The notation 2d6+3 means two six-sided dice plus 3. Dice from d4 to d100 and a custom number of sides up to 1000 are supported, with up to 20 dice and up to 10 rolls at a time. For the sum the exact probability distribution is shown: with two dice a sum of 7 comes up with a 16.7% chance, while 2 or 12 only 2.8% each. For many dice the average and standard deviation are shown.</p>
+
+            <h2>The coin</h2>
+            <p>Each flip is one random bit, so heads and tails are equally likely and the flips are independent. For a series the calculator shows the counts, percentages, the longest run of the same side and the exact probability of such a result. In a short series deviations from 50/50 are normal: the coin does not “remember” earlier flips.</p>
+
+            <h2>Picking from a list</h2>
+            <p>Paste a list, one item per line up to 500, and choose a number of winners or shuffle the whole list. The pick does not repeat items and the chance of each is shown. The shuffle uses the Fisher–Yates algorithm, so all orders are equally likely. Identical lines count separately.</p>
+
+            <h2>Sources, rights and contact</h2>
+            <p>The calculations are mathematical and do not depend on external data. For the source of randomness see the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues" target="_blank" rel="noopener noreferrer">crypto.getRandomValues</a> documentation, for shuffling the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" target="_blank" rel="noopener noreferrer">Fisher–Yates algorithm</a> and for the dice format <a href="https://en.wikipedia.org/wiki/Dice_notation" target="_blank" rel="noopener noreferrer">dice notation</a>. Sampling without repeats is described in Bentley's “Programming Pearls” (Floyd's algorithm). The site is not affiliated with or endorsed by these organizations, and their names belong to their owners. If you are a rights holder with a concern, write to us on the <a href="/en/contacts">Contacts</a> page.</p>
+
+            <h2>Limits</h2>
+            <p>The result is random and is not stored, so no link to it is created. Official draws and lotteries need a public independent process with verification, while this tool suits games, samples and informal draws. The absolute value of the numbers is limited to 10¹⁵ and up to 1000 numbers can be drawn at a time.</p>
+            <p class="ph-mini">Every number in the range has the same chance and earlier results do not affect later ones. There are no “lucky” numbers: in a lottery the set 1-2-3-4-5-6 is as likely as any other.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
+            <div class="cc-faq-item">
                 <h3>How random are these numbers?</h3>
-                <p>The generator uses the browser's cryptographically secure randomness source (Web Crypto API), which
-                    provides high-quality randomness.</p>
+                <p>They are picked by the browser's cryptographic generator crypto.getRandomValues. Values that would break uniformity are rejected, so every number has the same chance.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Can I get numbers without repeats?</h3>
-                <p>Yes, enable the "no repeats" option — then every number in the result set will be unique.</p>
+            <div class="cc-faq-item">
+                <h3>What is modulo bias?</h3>
+                <p>If you simply take the remainder of a random number divided by the range size, smaller numbers come up slightly more often. We reject values from the “incomplete tail”, so there is no bias.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Is this generator suitable for lotteries or giveaways?</h3>
-                <p>Yes, for informal giveaways and personal use. Official lotteries with cash prizes use certified
-                    systems.</p>
+            <div class="cc-faq-item">
+                <h3>How do I get numbers without repeats?</h3>
+                <p>Turn on “No repeats”: all numbers will be different. The count cannot exceed the size of the range, otherwise the calculator says so.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I get decimal numbers?</h3>
+                <p>Yes, choose from 1 to 6 decimal places. The values are worked out exactly, without floating-point errors.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I generate lottery numbers?</h3>
+                <p>Press “6 of 49” or “5 of 36”: a set with no repeats in ascending order. All sets are equally likely and the number of possible combinations is shown next to it.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are there “lucky” numbers?</h3>
+                <p>No. Every set in a lottery has the same chance, and earlier draws do not affect later ones.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does the notation 2d6+3 mean?</h3>
+                <p>Roll two six-sided dice and add 3 to the sum. The first number is the number of dice, the second the number of sides, and after the plus or minus comes the modifier.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How is the probability of a dice sum worked out?</h3>
+                <p>Exactly: the distributions of the single dice are convolved. For two six-sided dice a sum of 7 has a chance of 6 in 36, or 16.7%.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is the coin fair?</h3>
+                <p>Yes: each flip is one random bit, so heads and tails are equally likely and the flips are independent. Five heads in a row is a normal event in a long series.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I pick a winner from several participants?</h3>
+                <p>On the “From a list” tab paste the names one per line, choose the number of winners and press “Generate”. Everyone has the same chance.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I use this for an official draw?</h3>
+                <p>For public prize draws a process the participants can verify is better, for example with a video recording and witnesses. This generator suits informal draws.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Are my lists and results stored or sent?</h3>
+                <p>No. Everything happens in your browser, nothing is sent or stored, and no link to the result is created.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
