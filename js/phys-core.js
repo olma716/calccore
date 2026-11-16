@@ -313,7 +313,7 @@
   const lc1 = (s) => s.charAt(0).toLowerCase() + s.slice(1);
   const clean = (s) => s.replace(/[\u00a0\u202f]/g, " ");
   let last = null;
-  function textOf(m) { return tidy(clean([m.expr + "  →  " + m.resText, ""].concat(m.steps.map((s, i) => (i + 1) + ". " + s.t + "\n   " + s.l.join("\n   "))).join("\n"))); }
+  function textOf(m) { if (typeof m.copyText === "string") return m.copyText; return tidy(clean([m.expr + "  →  " + m.resText, ""].concat(m.steps.map((s, i) => (i + 1) + ". " + s.t + "\n   " + s.l.join("\n   "))).join("\n"))); }
   const foldOpen = {};
   function restoreFolds(box) { box.querySelectorAll("details[data-keep]").forEach((d) => { if (foldOpen[d.dataset.keep]) d.open = true; }); }
   function render(m, strict) {
@@ -321,7 +321,7 @@
     if (!m.ok) { last = null; if (m.incomplete && !strict) { box.innerHTML = T.enter; return; } box.innerHTML = '<div class="ph__hintbox">' + esc(m.msg || T.enter) + "</div>"; return; }
     last = m;
     const tiles = m.tiles && m.tiles.length ? '<div class="ph__tiles">' + m.tiles.map((t) => '<div class="ph__tile"><small>' + esc(t.k) + "</small><b>" + esc(t.v) + "</b></div>").join("") + "</div>" : "";
-    box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + esc(tidy((m.subRaw ? "" : "= ") + m.headSub)) + "</div>" : "") + "</div>" + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + (m.note !== undefined ? (m.note ? '<div class="ph__note">' + m.note + "</div>" : "") : CFG.exactNote === false ? "" : '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>");
+    box.innerHTML = '<div class="ph__rhead"><div class="ph__expr">' + esc(m.expr) + '</div><div class="ph__forms"><span class="ph__rt"><small>' + esc(m.head[0]) + '</small><span class="ph__big' + (String(m.head[1]).length > 22 ? " ph__big--sm" : "") + '">' + esc(m.head[1]) + "</span></span></div>" + (m.headSub ? '<div class="ph__sub2">' + esc(tidy((m.subRaw ? "" : "= ") + m.headSub)) + "</div>" : "") + "</div>" + (m.afterHead || "") + tiles + (m.extraHtml || "") + stepsHtml(m.steps) + (m.note !== undefined ? (m.note ? '<div class="ph__note">' + m.note + "</div>" : "") : CFG.exactNote === false ? "" : '<div class="ph__note">' + L("Усі числа точні (дроби, корені не округлюються), десяткові наближені до обраної кількості знаків.", "All numbers are exact (fractions and roots are not rounded); decimals are rounded to the chosen number of places.") + "</div>");
     restoreFolds(box);
   }
   // події аналітики: лише назви дій і ключ вкладки, без введених значень
@@ -385,7 +385,7 @@
   function clearFields() { if (MODE.type === "chain") MODE.vars.forEach((v) => { el("v_" + v.id).value = ""; el("u_" + v.id).value = "0"; }); else if (MODE.reset) MODE.reset(helpers()); }
   const G0 = () => { const li = document.querySelector("#gg_list li"); return li ? li.dataset.v : "9.8"; };
   const D0 = () => { const li = document.querySelector("#dc_list li"); return li ? li.dataset.v : "4"; };
-  function resetAll() { setDd("decs", D0()); setDd("gval", G0()); el("setBox").open = false; setMode(CFG.modes[0].key); render({ ok: false, incomplete: true }, false); last = null; }
+  function resetAll() { if (CFG.onReset) CFG.onReset(); setDd("decs", D0()); setDd("gval", G0()); el("setBox").open = false; setMode(CFG.modes[0].key); render({ ok: false, incomplete: true }, false); last = null; if (CFG.autoStart) calc(); }
   function applyChip(ch) {
     clearFields(); setDd("find", ch.find || MODE.find); syncFind();
     Object.keys(ch.vals).forEach((id) => { const [val, un] = String(ch.vals[id]).split("|"); if (id !== (ch.find || MODE.find)) el("v_" + id).value = val; if (un !== undefined) el("u_" + id).value = un; });
@@ -537,13 +537,13 @@
         el("calcBtn").addEventListener("click", () => { const m = calc(true); if (!m.ok && m.msg) toast(m.msg); });
         el("exampleBtn").addEventListener("click", fillExample);
         el("resetBtn").addEventListener("click", () => { resetAll(); toast(T.reset); });
-        el("shareBtn").addEventListener("click", share);
+        el("shareBtn").addEventListener("click", share); if (CFG.noShare) el("shareBtn").style.display = "none";
         el("copyBtn").addEventListener("click", copyResult);
         MODE = CFG.modes[0];
         const used = applyFromUrl();
         if (!used) buildMode();
         document.querySelectorAll(".ph__tab").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.m === MODE.key)));
-        if (used) calc(); else render({ ok: false, incomplete: true }, false);
+        if (used || CFG.autoStart) calc(); else render({ ok: false, incomplete: true }, false);
       });
     },
     // для перевірок
