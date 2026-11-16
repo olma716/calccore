@@ -1,0 +1,338 @@
+/* ============================================================
+   Блоки під калькулятором на всіх сторінках:
+   «Також може стати в пригоді» (градієнтні картки), SEO-текст ліворуч і FAQ-акордеон праворуч.
+   Файл самодостатній: підключається ПІСЛЯ css калькулятора, не залежить від його .cc-* правил.
+   Розмітку приводить до єдиного вигляду seo-transform.js
+   ============================================================ */
+
+/* ---------- Також може стати в пригоді ---------- */
+.cc-related {
+    max-width: 1168px;
+    margin: 28px auto 0;
+    padding: 0;
+}
+
+.cc-related h2 {
+    margin: 0 0 16px;
+    color: #283b69;
+    font-size: 22px;
+    text-align: center;
+}
+
+.cc-related .cc-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cc-related .cc-related-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 14px 16px;
+    overflow: hidden;
+    border-radius: 16px;
+    /* мякший колір: нижня половина градієнта хедера */
+    background: linear-gradient(180deg, #41537f 0%, #5a6ea1 100%);
+    color: #eaf0ff;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(40, 59, 105, .20);
+    transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease;
+}
+
+.cc-related .cc-related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(40, 59, 105, .30);
+}
+
+.cc-related .cc-related-card:focus-visible {
+    outline: 2px solid #4b7bdc;
+    outline-offset: 3px;
+}
+
+/* блиск, що пробігає при наведенні */
+.cc-related .cc-related-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .28) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 1.3s ease;
+    pointer-events: none;
+}
+
+.cc-related .cc-related-card:hover::after {
+    transform: translateX(120%);
+}
+
+/* велика напівпрозора іконка в кутку */
+.cc-related .cc-related-card .cc-related-ico {
+    position: absolute;
+    right: -6px;
+    bottom: -10px;
+    width: 78px;
+    height: 78px;
+    color: rgba(255, 255, 255, .15);
+    stroke-width: 1.6;
+    transition: transform .5s cubic-bezier(.3, 1.4, .5, 1), color .4s ease;
+    pointer-events: none;
+}
+
+.cc-related .cc-related-card:hover .cc-related-ico {
+    transform: rotate(-8deg) scale(1.1);
+    color: rgba(255, 255, 255, .24);
+}
+
+.cc-related .cc-related-card b {
+    position: relative;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.cc-related .cc-related-card span {
+    position: relative;
+    max-width: 90%;
+    color: #eaf0ff;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.cc-related .cc-related-card .cc-related-open {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 4px;
+    color: #fff;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.cc-related .cc-related-card .cc-related-arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform .3s ease;
+}
+
+.cc-related .cc-related-card:hover .cc-related-arrow {
+    transform: translateX(4px);
+}
+
+@media (max-width: 720px) {
+    .cc-related .cc-related-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ---------- SEO-текст і FAQ ---------- */
+.cc-two {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+    max-width: 1168px;
+    margin: 28px auto 0;
+    padding: 0;
+}
+
+.cc-two .cc-seo,
+.cc-two .cc-faq {
+    max-width: none;
+    margin: 0;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(31, 47, 85, .06), 0 8px 22px rgba(40, 59, 105, .10);
+}
+
+.cc-two .cc-seo {
+    padding: 22px 22px 10px;
+    min-width: 0;
+}
+
+.cc-two .cc-seo h2 {
+    margin: 0 0 8px;
+    color: #283b69;
+    font-size: 18px;
+}
+
+.cc-two .cc-seo h2:not(:first-child) {
+    margin-top: 22px;
+}
+
+.cc-two .cc-seo h3 {
+    margin: 16px 0 6px;
+    color: #283b69;
+    font-size: 16px;
+}
+
+.cc-two .cc-seo p {
+    margin: 0 0 14px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3a4766;
+}
+
+.cc-two .cc-seo ul,
+.cc-two .cc-seo ol {
+    margin: 0 0 14px;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3a4766;
+}
+
+.cc-two .cc-seo a {
+    color: #283b69;
+    font-weight: 700;
+}
+
+/* підсумкова примітка (ph-mini та власні *-mini кожної сторінки) */
+.cc-two .cc-seo p.ph-mini,
+.cc-two .cc-seo p[class$="-mini"] {
+    margin: 6px 0 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #eaf1fc;
+    color: #283b69;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+/* таблиці всередині тексту не розпирають вужчу колонку */
+.cc-two .cc-seo table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* FAQ: картка з шапкою кольору хедера, не прилипає при прокрутці */
+.cc-two .cc-faq {
+    overflow: hidden;
+    padding: 0;
+}
+
+.cc-two .cc-faq h2 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    padding: 14px 16px;
+    /* той самий м’який градієнт, що в картках «Також може стати в пригоді» */
+    background: linear-gradient(180deg, #41537f 0%, #5a6ea1 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.cc-two .cc-faq h2 svg {
+    flex: 0 0 auto;
+}
+
+.cc-two .cc-faq-item {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    border-top: 1px solid #e5e9f4;
+}
+
+.cc-two .cc-faq h2 + .cc-faq-item {
+    border-top: 0;
+}
+
+.cc-two .cc-faq-item summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    list-style: none;
+    transition: background .25s ease;
+}
+
+.cc-two .cc-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.cc-two .cc-faq-item summary::after {
+    content: "";
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    margin: 0 3px 3px auto;
+    border-right: 2px solid #5b78b8;
+    border-bottom: 2px solid #5b78b8;
+    transform: rotate(45deg);
+    transition: transform .3s ease, margin .3s ease;
+}
+
+.cc-two .cc-faq-item[open] summary::after {
+    margin-bottom: 0;
+    margin-top: 5px;
+    transform: rotate(225deg);
+}
+
+.cc-two .cc-faq-item summary:hover {
+    background: #f4f7fd;
+}
+
+.cc-two .cc-faq-item summary:focus-visible {
+    outline: 2px solid #4b7bdc;
+    outline-offset: -2px;
+}
+
+.cc-two .cc-faq-item h3 {
+    margin: 0;
+    color: #1f2f55;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.cc-two .cc-faq-item p {
+    margin: 0;
+    padding: 0 14px 14px;
+    color: #3a4766;
+    font-size: 13px;
+    line-height: 1.6;
+    animation: cc-faq-in .3s ease;
+}
+
+@keyframes cc-faq-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 860px) {
+    .cc-two {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cc-two .cc-seo {
+        padding: 18px 16px 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cc-related .cc-related-card,
+    .cc-related .cc-related-card::after,
+    .cc-related .cc-related-card .cc-related-ico,
+    .cc-related .cc-related-card .cc-related-arrow,
+    .cc-two .cc-faq-item summary,
+    .cc-two .cc-faq-item summary::after { transition: none; }
+
+    .cc-two .cc-faq-item p { animation: none; }
+}
+
+/* сторінки пального й TCO: калькулятор там у власній обгортці шириною 1160 px з відступом 20 px, блоки під ним вирівнюємо так само */
+.fuel-page > .cc-related,
+.fuel-page > .cc-two {
+    width: calc(100% - 40px);
+    max-width: 1160px;
+}

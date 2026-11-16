@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="/css/style.css?v=20261118mn1" />
     <link rel="stylesheet" href="/css/ph.css?v=20261118cb2" />
     <link rel="stylesheet" href="/css/datepick.css?v=20261118cb2" />
+    <link rel="stylesheet" href="/css/seo-block.css?v=20261119sb5" />
 
     <script src="/js/i18n.js?v=20261118cb2" defer></script>
     <script src="/js/phys-core.js?v=20261118cb2" defer></script>
@@ -356,104 +357,104 @@
         <section class="cc-related">
             <h2>You may also find useful</h2>
             <div class="cc-related-grid">
-                <a class="cc-related-card" href="/en/datetime/timezone-converter"><b>Time Zone Converter</b><span>Time in any city of the world.</span></a>
-                <a class="cc-related-card" href="/en/datetime/day-of-week-calculator"><b>Day of the Week for a Date</b><span>Which weekday a date was or will be.</span></a>
-                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><b>Date Difference Calculator</b><span>How many days, weeks and months between dates.</span></a>
+                <a class="cc-related-card" href="/en/datetime/timezone-converter"><svg class="cc-related-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><b>Time Zone Converter</b><span>Time in any city of the world.</span><em class="cc-related-open">Open<svg class="cc-related-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></em></a>
+                <a class="cc-related-card" href="/en/datetime/day-of-week-calculator"><svg class="cc-related-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M16 3v4M8 3v4M4 11h16"/></svg><b>Day of the Week for a Date</b><span>Which weekday a date was or will be.</span><em class="cc-related-open">Open<svg class="cc-related-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></em></a>
+                <a class="cc-related-card" href="/en/datetime/date-difference-calculator"><svg class="cc-related-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg><b>Date Difference Calculator</b><span>How many days, weeks and months between dates.</span><em class="cc-related-open">Open<svg class="cc-related-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></em></a>
             </div>
         </section>
 
-        <div class="cc-divider"></div>
+        <div class="cc-two">
+            <section class="cc-seo">
+                <h2>What a Unix timestamp is</h2>
+                <p>A Unix timestamp (epoch time, POSIX time) is the number of seconds that have passed since <b>January 1, 1970 00:00:00 UTC</b>. The number 0 is January 1, 1970, and <b>1700000000</b> is November 14, 2023 22:13:20 UTC (a Tuesday). It is a convenient way to store a moment in time as one number in databases, APIs, logs and file systems, regardless of the time zone. Leap seconds are not counted in Unix time: every day has exactly 86,400 seconds.</p>
 
-        <section class="cc-seo">
-            <h2>What a Unix timestamp is</h2>
-            <p>A Unix timestamp (epoch time, POSIX time) is the number of seconds that have passed since <b>January 1, 1970 00:00:00 UTC</b>. The number 0 is January 1, 1970, and <b>1700000000</b> is November 14, 2023 22:13:20 UTC (a Tuesday). It is a convenient way to store a moment in time as one number in databases, APIs, logs and file systems, regardless of the time zone. Leap seconds are not counted in Unix time: every day has exactly 86,400 seconds.</p>
+                <h2>Seconds, milliseconds, microseconds and nanoseconds</h2>
+                <p>A classic timestamp in seconds has <b>10 digits</b> (up to the year 2286). JavaScript, Java and many APIs use <b>milliseconds</b> (13 digits), some databases and profilers use microseconds (16 digits), and Go, Rust and time series use nanoseconds (19 digits). The calculator detects the unit by the number of digits and shows which one it chose, and you can change it manually if needed. Numbers are parsed exactly, so a 19-digit value like 1700000000123456789 does not lose digits, unlike ordinary JavaScript numbers.</p>
 
-            <h2>Seconds, milliseconds, microseconds and nanoseconds</h2>
-            <p>A classic timestamp in seconds has <b>10 digits</b> (up to the year 2286). JavaScript, Java and many APIs use <b>milliseconds</b> (13 digits), some databases and profilers use microseconds (16 digits), and Go, Rust and time series use nanoseconds (19 digits). The calculator detects the unit by the number of digits and shows which one it chose, and you can change it manually if needed. Numbers are parsed exactly, so a 19-digit value like 1700000000123456789 does not lose digits, unlike ordinary JavaScript numbers.</p>
+                <h2>Time zones and formats</h2>
+                <p>A timestamp always corresponds to one moment, while the date depends on the zone. The same 1700000000 is 22:13:20 in UTC and already 00:13:20 on November 15 in Kyiv. The calculator shows the date in the chosen zone (with a search among more than 500 cities and zones), in ISO 8601 with an offset, RFC 2822 and HTTP date formats. For each moment you see the weekday, the day of the year, the ISO week number and “how long ago or from now”.</p>
 
-            <h2>Time zones and formats</h2>
-            <p>A timestamp always corresponds to one moment, while the date depends on the zone. The same 1700000000 is 22:13:20 in UTC and already 00:13:20 on November 15 in Kyiv. The calculator shows the date in the chosen zone (with a search among more than 500 cities and zones), in ISO 8601 with an offset, RFC 2822 and HTTP date formats. For each moment you see the weekday, the day of the year, the ISO week number and “how long ago or from now”.</p>
+                <h2>Date to timestamp</h2>
+                <p>The “Date → timestamp” tab converts a date and time (with seconds and a fractional part, for example 14:30:05.123) into a timestamp in seconds, milliseconds, microseconds and nanoseconds. The time is entered in the chosen zone: November 7, 2026 14:30:05 in Kyiv is <b>1794054605</b>. If the time falls on a daylight saving change, the calculator warns you: an hour that does not exist or an hour that happens twice.</p>
 
-            <h2>Date to timestamp</h2>
-            <p>The “Date → timestamp” tab converts a date and time (with seconds and a fractional part, for example 14:30:05.123) into a timestamp in seconds, milliseconds, microseconds and nanoseconds. The time is entered in the chosen zone: November 7, 2026 14:30:05 in Kyiv is <b>1794054605</b>. If the time falls on a daylight saving change, the calculator warns you: an hour that does not exist or an hour that happens twice.</p>
+                <h2>The Year 2038 problem</h2>
+                <p>Old systems store a timestamp as a signed 32-bit integer: the largest value 2147483647 is <b>January 19, 2038 03:14:07 UTC</b>, and the next second overflows the number. The smallest value, −2147483648, is December 13, 1901. The calculator shows whether a value fits into 32 bits. Modern systems with 64-bit time do not have this problem.</p>
 
-            <h2>The Year 2038 problem</h2>
-            <p>Old systems store a timestamp as a signed 32-bit integer: the largest value 2147483647 is <b>January 19, 2038 03:14:07 UTC</b>, and the next second overflows the number. The smallest value, −2147483648, is December 13, 1901. The calculator shows whether a value fits into 32 bits. Modern systems with 64-bit time do not have this problem.</p>
+                <h2>Other epochs</h2>
+                <p>Different systems count time from different dates. Windows FILETIME and LDAP use hundreds of nanoseconds since 1601, .NET ticks count from year 0001, Excel counts days since December 30, 1899, Apple counts seconds since 2001, WebKit browsers use microseconds since 1601 and astronomers use the Julian day. For January 1, 2000 these are 125911584000000000, 630822816000000000, 36526 and 2451544.5 respectively. In Excel, serial numbers 1–60 are shifted because of the well-known false leap year 1900.</p>
 
-            <h2>Other epochs</h2>
-            <p>Different systems count time from different dates. Windows FILETIME and LDAP use hundreds of nanoseconds since 1601, .NET ticks count from year 0001, Excel counts days since December 30, 1899, Apple counts seconds since 2001, WebKit browsers use microseconds since 1601 and astronomers use the Julian day. For January 1, 2000 these are 125911584000000000, 630822816000000000, 36526 and 2451544.5 respectively. In Excel, serial numbers 1–60 are shifted because of the well-known false leap year 1900.</p>
+                <h2>Code snippets</h2>
+                <p>Under the result there is a collapsed block with ready-made calls for JavaScript, Python, PHP, Go, Java, C#, Bash, PostgreSQL and MySQL: how to turn a timestamp into a date and how to get the current timestamp. The calculator itself loads and stores nothing, and the conversion runs in the browser.</p>
 
-            <h2>Code snippets</h2>
-            <p>Under the result there is a collapsed block with ready-made calls for JavaScript, Python, PHP, Go, Java, C#, Bash, PostgreSQL and MySQL: how to turn a timestamp into a date and how to get the current timestamp. The calculator itself loads and stores nothing, and the conversion runs in the browser.</p>
+                <h2>Limits</h2>
+                <p>Dates from the year 1000 to 2999 for date input, and for timestamps the browser's date limit of about ±275,760 years applies. Unix time does not count leap seconds and time zone rules come from the browser's database. The code snippets are typical, so check them for your version of the language.</p>
+                <p class="ph-mini">Unix time does not count leap seconds. The unit is detected by the number of digits: you can change it manually.</p>
+            </section>
 
-            <h2>Limits</h2>
-            <p>Dates from the year 1000 to 2999 for date input, and for timestamps the browser's date limit of about ±275,760 years applies. Unix time does not count leap seconds and time zone rules come from the browser's database. The code snippets are typical, so check them for your version of the language.</p>
-            <p class="ph-mini">Unix time does not count leap seconds. The unit is detected by the number of digits: you can change it manually.</p>
-        </section>
+            <section class="cc-faq">
+                <h2><svg class="cc-faq-ico" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 17v.01"/><path d="M12 13.5a1.5 1.5 0 0 1 1-1.5 2.6 2.6 0 1 0-3-4"/></svg><span>FAQ</span></h2>
 
-        <section class="cc-faq">
-            <h2>FAQ</h2>
+                <details class="cc-faq-item" open>
+                    <summary><h3>How do I convert a Unix timestamp to a date?</h3></summary>
+                    <p>Paste the number on the “Timestamp → date” tab: the calculator shows the date in UTC, in the chosen zone and in ISO 8601. For example 1700000000 is 11/14/2023 22:13:20 UTC.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>How do I convert a Unix timestamp to a date?</h3>
-                <p>Paste the number on the “Timestamp → date” tab: the calculator shows the date in UTC, in the chosen zone and in ISO 8601. For example 1700000000 is 11/14/2023 22:13:20 UTC.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>How do I tell whether it is seconds or milliseconds?</h3></summary>
+                    <p>By the number of digits: 10 digits are seconds, 13 are milliseconds, 16 are microseconds, 19 are nanoseconds. The calculator detects it itself and lets you change it manually.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>How do I tell whether it is seconds or milliseconds?</h3>
-                <p>By the number of digits: 10 digits are seconds, 13 are milliseconds, 16 are microseconds, 19 are nanoseconds. The calculator detects it itself and lets you change it manually.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>Why is my date in the year 55,840?</h3></summary>
+                    <p>Milliseconds (13 digits) were entered as seconds. Choose “Auto” or “Milliseconds” and the date becomes correct.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>Why is my date in the year 55,840?</h3>
-                <p>Milliseconds (13 digits) were entered as seconds. Choose “Auto” or “Milliseconds” and the date becomes correct.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>How do I convert a date to a timestamp?</h3></summary>
+                    <p>Open the “Date → timestamp” tab and enter the date, time and zone. 11/07/2026 14:30:05 in Kyiv is 1794054605.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>How do I convert a date to a timestamp?</h3>
-                <p>Open the “Date → timestamp” tab and enter the date, time and zone. 11/07/2026 14:30:05 in Kyiv is 1794054605.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>Does Unix time account for time zones?</h3></summary>
+                    <p>The timestamp itself does not: it is a moment in UTC. A time zone is needed only to show the date or to enter a local time.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>Does Unix time account for time zones?</h3>
-                <p>The timestamp itself does not: it is a moment in UTC. A time zone is needed only to show the date or to enter a local time.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>What is the Year 2038 problem?</h3></summary>
+                    <p>A signed 32-bit integer overflows at 2147483647, i.e. January 19, 2038 03:14:07 UTC. The calculator shows whether a value fits into 32 bits.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>What is the Year 2038 problem?</h3>
-                <p>A signed 32-bit integer overflows at 2147483647, i.e. January 19, 2038 03:14:07 UTC. The calculator shows whether a value fits into 32 bits.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>Are leap seconds counted?</h3></summary>
+                    <p>No. Under POSIX every day in Unix time has exactly 86,400 seconds, so leap seconds are “stretched” into a neighbouring second.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>Are leap seconds counted?</h3>
-                <p>No. Under POSIX every day in Unix time has exactly 86,400 seconds, so leap seconds are “stretched” into a neighbouring second.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>Is precision lost for 19-digit numbers?</h3></summary>
+                    <p>No. Numbers are parsed exactly, unlike ordinary JavaScript numbers, which lose the last digits after 15–16 digits.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>Is precision lost for 19-digit numbers?</h3>
-                <p>No. Numbers are parsed exactly, unlike ordinary JavaScript numbers, which lose the last digits after 15–16 digits.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>How do I get the current timestamp?</h3></summary>
+                    <p>The form has a live counter and a “Now” button. In code: Math.floor(Date.now() / 1000) in JavaScript, int(time.time()) in Python, time() in PHP, date +%s in Bash.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>How do I get the current timestamp?</h3>
-                <p>The form has a live counter and a “Now” button. In code: Math.floor(Date.now() / 1000) in JavaScript, int(time.time()) in Python, time() in PHP, date +%s in Bash.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>What are Windows FILETIME and .NET ticks?</h3></summary>
+                    <p>They count intervals of 100 nanoseconds: FILETIME since January 1, 1601 and .NET ticks since January 1, 0001. The “Other epochs” tab converts them to Unix time and back.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>What are Windows FILETIME and .NET ticks?</h3>
-                <p>They count intervals of 100 nanoseconds: FILETIME since January 1, 1601 and .NET ticks since January 1, 0001. The “Other epochs” tab converts them to Unix time and back.</p>
-            </div>
+                <details class="cc-faq-item">
+                    <summary><h3>Why are Excel dates before March 1900 wrong?</h3></summary>
+                    <p>Excel treats 1900 as a leap year (although February 29, 1900 did not exist), so serial numbers 1–60 are shifted by a day.</p>
+                </details>
 
-            <div class="cc-faq-item">
-                <h3>Why are Excel dates before March 1900 wrong?</h3>
-                <p>Excel treats 1900 as a leap year (although February 29, 1900 did not exist), so serial numbers 1–60 are shifted by a day.</p>
-            </div>
-
-            <div class="cc-faq-item">
-                <h3>Which dates does the calculator support?</h3>
-                <p>For date input from the year 1000 to 2999, for timestamps about ±275,760 years. A negative timestamp is a time before 1970.</p>
-            </div>
-        </section>
+                <details class="cc-faq-item">
+                    <summary><h3>Which dates does the calculator support?</h3></summary>
+                    <p>For date input from the year 1000 to 2999, for timestamps about ±275,760 years. A negative timestamp is a time before 1970.</p>
+                </details>
+            </section>
+        </div>
     </main>
 
     <div id="footer"></div>
