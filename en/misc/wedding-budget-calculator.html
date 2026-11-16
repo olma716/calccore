@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8HZ7JH41R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,13 +10,14 @@
         gtag('js', new Date());
         gtag('config', 'G-D8HZ7JH41R');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
 
-    <title>Wedding Budget Calculator Online | CalcCore</title>
+    <title>Wedding Budget Calculator Online: Costs and Guests | CalcCore</title>
     <meta name="description"
-        content="Plan your wedding budget: catering, venue, decor, photography, music, and more. Calculate total cost and cost per guest." />
+        content="Work out a wedding budget by item with a reserve and a child banquet, split a budget by percentages and find how many guests it holds." />
 
     <link rel="canonical" href="https://calccore.net/en/misc/wedding-budget-calculator" />
     <link rel="alternate" hreflang="uk" href="https://calccore.net/misc/wedding-budget-calculator" />
@@ -26,271 +28,431 @@
     <meta property="og:site_name" content="CalcCore" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="uk_UA" />
-    <meta property="og:title" content="Wedding Budget Calculator Online" />
-    <meta property="og:description" content="Plan your wedding budget: catering, venue, decor, photography, music, and more. Calculate total cost and cost per guest." />
+    <meta property="og:title" content="Wedding Budget Calculator Online: Costs and Guests" />
+    <meta property="og:description" content="Work out a wedding budget by item with a reserve and a child banquet, split a budget by percentages and find how many guests it holds." />
     <meta property="og:url" content="https://calccore.net/en/misc/wedding-budget-calculator" />
     <meta property="og:image" content="https://calccore.net/assets/og-calccore.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CalcCore: free online calculators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Wedding Budget Calculator Online" />
-    <meta name="twitter:description" content="Plan your wedding budget: catering, venue, decor, photography, music, and more. Calculate total cost and cost per guest." />
+    <meta name="twitter:title" content="Wedding Budget Calculator Online: Costs and Guests" />
+    <meta name="twitter:description" content="Work out a wedding budget by item with a reserve and a child banquet, split a budget by percentages and find how many guests it holds." />
     <meta name="twitter:image" content="https://calccore.net/assets/og-calccore.png" />
 
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/1pm-calculator.css" />
+    <link rel="stylesheet" href="/css/ph.css?v=20261117wb4" />
+    <link rel="stylesheet" href="/css/wb.css?v=20261117wb4" />
 
-    <script src="/js/i18n.js" defer></script>
-    <script src="/js/wedding-budget-calculator.js?v=20260911" defer></script>
-
-    <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What's usually the biggest expense in a wedding budget?",
-        "acceptedAnswer":{"@type":"Answer","text":"The biggest expense is typically catering and venue rental, since they scale directly with the number of guests and usually make up 40-50% of the total budget."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why should you set aside a contingency reserve?",
-        "acceptedAnswer":{"@type":"Answer","text":"Wedding planning is often accompanied by unexpected extra costs — it's recommended to set aside a 10-15% reserve beyond the planned categories."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I reduce the cost per guest?",
-        "acceptedAnswer":{"@type":"Answer","text":"The most effective way is to trim the guest list, since catering and seating scale directly proportional to headcount."}
-      }
-    ]
-  }
-  </script>
+    <script src="/js/i18n.js?v=20261117wb4" defer></script>
+    <script src="/js/phys-core.js?v=20261117wb4" defer></script>
+    <script src="/js/km-data.js?v=20261117wb4" defer></script>
+    <script src="/js/wb-data.js?v=20261117wb4" defer></script>
+    <script src="/js/wb-calc.js?v=20261117wb4" defer></script>
 
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "@id":"https://calccore.net/en/misc/wedding-budget-calculator#app",
-    "name":"Wedding Budget Calculator",
-    "description":"Plan a wedding budget by category with cost-per-guest calculation.",
-    "url":"https://calccore.net/en/misc/wedding-budget-calculator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "inLanguage":"en",
-    "publisher":{"@id":"https://calccore.net/#org"},
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "SoftwareApplication",
+    "WebApplication"
+  ],
+  "@id": "https://calccore.net/en/misc/wedding-budget-calculator#app",
+  "name": "Wedding Budget Calculator",
+  "description": "An online wedding budget calculator: a cost estimate by item (a banquet with a child discount, venue, decor, music, photo, attire, cake, rings, transport and your own items) with a reserve and the amount left to pay; a budget split by percentages with three ready layouts; a calculation of how many guests a budget holds. Amounts in cents without errors and a link to share.",
+  "url": "https://calccore.net/en/misc/wedding-budget-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://calccore.net/#org",
+    "name": "CalcCore",
+    "url": "https://calccore.net/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "UAH"
+  },
+  "featureList": [
+    "A cost estimate by item with a reserve",
+    "A child banquet as a percentage of the adult one",
+    "Your own cost items",
+    "Already paid and the amount left to pay",
+    "A budget split by percentages",
+    "How many guests a budget holds",
+    "The cost per guest",
+    "A link to share"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://calccore.net/en/misc/wedding-budget-calculator#webpage",
+      "url": "https://calccore.net/en/misc/wedding-budget-calculator",
+      "name": "Wedding Budget Calculator Online: Costs and Guests | CalcCore",
+      "description": "Work out a wedding budget by item with a reserve and a child banquet, split a budget by percentages and find how many guests it holds.",
+      "isPartOf": {
+        "@id": "https://calccore.net/#website"
+      },
+      "about": {
+        "@id": "https://calccore.net/en/misc/wedding-budget-calculator#app"
+      },
+      "breadcrumb": {
+        "@id": "https://calccore.net/en/misc/wedding-budget-calculator#breadcrumb"
+      },
+      "dateModified": "2026-11-17",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://calccore.net/en/misc/wedding-budget-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "CalcCore",
+          "item": "https://calccore.net/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Misc",
+          "item": "https://calccore.net/en/misc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Wedding budget",
+          "item": "https://calccore.net/en/misc/wedding-budget-calculator"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://calccore.net/en/misc/wedding-budget-calculator#faq",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does a wedding cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the country, city, season, venue and number of guests, so there is no single figure. Enter your prices for the banquet, venue and other items and the calculator builds the estimate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What reserve should I set aside?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Advice usually names 5–10% of the sum of all items. The calculator defaults to 10%, but you can enter any value, including 0."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the banquet with children counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Adults are charged in full and children at a percentage of the adult portion, 50% by default. You can change the percentage in the “More items and guests” block."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are costs per guest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are amounts multiplied by all the guests, children included: favours, a transfer, seating cards. They are added separately from the banquet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I add my own costs that are not in the list?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the “More items and guests” block paste lines “name amount”, for example “Fire show 500”. Write the amount without spaces. Up to 30 lines."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find out how much is left to pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the “Payment and currency” block enter the amount already paid: the calculator shows the amount left to pay or the overpayment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the “Budget split” tab do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From the total and the percentages it shows how much to set aside for each item and per guest. There are three ready layouts and the percentages can be changed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should the percentages add up to 100?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Then the whole budget is split and the cents are divided with no remainder. If the sum is not 100, the calculator shows the unallocated remainder or the excess."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find out how many guests I can invite?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the “How many guests” tab enter the budget, the cost per guest, the fixed costs and the reserve. The calculator finds the maximum and shows the cost with other guest numbers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do the rule-of-thumb percentages come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From advice on wedding budgets (Joy, WeddingWire, GiftList), mostly American: banquet and venue 40–50%, photo 10–12%, decor 8–10%. It is a guide, not a norm."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I share the estimate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the “Share” button copies a link with the entered data. Remember the amounts will be visible to anyone who opens the link."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data stored or sent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, everything is worked out in your browser and nothing is sent. The data goes into the link only when you press “Share” yourself."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
-<body class="credit-page c1pm">
+<body class="ph-page ph-modern">
     <div id="header"></div>
 
     <main class="container">
-        <section class="mcalc c1pm" id="cwedding">
-            <div class="mcalc__wrap">
+        <section class="ph" id="ph">
+            <div class="ph__wrap">
 
-                <div class="mcalc__titlebar">
-                    <h1 class="mcalc__h1">Wedding Budget Calculator</h1>
-                    <p class="mcalc__p">
-                        Plan your wedding budget by category — see the
-                        total cost and cost per guest.
-                    </p>
+                <div class="ph__titlebar">
+                    <h1 class="ph__h1">Wedding Budget Calculator</h1>
+                    <p class="ph__p">Enter the number of guests and the amounts by item and the calculator shows the total estimate with a reserve, the cost per guest, the share of each item and how much is left to pay. There is a split of a ready budget by percentages and a calculation of how many guests it holds. All the amounts are yours and the calculation is exact to the cent.</p>
                 </div>
 
-                <div class="mcalc__grid">
+                <div class="ph__grid">
 
                     <!-- LEFT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Enter expenses</h2>
-                            <span class="mcalc__badge">Misc</span>
+                    <div class="evc-topline">
+                        <label class="evc-autocalc">
+                            <input type="checkbox" id="autoCalc" checked>
+                            <span>Auto-calculate</span>
+                        </label>
+                    </div>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Enter data</h2>
+                            <span class="ph__badge">Misc</span>
                         </div>
 
-                        <div class="mcalc__rows">
+                        <div class="ph__tabs ph__tabs--tiles" role="tablist">
+                            <button type="button" class="ph__tab ph__tab--tile is-active" data-m="cost" role="tab" aria-selected="true"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="ph__tileTx"><b class="ph__tabT">Costs</b><span class="ph__ex">A cost estimate by item with a reserve</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="alloc" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg><span class="ph__tileTx"><b class="ph__tabT">Budget split</b><span class="ph__ex">A budget split by percentages</span></span></button>
+                            <button type="button" class="ph__tab ph__tab--tile" data-m="guests" role="tab" aria-selected="false"><svg class="ph__tileIc" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 5"/></svg><span class="ph__tileTx"><b class="ph__tabT">How many guests</b><span class="ph__ex">How many guests a budget holds</span></span></button>
+                        </div>
 
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="guestCount">Number of guests</label>
-                                <input class="mcalc__input" id="guestCount" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 80" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="cateringPerGuest">Catering per guest</label>
-                                <input class="mcalc__input" id="cateringPerGuest" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 60" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="venue">Venue rental</label>
-                                <input class="mcalc__input" id="venue" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 3000" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="decor">Decor and flowers</label>
-                                <input class="mcalc__input" id="decor" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2000" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="entertainment">Music and entertainment</label>
-                                <input class="mcalc__input" id="entertainment" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 1500" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="attire">Dress/suit</label>
-                                <input class="mcalc__input" id="attire" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 2500" />
-                            </div>
-
-                            <div class="mcalc__field">
-                                <label class="mcalc__label" for="photography">Photo/video</label>
-                                <input class="mcalc__input" id="photography" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 1800" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="other">Other expenses (invitations, cake,
-                                    transport)</label>
-                                <input class="mcalc__input" id="other" type="text" inputmode="decimal"
-                                    placeholder="e.g.: 1000" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <label class="mcalc__label" for="contingency">Contingency reserve (%)</label>
-                                <input class="mcalc__input" id="contingency" type="text" inputmode="numeric"
-                                    placeholder="e.g.: 10" value="10" />
-                            </div>
-
-                            <div class="mcalc__field m-full">
-                                <div class="mcalc__actions m-mt10">
-                                    <button class="mcalc__btn mcalc__btn--primary" id="btnCalc"
-                                        type="button">Calculate</button>
-                                    <button class="mcalc__btn" id="btnReset" type="button">Reset</button>
-                                    <button class="mcalc__btn" id="btnCopy" type="button">Copy result</button>
+                        <div>
+                            <div class="ph__field ph__field--full" id="findFld">
+                                <span class="ph__label" id="fdLbl">What to find</span>
+                                <input type="hidden" id="find" value="x">
+                                <div class="ph__findRow">
+                                    <div class="ph__sel" id="fd_dd">
+                                        <button type="button" class="ph__selBtn" id="fd_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="fdLbl fd_val"><span id="fd_val">—</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                        <ul class="ph__selList" id="fd_list" role="listbox" aria-labelledby="fdLbl" hidden>
+                                            <li role="option" tabindex="-1" data-v="x" aria-selected="true">—</li>
+                                        </ul>
+                                    </div>
+                                    <select class="ph__unit" id="resUnit" aria-label="Unit of the result"></select>
                                 </div>
-                                <div class="mcalc__toast" id="mToast"></div>
                             </div>
-
                         </div>
+                        <div id="phBody"></div>
+
+                        <details class="ph__setbox" id="setBox" hidden>
+                            <summary class="ph__cap"><span>Settings</span><span class="ph__caret" aria-hidden="true"></span></summary>
+                            <div class="ph__cols">
+                            <div class="ph__field ph__field--full">
+                                <span class="ph__label" id="dcLbl">Decimal places</span>
+                                <input type="hidden" id="decs" value="4">
+                                <div class="ph__sel" id="dc_dd">
+                                    <button type="button" class="ph__selBtn" id="dc_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dcLbl dc_val"><span id="dc_val">4</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="dc_list" role="listbox" aria-labelledby="dcLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="4" aria-selected="true">4</li>
+                                        <li role="option" tabindex="-1" data-v="2" aria-selected="false">2</li>
+                                        <li role="option" tabindex="-1" data-v="6" aria-selected="false">6</li>
+                                        <li role="option" tabindex="-1" data-v="8" aria-selected="false">8</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ph__field ph__field--full" id="gFld">
+                                <span class="ph__label" id="ggLbl">Gravitational acceleration g</span>
+                                <input type="hidden" id="gval" value="9.8">
+                                <div class="ph__sel" id="gg_dd">
+                                    <button type="button" class="ph__selBtn" id="gg_btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ggLbl gg_val"><span id="gg_val">9.8 m/s²</span><span class="ph__caret" aria-hidden="true"></span></button>
+                                    <ul class="ph__selList" id="gg_list" role="listbox" aria-labelledby="ggLbl" hidden>
+                                        <li role="option" tabindex="-1" data-v="9.8" aria-selected="true">9.8 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="9.81" aria-selected="false">9.81 m/s²</li>
+                                        <li role="option" tabindex="-1" data-v="10" aria-selected="false">10 m/s² (school)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ph__hint ph__mt12" id="gHint">The value of g is used wherever weight or free fall is involved.</div>
+                        </details>
+
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="calcBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>Calculate</button>
+                        </div>
+                        <div class="ph__toast" id="toast" role="status" aria-live="polite"></div>
                     </div>
 
                     <!-- RIGHT -->
-                    <div class="mcalc__card">
-                        <div class="mcalc__sectionTitle">
-                            <h2 class="mcalc__h2">Result</h2>
-                            <span class="mcalc__badge">CalcCore</span>
+                    <div class="ph__card">
+                        <div class="ph__sectionTitle">
+                            <h2 class="ph__h2">Result</h2>
+                            <span class="ph__badge">CalcCore</span>
                         </div>
-
-                        <div class="mcalc__bigNumber" id="mResult">Enter inputs to calculate.</div>
-                        <div class="m-details" id="mDetails" aria-live="polite"></div>
-
-                        <details class="m-schedule" id="scheduleWrap" open>
-                            <summary class="m-sum">
-                                <span class="m-sum-left">
-                                    <span class="m-ico" aria-hidden="true"></span>
-                                    Category breakdown <span class="muted">(open)</span>
-                                </span>
-                                <span class="m-chevron" aria-hidden="true"></span>
-                            </summary>
-
-                            <div class="m-tablewrap">
-                                <table class="m-table" id="scheduleTable" aria-label="Wedding budget breakdown">
-                                    <thead>
-                                        <tr>
-                                            <th>Category</th>
-                                            <th>Amount</th>
-                                            <th>% of budget</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </details>
-
-                        <div class="m-navlinks">
-                            <a href="/en/misc/tip-calculator">Tip Calculator</a>
-                            <a href="/en/misc/unit-converter">Unit Converter</a>
+                        <div class="ph__result" id="result">Enter the amounts: the result will appear here.</div>
+                        <div class="ph__actions ph__mt12">
+                            <button class="ph__btn ph__btn--primary" id="shareBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share link</button>
+                            <button class="ph__btn" id="exampleBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg>Example</button>
+                            <button class="ph__btn ph__btn--primary" id="resetBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+                            <button class="ph__btn ph__btn--primary" id="copyBtn" type="button"><svg class="ph__btnIc" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy result</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="m-divider"></div>
-
-        <section class="m-seo">
-            <h2>Why plan a wedding budget in advance</h2>
-            <p>
-                Wedding planning easily gets out of hand without a clear budget — individual expenses
-                seem small, but together they quickly add up to a significant amount. Breaking the
-                budget down by category helps you see the full picture and make informed decisions
-                about priorities.
-            </p>
-
-            <h2>Typical wedding budget breakdown</h2>
-            <ul>
-                <li><b>Catering and venue (40-50%):</b> usually the largest expense, directly proportional to the number
-                    of guests.</li>
-                <li><b>Photo/video (10-15%):</b> lifelong memories, so many couples don't skimp on this category.</li>
-                <li><b>Dress/suit (8-10%):</b> including accessories and preparation.</li>
-                <li><b>Decor and flowers (8-10%):</b> can vary significantly by style and season.</li>
-                <li><b>Music and entertainment (7-10%):</b> MC, band or DJ, special effects.</li>
-                <li><b>Other (10-15%):</b> invitations, cake, transport, guest favors.</li>
-            </ul>
-
-            <h2>Why a reserve matters</h2>
-            <p>
-                Nearly every wedding runs into unexpected expenses — from weather conditions (if part
-                of the event is outdoors) to last-minute changes in the guest list. A 10-15% reserve
-                beyond the planned budget helps avoid stress from surprise additional costs closer to
-                the wedding date.
-            </p>
-
-            <h2>Ways to optimize the budget</h2>
-            <ul>
-                <li><b>Trim the guest list:</b> the most effective way to reduce costs, since catering scales directly
-                    proportional to headcount.</li>
-                <li><b>Choose a weekday or off-season:</b> venues and vendors often offer discounts outside peak dates
-                    (summer Saturdays).</li>
-                <li><b>Prioritize:</b> identify the 2-3 categories most important to the couple and allocate more budget
-                    to them, compensating with less important items.</li>
-            </ul>
-
-            <p class="m-hintSmall">
-                The percentages shown are general guidelines and can vary significantly depending on
-                region, wedding style, and the couple's personal priorities.
-            </p>
+        <section class="cc-related">
+            <h2>You may also find useful</h2>
+            <div class="cc-related-grid">
+                <a class="cc-related-card" href="/en/misc/tip-calculator"><b>Tip Calculator</b><span>A tip, tax and splitting a bill.</span></a>
+                <a class="cc-related-card" href="/en/finance/credit-calculator"><b>Credit Calculator</b><span>Monthly payment, overpayment and schedule.</span></a>
+                <a class="cc-related-card" href="/en/finance/deposit-calculator"><b>Deposit Calculator</b><span>Profit with tax and an interest payout.</span></a>
+            </div>
         </section>
 
-        <section class="m-faq">
+        <div class="cc-divider"></div>
+
+        <section class="cc-seo">
+            <h2>What the calculator does</h2>
+            <p>The calculator builds a <b>wedding cost estimate by item</b>: the banquet, venue, decor and flowers, music and host, photo and video, attire, beauty, cake, rings, ceremony, invitations, transport and your own items. A reserve is added to the sum, and the result shows the total cost, the cost per guest, the share of each item and how much is left to pay after the advances already made.</p>
+
+            <h2>The banquet, children and per-guest costs</h2>
+            <p>The banquet is counted for each adult guest, while children are charged at a percentage of the adult portion: 50% by default, but you can set your own. You can also add a cost for every guest, such as favours or a transfer. This removes the typical mistake of multiplying the cost per guest by everyone equally without allowing for children.</p>
+
+            <h2>A reserve for the unexpected</h2>
+            <p>The reserve is worked out on the sum of all items. Advice usually suggests setting aside about 5–10%: prices rise, guests are added and small expenses appear. In this calculator you can enter 0 and set no reserve at all: zero is no longer replaced by a default value, as it was on the old page.</p>
+
+            <h2>Splitting a budget by percentages</h2>
+            <p>If the total is already known, on the “Budget split” tab set the percentages by item or choose one of three layouts: a rule of thumb, more on the banquet or more on photo and decor. The calculator shows the amounts by item and per guest. When the percentages add up to exactly 100, the cents are split by the largest remainder method, so the sum equals the budget exactly.</p>
+
+            <h2>How many guests a budget holds</h2>
+            <p>The “How many guests” tab answers the reverse question: from the budget, the fixed costs, the cost per guest and the reserve it finds the largest number of guests and shows what the estimate would be with other guest numbers. If the budget does not hold even the fixed costs, the calculator says what is missing.</p>
+
+            <h2>Rules of thumb from articles, not a norm</h2>
+            <p>In advice on wedding budgets the banquet and venue together are usually put at 40–50% of the costs, photo and video at 10–12%, decor and flowers at 8–10%, music and entertainment at 5–10% and attire at 5–8%. This is mostly American advice, so your real shares may differ. The calculator's starting percentages are a rounded rule of thumb to adjust to your prices.</p>
+
+            <h2>Sources, rights and contact</h2>
+            <p>All the calculations are arithmetic and do not depend on external data. The rule-of-thumb percentages are summarized from advice by <a href="https://withjoy.com/blog/wedding-budget-breakdown-by-percentage/" target="_blank" rel="noopener noreferrer">Joy</a>, <a href="https://www.weddingwire.com/wedding-ideas/wedding-budget-breakdown" target="_blank" rel="noopener noreferrer">WeddingWire</a> and <a href="https://giftlist.com/blog/wedding-budget-categories-what-to-spend-where" target="_blank" rel="noopener noreferrer">GiftList</a> and put in our own words. The site is not affiliated with or endorsed by these organizations, and their names belong to their owners. If you are a rights holder with a concern, write to us on the <a href="/en/contacts">Contacts</a> page.</p>
+
+            <h2>Limits</h2>
+            <p>The calculator does not know prices in your city and suggests nothing for you: you enter all the amounts. Currencies are not converted and the symbol is chosen only for display. The maximum is 5000 guests, up to 30 own items and amounts up to a billion.</p>
+            <p class="ph-mini">Set aside a reserve of at least 5–10% and fix the biggest items (the banquet and the venue) first: they decide the rest. Recalculate the estimate whenever the number of guests changes.</p>
+        </section>
+
+        <section class="cc-faq">
             <h2>FAQ</h2>
 
-            <div class="m-faq-item">
-                <h3>What's usually the biggest expense in a wedding budget?</h3>
-                <p>The biggest expense is typically catering and venue rental, since they scale directly with the number
-                    of guests and usually make up 40-50% of the total budget.</p>
+            <div class="cc-faq-item">
+                <h3>How much does a wedding cost?</h3>
+                <p>It depends on the country, city, season, venue and number of guests, so there is no single figure. Enter your prices for the banquet, venue and other items and the calculator builds the estimate.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>Why should you set aside a contingency reserve?</h3>
-                <p>Wedding planning is often accompanied by unexpected extra costs — it's recommended to set aside a
-                    10-15% reserve beyond the planned categories.</p>
+            <div class="cc-faq-item">
+                <h3>What reserve should I set aside?</h3>
+                <p>Advice usually names 5–10% of the sum of all items. The calculator defaults to 10%, but you can enter any value, including 0.</p>
             </div>
 
-            <div class="m-faq-item">
-                <h3>How do I reduce the cost per guest?</h3>
-                <p>The most effective way is to trim the guest list, since catering and seating scale directly
-                    proportional to headcount.</p>
+            <div class="cc-faq-item">
+                <h3>How is the banquet with children counted?</h3>
+                <p>Adults are charged in full and children at a percentage of the adult portion, 50% by default. You can change the percentage in the “More items and guests” block.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What are costs per guest?</h3>
+                <p>They are amounts multiplied by all the guests, children included: favours, a transfer, seating cards. They are added separately from the banquet.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I add my own costs that are not in the list?</h3>
+                <p>In the “More items and guests” block paste lines “name amount”, for example “Fire show 500”. Write the amount without spaces. Up to 30 lines.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find out how much is left to pay?</h3>
+                <p>In the “Payment and currency” block enter the amount already paid: the calculator shows the amount left to pay or the overpayment.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>What does the “Budget split” tab do?</h3>
+                <p>From the total and the percentages it shows how much to set aside for each item and per guest. There are three ready layouts and the percentages can be changed.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Why should the percentages add up to 100?</h3>
+                <p>Then the whole budget is split and the cents are divided with no remainder. If the sum is not 100, the calculator shows the unallocated remainder or the excess.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>How do I find out how many guests I can invite?</h3>
+                <p>On the “How many guests” tab enter the budget, the cost per guest, the fixed costs and the reserve. The calculator finds the maximum and shows the cost with other guest numbers.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Where do the rule-of-thumb percentages come from?</h3>
+                <p>From advice on wedding budgets (Joy, WeddingWire, GiftList), mostly American: banquet and venue 40–50%, photo 10–12%, decor 8–10%. It is a guide, not a norm.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Can I share the estimate?</h3>
+                <p>Yes, the “Share” button copies a link with the entered data. Remember the amounts will be visible to anyone who opens the link.</p>
+            </div>
+
+            <div class="cc-faq-item">
+                <h3>Is my data stored or sent?</h3>
+                <p>No, everything is worked out in your browser and nothing is sent. The data goes into the link only when you press “Share” yourself.</p>
             </div>
         </section>
-
     </main>
 
     <div id="footer"></div>
